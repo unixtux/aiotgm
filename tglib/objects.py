@@ -232,7 +232,7 @@ def serialize(
 
 def _get_kwargs(obj: TelegramType, kwargs: dict) -> bool:
     if kwargs:
-        logger.warning(
+        logger.debug(
             'Got unexpected arguments for'
             f' {obj.__class__.__name__}: {kwargs}'
         )
