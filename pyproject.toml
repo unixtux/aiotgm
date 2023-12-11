@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=69.0.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tglib"
+version = "1.0.2"
+authors = [
+    { name = "unixtux"}
+]
+dependencies = [
+    "aiohttp"
+]
+[tool.setuptools.packages]
+find = {}
+
