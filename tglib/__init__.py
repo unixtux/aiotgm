@@ -1,14 +1,6 @@
 #!/bin/python3
 
-import re
-try:
-    with open('pyproject.toml') as read_v:
-        __version__ = re.search(
-            r'version.*=.*"(.*?)"',
-            read_v.read()
-        ).group(1)
-except FileNotFoundError:
-    __version__ = None
+__version__ = '1.0.6'
 
 __all__ = [
     'Client',
@@ -38,6 +30,7 @@ MARKDOWN_ESCAPES = {
     '!':'\!'
 }
 
+import re
 import asyncio
 from typing import (Any,
                     Union,
@@ -113,17 +106,6 @@ class Client(TelegramApi):
 
     async def close(self) -> Literal[True]:
         return await super().close()
-
-    async def delete_message(
-        self,
-        chat_id: Union[int, str],
-        message_id: int
-    ) -> Literal[True]:
-        params = {
-            'chat_id': chat_id,
-            'message_id': message_id
-        }
-        return await super().delete_message(params)
 
     async def send_message(
         self,
@@ -1400,6 +1382,17 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().stop_poll(params)
         return Poll.dese(result)
+
+    async def delete_message(
+        self,
+        chat_id: Union[int, str],
+        message_id: int
+    ) -> Literal[True]:
+        params = {
+            'chat_id': chat_id,
+            'message_id': message_id
+        }
+        return await super().delete_message(params)
 
     async def send_sticker(
         self,
