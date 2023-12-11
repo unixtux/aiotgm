@@ -1,5 +1,15 @@
 #!/bin/python3
 
+import re
+try:
+    with open('pyproject.toml') as read_v:
+        __version__ = re.search(
+            r'version.*=.*"(.*?)"',
+            read_v.read()
+        ).group(1)
+except FileNotFoundError:
+    __version__ = None
+
 __all__ = [
     'Client',
     'NextManager',
@@ -28,8 +38,6 @@ MARKDOWN_ESCAPES = {
     '!':'\!'
 }
 
-import re
-import time
 import asyncio
 from typing import (Any,
                     Union,
@@ -38,7 +46,10 @@ from typing import (Any,
                     Callable,
                     Coroutine)
 
-from .api import *
+from .api import (
+    TelegramApi,
+    TelegramError
+)
 from .objects import *
 from .update_manager import *
 

@@ -19,13 +19,25 @@ from typing import (Any,
                     Optional,
                     Coroutine)
 
-from .http_manager import *
-from .objects import InputFile, serialize, json
+from aiohttp import (
+    FormData,
+    ClientError,
+    TCPConnector,
+    ClientTimeout,
+    ClientSession,
+    ClientTimeout,
+    ClientResponse
+)
+from .objects import (
+    json,
+    InputFile,
+    serialize
+)
 
 try:
     import ssl
 except ImportError:
-    logger.warning(
+    logger.info(
         "module 'ssl' not found, SSL_CONTEXT is None"
     )
     SSL_CONTEXT = None
@@ -33,7 +45,7 @@ else:
     try:
         import certifi
     except ImportError:
-        logger.warning(
+        logger.info(
             "module 'certifi' not found, using default CA"
         )
         SSL_CONTEXT = ssl.create_default_context()
@@ -121,6 +133,9 @@ def _prepare_data(
 class TelegramError(Exception):
     """Class to handle exceptions during Telegram requests."""
 
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119.0) Gecko/20100101 Firefox/119.0'
+}
 BASE_URL = 'https://api.telegram.org'
 CLIENT_TIMEOUT = ClientTimeout(total = 300, connect = 3)
 
