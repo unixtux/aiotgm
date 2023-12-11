@@ -1,10 +1,11 @@
 [build-system]
-requires = ["setuptools>=69.0.2", "wheel"]
+requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "tglib"
-version = "1.0.3"
+version = "1.0.5"
+requires-python = ">= 3.8"
 license = {file = "LICENSE"}
 readme = "README.md"
 authors = [
@@ -16,8 +17,8 @@ dependencies = [
 
 [project.optional-dependencies]
 all = [
-    "ujson==5.9.0",
-    "certifi==2023.11.17"
+    "certifi==2023.11.17",
+    "ujson==5.9.0"
 ]
 
 [project.urls]
