@@ -1131,7 +1131,10 @@ class Client(TelegramApi):
         return await super().set_chat_photo(params)
 
 
-    async def delete_chat_photo(self, chat_id: Union[int, str]) -> Literal[True]:
+    async def delete_chat_photo(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
         '''\
         https://core.telegram.org/bots/api#deletechatphoto
         Use this method to delete a chat photo. Photos can't be changed for
@@ -1213,7 +1216,10 @@ class Client(TelegramApi):
         return await super().unpin_chat_message(params)
 
 
-    async def unpin_all_chat_messages(self, chat_id: Union[int, str]) -> Literal[True]:
+    async def unpin_all_chat_messages(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
         '''\
         https://core.telegram.org/bots/api#unpinallchatmessages
         Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the
@@ -1225,7 +1231,10 @@ class Client(TelegramApi):
         return await super().unpin_all_chat_messages(params)
 
 
-    async def leave_chat(self, chat_id: Union[int, str]) -> Literal[True]:
+    async def leave_chat(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
         '''\
         https://core.telegram.org/bots/api#leavechat
         Use this method for your bot to leave a group, supergroup or channel. Returns True on success.'''
@@ -1235,7 +1244,10 @@ class Client(TelegramApi):
         return await super().leave_chat(params)
 
 
-    async def get_chat(self, chat_id: Union[int, str]) -> Chat:
+    async def get_chat(
+        self,
+        chat_id: Union[int, str]
+    ) -> Chat:
         '''\
         https://core.telegram.org/bots/api#getchat
         Use this method to get up to date information about the chat (current name of the user for one-on-one
@@ -1247,7 +1259,10 @@ class Client(TelegramApi):
         return Chat.dese(result)
 
 
-    async def get_chat_administrators(self, chat_id: Union[int, str]) -> list[ChatMember]:
+    async def get_chat_administrators(
+        self,
+        chat_id: Union[int, str]
+    ) -> list[ChatMember]:
         '''\
         https://core.telegram.org/bots/api#getchatadministrators
         Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects.'''
@@ -1258,7 +1273,10 @@ class Client(TelegramApi):
         return [ChatMember.dese(chat_member) for chat_member in result]
 
 
-    async def get_chat_member_count(self, chat_id: Union[int, str]) -> int:
+    async def get_chat_member_count(
+        self,
+        chat_id: Union[int, str]
+    ) -> int:
         '''\
         https://core.telegram.org/bots/api#getchatmembercount
         Use this method to get the number of members in a chat. Returns Int on success.'''
@@ -1302,7 +1320,10 @@ class Client(TelegramApi):
         return await super().set_chat_sticker_set(params)
 
 
-    async def delete_chat_sticker_set(self, chat_id: Union[int, str]) -> Literal[True]:
+    async def delete_chat_sticker_set(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
         '''\
         https://core.telegram.org/bots/api#deletechatstickerset
         Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the
@@ -1985,7 +2006,10 @@ class Client(TelegramApi):
         return StickerSet.dese(result)
 
 
-    async def get_custom_emoji_stickers(self, custom_emoji_ids: list[str]) -> list[Sticker]:
+    async def get_custom_emoji_stickers(
+        self,
+        custom_emoji_ids: list[str]
+    ) -> list[Sticker]:
         '''\
         https://core.telegram.org/bots/api#getcustomemojistickers
         Use this method to get information about custom emoji stickers
