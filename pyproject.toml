@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tglib"
-version = "1.0.7"
+version = "1.0.8"
 requires-python = ">= 3.8"
 license = {file = "LICENSE"}
 readme = "README.md"
@@ -24,5 +24,5 @@ all = [
 [project.urls]
 Repository = "https://github.com/unixtux/tglib"
 
-[tool.setuptools.packages]
-find = {}
+[tool.setuptools]
+packages = ["tglib"]
