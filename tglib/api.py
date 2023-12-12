@@ -23,7 +23,6 @@ from aiohttp import (
     FormData,
     ClientError,
     TCPConnector,
-    ClientTimeout,
     ClientSession,
     ClientTimeout,
     ClientResponse
@@ -71,7 +70,7 @@ def _get_files(
                 }
                 del params[key]
 
-    return files if files != {} else None
+    return files if files else None
 
 
 async def _check_json(response: ClientResponse) -> Any:
@@ -132,6 +131,7 @@ def _prepare_data(
 
 class TelegramError(Exception):
     """Class to handle exceptions during Telegram requests."""
+
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119.0) Gecko/20100101 Firefox/119.0'

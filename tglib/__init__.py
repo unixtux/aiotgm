@@ -205,7 +205,7 @@ class Client(TelegramApi):
         has_spoiler: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[bool] = None,
+        reply_to_message_id: Optional[int] = None,
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
@@ -1517,7 +1517,7 @@ class Client(TelegramApi):
     async def set_sticker_mask_position(
         self,
         sticker: str,
-        mask_position: Optional[MarkPosition] = None
+        mask_position: Optional[MaskPosition] = None
     ) -> Literal[True]:
         params = {'sticker': sticker}
         if mask_position is not None: params['mask_position'] = mask_position

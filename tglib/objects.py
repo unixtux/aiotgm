@@ -97,7 +97,6 @@ __all__ = [
     'LabeledPrice',
     'Location',
     'LoginUrl',
-    'MarkPosition',
     'MaskPosition',
     'MenuButton',
     'MenuButtonCommands',
@@ -163,7 +162,7 @@ from typing import (Any,
                     Iterable)
 
 from .logger import get_logger
-logger = get_logger('TelegramApi')
+logger = get_logger('TelegramTypes')
 
 try:
     import ujson as json
@@ -414,32 +413,6 @@ class InputFile(TelegramType):
             self.file_name = file_name
         else:
             self.file_name = None
-
-
-class MarkPosition(TelegramType):
-    @classmethod
-    def dese(cls, result):
-        if result is None: return None
-        obj = check_dict(result)
-        obj['point'] = obj.get('point')
-        obj['x_shift'] = obj.get('x_shift')
-        obj['y_shift'] = obj.get('y_shift')
-        obj['scale'] = obj.get('scale')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        point: str,
-        x_shift: float,
-        y_shift: float,
-        scale: float,
-        **kwargs
-    ):
-        _get_kwargs(self, kwargs)
-        self.point = point
-        self.x_shift = x_shift
-        self.y_shift = y_shift
-        self.scale = scale
 
 
 class LoginUrl(TelegramType):
@@ -2385,47 +2358,61 @@ class BotCommandScope(TelegramType):
             BotCommandScopeChatMember.__name__
         ])
         logger.warning(
-            'Deprecated BotCommandScope, you should use one'
-            f' of the following types instead: {scopes}.'
+            'BotCommandScope warning, expected one'
+            f' of the following types: {scopes}.'
         )
         self.__dict__ = kwargs
 
 
 class BotCommandScopeDefault(BotCommandScope):
-    def __init__(self):
-        self.type: str = 'default'
+    def __init__(
+        self,
+        type: str = 'default'
+    ):
+        self.type = type
 
 
 class BotCommandScopeAllPrivateChats(BotCommandScope):
-    def __init__(self):
-        self.type: str = 'all_private_chats'
+    def __init__(
+        self,
+        type: str = 'all_private_chats'
+    ):
+        self.type = type
 
 
 class BotCommandScopeAllGroupChats(BotCommandScope):
-    def __init__(self):
-        self.type: str = 'all_group_chats'
+    def __init__(
+        self,
+        type: str = 'all_group_chats'
+    ):
+        self.type = type
 
 
 class BotCommandScopeAllChatAdministrators(BotCommandScope):
-    def __init__(self):
-        self.type: str = 'all_chat_administrators'
+    def __init__(
+        self,
+        type: str = 'all_chat_administrators'
+    ):
+        self.type = type
 
 
 class BotCommandScopeChat(BotCommandScope):
     def __init__(
         self,
-        chat_id: Union[int, str]
+        chat_id: Union[int, str],
+        type: str = 'chat'
     ):
-        self.type: str = 'chat'
+        self.type = type
         self.chat_id = chat_id
 
 
 class BotCommandScopeChatAdministrators(BotCommandScope):
     def __init__(
         self,
-        chat_id: Union[int, str]
+        chat_id: Union[int, str],
+        type: str = 'chat_administrators'
     ):
-        self.type: str = 'chat_administrators'
+        self.type = type
         self.chat_id = chat_id
 
 
@@ -2433,9 +2420,10 @@ class BotCommandScopeChatMember(BotCommandScope):
     def __init__(
         self,
         chat_id: Union[int, str],
-        user_id: int
+        user_id: int,
+        type: str = 'chat_member'
     ):
-        self.type: str = 'chat_member'
+        self.type = type
         self.chat_id = chat_id
         self.user_id = user_id
 
@@ -2515,37 +2503,44 @@ class MenuButton(TelegramType):
         self,
         **kwargs
     ):
-        if _get_kwargs(self, kwargs):
-            menus = ', '.join([
-                MenuButtonCommands.__name__,
-                MenuButtonWebApp.__name__,
-                MenuButtonDefault.__name__
-            ])
-            logger.warning(
-                f'Deprecated MenuButton, expected {menus}.'
-            )
-            self.__dict__ = kwargs
+        menus = ', '.join([
+            MenuButtonCommands.__name__,
+            MenuButtonWebApp.__name__,
+            MenuButtonDefault.__name__
+        ])
+        logger.warning(
+            'MenuButton warning, expected one'
+            f' of the following types: {menus}.'
+        )
+        self.__dict__ = kwargs
 
 
 class MenuButtonCommands(MenuButton):
-    def __init__(self):
-        self.type: str = 'commands'
+    def __init__(
+        self,
+        type: str = 'commands'
+    ):
+        self.type = type
 
 
 class MenuButtonWebApp(MenuButton):
     def __init__(
         self,
         text: str,
-        web_app: WebAppInfo
+        web_app: WebAppInfo,
+        type: str = 'web_app'
     ):
-        self.type: str = 'web_app'
+        self.type = type
         self.text = text
         self.web_app = web_app
 
 
 class MenuButtonDefault(MenuButton):
-    def __init__(self):
-        self.type: str = 'default'
+    def __init__(
+        self,
+        type: str = 'default'
+    ):
+        self.type = type
 
 
 class ResponseParameters(TelegramType):
@@ -2581,8 +2576,8 @@ class InputMedia(TelegramType):
             InputMediaDocument.__name__
         ])
         logger.warning(
-            'Deprecated InputMedia, You should use one of'
-            f' the following types instead: {input_media}.'
+            'InputMedia warning, expected one'
+            f' of the following types: {input_media}.'
         )
         self.__dict__ = kwargs
 
@@ -2594,9 +2589,10 @@ class InputMediaPhoto(InputMedia):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
-        has_spoiler: Optional[bool] = None
+        has_spoiler: Optional[bool] = None,
+        type: str = 'photo'
     ):
-        self.type: str = 'photo'
+        self.type = type
         self.media = media
         self.caption = caption
         self.parse_mode = parse_mode
@@ -2616,9 +2612,10 @@ class InputMediaVideo(InputMedia):
         height: Optional[int] = None,
         duration: Optional[int] = None,
         supports_streaming: Optional[bool] = None,
-        has_spoiler: Optional[bool] = None
+        has_spoiler: Optional[bool] = None,
+        type: str = 'video'
     ):
-        self.type: str = 'video'
+        self.type = type
         self.media = media
         self.thumbnail = thumbnail
         self.caption = caption
@@ -2642,9 +2639,10 @@ class InputMediaAnimation(InputMedia):
         width: Optional[int] = None,
         height: Optional[int] = None,
         duration: Optional[int] = None,
-        has_spoiler: Optional[bool] = None
+        has_spoiler: Optional[bool] = None,
+        type: str = 'animation'
     ):
-        self.type: str = 'animation'
+        self.type = type
         self.media = media
         self.thumbnail = thumbnail
         self.caption = caption
@@ -2666,9 +2664,10 @@ class InputMediaAudio(InputMedia):
         caption_entities: Optional[list[MessageEntity]] = None,
         duration: Optional[int] = None,
         performer: Optional[str] = None,
-        title: Optional[str] = None
+        title: Optional[str] = None,
+        type: str = 'audio'
     ):
-        self.type: str = 'audio'
+        self.type = type
         self.media = media
         self.thumbnail = thumbnail
         self.caption = caption
@@ -2687,9 +2686,10 @@ class InputMediaDocument(InputMedia):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
-        disable_content_type_detection: Optional[bool] = None
+        disable_content_type_detection: Optional[bool] = None,
+        type: str = 'document'
     ):
-        self.type: str = 'document'
+        self.type = type
         self.media = media
         self.thumbnail = thumbnail
         self.caption = caption
@@ -2889,8 +2889,8 @@ class InputMessageContent(TelegramType):
             InputInvoiceMessageContent.__name__
         ])
         logger.warning(
-            'Deprecated InputMessageContent, you should use'
-            f' one of the following types instead: {inputs}.'
+            'InputMessageContent warning, expected'
+            f' one of the following types: {inputs}.'
         )
         self.__dict__ = kwargs
 
@@ -3040,8 +3040,8 @@ class InlineQueryResult(TelegramType):
             InlineQueryResultCachedAudio.__name__
         ])
         logger.warning(
-            'Deprecated InlineQueryResult, you should use one of'
-            f' the following types instead: {inline_query_results}.'
+            'InlineQueryResult warning, expected one of'
+            f' the following types: {inline_query_results}.'
         )
         self.__dict__ = kwargs
 
@@ -3058,9 +3058,10 @@ class InlineQueryResultArticle(InlineQueryResult):
         description: Optional[str] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
+        thumbnail_height: Optional[int] = None,
+        type: str = 'article'
     ):
-        self.type: str = 'article'
+        self.type = type
         self.id = id
         self.title = title
         self.input_message_content = input_message_content
@@ -3087,9 +3088,10 @@ class InlineQueryResultPhoto(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'photo'
     ):
-        self.type: str = 'photo'
+        self.type = type
         self.id = id
         self.photo_url = photo_url
         self.thumbnail_url = thumbnail_url
@@ -3119,9 +3121,10 @@ class InlineQueryResultGif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'gif'
     ):
-        self.type: str = 'gif'
+        self.type = type
         self.id = id
         self.gif_url = gif_url
         self.thumbnail_url = thumbnail_url
@@ -3152,9 +3155,10 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'mpeg4_gif'
     ):
-        self.type: str = 'mpeg4_gif'
+        self.type = type
         self.id = id
         self.mpeg4_url = mpeg4_url
         self.thumbnail_url = thumbnail_url
@@ -3186,9 +3190,10 @@ class InlineQueryResultVideo(InlineQueryResult):
         video_duration: Optional[int] = None,
         description: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'video'
     ):
-        self.type: str = 'video'
+        self.type = type
         self.id = id
         self.video_url = video_url
         self.mime_type = mime_type
@@ -3217,9 +3222,10 @@ class InlineQueryResultAudio(InlineQueryResult):
         performer: Optional[str] = None,
         audio_duration: Optional[int] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'audio'
     ):
-        self.type: str = 'audio'
+        self.type = type
         self.id = id
         self.audio_url = audio_url
         self.title = title
@@ -3243,9 +3249,10 @@ class InlineQueryResultVoice(InlineQueryResult):
         caption_entities: Optional[list[MessageEntity]] = None,
         voice_duration: Optional[int] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'voice'
     ):
-        self.type: str = 'voice'
+        self.type = type
         self.id = id
         self.voice_url = voice_url
         self.title = title
@@ -3272,9 +3279,10 @@ class InlineQueryResultDocument(InlineQueryResult):
         input_message_content: Optional[InputMessageContent] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
+        thumbnail_height: Optional[int] = None,
+        type: str = 'document'
     ):
-        self.type: str = 'document'
+        self.type = type
         self.id = id
         self.title = title
         self.document_url = document_url
@@ -3305,9 +3313,10 @@ class InlineQueryResultLocation(InlineQueryResult):
         input_message_content: Optional[InputMessageContent] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
+        thumbnail_height: Optional[int] = None,
+        type: str = 'location'
     ):
-        self.type: str = 'location'
+        self.type = type
         self.id = id
         self.latitude = latitude
         self.longitude = longitude
@@ -3339,9 +3348,10 @@ class InlineQueryResultVenue(InlineQueryResult):
         input_message_content: Optional[InputMessageContent] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
+        thumbnail_height: Optional[int] = None,
+        type: str = 'venue'
     ):
-        self.type: str = 'venue'
+        self.type = type
         self.id = id
         self.latitude = latitude
         self.longitude = longitude
@@ -3370,9 +3380,10 @@ class InlineQueryResultContact(InlineQueryResult):
         input_message_content: Optional[InputMessageContent] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
+        thumbnail_height: Optional[int] = None,
+        type: str = 'contact'
     ):
-        self.type: str = 'contact'
+        self.type = type
         self.id = id
         self.phone_number = phone_number
         self.first_name = first_name
@@ -3390,9 +3401,10 @@ class InlineQueryResultGame(InlineQueryResult):
         self,
         id: str,
         game_short_name: str,
-        reply_markup: Optional[InlineKeyboardMarkup] = None
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        type: str = 'game'
     ):
-        self.type: str = 'game'
+        self.type = type
         self.id = id
         self.game_short_name = game_short_name
         self.reply_markup = reply_markup
@@ -3409,9 +3421,10 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'photo'
     ):
-        self.type: str = 'photo'
+        self.type = type
         self.id = id
         self.photo_file_id = photo_file_id
         self.title = title
@@ -3433,9 +3446,10 @@ class InlineQueryResultCachedGif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'gif'
     ):
-        self.type: str = 'gif'
+        self.type = type
         self.id = id
         self.gif_file_id = gif_file_id
         self.title = title
@@ -3456,9 +3470,10 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'mpeg4_gif'
     ):
-        self.type: str = 'mpeg4_gif'
+        self.type = type
         self.id = id
         self.mpeg4_file_id = mpeg4_file_id
         self.title = title
@@ -3475,9 +3490,10 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
         id: str,
         sticker_file_id: str,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'sticker'
     ):
-        self.type: str = 'sticker'
+        self.type = type
         self.id = id
         self.sticker_file_id = sticker_file_id
         self.reply_markup = reply_markup
@@ -3495,9 +3511,10 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'document'
     ):
-        self.type: str = 'document'
+        self.type = type
         self.id = id
         self.title = title
         self.document_file_id = document_file_id
@@ -3520,9 +3537,10 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'video'
     ):
-        self.type: str = 'video'
+        self.type = type
         self.id = id
         self.video_file_id = video_file_id
         self.title = title
@@ -3544,9 +3562,10 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'voice'
     ):
-        self.type: str = 'voice'
+        self.type = type
         self.id = id
         self.voice_file_id = voice_file_id
         self.title = title
@@ -3566,9 +3585,10 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
+        input_message_content: Optional[InputMessageContent] = None,
+        type: str = 'audio'
     ):
-        self.type: str = 'audio'
+        self.type = type
         self.id = id
         self.audio_file_id = audio_file_id
         self.caption = caption
@@ -3951,8 +3971,8 @@ class PassportElementError(TelegramType):
             PassportElementErrorUnspecified.__name__
         ])
         logger.warning(
-            'Deprecated PassportElementError, you should'
-            f' use one of the following instead: {errors}.'
+            'PassportElementError warning, expected'
+            f' one of the following types: {errors}.'
         )
         self.__dict__ = kwargs
 
@@ -3970,9 +3990,10 @@ class PassportElementErrorDataField(PassportElementError):
         ],
         field_name: str,
         data_hash: str,
-        message: str
+        message: str,
+        source: str = 'data'
     ):
-        self.source: str = 'data'
+        self.source = source
         self.type = type
         self.field_name = field_name
         self.data_hash = data_hash
@@ -3989,9 +4010,10 @@ class PassportElementErrorFrontSide(PassportElementError):
             'internal_passport'
         ],
         file_hash: str,
-        message: str
+        message: str,
+        source: str = 'front_side'
     ):
-        self.source: str = 'front_side'
+        self.source = source
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -4002,9 +4024,10 @@ class PassportElementErrorReverseSide(PassportElementError):
         self,
         type: Literal['driver_license', 'identity_card'],
         file_hash: str,
-        message: str
+        message: str,
+        source: str = 'reverse_side'
     ):
-        self.source: str = 'reverse_side'
+        self.source = source
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -4020,9 +4043,10 @@ class PassportElementErrorSelfie(PassportElementError):
             'internal_passport'
         ],
         file_hash: str,
-        message: str
+        message: str,
+        source: str = 'selfie'
     ):
-        self.source: str = 'selfie'
+        self.source = source
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -4039,9 +4063,10 @@ class PassportElementErrorFile(PassportElementError):
             'temporary_registration'
         ],
         file_hash: str,
-        message: str
+        message: str,
+        source: str = 'file'
     ):
-        self.source: str = 'file'
+        self.source = source
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -4058,9 +4083,10 @@ class PassportElementErrorFiles(PassportElementError):
             'temporary_registration'
         ],
         file_hashes: list[str],
-        message: str
+        message: str,
+        source: str = 'files'
     ):
-        self.source: str = 'files'
+        self.source = source
         self.type = type
         self.file_hashes = file_hashes
         self.message = message
@@ -4081,9 +4107,10 @@ class PassportElementErrorTranslationFile(PassportElementError):
             'temporary_registration'
         ],
         file_hash: str,
-        message: str
+        message: str,
+        source: str = 'translation_file'
     ):
-        self.source: str = 'translation_file'
+        self.source = source
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -4104,9 +4131,10 @@ class PassportElementErrorTranslationFiles(PassportElementError):
             'temporary_registration'
         ],
         file_hashes: list[str],
-        message: str
+        message: str,
+        source: str = 'translation_files'
     ):
-        self.source: str = 'translation_files'
+        self.source = source
         self.type = type
         self.file_hashes = file_hashes
         self.message = message
@@ -4117,9 +4145,10 @@ class PassportElementErrorUnspecified(PassportElementError):
         self,
         type: str,
         element_hash: str,
-        message: str
+        message: str,
+        source: str = 'unspecified'
     ):
-        self.source: str = 'unspecified'
+        self.source = source
         self.type = type
         self.element_hash = element_hash
         self.message = message

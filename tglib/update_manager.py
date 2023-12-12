@@ -2,7 +2,9 @@
 
 import os
 import inspect
-from typing import Callable, Optional, Any
+from typing import (Any,
+                    Union,
+                    Callable)
 
 from .logger import get_logger
 logger = get_logger('TelegramApi')
@@ -64,7 +66,7 @@ def _check_rule(
     manager: str,
     obj: Any,
     checker: Callable,
-    func: Callable
+    function: Callable
 ) -> None:
 
     errors = []
@@ -88,8 +90,8 @@ def _check_rule(
         if not checker_args == 1:
             errors.append(checker_err)
 
-    if not inspect.iscoroutinefunction(func):
-        if inspect.isasyncgenfunction(func):
+    if not inspect.iscoroutinefunction(function):
+        if inspect.isasyncgenfunction(function):
             not_yield = (
                 " Attention: async generator is not allowed."
             )
@@ -100,12 +102,12 @@ def _check_rule(
         errors.append(
             f'ERROR {n} • The wrapped function must'
             f' be a coroutine.{not_yield} E.g. -> async def'
-            f' example_func({obj_name.lower()}: {obj_name}): return ...'
+            f' foo({obj_name.lower()}: {obj_name}): return ...'
         )
 
-    if hasattr(func, '__code__'):
-        func_args = func.__code__.co_argcount
-        func_args += func.__code__.co_kwonlyargcount
+    if hasattr(function, '__code__'):
+        func_args = function.__code__.co_argcount
+        func_args += function.__code__.co_kwonlyargcount
 
         if not func_args == 1:
             n = len(errors) + 1
@@ -127,20 +129,30 @@ class Rule:
     def __init__(
         self,
         checker: Callable[[Any], Any],
-        func: Callable[[Any], Any]
+        function: Callable[[Any], Any]
     ):
-        self.checker = checker
-        self.func = func
+        self.__checker = checker
+        self.__function = function
+
+    @property
+    def checker(self) -> Callable[[Any], Any]:
+        return self.__checker
+
+    @property
+    def function(self) -> Callable[[Any], Any]:
+        return self.__function
+
 
 class NextManager:
     """\
     A new update will be processed by the next manager returning
     the instance of this class in your decorated functions."""
 
+
 async def _run_coroutine(
     rule: Rule,
     obj: Any
-) -> Optional[Any]:
+) -> Union[Any, NextManager]:
 
     try:
         check = rule.checker(obj)
@@ -159,17 +171,18 @@ async def _run_coroutine(
         return NextManager()
     else:
         try:
-            return await rule.func(obj)
+            return await rule.function(obj)
         except BaseException as err:
-            code = rule.func.__code__
+            code = rule.function.__code__
             lineno = code.co_firstlineno
             filename = os.path.basename(code.co_filename)
             logger.error(
                 f'{err!r} occurred in the'
-                f' function {rule.func.__name__!r} in'
+                f' function {rule.function.__name__!r} in'
                 f' file {filename!r} at line {lineno}.'
             )
             raise err
+
 
 class UpdateManager:
     def __init__(self, name: str, obj: Any):
@@ -195,12 +208,12 @@ class UpdateManager:
     def add_rule(
         self,
         checker: Callable[[Any], Any],
-        func: Callable[[Any], Any]
+        function: Callable[[Any], Any]
     ) -> None:
         _check_rule(
             self.__name,
             self.__obj,
             checker,
-            func
+            function
         )
-        self.__rules += (Rule(checker, func), )
+        self.__rules += (Rule(checker, function), )
