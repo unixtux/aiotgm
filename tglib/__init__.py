@@ -83,6 +83,332 @@ class Client(TelegramApi):
         self.__chat_join_request_manager = UpdateManager(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
 
 
+    @property
+    def parse_mode(self) -> Optional[str]:
+        return self.__parse_mode
+
+    @parse_mode.setter
+    def parse_mode(self, val: Optional[str]) -> None:
+        if not isinstance(val, (str, type(None))):
+            raise TypeError(f'parse_mode must be str or None, got {val.__class__}')
+        self.__parse_mode = val
+
+    @property
+    def protect_content(self) -> Optional[bool]:
+        return self.__protect_content
+
+    @protect_content.setter
+    def protect_content(self, val: Optional[bool]) -> None:
+        val = None if not val else True
+        self.__protect_content = val
+
+
+    # 14 UpdateManagers
+
+    @property
+    def message_manager(self) -> UpdateManager:
+        return self.__message_manager
+
+    def manage_message(self, checker = lambda message: True):
+        def wrap(func: Callable[[Message], Any]):
+            self.message_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def edited_message_manager(self) -> UpdateManager:
+        return self.__edited_message_manager
+
+    def manage_edited_message(self, checker = lambda edited_message: True):
+        def wrap(func: Callable[[Message], Any]):
+            self.edited_message_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def channel_post_manager(self) -> UpdateManager:
+        return self.__channel_post_manager
+
+    def manage_channel_post(self, checker = lambda channel_post: True):
+        def wrap(func: Callable[[Message], Any]):
+            self.channel_post_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def edited_channel_post_manager(self) -> UpdateManager:
+        return self.__edited_channel_post_manager
+
+    def manage_edited_channel_post(self, checker = lambda edited_channel_post: True):
+        def wrap(func: Callable[[Message], Any]):
+            self.edited_channel_post_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def inline_query_manager(self) -> UpdateManager:
+        return self.__inline_query_manager
+
+    def manage_inline_query(self, checker = lambda inline_query: True):
+        def wrap(func: Callable[[InlineQuery], Any]):
+            self.inline_query_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def chosen_inline_result_manager(self) -> UpdateManager:
+        return self.__chosen_inline_result_manager
+
+    def manage_chosen_inline_result(self, checker = lambda chosen_inline_result: True):
+        def wrap(func: Callable[[ChosenInlineResult], Any]):
+            self.chosen_inline_result_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def callback_query_manager(self) -> UpdateManager:
+        return self.__callback_query_manager
+
+    def manage_callback_query(self, checker = lambda callback_query: True):
+        def wrap(func: Callable[[CallbackQuery], Any]):
+            self.callback_query_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def shipping_query_manager(self) -> UpdateManager:
+        return self.__shipping_query_manager
+
+    def manage_shipping_query(self, checker = lambda shipping_query: True):
+        def wrap(func: Callable[[ShippingQuery], Any]):
+            self.shipping_query_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def pre_checkout_query_manager(self) -> UpdateManager:
+        return self.__pre_checkout_query_manager
+
+    def manage_pre_checkout_query(self, checker = lambda pre_checkout_query: True):
+        def wrap(func: Callable[[PreCheckoutQuery], Any]):
+            self.pre_checkout_query_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def poll_manager(self) -> UpdateManager:
+        return self.__poll_manager
+
+    def manage_poll(self, checker = lambda poll: True):
+        def wrap(func: Callable[[Poll], Any]):
+            self.poll_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def poll_answer_manager(self) -> UpdateManager:
+        return self.__poll_answer_manager
+
+    def manage_poll_answer(self, checker = lambda poll_answer: True):
+        def wrap(func: Callable[[PollAnswer], Any]):
+            self.poll_answer_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def my_chat_member_manager(self) -> UpdateManager:
+        return self.__my_chat_member_manager
+
+    def manage_my_chat_member(self, checker = lambda my_chat_member: True):
+        def wrap(func: Callable[[ChatMemberUpdated], Any]):
+            self.my_chat_member_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def chat_member_manager(self) -> UpdateManager:
+        return self.__chat_member_manager
+
+    def manage_chat_member(self, checker = lambda chat_member: True):
+        def wrap(func: Callable[[ChatMemberUpdated], Any]):
+            self.chat_member_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def chat_join_request_manager(self) -> UpdateManager:
+        return self.__chat_join_request_manager
+
+    def manage_chat_join_request(self, checker = lambda chat_join_request: True):
+        def wrap(func: Callable[[ChatJoinRequest], Any]):
+            self.chat_join_request_manager.add_rule(checker, func)
+        return wrap
+
+
+    # Processing new updates
+
+    async def long_polling(self, timeout: int = 60):
+        unlimited = float('inf')
+        params = {'timeout': timeout}
+        while True:
+            try:
+                if self.__offset is not None:
+                    params['offset'] = self.__offset
+
+                result = await super().get_updates(
+                    params = params,
+                    max_retries = unlimited,
+                    keep_session = True
+                )
+                updates = [Update.dese(update) for update in result]
+
+            except TelegramError as exc:
+                if not re.search(r'bad.*gateway', str(exc), re.IGNORECASE):
+                    await self.session.close()
+                    return logger.info('long polling was interrupted.')
+
+            except:
+                await self.session.close()
+                return logger.info('long polling was interrupted.')
+            else:
+                if updates:
+                    self.__offset = updates[-1].update_id + 1
+                    for update in updates:
+                        asyncio.create_task(self.__process_update(update))
+
+
+    async def __process_update(self, update: Update):
+
+        if update.message:
+            obj: Message = update.message
+            for rule in self.message_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.edited_message:
+            obj: Message = update.edited_message
+            for rule in self.edited_message_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.channel_post:
+            obj: Message = update.channel_post
+            for rule in self.channel_post_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.edited_channel_post:
+            obj: Message = update.edited_channel_post
+            for rule in self.edited_channel_post_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.inline_query:
+            obj: InlineQuery = update.inline_query
+            for rule in self.inline_query_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.chosen_inline_result:
+            obj: ChosenInlineResult = update.chosen_inline_result
+            for rule in self.chosen_inline_result_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.callback_query:
+            obj: CallbackQuery = update.callback_query
+            for rule in self.callback_query_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.shipping_query:
+            obj: ShippingQuery = update.shipping_query
+            for rule in self.shipping_query_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.pre_checkout_query:
+            obj: PreCheckoutQuery = update.pre_checkout_query
+            for rule in self.pre_checkout_query_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.poll:
+            obj: Poll = update.poll
+            for rule in self.poll_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.poll_answer:
+            obj: PollAnswer = update.poll_answer
+            for rule in self.poll_answer_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.my_chat_member:
+            obj: ChatMemberUpdated = update.my_chat_member
+            for rule in self.my_chat_member_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.chat_member:
+            obj: ChatMemberUpdated = update.chat_member
+            for rule in self.chat_member_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+        elif update.chat_join_request:
+            obj: ChatJoinRequest = update.chat_join_request
+            for rule in self.chat_join_request_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                       return
+                except:
+                    return
+
+
+    # Available methods
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -2522,328 +2848,3 @@ class Client(TelegramApi):
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         result = await super().get_game_high_scores(params)
         return [GameHighScore.dese(score) for score in result]
-
-
-######################################################################
-
-    @property
-    def parse_mode(self) -> Optional[str]:
-        return self.__parse_mode
-
-    @parse_mode.setter
-    def parse_mode(self, val: Optional[str]) -> None:
-        if not isinstance(val, (str, type(None))):
-            raise TypeError(f'parse_mode must be str or None, got {val.__class__}')
-        self.__parse_mode = val
-
-    @property
-    def protect_content(self) -> Optional[bool]:
-        return self.__protect_content
-
-    @protect_content.setter
-    def protect_content(self, val: Optional[bool]) -> None:
-        val = None if not val else True
-        self.__protect_content = val
-
-    # 14 UpdateManagers
-
-    @property
-    def message_manager(self) -> UpdateManager:
-        return self.__message_manager
-
-    def manage_message(self, checker = lambda message: True):
-        def wrap(func: Callable[[Message], Any]):
-            self.message_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def edited_message_manager(self) -> UpdateManager:
-        return self.__edited_message_manager
-
-    def manage_edited_message(self, checker = lambda edited_message: True):
-        def wrap(func: Callable[[Message], Any]):
-            self.edited_message_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def channel_post_manager(self) -> UpdateManager:
-        return self.__channel_post_manager
-
-    def manage_channel_post(self, checker = lambda channel_post: True):
-        def wrap(func: Callable[[Message], Any]):
-            self.channel_post_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def edited_channel_post_manager(self) -> UpdateManager:
-        return self.__edited_channel_post_manager
-
-    def manage_edited_channel_post(self, checker = lambda edited_channel_post: True):
-        def wrap(func: Callable[[Message], Any]):
-            self.edited_channel_post_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def inline_query_manager(self) -> UpdateManager:
-        return self.__inline_query_manager
-
-    def manage_inline_query(self, checker = lambda inline_query: True):
-        def wrap(func: Callable[[InlineQuery], Any]):
-            self.inline_query_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def chosen_inline_result_manager(self) -> UpdateManager:
-        return self.__chosen_inline_result_manager
-
-    def manage_chosen_inline_result(self, checker = lambda chosen_inline_result: True):
-        def wrap(func: Callable[[ChosenInlineResult], Any]):
-            self.chosen_inline_result_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def callback_query_manager(self) -> UpdateManager:
-        return self.__callback_query_manager
-
-    def manage_callback_query(self, checker = lambda callback_query: True):
-        def wrap(func: Callable[[CallbackQuery], Any]):
-            self.callback_query_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def shipping_query_manager(self) -> UpdateManager:
-        return self.__shipping_query_manager
-
-    def manage_shipping_query(self, checker = lambda shipping_query: True):
-        def wrap(func: Callable[[ShippingQuery], Any]):
-            self.shipping_query_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def pre_checkout_query_manager(self) -> UpdateManager:
-        return self.__pre_checkout_query_manager
-
-    def manage_pre_checkout_query(self, checker = lambda pre_checkout_query: True):
-        def wrap(func: Callable[[PreCheckoutQuery], Any]):
-            self.pre_checkout_query_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def poll_manager(self) -> UpdateManager:
-        return self.__poll_manager
-
-    def manage_poll(self, checker = lambda poll: True):
-        def wrap(func: Callable[[Poll], Any]):
-            self.poll_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def poll_answer_manager(self) -> UpdateManager:
-        return self.__poll_answer_manager
-
-    def manage_poll_answer(self, checker = lambda poll_answer: True):
-        def wrap(func: Callable[[PollAnswer], Any]):
-            self.poll_answer_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def my_chat_member_manager(self) -> UpdateManager:
-        return self.__my_chat_member_manager
-
-    def manage_my_chat_member(self, checker = lambda my_chat_member: True):
-        def wrap(func: Callable[[ChatMemberUpdated], Any]):
-            self.my_chat_member_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def chat_member_manager(self) -> UpdateManager:
-        return self.__chat_member_manager
-
-    def manage_chat_member(self, checker = lambda chat_member: True):
-        def wrap(func: Callable[[ChatMemberUpdated], Any]):
-            self.chat_member_manager.add_rule(checker, func)
-        return wrap
-
-    @property
-    def chat_join_request_manager(self) -> UpdateManager:
-        return self.__chat_join_request_manager
-
-    def manage_chat_join_request(self, checker = lambda chat_join_request: True):
-        def wrap(func: Callable[[ChatJoinRequest], Any]):
-            self.chat_join_request_manager.add_rule(checker, func)
-        return wrap
-
-    # Incoming updates process
-
-    async def long_polling(self, timeout: int = 60):
-        unlimited = float('inf')
-        params = {'timeout': timeout}
-        while True:
-            try:
-                if self.__offset is not None:
-                    params['offset'] = self.__offset
-
-                result = await super().get_updates(
-                    params = params,
-                    max_retries = unlimited,
-                    keep_session = True
-                )
-                updates = [Update.dese(update) for update in result]
-
-            except TelegramError as exc:
-                if not re.search(r'bad.*gateway', str(exc), re.IGNORECASE):
-                    await self.session.close()
-                    return logger.info('long polling was interrupted.')
-
-            except:
-                await self.session.close()
-                return logger.info('long polling was interrupted.')
-            else:
-                if updates:
-                    self.__offset = updates[-1].update_id + 1
-                    for update in updates:
-                        asyncio.create_task(self.__process_update(update))
-
-
-    async def __process_update(self, update: Update):
-
-        if update.message:
-            obj: Message = update.message
-            for rule in self.message_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.edited_message:
-            obj: Message = update.edited_message
-            for rule in self.edited_message_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.channel_post:
-            obj: Message = update.channel_post
-            for rule in self.channel_post_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.edited_channel_post:
-            obj: Message = update.edited_channel_post
-            for rule in self.edited_channel_post_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.inline_query:
-            obj: InlineQuery = update.inline_query
-            for rule in self.inline_query_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.chosen_inline_result:
-            obj: ChosenInlineResult = update.chosen_inline_result
-            for rule in self.chosen_inline_result_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.callback_query:
-            obj: CallbackQuery = update.callback_query
-            for rule in self.callback_query_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.shipping_query:
-            obj: ShippingQuery = update.shipping_query
-            for rule in self.shipping_query_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.pre_checkout_query:
-            obj: PreCheckoutQuery = update.pre_checkout_query
-            for rule in self.pre_checkout_query_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.poll:
-            obj: Poll = update.poll
-            for rule in self.poll_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.poll_answer:
-            obj: PollAnswer = update.poll_answer
-            for rule in self.poll_answer_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.my_chat_member:
-            obj: ChatMemberUpdated = update.my_chat_member
-            for rule in self.my_chat_member_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.chat_member:
-            obj: ChatMemberUpdated = update.chat_member
-            for rule in self.chat_member_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
-        elif update.chat_join_request:
-            obj: ChatJoinRequest = update.chat_join_request
-            for rule in self.chat_join_request_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
-                    return
-
