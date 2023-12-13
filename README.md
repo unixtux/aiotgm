@@ -1,6 +1,6 @@
 [![pypi](https://img.shields.io/badge/pypi-tglib-blue)](https://pypi.org/project/tglib/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1)
 
-<h2 style="text-align: center;">Async telegram library to build your bot client</h2>
+<h2 align="center">Async telegram library to build your bot client</h2>
 
 * #### Dependencies
     * [aiohttp](https://github.com/aio-libs/aiohttp)
