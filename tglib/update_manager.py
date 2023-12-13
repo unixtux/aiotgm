@@ -4,8 +4,7 @@ import os
 import inspect
 from typing import (Any,
                     Union,
-                    Callable,
-                    Optional)
+                    Callable)
 
 from .logger import get_logger
 logger = get_logger('TelegramApi')
@@ -67,10 +66,10 @@ examples = {
 def _func_ok(
     func: Callable,
     must_be_coro: bool = False
-) -> Optional[bool]:
+) -> bool:
 
     if not inspect.isfunction(func):
-        return
+        return False
 
     spec = inspect.getfullargspec(func)
 
@@ -79,12 +78,21 @@ def _func_ok(
         and not spec.varkw
         and not spec.kwonlyargs):
 
-        if (must_be_coro
-            and not inspect.iscoroutinefunction(func)):
+        if (
+            must_be_coro
+            and inspect.iscoroutinefunction(func)
+        ):
+            return True
 
-            return
+        elif (
+            not must_be_coro
+            and not inspect.iscoroutinefunction(func)
+            and not inspect.isasyncgenfunction(func)
+            and not inspect.isgeneratorfunction(func)
+        ):
+            return True
 
-        return True
+    return False
 
 
 def _check_rule(
