@@ -172,13 +172,12 @@ async def last_manager(mex: Message):
 
 # You can also use the method 'add_rule' of managers to add rules
 
-checker = lambda mex: mex.text in ['/start', '/help']
+checker = lambda mex: mex.text == '/help'
 
-async def delete(mex):
-    await bot.delete_message(mex.chat.id, mex.message_id)
-    return NextManager()
+async def help_msg(mex):
+    await bot.send_message(mex.chat.id, 'This is a list of commands...')
 
-bot.message_manager.add_rule(checker, delete)
+bot.message_manager.add_rule(checker, help_msg)
 
 # Finally you call the method 'long_polling' to
 # start receiving updates from the telegram server
