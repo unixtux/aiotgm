@@ -1,15 +1,15 @@
 [![pypi](https://img.shields.io/badge/pypi-tglib-blue)](https://pypi.org/project/tglib/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1)
 
-<h2 align="center">Async telegram library to build your bot client</h2>
+<h2 align="center">Async python library to build your telegram bot client</h2>
 
 * #### Dependencies
     * [aiohttp](https://github.com/aio-libs/aiohttp)
     * Optional [ujson](https://github.com/ultrajson/ultrajson), [certifi](https://github.com/certifi/python-certifi)
 
 * #### Installation
-    * Classic ```python3 -m pip install tglib```
-    * With optional dependencies ```python3 -m pip install tglib[all]```
-    * To update to the latest version ```python3 -m pip install -U tglib```
+    * Classic ```python -m pip install tglib```
+    * With optional dependencies ```python -m pip install tglib[all]```
+    * To update to the latest version ```python -m pip install -U tglib```
 
 * #### Managers for different [updates](https://core.telegram.org/bots/api#update)
     * message_manager
@@ -142,7 +142,7 @@
     * get_game_high_scores
 
 * #### Usage
-```
+```python
 import asyncio
 from tglib import (
     Client,
