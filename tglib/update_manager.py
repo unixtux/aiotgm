@@ -4,7 +4,8 @@ import os
 import inspect
 from typing import (Any,
                     Union,
-                    Callable)
+                    Callable,
+                    Optional)
 
 from .logger import get_logger
 logger = get_logger('TelegramApi')
@@ -62,6 +63,30 @@ examples = {
     CHAT_JOIN_REQUEST_MANAGER : "lambda chat_join_request: chat_join_request.chat.id == xyz"
 }
 
+
+def _func_ok(
+    func: Callable,
+    must_be_coro: bool = False
+) -> Optional[bool]:
+
+    if not inspect.isfunction(func):
+        return
+
+    spec = inspect.getfullargspec(func)
+
+    if (len(spec.args) == 1
+        and not spec.varargs
+        and not spec.varkw
+        and not spec.kwonlyargs):
+
+        if (must_be_coro
+            and not inspect.iscoroutinefunction(func)):
+
+            return
+
+        return True
+
+
 def _check_rule(
     manager: str,
     obj: Any,
@@ -72,50 +97,24 @@ def _check_rule(
     errors = []
     obj_name: str = obj.__name__
 
-    checker_err = (
-        "ERROR 1 • The 'checker' argument"
-        ' must be a function that takes only'
-        ' one parameter, it will be processed as'
-        f' {obj_name}. E.g. -> ({examples[manager]})'
-    )
-    if (not hasattr(checker, '__code__')
-        or inspect.iscoroutinefunction(checker)
-        or inspect.isasyncgenfunction(checker)):
-
-        errors.append(checker_err)
-    else:
-        checker_args = checker.__code__.co_argcount
-        checker_args += checker.__code__.co_kwonlyargcount
-
-        if not checker_args == 1:
-            errors.append(checker_err)
-
-    if not inspect.iscoroutinefunction(function):
-        if inspect.isasyncgenfunction(function):
-            not_yield = (
-                " Attention: async generator is not allowed."
-            )
-        else:
-            not_yield = str()
-
+    if not _func_ok(checker):
+        errors.append(
+            "ERROR 1 • The 'checker' argument must"
+            ' be a normal function that takes only'
+            ' one parameter, it will be processed as'
+            f' {obj_name}. E.g. -> {examples[manager]}'
+        )
+    if not _func_ok(
+        function,
+        must_be_coro = True
+    ):
         n = len(errors) + 1
         errors.append(
-            f'ERROR {n} • The wrapped function must'
-            f' be a coroutine.{not_yield} E.g. -> async def'
+            f'ERROR {n} • The wrapped function must be'
+            ' an async def (async generator is not allowed)'
+            ' that takes only one argument. E.g. -> async def'
             f' foo({obj_name.lower()}: {obj_name}): return ...'
         )
-
-    if hasattr(function, '__code__'):
-        func_args = function.__code__.co_argcount
-        func_args += function.__code__.co_kwonlyargcount
-
-        if not func_args == 1:
-            n = len(errors) + 1
-            errors.append(
-                f'ERROR {n} • Got {func_args} arguments'
-                f' in the wrapped function. You must pass'
-                f' only one, it will be processed as {obj_name}.'
-            )
     if errors:
         len_err = len(errors)
         s = str() if len_err == 1 else 's'
@@ -124,6 +123,7 @@ def _check_rule(
             f' to add a rule to the {manager}, see below'
             f' for more details.\n\n' + '\n'.join(errors)
         )
+
 
 class Rule:
     def __init__(
