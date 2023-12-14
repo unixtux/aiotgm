@@ -34,6 +34,7 @@ All the methods of the Client are the same described in [here](https://core.tele
 
 * #### NOTES
 > If the object Message has not text, it's str() instead of None, so you can use for example text.startswith() without getting errors.
+
 > All other optional attributes of the objects are None if they are not in the Json received as response.
 
 * #### Usage
