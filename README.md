@@ -30,7 +30,7 @@
 
 
 * #### Available methods
-All the methods of the Client are the same described in [here](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case.
+All the methods of the Client are the same described [here](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case.
 
 * #### Available Types
 All the types are the same described [here](https://core.telegram.org/bots/api#available-types).
@@ -43,17 +43,18 @@ All the types are the same described [here](https://core.telegram.org/bots/api#a
 > Webhook has not been implemented yet.
 
 * #### ReplyMarkups
-InlineKeyboardMarkup and ReplyKeyboardMarkup have a method called 'add', so you can add new buttons after the object has been initialized.
+InlineKeyboardMarkup and ReplyKeyboardMarkup have the method 'add', so you can add new buttons after the object has been initialized.
 ```python
 markup = ReplyKeyboardMarkup()
 markup.add(KeyboardButton('xyz'), ...)
 
-# all the buttons added with this method will be added to the same row, you
-# can change the row width after the creation with this property setter 'row_width'
+# all the buttons added with this method will be
+# added to the same row, you can change the row width
+# after the creation with the property setter 'row_width'.
 
 markup.row_width = 4
 
-# this will reorder all the buttons in a row of 4
+# this will reorder all the buttons in a row of 4.
 ```
 
 * #### Usage
@@ -77,10 +78,11 @@ async def welcome(mex: Message):
     try:
         await bot.send_message(mex.chat.id, 'welcome')
     except (TimeoutError, TelegramError):
-        # TelegramError is raised when
-        # a request goes wrong, otherwise
-        # will be raised TimeoutError if a
-        # response is not returned in 5 minutes
+        # Two errors can be raised in requests.
+        # - TimeoutError if a response is
+        #   not returned after 5 minutes.
+        # - TelegramError if a response is
+        #   returned but got a bad status code.
 
     return NextManager()
     # Returning a NextManager instance, you will pass
@@ -88,7 +90,7 @@ async def welcome(mex: Message):
 
 
 # You can also add rules with the
-# method 'add_rule' of the managers
+# method 'add_rule' of the managers.
 
 async def foo(mex):
     ...
@@ -97,7 +99,7 @@ bot.message_manager.add_rule(lambda x: True, foo)
 
 # Calling the method 'long_polling',
 # the bot starts receiving updates by
-# the telegram server and process them
+# the telegram server and process them.
 
 if __name__ == '__main__':
     asyncio.run(bot.long_polling())
