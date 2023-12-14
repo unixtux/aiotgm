@@ -3,9 +3,9 @@
 <h3 align="center">Async python library to build your telegram bot client</h3>
 
 * #### Requirements
-  * *Python >= 3.8*
+  * Python >= 3.8
   * [aiohttp](https://github.com/aio-libs/aiohttp)
-  * *Optional [ujson](https://github.com/ultrajson/ultrajson) & [certifi](https://github.com/certifi/python-certifi)*
+  * Optional [ujson](https://github.com/ultrajson/ultrajson) & [certifi](https://github.com/certifi/python-certifi)
 
 * #### Installation
   * ```pip install tglib```
