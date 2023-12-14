@@ -37,16 +37,19 @@ All the methods of the Client are the same described in [here](https://core.tele
 
 > All other optional attributes of the objects are None if they are not in the Json received as response.
 
+> Webhook has not been implemented yet
+
 * #### [Types](https://core.telegram.org/bots/api#available-types)
 All the types are the same described [here](https://core.telegram.org/bots/api#available-types).
 
-* #### Reply Markups
-Objects InlineKeyboardMarkup and ReplyKeyboardMarkup have a method called 'add', so you can add new buttons after the object has been initialized.
+* #### ReplyMarkups
+InlineKeyboardMarkup and ReplyKeyboardMarkup have a method called 'add', so you can add new buttons after the object has been initialized.
 ```python
 markup = ReplyKeyboardMarkup()
 markup.add(KeyboardButton('xyz'), ...)
 
-# all the buttons added with this method will be added to the same row, you can change the row after the creation with this property setter 'row_width'
+# all the buttons added with this method will be added to the same row, you
+# can change the row width after the creation with this property setter 'row_width'
 
 markup.row_width = 4
 
