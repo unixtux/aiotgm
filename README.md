@@ -4,12 +4,12 @@
 
 * #### Requirements
   * *Python >= 3.8*
-  * *Module [aiohttp](https://github.com/aio-libs/aiohttp)*
+  * [aiohttp](https://github.com/aio-libs/aiohttp)
   * *Optional [ujson](https://github.com/ultrajson/ultrajson) & [certifi](https://github.com/certifi/python-certifi)*
 
 * #### Installation
-  * ```python -m pip install tglib```
-  * *To update* ```python -m pip install -U tglib```
+  * ```pip install tglib```
+  * To update ```pip install -U tglib```
 
 * #### 14 managers for different [updates](https://core.telegram.org/bots/api#update)
   * message_manager
@@ -162,24 +162,20 @@ async def welcome(mex: Message):
     try:
         await bot.send_message(mex.chat.id, 'welcome')
     except (TimeoutError, TelegramError):
-        ...
-    # TelegramError is raised when
-    # a request goes wrong, otherwise
-    # will be raised TimeoutError if a
-    # response is not returned in 5 minutes
+        # TelegramError is raised when
+        # a request goes wrong, otherwise
+        # will be raised TimeoutError if a
+        # response is not returned in 5 minutes
 
     return NextManager()
     # Returning a NextManager instance, you will pass
     # the update to the following manager of same kind.
 
-@bot.manage_message()
-async def another_manager(mex):
-    ...
 
 # You can also add rules with the
 # method 'add_rule' of the managers
 
-async def foo(obj):
+async def foo(mex):
     ...
 
 bot.message_manager.add_rule(lambda x: True, foo)
