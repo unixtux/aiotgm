@@ -31,15 +31,15 @@
 
 
 * #### Available methods
-All the methods of the Client are the same described [in the offical documentation](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case. E.g. sendMessage to send_message.
-All the methods are *async functions*, so you must use them in *await expression*.
+All the methods of the Client are the same described in the [offical documentation](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case. E.g. sendMessage to send_message.
+All the methods are **async** functions, so you must use them in **await** expression.
 
 * #### Available Types
-All the types are the same described [in the offical documentation](https://core.telegram.org/bots/api#available-types).
+All the types are the same described in the [offical documentation](https://core.telegram.org/bots/api#available-types).
 
-> If the type Message has not text, it's str() instead of None, so you can use for example text.startswith() without getting errors.
+> If the attribute of Message is empty, it's **str()** instead of **None**, so you can use for example text.startswith() without getting errors.
 
-> Attribute 'from' of the types, has been changed to 'from_user' because in python it cause conflict.
+> Attribute **'from'** of the types, has been changed to **'from_user'** because in python it cause conflict.
 
 > All other optional attributes of the objects are None if they are not in the JSON received as response.
 
@@ -48,7 +48,7 @@ All the types are the same described [in the offical documentation](https://core
 > Webhook has not been implemented yet.
 
 * #### ReplyMarkups
-*InlineKeyboardMarkup* and *ReplyKeyboardMarkup* have the method 'add', so you can add new buttons after the object has been initialized.
+**InlineKeyboardMarkup** and **ReplyKeyboardMarkup** have the method 'add', so you can add new buttons after the object has been initialized.
 ```python
 markup = ReplyKeyboardMarkup()
 markup.add(KeyboardButton('xyz'), ...)
