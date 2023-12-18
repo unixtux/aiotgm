@@ -795,6 +795,9 @@ class ChatPhoto(TelegramType):
 
 
 class Location(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#location
+    This object represents a point on the map.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1362,6 +1365,9 @@ class PollAnswer(TelegramType):
 
 
 class Poll(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#poll
+    This object contains information about a poll.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1415,6 +1421,9 @@ class Poll(TelegramType):
 
 
 class Venue(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#venue
+    This object represents a venue.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1450,6 +1459,9 @@ class Venue(TelegramType):
 
 
 class WebAppData(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#webappdata
+    Describes data sent from a Web App to the bot.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1470,6 +1482,10 @@ class WebAppData(TelegramType):
 
 
 class ProximityAlertTriggered(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#proximityalerttriggered
+    This object represents the content of a service message, sent whenever
+    a user in the chat triggers a proximity alert set by another user.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1493,6 +1509,9 @@ class ProximityAlertTriggered(TelegramType):
 
 
 class MessageAutoDeleteTimerChanged(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#messageautodeletetimerchanged
+    This object represents a service message about a change in auto-delete timer settings.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1510,6 +1529,9 @@ class MessageAutoDeleteTimerChanged(TelegramType):
 
 
 class ForumTopicCreated(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#forumtopiccreated
+    This object represents a service message about a new forum topic created in the chat.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1533,6 +1555,10 @@ class ForumTopicCreated(TelegramType):
 
 
 class ForumTopicClosed(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#forumtopicclosed
+    This object represents a service message about a forum
+    topic closed in the chat. Currently holds no information.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1548,6 +1574,9 @@ class ForumTopicClosed(TelegramType):
 
 
 class ForumTopicEdited(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#forumtopicedited
+    This object represents a service message about an edited forum topic.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1568,6 +1597,10 @@ class ForumTopicEdited(TelegramType):
 
 
 class ForumTopicReopened(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#forumtopicreopened
+    This object represents a service message about a forum
+    topic reopened in the chat. Currently holds no information.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1583,6 +1616,10 @@ class ForumTopicReopened(TelegramType):
 
 
 class GeneralForumTopicHidden(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#generalforumtopichidden
+    This object represents a service message about General forum
+    topic hidden in the chat. Currently holds no information.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1598,6 +1635,10 @@ class GeneralForumTopicHidden(TelegramType):
 
 
 class GeneralForumTopicUnhidden(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#generalforumtopicunhidden
+    This object represents a service message about General forum
+    topic unhidden in the chat. Currently holds no information.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1613,6 +1654,10 @@ class GeneralForumTopicUnhidden(TelegramType):
 
 
 class UserShared(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#usershared
+    This object contains information about the user whose identifier
+    was shared with the bot using a KeyboardButtonRequestUser button.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1633,6 +1678,10 @@ class UserShared(TelegramType):
 
 
 class ChatShared(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chatshared
+    This object contains information about the chat whose identifier
+    was shared with the bot using a KeyboardButtonRequestChat button.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1653,6 +1702,11 @@ class ChatShared(TelegramType):
 
 
 class WriteAccessAllowed(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#writeaccessallowed
+    This object represents a service message about a user allowing a bot to write
+    messages after adding it to the attachment menu, launching a Web App from a link,
+    or accepting an explicit request from a Web App sent by the method requestWriteAccess.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1676,6 +1730,9 @@ class WriteAccessAllowed(TelegramType):
 
 
 class VideoChatScheduled(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#videochatscheduled
+    This object represents a service message about a video chat scheduled in the chat.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1693,6 +1750,10 @@ class VideoChatScheduled(TelegramType):
 
 
 class VideoChatStarted(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#videochatstarted
+    This object represents a service message about a video
+    chat started in the chat. Currently holds no information.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1708,6 +1769,9 @@ class VideoChatStarted(TelegramType):
 
 
 class VideoChatEnded(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#videochatended
+    This object represents a service message about a video chat ended in the chat.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1725,6 +1789,9 @@ class VideoChatEnded(TelegramType):
 
 
 class VideoChatParticipantsInvited(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#videochatparticipantsinvited
+    This object represents a service message about new members invited to a video chat.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1742,6 +1809,9 @@ class VideoChatParticipantsInvited(TelegramType):
 
 
 class UserProfilePhotos(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#userprofilephotos
+    This object represent a user's profile pictures.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1762,6 +1832,11 @@ class UserProfilePhotos(TelegramType):
 
 
 class File(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#file
+    This object represents a file ready to be downloaded. The file can be downloaded via the link
+    https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed that the link will be
+    valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1788,6 +1863,9 @@ class File(TelegramType):
 
 
 class WebAppInfo(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#webappinfo
+    Describes a Web App.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1803,6 +1881,10 @@ class WebAppInfo(TelegramType):
 
 
 class KeyboardButtonRequestUser(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#keyboardbuttonrequestuser
+    This object defines the criteria used to request a suitable user. The identifier of
+    the selected user will be shared with the bot when the corresponding button is pressed.'''
     def __init__(
         self,
         request_id: int,
@@ -1845,6 +1927,12 @@ class KeyboardButtonPollType(TelegramType):
 
 
 class KeyboardButton(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#keyboardbutton
+    This object represents one button of the reply keyboard. For
+    simple text buttons, String can be used instead of this object to specify
+    the button text. The optional fields web_app, request_user, request_chat,
+    request_contact, request_location, and request_poll are mutually exclusive.'''
     def __init__(
         self,
         text: str,
@@ -1865,6 +1953,10 @@ class KeyboardButton(TelegramType):
 
 
 class ReplyKeyboardMarkup(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#replykeyboardmarkup
+    This object represents a custom keyboard with reply
+    options (see Introduction to bots for details and examples).'''
     def __init__(
         self,
         keyboard: list[list[KeyboardButton]] = [],
@@ -1882,12 +1974,6 @@ class ReplyKeyboardMarkup(TelegramType):
         self.selective = selective
 
     def add(self, *buttons: KeyboardButton):
-        for btn in buttons:
-            if not isinstance(btn, KeyboardButton):
-                raise TypeError(
-                    f'keyboard of {self.__class__.__name__}'
-                    ' must be a nested list of KeyboardButton'
-                )
         self.keyboard.append(list(buttons))
         return self
 
