@@ -31,11 +31,11 @@
 
 
 * #### Available methods
-All the methods of the Client are the same described [here](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case. E.g. sendMessage to send_message.
+All the methods of the Client are the same described [in the offical documentation](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case. E.g. sendMessage to send_message.
 All the methods are *async functions*, so you must use them in *await expression*.
 
 * #### Available Types
-All the types are the same described [here](https://core.telegram.org/bots/api#available-types).
+All the types are the same described [in the offical documentation](https://core.telegram.org/bots/api#available-types).
 
 > If the type Message has not text, it's str() instead of None, so you can use for example text.startswith() without getting errors.
 
@@ -48,7 +48,7 @@ All the types are the same described [here](https://core.telegram.org/bots/api#a
 > Webhook has not been implemented yet.
 
 * #### ReplyMarkups
-InlineKeyboardMarkup and ReplyKeyboardMarkup have the method 'add', so you can add new buttons after the object has been initialized.
+*InlineKeyboardMarkup* and *ReplyKeyboardMarkup* have the method 'add', so you can add new buttons after the object has been initialized.
 ```python
 markup = ReplyKeyboardMarkup()
 markup.add(KeyboardButton('xyz'), ...)
@@ -100,7 +100,7 @@ async def welcome(message: Message):
 def checker(message: Message):
     return message.text == '/start'
 
-async def foo(message):
+async def foo(message: Message):
     ...
 
 bot.message_manager.add_rule(checker, foo)
