@@ -1,6 +1,6 @@
 [![pypi](https://img.shields.io/badge/pypi-tglib-blue)](https://pypi.org/project/tglib/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1)
 
-<h3 align="center">Async python library to build your telegram bot client</h3>
+<h3 align="center">Async python module to build your telegram bot client</h3>
 
 * #### Requirements
   * Python >= 3.8
@@ -9,6 +9,7 @@
 
 * #### Installation
 ```python -m pip install tglib```
+
 * #### Update the library
 ```python -m pip install -U tglib```
 
@@ -30,15 +31,19 @@
 
 
 * #### Available methods
-All the methods of the Client are the same described [here](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case.
+All the methods of the Client are the same described [here](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case. E.g. sendMessage to send_message.
+All the methods are *async functions*, so you must use them in *await expression*.
 
 * #### Available Types
 All the types are the same described [here](https://core.telegram.org/bots/api#available-types).
 
-* #### Notes
-> If the object Message has not text, it's str() instead of None, so you can use for example text.startswith() without getting errors.
+> If the type Message has not text, it's str() instead of None, so you can use for example text.startswith() without getting errors.
 
-> All other optional attributes of the objects are None if they are not in the Json received as response.
+> Attribute 'from' of the types, has been changed to 'from_user' because in python it cause conflict.
+
+> All other optional attributes of the objects are None if they are not in the JSON received as response.
+
+* #### Notes
 
 > Webhook has not been implemented yet.
 
@@ -73,10 +78,10 @@ bot = Client('<your_token>')
 # Add some rules for incoming updates. Managers
 # check rules in the same order they were added.
 
-@bot.manage_message(lambda mex: mex.text == '/start')
-async def welcome(mex: Message):
+@bot.manage_message(lambda message: message.text == '/start')
+async def welcome(message: Message):
     try:
-        await bot.send_message(mex.chat.id, 'welcome')
+        await bot.send_message(message.chat.id, 'welcome')
     except (TimeoutError, TelegramError):
         # Two errors can be raised in requests.
         # - TimeoutError if a response is
@@ -92,10 +97,13 @@ async def welcome(mex: Message):
 # You can also add rules with the
 # method 'add_rule' of the managers.
 
-async def foo(mex):
+def checker(message: Message):
+    return message.text == '/start'
+
+async def foo(message):
     ...
 
-bot.message_manager.add_rule(lambda x: True, foo)
+bot.message_manager.add_rule(checker, foo)
 
 # Calling the method 'long_polling',
 # the bot starts receiving updates by

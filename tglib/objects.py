@@ -500,6 +500,9 @@ class User(TelegramType):
 
 
 class MessageEntity(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#messageentity
+    This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -948,6 +951,9 @@ class Chat(TelegramType):
 
 
 class MessageId(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#messageid
+    This object represents a unique message identifier.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -965,6 +971,9 @@ class MessageId(TelegramType):
 
 
 class PhotoSize(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#photosize
+    This object represents one size of a photo or a file / sticker thumbnail.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -994,6 +1003,9 @@ class PhotoSize(TelegramType):
 
 
 class Animation(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#animation
+    This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1035,6 +1047,9 @@ class Animation(TelegramType):
 
 
 class Audio(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#audio
+    This object represents an audio file to be treated as music by the Telegram clients.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1076,6 +1091,9 @@ class Audio(TelegramType):
 
 
 class Document(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#document
+    This object represents a general file (as opposed to photos, voice messages and audio files).'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1108,6 +1126,9 @@ class Document(TelegramType):
 
 
 class Story(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#story
+    This object represents a message about a forwarded story in the chat. Currently holds no information.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1123,6 +1144,9 @@ class Story(TelegramType):
 
 
 class Video(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#video
+    This object represents a video file.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1164,6 +1188,9 @@ class Video(TelegramType):
 
 
 class VideoNote(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#videonote
+    This object represents a video message (available in Telegram apps as of v.4.0).'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1196,6 +1223,9 @@ class VideoNote(TelegramType):
 
 
 class Voice(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#voice
+    This object represents a voice note.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1225,6 +1255,9 @@ class Voice(TelegramType):
 
 
 class Contact(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#contact
+    This object represents a phone contact.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1254,6 +1287,9 @@ class Contact(TelegramType):
 
 
 class Dice(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#dice
+    This object represents an animated emoji that displays a random value.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1274,6 +1310,9 @@ class Dice(TelegramType):
 
 
 class PollOption(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#polloption
+    This object contains information about one answer option in a poll.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1294,29 +1333,32 @@ class PollOption(TelegramType):
 
 
 class PollAnswer(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#pollanswer
+    This object represents an answer of a user in a non-anonymous poll.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
         obj = check_dict(result)
         obj['poll_id'] = obj.get('poll_id')
+        obj['option_ids'] = obj.get('option_ids')
         obj['voter_chat'] = Chat.dese(obj.get('voter_chat'))
         obj['user'] = User.dese(obj.get('user'))
-        obj['option_ids'] = obj.get('option_ids')
         return cls(**obj)
 
     def __init__(
         self,
         poll_id: str,
+        option_ids: list[int],
         voter_chat: Optional[Chat] = None,
         user: Optional[User] = None,
-        option_ids: Optional[list[int]] = None,
         **kwargs
     ):
         _get_kwargs(self, kwargs)
         self.poll_id = poll_id
+        self.option_ids = option_ids
         self.voter_chat = voter_chat
         self.user = user
-        self.option_ids = option_ids
 
 
 class Poll(TelegramType):
