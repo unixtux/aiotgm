@@ -533,16 +533,19 @@ class MessageEntity(TelegramType):
 
 
 class Message(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#message
+    This object represents a message.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
         obj = check_dict(result)
         obj['message_id'] = obj.get('message_id')
+        obj['date'] = obj.get('date')
+        obj['chat'] = Chat.dese(obj.get('chat'))
         obj['message_thread_id'] = obj.get('message_thread_id')
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['sender_chat'] = Chat.dese(obj.get('sender_chat'))
-        obj['date'] = obj.get('date')
-        obj['chat'] = Chat.dese(obj.get('chat'))
         obj['forward_from'] = User.dese(obj.get('forward_from'))
         obj['forward_from_chat'] = Chat.dese(obj.get('forward_from_chat'))
         obj['forward_from_message_id'] = obj.get('forward_from_message_id')
@@ -708,7 +711,7 @@ class Message(TelegramType):
         self.has_protected_content: Optional[Literal[True]] = has_protected_content
         self.media_group_id: Optional[str] = media_group_id
         self.author_signature: Optional[str] = author_signature
-        self.text: Optional[str] = text if text is not None else str() # It should be None but with str() we simplify
+        self.text: str = text if text is not None else str() # If not text, it's str() instead of None
         self.entities: Optional[list[MessageEntity]] = entities
         self.animation: Optional[Animation] = animation
         self.audio: Optional[Audio] = audio
