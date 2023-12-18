@@ -450,6 +450,9 @@ class LabeledPrice(TelegramType):
 
 
 class User(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#user
+    This object represents a Telegram user or bot.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -475,8 +478,8 @@ class User(TelegramType):
         last_name: Optional[str] = None,
         username: Optional[str] = None,
         language_code: Optional[str] = None,
-        is_premium: Optional[True] = None,
-        added_to_attachment_menu: Optional[True] = None,
+        is_premium: Optional[Literal[True]] = None,
+        added_to_attachment_menu: Optional[Literal[True]] = None,
         can_join_groups: Optional[bool] = None,
         can_read_all_group_messages: Optional[bool] = None,
         supports_inline_queries: Optional[bool] = None,
@@ -610,8 +613,8 @@ class Message(TelegramType):
 
     def __init__(
         self,
-        message_id: int,
-        date: int,
+        message_id,
+        date,
         chat,
         message_thread_id = None,
         from_user = None,
@@ -630,7 +633,7 @@ class Message(TelegramType):
         has_protected_content = None,
         media_group_id = None,
         author_signature = None,
-        text: Optional[str] = None,
+        text = None,
         entities = None,
         animation = None,
         audio = None,
@@ -685,8 +688,8 @@ class Message(TelegramType):
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.message_id = message_id
-        self.date = date
+        self.message_id: int = message_id
+        self.date: int = date
         self.chat: Chat = chat
         self.message_thread_id: Optional[int] = message_thread_id
         self.from_user: Optional[User] = from_user
@@ -697,15 +700,15 @@ class Message(TelegramType):
         self.forward_signature: Optional[str] = forward_signature
         self.forward_sender_name: Optional[str] = forward_sender_name
         self.forward_date: Optional[int] = forward_date
-        self.is_topic_message: Optional[True] = is_topic_message
-        self.is_automatic_forward: Optional[True] = is_automatic_forward
+        self.is_topic_message: Optional[Literal[True]] = is_topic_message
+        self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
         self.reply_to_message: Optional[Message] = reply_to_message
         self.via_bot: Optional[User] = via_bot
         self.edit_date: Optional[int] = edit_date
-        self.has_protected_content: Optional[True] = has_protected_content
+        self.has_protected_content: Optional[Literal[True]] = has_protected_content
         self.media_group_id: Optional[str] = media_group_id
         self.author_signature: Optional[str] = author_signature
-        self.text = text if text is not None else str() # It should be None but with str() we simplify
+        self.text: Optional[str] = text if text is not None else str() # It should be None but with str() we simplify
         self.entities: Optional[list[MessageEntity]] = entities
         self.animation: Optional[Animation] = animation
         self.audio: Optional[Audio] = audio
@@ -718,7 +721,7 @@ class Message(TelegramType):
         self.voice: Optional[Voice] = voice
         self.caption: Optional[str] = caption
         self.caption_entities: Optional[list[MessageEntity]] = caption_entities
-        self.has_media_spoiler: Optional[True] = has_media_spoiler
+        self.has_media_spoiler: Optional[Literal[True]] = has_media_spoiler
         self.contact: Optional[Contact] = contact
         self.dice: Optional[Dice] = dice
         self.game: Optional[Game] = game
@@ -729,10 +732,10 @@ class Message(TelegramType):
         self.left_chat_member: Optional[User] = left_chat_member
         self.new_chat_title: Optional[str] = new_chat_title
         self.new_chat_photo: Optional[list[PhotoSize]] = new_chat_photo
-        self.delete_chat_photo: Optional[True] = delete_chat_photo
-        self.group_chat_created: Optional[True] = group_chat_created
-        self.supergroup_chat_created: Optional[True] = supergroup_chat_created
-        self.channel_chat_created: Optional[True] = channel_chat_created
+        self.delete_chat_photo: Optional[Literal[True]] = delete_chat_photo
+        self.group_chat_created: Optional[Literal[True]] = group_chat_created
+        self.supergroup_chat_created: Optional[Literal[True]] = supergroup_chat_created
+        self.channel_chat_created: Optional[Literal[True]] = channel_chat_created
         self.message_auto_delete_timer_changed: Optional[MessageAutoDeleteTimerChanged] = message_auto_delete_timer_changed
         self.migrate_to_chat_id: Optional[int] = migrate_to_chat_id
         self.migrate_from_chat_id: Optional[int] = migrate_from_chat_id
@@ -838,6 +841,9 @@ class ChatLocation(TelegramType):
 
 
 class Chat(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chat
+    This object represents a chat.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -881,27 +887,27 @@ class Chat(TelegramType):
         username: Optional[str] = None,
         first_name: Optional[str] = None,
         last_name: Optional[str] = None,
-        is_forum: Optional[True] = None,
+        is_forum: Optional[Literal[True]] = None,
         photo: Optional[ChatPhoto] = None,
         active_usernames: Optional[list[str]] = None,
         emoji_status_custom_emoji_id: Optional[str] = None,
         emoji_status_expiration_date: Optional[int] = None,
         bio: Optional[str] = None,
-        has_private_forwards: Optional[True] = None,
-        has_restricted_voice_and_video_messages: Optional[True] = None,
-        join_to_send_messages: Optional[True] = None,
-        join_by_request: Optional[True] = None,
+        has_private_forwards: Optional[Literal[True]] = None,
+        has_restricted_voice_and_video_messages: Optional[Literal[True]] = None,
+        join_to_send_messages: Optional[Literal[True]] = None,
+        join_by_request: Optional[Literal[True]] = None,
         description: Optional[str] = None,
         invite_link: Optional[str] = None,
         pinned_message: Optional[Message] = None,
         permissions: Optional[ChatPermissions] = None,
         slow_mode_delay: Optional[int] = None,
         message_auto_delete_time: Optional[int] = None,
-        has_aggressive_anti_spam_enabled: Optional[True] = None,
-        has_hidden_members: Optional[True] = None,
-        has_protected_content: Optional[True] = None,
+        has_aggressive_anti_spam_enabled: Optional[Literal[True]] = None,
+        has_hidden_members: Optional[Literal[True]] = None,
+        has_protected_content: Optional[Literal[True]] = None,
         sticker_set_name: Optional[str] = None,
-        can_set_sticker_set: Optional[True] = None,
+        can_set_sticker_set: Optional[Literal[True]] = None,
         linked_chat_id: Optional[int] = None,
         location: Optional[ChatLocation] = None,
         **kwargs
@@ -2759,7 +2765,7 @@ class Sticker(TelegramType):
         premium_animation: Optional[File] = None,
         mask_position: Optional[MaskPosition] = None,
         custom_emoji_id: Optional[str] = None,
-        needs_repainting: Optional[True] = None,
+        needs_repainting: Optional[Literal[True]] = None,
         file_size: Optional[int] = None,
         **kwargs
     ):
@@ -4210,6 +4216,10 @@ class GameHighScore(TelegramType):
 
 
 class Update(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#update
+    This object represents an incoming update. At most one of
+    the optional parameters can be present in any given update.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
