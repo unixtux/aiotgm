@@ -31,30 +31,30 @@
 
 
 * #### Available methods
-All the methods of the Client are the same described in the [offical documentation](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case. All the methods are **async** functions, so you must use them in **await** expression.
+All the methods of the Client are the same described in the *[offical documentation](https://core.telegram.org/bots/api#available-methods)*, changed from camelCase to snake_case. All the methods are **async** functions, so you must use them in **await** expression.
 
 * #### Available Types
-All the types are the same described in the [offical documentation](https://core.telegram.org/bots/api#available-types).
+All the types are the same described in the *[offical documentation](https://core.telegram.org/bots/api#available-types)*.
 
-> If the attribute **text** of the Message is empty, it's **str()** instead of **None**, so you can use for example text.startswith() without getting errors.
+> If the attribute **'text'** of the Message is empty, it's **str()** instead of **None**, so you can use for example text.startswith() without getting errors.
 
-> Attribute **'from'** of the types, has been changed to **'from_user'** because in python it cause conflict.
+> Attribute **'from'** of the types, has been changed to **'from_user'** because in python it causes conflict.
 
-> All other optional attributes of the objects are None if they are not in the JSON received as response.
+> All other optional attributes of the objects are None if they are not in the **JSON** received as response.
 
 * #### Notes
 
 > Webhook has not been implemented yet.
 
 * #### ReplyMarkups
-**InlineKeyboardMarkup** and **ReplyKeyboardMarkup** have the method 'add', so you can add new buttons after the object has been initialized.
+**InlineKeyboardMarkup** and **ReplyKeyboardMarkup** have the method **'add'**, so you can add new buttons after the object has been initialized.
 ```python
 markup = ReplyKeyboardMarkup()
 markup.add(KeyboardButton('xyz'), ...)
 
-# all the buttons added with this method will be
-# added to the same row, you can change the row width
-# after the creation with the property setter 'row_width'.
+# All the buttons added with this method will be in
+# the same row, you can change the row width after the
+# object initialization using the property setter 'row_width'.
 
 markup.row_width = 4
 
