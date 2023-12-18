@@ -31,13 +31,12 @@
 
 
 * #### Available methods
-All the methods of the Client are the same described in the [offical documentation](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case. E.g. sendMessage to send_message.
-All the methods are **async** functions, so you must use them in **await** expression.
+All the methods of the Client are the same described in the [offical documentation](https://core.telegram.org/bots/api#available-methods), changed from camelCase to snake_case. All the methods are **async** functions, so you must use them in **await** expression.
 
 * #### Available Types
 All the types are the same described in the [offical documentation](https://core.telegram.org/bots/api#available-types).
 
-> If the attribute of Message is empty, it's **str()** instead of **None**, so you can use for example text.startswith() without getting errors.
+> If the attribute **text** of the Message is empty, it's **str()** instead of **None**, so you can use for example text.startswith() without getting errors.
 
 > Attribute **'from'** of the types, has been changed to **'from_user'** because in python it cause conflict.
 
