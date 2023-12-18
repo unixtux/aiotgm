@@ -99,10 +99,10 @@ async def welcome(message: Message):
 def checker(message: Message):
     return message.text == '/start'
 
-async def foo(message: Message):
+async def welcome(message: Message):
     ...
 
-bot.message_manager.add_rule(checker, foo)
+bot.message_manager.add_rule(checker, welcome)
 
 # Calling the method 'long_polling',
 # the bot starts receiving updates by
