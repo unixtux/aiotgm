@@ -2863,6 +2863,14 @@ class ResponseParameters(TelegramType):
 
 
 class InputMedia(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inputmedia
+    This object represents the content of a media message to be sent. It should be one of
+    - InputMediaAnimation
+    - InputMediaDocument
+    - InputMediaAudio
+    - InputMediaPhoto
+    - InputMediaVideo'''
     def __init__(
         self,
         **kwargs
@@ -2882,6 +2890,9 @@ class InputMedia(TelegramType):
 
 
 class InputMediaPhoto(InputMedia):
+    '''\
+    https://core.telegram.org/bots/api#inputmediaphoto
+    Represents a photo to be sent.'''
     def __init__(
         self,
         media: str,
@@ -2900,6 +2911,9 @@ class InputMediaPhoto(InputMedia):
 
 
 class InputMediaVideo(InputMedia):
+    '''\
+    https://core.telegram.org/bots/api#inputmediavideo
+    Represents a video to be sent.'''
     def __init__(
         self,
         media: str,
@@ -2928,6 +2942,9 @@ class InputMediaVideo(InputMedia):
 
 
 class InputMediaAnimation(InputMedia):
+    '''\
+    https://core.telegram.org/bots/api#inputmediaanimation
+    Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.'''
     def __init__(
         self,
         media: str,
@@ -2954,6 +2971,9 @@ class InputMediaAnimation(InputMedia):
 
 
 class InputMediaAudio(InputMedia):
+    '''\
+    https://core.telegram.org/bots/api#inputmediaaudio
+    Represents an audio file to be treated as music to be sent.'''
     def __init__(
         self,
         media: str,
@@ -2978,6 +2998,9 @@ class InputMediaAudio(InputMedia):
 
 
 class InputMediaDocument(InputMedia):
+    '''\
+    https://core.telegram.org/bots/api#inputmediadocument
+    Represents a general file to be sent.'''
     def __init__(
         self,
         media: str,
