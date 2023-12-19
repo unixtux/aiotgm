@@ -299,6 +299,9 @@ class ChatPermissions(TelegramType):
 
 
 class ChatAdministratorRights(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chatadministratorrights
+    Represents the rights of an administrator in a chat.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -358,6 +361,10 @@ class ChatAdministratorRights(TelegramType):
 
 
 class SwitchInlineQueryChosenChat(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#switchinlinequerychosenchat
+    This object represents an inline button that switches the current user
+    to inline mode in a chosen chat, with an optional default inline query.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -416,6 +423,11 @@ class InputFile(TelegramType):
 
 
 class LoginUrl(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#loginurl
+    This object represents a parameter of the inline keyboard button used to automatically authorize
+    a user. Serves as a great replacement for the Telegram Login Widget when the user is coming from
+    Telegram. All the user needs to do is tap/click a button and confirm that they want to log in.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -769,6 +781,9 @@ class Message(TelegramType):
 
 
 class ChatPhoto(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chatphoto
+    This object represents a chat photo.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1897,6 +1912,10 @@ class KeyboardButtonRequestUser(TelegramType):
 
 
 class KeyboardButtonRequestChat(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#keyboardbuttonrequestchat
+    This object defines the criteria used to request a suitable chat. The identifier of
+    the selected chat will be shared with the bot when the corresponding button is pressed.'''
     def __init__(
         self,
         request_id: int,
@@ -1919,6 +1938,10 @@ class KeyboardButtonRequestChat(TelegramType):
 
 
 class KeyboardButtonPollType(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#keyboardbuttonpolltype
+    This object represents type of a poll, which is allowed to
+    be created and sent when the corresponding button is pressed.'''
     def __init__(
         self,
         type: Optional[str] = None
@@ -2001,15 +2024,25 @@ class ReplyKeyboardMarkup(TelegramType):
 
 
 class ReplyKeyboardRemove(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#replykeyboardremove
+    Upon receiving a message with this object, Telegram clients will remove the current
+    custom keyboard and display the default letter-keyboard. By default, custom keyboards
+    are displayed until a new keyboard is sent by a bot. An exception is made for one-time
+    keyboards that are hidden immediately after the user presses a button (see ReplyKeyboardMarkup).'''
     def __init__(
         self,
+        remove_keyboard: Literal[True] = True,
         selective: Optional[bool] = None
     ):
-        self.remove_keyboard = True
+        self.remove_keyboard = remove_keyboard
         self.selective = selective
 
 
 class InlineKeyboardButton(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inlinekeyboardbutton
+    This object represents one button of an inline keyboard. You must use exactly one of the optional fields.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2052,6 +2085,9 @@ class InlineKeyboardButton(TelegramType):
 
 
 class InlineKeyboardMarkup(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inlinekeyboardmarkup
+    This object represents an inline keyboard that appears right next to the message it belongs to.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2066,12 +2102,6 @@ class InlineKeyboardMarkup(TelegramType):
         self.inline_keyboard = inline_keyboard
 
     def add(self, *buttons: InlineKeyboardButton):
-        for btn in buttons:
-            if not isinstance(btn, InlineKeyboardButton):
-                raise TypeError(
-                    f'keyboard of {self.__class__.__name__}'
-                    ' must be a nested list of InlineKeyboardButton'
-                )
         self.inline_keyboard.append(list(buttons))
         return self
 
@@ -2099,6 +2129,13 @@ class InlineKeyboardMarkup(TelegramType):
 
 
 class CallbackQuery(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#callbackquery
+    This object represents an incoming callback query from a callback button in
+    an inline keyboard. If the button that originated the query was attached to a
+    message sent by the bot, the field message will be present. If the button was
+    attached to a message sent via the bot (in inline mode), the field inline_message_id
+    will be present. Exactly one of the fields data or game_short_name will be present.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2134,17 +2171,26 @@ class CallbackQuery(TelegramType):
 
 
 class ForceReply(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#forcereply
+    Upon receiving a message with this object, Telegram clients will display a reply interface to
+    the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely
+    useful if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode.'''
     def __init__(
         self,
+        force_reply: Literal[True] = True,
         input_field_placeholder: Optional[str] = None,
         selective: Optional[bool] = None
     ):
-        self.force_reply = True
+        self.force_reply = force_reply
         self.input_field_placeholder = input_field_placeholder
         self.selective = selective
 
 
 class ChatInviteLink(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chatinvitelink
+    Represents an invite link for a chat.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2188,11 +2234,22 @@ class ChatInviteLink(TelegramType):
 # ChatMember: 6 SUBCLASSES
 
 class ChatMember(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chatmember
+    This object contains information about one member of a chat.
+    Currently, the following 6 types of chat members are supported:
+    - ChatMemberOwner
+    - ChatMemberAdministrator
+    - ChatMemberMember
+    - ChatMemberRestricted
+    - ChatMemberLeft
+    - ChatMemberBanned'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
         obj = check_dict(result)        
         obj['user'] = User.dese(obj.get('user'))
+
         status = obj['status']
 
         if status == 'creator':
@@ -2219,7 +2276,18 @@ class ChatMember(TelegramType):
         self,
         **kwargs
     ):
-        _get_kwargs(self, kwargs)
+        members = ', '.join([
+            ChatMemberOwner.__name__,
+            ChatMemberAdministrator.__name__,
+            ChatMemberMember.__name__,
+            ChatMemberRestricted.__name__,
+            ChatMemberLeft.__name__,
+            ChatMemberBanned.__name__
+        ])
+        logger.warning(
+            'ChatMember warning, expected one'
+            f' of the following types: {members}.'
+        )
         self.__dict__ = kwargs
 
 
