@@ -845,6 +845,9 @@ class Location(TelegramType):
 
 
 class ChatLocation(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chatlocation
+    Represents a location to which a chat is connected.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2292,6 +2295,9 @@ class ChatMember(TelegramType):
 
 
 class ChatMemberOwner(ChatMember):
+    '''\
+    https://core.telegram.org/bots/api#chatmemberowner
+    Represents a chat member that owns the chat and has all administrator privileges.'''
     def __init__(
         self,
         status: str,
@@ -2308,6 +2314,9 @@ class ChatMemberOwner(ChatMember):
 
 
 class ChatMemberAdministrator(ChatMember):
+    '''\
+    https://core.telegram.org/bots/api#chatmemberadministrator
+    Represents a chat member that has some additional privileges.'''
     def __init__(
         self,
         status: str,
@@ -2354,6 +2363,9 @@ class ChatMemberAdministrator(ChatMember):
 
 
 class ChatMemberMember(ChatMember):
+    '''\
+    https://core.telegram.org/bots/api#chatmembermember
+    Represents a chat member that has no additional privileges or restrictions.'''
     def __init__(
         self,
         status: str,
@@ -2366,6 +2378,9 @@ class ChatMemberMember(ChatMember):
 
 
 class ChatMemberRestricted(ChatMember):
+    '''\
+    https://core.telegram.org/bots/api#chatmemberrestricted
+    Represents a chat member that is under certain restrictions in the chat. Supergroups only.'''
     def __init__(
         self,
         status: str,
@@ -2410,6 +2425,9 @@ class ChatMemberRestricted(ChatMember):
 
 
 class ChatMemberLeft(ChatMember):
+    '''\
+    https://core.telegram.org/bots/api#chatmemberleft
+    Represents a chat member that isn't currently a member of the chat, but may join it themselves.'''
     def __init__(
         self,
         status: str,
@@ -2422,6 +2440,9 @@ class ChatMemberLeft(ChatMember):
 
 
 class ChatMemberBanned(ChatMember):
+    '''\
+    https://core.telegram.org/bots/api#chatmemberbanned
+    Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.'''
     def __init__(
         self,
         status: str,
@@ -2436,6 +2457,9 @@ class ChatMemberBanned(ChatMember):
 
 
 class ChatMemberUpdated(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chatmemberupdated
+    This object represents changes in the status of a chat member.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2471,6 +2495,9 @@ class ChatMemberUpdated(TelegramType):
 
 
 class ChatJoinRequest(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#chatjoinrequest
+    Represents a join request sent to a chat.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2503,6 +2530,9 @@ class ChatJoinRequest(TelegramType):
 
 
 class ForumTopic(TelegramType):
+    '''\
+    Represents a location to which a chat is connected.
+    This object represents a forum topic.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2529,6 +2559,9 @@ class ForumTopic(TelegramType):
 
 
 class BotCommand(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#botcommand
+    This object represents a bot command.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2549,6 +2582,16 @@ class BotCommand(TelegramType):
 # BotCommandScope: 7 SUBCLASSES
 
 class BotCommandScope(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#botcommandscope
+    This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:
+    - BotCommandScopeDefault
+    - BotCommandScopeAllPrivateChats
+    - BotCommandScopeAllGroupChats
+    - BotCommandScopeAllChatAdministrators
+    - BotCommandScopeChat
+    - BotCommandScopeChatAdministrators
+    - BotCommandScopeChatMember'''
     def __init__(
         self,
         **kwargs
@@ -2570,6 +2613,10 @@ class BotCommandScope(TelegramType):
 
 
 class BotCommandScopeDefault(BotCommandScope):
+    '''\
+    https://core.telegram.org/bots/api#botcommandscopedefault
+    Represents the default scope of bot commands. Default commands are
+    used if no commands with a narrower scope are specified for the user.'''
     def __init__(
         self,
         type: str = 'default'
@@ -2578,6 +2625,9 @@ class BotCommandScopeDefault(BotCommandScope):
 
 
 class BotCommandScopeAllPrivateChats(BotCommandScope):
+    '''\
+    https://core.telegram.org/bots/api#botcommandscopeallprivatechats
+    Represents the scope of bot commands, covering all private chats.'''
     def __init__(
         self,
         type: str = 'all_private_chats'
@@ -2586,6 +2636,9 @@ class BotCommandScopeAllPrivateChats(BotCommandScope):
 
 
 class BotCommandScopeAllGroupChats(BotCommandScope):
+    '''\
+    https://core.telegram.org/bots/api#botcommandscopeallgroupchats
+    Represents the scope of bot commands, covering all group and supergroup chats.'''
     def __init__(
         self,
         type: str = 'all_group_chats'
@@ -2594,6 +2647,9 @@ class BotCommandScopeAllGroupChats(BotCommandScope):
 
 
 class BotCommandScopeAllChatAdministrators(BotCommandScope):
+    '''\
+    https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
+    Represents the scope of bot commands, covering all group and supergroup chat administrators.'''
     def __init__(
         self,
         type: str = 'all_chat_administrators'
@@ -2602,6 +2658,9 @@ class BotCommandScopeAllChatAdministrators(BotCommandScope):
 
 
 class BotCommandScopeChat(BotCommandScope):
+    '''\
+    https://core.telegram.org/bots/api#botcommandscopechat
+    Represents the scope of bot commands, covering a specific chat.'''
     def __init__(
         self,
         chat_id: Union[int, str],
@@ -2612,6 +2671,9 @@ class BotCommandScopeChat(BotCommandScope):
 
 
 class BotCommandScopeChatAdministrators(BotCommandScope):
+    '''\
+    https://core.telegram.org/bots/api#botcommandscopechatadministrators
+    Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.'''
     def __init__(
         self,
         chat_id: Union[int, str],
@@ -2622,6 +2684,9 @@ class BotCommandScopeChatAdministrators(BotCommandScope):
 
 
 class BotCommandScopeChatMember(BotCommandScope):
+    '''\
+    https://core.telegram.org/bots/api#botcommandscopechatmember
+    Represents the scope of bot commands, covering a specific member of a group or supergroup chat.'''
     def __init__(
         self,
         chat_id: Union[int, str],
@@ -2634,6 +2699,9 @@ class BotCommandScopeChatMember(BotCommandScope):
 
 
 class BotName(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#botname
+    This object represents the bot's name.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2650,6 +2718,9 @@ class BotName(TelegramType):
 
 
 class BotDescription(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#botdescription
+    This object represents the bot's description.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2667,6 +2738,9 @@ class BotDescription(TelegramType):
 
 
 class BotShortDescription(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#botshortdescription
+    This object represents the bot's short description.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2686,6 +2760,14 @@ class BotShortDescription(TelegramType):
 # MenuButton: 3 SUBCLASSES
 
 class MenuButton(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#menubutton
+    This object describes the bot's menu button in a private chat. It should be one of
+    - MenuButtonCommands
+    - MenuButtonWebApp
+    - MenuButtonDefault
+    If a menu button other than MenuButtonDefault is set for a private chat, then it is applied in the chat.
+    Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2721,6 +2803,9 @@ class MenuButton(TelegramType):
 
 
 class MenuButtonCommands(MenuButton):
+    '''\
+    https://core.telegram.org/bots/api#menubuttoncommands
+    Represents a menu button, which opens the bot's list of commands.'''
     def __init__(
         self,
         type: str = 'commands'
@@ -2729,6 +2814,9 @@ class MenuButtonCommands(MenuButton):
 
 
 class MenuButtonWebApp(MenuButton):
+    '''\
+    https://core.telegram.org/bots/api#menubuttonwebapp
+    Represents a menu button, which launches a Web App.'''
     def __init__(
         self,
         text: str,
@@ -2741,6 +2829,9 @@ class MenuButtonWebApp(MenuButton):
 
 
 class MenuButtonDefault(MenuButton):
+    '''\
+    https://core.telegram.org/bots/api#menubuttondefault
+    Describes that no specific value for the menu button was set.'''
     def __init__(
         self,
         type: str = 'default'
@@ -2749,6 +2840,9 @@ class MenuButtonDefault(MenuButton):
 
 
 class ResponseParameters(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#responseparameters
+    Describes why a request was unsuccessful.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
