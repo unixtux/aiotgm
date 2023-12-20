@@ -456,6 +456,9 @@ class LoginUrl(TelegramType):
 
 
 class LabeledPrice(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#labeledprice
+    This object represents a portion of the price for goods or services.'''
     def __init__(
         self,
         label: str,
@@ -3223,6 +3226,15 @@ class InlineQueryResultsButton(TelegramType):
 # InputMessageContent: 5 SUBCLASSES
 
 class InputMessageContent(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inputmessagecontent
+    This object represents the content of a message to be sent as a result of
+    an inline query. Telegram clients currently support the following 5 types:
+    - InputTextMessageContent
+    - InputLocationMessageContent
+    - InputVenueMessageContent
+    - InputContactMessageContent
+    - InputInvoiceMessageContent'''
     def __init__(
         self,
         **kwargs
@@ -3242,6 +3254,9 @@ class InputMessageContent(TelegramType):
 
 
 class InputTextMessageContent(InputMessageContent):
+    '''\
+    https://core.telegram.org/bots/api#inputtextmessagecontent
+    Represents the content of a text message to be sent as the result of an inline query.'''
     def __init__(
         self,
         message_text: str,
@@ -3256,6 +3271,9 @@ class InputTextMessageContent(InputMessageContent):
 
 
 class InputLocationMessageContent(InputMessageContent):
+    '''\
+    https://core.telegram.org/bots/api#inputlocationmessagecontent
+    Represents the content of a location message to be sent as the result of an inline query.'''
     def __init__(
         self,
         latitude: float,
@@ -3274,6 +3292,9 @@ class InputLocationMessageContent(InputMessageContent):
 
 
 class InputVenueMessageContent(InputMessageContent):
+    '''\
+    https://core.telegram.org/bots/api#inputvenuemessagecontent
+    Represents the content of a venue message to be sent as the result of an inline query.'''
     def __init__(
         self,
         latitude: float,
@@ -3296,6 +3317,9 @@ class InputVenueMessageContent(InputMessageContent):
 
 
 class InputContactMessageContent(InputMessageContent):
+    '''\
+    https://core.telegram.org/bots/api#inputcontactmessagecontent
+    Represents the content of a contact message to be sent as the result of an inline query.'''
     def __init__(
         self,
         phone_number: str,
@@ -3310,6 +3334,9 @@ class InputContactMessageContent(InputMessageContent):
 
 
 class InputInvoiceMessageContent(InputMessageContent):
+    '''\
+    https://core.telegram.org/bots/api#inputinvoicemessagecontent
+    Represents the content of an invoice message to be sent as the result of an inline query.'''
     def __init__(
         self,
         title: str,
@@ -3578,6 +3605,10 @@ class InlineQueryResultVideo(InlineQueryResult):
 
 
 class InlineQueryResultAudio(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultaudio
+    Represents a link to an MP3 audio file. By default, this audio file will be sent by the user.
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.'''
     def __init__(
         self,
         id: str,
@@ -3606,6 +3637,11 @@ class InlineQueryResultAudio(InlineQueryResult):
 
 
 class InlineQueryResultVoice(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultvoice
+    Represents a link to a voice recording in an .OGG container encoded with OPUS.
+    By default, this voice recording will be sent by the user. Alternatively, you can use
+    input_message_content to send a message with the specified content instead of the the voice message.'''
     def __init__(
         self,
         id: str,
@@ -3632,6 +3668,11 @@ class InlineQueryResultVoice(InlineQueryResult):
 
 
 class InlineQueryResultDocument(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultdocument
+    Represents a link to a file. By default, this file will be sent by the user with an optional
+    caption. Alternatively, you can use input_message_content to send a message with the specified
+    content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.'''
     def __init__(
         self,
         id: str,
@@ -3666,6 +3707,10 @@ class InlineQueryResultDocument(InlineQueryResult):
 
 
 class InlineQueryResultLocation(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultlocation
+    Represents a location on a map. By default, the location will be sent by the user. Alternatively,
+    you can use input_message_content to send a message with the specified content instead of the location.'''
     def __init__(
         self,
         id: str,
@@ -3700,6 +3745,10 @@ class InlineQueryResultLocation(InlineQueryResult):
 
 
 class InlineQueryResultVenue(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultvenue
+    Represents a venue. By default, the venue will be sent by the user. Alternatively, you can
+    use input_message_content to send a message with the specified content instead of the venue.'''
     def __init__(
         self,
         id: str,
@@ -3736,6 +3785,10 @@ class InlineQueryResultVenue(InlineQueryResult):
 
 
 class InlineQueryResultContact(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcontact
+    Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively,
+    you can use input_message_content to send a message with the specified content instead of the contact.'''
     def __init__(
         self,
         id: str,
@@ -3764,6 +3817,9 @@ class InlineQueryResultContact(InlineQueryResult):
 
 
 class InlineQueryResultGame(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultgame
+    Represents a Game.'''
     def __init__(
         self,
         id: str,
@@ -3778,6 +3834,11 @@ class InlineQueryResultGame(InlineQueryResult):
 
 
 class InlineQueryResultCachedPhoto(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcachedphoto
+    Represents a link to a photo stored on the Telegram servers. By default, this
+    photo will be sent by the user with an optional caption. Alternatively, you can use
+    input_message_content to send a message with the specified content instead of the photo.'''
     def __init__(
         self,
         id: str,
@@ -3804,6 +3865,11 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
 
 
 class InlineQueryResultCachedGif(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcachedgif
+    Represents a link to an animated GIF file stored on the Telegram servers. By default,
+    this animated GIF file will be sent by the user with an optional caption. Alternatively, you
+    can use input_message_content to send a message with specified content instead of the animation.'''
     def __init__(
         self,
         id: str,
@@ -3828,6 +3894,11 @@ class InlineQueryResultCachedGif(InlineQueryResult):
 
 
 class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif
+    Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers.
+    By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you
+    can use input_message_content to send a message with the specified content instead of the animation.'''
     def __init__(
         self,
         id: str,
@@ -3852,6 +3923,11 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
 
 
 class InlineQueryResultCachedSticker(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcachedsticker
+    Represents a link to a sticker stored on the Telegram servers.
+    By default, this sticker will be sent by the user. Alternatively, you can use
+    input_message_content to send a message with the specified content instead of the sticker.'''
     def __init__(
         self,
         id: str,
@@ -3868,6 +3944,11 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
 
 
 class InlineQueryResultCachedDocument(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcacheddocument
+    Represents a link to a file stored on the Telegram servers. By default, this
+    file will be sent by the user with an optional caption. Alternatively, you can use
+    input_message_content to send a message with the specified content instead of the file.'''
     def __init__(
         self,
         id: str,
@@ -3894,6 +3975,11 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
 
 
 class InlineQueryResultCachedVideo(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcachedvideo
+    Represents a link to a video file stored on the Telegram servers. By default, this
+    video file will be sent by the user with an optional caption. Alternatively, you can
+    use input_message_content to send a message with the specified content instead of the video.'''
     def __init__(
         self,
         id: str,
@@ -3920,6 +4006,11 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
 
 
 class InlineQueryResultCachedVoice(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcachedvoice
+    Represents a link to a voice message stored on the Telegram servers.
+    By default, this voice message will be sent by the user. Alternatively, you can use
+    input_message_content to send a message with the specified content instead of the voice message.'''
     def __init__(
         self,
         id: str,
@@ -3944,6 +4035,11 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
 
 
 class InlineQueryResultCachedAudio(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
+    Represents a link to an MP3 audio file stored on the Telegram servers.
+    By default, this audio file will be sent by the user. Alternatively, you can use
+    input_message_content to send a message with the specified content instead of the audio.'''
     def __init__(
         self,
         id: str,
@@ -3966,6 +4062,9 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
 
 
 class ChosenInlineResult(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#choseninlineresult
+    Represents a result of an inline query that was chosen by the user and sent to their chat partner.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3995,6 +4094,9 @@ class ChosenInlineResult(TelegramType):
 
 
 class SentWebAppMessage(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#sentwebappmessage
+    Describes an inline message sent by a Web App on behalf of a user.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4012,6 +4114,9 @@ class SentWebAppMessage(TelegramType):
 
 
 class Invoice(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#invoice
+    This object contains basic information about an invoice.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4041,6 +4146,9 @@ class Invoice(TelegramType):
 
 
 class ShippingAddress(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#shippingaddress
+    This object represents a shipping address.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4073,6 +4181,9 @@ class ShippingAddress(TelegramType):
 
 
 class OrderInfo(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#orderinfo
+    This object represents information about an order.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4099,6 +4210,9 @@ class OrderInfo(TelegramType):
 
 
 class ShippingOption(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#shippingoption
+    This object represents one shipping option.'''
     def __init__(
         self,
         id: str,
@@ -4111,6 +4225,9 @@ class ShippingOption(TelegramType):
 
 
 class SuccessfulPayment(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#successfulpayment
+    This object contains basic information about a successful payment.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4146,6 +4263,9 @@ class SuccessfulPayment(TelegramType):
 
 
 class ShippingQuery(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#shippingquery
+    This object contains information about an incoming shipping query.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4172,6 +4292,9 @@ class ShippingQuery(TelegramType):
 
 
 class PreCheckoutQuery(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#precheckoutquery
+    This object contains information about an incoming pre-checkout query.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
