@@ -407,6 +407,10 @@ class CallbackGame(TelegramType):
 
 
 class InputFile(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inputfile
+    This object represents the contents of a file to be uploaded. Must be posted
+    using multipart/form-data in the usual way that files are uploaded via the browser.'''
     def __init__(
         self,
         path: str,
@@ -3021,6 +3025,9 @@ class InputMediaDocument(InputMedia):
 
 
 class MaskPosition(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#maskposition
+    This object describes the position on faces where a mask should be placed by default.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3039,12 +3046,15 @@ class MaskPosition(TelegramType):
         scale: float
     ):
         self.point = point
-        self.x_shift= x_shift
+        self.x_shift = x_shift
         self.y_shift = y_shift
         self.scale = scale
 
 
 class Sticker(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#sticker
+    This object represents a sticker.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3104,6 +3114,9 @@ class Sticker(TelegramType):
 
 
 class StickerSet(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#stickerset
+    This object represents a sticker set.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3139,6 +3152,9 @@ class StickerSet(TelegramType):
 
 
 class InputSticker(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inputsticker
+    This object describes a sticker to be added to a sticker set.'''
     def __init__(
         self,
         sticker: Union[InputFile, str],
@@ -3153,6 +3169,10 @@ class InputSticker(TelegramType):
 
 
 class InlineQuery(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inlinequery
+    This object represents an incoming inline query. When the user sends
+    an empty query, your bot could return some default or trending results.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3176,15 +3196,19 @@ class InlineQuery(TelegramType):
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.id: str = id
+        self.id = id
         self.from_user = from_user
-        self.query: str = query
-        self.offset: str = offset
+        self.query = query
+        self.offset = offset
         self.chat_type = chat_type
         self.location = location
 
 
 class InlineQueryResultsButton(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultsbutton
+    This object represents a button to be shown above inline query
+    results. You must use exactly one of the optional fields.'''
     def __init__(
         self,
         text: str,
@@ -3369,6 +3393,9 @@ class InlineQueryResult(TelegramType):
 
 
 class InlineQueryResultArticle(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultarticle
+    Represents a link to an article or web page.'''
     def __init__(
         self,
         id: str,
@@ -3397,6 +3424,10 @@ class InlineQueryResultArticle(InlineQueryResult):
 
 
 class InlineQueryResultPhoto(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultphoto
+    Represents a link to a photo. By default, this photo will be sent by the user with optional caption.
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.'''
     def __init__(
         self,
         id: str,
@@ -3429,6 +3460,10 @@ class InlineQueryResultPhoto(InlineQueryResult):
 
 
 class InlineQueryResultGif(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultgif
+    Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional
+    caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.'''
     def __init__(
         self,
         id: str,
@@ -3463,6 +3498,11 @@ class InlineQueryResultGif(InlineQueryResult):
 
 
 class InlineQueryResultMpeg4Gif(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
+    Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default,
+    this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can
+    use input_message_content to send a message with the specified content instead of the animation.'''
     def __init__(
         self,
         id: str,
@@ -3497,6 +3537,11 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
 
 
 class InlineQueryResultVideo(InlineQueryResult):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresultvideo
+    Represents a link to a page containing an embedded video player or a video file. By
+    default, this video file will be sent by the user with an optional caption. Alternatively, you
+    can use input_message_content to send a message with the specified content instead of the video.'''
     def __init__(
         self,
         id: str,
