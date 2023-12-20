@@ -416,9 +416,10 @@ class Client(TelegramApi):
         timeout: Optional[int] = None,
         allowed_updates: Optional[list[str]] = None
     ) -> list[Update]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getupdates
-        Use this method to receive incoming updates using long polling. Returns an Array of Update objects.'''
+        Use this method to receive incoming updates using long polling. Returns an Array of Update objects.
+        '''
         params = {}
         if offset is not None: params['offset'] = offset
         if limit is not None: params['limit'] = limit
@@ -429,30 +430,33 @@ class Client(TelegramApi):
 
 
     async def get_me(self) -> User:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getme
         A simple method for testing your bot's authentication token. Requires
-        no parameters. Returns basic information about the bot in form of a User object.'''
+        no parameters. Returns basic information about the bot in form of a User object.
+        '''
         result = await super().get_me()
         return User.dese(result)
 
 
     async def log_out(self) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#logout
         Use this method to log out from the cloud Bot API server before launching the bot locally.
         You must log out the bot before running it locally, otherwise there is no guarantee that the
         bot will receive updates. After a successful call, you can immediately log in on a local server, but will
-        not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.'''
+        not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
+        '''
         return await super().log_out()
 
 
     async def close(self) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#close
         Use this method to close the bot instance before moving it from one local server to another. You need to delete the
         webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will
-        return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.'''
+        return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.
+        '''
         return await super().close()
 
 
@@ -470,9 +474,10 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup:  Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendmessage
-        Use this method to send text messages. On success, the sent Message is returned.'''
+        Use this method to send text messages. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'text': text
@@ -501,10 +506,11 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#forwardmessage
         Use this method to forward messages of any kind. Service messages
-        can't be forwarded. On success, the sent Message is returned.'''
+        can't be forwarded. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'from_chat_id': from_chat_id,
@@ -533,11 +539,12 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> MessageId:
-        '''\
+        '''
         https://core.telegram.org/bots/api#copymessage
         Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. A quiz poll can be
         copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage,
-        but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.'''
+        but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
+        '''
         params = {
             'chat_id': chat_id,
             'from_chat_id': from_chat_id,
@@ -573,9 +580,10 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendphoto
-        Use this method to send photos. On success, the sent Message is returned.'''
+        Use this method to send photos. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'photo': photo
@@ -614,12 +622,13 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendaudio
         Use this method to send audio files, if you want Telegram clients to display them in the music
         player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned.
         Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
-        For sending voice messages, use the sendVoice method instead.'''
+        For sending voice messages, use the sendVoice method instead.
+        '''
         params = {
             'chat_id': chat_id,
             'audio': audio
@@ -659,10 +668,11 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#senddocument
         Use this method to send general files. On success, the sent Message is returned. Bots can
-        currently send files of any type of up to 50 MB in size, this limit may be changed in the future.'''
+        currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+        '''
         params = {
             'chat_id': chat_id,
             'document': document
@@ -704,11 +714,12 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendvideo
         Use this method to send video files, Telegram clients support
         MPEG4 videos (other formats may be sent as Document). On success, the sent Message is returned.
-        Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.'''
+        Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+        '''
         params = {
             'chat_id': chat_id,
             'video': video
@@ -753,10 +764,11 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendanimation
         Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent Message
-        is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.'''
+        is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+        '''
         params = {
             'chat_id': chat_id,
             'animation': animation
@@ -796,12 +808,13 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendvoice
         Use this method to send audio files, if you want Telegram clients to display the file as
         a playable voice message. For this to work, your audio must be in an .OGG file encoded with
         OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned.
-        Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.'''
+        Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+        '''
         params = {
             'chat_id': chat_id,
             'voice': voice
@@ -836,10 +849,11 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendvideonote
         As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute
-        long. Use this method to send video messages. On success, the sent Message is returned.'''
+        long. Use this method to send video messages. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'video_note': video_note
@@ -868,11 +882,12 @@ class Client(TelegramApi):
         reply_to_message_id: Optional[int] = None,
         allow_sending_without_reply: Optional[bool] = None
     ) -> list[Message]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendmediagroup
         Use this method to send a group of photos, videos, documents or audios as
         an album. Documents and audio files can be only grouped in an album with messages
-        of the same type. On success, an array of Messages that were sent is returned.'''
+        of the same type. On success, an array of Messages that were sent is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'media': media
@@ -903,9 +918,10 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendlocation
-        Use this method to send point on the map. On success, the sent Message is returned.'''
+        Use this method to send point on the map. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'latitude': latitude,
@@ -944,9 +960,10 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendvenue
-        Use this method to send information about a venue. On success, the sent Message is returned.'''
+        Use this method to send information about a venue. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'latitude': latitude,
@@ -983,9 +1000,10 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendcontact
-        Use this method to send phone contacts. On success, the sent Message is returned.'''
+        Use this method to send phone contacts. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'phone_number': phone_number,
@@ -1026,9 +1044,10 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendpoll
-        Use this method to send a native poll. On success, the sent Message is returned.'''
+        Use this method to send a native poll. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'question': question,
@@ -1066,10 +1085,11 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#senddice
         Use this method to send an animated emoji that will
-        display a random value. On success, the sent Message is returned.'''
+        display a random value. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1091,11 +1111,12 @@ class Client(TelegramApi):
         action: str,
         message_thread_id: Optional[int] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendchataction
         Use this method when you need to tell the user that something is happening on
         the bot's side. The status is set for 5 seconds or less (when a message arrives
-        from your bot, Telegram clients clear its typing status). Returns True on success.'''
+        from your bot, Telegram clients clear its typing status). Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'action': action
@@ -1110,9 +1131,10 @@ class Client(TelegramApi):
         offset: Optional[int] = None,
         limit: Optional[int] = None
     ) -> UserProfilePhotos:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getuserprofilephotos
-        Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.'''
+        Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
+        '''
         params = {
             'user_id': user_id
         }
@@ -1126,14 +1148,15 @@ class Client(TelegramApi):
         self,
         file_id: str
     ) -> File:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getfile
         Use this method to get basic information about a file and prepare it for
         downloading. For the moment, bots can download files of up to 20MB in size.
         On success, a File object is returned. The file can then be downloaded via the
         link https://api.telegram.org/file/bot<token>/<file_path>, where <file_path> is
         taken from the response. It is guaranteed that the link will be valid for at least
-        1 hour. When the link expires, a new one can be requested by calling getFile again.'''
+        1 hour. When the link expires, a new one can be requested by calling getFile again.
+        '''
         params = {
             'file_id': file_id
         }
@@ -1148,12 +1171,13 @@ class Client(TelegramApi):
         until_date: Optional[int] = None,
         revoke_messages: Optional[bool] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#banchatmember
         Use this method to ban a user in a group, a supergroup or a channel. In the case
         of supergroups and channels, the user will not be able to return to the chat on their
         own using invite links, etc., unless unbanned first. The bot must be an administrator
-        in the chat for this to work and must have the appropriate administrator rights. Returns True on success.'''
+        in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'user_id': user_id
@@ -1169,13 +1193,14 @@ class Client(TelegramApi):
         user_id: int,
         only_if_banned: Optional[bool] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#unbanchatmember
         Use this method to unban a previously banned user in a supergroup or channel. The user will not return
         to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator
         for this to work. By default, this method guarantees that after the call the user is not a member of the chat,
         but will be able to join it. So if the user is a member of the chat they will also be removed from the chat.
-        If you don't want this, use the parameter only_if_banned. Returns True on success.'''
+        If you don't want this, use the parameter only_if_banned. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'user_id': user_id
@@ -1192,11 +1217,12 @@ class Client(TelegramApi):
         use_independent_chat_permissions: Optional[bool] = None,
         until_date: Optional[int] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#restrictchatmember
         Use this method to restrict a user in a supergroup. The bot must be an administrator in
         the supergroup for this to work and must have the appropriate administrator rights.
-        Pass True for all permissions to lift restrictions from a user. Returns True on success.'''
+        Pass True for all permissions to lift restrictions from a user. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'user_id': user_id,
@@ -1227,11 +1253,12 @@ class Client(TelegramApi):
         can_delete_stories: Optional[bool] = None,
         can_manage_topics: Optional[bool] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#promotechatmember
         Use this method to promote or demote a user in a supergroup or a channel. The bot must be
         an administrator in the chat for this to work and must have the appropriate administrator
-        rights. Pass False for all boolean parameters to demote a user. Returns True on success.'''
+        rights. Pass False for all boolean parameters to demote a user. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'user_id': user_id
@@ -1260,10 +1287,11 @@ class Client(TelegramApi):
         user_id: int,
         custom_title: str
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setchatadministratorcustomtitle
         Use this method to set a custom title for an administrator
-        in a supergroup promoted by the bot. Returns True on success.'''
+        in a supergroup promoted by the bot. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'user_id': user_id,
@@ -1277,12 +1305,13 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         sender_chat_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#banchatsenderchat
         Use this method to ban a channel chat in a supergroup or a channel. Until
         the chat is unbanned, the owner of the banned chat won't be able to send messages
         on behalf of any of their channels. The bot must be an administrator in the supergroup or
-        channel for this to work and must have the appropriate administrator rights. Returns True on success.'''
+        channel for this to work and must have the appropriate administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'sender_chat_id': sender_chat_id
@@ -1295,10 +1324,11 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         sender_chat_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#unbanchatsenderchat
         Use this method to unban a previously banned channel chat in a supergroup or channel. The bot must be an
-        administrator for this to work and must have the appropriate administrator rights. Returns True on success.'''
+        administrator for this to work and must have the appropriate administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'sender_chat_id': sender_chat_id
@@ -1312,11 +1342,12 @@ class Client(TelegramApi):
         permissions: ChatPermissions,
         use_independent_chat_permissions: Optional[bool] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setchatpermissions
         Use this method to set default chat permissions for all members. The bot
         must be an administrator in the group or a supergroup for this to work and
-        must have the can_restrict_members administrator rights. Returns True on success.'''
+        must have the can_restrict_members administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'permissions': permissions
@@ -1329,11 +1360,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> str:
-        '''\
+        '''
         https://core.telegram.org/bots/api#exportchatinvitelink
         Use this method to generate a new primary invite link for a chat; any previously generated
         primary link is revoked. The bot must be an administrator in the chat for this to work and must
-        have the appropriate administrator rights. Returns the new invite link as String on success.'''
+        have the appropriate administrator rights. Returns the new invite link as String on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1348,11 +1380,12 @@ class Client(TelegramApi):
         member_limit: Optional[int] = None,
         creates_join_request: Optional[bool] = None
     ) -> ChatInviteLink:
-        '''\
+        '''
         https://core.telegram.org/bots/api#createchatinvitelink
         Use this method to create an additional invite link for a chat. The bot must be an administrator
         in the chat for this to work and must have the appropriate administrator rights. The link can be
-        revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.'''
+        revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1373,11 +1406,12 @@ class Client(TelegramApi):
         member_limit: Optional[int] = None,
         creates_join_request: Optional[bool] = None
     ) -> ChatInviteLink:
-        '''\
+        '''
         https://core.telegram.org/bots/api#editchatinvitelink
         Use this method to edit a non-primary invite link created by the bot. The bot
         must be an administrator in the chat for this to work and must have the appropriate
-        administrator rights. Returns the edited invite link as a ChatInviteLink object.'''
+        administrator rights. Returns the edited invite link as a ChatInviteLink object.
+        '''
         params = {
             'chat_id': chat_id,
             'invite_link': invite_link
@@ -1395,11 +1429,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         invite_link: str
     ) -> ChatInviteLink:
-        '''\
+        '''
         https://core.telegram.org/bots/api#revokechatinvitelink
         Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new
         link is automatically generated. The bot must be an administrator in the chat for this to work and must
-        have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object.'''
+        have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object.
+        '''
         params = {
             'chat_id': chat_id,
             'invite_link': invite_link
@@ -1413,10 +1448,11 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         user_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#approvechatjoinrequest
         Use this method to approve a chat join request. The bot must be an administrator in the chat
-        for this to work and must have the can_invite_users administrator right. Returns True on success.'''
+        for this to work and must have the can_invite_users administrator right. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'user_id': user_id
@@ -1429,10 +1465,11 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         user_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#declinechatjoinrequest
         Use this method to decline a chat join request. The bot must be an administrator in the chat
-        for this to work and must have the can_invite_users administrator right. Returns True on success.'''
+        for this to work and must have the can_invite_users administrator right. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'user_id': user_id
@@ -1445,11 +1482,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         photo: InputFile
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setchatphoto
         Use this method to set a new profile photo for the chat. Photos can't be changed
         for private chats. The bot must be an administrator in the chat for this to work
-        and must have the appropriate administrator rights. Returns True on success.'''
+        and must have the appropriate administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'photo': photo
@@ -1461,11 +1499,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#deletechatphoto
         Use this method to delete a chat photo. Photos can't be changed for
         private chats. The bot must be an administrator in the chat for this to work
-        and must have the appropriate administrator rights. Returns True on success.'''
+        and must have the appropriate administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1477,11 +1516,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         title: str
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setchattitle
         Use this method to change the title of a chat. Titles can't be changed for
         private chats. The bot must be an administrator in the chat for this to work
-        and must have the appropriate administrator rights. Returns True on success.'''
+        and must have the appropriate administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'title': title
@@ -1494,11 +1534,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         description: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setchatdescription
         Use this method to change the description of a group, a supergroup or a
         channel. The bot must be an administrator in the chat for this to work and
-        must have the appropriate administrator rights. Returns True on success.'''
+        must have the appropriate administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1512,11 +1553,12 @@ class Client(TelegramApi):
         message_id: int,
         disable_notification: Optional[bool] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#pinchatmessage
         Use this method to add a message to the list of pinned messages in a chat. If the chat is not a
         private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages'
-        administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.'''
+        administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'message_id': message_id
@@ -1530,11 +1572,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         message_id: Optional[int] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#unpinchatmessage
         Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a
         private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages'
-        administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.'''
+        administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1546,11 +1589,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#unpinallchatmessages
         Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the
         bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator
-        right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.'''
+        right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1561,9 +1605,10 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#leavechat
-        Use this method for your bot to leave a group, supergroup or channel. Returns True on success.'''
+        Use this method for your bot to leave a group, supergroup or channel. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1574,10 +1619,11 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Chat:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getchat
         Use this method to get up to date information about the chat (current name of the user for one-on-one
-        conversations, current username of a user, group or channel, etc.). Returns a Chat object on success.'''
+        conversations, current username of a user, group or channel, etc.). Returns a Chat object on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1589,9 +1635,10 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> list[ChatMember]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getchatadministrators
-        Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects.'''
+        Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1603,9 +1650,10 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> int:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getchatmembercount
-        Use this method to get the number of members in a chat. Returns Int on success.'''
+        Use this method to get the number of members in a chat. Returns Int on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1617,10 +1665,11 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         user_id: int
     ) -> ChatMember:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getchatmember
         Use this method to get information about a member of a chat. The method is only guaranteed to work
-        for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.'''
+        for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
+        '''
         params = {
             'chat_id': chat_id,
             'user_id': user_id
@@ -1634,11 +1683,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         sticker_set_name: str
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setchatstickerset
         Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the
         chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set
-        optionally returned in getChat requests to check if the bot can use this method. Returns True on success.'''
+        optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'sticker_set_name': sticker_set_name
@@ -1650,11 +1700,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#deletechatstickerset
         Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the
         chat for this to work and must have the appropriate administrator rights. Use the field can_set_sticker_set
-        optionally returned in getChat requests to check if the bot can use this method. Returns True on success.'''
+        optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1662,10 +1713,11 @@ class Client(TelegramApi):
 
 
     async def get_forum_topic_icon_stickers(self) -> list[Sticker]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getforumtopiciconstickers
         Use this method to get custom emoji stickers, which can be used as a forum topic
-        icon by any user. Requires no parameters. Returns an Array of Sticker objects.'''
+        icon by any user. Requires no parameters. Returns an Array of Sticker objects.
+        '''
         result = await super().get_forum_topic_icon_stickers()
         return [Sticker.dese(sticker) for sticker in result]
 
@@ -1677,11 +1729,12 @@ class Client(TelegramApi):
         icon_color: Optional[int] = None,
         icon_custom_emoji_id: Optional[str] = None
     ) -> ForumTopic:
-        '''\
+        '''
         https://core.telegram.org/bots/api#createforumtopic
         Use this method to create a topic in a forum supergroup chat. The bot must be
         an administrator in the chat for this to work and must have the can_manage_topics
-        administrator rights. Returns information about the created topic as a ForumTopic object.'''
+        administrator rights. Returns information about the created topic as a ForumTopic object.
+        '''
         params = {
             'chat_id': chat_id,
             'name': name
@@ -1699,11 +1752,12 @@ class Client(TelegramApi):
         name: Optional[str] = None,
         icon_custom_emoji_id: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#editforumtopic
         Use this method to edit name and icon of a topic in a forum supergroup chat. The bot
         must be an administrator in the chat for this to work and must have can_manage_topics
-        administrator rights, unless it is the creator of the topic. Returns True on success.'''
+        administrator rights, unless it is the creator of the topic. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'message_thread_id': message_thread_id
@@ -1718,11 +1772,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         message_thread_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#closeforumtopic
         Use this method to close an open topic in a forum supergroup chat. The bot must
         be an administrator in the chat for this to work and must have the can_manage_topics
-        administrator rights, unless it is the creator of the topic. Returns True on success.'''
+        administrator rights, unless it is the creator of the topic. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'message_thread_id': message_thread_id
@@ -1735,11 +1790,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         message_thread_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#reopenforumtopic
         Use this method to reopen a closed topic in a forum supergroup chat. The bot must
         be an administrator in the chat for this to work and must have the can_manage_topics
-        administrator rights, unless it is the creator of the topic. Returns True on success.'''
+        administrator rights, unless it is the creator of the topic. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'message_thread_id': message_thread_id
@@ -1752,11 +1808,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         message_thread_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#deleteforumtopic
         Use this method to delete a forum topic along with all its messages in a forum
         supergroup chat. The bot must be an administrator in the chat for this to work and
-        must have the can_delete_messages administrator rights. Returns True on success.'''
+        must have the can_delete_messages administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'message_thread_id': message_thread_id
@@ -1769,11 +1826,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         message_thread_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#unpinallforumtopicmessages
         Use this method to clear the list of pinned messages in a forum topic.
         The bot must be an administrator in the chat for this to work and must have the
-        can_pin_messages administrator right in the supergroup. Returns True on success.'''
+        can_pin_messages administrator right in the supergroup. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'message_thread_id': message_thread_id
@@ -1786,11 +1844,12 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         name: str
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#editgeneralforumtopic
         Use this method to edit the name of the 'General' topic in a forum supergroup
         chat. The bot must be an administrator in the chat for this to work and must
-        have can_manage_topics administrator rights. Returns True on success.'''
+        have can_manage_topics administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'name': name
@@ -1802,11 +1861,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#closegeneralforumtopic
         Use this method to close an open 'General' topic in a forum supergroup chat.
         The bot must be an administrator in the chat for this to work and must have
-        the can_manage_topics administrator rights. Returns True on success.'''
+        the can_manage_topics administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1817,11 +1877,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#reopengeneralforumtopic
         Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be
         an administrator in the chat for this to work and must have the can_manage_topics administrator
-        rights. The topic will be automatically unhidden if it was hidden. Returns True on success.'''
+        rights. The topic will be automatically unhidden if it was hidden. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1832,11 +1893,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#hidegeneralforumtopic
         Use this method to hide the 'General' topic in a forum supergroup chat. The bot must be an
         administrator in the chat for this to work and must have the can_manage_topics administrator
-        rights. The topic will be automatically closed if it was open. Returns True on success.'''
+        rights. The topic will be automatically closed if it was open. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1847,11 +1909,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#unhidegeneralforumtopic
         Use this method to unhide the 'General' topic in a forum supergroup
         chat. The bot must be an administrator in the chat for this to work and must
-        have the can_manage_topics administrator rights. Returns True on success.'''
+        have the can_manage_topics administrator rights. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1862,11 +1925,12 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#unpinallgeneralforumtopicmessages
         Use this method to clear the list of pinned messages in a General forum topic.
         The bot must be an administrator in the chat for this to work and must have the
-        can_pin_messages administrator right in the supergroup. Returns True on success.'''
+        can_pin_messages administrator right in the supergroup. Returns True on success.
+        '''
         params = {
             'chat_id': chat_id
         }
@@ -1881,11 +1945,12 @@ class Client(TelegramApi):
         url: Optional[str] = None,
         cache_time: Optional[int] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#answercallbackquery
         Use this method to send answers to callback queries sent from inline
         keyboards. The answer will be displayed to the user as a notification at
-        the top of the chat screen or as an alert. On success, True is returned.'''
+        the top of the chat screen or as an alert. On success, True is returned.
+        '''
         params = {
             'callback_query_id': callback_query_id
         }
@@ -1902,10 +1967,11 @@ class Client(TelegramApi):
         scope: Optional[BotCommandScope] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setmycommands
         Use this method to change the list of the bot's commands. See this
-        manual for more details about bot commands. Returns True on success.'''
+        manual for more details about bot commands. Returns True on success.
+        '''
         params = {
             'commands': commands
         }
@@ -1919,11 +1985,12 @@ class Client(TelegramApi):
         scope: Optional[BotCommandScope] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#deletemycommands
         Use this method to delete the list of the bot's commands for
         the given scope and user language. After deletion, higher level
-        commands will be shown to affected users. Returns True on success.'''
+        commands will be shown to affected users. Returns True on success.
+        '''
         params = {}
         if scope is not None: params['scope'] = scope
         if language_code is not None: params['language_code'] = language_code
@@ -1935,10 +2002,11 @@ class Client(TelegramApi):
         scope: Optional[BotCommandScope] = None,
         language_code: Optional[str] = None
     ) -> list[BotCommand]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getmycommands
         Use this method to get the current list of the bot's commands for the given scope and user
-        language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned.'''
+        language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned.
+        '''
         params = {}
         if scope is not None: params['scope'] = scope
         if language_code is not None: params['language_code'] = language_code
@@ -1951,9 +2019,10 @@ class Client(TelegramApi):
         name: Optional[str] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setmyname
-        Use this method to change the bot's name. Returns True on success.'''
+        Use this method to change the bot's name. Returns True on success.
+        '''
         params = {}
         if name is not None: params['name'] = name
         if language_code is not None: params['language_code'] = language_code
@@ -1964,9 +2033,10 @@ class Client(TelegramApi):
         self,
         language_code: Optional[str] = None
     ) -> BotName:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getmyname
-        Use this method to get the current bot name for the given user language. Returns BotName on success.'''
+        Use this method to get the current bot name for the given user language. Returns BotName on success.
+        '''
         params = {}
         if language_code is not None: params['language_code'] = language_code
         result = await super().get_my_name(params)
@@ -1978,10 +2048,11 @@ class Client(TelegramApi):
         description: Optional[str] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setmydescription
         Use this method to change the bot's description, which is shown in
-        the chat with the bot if the chat is empty. Returns True on success.'''
+        the chat with the bot if the chat is empty. Returns True on success.
+        '''
         params = {}
         if description is not None: params['description'] = description
         if language_code is not None: params['language_code'] = language_code
@@ -1992,10 +2063,11 @@ class Client(TelegramApi):
         self,
         language_code: Optional[str] = None
     ) -> BotDescription:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getmydescription
         Use this method to get the current bot description for
-        the given user language. Returns BotDescription on success.'''
+        the given user language. Returns BotDescription on success.
+        '''
         params = {}
         if language_code is not None: params['language_code'] = language_code
         result = await super().get_my_description(params)
@@ -2007,10 +2079,11 @@ class Client(TelegramApi):
         short_description: Optional[str] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setmyshortdescription
         Use this method to change the bot's short description, which is shown on the bot's profile
-        page and is sent together with the link when users share the bot. Returns True on success.'''
+        page and is sent together with the link when users share the bot. Returns True on success.
+        '''
         params = {}
         if short_description is not None: params['short_description'] = short_description
         if language_code is not None: params['language_code'] = language_code
@@ -2021,10 +2094,11 @@ class Client(TelegramApi):
         self,
         language_code: Optional[str] = None
     ) -> BotShortDescription:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getmyshortdescription
         Use this method to get the current bot short description for
-        the given user language. Returns BotShortDescription on success.'''
+        the given user language. Returns BotShortDescription on success.
+        '''
         params = {}
         if language_code is not None: params['language_code'] = language_code
         result = await super().get_my_short_description(params)
@@ -2036,10 +2110,11 @@ class Client(TelegramApi):
         chat_id: Optional[int] = None,
         menu_button: Optional[MenuButton] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setchatmenubutton
         Use this method to change the bot's menu button in a private
-        chat, or the default menu button. Returns True on success.'''
+        chat, or the default menu button. Returns True on success.
+        '''
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
         if menu_button is not None: params['menu_button'] = menu_button
@@ -2050,10 +2125,11 @@ class Client(TelegramApi):
         self,
         chat_id: Optional[int] = None
     ) -> MenuButton:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getchatmenubutton
         Use this method to get the current value of the bot's menu button in a
-        private chat, or the default menu button. Returns MenuButton on success.'''
+        private chat, or the default menu button. Returns MenuButton on success.
+        '''
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
         result = await super().get_chat_menu_button(params)
@@ -2065,11 +2141,12 @@ class Client(TelegramApi):
         rights: Optional[ChatAdministratorRights] = None,
         for_channels: Optional[bool] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setmydefaultadministratorrights
         Use this method to change the default administrator rights requested by the bot when
         it's added as an administrator to groups or channels. These rights will be suggested to
-        users, but they are free to modify the list before adding the bot. Returns True on success.'''
+        users, but they are free to modify the list before adding the bot. Returns True on success.
+        '''
         params = {}
         if rights is not None: params['rights'] = rights
         if for_channels is not None: params['for_channels'] = for_channels
@@ -2080,9 +2157,10 @@ class Client(TelegramApi):
         self,
         for_channels: Optional[bool] = None
     ) -> ChatAdministratorRights:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getmydefaultadministratorrights
-        Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.'''
+        Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
+        '''
         params = {}
         if for_channels is not None: params['for_channels'] = for_channels
         result = await super().get_my_default_administrator_rights(params)
@@ -2100,10 +2178,11 @@ class Client(TelegramApi):
         disable_web_page_preview: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#editmessagetext
         Use this method to edit text and game messages. On success, if the edited message
-        is not an inline message, the edited Message is returned, otherwise True is returned.'''
+        is not an inline message, the edited Message is returned, otherwise True is returned.
+        '''
         params = {
             'text', text
         }
@@ -2129,10 +2208,11 @@ class Client(TelegramApi):
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#editmessagecaption
         Use this method to edit captions of messages. On success, if the edited message is
-        not an inline message, the edited Message is returned, otherwise True is returned.'''
+        not an inline message, the edited Message is returned, otherwise True is returned.
+        '''
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
@@ -2154,13 +2234,14 @@ class Client(TelegramApi):
         inline_message_id: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#editmessagemedia
         Use this method to edit animation, audio, document, photo, or video messages. If a message is part
         of a message album, then it can be edited only to an audio for audio albums, only to a document for
         document albums and to a photo or a video otherwise. When an inline message is edited, a new file
         can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the
-        edited message is not an inline message, the edited Message is returned, otherwise True is returned.'''
+        edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+        '''
         params = {
             'media': media
         }
@@ -2184,11 +2265,12 @@ class Client(TelegramApi):
         proximity_alert_radius: Optional[int] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#editmessagelivelocation
         Use this method to edit live location messages. A location can be edited until its live_period
         expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the
-        edited message is not an inline message, the edited Message is returned, otherwise True is returned.'''
+        edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+        '''
         params = {
             'latitude': latitude,
             'longitude': longitude
@@ -2211,10 +2293,11 @@ class Client(TelegramApi):
         inline_message_id: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#stopmessagelivelocation
         Use this method to stop updating a live location message before live_period expires. On success,
-        if the message is not an inline message, the edited Message is returned, otherwise True is returned.'''
+        if the message is not an inline message, the edited Message is returned, otherwise True is returned.
+        '''
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
@@ -2231,10 +2314,11 @@ class Client(TelegramApi):
         inline_message_id: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#editmessagereplymarkup
         Use this method to edit only the reply markup of messages. On success, if the edited
-        message is not an inline message, the edited Message is returned, otherwise True is returned.'''
+        message is not an inline message, the edited Message is returned, otherwise True is returned.
+        '''
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
@@ -2250,9 +2334,10 @@ class Client(TelegramApi):
         message_id: int,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Poll:
-        '''\
+        '''
         https://core.telegram.org/bots/api#stoppoll
-        Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.'''
+        Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'message_id': message_id
@@ -2267,7 +2352,7 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         message_id: int
     ) -> Literal[True]:
-        '''\
+        '''
         Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.
         Use this method to delete a message, including service messages, with the following limitations:
         - A message can only be deleted if it was sent less than 48 hours ago.
@@ -2278,7 +2363,8 @@ class Client(TelegramApi):
         - Bots granted can_post_messages permissions can delete outgoing messages in channels.
         - If the bot is an administrator of a group, it can delete any message there.
         - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
-        Returns True on success.'''
+        Returns True on success.
+        '''
         params = {
             'chat_id': chat_id,
             'message_id': message_id
@@ -2298,10 +2384,11 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendsticker
         Use this method to send static .WEBP, animated .TGS, or
-        video .WEBM stickers. On success, the sent Message is returned.'''
+        video .WEBM stickers. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'sticker': sticker
@@ -2322,9 +2409,10 @@ class Client(TelegramApi):
         self,
         name: str
     ) -> StickerSet:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getstickerset
-        Use this method to get a sticker set. On success, a StickerSet object is returned.'''
+        Use this method to get a sticker set. On success, a StickerSet object is returned.
+        '''
         params = {
             'name': name
         }
@@ -2336,10 +2424,11 @@ class Client(TelegramApi):
         self,
         custom_emoji_ids: list[str]
     ) -> list[Sticker]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getcustomemojistickers
         Use this method to get information about custom emoji stickers
-        by their identifiers. Returns an Array of Sticker objects.'''
+        by their identifiers. Returns an Array of Sticker objects.
+        '''
         params = {
             'custom_emoji_ids': custom_emoji_ids
         }
@@ -2353,10 +2442,11 @@ class Client(TelegramApi):
         sticker: InputFile,
         sticker_format: str
     ) -> File:
-        '''\
+        '''
         https://core.telegram.org/bots/api#uploadstickerfile
         Use this method to upload a file with a sticker for later use in the createNewStickerSet and
-        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.'''
+        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
+        '''
         params = {
             'user_id': user_id,
             'sticker': sticker,
@@ -2376,10 +2466,11 @@ class Client(TelegramApi):
         sticker_type: Optional[str] = None,
         needs_repainting: Optional[bool] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#createnewstickerset
         Use this method to create a new sticker set owned by a user. The bot
-        will be able to edit the sticker set thus created. Returns True on success.'''
+        will be able to edit the sticker set thus created. Returns True on success.
+        '''
         params = {
             'user_id': user_id,
             'name': name,
@@ -2398,12 +2489,13 @@ class Client(TelegramApi):
         name: str,
         sticker: InputSticker
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#addstickertoset
         Use this method to add a new sticker to a set created by the bot. The format of the
         added sticker must match the format of the other stickers in the set. Emoji sticker
         sets can have up to 200 stickers. Animated and video sticker sets can have up to 50
-        stickers. Static sticker sets can have up to 120 stickers. Returns True on success.'''
+        stickers. Static sticker sets can have up to 120 stickers. Returns True on success.
+        '''
         params = {
             'user_id': user_id,
             'name': name,
@@ -2417,9 +2509,10 @@ class Client(TelegramApi):
         sticker: str,
         position: int
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setstickerpositioninset
-        Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success.'''
+        Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success.
+        '''
         params = {
             'sticker': sticker,
             'position': position
@@ -2431,9 +2524,10 @@ class Client(TelegramApi):
         self,
         sticker: str
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#deletestickerfromset
-        Use this method to delete a sticker from a set created by the bot. Returns True on success.'''
+        Use this method to delete a sticker from a set created by the bot. Returns True on success.
+        '''
         params = {
             'sticker': sticker
         }
@@ -2445,10 +2539,11 @@ class Client(TelegramApi):
         sticker: str,
         emoji_list: list[str]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setstickeremojilist
         Use this method to change the list of emoji assigned to a regular or custom emoji sticker.
-        The sticker must belong to a sticker set created by the bot. Returns True on success.'''
+        The sticker must belong to a sticker set created by the bot. Returns True on success.
+        '''
         params = {
             'sticker': sticker,
             'emoji_list': emoji_list
@@ -2461,10 +2556,11 @@ class Client(TelegramApi):
         sticker: str,
         keywords: Optional[list[str]] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setstickerkeywords
         Use this method to change search keywords assigned to a regular or custom emoji sticker.
-        The sticker must belong to a sticker set created by the bot. Returns True on success.'''
+        The sticker must belong to a sticker set created by the bot. Returns True on success.
+        '''
         params = {
             'sticker': sticker
         }
@@ -2477,10 +2573,11 @@ class Client(TelegramApi):
         sticker: str,
         mask_position: Optional[MaskPosition] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setstickermaskposition
         Use this method to change the mask position of a mask sticker. The sticker
-        must belong to a sticker set that was created by the bot. Returns True on success.'''
+        must belong to a sticker set that was created by the bot. Returns True on success.
+        '''
         params = {
             'sticker': sticker
         }
@@ -2493,9 +2590,10 @@ class Client(TelegramApi):
         name: str,
         title: str
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setstickersettitle
-        Use this method to set the title of a created sticker set. Returns True on success.'''
+        Use this method to set the title of a created sticker set. Returns True on success.
+        '''
         params = {
             'name': name,
             'title': title
@@ -2509,10 +2607,11 @@ class Client(TelegramApi):
         user_id: int,
         thumbnail: Optional[Union[InputFile, str]] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setstickersetthumbnail
         Use this method to set the thumbnail of a regular or mask sticker set. The format of the
-        thumbnail file must match the format of the stickers in the set. Returns True on success.'''
+        thumbnail file must match the format of the stickers in the set. Returns True on success.
+        '''
         params = {
             'name': name,
             'user_id': user_id
@@ -2526,9 +2625,10 @@ class Client(TelegramApi):
         name: str,
         custom_emoji_id: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setcustomemojistickersetthumbnail
-        Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.'''
+        Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
+        '''
         params = {
             'name': name
         }
@@ -2540,9 +2640,10 @@ class Client(TelegramApi):
         self,
         name: str
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#deletestickerset
-        Use this method to delete a sticker set that was created by the bot. Returns True on success.'''
+        Use this method to delete a sticker set that was created by the bot. Returns True on success.
+        '''
         params = {
             'name': name
         }
@@ -2558,10 +2659,11 @@ class Client(TelegramApi):
         next_offset: Optional[str] = None,
         button: Optional[InlineQueryResultsButton] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#answerinlinequery
         Use this method to send answers to an inline query. On success,
-        True is returned. No more than 50 results per query are allowed.'''
+        True is returned. No more than 50 results per query are allowed.
+        '''
         params = {
             'inline_query_id': inline_query_id,
             'results': results
@@ -2578,11 +2680,12 @@ class Client(TelegramApi):
         web_app_query_id: str,
         result: InlineQueryResult
     ) -> SentWebAppMessage:
-        '''\
+        '''
         https://core.telegram.org/bots/api#answerwebappquery
         Use this method to set the result of an interaction with a Web App and
         send a corresponding message on behalf of the user to the chat from which
-        the query originated. On success, a SentWebAppMessage object is returned.'''
+        the query originated. On success, a SentWebAppMessage object is returned.
+        '''
         params = {
             'web_app_query_id': web_app_query_id,
             'result': result
@@ -2622,9 +2725,10 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendinvoice
-        Use this method to send invoices. On success, the sent Message is returned.'''
+        Use this method to send invoices. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'title': title,
@@ -2683,9 +2787,10 @@ class Client(TelegramApi):
         send_email_to_provider: Optional[bool] = None,
         is_flexible: Optional[bool] = None
     ) -> str:
-        '''\
+        '''
         https://core.telegram.org/bots/api#createinvoicelink
-        Use this method to create a link for an invoice. Returns the created invoice link as String on success.'''
+        Use this method to create a link for an invoice. Returns the created invoice link as String on success.
+        '''
         params = {
             'title': title,
             'description': description,
@@ -2718,11 +2823,12 @@ class Client(TelegramApi):
         shipping_options: Optional[list[ShippingOption]] = None,
         error_message: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#answershippingquery
         If you sent an invoice requesting a shipping address and the parameter is_flexible
         was specified, the Bot API will send an Update with a shipping_query field to the
-        bot. Use this method to reply to shipping queries. On success, True is returned.'''
+        bot. Use this method to reply to shipping queries. On success, True is returned.
+        '''
         params = {
             'shipping_query_id': shipping_query_id,
             'ok': ok
@@ -2738,12 +2844,13 @@ class Client(TelegramApi):
         ok: bool,
         error_message: Optional[str] = None
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#answerprecheckoutquery
         Once the user has confirmed their payment and shipping details, the Bot API sends the
         final confirmation in the form of an Update with the field pre_checkout_query. Use this
         method to respond to such pre-checkout queries. On success, True is returned. Note: The
-        Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.'''
+        Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
+        '''
         params = {
             'pre_checkout_query_id': pre_checkout_query_id,
             'ok': ok
@@ -2757,14 +2864,15 @@ class Client(TelegramApi):
         user_id: int,
         errors: list[PassportElementError]
     ) -> Literal[True]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setpassportdataerrors
         Informs a user that some of the Telegram Passport elements they provided contains errors. The user
         will not be able to re-submit their Passport to you until the errors are fixed (the contents of the
         field for which you returned the error must change). Returns True on success. Use this if the data
         submitted by the user doesn't satisfy the standards your service requires for any reason. For example,
         if a birthday date seems invalid, a submitted document is blurry, a scan shows evidence of tampering,
-        etc. Supply some details in the error message to make sure the user knows how to correct the issues.'''
+        etc. Supply some details in the error message to make sure the user knows how to correct the issues.
+        '''
         params = {
             'user_id': user_id,
             'errors': errors
@@ -2783,9 +2891,10 @@ class Client(TelegramApi):
         allow_sending_without_reply: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Message:
-        '''\
+        '''
         https://core.telegram.org/bots/api#sendgame
-        Use this method to send a game. On success, the sent Message is returned.'''
+        Use this method to send a game. On success, the sent Message is returned.
+        '''
         params = {
             'chat_id': chat_id,
             'game_short_name': game_short_name
@@ -2811,11 +2920,12 @@ class Client(TelegramApi):
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None
     ) -> Union[Message, Literal[True]]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#setgamescore
         Use this method to set the score of the specified user in a game message. On success, if the
         message is not an inline message, the Message is returned, otherwise True is returned. Returns an
-        error, if the new score is not greater than the user's current score in the chat and force is False.'''
+        error, if the new score is not greater than the user's current score in the chat and force is False.
+        '''
         params = {
             'user_id': user_id,
             'score': score
@@ -2836,10 +2946,11 @@ class Client(TelegramApi):
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None
     ) -> list[GameHighScore]:
-        '''\
+        '''
         https://core.telegram.org/bots/api#getgamehighscores
         Use this method to get data for high score tables. Will return the score of the specified
-        user and several of their neighbors in a game. Returns an Array of GameHighScore objects.'''
+        user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
+        '''
         params = {
             'user_id': user_id
         }
