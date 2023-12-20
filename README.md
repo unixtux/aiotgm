@@ -5,12 +5,12 @@
 * #### Requirements
   * Python >= 3.8
   * [aiohttp](https://github.com/aio-libs/aiohttp)
-  * Optional [ujson](https://github.com/ultrajson/ultrajson) & [certifi](https://github.com/certifi/python-certifi)
+  * *Optional* [ujson](https://github.com/ultrajson/ultrajson) & [certifi](https://github.com/certifi/python-certifi)
 
 * #### Installation
 ```python -m pip install tglib```
 
-* #### Update the library
+* #### Update the module
 ```python -m pip install -U tglib```
 
 * #### 14 managers for different [updates](https://core.telegram.org/bots/api#update)
@@ -31,14 +31,14 @@
 
 
 * #### Available methods
-All the methods of the Client are the same described in the *[offical documentation](https://core.telegram.org/bots/api#available-methods)*, changed from camelCase to snake_case. All the methods are **async** functions, so you must use them in **await** expression.
+All the methods of the Client are the same described in the *[offical documentation](https://core.telegram.org/bots/api#available-methods)*, changed from camelCase to snake_case. All the methods are **async**, so you must use them in **await** expression.
 
 * #### Available Types
 All the types are the same described in the *[offical documentation](https://core.telegram.org/bots/api#available-types)*.
 
-> If the attribute **'text'** of the Message is empty, it's **str()** instead of **None**, so you can use for example text.startswith() without getting errors.
-
 > Attribute **'from'** of the types, has been changed to **'from_user'** because in python it causes conflict.
+
+> If the attribute **'text'** of the Message is empty, it's **str()** instead of **None**, so you can use for example text.startswith() without getting errors.
 
 > All other optional attributes of the objects are None if they are not in the **JSON** received as response.
 
@@ -47,7 +47,7 @@ All the types are the same described in the *[offical documentation](https://cor
 > Webhook has not been implemented yet.
 
 * #### ReplyMarkups
-**InlineKeyboardMarkup** and **ReplyKeyboardMarkup** have the method **'add'**, so you can add new buttons after the object has been initialized.
+**InlineKeyboardMarkup** and **ReplyKeyboardMarkup** have the method **'add'**, so you can create new buttons after the object has been initialized.
 ```python
 markup = ReplyKeyboardMarkup()
 markup.add(KeyboardButton('xyz'), ...)
@@ -83,8 +83,8 @@ async def welcome(message: Message):
         await bot.send_message(message.chat.id, 'welcome')
     except (TimeoutError, TelegramError):
         # Two errors can be raised in requests.
-        # - TimeoutError if a response is
-        #   not returned after 5 minutes.
+        # - TimeoutError if a response
+        #   is not returned in 5 minutes.
         # - TelegramError if a response is
         #   returned but got a bad status code.
 
