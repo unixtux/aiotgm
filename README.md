@@ -61,6 +61,9 @@ markup.row_width = 4
 # this will reorder all the buttons in a row of 4.
 ```
 
+* #### Prerequisites
+You require a basic Python knowledge and a telegram bot API token, you can get it via *[@BotFather](https://t.me/botfather)*.
+
 * #### Usage
 ```python
 import asyncio

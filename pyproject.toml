@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tglib"
-version = "1.1.0"
+version = "1.1.1"
 requires-python = ">= 3.8"
 license = {file = "LICENSE"}
 readme = "README.md"
@@ -12,9 +12,9 @@ authors = [
     {name = "unixtux"}
 ]
 dependencies = [
-    "aiohttp==3.9.1",
-    "certifi==2023.11.17",
-    "ujson==5.9.0"
+    "aiohttp>=3.9.1",
+    "certifi>=2023.11.17",
+    "ujson>=5.9.0"
 ]
 
 [project.urls]
