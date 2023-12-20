@@ -392,6 +392,9 @@ class SwitchInlineQueryChosenChat(TelegramType):
 
 
 class CallbackGame(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#callbackgame
+    A placeholder, currently holds no information. Use BotFather to set up your game.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3386,6 +3389,30 @@ class InputInvoiceMessageContent(InputMessageContent):
 
 
 class InlineQueryResult(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#inlinequeryresult
+    This object represents one result of an inline query. Telegram
+    clients currently support results of the following 20 types:
+    - InlineQueryResultCachedAudio
+    - InlineQueryResultCachedDocument
+    - InlineQueryResultCachedGif
+    - InlineQueryResultCachedMpeg4Gif
+    - InlineQueryResultCachedPhoto
+    - InlineQueryResultCachedSticker
+    - InlineQueryResultCachedVideo
+    - InlineQueryResultCachedVoice
+    - InlineQueryResultArticle
+    - InlineQueryResultAudio
+    - InlineQueryResultContact
+    - InlineQueryResultGame
+    - InlineQueryResultDocument
+    - InlineQueryResultGif
+    - InlineQueryResultLocation
+    - InlineQueryResultMpeg4Gif
+    - InlineQueryResultPhoto
+    - InlineQueryResultVenue
+    - InlineQueryResultVideo
+    - InlineQueryResultVoice'''
     def __init__(
         self,
         **kwargs
@@ -4330,6 +4357,10 @@ class PreCheckoutQuery(TelegramType):
 
 
 class PassportFile(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#passportfile
+    This object represents a file uploaded to Telegram Passport. Currently all
+    Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4356,12 +4387,15 @@ class PassportFile(TelegramType):
 
 
 class EncryptedPassportElement(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#encryptedpassportelement
+    Describes documents or other Telegram Passport elements shared with the bot by the user.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
         obj = check_dict(result)
         obj['type'] = obj.get('type')
-        obj['hash'] = [PassportFile.dese(kwargs) for kwargs in obj.get('hash')]
+        obj['hash'] = obj.get('hash')
         obj['data'] = obj.get('data')
         obj['phone_number'] = obj.get('phone_number')
         obj['email'] = obj.get('email')
@@ -4369,7 +4403,7 @@ class EncryptedPassportElement(TelegramType):
         obj['front_side'] = PassportFile.dese(obj.get('front_side'))
         obj['reverse_side'] = PassportFile.dese(obj.get('reverse_side'))
         obj['selfie'] = PassportFile.dese(obj.get('selfie'))
-        obj['translation'] = obj.get('translation')
+        obj['translation'] = [PassportFile.dese(kwargs) for kwargs in obj.get('translation')] if 'translation' in obj else None
         return cls(**obj)
 
     def __init__(
@@ -4400,6 +4434,10 @@ class EncryptedPassportElement(TelegramType):
 
 
 class EncryptedCredentials(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#encryptedcredentials
+    Describes data required for decrypting and authenticating EncryptedPassportElement. See the Telegram
+    Passport Documentation for a complete description of the data decryption and authentication processes.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4423,6 +4461,9 @@ class EncryptedCredentials(TelegramType):
 
 
 class PassportData(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#passportdata
+    Describes Telegram Passport data shared with the bot by the user.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4445,6 +4486,19 @@ class PassportData(TelegramType):
 # PassportElementError: 5 SUBCLASSES
 
 class PassportElementError(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerror
+    This object represents an error in the Telegram Passport element which
+    was submitted that should be resolved by the user. It should be one of:
+    - PassportElementErrorDataField
+    - PassportElementErrorFrontSide
+    - PassportElementErrorReverseSide
+    - PassportElementErrorSelfie
+    - PassportElementErrorFile
+    - PassportElementErrorFiles
+    - PassportElementErrorTranslationFile
+    - PassportElementErrorTranslationFiles
+    - PassportElementErrorUnspecified'''
     def __init__(
         self,
         **kwargs
@@ -4468,6 +4522,10 @@ class PassportElementError(TelegramType):
 
 
 class PassportElementErrorDataField(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrordatafield
+    Represents an issue in one of the data fields that was provided by the
+    user. The error is considered resolved when the field's value changes.'''
     def __init__(
         self,
         type: Literal[
@@ -4491,6 +4549,10 @@ class PassportElementErrorDataField(PassportElementError):
 
 
 class PassportElementErrorFrontSide(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrorfrontside
+    Represents an issue with the front side of a document. The error is
+    considered resolved when the file with the front side of the document changes.'''
     def __init__(
         self,
         type: Literal[
@@ -4510,6 +4572,10 @@ class PassportElementErrorFrontSide(PassportElementError):
 
 
 class PassportElementErrorReverseSide(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrorreverseside
+    Represents an issue with the reverse side of a document. The error is
+    considered resolved when the file with reverse side of the document changes.'''
     def __init__(
         self,
         type: Literal['driver_license', 'identity_card'],
@@ -4524,6 +4590,10 @@ class PassportElementErrorReverseSide(PassportElementError):
 
 
 class PassportElementErrorSelfie(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrorselfie
+    Represents an issue with the selfie with a document. The error
+    is considered resolved when the file with the selfie changes.'''
     def __init__(
         self,
         type: Literal[
@@ -4543,6 +4613,10 @@ class PassportElementErrorSelfie(PassportElementError):
 
 
 class PassportElementErrorFile(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrorfile
+    Represents an issue with a document scan. The error is
+    considered resolved when the file with the document scan changes.'''
     def __init__(
         self,
         type: Literal[
@@ -4563,6 +4637,10 @@ class PassportElementErrorFile(PassportElementError):
 
 
 class PassportElementErrorFiles(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrorfiles
+    Represents an issue with a list of scans. The error is considered
+    resolved when the list of files containing the scans changes.'''
     def __init__(
         self,
         type: Literal[
@@ -4583,6 +4661,10 @@ class PassportElementErrorFiles(PassportElementError):
 
 
 class PassportElementErrorTranslationFile(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrortranslationfile
+    Represents an issue with one of the files that constitute the translation
+    of a document. The error is considered resolved when the file changes.'''
     def __init__(
         self,
         type: Literal[
@@ -4607,6 +4689,10 @@ class PassportElementErrorTranslationFile(PassportElementError):
 
 
 class PassportElementErrorTranslationFiles(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrortranslationfiles
+    Represents an issue with the translated version of a document. The error
+    is considered resolved when a file with the document translation change.'''
     def __init__(
         self,
         type: Literal[
@@ -4631,6 +4717,9 @@ class PassportElementErrorTranslationFiles(PassportElementError):
 
 
 class PassportElementErrorUnspecified(PassportElementError):
+    '''\
+    https://core.telegram.org/bots/api#passportelementerrorunspecified
+    Represents an issue in an unspecified place. The error is considered resolved when new data is added.'''
     def __init__(
         self,
         type: str,
@@ -4645,6 +4734,9 @@ class PassportElementErrorUnspecified(PassportElementError):
 
 
 class Game(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#game
+    This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4677,6 +4769,9 @@ class Game(TelegramType):
 
 
 class GameHighScore(TelegramType):
+    '''\
+    https://core.telegram.org/bots/api#gamehighscore
+    This object represents one row of the high scores table for a game.'''
     @classmethod
     def dese(cls, result):
         if result is None: return None
