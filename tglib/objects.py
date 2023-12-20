@@ -240,9 +240,10 @@ def _get_kwargs(obj: TelegramType, kwargs: dict) -> bool:
 
 
 class ChatPermissions(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatpermissions
-    Describes actions that a non-administrator user is allowed to take in a chat.'''
+    Describes actions that a non-administrator user is allowed to take in a chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -299,9 +300,10 @@ class ChatPermissions(TelegramType):
 
 
 class ChatAdministratorRights(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatadministratorrights
-    Represents the rights of an administrator in a chat.'''
+    Represents the rights of an administrator in a chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -361,10 +363,11 @@ class ChatAdministratorRights(TelegramType):
 
 
 class SwitchInlineQueryChosenChat(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#switchinlinequerychosenchat
     This object represents an inline button that switches the current user
-    to inline mode in a chosen chat, with an optional default inline query.'''
+    to inline mode in a chosen chat, with an optional default inline query.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -392,9 +395,10 @@ class SwitchInlineQueryChosenChat(TelegramType):
 
 
 class CallbackGame(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#callbackgame
-    A placeholder, currently holds no information. Use BotFather to set up your game.'''
+    A placeholder, currently holds no information. Use BotFather to set up your game.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -410,10 +414,11 @@ class CallbackGame(TelegramType):
 
 
 class InputFile(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputfile
     This object represents the contents of a file to be uploaded. Must be posted
-    using multipart/form-data in the usual way that files are uploaded via the browser.'''
+    using multipart/form-data in the usual way that files are uploaded via the browser.
+    '''
     def __init__(
         self,
         path: str,
@@ -430,11 +435,12 @@ class InputFile(TelegramType):
 
 
 class LoginUrl(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#loginurl
     This object represents a parameter of the inline keyboard button used to automatically authorize
     a user. Serves as a great replacement for the Telegram Login Widget when the user is coming from
-    Telegram. All the user needs to do is tap/click a button and confirm that they want to log in.'''
+    Telegram. All the user needs to do is tap/click a button and confirm that they want to log in.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -459,9 +465,10 @@ class LoginUrl(TelegramType):
 
 
 class LabeledPrice(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#labeledprice
-    This object represents a portion of the price for goods or services.'''
+    This object represents a portion of the price for goods or services.
+    '''
     def __init__(
         self,
         label: str,
@@ -472,9 +479,10 @@ class LabeledPrice(TelegramType):
 
 
 class User(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#user
-    This object represents a Telegram user or bot.'''
+    This object represents a Telegram user or bot.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -522,9 +530,10 @@ class User(TelegramType):
 
 
 class MessageEntity(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#messageentity
-    This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.'''
+    This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -558,9 +567,10 @@ class MessageEntity(TelegramType):
 
 
 class Message(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#message
-    This object represents a message.'''
+    This object represents a message.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -791,9 +801,10 @@ class Message(TelegramType):
 
 
 class ChatPhoto(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatphoto
-    This object represents a chat photo.'''
+    This object represents a chat photo.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -820,9 +831,10 @@ class ChatPhoto(TelegramType):
 
 
 class Location(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#location
-    This object represents a point on the map.'''
+    This object represents a point on the map.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -855,9 +867,10 @@ class Location(TelegramType):
 
 
 class ChatLocation(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatlocation
-    Represents a location to which a chat is connected.'''
+    Represents a location to which a chat is connected.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -878,9 +891,10 @@ class ChatLocation(TelegramType):
 
 
 class Chat(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chat
-    This object represents a chat.'''
+    This object represents a chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -982,9 +996,10 @@ class Chat(TelegramType):
 
 
 class MessageId(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#messageid
-    This object represents a unique message identifier.'''
+    This object represents a unique message identifier.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1002,9 +1017,10 @@ class MessageId(TelegramType):
 
 
 class PhotoSize(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#photosize
-    This object represents one size of a photo or a file / sticker thumbnail.'''
+    This object represents one size of a photo or a file / sticker thumbnail.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1034,9 +1050,10 @@ class PhotoSize(TelegramType):
 
 
 class Animation(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#animation
-    This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).'''
+    This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1078,9 +1095,10 @@ class Animation(TelegramType):
 
 
 class Audio(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#audio
-    This object represents an audio file to be treated as music by the Telegram clients.'''
+    This object represents an audio file to be treated as music by the Telegram clients.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1122,9 +1140,10 @@ class Audio(TelegramType):
 
 
 class Document(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#document
-    This object represents a general file (as opposed to photos, voice messages and audio files).'''
+    This object represents a general file (as opposed to photos, voice messages and audio files).
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1157,9 +1176,10 @@ class Document(TelegramType):
 
 
 class Story(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#story
-    This object represents a message about a forwarded story in the chat. Currently holds no information.'''
+    This object represents a message about a forwarded story in the chat. Currently holds no information.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1175,9 +1195,10 @@ class Story(TelegramType):
 
 
 class Video(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#video
-    This object represents a video file.'''
+    This object represents a video file.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1219,9 +1240,10 @@ class Video(TelegramType):
 
 
 class VideoNote(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#videonote
-    This object represents a video message (available in Telegram apps as of v.4.0).'''
+    This object represents a video message (available in Telegram apps as of v.4.0).
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1254,9 +1276,10 @@ class VideoNote(TelegramType):
 
 
 class Voice(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#voice
-    This object represents a voice note.'''
+    This object represents a voice note.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1286,9 +1309,10 @@ class Voice(TelegramType):
 
 
 class Contact(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#contact
-    This object represents a phone contact.'''
+    This object represents a phone contact.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1318,9 +1342,10 @@ class Contact(TelegramType):
 
 
 class Dice(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#dice
-    This object represents an animated emoji that displays a random value.'''
+    This object represents an animated emoji that displays a random value.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1341,9 +1366,10 @@ class Dice(TelegramType):
 
 
 class PollOption(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#polloption
-    This object contains information about one answer option in a poll.'''
+    This object contains information about one answer option in a poll.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1364,9 +1390,10 @@ class PollOption(TelegramType):
 
 
 class PollAnswer(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#pollanswer
-    This object represents an answer of a user in a non-anonymous poll.'''
+    This object represents an answer of a user in a non-anonymous poll.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1393,9 +1420,10 @@ class PollAnswer(TelegramType):
 
 
 class Poll(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#poll
-    This object contains information about a poll.'''
+    This object contains information about a poll.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1449,9 +1477,10 @@ class Poll(TelegramType):
 
 
 class Venue(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#venue
-    This object represents a venue.'''
+    This object represents a venue.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1487,9 +1516,10 @@ class Venue(TelegramType):
 
 
 class WebAppData(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#webappdata
-    Describes data sent from a Web App to the bot.'''
+    Describes data sent from a Web App to the bot.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1510,10 +1540,11 @@ class WebAppData(TelegramType):
 
 
 class ProximityAlertTriggered(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#proximityalerttriggered
     This object represents the content of a service message, sent whenever
-    a user in the chat triggers a proximity alert set by another user.'''
+    a user in the chat triggers a proximity alert set by another user.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1537,9 +1568,10 @@ class ProximityAlertTriggered(TelegramType):
 
 
 class MessageAutoDeleteTimerChanged(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#messageautodeletetimerchanged
-    This object represents a service message about a change in auto-delete timer settings.'''
+    This object represents a service message about a change in auto-delete timer settings.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1557,9 +1589,10 @@ class MessageAutoDeleteTimerChanged(TelegramType):
 
 
 class ForumTopicCreated(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#forumtopiccreated
-    This object represents a service message about a new forum topic created in the chat.'''
+    This object represents a service message about a new forum topic created in the chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1583,10 +1616,11 @@ class ForumTopicCreated(TelegramType):
 
 
 class ForumTopicClosed(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#forumtopicclosed
     This object represents a service message about a forum
-    topic closed in the chat. Currently holds no information.'''
+    topic closed in the chat. Currently holds no information.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1602,9 +1636,10 @@ class ForumTopicClosed(TelegramType):
 
 
 class ForumTopicEdited(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#forumtopicedited
-    This object represents a service message about an edited forum topic.'''
+    This object represents a service message about an edited forum topic.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1625,10 +1660,11 @@ class ForumTopicEdited(TelegramType):
 
 
 class ForumTopicReopened(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#forumtopicreopened
     This object represents a service message about a forum
-    topic reopened in the chat. Currently holds no information.'''
+    topic reopened in the chat. Currently holds no information.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1644,10 +1680,11 @@ class ForumTopicReopened(TelegramType):
 
 
 class GeneralForumTopicHidden(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#generalforumtopichidden
     This object represents a service message about General forum
-    topic hidden in the chat. Currently holds no information.'''
+    topic hidden in the chat. Currently holds no information.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1663,10 +1700,11 @@ class GeneralForumTopicHidden(TelegramType):
 
 
 class GeneralForumTopicUnhidden(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#generalforumtopicunhidden
     This object represents a service message about General forum
-    topic unhidden in the chat. Currently holds no information.'''
+    topic unhidden in the chat. Currently holds no information.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1682,10 +1720,11 @@ class GeneralForumTopicUnhidden(TelegramType):
 
 
 class UserShared(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#usershared
     This object contains information about the user whose identifier
-    was shared with the bot using a KeyboardButtonRequestUser button.'''
+    was shared with the bot using a KeyboardButtonRequestUser button.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1706,10 +1745,11 @@ class UserShared(TelegramType):
 
 
 class ChatShared(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatshared
     This object contains information about the chat whose identifier
-    was shared with the bot using a KeyboardButtonRequestChat button.'''
+    was shared with the bot using a KeyboardButtonRequestChat button.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1730,11 +1770,12 @@ class ChatShared(TelegramType):
 
 
 class WriteAccessAllowed(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#writeaccessallowed
     This object represents a service message about a user allowing a bot to write
     messages after adding it to the attachment menu, launching a Web App from a link,
-    or accepting an explicit request from a Web App sent by the method requestWriteAccess.'''
+    or accepting an explicit request from a Web App sent by the method requestWriteAccess.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1758,9 +1799,10 @@ class WriteAccessAllowed(TelegramType):
 
 
 class VideoChatScheduled(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#videochatscheduled
-    This object represents a service message about a video chat scheduled in the chat.'''
+    This object represents a service message about a video chat scheduled in the chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1778,10 +1820,11 @@ class VideoChatScheduled(TelegramType):
 
 
 class VideoChatStarted(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#videochatstarted
     This object represents a service message about a video
-    chat started in the chat. Currently holds no information.'''
+    chat started in the chat. Currently holds no information.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1797,9 +1840,10 @@ class VideoChatStarted(TelegramType):
 
 
 class VideoChatEnded(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#videochatended
-    This object represents a service message about a video chat ended in the chat.'''
+    This object represents a service message about a video chat ended in the chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1817,9 +1861,10 @@ class VideoChatEnded(TelegramType):
 
 
 class VideoChatParticipantsInvited(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#videochatparticipantsinvited
-    This object represents a service message about new members invited to a video chat.'''
+    This object represents a service message about new members invited to a video chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1837,9 +1882,10 @@ class VideoChatParticipantsInvited(TelegramType):
 
 
 class UserProfilePhotos(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#userprofilephotos
-    This object represent a user's profile pictures.'''
+    This object represent a user's profile pictures.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1860,11 +1906,12 @@ class UserProfilePhotos(TelegramType):
 
 
 class File(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#file
     This object represents a file ready to be downloaded. The file can be downloaded via the link
     https://api.telegram.org/file/bot<token>/<file_path>. It is guaranteed that the link will be
-    valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile.'''
+    valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1891,9 +1938,10 @@ class File(TelegramType):
 
 
 class WebAppInfo(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#webappinfo
-    Describes a Web App.'''
+    Describes a Web App.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -1909,10 +1957,11 @@ class WebAppInfo(TelegramType):
 
 
 class KeyboardButtonRequestUser(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#keyboardbuttonrequestuser
     This object defines the criteria used to request a suitable user. The identifier of
-    the selected user will be shared with the bot when the corresponding button is pressed.'''
+    the selected user will be shared with the bot when the corresponding button is pressed.
+    '''
     def __init__(
         self,
         request_id: int,
@@ -1925,10 +1974,11 @@ class KeyboardButtonRequestUser(TelegramType):
 
 
 class KeyboardButtonRequestChat(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#keyboardbuttonrequestchat
     This object defines the criteria used to request a suitable chat. The identifier of
-    the selected chat will be shared with the bot when the corresponding button is pressed.'''
+    the selected chat will be shared with the bot when the corresponding button is pressed.
+    '''
     def __init__(
         self,
         request_id: int,
@@ -1951,10 +2001,11 @@ class KeyboardButtonRequestChat(TelegramType):
 
 
 class KeyboardButtonPollType(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#keyboardbuttonpolltype
     This object represents type of a poll, which is allowed to
-    be created and sent when the corresponding button is pressed.'''
+    be created and sent when the corresponding button is pressed.
+    '''
     def __init__(
         self,
         type: Optional[str] = None
@@ -1963,12 +2014,13 @@ class KeyboardButtonPollType(TelegramType):
 
 
 class KeyboardButton(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#keyboardbutton
     This object represents one button of the reply keyboard. For
     simple text buttons, String can be used instead of this object to specify
     the button text. The optional fields web_app, request_user, request_chat,
-    request_contact, request_location, and request_poll are mutually exclusive.'''
+    request_contact, request_location, and request_poll are mutually exclusive.
+    '''
     def __init__(
         self,
         text: str,
@@ -1989,10 +2041,11 @@ class KeyboardButton(TelegramType):
 
 
 class ReplyKeyboardMarkup(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#replykeyboardmarkup
     This object represents a custom keyboard with reply
-    options (see Introduction to bots for details and examples).'''
+    options (see Introduction to bots for details and examples).
+    '''
     def __init__(
         self,
         keyboard: list[list[KeyboardButton]] = [],
@@ -2037,12 +2090,13 @@ class ReplyKeyboardMarkup(TelegramType):
 
 
 class ReplyKeyboardRemove(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#replykeyboardremove
     Upon receiving a message with this object, Telegram clients will remove the current
     custom keyboard and display the default letter-keyboard. By default, custom keyboards
     are displayed until a new keyboard is sent by a bot. An exception is made for one-time
-    keyboards that are hidden immediately after the user presses a button (see ReplyKeyboardMarkup).'''
+    keyboards that are hidden immediately after the user presses a button (see ReplyKeyboardMarkup).
+    '''
     def __init__(
         self,
         remove_keyboard: Literal[True] = True,
@@ -2053,9 +2107,10 @@ class ReplyKeyboardRemove(TelegramType):
 
 
 class InlineKeyboardButton(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinekeyboardbutton
-    This object represents one button of an inline keyboard. You must use exactly one of the optional fields.'''
+    This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2098,9 +2153,10 @@ class InlineKeyboardButton(TelegramType):
 
 
 class InlineKeyboardMarkup(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinekeyboardmarkup
-    This object represents an inline keyboard that appears right next to the message it belongs to.'''
+    This object represents an inline keyboard that appears right next to the message it belongs to.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2142,13 +2198,14 @@ class InlineKeyboardMarkup(TelegramType):
 
 
 class CallbackQuery(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#callbackquery
     This object represents an incoming callback query from a callback button in
     an inline keyboard. If the button that originated the query was attached to a
     message sent by the bot, the field message will be present. If the button was
     attached to a message sent via the bot (in inline mode), the field inline_message_id
-    will be present. Exactly one of the fields data or game_short_name will be present.'''
+    will be present. Exactly one of the fields data or game_short_name will be present.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2184,11 +2241,12 @@ class CallbackQuery(TelegramType):
 
 
 class ForceReply(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#forcereply
     Upon receiving a message with this object, Telegram clients will display a reply interface to
     the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely
-    useful if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode.'''
+    useful if you want to create user-friendly step-by-step interfaces without having to sacrifice privacy mode.
+    '''
     def __init__(
         self,
         force_reply: Literal[True] = True,
@@ -2201,9 +2259,10 @@ class ForceReply(TelegramType):
 
 
 class ChatInviteLink(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatinvitelink
-    Represents an invite link for a chat.'''
+    Represents an invite link for a chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2247,7 +2306,7 @@ class ChatInviteLink(TelegramType):
 # ChatMember: 6 SUBCLASSES
 
 class ChatMember(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatmember
     This object contains information about one member of a chat.
     Currently, the following 6 types of chat members are supported:
@@ -2256,7 +2315,8 @@ class ChatMember(TelegramType):
     - ChatMemberMember
     - ChatMemberRestricted
     - ChatMemberLeft
-    - ChatMemberBanned'''
+    - ChatMemberBanned
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2305,9 +2365,10 @@ class ChatMember(TelegramType):
 
 
 class ChatMemberOwner(ChatMember):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatmemberowner
-    Represents a chat member that owns the chat and has all administrator privileges.'''
+    Represents a chat member that owns the chat and has all administrator privileges.
+    '''
     def __init__(
         self,
         status: str,
@@ -2324,9 +2385,10 @@ class ChatMemberOwner(ChatMember):
 
 
 class ChatMemberAdministrator(ChatMember):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatmemberadministrator
-    Represents a chat member that has some additional privileges.'''
+    Represents a chat member that has some additional privileges.
+    '''
     def __init__(
         self,
         status: str,
@@ -2373,9 +2435,10 @@ class ChatMemberAdministrator(ChatMember):
 
 
 class ChatMemberMember(ChatMember):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatmembermember
-    Represents a chat member that has no additional privileges or restrictions.'''
+    Represents a chat member that has no additional privileges or restrictions.
+    '''
     def __init__(
         self,
         status: str,
@@ -2388,9 +2451,10 @@ class ChatMemberMember(ChatMember):
 
 
 class ChatMemberRestricted(ChatMember):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatmemberrestricted
-    Represents a chat member that is under certain restrictions in the chat. Supergroups only.'''
+    Represents a chat member that is under certain restrictions in the chat. Supergroups only.
+    '''
     def __init__(
         self,
         status: str,
@@ -2435,9 +2499,10 @@ class ChatMemberRestricted(ChatMember):
 
 
 class ChatMemberLeft(ChatMember):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatmemberleft
-    Represents a chat member that isn't currently a member of the chat, but may join it themselves.'''
+    Represents a chat member that isn't currently a member of the chat, but may join it themselves.
+    '''
     def __init__(
         self,
         status: str,
@@ -2450,9 +2515,10 @@ class ChatMemberLeft(ChatMember):
 
 
 class ChatMemberBanned(ChatMember):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatmemberbanned
-    Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.'''
+    Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
+    '''
     def __init__(
         self,
         status: str,
@@ -2467,9 +2533,10 @@ class ChatMemberBanned(ChatMember):
 
 
 class ChatMemberUpdated(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatmemberupdated
-    This object represents changes in the status of a chat member.'''
+    This object represents changes in the status of a chat member.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2505,9 +2572,10 @@ class ChatMemberUpdated(TelegramType):
 
 
 class ChatJoinRequest(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#chatjoinrequest
-    Represents a join request sent to a chat.'''
+    Represents a join request sent to a chat.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2540,9 +2608,10 @@ class ChatJoinRequest(TelegramType):
 
 
 class ForumTopic(TelegramType):
-    '''\
+    '''
     Represents a location to which a chat is connected.
-    This object represents a forum topic.'''
+    This object represents a forum topic.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2569,9 +2638,10 @@ class ForumTopic(TelegramType):
 
 
 class BotCommand(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommand
-    This object represents a bot command.'''
+    This object represents a bot command.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2592,7 +2662,7 @@ class BotCommand(TelegramType):
 # BotCommandScope: 7 SUBCLASSES
 
 class BotCommandScope(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommandscope
     This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:
     - BotCommandScopeDefault
@@ -2601,7 +2671,8 @@ class BotCommandScope(TelegramType):
     - BotCommandScopeAllChatAdministrators
     - BotCommandScopeChat
     - BotCommandScopeChatAdministrators
-    - BotCommandScopeChatMember'''
+    - BotCommandScopeChatMember
+    '''
     def __init__(
         self,
         **kwargs
@@ -2623,10 +2694,11 @@ class BotCommandScope(TelegramType):
 
 
 class BotCommandScopeDefault(BotCommandScope):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommandscopedefault
     Represents the default scope of bot commands. Default commands are
-    used if no commands with a narrower scope are specified for the user.'''
+    used if no commands with a narrower scope are specified for the user.
+    '''
     def __init__(
         self,
         type: str = 'default'
@@ -2635,9 +2707,10 @@ class BotCommandScopeDefault(BotCommandScope):
 
 
 class BotCommandScopeAllPrivateChats(BotCommandScope):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommandscopeallprivatechats
-    Represents the scope of bot commands, covering all private chats.'''
+    Represents the scope of bot commands, covering all private chats.
+    '''
     def __init__(
         self,
         type: str = 'all_private_chats'
@@ -2646,9 +2719,10 @@ class BotCommandScopeAllPrivateChats(BotCommandScope):
 
 
 class BotCommandScopeAllGroupChats(BotCommandScope):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommandscopeallgroupchats
-    Represents the scope of bot commands, covering all group and supergroup chats.'''
+    Represents the scope of bot commands, covering all group and supergroup chats.
+    '''
     def __init__(
         self,
         type: str = 'all_group_chats'
@@ -2657,9 +2731,10 @@ class BotCommandScopeAllGroupChats(BotCommandScope):
 
 
 class BotCommandScopeAllChatAdministrators(BotCommandScope):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
-    Represents the scope of bot commands, covering all group and supergroup chat administrators.'''
+    Represents the scope of bot commands, covering all group and supergroup chat administrators.
+    '''
     def __init__(
         self,
         type: str = 'all_chat_administrators'
@@ -2668,9 +2743,10 @@ class BotCommandScopeAllChatAdministrators(BotCommandScope):
 
 
 class BotCommandScopeChat(BotCommandScope):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommandscopechat
-    Represents the scope of bot commands, covering a specific chat.'''
+    Represents the scope of bot commands, covering a specific chat.
+    '''
     def __init__(
         self,
         chat_id: Union[int, str],
@@ -2681,9 +2757,10 @@ class BotCommandScopeChat(BotCommandScope):
 
 
 class BotCommandScopeChatAdministrators(BotCommandScope):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommandscopechatadministrators
-    Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.'''
+    Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
+    '''
     def __init__(
         self,
         chat_id: Union[int, str],
@@ -2694,9 +2771,10 @@ class BotCommandScopeChatAdministrators(BotCommandScope):
 
 
 class BotCommandScopeChatMember(BotCommandScope):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botcommandscopechatmember
-    Represents the scope of bot commands, covering a specific member of a group or supergroup chat.'''
+    Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
+    '''
     def __init__(
         self,
         chat_id: Union[int, str],
@@ -2709,9 +2787,10 @@ class BotCommandScopeChatMember(BotCommandScope):
 
 
 class BotName(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botname
-    This object represents the bot's name.'''
+    This object represents the bot's name.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2728,9 +2807,10 @@ class BotName(TelegramType):
 
 
 class BotDescription(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botdescription
-    This object represents the bot's description.'''
+    This object represents the bot's description.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2748,9 +2828,10 @@ class BotDescription(TelegramType):
 
 
 class BotShortDescription(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#botshortdescription
-    This object represents the bot's short description.'''
+    This object represents the bot's short description.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2770,14 +2851,15 @@ class BotShortDescription(TelegramType):
 # MenuButton: 3 SUBCLASSES
 
 class MenuButton(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#menubutton
     This object describes the bot's menu button in a private chat. It should be one of
     - MenuButtonCommands
     - MenuButtonWebApp
     - MenuButtonDefault
     If a menu button other than MenuButtonDefault is set for a private chat, then it is applied in the chat.
-    Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.'''
+    Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2813,9 +2895,10 @@ class MenuButton(TelegramType):
 
 
 class MenuButtonCommands(MenuButton):
-    '''\
+    '''
     https://core.telegram.org/bots/api#menubuttoncommands
-    Represents a menu button, which opens the bot's list of commands.'''
+    Represents a menu button, which opens the bot's list of commands.
+    '''
     def __init__(
         self,
         type: str = 'commands'
@@ -2824,9 +2907,10 @@ class MenuButtonCommands(MenuButton):
 
 
 class MenuButtonWebApp(MenuButton):
-    '''\
+    '''
     https://core.telegram.org/bots/api#menubuttonwebapp
-    Represents a menu button, which launches a Web App.'''
+    Represents a menu button, which launches a Web App.
+    '''
     def __init__(
         self,
         text: str,
@@ -2839,9 +2923,10 @@ class MenuButtonWebApp(MenuButton):
 
 
 class MenuButtonDefault(MenuButton):
-    '''\
+    '''
     https://core.telegram.org/bots/api#menubuttondefault
-    Describes that no specific value for the menu button was set.'''
+    Describes that no specific value for the menu button was set.
+    '''
     def __init__(
         self,
         type: str = 'default'
@@ -2850,9 +2935,10 @@ class MenuButtonDefault(MenuButton):
 
 
 class ResponseParameters(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#responseparameters
-    Describes why a request was unsuccessful.'''
+    Describes why a request was unsuccessful.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -2873,14 +2959,15 @@ class ResponseParameters(TelegramType):
 
 
 class InputMedia(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputmedia
     This object represents the content of a media message to be sent. It should be one of
     - InputMediaAnimation
     - InputMediaDocument
     - InputMediaAudio
     - InputMediaPhoto
-    - InputMediaVideo'''
+    - InputMediaVideo
+    '''
     def __init__(
         self,
         **kwargs
@@ -2900,9 +2987,10 @@ class InputMedia(TelegramType):
 
 
 class InputMediaPhoto(InputMedia):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputmediaphoto
-    Represents a photo to be sent.'''
+    Represents a photo to be sent.
+    '''
     def __init__(
         self,
         media: str,
@@ -2921,9 +3009,10 @@ class InputMediaPhoto(InputMedia):
 
 
 class InputMediaVideo(InputMedia):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputmediavideo
-    Represents a video to be sent.'''
+    Represents a video to be sent.
+    '''
     def __init__(
         self,
         media: str,
@@ -2952,9 +3041,10 @@ class InputMediaVideo(InputMedia):
 
 
 class InputMediaAnimation(InputMedia):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputmediaanimation
-    Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.'''
+    Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
+    '''
     def __init__(
         self,
         media: str,
@@ -2981,9 +3071,10 @@ class InputMediaAnimation(InputMedia):
 
 
 class InputMediaAudio(InputMedia):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputmediaaudio
-    Represents an audio file to be treated as music to be sent.'''
+    Represents an audio file to be treated as music to be sent.
+    '''
     def __init__(
         self,
         media: str,
@@ -3008,9 +3099,10 @@ class InputMediaAudio(InputMedia):
 
 
 class InputMediaDocument(InputMedia):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputmediadocument
-    Represents a general file to be sent.'''
+    Represents a general file to be sent.
+    '''
     def __init__(
         self,
         media: str,
@@ -3031,9 +3123,10 @@ class InputMediaDocument(InputMedia):
 
 
 class MaskPosition(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#maskposition
-    This object describes the position on faces where a mask should be placed by default.'''
+    This object describes the position on faces where a mask should be placed by default.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3058,9 +3151,10 @@ class MaskPosition(TelegramType):
 
 
 class Sticker(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#sticker
-    This object represents a sticker.'''
+    This object represents a sticker.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3120,9 +3214,10 @@ class Sticker(TelegramType):
 
 
 class StickerSet(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#stickerset
-    This object represents a sticker set.'''
+    This object represents a sticker set.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3158,9 +3253,10 @@ class StickerSet(TelegramType):
 
 
 class InputSticker(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputsticker
-    This object describes a sticker to be added to a sticker set.'''
+    This object describes a sticker to be added to a sticker set.
+    '''
     def __init__(
         self,
         sticker: Union[InputFile, str],
@@ -3175,10 +3271,11 @@ class InputSticker(TelegramType):
 
 
 class InlineQuery(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequery
     This object represents an incoming inline query. When the user sends
-    an empty query, your bot could return some default or trending results.'''
+    an empty query, your bot could return some default or trending results.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -3211,10 +3308,11 @@ class InlineQuery(TelegramType):
 
 
 class InlineQueryResultsButton(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultsbutton
     This object represents a button to be shown above inline query
-    results. You must use exactly one of the optional fields.'''
+    results. You must use exactly one of the optional fields.
+    '''
     def __init__(
         self,
         text: str,
@@ -3229,7 +3327,7 @@ class InlineQueryResultsButton(TelegramType):
 # InputMessageContent: 5 SUBCLASSES
 
 class InputMessageContent(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputmessagecontent
     This object represents the content of a message to be sent as a result of
     an inline query. Telegram clients currently support the following 5 types:
@@ -3237,7 +3335,8 @@ class InputMessageContent(TelegramType):
     - InputLocationMessageContent
     - InputVenueMessageContent
     - InputContactMessageContent
-    - InputInvoiceMessageContent'''
+    - InputInvoiceMessageContent
+    '''
     def __init__(
         self,
         **kwargs
@@ -3257,9 +3356,10 @@ class InputMessageContent(TelegramType):
 
 
 class InputTextMessageContent(InputMessageContent):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputtextmessagecontent
-    Represents the content of a text message to be sent as the result of an inline query.'''
+    Represents the content of a text message to be sent as the result of an inline query.
+    '''
     def __init__(
         self,
         message_text: str,
@@ -3274,9 +3374,10 @@ class InputTextMessageContent(InputMessageContent):
 
 
 class InputLocationMessageContent(InputMessageContent):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputlocationmessagecontent
-    Represents the content of a location message to be sent as the result of an inline query.'''
+    Represents the content of a location message to be sent as the result of an inline query.
+    '''
     def __init__(
         self,
         latitude: float,
@@ -3295,9 +3396,10 @@ class InputLocationMessageContent(InputMessageContent):
 
 
 class InputVenueMessageContent(InputMessageContent):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputvenuemessagecontent
-    Represents the content of a venue message to be sent as the result of an inline query.'''
+    Represents the content of a venue message to be sent as the result of an inline query.
+    '''
     def __init__(
         self,
         latitude: float,
@@ -3320,9 +3422,10 @@ class InputVenueMessageContent(InputMessageContent):
 
 
 class InputContactMessageContent(InputMessageContent):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputcontactmessagecontent
-    Represents the content of a contact message to be sent as the result of an inline query.'''
+    Represents the content of a contact message to be sent as the result of an inline query.
+    '''
     def __init__(
         self,
         phone_number: str,
@@ -3337,9 +3440,10 @@ class InputContactMessageContent(InputMessageContent):
 
 
 class InputInvoiceMessageContent(InputMessageContent):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inputinvoicemessagecontent
-    Represents the content of an invoice message to be sent as the result of an inline query.'''
+    Represents the content of an invoice message to be sent as the result of an inline query.
+    '''
     def __init__(
         self,
         title: str,
@@ -3389,7 +3493,7 @@ class InputInvoiceMessageContent(InputMessageContent):
 
 
 class InlineQueryResult(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresult
     This object represents one result of an inline query. Telegram
     clients currently support results of the following 20 types:
@@ -3412,7 +3516,8 @@ class InlineQueryResult(TelegramType):
     - InlineQueryResultPhoto
     - InlineQueryResultVenue
     - InlineQueryResultVideo
-    - InlineQueryResultVoice'''
+    - InlineQueryResultVoice
+    '''
     def __init__(
         self,
         **kwargs
@@ -3447,9 +3552,10 @@ class InlineQueryResult(TelegramType):
 
 
 class InlineQueryResultArticle(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultarticle
-    Represents a link to an article or web page.'''
+    Represents a link to an article or web page.
+    '''
     def __init__(
         self,
         id: str,
@@ -3478,10 +3584,11 @@ class InlineQueryResultArticle(InlineQueryResult):
 
 
 class InlineQueryResultPhoto(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultphoto
     Represents a link to a photo. By default, this photo will be sent by the user with optional caption.
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.'''
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
+    '''
     def __init__(
         self,
         id: str,
@@ -3514,10 +3621,11 @@ class InlineQueryResultPhoto(InlineQueryResult):
 
 
 class InlineQueryResultGif(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultgif
     Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional
-    caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.'''
+    caption. Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
+    '''
     def __init__(
         self,
         id: str,
@@ -3552,11 +3660,12 @@ class InlineQueryResultGif(InlineQueryResult):
 
 
 class InlineQueryResultMpeg4Gif(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
     Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default,
     this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can
-    use input_message_content to send a message with the specified content instead of the animation.'''
+    use input_message_content to send a message with the specified content instead of the animation.
+    '''
     def __init__(
         self,
         id: str,
@@ -3591,11 +3700,12 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
 
 
 class InlineQueryResultVideo(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultvideo
     Represents a link to a page containing an embedded video player or a video file. By
     default, this video file will be sent by the user with an optional caption. Alternatively, you
-    can use input_message_content to send a message with the specified content instead of the video.'''
+    can use input_message_content to send a message with the specified content instead of the video.
+    '''
     def __init__(
         self,
         id: str,
@@ -3632,10 +3742,11 @@ class InlineQueryResultVideo(InlineQueryResult):
 
 
 class InlineQueryResultAudio(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultaudio
     Represents a link to an MP3 audio file. By default, this audio file will be sent by the user.
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.'''
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
+    '''
     def __init__(
         self,
         id: str,
@@ -3664,11 +3775,12 @@ class InlineQueryResultAudio(InlineQueryResult):
 
 
 class InlineQueryResultVoice(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultvoice
     Represents a link to a voice recording in an .OGG container encoded with OPUS.
     By default, this voice recording will be sent by the user. Alternatively, you can use
-    input_message_content to send a message with the specified content instead of the the voice message.'''
+    input_message_content to send a message with the specified content instead of the the voice message.
+    '''
     def __init__(
         self,
         id: str,
@@ -3695,11 +3807,12 @@ class InlineQueryResultVoice(InlineQueryResult):
 
 
 class InlineQueryResultDocument(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultdocument
     Represents a link to a file. By default, this file will be sent by the user with an optional
     caption. Alternatively, you can use input_message_content to send a message with the specified
-    content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.'''
+    content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.
+    '''
     def __init__(
         self,
         id: str,
@@ -3734,10 +3847,11 @@ class InlineQueryResultDocument(InlineQueryResult):
 
 
 class InlineQueryResultLocation(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultlocation
     Represents a location on a map. By default, the location will be sent by the user. Alternatively,
-    you can use input_message_content to send a message with the specified content instead of the location.'''
+    you can use input_message_content to send a message with the specified content instead of the location.
+    '''
     def __init__(
         self,
         id: str,
@@ -3772,10 +3886,11 @@ class InlineQueryResultLocation(InlineQueryResult):
 
 
 class InlineQueryResultVenue(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultvenue
     Represents a venue. By default, the venue will be sent by the user. Alternatively, you can
-    use input_message_content to send a message with the specified content instead of the venue.'''
+    use input_message_content to send a message with the specified content instead of the venue.
+    '''
     def __init__(
         self,
         id: str,
@@ -3812,10 +3927,11 @@ class InlineQueryResultVenue(InlineQueryResult):
 
 
 class InlineQueryResultContact(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcontact
     Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively,
-    you can use input_message_content to send a message with the specified content instead of the contact.'''
+    you can use input_message_content to send a message with the specified content instead of the contact.
+    '''
     def __init__(
         self,
         id: str,
@@ -3844,9 +3960,10 @@ class InlineQueryResultContact(InlineQueryResult):
 
 
 class InlineQueryResultGame(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultgame
-    Represents a Game.'''
+    Represents a Game.
+    '''
     def __init__(
         self,
         id: str,
@@ -3861,11 +3978,12 @@ class InlineQueryResultGame(InlineQueryResult):
 
 
 class InlineQueryResultCachedPhoto(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedphoto
     Represents a link to a photo stored on the Telegram servers. By default, this
     photo will be sent by the user with an optional caption. Alternatively, you can use
-    input_message_content to send a message with the specified content instead of the photo.'''
+    input_message_content to send a message with the specified content instead of the photo.
+    '''
     def __init__(
         self,
         id: str,
@@ -3892,11 +4010,12 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
 
 
 class InlineQueryResultCachedGif(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedgif
     Represents a link to an animated GIF file stored on the Telegram servers. By default,
     this animated GIF file will be sent by the user with an optional caption. Alternatively, you
-    can use input_message_content to send a message with specified content instead of the animation.'''
+    can use input_message_content to send a message with specified content instead of the animation.
+    '''
     def __init__(
         self,
         id: str,
@@ -3921,11 +4040,12 @@ class InlineQueryResultCachedGif(InlineQueryResult):
 
 
 class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif
     Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers.
     By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you
-    can use input_message_content to send a message with the specified content instead of the animation.'''
+    can use input_message_content to send a message with the specified content instead of the animation.
+    '''
     def __init__(
         self,
         id: str,
@@ -3950,11 +4070,12 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
 
 
 class InlineQueryResultCachedSticker(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedsticker
     Represents a link to a sticker stored on the Telegram servers.
     By default, this sticker will be sent by the user. Alternatively, you can use
-    input_message_content to send a message with the specified content instead of the sticker.'''
+    input_message_content to send a message with the specified content instead of the sticker.
+    '''
     def __init__(
         self,
         id: str,
@@ -3971,11 +4092,12 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
 
 
 class InlineQueryResultCachedDocument(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcacheddocument
     Represents a link to a file stored on the Telegram servers. By default, this
     file will be sent by the user with an optional caption. Alternatively, you can use
-    input_message_content to send a message with the specified content instead of the file.'''
+    input_message_content to send a message with the specified content instead of the file.
+    '''
     def __init__(
         self,
         id: str,
@@ -4002,11 +4124,12 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
 
 
 class InlineQueryResultCachedVideo(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedvideo
     Represents a link to a video file stored on the Telegram servers. By default, this
     video file will be sent by the user with an optional caption. Alternatively, you can
-    use input_message_content to send a message with the specified content instead of the video.'''
+    use input_message_content to send a message with the specified content instead of the video.
+    '''
     def __init__(
         self,
         id: str,
@@ -4033,11 +4156,12 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
 
 
 class InlineQueryResultCachedVoice(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedvoice
     Represents a link to a voice message stored on the Telegram servers.
     By default, this voice message will be sent by the user. Alternatively, you can use
-    input_message_content to send a message with the specified content instead of the voice message.'''
+    input_message_content to send a message with the specified content instead of the voice message.
+    '''
     def __init__(
         self,
         id: str,
@@ -4062,11 +4186,12 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
 
 
 class InlineQueryResultCachedAudio(InlineQueryResult):
-    '''\
+    '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
     Represents a link to an MP3 audio file stored on the Telegram servers.
     By default, this audio file will be sent by the user. Alternatively, you can use
-    input_message_content to send a message with the specified content instead of the audio.'''
+    input_message_content to send a message with the specified content instead of the audio.
+    '''
     def __init__(
         self,
         id: str,
@@ -4089,9 +4214,10 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
 
 
 class ChosenInlineResult(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#choseninlineresult
-    Represents a result of an inline query that was chosen by the user and sent to their chat partner.'''
+    Represents a result of an inline query that was chosen by the user and sent to their chat partner.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4121,9 +4247,10 @@ class ChosenInlineResult(TelegramType):
 
 
 class SentWebAppMessage(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#sentwebappmessage
-    Describes an inline message sent by a Web App on behalf of a user.'''
+    Describes an inline message sent by a Web App on behalf of a user.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4141,9 +4268,10 @@ class SentWebAppMessage(TelegramType):
 
 
 class Invoice(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#invoice
-    This object contains basic information about an invoice.'''
+    This object contains basic information about an invoice.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4173,9 +4301,10 @@ class Invoice(TelegramType):
 
 
 class ShippingAddress(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#shippingaddress
-    This object represents a shipping address.'''
+    This object represents a shipping address.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4208,9 +4337,10 @@ class ShippingAddress(TelegramType):
 
 
 class OrderInfo(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#orderinfo
-    This object represents information about an order.'''
+    This object represents information about an order.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4237,9 +4367,10 @@ class OrderInfo(TelegramType):
 
 
 class ShippingOption(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#shippingoption
-    This object represents one shipping option.'''
+    This object represents one shipping option.
+    '''
     def __init__(
         self,
         id: str,
@@ -4252,9 +4383,10 @@ class ShippingOption(TelegramType):
 
 
 class SuccessfulPayment(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#successfulpayment
-    This object contains basic information about a successful payment.'''
+    This object contains basic information about a successful payment.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4290,9 +4422,10 @@ class SuccessfulPayment(TelegramType):
 
 
 class ShippingQuery(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#shippingquery
-    This object contains information about an incoming shipping query.'''
+    This object contains information about an incoming shipping query.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4319,9 +4452,10 @@ class ShippingQuery(TelegramType):
 
 
 class PreCheckoutQuery(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#precheckoutquery
-    This object contains information about an incoming pre-checkout query.'''
+    This object contains information about an incoming pre-checkout query.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4357,10 +4491,11 @@ class PreCheckoutQuery(TelegramType):
 
 
 class PassportFile(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportfile
     This object represents a file uploaded to Telegram Passport. Currently all
-    Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.'''
+    Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4387,9 +4522,10 @@ class PassportFile(TelegramType):
 
 
 class EncryptedPassportElement(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#encryptedpassportelement
-    Describes documents or other Telegram Passport elements shared with the bot by the user.'''
+    Describes documents or other Telegram Passport elements shared with the bot by the user.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4434,10 +4570,11 @@ class EncryptedPassportElement(TelegramType):
 
 
 class EncryptedCredentials(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#encryptedcredentials
     Describes data required for decrypting and authenticating EncryptedPassportElement. See the Telegram
-    Passport Documentation for a complete description of the data decryption and authentication processes.'''
+    Passport Documentation for a complete description of the data decryption and authentication processes.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4461,9 +4598,10 @@ class EncryptedCredentials(TelegramType):
 
 
 class PassportData(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportdata
-    Describes Telegram Passport data shared with the bot by the user.'''
+    Describes Telegram Passport data shared with the bot by the user.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4486,7 +4624,7 @@ class PassportData(TelegramType):
 # PassportElementError: 5 SUBCLASSES
 
 class PassportElementError(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerror
     This object represents an error in the Telegram Passport element which
     was submitted that should be resolved by the user. It should be one of:
@@ -4498,7 +4636,8 @@ class PassportElementError(TelegramType):
     - PassportElementErrorFiles
     - PassportElementErrorTranslationFile
     - PassportElementErrorTranslationFiles
-    - PassportElementErrorUnspecified'''
+    - PassportElementErrorUnspecified
+    '''
     def __init__(
         self,
         **kwargs
@@ -4522,10 +4661,11 @@ class PassportElementError(TelegramType):
 
 
 class PassportElementErrorDataField(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrordatafield
     Represents an issue in one of the data fields that was provided by the
-    user. The error is considered resolved when the field's value changes.'''
+    user. The error is considered resolved when the field's value changes.
+    '''
     def __init__(
         self,
         type: Literal[
@@ -4549,10 +4689,11 @@ class PassportElementErrorDataField(PassportElementError):
 
 
 class PassportElementErrorFrontSide(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrorfrontside
     Represents an issue with the front side of a document. The error is
-    considered resolved when the file with the front side of the document changes.'''
+    considered resolved when the file with the front side of the document changes.
+    '''
     def __init__(
         self,
         type: Literal[
@@ -4572,10 +4713,11 @@ class PassportElementErrorFrontSide(PassportElementError):
 
 
 class PassportElementErrorReverseSide(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrorreverseside
     Represents an issue with the reverse side of a document. The error is
-    considered resolved when the file with reverse side of the document changes.'''
+    considered resolved when the file with reverse side of the document changes.
+    '''
     def __init__(
         self,
         type: Literal['driver_license', 'identity_card'],
@@ -4590,10 +4732,11 @@ class PassportElementErrorReverseSide(PassportElementError):
 
 
 class PassportElementErrorSelfie(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrorselfie
     Represents an issue with the selfie with a document. The error
-    is considered resolved when the file with the selfie changes.'''
+    is considered resolved when the file with the selfie changes.
+    '''
     def __init__(
         self,
         type: Literal[
@@ -4613,10 +4756,11 @@ class PassportElementErrorSelfie(PassportElementError):
 
 
 class PassportElementErrorFile(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrorfile
     Represents an issue with a document scan. The error is
-    considered resolved when the file with the document scan changes.'''
+    considered resolved when the file with the document scan changes.
+    '''
     def __init__(
         self,
         type: Literal[
@@ -4637,10 +4781,11 @@ class PassportElementErrorFile(PassportElementError):
 
 
 class PassportElementErrorFiles(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrorfiles
     Represents an issue with a list of scans. The error is considered
-    resolved when the list of files containing the scans changes.'''
+    resolved when the list of files containing the scans changes.
+    '''
     def __init__(
         self,
         type: Literal[
@@ -4661,10 +4806,11 @@ class PassportElementErrorFiles(PassportElementError):
 
 
 class PassportElementErrorTranslationFile(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrortranslationfile
     Represents an issue with one of the files that constitute the translation
-    of a document. The error is considered resolved when the file changes.'''
+    of a document. The error is considered resolved when the file changes.
+    '''
     def __init__(
         self,
         type: Literal[
@@ -4689,10 +4835,11 @@ class PassportElementErrorTranslationFile(PassportElementError):
 
 
 class PassportElementErrorTranslationFiles(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrortranslationfiles
     Represents an issue with the translated version of a document. The error
-    is considered resolved when a file with the document translation change.'''
+    is considered resolved when a file with the document translation change.
+    '''
     def __init__(
         self,
         type: Literal[
@@ -4717,9 +4864,10 @@ class PassportElementErrorTranslationFiles(PassportElementError):
 
 
 class PassportElementErrorUnspecified(PassportElementError):
-    '''\
+    '''
     https://core.telegram.org/bots/api#passportelementerrorunspecified
-    Represents an issue in an unspecified place. The error is considered resolved when new data is added.'''
+    Represents an issue in an unspecified place. The error is considered resolved when new data is added.
+    '''
     def __init__(
         self,
         type: str,
@@ -4734,9 +4882,10 @@ class PassportElementErrorUnspecified(PassportElementError):
 
 
 class Game(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#game
-    This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.'''
+    This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4769,9 +4918,10 @@ class Game(TelegramType):
 
 
 class GameHighScore(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#gamehighscore
-    This object represents one row of the high scores table for a game.'''
+    This object represents one row of the high scores table for a game.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
@@ -4795,10 +4945,11 @@ class GameHighScore(TelegramType):
 
 
 class Update(TelegramType):
-    '''\
+    '''
     https://core.telegram.org/bots/api#update
     This object represents an incoming update. At most one of
-    the optional parameters can be present in any given update.'''
+    the optional parameters can be present in any given update.
+    '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
