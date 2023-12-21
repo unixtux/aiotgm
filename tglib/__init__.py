@@ -1,6 +1,6 @@
 #!/bin/python3
 
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 
 __all__ = [
     'Client',
@@ -2184,7 +2184,7 @@ class Client(TelegramApi):
         is not an inline message, the edited Message is returned, otherwise True is returned.
         '''
         params = {
-                'text': text
+            'text': text
         }
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
