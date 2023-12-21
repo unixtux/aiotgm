@@ -2048,14 +2048,14 @@ class ReplyKeyboardMarkup(TelegramType):
     '''
     def __init__(
         self,
-        keyboard: list[list[KeyboardButton]] = [],
+        keyboard: Optional[list[list[KeyboardButton]]] = None,
         is_persistent: Optional[bool] = None,
         resize_keyboard: Optional[bool] = None,
         one_time_keyboard: Optional[bool] = None,
         input_field_placeholder: Optional[str] = None,
         selective: Optional[bool] = None
     ):
-        self.keyboard = keyboard
+        self.keyboard = [] if keyboard is None else keyboard
         self.is_persistent = is_persistent
         self.resize_keyboard = resize_keyboard
         self.one_time_keyboard = one_time_keyboard
@@ -2063,7 +2063,7 @@ class ReplyKeyboardMarkup(TelegramType):
         self.selective = selective
 
     def add(self, *buttons: KeyboardButton):
-        self.keyboard.append(list(buttons))
+        self.keyboard.append(buttons)
         return self
 
     @property
@@ -2166,12 +2166,12 @@ class InlineKeyboardMarkup(TelegramType):
 
     def __init__(
         self,
-        inline_keyboard: list[list[InlineKeyboardButton]] = []
+        inline_keyboard: Optional[list[list[InlineKeyboardButton]]] = None
     ):
-        self.inline_keyboard = inline_keyboard
+        self.inline_keyboard = [] if inline_keyboard is None else inline_keyboard
 
     def add(self, *buttons: InlineKeyboardButton):
-        self.inline_keyboard.append(list(buttons))
+        self.inline_keyboard.append(buttons)
         return self
 
     @property
