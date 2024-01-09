@@ -2353,7 +2353,7 @@ class Client(TelegramApi):
         message_id: int
     ) -> Literal[True]:
         '''
-        Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.
+        https://core.telegram.org/bots/api#deletemessage
         Use this method to delete a message, including service messages, with the following limitations:
         - A message can only be deleted if it was sent less than 48 hours ago.
         - Service messages about a supergroup, channel, or forum topic creation can't be deleted.
@@ -2378,6 +2378,7 @@ class Client(TelegramApi):
         message_ids: list[int]
     ) -> Literal[True]:
         '''
+        https://core.telegram.org/bots/api#deletemessages
         Use this method to delete multiple messages simultaneously. If some of the
         specified messages can't be found, they are skipped. Returns True on success.
         '''
