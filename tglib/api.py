@@ -218,20 +218,20 @@ class TelegramApi:
                     **self.__headers_and_proxy
                 ) as response:
                     result = await _check_json(response)
-                    if current_try != 1:
-                        logger.info(
+                    '''if current_try != 1:
+                        logger.debug(
                             f'Request {method!r} completed'
                             f' after {current_try} retries.'
-                        )
+                        )'''
                     return result
 
             except (ClientError, TimeoutError) as err:
-                err = type(err)(re.sub(r'bot.*?/', r'bot***/', str(err)))
-                logger.warning(
+                '''err = type(err)(re.sub(r'bot.*?/', r'bot***/', str(err)))
+                logger.debug(
                     f'{err!r} in method'
                     f' {method!r}, current try'
                     f': {current_try}/{max_retries}'
-                )
+                )'''
                 await asyncio.sleep(
                     3 - (time.time() - start_time)
                 )
