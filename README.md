@@ -40,7 +40,7 @@ All the types are the same described in the *[offical documentation](https://cor
 
 > If the attribute **'text'** of the Message is empty, it's **str()** instead of **None**, so you can use for example text.startswith() without getting errors.
 
-> All other optional attributes of the objects are None if they are not in the **JSON** received as response.
+> All other optional attributes of the objects are **None** if they are not in the **JSON** received as response.
 
 * #### Notes
 
@@ -58,7 +58,7 @@ markup.add(KeyboardButton('xyz'), ...)
 
 markup.row_width = 4
 
-# this will reorder all the buttons in a row of 4.
+# Keyboard will be reordered with 4 buttons each row.
 ```
 
 * #### Prerequisites
