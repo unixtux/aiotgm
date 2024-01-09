@@ -608,6 +608,10 @@ class TelegramApi:
         method = 'deleteMessage'
         return await self._request(method, params)
 
+    async def delete_messages(self, params: dict) -> Coroutine:
+        method = 'deleteMessages'
+        return await self._request(method, params)
+
     async def send_sticker(self, params: dict) -> Coroutine:
         method = 'sendSticker'
         files = _get_files(params, 'sticker')

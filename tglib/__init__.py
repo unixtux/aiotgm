@@ -2372,6 +2372,22 @@ class Client(TelegramApi):
         return await super().delete_message(params)
 
 
+    async def delete_messages(
+        self,
+        chat_id: Union[int, str],
+        message_ids: list[int]
+    ) -> Literal[True]:
+        '''
+        Use this method to delete multiple messages simultaneously. If some of the
+        specified messages can't be found, they are skipped. Returns True on success.
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_ids': message_ids
+        }
+        return await super().delete_messages(params)
+
+
     async def send_sticker(
         self,
         chat_id: Union[int, str],
