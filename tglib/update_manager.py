@@ -164,32 +164,32 @@ async def _run_coroutine(
 
     try:
         check = rule.checker(obj)
-    except BaseException as err:
+    except BaseException as exc:
         code = rule.checker.__code__
         lineno = code.co_firstlineno
         filename = os.path.basename(code.co_filename)
         logger.error(
-            f'{err!r} occurred in the'
+            f'{exc!r} occurred in the'
             f' function {rule.checker.__name__!r} in'
             f' file {filename!r} at line {lineno}.'
         )
-        raise err
+        raise exc from None
 
     if not check:
         return NextManager()
     else:
         try:
             return await rule.function(obj)
-        except BaseException as err:
+        except BaseException as exc:
             code = rule.function.__code__
             lineno = code.co_firstlineno
             filename = os.path.basename(code.co_filename)
             logger.error(
-                f'{err!r} occurred in the'
+                f'{exc!r} occurred in the'
                 f' function {rule.function.__name__!r} in'
                 f' file {filename!r} at line {lineno}.'
             )
-            raise err
+            raise exc from None
 
 
 class UpdateManager:

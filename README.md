@@ -58,7 +58,7 @@ markup.add(KeyboardButton('xyz'), ...)
 
 markup.row_width = 4
 
-# Keyboard will be reordered with 4 buttons each row.
+# The keyboard will be rearranged with 4 buttons each row.
 ```
 
 * #### Prerequisites

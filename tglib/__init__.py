@@ -1,6 +1,6 @@
 #!/bin/python3
 
-__version__ = '1.1.5'
+__version__ = '1.1.6'
 
 __all__ = [
     'Client',
@@ -252,11 +252,13 @@ class Client(TelegramApi):
             except TelegramError as exc:
                 if not re.search(r'bad.*gateway', str(exc), re.IGNORECASE):
                     await self.session.close()
-                    return logger.info('long polling was interrupted.')
+                    logger.info('long polling was interrupted.')
+                    raise exc from None
 
-            except:
+            except BaseException as exc:
                 await self.session.close()
-                return logger.info('long polling was interrupted.')
+                logger.info('long polling was interrupted.')
+                raise exc from None
             else:
                 if updates:
                     self.__offset = updates[-1].update_id + 1
