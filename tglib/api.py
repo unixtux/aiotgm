@@ -85,8 +85,12 @@ async def _check_json(response: ClientResponse) -> Any:
     else:
         error_code = result['error_code']
         description = result['description']
+
         raise TelegramError(
-            {'error_code': error_code, 'description': description}
+            {
+                'error_code': error_code,
+                'description': description
+            }
         )
 
 
@@ -117,6 +121,7 @@ def _prepare_data(
                 content = rb.read()
 
         except FileNotFoundError:
+
             raise FileNotFoundError(
                 f"File {path!r} doesn't"
                 ' exist, check your InputFile'
@@ -228,7 +233,9 @@ class TelegramApi:
                 logger.error(
                     f'{exc!r} occurred in method {method!r}'
                 )
-                raise exc from None
+                exc = type(exc)(*[arg for arg in exc.args])
+                # this because it causes too much traceback
+                raise exc
 
             finally:
                 if not (
