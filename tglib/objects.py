@@ -106,6 +106,7 @@ __all__ = [
     'MessageAutoDeleteTimerChanged',
     'MessageEntity',
     'MessageId',
+    'MessageReactionUpdated',
     'OrderInfo',
     'PassportData',
     'PassportElementError',
@@ -125,6 +126,9 @@ __all__ = [
     'PollOption',
     'PreCheckoutQuery',
     'ProximityAlertTriggered',
+    'ReactionType',
+    'ReactionTypeEmoji',
+    'ReactionTypeCustomEmoji',
     'ReplyKeyboardMarkup',
     'ReplyKeyboardRemove',
     'ResponseParameters',
@@ -237,6 +241,73 @@ def _get_kwargs(obj: TelegramType, kwargs: dict) -> bool:
         )
         return True
     return False
+
+
+# ReactionType: 2 SUBCLASSES
+
+class ReactionType(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#reactiontype
+    This object describes the type of a reaction.
+    Currently, it can be one of:
+    - ReactionTypeEmoji
+    - ReactionTypeCustomEmoji
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = check_dict(result)
+        type = obj['type']
+
+        if type == 'emoji':
+            return ReactionTypeEmoji(**obj)
+
+        elif type == 'custom_emoji':
+            return ReactionTypeCustomEmoji(**obj)
+        else:
+            return cls(**obj)
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        reaction_types = ', '.join([
+            ReactionTypeEmoji.__name__,
+            ReactionTypeCustomEmoji.__name__
+        ])
+        logger.warning(
+            'ReactionType warning, expected one'
+            f' of the following types: {reaction_types}.'
+        )
+        self.__dict__ = kwargs
+
+
+class ReactionTypeEmoji(ReactionType):
+    '''
+    https://core.telegram.org/bots/api#reactiontypeemoji
+    The reaction is based on an emoji.
+    '''
+    def __init__(
+        self,
+        emoji: str,
+        type: str = 'emoji'
+    ):
+        self.type = type
+        self.emoji = emoji
+
+
+class ReactionTypeCustomEmoji(ReactionType):
+    '''
+    https://core.telegram.org/bots/api#reactiontypecustomemoji
+    The reaction is based on a custom emoji.
+    '''
+    def __init__(
+        self,
+        custom_emoji_id: str,
+        type: str = 'custom_emoji'
+    ):
+        self.type = type
+        self.emoji = custom_emoji_id
 
 
 class ChatPermissions(TelegramType):
@@ -993,6 +1064,44 @@ class Chat(TelegramType):
         self.can_set_sticker_set = can_set_sticker_set
         self.linked_chat_id = linked_chat_id
         self.location = location
+
+
+class MessageReactionUpdated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messagereactionupdated
+    This object represents a change of a reaction on a message performed by a user.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = check_dict(result)
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['message_id'] = obj.get('message_id')
+        obj['date'] = obj.get('date')
+        obj['old_reaction'] = [ReactionType.dese(kwargs) for kwargs in obj.get('old_reaction')]
+        obj['new_reaction'] = [ReactionType.dese(kwargs) for kwargs in obj.get('new_reaction')]
+        obj['user'] = User.dese(obj.get('user'))
+        obj['actor_chat'] = Chat.dese(obj.get('actor_chat'))
+
+    def __init__(
+        self,
+        chat: Chat,
+        message_id: int,
+        date: int,
+        old_reaction: list[ReactionType],
+        new_reaction: list[ReactionType],
+        user: Optional[User] = None,
+        actor_chat: Optional[Chat] = None,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.chat = chat
+        self.message_id = message_id
+        self.date = date
+        self.old_reaction = old_reaction
+        self.new_reaction = new_reaction
+        self.user = user
+        self.actor_chat = actor_chat
 
 
 class MessageId(TelegramType):
@@ -4959,6 +5068,7 @@ class Update(TelegramType):
         obj['edited_message'] = Message.dese(obj.get('edited_message'))
         obj['channel_post'] = Message.dese(obj.get('channel_post'))
         obj['edited_channel_post'] = Message.dese(obj.get('edited_channel_post'))
+        obj['message_reaction'] = MessageReactionUpdated.dese(obj.get('message_reaction'))
         obj['inline_query'] = InlineQuery.dese(obj.get('inline_query'))
         obj['chosen_inline_result'] = ChosenInlineResult.dese(obj.get('chosen_inline_result'))
         obj['callback_query'] = CallbackQuery.dese(obj.get('callback_query'))
@@ -4978,6 +5088,7 @@ class Update(TelegramType):
         edited_message: Optional[Message] = None,
         channel_post: Optional[Message] = None,
         edited_channel_post: Optional[Message] = None,
+        message_reaction: Optional[MessageReactionUpdated] = None,
         inline_query: Optional[InlineQuery] = None,
         chosen_inline_result: Optional[ChosenInlineResult] = None,
         callback_query: Optional[CallbackQuery] = None,
@@ -4996,6 +5107,7 @@ class Update(TelegramType):
         self.edited_message = edited_message
         self.channel_post = channel_post
         self.edited_channel_post = edited_channel_post
+        self.message_reaction = message_reaction
         self.inline_query = inline_query
         self.chosen_inline_result = chosen_inline_result
         self.callback_query = callback_query

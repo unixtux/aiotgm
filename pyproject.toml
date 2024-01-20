@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tglib"
-version = "1.1.7"
+version = "1.1.8"
 requires-python = ">= 3.8"
 license = {file = "LICENSE"}
 readme = "README.md"
