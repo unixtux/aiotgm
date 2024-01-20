@@ -307,7 +307,7 @@ class ReactionTypeCustomEmoji(ReactionType):
         type: str = 'custom_emoji'
     ):
         self.type = type
-        self.emoji = custom_emoji_id
+        self.custom_emoji_id = custom_emoji_id
 
 
 class ChatPermissions(TelegramType):
