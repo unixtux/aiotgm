@@ -197,12 +197,8 @@ class TelegramType:
 def serialize(
     val: Any,
     *,
-    last = True,
-    ignore: tuple[type] = ()
+    last = True
 ) -> Union[Any, str, list, dict]:
-
-    if not isinstance(ignore, Iterable):
-        ignore = (ignore, )
 
     if isinstance(val, TelegramType):
         val = val.__dict__
@@ -230,7 +226,7 @@ def serialize(
     if last is False:
         return res
     else:
-        return res if type(res) in ignore else json.dumps(res, ensure_ascii = False)
+        return res if isinstance(res, str) else json.dumps(res, ensure_ascii = False)
 
 
 def _get_kwargs(obj: TelegramType, kwargs: dict) -> bool:

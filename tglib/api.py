@@ -54,23 +54,8 @@ else:
         )
 
 
-def _get_files(
-    params: dict,
-    *file_keys: str
-) -> Optional[dict[str, dict[Literal['path', 'file_name'], Any]]]:
-
-    files = {}
-    for key in file_keys:
-        if key in params:
-            obj = params[key]
-            if isinstance(obj, InputFile):
-                files[key] = {
-                    'path': obj.path,
-                    'file_name': obj.file_name
-                }
-                del params[key]
-
-    return files if files else None
+def _format_url(token: str, method: str) -> str:
+    return '/bot{}/{}'.format(token, method)
 
 
 async def _check_json(response: ClientResponse) -> Any:
@@ -94,13 +79,36 @@ async def _check_json(response: ClientResponse) -> Any:
         )
 
 
-def _format_url(token: str, method: str) -> str:
-    return '/bot{}/{}'.format(token, method)
+def _get_files(
+    params: dict,
+    *file_keys: str
+) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
+
+    files = {}
+    for key in file_keys:
+        if key in params:
+            obj = params[key]
+            if isinstance(obj, InputFile):
+                try:
+                    with open(path, 'rb') as rb:
+                        content = rb.read()
+                except FileNotFoundError:
+                    raise FileNotFoundError(
+                        f"File {path!r} doesn't"
+                        ' exist, check your InputFile'
+                    )
+                files[key] = {
+                    'content': content,
+                    'file_name': obj.file_name
+                }
+                del params[key]
+
+    return files if files else None
 
 
 def _prepare_data(
     params: Optional[dict],
-    files: Optional[dict[str, dict[Literal['path', 'file_name'], Any]]]
+    files: Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]
 ) -> Optional[FormData]:
 
     if params is None:
@@ -111,21 +119,11 @@ def _prepare_data(
     if files is None:
         return data
 
-    for key, value in files.items():
+    for key in files:
 
-        path = value['path']
-        file_name = value['file_name']
+        content = files[key]['content']
+        file_name = files[key]['file_name']
 
-        try:
-            with open(path, 'rb') as rb:
-                content = rb.read()
-
-        except FileNotFoundError:
-
-            raise FileNotFoundError(
-                f"File {path!r} doesn't"
-                ' exist, check your InputFile'
-            )
         data.add_field(
             key,
             content,
@@ -195,8 +193,8 @@ class TelegramApi:
     ):
 
         if params is not None:
-            for key, val in params.items():
-                params[key] = serialize(val, ignore = (str, ))
+            for key in params:
+                params[key] = serialize(params[key])
 
         if REQ_DEBUG:
             logger.debug(
