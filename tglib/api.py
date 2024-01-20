@@ -90,11 +90,11 @@ def _get_files(
             obj = params[key]
             if isinstance(obj, InputFile):
                 try:
-                    with open(path, 'rb') as rb:
+                    with open(obj.path, 'rb') as rb:
                         content = rb.read()
                 except FileNotFoundError:
                     raise FileNotFoundError(
-                        f"File {path!r} doesn't"
+                        f"File {obj.path!r} doesn't"
                         ' exist, check your InputFile'
                     )
                 files[key] = {
