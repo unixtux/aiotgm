@@ -71,6 +71,7 @@ class Client(TelegramApi):
         self.__edited_message_manager = UpdateManager(EDITED_MESSAGE_MANAGER, Message)
         self.__channel_post_manager = UpdateManager(CHANNEL_POST_MANAGER, Message)
         self.__edited_channel_post_manager = UpdateManager(EDITED_CHANNEL_POST_MANAGER, Message)
+        self.__message_reaction_manager = UpdateManager(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
         self.__inline_query_manager = UpdateManager(INLINE_QUERY_MANAGER, InlineQuery)
         self.__chosen_inline_result_manager = UpdateManager(CHOSEN_INLINE_RESULT_MANAGER, ChosenInlineResult)
         self.__callback_query_manager = UpdateManager(CALLBACK_QUERY_MANAGER, CallbackQuery)
@@ -103,7 +104,7 @@ class Client(TelegramApi):
         self.__protect_content = val
 
 
-    # 14 UpdateManagers
+    # 15 UpdateManagers
 
     @property
     def message_manager(self) -> UpdateManager:
@@ -130,6 +131,15 @@ class Client(TelegramApi):
     def manage_channel_post(self, checker = lambda channel_post: True):
         def wrap(func: Callable[[Message], Any]):
             self.channel_post_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def message_reaction_manager(self) -> UpdateManager:
+        return self.__message_reaction_manager
+
+    def manage_message_reaction(self, checker = lambda message_reaction: True):
+        def wrap(func: Callable[[MessageReactionUpdated], Any]):
+            self.message_reaction_manager.add_rule(checker, func)
         return wrap
 
     @property
@@ -305,6 +315,16 @@ class Client(TelegramApi):
                     result = await _run_coroutine(rule, obj)
                     if not isinstance(result, NextManager):
                        return
+                except:
+                    return
+
+        elif update.message_reaction:
+            obj: MessageReactionUpdated = update.message_reaction
+            for rule in self.message_reaction_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                        return
                 except:
                     return
 
