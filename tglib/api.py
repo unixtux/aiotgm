@@ -192,7 +192,7 @@ class TelegramApi:
         *,
         max_retries: int = 100,
         keep_session: Optional[bool] = None
-    ) -> Coroutine:
+    ):
 
         if params is not None:
             for key, val in params.items():
@@ -226,13 +226,9 @@ class TelegramApi:
                     return await _check_json(response)
 
             except (ClientError, TimeoutError):
-                await asyncio.sleep(
-                    3 - (time.time() - start_time)
-                )
+                await asyncio.sleep(3 - (time.time() - start_time))
+
             except BaseException as exc:
-                logger.error(
-                    f'{exc!r} occurred in method {method!r}'
-                )
                 exc = type(exc)(*[arg for arg in exc.args])
                 # this because it causes too much traceback
                 raise exc
@@ -258,461 +254,461 @@ class TelegramApi:
 
 ###########################################################
 
-    async def get_updates(self, params: dict, **kwargs) -> Coroutine:
+    async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
 
-    async def get_me(self) -> Coroutine:
+    async def get_me(self):
         method = 'getMe'
         return await self._request(method)
 
-    async def send_message(self, params: dict) -> Coroutine:
+    async def send_message(self, params: dict):
         method = 'sendMessage'
         return await self._request(method, params)
 
-    async def log_out(self) -> Coroutine:
+    async def log_out(self):
         method = 'logOut'
         return await self._request(method)
 
-    async def close(self) -> Coroutine:
+    async def close(self):
         method = 'close'
         return await self._request(method)
 
-    async def forward_message(self, params: dict) -> Coroutine:
+    async def forward_message(self, params: dict):
         method = 'forwardMessage'
         return await self._request(method, params)
 
-    async def copy_message(self, params: dict) -> Coroutine:
+    async def copy_message(self, params: dict):
         method = 'copyMessage'
         return await self._request(method, params)
 
-    async def send_photo(self, params: dict) -> Coroutine:
+    async def send_photo(self, params: dict):
         method = 'sendPhoto'
         files = _get_files(params, 'photo')
         return await self._request(method, params, files)
 
-    async def send_audio(self, params: dict) -> Coroutine:
+    async def send_audio(self, params: dict):
         method = 'sendAudio'
         files = _get_files(params, 'audio', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_document(self, params: dict) -> Coroutine:
+    async def send_document(self, params: dict):
         method = 'sendDocument'
         files = _get_files(params, 'document', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_video(self, params: dict) -> Coroutine:
+    async def send_video(self, params: dict):
         method = 'sendVideo'
         files = _get_files(params, 'video', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_animation(self, params: dict) -> Coroutine:
+    async def send_animation(self, params: dict):
         method = 'sendAnimation'
         files = _get_files(params, 'animation', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_voice(self, params: dict) -> Coroutine:
+    async def send_voice(self, params: dict):
         method = 'sendVoice'
         files = _get_files(params, 'voice')
         return await self._request(method, params, files)
 
-    async def send_video_note(self, params: dict) -> Coroutine:
+    async def send_video_note(self, params: dict):
         method = 'sendVideoNote'
         files = _get_files(params, 'video_note', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_media_group(self, params: dict) -> Coroutine:
+    async def send_media_group(self, params: dict):
         method = 'sendMediaGroup'
         return await self._request(method, params)
 
-    async def send_location(self, params: dict) -> Coroutine:
+    async def send_location(self, params: dict):
         method = 'sendLocation'
         return await self._request(method, params)
 
-    async def send_venue(self, params: dict) -> Coroutine:
+    async def send_venue(self, params: dict):
         method = 'sendVenue'
         return await self._request(method, params)
 
-    async def send_contact(self, params: dict) -> Coroutine:
+    async def send_contact(self, params: dict):
         method = 'sendContact'
         return await self._request(method, params)
 
-    async def send_poll(self, params: dict) -> Coroutine:
+    async def send_poll(self, params: dict):
         method = 'sendPoll'
         return await self._request(method, params)
 
-    async def send_dice(self, params: dict) -> Coroutine:
+    async def send_dice(self, params: dict):
         method = 'sendDice'
         return await self._request(method, params)
 
-    async def send_chat_action(self, params: dict) -> Coroutine:
+    async def send_chat_action(self, params: dict):
         method = 'sendChatAction'
         return await self._request(method, params)
 
-    async def get_user_profile_photos(self, params: dict) -> Coroutine:
+    async def get_user_profile_photos(self, params: dict):
         method = 'getUserProfilePhotos'
         return await self._request(method, params)
 
-    async def get_file(self, params: dict) -> Coroutine:
+    async def get_file(self, params: dict):
         method = 'getFile'
         return await self._request(method, params)
 
-    async def ban_chat_member(self, params: dict) -> Coroutine:
+    async def ban_chat_member(self, params: dict):
         method = 'banChatMember'
         return await self._request(method, params)
 
-    async def unban_chat_member(self, params: dict) -> Coroutine:
+    async def unban_chat_member(self, params: dict):
         method = 'unbanChatMember'
         return await self._request(method, params)
 
-    async def restrict_chat_member(self, params: dict) -> Coroutine:
+    async def restrict_chat_member(self, params: dict):
         method = 'restrictChatMember'
         return await self._request(method, params)
 
-    async def promote_chat_member(self, params: dict) -> Coroutine:
+    async def promote_chat_member(self, params: dict):
         method = 'promoteChatMember'
         return await self._request(method, params)
 
-    async def set_chat_administrator_custom_title(self, params: dict) -> Coroutine:
+    async def set_chat_administrator_custom_title(self, params: dict):
         method = 'setChatAdministratorCustomTitle'
         return await self._request(method, params)
 
-    async def ban_chat_sender_chat(self, params: dict) -> Coroutine:
+    async def ban_chat_sender_chat(self, params: dict):
         method = 'banChatSenderChat'
         return await self._request(method, params)
 
-    async def unban_chat_sender_chat(self, params: dict) -> Coroutine:
+    async def unban_chat_sender_chat(self, params: dict):
         method = 'unbanChatSenderChat'
         return await self._request(method, params)
 
-    async def set_chat_permissions(self, params: dict) -> Coroutine:
+    async def set_chat_permissions(self, params: dict):
         method = 'setChatPermissions'
         return await self._request(method, params)
 
-    async def export_chat_invite_link(self, params: dict) -> Coroutine:
+    async def export_chat_invite_link(self, params: dict):
         method = 'exportChatInviteLink'
         return await self._request(method, params)
 
-    async def create_chat_invite_link(self, params: dict) -> Coroutine:
+    async def create_chat_invite_link(self, params: dict):
         method = 'createChatInviteLink'
         return await self._request(method, params)
 
-    async def edit_chat_invite_link(self, params: dict) -> Coroutine:
+    async def edit_chat_invite_link(self, params: dict):
         method = 'editChatInviteLink'
         return await self._request(method, params)
 
-    async def revoke_chat_invite_link(self, params: dict) -> Coroutine:
+    async def revoke_chat_invite_link(self, params: dict):
         method = 'revokeChatInviteLink'
         return await self._request(method, params)
 
-    async def approve_chat_join_request(self, params: dict) -> Coroutine:
+    async def approve_chat_join_request(self, params: dict):
         method = 'approveChatJoinRequest'
         return await self._request(method, params)
 
-    async def decline_chat_join_request(self, params: dict) -> Coroutine:
+    async def decline_chat_join_request(self, params: dict):
         method = 'declineChatJoinRequest'
         return await self._request(method, params)
 
-    async def set_chat_photo(self, params: dict) -> Coroutine:
+    async def set_chat_photo(self, params: dict):
         method = 'setChatPhoto'
         files = _get_files(params, 'photo')
         return await self._request(method, params, files)
 
-    async def delete_chat_photo(self, params: dict) -> Coroutine:
+    async def delete_chat_photo(self, params: dict):
         method = 'deleteChatPhoto'
         return await self._request(method, params)
 
-    async def set_chat_title(self, params: dict) -> Coroutine:
+    async def set_chat_title(self, params: dict):
         method = 'setChatTitle'
         return await self._request(method, params)
 
-    async def set_chat_description(self, params: dict) -> Coroutine:
+    async def set_chat_description(self, params: dict):
         method = 'setChatDescription'
         return await self._request(method, params)
 
-    async def pin_chat_message(self, params: dict) -> Coroutine:
+    async def pin_chat_message(self, params: dict):
         method = 'pinChatMessage'
         return await self._request(method, params)
 
-    async def unpin_chat_message(self, params: dict) -> Coroutine:
+    async def unpin_chat_message(self, params: dict):
         method = 'unpinChatMessage'
         return await self._request(method, params)
 
-    async def unpin_all_chat_messages(self, params: dict) -> Coroutine:
+    async def unpin_all_chat_messages(self, params: dict):
         method = 'unpinAllChatMessages'
         return await self._request(method, params)
 
-    async def leave_chat(self, params: dict) -> Coroutine:
+    async def leave_chat(self, params: dict):
         method = 'leaveChat'
         return await self._request(method, params)
 
-    async def get_chat(self, params: dict) -> Coroutine:
+    async def get_chat(self, params: dict):
         method = 'getChat'
         return await self._request(method, params)
 
-    async def get_chat_administrators(self, params: dict) -> Coroutine:
+    async def get_chat_administrators(self, params: dict):
         method = 'getChatAdministrators'
         return await self._request(method, params)
 
-    async def get_chat_member_count(self, params: dict) -> Coroutine:
+    async def get_chat_member_count(self, params: dict):
         method = 'getChatMemberCount'
         return await self._request(method, params)
 
-    async def get_chat_member(self, params: dict) -> Coroutine:
+    async def get_chat_member(self, params: dict):
         method = 'getChatMember'
         return await self._request(method, params)
 
-    async def set_chat_sticker_set(self, params: dict) -> Coroutine:
+    async def set_chat_sticker_set(self, params: dict):
         method = 'setChatStickerSet'
         return await self._request(method, params)
 
-    async def delete_chat_sticker_set(self, params: dict) -> Coroutine:
+    async def delete_chat_sticker_set(self, params: dict):
         method = 'deleteChatStickerSet'
         return await self._request(method, params)
 
-    async def get_forum_topic_icon_stickers(self) -> Coroutine:
+    async def get_forum_topic_icon_stickers(self):
         method = 'getForumTopicIconStickers'
         return await self._request(method)
 
-    async def create_forum_topic(self, params: dict) -> Coroutine:
+    async def create_forum_topic(self, params: dict):
         method = 'createForumTopic'
         return await self._request(method, params)
 
-    async def edit_forum_topic(self, params: dict) -> Coroutine:
+    async def edit_forum_topic(self, params: dict):
         method = 'editForumTopic'
         return await self._request(method, params)
 
-    async def close_forum_topic(self, params: dict) -> Coroutine:
+    async def close_forum_topic(self, params: dict):
         method = 'closeForumTopic'
         return await self._request(method, params)
 
-    async def reopen_forum_topic(self, params: dict) -> Coroutine:
+    async def reopen_forum_topic(self, params: dict):
         method = 'reopenForumTopic'
         return await self._request(method, params)
 
-    async def delete_forum_topic(self, params: dict) -> Coroutine:
+    async def delete_forum_topic(self, params: dict):
         method = 'deleteForumTopic'
         return await self._request(method, params)
 
-    async def unpin_all_forum_topic_messages(self, params: dict) -> Coroutine:
+    async def unpin_all_forum_topic_messages(self, params: dict):
         method = 'unpinAllForumTopicMessages'
         return await self._request(method, params)
 
-    async def edit_general_forum_topic(self, params: dict) -> Coroutine:
+    async def edit_general_forum_topic(self, params: dict):
         method = 'editGeneralForumTopic'
         return await self._request(method, params)
 
-    async def close_general_forum_topic(self, params: dict) -> Coroutine:
+    async def close_general_forum_topic(self, params: dict):
         method = 'closeGeneralForumTopic'
         return await self._request(method, params)
 
-    async def reopen_general_forum_topic(self, params: dict) -> Coroutine:
+    async def reopen_general_forum_topic(self, params: dict):
         method = 'reopenGeneralForumTopic'
         return await self._request(method, params)
 
-    async def hide_general_forum_topic(self, params: dict) -> Coroutine:
+    async def hide_general_forum_topic(self, params: dict):
         method = 'hideGeneralForumTopic'
         return await self._request(method, params)
 
-    async def unhide_general_forum_topic(self, params: dict) -> Coroutine:
+    async def unhide_general_forum_topic(self, params: dict):
         method = 'unhideGeneralForumTopic'
         return await self._request(method, params)
 
-    async def unpin_all_general_forum_topic_messages(self, params: dict) -> Coroutine:
+    async def unpin_all_general_forum_topic_messages(self, params: dict):
         method = 'unpinAllGeneralForumTopicMessages'
         return await self._request(method, params)
 
-    async def answer_callback_query(self, params: dict) -> Coroutine:
+    async def answer_callback_query(self, params: dict):
         method = 'answerCallbackQuery'
         return await self._request(method, params)
 
-    async def set_my_commands(self, params: dict) -> Coroutine:
+    async def set_my_commands(self, params: dict):
         method = 'setMyCommands'
         return await self._request(method, params)
 
-    async def delete_my_commands(self, params: dict) -> Coroutine:
+    async def delete_my_commands(self, params: dict):
         method = 'deleteMyCommands'
         return await self._request(method, params)
 
-    async def get_my_commands(self, params: dict) -> Coroutine:
+    async def get_my_commands(self, params: dict):
         method = 'getMyCommands'
         return await self._request(method, params)
 
-    async def set_my_name(self, params: dict) -> Coroutine:
+    async def set_my_name(self, params: dict):
         method = 'setMyName'
         return await self._request(method, params)
 
-    async def get_my_name(self, params: dict) -> Coroutine:
+    async def get_my_name(self, params: dict):
         method = 'getMyName'
         return await self._request(method, params)
 
-    async def set_my_description(self, params: dict) -> Coroutine:
+    async def set_my_description(self, params: dict):
         method = 'setMyDescription'
         return await self._request(method, params)
 
-    async def get_my_description(self, params: dict) -> Coroutine:
+    async def get_my_description(self, params: dict):
         method = 'getMyDescription'
         return await self._request(method, params)
 
-    async def set_my_short_description(self, params: dict) -> Coroutine:
+    async def set_my_short_description(self, params: dict):
         method = 'setMyShortDescription'
         return await self._request(method, params)
 
-    async def get_my_short_description(self, params: dict) -> Coroutine:
+    async def get_my_short_description(self, params: dict):
         method = 'getMyShortDescription'
         return await self._request(method, params)
 
-    async def set_chat_menu_button(self, params: dict) -> Coroutine:
+    async def set_chat_menu_button(self, params: dict):
         method = 'setChatMenuButton'
         return await self._request(method, params)
 
-    async def get_chat_menu_button(self, params: dict) -> Coroutine:
+    async def get_chat_menu_button(self, params: dict):
         method = 'getChatMenuButton'
         return await self._request(method, params)
 
-    async def set_my_default_administrator_rights(self, params: dict) -> Coroutine:
+    async def set_my_default_administrator_rights(self, params: dict):
         method = 'setMyDefaultAdministratorRights'
         return await self._request(method, params)
 
-    async def get_my_default_administrator_rights(self, params: dict) -> Coroutine:
+    async def get_my_default_administrator_rights(self, params: dict):
         method = 'getMyDefaultAdministratorRights'
         return await self._request(method, params)
 
-    async def edit_message_text(self, params: dict) -> Coroutine:
+    async def edit_message_text(self, params: dict):
         method = 'editMessageText'
         return await self._request(method, params)
 
-    async def edit_message_caption(self, params: dict) -> Coroutine:
+    async def edit_message_caption(self, params: dict):
         method = 'editMessageCaption'
         return await self._request(method, params)
 
-    async def edit_message_media(self, params: dict) -> Coroutine:
+    async def edit_message_media(self, params: dict):
         method = 'editMessageMedia'
         return await self._request(method, params)
 
-    async def edit_message_live_location(self, params: dict) -> Coroutine:
+    async def edit_message_live_location(self, params: dict):
         method = 'editMessageLiveLocation'
         return await self._request(method, params)
 
-    async def stop_message_live_location(self, params: dict) -> Coroutine:
+    async def stop_message_live_location(self, params: dict):
         method = 'stopMessageLiveLocation'
         return await self._request(method, params)
 
-    async def edit_message_reply_markup(self, params: dict) -> Coroutine:
+    async def edit_message_reply_markup(self, params: dict):
         method = 'editMessageReplyMarkup'
         return await self._request(method, params)
 
-    async def stop_poll(self, params: dict) -> Coroutine:
+    async def stop_poll(self, params: dict):
         method = 'stopPoll'
         return await self._request(method, params)
 
-    async def delete_message(self, params: dict) -> Coroutine:
+    async def delete_message(self, params: dict):
         method = 'deleteMessage'
         return await self._request(method, params)
 
-    async def delete_messages(self, params: dict) -> Coroutine:
+    async def delete_messages(self, params: dict):
         method = 'deleteMessages'
         return await self._request(method, params)
 
-    async def send_sticker(self, params: dict) -> Coroutine:
+    async def send_sticker(self, params: dict):
         method = 'sendSticker'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
 
-    async def get_sticker_set(self, params: dict) -> Coroutine:
+    async def get_sticker_set(self, params: dict):
         method = 'getStickerSet'
         return await self._request(method, params)
 
-    async def get_custom_emoji_stickers(self, params: dict) -> Coroutine:
+    async def get_custom_emoji_stickers(self, params: dict):
         method = 'getCustomEmojiStickers'
         return await self._request(method, params)
 
-    async def upload_sticker_file(self, params: dict) -> Coroutine:
+    async def upload_sticker_file(self, params: dict):
         method = 'uploadStickerFile'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
 
-    async def create_new_sticker_set(self, params: dict) -> Coroutine:
+    async def create_new_sticker_set(self, params: dict):
         method = 'createNewStickerSet'
         return await self._request(method, params)
 
-    async def add_sticker_to_set(self, params: dict) -> Coroutine:
+    async def add_sticker_to_set(self, params: dict):
         method = 'addStickerToSet'
         return await self._request(method, params)
 
-    async def set_sticker_position_in_set(self, params: dict) -> Coroutine:
+    async def set_sticker_position_in_set(self, params: dict):
         method = 'setStickerPositionInSet'
         return await self._request(method, params)
 
-    async def delete_sticker_from_set(self, params: dict) -> Coroutine:
+    async def delete_sticker_from_set(self, params: dict):
         method = 'deleteStickerFromSet'
         return await self._request(method, params)
 
-    async def set_sticker_emoji_list(self, params: dict) -> Coroutine:
+    async def set_sticker_emoji_list(self, params: dict):
         method = 'setStickerEmojiList'
         return await self._request(method, params)
 
-    async def set_sticker_keywords(self, params: dict) -> Coroutine:
+    async def set_sticker_keywords(self, params: dict):
         method = 'setStickerKeywords'
         return await self._request(method, params)
 
-    async def set_sticker_mask_position(self, params: dict) -> Coroutine:
+    async def set_sticker_mask_position(self, params: dict):
         method = 'setStickerMaskPosition'
         return await self._request(method, params)
 
-    async def set_sticker_set_title(self, params: dict) -> Coroutine:
+    async def set_sticker_set_title(self, params: dict):
         method = 'setStickerSetTitle'
         return await self._request(method, params)
 
-    async def set_sticker_set_thumbnail(self, params: dict) -> Coroutine:
+    async def set_sticker_set_thumbnail(self, params: dict):
         method = 'setStickerSetThumbnail'
         files = _get_files(params, 'thumbnail')
         return await self._request(method, params, files)
 
-    async def set_custom_emoji_sticker_set_thumbnail(self, params: dict) -> Coroutine:
+    async def set_custom_emoji_sticker_set_thumbnail(self, params: dict):
         method = 'setCustomEmojiStickerSetThumbnail'
         return await self._request(method, params)
 
-    async def delete_sticker_set(self, params: dict) -> Coroutine:
+    async def delete_sticker_set(self, params: dict):
         method = 'deleteStickerSet'
         return await self._request(method, params)
 
-    async def answer_inline_query(self, params: dict) -> Coroutine:
+    async def answer_inline_query(self, params: dict):
         method = 'answerInlineQuery'
         return await self._request(method, params)
 
-    async def answer_web_app_query(self, params: dict) -> Coroutine:
+    async def answer_web_app_query(self, params: dict):
         method = 'answerWebAppQuery'
         return await self._request(method, params)
 
-    async def send_invoice(self, params: dict) -> Coroutine:
+    async def send_invoice(self, params: dict):
         method = 'sendInvoice'
         return await self._request(method, params)
 
-    async def create_invoice_link(self, params: dict) -> Coroutine:
+    async def create_invoice_link(self, params: dict):
         method = 'createInvoiceLink'
         return await self._request(method, params)
 
-    async def answer_shipping_query(self, params: dict) -> Coroutine:
+    async def answer_shipping_query(self, params: dict):
         method = 'answerShippingQuery'
         return await self._request(method, params)
 
-    async def answer_pre_checkout_query(self, params: dict) -> Coroutine:
+    async def answer_pre_checkout_query(self, params: dict):
         method = 'answerPreCheckoutQuery'
         return await self._request(method, params)
 
-    async def set_passport_data_errors(self, params: dict) -> Coroutine:
+    async def set_passport_data_errors(self, params: dict):
         method = 'setPassportDataErrors'
         return await self._request(method, params)
 
-    async def send_game(self, params: dict) -> Coroutine:
+    async def send_game(self, params: dict):
         method = 'sendGame'
         return await self._request(method, params)
 
-    async def set_game_score(self, params: dict) -> Coroutine:
+    async def set_game_score(self, params: dict):
         method = 'setGameScore'
         return await self._request(method, params)
 
-    async def get_game_high_scores(self, params: dict) -> Coroutine:
+    async def get_game_high_scores(self, params: dict):
         method = 'getGameHighScores'
         return await self._request(method, params)
