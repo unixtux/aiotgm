@@ -7,9 +7,10 @@ __all__ = [
 import logging
 
 def get_logger(name: str) -> logging.Logger:
-    """\
+    """
     Function to get a preformatted Logger instance.
-    If the Logger already exists, level won't be set."""
+    If the Logger already exists, level won't be set.
+    """
 
     if name in logging.Logger.manager.loggerDict:
         return logging.getLogger(name)

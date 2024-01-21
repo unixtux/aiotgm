@@ -133,7 +133,9 @@ def _prepare_data(
 
 
 class TelegramError(Exception):
-    """Class to handle exceptions during Telegram requests."""
+    """
+    Class to handle exceptions during Telegram requests.
+    """
 
 
 HEADERS = {
