@@ -231,7 +231,7 @@ class TelegramApi:
             except BaseException as exc:
                 exc = type(exc)(*[arg for arg in exc.args])
                 # this because it causes too much traceback
-                raise exc
+                raise exc from None
 
             finally:
                 if not (
