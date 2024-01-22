@@ -13,7 +13,7 @@
 * #### Update the module
 ```python -m pip install -U tglib```
 
-* #### 15 managers for different [updates](https://core.telegram.org/bots/api#update)
+* #### 16 managers for different [updates](https://core.telegram.org/bots/api#update)
   * message_manager
   * edited_message_manager
   * channel_post_manager
