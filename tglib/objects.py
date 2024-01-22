@@ -1137,7 +1137,7 @@ class MessageReactionCountUpdated(TelegramType):
         obj['chat'] = Chat.dese(obj.get('chat'))
         obj['message_id'] = obj.get('message_id')
         obj['date'] = obj.get('date')
-        obj['reactions'] = [ReactionCount.dese(obj.get(kwargs) for kwargs in obj.get('reactions'))]
+        obj['reactions'] = [ReactionCount.dese(kwargs) for kwargs in obj.get('reactions')]
 
     def __init__(
         self,
