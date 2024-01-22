@@ -184,7 +184,7 @@ def check_dict(result: dict) -> dict:
 
     if not isinstance(result, dict):
         raise TypeError(
-            "Excpected dict as parameter in"
+            "Expected dict as parameter in"
             f" 'check_dict', got {result.__class__}"
         )
     if 'from' in result:
