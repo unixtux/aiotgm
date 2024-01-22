@@ -180,12 +180,12 @@ except ImportError:
     )
 
 
-def check_dict(result: dict) -> dict:
+def _check_dict(result: dict) -> dict:
 
     if not isinstance(result, dict):
         raise TypeError(
-            "Expected dict as parameter in"
-            f" 'check_dict', got {result.__class__}"
+            'Expected dict as parameter in'
+            f' _check_dict(), got {result.__class__}'
         )
     if 'from' in result:
         result['from_user'] = result['from']
@@ -256,7 +256,7 @@ class ReactionType(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         type = obj['type']
 
         if type == 'emoji':
@@ -318,7 +318,7 @@ class ChatPermissions(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['can_send_messages'] = obj.get('can_send_messages')
         obj['can_send_audios'] = obj.get('can_send_audios')
         obj['can_send_documents'] = obj.get('can_send_documents')
@@ -378,7 +378,7 @@ class ChatAdministratorRights(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['is_anonymous'] = obj.get('is_anonymous')
         obj['can_manage_chat'] = obj.get('can_manage_chat')
         obj['can_delete_messages'] = obj.get('can_delete_messages')
@@ -442,7 +442,7 @@ class SwitchInlineQueryChosenChat(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['query'] = obj.get('query')
         obj['allow_user_chats'] = obj.get('allow_user_chats')
         obj['allow_bot_chats'] = obj.get('allow_bot_chats')
@@ -473,7 +473,7 @@ class CallbackGame(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         return cls(**obj)
 
     def __init__(
@@ -515,7 +515,7 @@ class LoginUrl(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['url'] = obj.get('url')
         obj['forward_text'] = obj.get('forward_text')
         obj['bot_username'] = obj.get('bot_username')
@@ -557,7 +557,7 @@ class User(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['is_bot'] = obj.get('is_bot')
         obj['first_name'] = obj.get('first_name')
@@ -608,7 +608,7 @@ class MessageEntity(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['type'] = obj.get('type')
         obj['offset'] = obj.get('offset')
         obj['length'] = obj.get('length')
@@ -645,7 +645,7 @@ class Message(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['message_id'] = obj.get('message_id')
         obj['date'] = obj.get('date')
         obj['chat'] = Chat.dese(obj.get('chat'))
@@ -879,7 +879,7 @@ class ChatPhoto(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['small_file_id'] = obj.get('small_file_id')
         obj['small_file_unique_id'] = obj.get('small_file_unique_id')
         obj['big_file_id'] = obj.get('big_file_id')
@@ -909,7 +909,7 @@ class Location(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['longitude'] = obj.get('longitude')
         obj['latitude'] = obj.get('latitude')
         obj['horizontal_accuracy'] = obj.get('horizontal_accuracy')
@@ -945,7 +945,7 @@ class ChatLocation(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['location'] = Location.dese(obj.get('location'))
         obj['address'] = obj.get('address')
         return cls(**obj)
@@ -969,7 +969,7 @@ class Chat(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['type'] = obj.get('type')
         obj['title'] = obj.get('title')
@@ -1074,7 +1074,7 @@ class MessageReactionUpdated(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['chat'] = Chat.dese(obj.get('chat'))
         obj['message_id'] = obj.get('message_id')
         obj['date'] = obj.get('date')
@@ -1112,7 +1112,7 @@ class ReactionCount(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['type'] = ReactionType.dese(obj.get('type'))
         obj['total_count'] = obj.get('total_count')
 
@@ -1135,7 +1135,7 @@ class MessageReactionCountUpdated(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['chat'] = Chat.dese(obj.get('chat'))
         obj['message_id'] = obj.get('message_id')
         obj['date'] = obj.get('date')
@@ -1164,7 +1164,7 @@ class MessageId(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['message_id'] = obj.get('message_id')
         return cls(**obj)
 
@@ -1185,7 +1185,7 @@ class PhotoSize(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['width'] = obj.get('width')
@@ -1218,7 +1218,7 @@ class Animation(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['width'] = obj.get('width')
@@ -1263,7 +1263,7 @@ class Audio(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['duration'] = obj.get('duration')
@@ -1308,7 +1308,7 @@ class Document(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['thumbnail'] = PhotoSize.dese(obj.get('thumbnail'))
@@ -1344,7 +1344,7 @@ class Story(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         return cls(**obj)
 
     def __init__(
@@ -1363,7 +1363,7 @@ class Video(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['width'] = obj.get('width')
@@ -1408,7 +1408,7 @@ class VideoNote(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['length'] = obj.get('length')
@@ -1444,7 +1444,7 @@ class Voice(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['duration'] = obj.get('duration')
@@ -1477,7 +1477,7 @@ class Contact(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['phone_number'] = obj.get('phone_number')
         obj['first_name'] = obj.get('first_name')
         obj['last_name'] = obj.get('last_name')
@@ -1510,7 +1510,7 @@ class Dice(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['emoji'] = obj.get('emoji')
         obj['value'] = obj.get('value')
         return cls(**obj)
@@ -1534,7 +1534,7 @@ class PollOption(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['text'] = obj.get('text')
         obj['voter_count'] = obj.get('voter_count')
         return cls(**obj)
@@ -1558,7 +1558,7 @@ class PollAnswer(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['poll_id'] = obj.get('poll_id')
         obj['option_ids'] = obj.get('option_ids')
         obj['voter_chat'] = Chat.dese(obj.get('voter_chat'))
@@ -1588,7 +1588,7 @@ class Poll(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['question'] = obj.get('question')
         obj['options'] = [PollOption.dese(kwargs) for kwargs in obj.get('options')]
@@ -1645,7 +1645,7 @@ class Venue(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['location'] = Location.dese(obj.get('location'))
         obj['title'] = obj.get('title')
         obj['address'] = obj.get('address')
@@ -1684,7 +1684,7 @@ class WebAppData(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['data'] = obj.get('data')
         obj['button_text'] = obj.get('button_text')
         return cls(**obj)
@@ -1709,7 +1709,7 @@ class ProximityAlertTriggered(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['traveler'] = User.dese(obj.get('traveler'))
         obj['watcher'] = User.dese(obj.get('watcher'))
         obj['distance'] = obj.get('distance')
@@ -1736,7 +1736,7 @@ class MessageAutoDeleteTimerChanged(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['message_auto_delete_time'] = obj.get('message_auto_delete_time')
         return cls(**obj)
 
@@ -1757,7 +1757,7 @@ class ForumTopicCreated(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['name'] = obj.get('name')
         obj['icon_color'] = obj.get('icon_color')
         obj['icon_custom_emoji_id'] = obj.get('icon_custom_emoji_id')
@@ -1785,7 +1785,7 @@ class ForumTopicClosed(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         return cls(**obj)
 
     def __init__(
@@ -1804,7 +1804,7 @@ class ForumTopicEdited(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['name'] = obj.get('name')
         obj['icon_custom_emoji_id'] = obj.get('icon_custom_emoji_id')
         return cls(**obj)
@@ -1829,7 +1829,7 @@ class ForumTopicReopened(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         return cls(**obj)
 
     def __init__(
@@ -1849,7 +1849,7 @@ class GeneralForumTopicHidden(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         return cls(**obj)
 
     def __init__(
@@ -1869,7 +1869,7 @@ class GeneralForumTopicUnhidden(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         return cls(**obj)
 
     def __init__(
@@ -1889,7 +1889,7 @@ class UserShared(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['request_id'] = obj.get('request_id')
         obj['user_id'] = obj.get('user_id')
         return cls(**obj)
@@ -1914,7 +1914,7 @@ class ChatShared(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['request_id'] = obj.get('request_id')
         obj['chat_id'] = obj.get('chat_id')
         return cls(**obj)
@@ -1940,7 +1940,7 @@ class WriteAccessAllowed(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['from_request'] = obj.get('from_request')
         obj['web_app_name'] = obj.get('web_app_name')
         obj['from_attachment_menu'] = obj.get('from_attachment_menu')
@@ -1967,7 +1967,7 @@ class VideoChatScheduled(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['start_date'] = obj.get('start_date')
         return cls(**obj)
 
@@ -1989,7 +1989,7 @@ class VideoChatStarted(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         return cls(**obj)
 
     def __init__(
@@ -2008,7 +2008,7 @@ class VideoChatEnded(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['duration'] = obj.get('duration')
         return cls(**obj)
 
@@ -2029,7 +2029,7 @@ class VideoChatParticipantsInvited(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['users'] = [User.dese(kwargs) for kwargs in obj.get('users')]
         return cls(**obj)
 
@@ -2050,7 +2050,7 @@ class UserProfilePhotos(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['total_count'] = obj.get('total_count')
         obj['photos'] = [[PhotoSize.dese(kwargs) for kwargs in lst] for lst in obj.get('photos')]
         return cls(**obj)
@@ -2076,7 +2076,7 @@ class File(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['file_size'] = obj.get('file_size')
@@ -2106,7 +2106,7 @@ class WebAppInfo(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['url'] = obj.get('url')
         return cls(**obj)
 
@@ -2275,7 +2275,7 @@ class InlineKeyboardButton(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['text'] = obj.get('text')
         obj['url'] = obj.get('url')
         obj['callback_data'] = obj.get('callback_data')
@@ -2321,7 +2321,7 @@ class InlineKeyboardMarkup(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['inline_keyboard'] = [[InlineKeyboardButton.dese(kwargs) for kwargs in lst] for lst in obj.get('inline_keyboard')]
         return cls(**obj)
 
@@ -2370,7 +2370,7 @@ class CallbackQuery(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['message'] = Message.dese(obj.get('message'))
@@ -2427,7 +2427,7 @@ class ChatInviteLink(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['invite_link'] = obj.get('invite_link')
         obj['creator'] = User.dese(obj.get('creator'))
         obj['creates_join_request'] = obj.get('creates_join_request')
@@ -2481,7 +2481,7 @@ class ChatMember(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)        
+        obj = _check_dict(result)        
         obj['user'] = User.dese(obj.get('user'))
 
         status = obj['status']
@@ -2701,7 +2701,7 @@ class ChatMemberUpdated(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['chat'] = Chat.dese(obj.get('chat'))
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['date'] = obj.get('date')
@@ -2740,7 +2740,7 @@ class ChatJoinRequest(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['chat'] = Chat.dese(obj.get('chat'))
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['user_chat_id'] = obj.get('user_chat_id')
@@ -2776,7 +2776,7 @@ class ForumTopic(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['message_thread_id'] = obj.get('message_thread_id')
         obj['name'] = obj.get('name')
         obj['icon_color'] = obj.get('icon_color')
@@ -2806,7 +2806,7 @@ class BotCommand(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['command'] = obj.get('command')
         obj['description'] = obj.get('description')
         return cls(**obj)
@@ -2955,7 +2955,7 @@ class BotName(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         return cls(**obj)
 
     def __init__(
@@ -2975,7 +2975,7 @@ class BotDescription(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['description'] = obj.get('description')
         return cls(**obj)
 
@@ -2996,7 +2996,7 @@ class BotShortDescription(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['short_description'] = obj.get('short_description')
         return cls(**obj)
 
@@ -3024,7 +3024,7 @@ class MenuButton(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         type = obj['type']
 
         if type == 'commands':
@@ -3103,7 +3103,7 @@ class ResponseParameters(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['migrate_to_chat_id'] = obj.get('migrate_to_chat_id')
         obj['retry_after'] = obj.get('retry_after')
         return cls(**obj)
@@ -3291,7 +3291,7 @@ class MaskPosition(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['point'] = obj.get('point')
         obj['x_shift'] = obj.get('x_shift')
         obj['y_shift'] = obj.get('y_shift')
@@ -3319,7 +3319,7 @@ class Sticker(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['type'] = obj.get('type')
@@ -3382,7 +3382,7 @@ class StickerSet(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['name'] = obj.get('name')
         obj['title'] = obj.get('title')
         obj['sticker_type'] = obj.get('sticker_type')
@@ -3440,7 +3440,7 @@ class InlineQuery(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['query'] = obj.get('query')
@@ -4382,7 +4382,7 @@ class ChosenInlineResult(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['result_id'] = obj.get('result_id')
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['location'] = Location.dese(obj.get('location'))
@@ -4415,7 +4415,7 @@ class SentWebAppMessage(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['inline_message_id'] = obj.get('inline_message_id')
         return cls(**obj)
 
@@ -4436,7 +4436,7 @@ class Invoice(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['title'] = obj.get('title')
         obj['description'] = obj.get('description')
         obj['start_parameter'] = obj.get('start_parameter')
@@ -4469,7 +4469,7 @@ class ShippingAddress(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['country_code'] = obj.get('country_code')
         obj['state'] = obj.get('state')
         obj['city'] = obj.get('city')
@@ -4505,7 +4505,7 @@ class OrderInfo(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['name'] = obj.get('name')
         obj['phone_number'] = obj.get('phone_number')
         obj['email'] = obj.get('email')
@@ -4551,7 +4551,7 @@ class SuccessfulPayment(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['currency'] = obj.get('currency')
         obj['total_amount'] = obj.get('total_amount')
         obj['invoice_payload'] = obj.get('invoice_payload')
@@ -4590,7 +4590,7 @@ class ShippingQuery(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['invoice_payload'] = obj.get('invoice_payload')
@@ -4620,7 +4620,7 @@ class PreCheckoutQuery(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['currency'] = obj.get('currency')
@@ -4660,7 +4660,7 @@ class PassportFile(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['file_id'] = obj.get('file_id')
         obj['file_unique_id'] = obj.get('file_unique_id')
         obj['file_size'] = obj.get('file_size')
@@ -4690,7 +4690,7 @@ class EncryptedPassportElement(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['type'] = obj.get('type')
         obj['hash'] = obj.get('hash')
         obj['data'] = obj.get('data')
@@ -4739,7 +4739,7 @@ class EncryptedCredentials(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['data'] = obj.get('data')
         obj['hash'] = obj.get('hash')
         obj['secret'] = obj.get('secret')
@@ -4766,7 +4766,7 @@ class PassportData(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['data'] = [EncryptedPassportElement.dese(kwargs) for kwargs in obj.get('data')]
         obj['credentials'] = EncryptedCredentials.dese(obj.get('credentials'))
         return cls(**obj)
@@ -5050,7 +5050,7 @@ class Game(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['title'] = obj.get('title')
         obj['description'] = obj.get('description')
         obj['photo'] = [PhotoSize.dese(kwargs) for kwargs in obj.get('photo')]
@@ -5086,7 +5086,7 @@ class GameHighScore(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['position'] = obj.get('position')
         obj['user'] = User.dese(obj.get('user'))
         obj['score'] = obj.get('score')
@@ -5114,7 +5114,7 @@ class Update(TelegramType):
     @classmethod
     def dese(cls, result):
         if result is None: return None
-        obj = check_dict(result)
+        obj = _check_dict(result)
         obj['update_id'] = obj.get('update_id')
         obj['message'] = Message.dese(obj.get('message'))
         obj['edited_message'] = Message.dese(obj.get('edited_message'))
