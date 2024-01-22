@@ -19,6 +19,7 @@
   * channel_post_manager
   * edited_channel_post_manager
   * message_reaction_manager
+  * message_reaction_count_manager
   * inline_query_manager
   * chosen_inline_result_manager
   * callback_query_manager
