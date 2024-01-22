@@ -75,7 +75,7 @@ from tglib import (
     NextManager,
     TelegramError
 )
-from tglib.objects import *
+from tglib.types import *
 
 bot = Client('<your_token>')
 

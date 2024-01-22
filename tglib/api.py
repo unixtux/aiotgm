@@ -11,13 +11,11 @@ __all__ = [
 from .logger import get_logger
 logger = get_logger('TelegramApi')
 
-import re
 import time
 import asyncio
 from typing import (Any,
                     Literal,
-                    Optional,
-                    Coroutine)
+                    Optional)
 
 from aiohttp import (
     FormData,
@@ -27,10 +25,10 @@ from aiohttp import (
     ClientTimeout,
     ClientResponse
 )
-from .objects import (
+from .types import (
     json,
     InputFile,
-    serialize
+    _serialize
 )
 
 try:
@@ -196,7 +194,7 @@ class TelegramApi:
 
         if params is not None:
             for key in params:
-                params[key] = serialize(params[key])
+                params[key] = _serialize(params[key])
 
         if REQ_DEBUG:
             logger.debug(

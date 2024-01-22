@@ -36,14 +36,13 @@ from typing import (Any,
                     Union,
                     Literal,
                     Optional,
-                    Callable,
-                    Coroutine)
+                    Callable)
 
 from .api import (
     TelegramApi,
     TelegramError
 )
-from .objects import *
+from .types import *
 from .update_manager import *
 
 from .logger import get_logger

@@ -164,8 +164,7 @@ import os
 from typing import (Any,
                     Union,
                     Literal,
-                    Optional,
-                    Iterable)
+                    Optional)
 
 from .logger import get_logger
 logger = get_logger('TelegramTypes')
@@ -198,7 +197,7 @@ class TelegramType:
     ...
 
 
-def serialize(
+def _serialize(
     val: Any,
     *,
     last = True
@@ -214,7 +213,7 @@ def serialize(
         res = []
         for x in val:
             res.append(
-                serialize(x, last = False)
+                _serialize(x, last = False)
             )
 
     elif isinstance(val, dict):
@@ -222,7 +221,7 @@ def serialize(
         for x, y in val.items():
             if y is not None:
                 res.update(
-                    {x: serialize(y, last = False)}
+                    {x: _serialize(y, last = False)}
                 )
     else:
         res = val
