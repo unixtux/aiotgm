@@ -180,16 +180,18 @@ except ImportError:
     )
 
 
-def check_dict(res: dict) -> dict:
+def check_dict(result: dict) -> dict:
 
-    assert isinstance(res, dict)
+    if not isinstance(result, dict):
+        raise TypeError(
+            "Excpected dict as parameter in"
+            f" 'check_dict', got {result.__class__}"
+        )
+    if 'from' in result:
+        result['from_user'] = result['from']
+        del result['from']
 
-    if 'from' in res:
-
-        res['from_user'] = res['from']
-        del res['from']
-
-    return res.copy()
+    return result
 
 
 class TelegramType:
