@@ -72,6 +72,7 @@ class Client(TelegramApi):
         self.__channel_post_manager = UpdateManager(CHANNEL_POST_MANAGER, Message)
         self.__edited_channel_post_manager = UpdateManager(EDITED_CHANNEL_POST_MANAGER, Message)
         self.__message_reaction_manager = UpdateManager(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
+        self.__message_reaction_count_manager = UpdateManager(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
         self.__inline_query_manager = UpdateManager(INLINE_QUERY_MANAGER, InlineQuery)
         self.__chosen_inline_result_manager = UpdateManager(CHOSEN_INLINE_RESULT_MANAGER, ChosenInlineResult)
         self.__callback_query_manager = UpdateManager(CALLBACK_QUERY_MANAGER, CallbackQuery)
@@ -104,7 +105,7 @@ class Client(TelegramApi):
         self.__protect_content = val
 
 
-    # 15 UpdateManagers
+    # 16 UpdateManagers
 
     @property
     def message_manager(self) -> UpdateManager:
@@ -140,6 +141,15 @@ class Client(TelegramApi):
     def manage_message_reaction(self, checker = lambda message_reaction: True):
         def wrap(func: Callable[[MessageReactionUpdated], Any]):
             self.message_reaction_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def message_reaction_count_manager(self) -> UpdateManager:
+        return self.__message_reaction_count_manager
+
+    def manage_message_reaction_count(self, checker = lambda message_reaction_count: True):
+        def wrap(func: Callable[[MessageReactionCountUpdated], Any]):
+            self.message_reaction_count_manager.add_rule(checker, func)
         return wrap
 
     @property
@@ -321,6 +331,16 @@ class Client(TelegramApi):
         elif update.message_reaction:
             obj: MessageReactionUpdated = update.message_reaction
             for rule in self.message_reaction_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                        return
+                except:
+                    return
+
+        elif update.message_reaction_count:
+            obj: MessageReactionCountUpdated = update.message_reaction_count
+            for rule in self.message_reaction_count_manager:
                 try:
                     result = await _run_coroutine(rule, obj)
                     if not isinstance(result, NextManager):

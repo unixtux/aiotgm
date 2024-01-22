@@ -19,6 +19,7 @@ __all__ = [
     'CHANNEL_POST_MANAGER',
     'EDITED_CHANNEL_POST_MANAGER',
     'MESSAGE_REACTION_MANAGER',
+    'MESSAGE_REACTION_COUNT_MANAGER'
     'INLINE_QUERY_MANAGER',
     'CHOSEN_INLINE_RESULT_MANAGER',
     'CALLBACK_QUERY_MANAGER',
@@ -36,6 +37,7 @@ EDITED_MESSAGE_MANAGER = 'edited_message_manager'
 CHANNEL_POST_MANAGER = 'channel_post_manager'
 EDITED_CHANNEL_POST_MANAGER = 'edited_channel_post_manager'
 MESSAGE_REACTION_MANAGER = 'message_reaction_manager'
+MESSAGE_REACTION_COUNT_MANAGER = 'message_reaction_count_manager'
 INLINE_QUERY_MANAGER = 'inline_query_manager'
 CHOSEN_INLINE_RESULT_MANAGER = 'chosen_inline_result_manager'
 CALLBACK_QUERY_MANAGER = 'callback_query_manager'
@@ -53,6 +55,7 @@ examples = {
     CHANNEL_POST_MANAGER : "lambda message: message.chat.id == xyz",
     EDITED_CHANNEL_POST_MANAGER : "lambda message: message.chat.id == xyz",
     MESSAGE_REACTION_MANAGER: "lambda message_reaction: message_reaction.chat.id == xyz",
+    MESSAGE_REACTION_COUNT_MANAGER: "lambda message_reaction_count: message_reaction_count.chat.id == xyz",
     INLINE_QUERY_MANAGER : "lambda inline_query: inline_query.from_user.id == xyz",
     CHOSEN_INLINE_RESULT_MANAGER : "lambda chosen_inline_result: chosen_inline_result.from_user.id == xyz",
     CALLBACK_QUERY_MANAGER : "lambda callback_query: callback_query.from_user.id == xyz",

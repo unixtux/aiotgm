@@ -106,6 +106,7 @@ __all__ = [
     'MessageAutoDeleteTimerChanged',
     'MessageEntity',
     'MessageId',
+    'MessageReactionCountUpdated',
     'MessageReactionUpdated',
     'OrderInfo',
     'PassportData',
@@ -126,6 +127,7 @@ __all__ = [
     'PollOption',
     'PreCheckoutQuery',
     'ProximityAlertTriggered',
+    'ReactionCount',
     'ReactionType',
     'ReactionTypeEmoji',
     'ReactionTypeCustomEmoji',
@@ -1098,6 +1100,58 @@ class MessageReactionUpdated(TelegramType):
         self.new_reaction = new_reaction
         self.user = user
         self.actor_chat = actor_chat
+
+
+class ReactionCount(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#reactioncount
+    Represents a reaction added to a message along with the number of times it was added.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = check_dict(result)
+        obj['type'] = ReactionType.dese(obj.get('type'))
+        obj['total_count'] = obj.get('total_count')
+
+    def __init__(
+        self,
+        type: ReactionType,
+        total_count: int,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.type = type
+        self.total_count = total_count
+
+
+class MessageReactionCountUpdated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messagereactioncountupdated
+    This object represents reaction changes on a message with anonymous reactions.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = check_dict(result)
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['message_id'] = obj.get('message_id')
+        obj['date'] = obj.get('date')
+        obj['reactions'] = [ReactionCount.dese(obj.get(kwargs) for kwargs in obj.get('reactions'))]
+
+    def __init__(
+        self,
+        chat: Chat,
+        message_id: int,
+        date: int,
+        reactions: list[ReactionCount],
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.chat = chat
+        self.message_id = message_id
+        self.date = date
+        self.reactions = reactions
 
 
 class MessageId(TelegramType):
@@ -5065,6 +5119,7 @@ class Update(TelegramType):
         obj['channel_post'] = Message.dese(obj.get('channel_post'))
         obj['edited_channel_post'] = Message.dese(obj.get('edited_channel_post'))
         obj['message_reaction'] = MessageReactionUpdated.dese(obj.get('message_reaction'))
+        obj['message_reaction_count'] = MessageReactionCountUpdated.dese(obj.get('message_reaction_count'))
         obj['inline_query'] = InlineQuery.dese(obj.get('inline_query'))
         obj['chosen_inline_result'] = ChosenInlineResult.dese(obj.get('chosen_inline_result'))
         obj['callback_query'] = CallbackQuery.dese(obj.get('callback_query'))
@@ -5085,6 +5140,7 @@ class Update(TelegramType):
         channel_post: Optional[Message] = None,
         edited_channel_post: Optional[Message] = None,
         message_reaction: Optional[MessageReactionUpdated] = None,
+        message_reaction_count: Optional[MessageReactionCountUpdated] = None,
         inline_query: Optional[InlineQuery] = None,
         chosen_inline_result: Optional[ChosenInlineResult] = None,
         callback_query: Optional[CallbackQuery] = None,
@@ -5104,6 +5160,7 @@ class Update(TelegramType):
         self.channel_post = channel_post
         self.edited_channel_post = edited_channel_post
         self.message_reaction = message_reaction
+        self.message_reaction_count = message_reaction_count
         self.inline_query = inline_query
         self.chosen_inline_result = chosen_inline_result
         self.callback_query = callback_query
