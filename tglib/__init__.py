@@ -630,6 +630,37 @@ class Client(TelegramApi):
         return MessageId.dese(result)
 
 
+    async def copy_messages(
+        self,
+        chat_id: Union[int, str],
+        from_chat_id: Union[int, str],
+        message_ids: list[int],
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        remove_caption: Optional[bool] = None
+    ) -> list[MessageId]:
+        '''
+        https://core.telegram.org/bots/api#copymessages
+        Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service
+        messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value
+        of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have
+        a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.
+        '''
+        params = {
+            'chat_id': chat_id,
+            'from_chat_id': from_chat_id,
+            'message_ids': message_ids
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if remove_caption is not None: params['remove_caption'] = remove_caption
+        result = await super().copy_messages(params)
+        return [MessageId.dese(mid) for mid in result]
+
+
     async def send_photo(
         self,
         chat_id: Union[int, str],

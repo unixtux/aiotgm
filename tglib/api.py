@@ -281,6 +281,10 @@ class TelegramApi:
         method = 'copyMessage'
         return await self._request(method, params)
 
+    async def copy_messages(self, params: dict):
+        method = 'copyMessages'
+        return await self._request(method, params)
+
     async def send_photo(self, params: dict):
         method = 'sendPhoto'
         files = _get_files(params, 'photo')
