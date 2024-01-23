@@ -200,7 +200,7 @@ class TelegramType:
 def _serialize(
     val: Any,
     *,
-    last = True
+    last: bool = True
 ) -> Union[Any, str, list, dict]:
 
     if isinstance(val, TelegramType):
@@ -226,7 +226,7 @@ def _serialize(
     else:
         res = val
 
-    if last is False:
+    if not last:
         return res
     else:
         return res if isinstance(res, str) else json.dumps(res, ensure_ascii = False)

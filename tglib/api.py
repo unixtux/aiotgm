@@ -63,16 +63,13 @@ async def _check_json(response: ClientResponse) -> Any:
     if RESP_DEBUG:
         logger.debug(result)
 
-    if response.ok is True:
+    if result['ok'] is True:
         return result['result']
     else:
-        error_code = result['error_code']
-        description = result['description']
-
         raise TelegramError(
             {
-                'error_code': error_code,
-                'description': description
+                'error_code': result['error_code'],
+                'description': result['description']
             }
         )
 
@@ -117,10 +114,10 @@ def _prepare_data(
     if files is None:
         return data
 
-    for key in files:
+    for key, value in files.items():
 
-        content = files[key]['content']
-        file_name = files[key]['file_name']
+        content = value['content']
+        file_name = value['file_name']
 
         data.add_field(
             key,
