@@ -242,73 +242,6 @@ def _get_kwargs(obj: TelegramType, kwargs: dict) -> bool:
     return False
 
 
-# ReactionType: 2 SUBCLASSES
-
-class ReactionType(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#reactiontype
-    This object describes the type of a reaction.
-    Currently, it can be one of:
-    - ReactionTypeEmoji
-    - ReactionTypeCustomEmoji
-    '''
-    @classmethod
-    def dese(cls, result):
-        if result is None: return None
-        obj = _check_dict(result)
-        type = obj['type']
-
-        if type == 'emoji':
-            return ReactionTypeEmoji(**obj)
-
-        elif type == 'custom_emoji':
-            return ReactionTypeCustomEmoji(**obj)
-        else:
-            return cls(**obj)
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        reaction_types = ', '.join([
-            ReactionTypeEmoji.__name__,
-            ReactionTypeCustomEmoji.__name__
-        ])
-        logger.warning(
-            'ReactionType warning, expected one'
-            f' of the following types: {reaction_types}.'
-        )
-        self.__dict__ = kwargs
-
-
-class ReactionTypeEmoji(ReactionType):
-    '''
-    https://core.telegram.org/bots/api#reactiontypeemoji
-    The reaction is based on an emoji.
-    '''
-    def __init__(
-        self,
-        emoji: str,
-        type: str = 'emoji'
-    ):
-        self.type = type
-        self.emoji = emoji
-
-
-class ReactionTypeCustomEmoji(ReactionType):
-    '''
-    https://core.telegram.org/bots/api#reactiontypecustomemoji
-    The reaction is based on a custom emoji.
-    '''
-    def __init__(
-        self,
-        custom_emoji_id: str,
-        type: str = 'custom_emoji'
-    ):
-        self.type = type
-        self.custom_emoji_id = custom_emoji_id
-
-
 class ChatPermissions(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatpermissions
@@ -1063,6 +996,73 @@ class Chat(TelegramType):
         self.can_set_sticker_set = can_set_sticker_set
         self.linked_chat_id = linked_chat_id
         self.location = location
+
+
+# ReactionType: 2 SUBCLASSES
+
+class ReactionType(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#reactiontype
+    This object describes the type of a reaction.
+    Currently, it can be one of:
+    - ReactionTypeEmoji
+    - ReactionTypeCustomEmoji
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        type = obj['type']
+
+        if type == 'emoji':
+            return ReactionTypeEmoji(**obj)
+
+        elif type == 'custom_emoji':
+            return ReactionTypeCustomEmoji(**obj)
+        else:
+            return cls(**obj)
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        reaction_types = ', '.join([
+            ReactionTypeEmoji.__name__,
+            ReactionTypeCustomEmoji.__name__
+        ])
+        logger.warning(
+            'ReactionType warning, expected one'
+            f' of the following types: {reaction_types}.'
+        )
+        self.__dict__ = kwargs
+
+
+class ReactionTypeEmoji(ReactionType):
+    '''
+    https://core.telegram.org/bots/api#reactiontypeemoji
+    The reaction is based on an emoji.
+    '''
+    def __init__(
+        self,
+        emoji: str,
+        type: str = 'emoji'
+    ):
+        self.type = type
+        self.emoji = emoji
+
+
+class ReactionTypeCustomEmoji(ReactionType):
+    '''
+    https://core.telegram.org/bots/api#reactiontypecustomemoji
+    The reaction is based on a custom emoji.
+    '''
+    def __init__(
+        self,
+        custom_emoji_id: str,
+        type: str = 'custom_emoji'
+    ):
+        self.type = type
+        self.custom_emoji_id = custom_emoji_id
 
 
 class MessageReactionUpdated(TelegramType):
