@@ -3626,12 +3626,12 @@ class InputTextMessageContent(InputMessageContent):
         message_text: str,
         parse_mode: Optional[str] = None,
         entities: Optional[list[MessageEntity]] = None,
-        disable_web_page_preview: Optional[bool] = None
+        link_preview_options: Optional[LinkPreviewOptions] = None
     ):
         self.message_text = message_text
         self.parse_mode = parse_mode
         self.entities = entities
-        self.disable_web_page_preview = disable_web_page_preview
+        self.link_preview_options = link_preview_options
 
 
 class InputLocationMessageContent(InputMessageContent):
