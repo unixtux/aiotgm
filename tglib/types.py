@@ -39,6 +39,7 @@ __all__ = [
     'Document',
     'EncryptedCredentials',
     'EncryptedPassportElement',
+    'ExternalReplyInfo',
     'File',
     'ForceReply',
     'ForumTopic',
@@ -593,6 +594,7 @@ class Message(TelegramType):
         obj['is_topic_message'] = obj.get('is_topic_message')
         obj['is_automatic_forward'] = obj.get('is_automatic_forward')
         obj['reply_to_message'] = Message.dese(obj.get('reply_to_message'))
+        obj['external_reply'] = ExternalReplyInfo.dese(obj.get('external_reply'))
         obj['via_bot'] = User.dese(obj.get('via_bot'))
         obj['edit_date'] = obj.get('edit_date')
         obj['has_protected_content'] = obj.get('has_protected_content')
@@ -669,6 +671,7 @@ class Message(TelegramType):
         is_topic_message = None,
         is_automatic_forward = None,
         reply_to_message = None,
+        external_reply = None,
         via_bot = None,
         edit_date = None,
         has_protected_content = None,
@@ -744,6 +747,7 @@ class Message(TelegramType):
         self.is_topic_message: Optional[Literal[True]] = is_topic_message
         self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
         self.reply_to_message: Optional[Message] = reply_to_message
+        self.external_reply: Optional[ExternalReplyInfo] = external_reply
         self.via_bot: Optional[User] = via_bot
         self.edit_date: Optional[int] = edit_date
         self.has_protected_content: Optional[Literal[True]] = has_protected_content
@@ -5108,6 +5112,93 @@ class GameHighScore(TelegramType):
         self.position = position
         self.user = user
         self.score = score
+
+
+class ExternalReplyInfo(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#externalreplyinfo
+    This object contains information about a message that is being replied to, which may come from another chat or forum topic.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['origin'] = MessageOrigin.dese(obj.get('origin'))
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['message_id'] = obj.get('message_id')
+        obj['link_preview_options'] = LinkPreviewOptions.dese(obj.get('link_preview_options'))
+        obj['animation'] = Animation.dese(obj.get('animation'))
+        obj['audio'] = Audio.dese(obj.get('audio'))
+        obj['document'] = Document.dese(obj.get('document'))
+        obj['photo'] = [PhotoSize.dese(kwargs) for kwargs in obj.get('photo')] if 'photo' in obj else None
+        obj['sticker'] = Sticker.dese(obj.get('sticker'))
+        obj['story'] = Story.dese(obj.get('story'))
+        obj['video'] = Video.dese(obj.get('video'))
+        obj['video_note'] = VideoNote.dese(obj.get('video_note'))
+        obj['voice'] = Voice.dese(obj.get('voice'))
+        obj['has_media_spoiler'] = obj.get('has_media_spoiler')
+        obj['contact'] = Contact.dese(obj.get('contact'))
+        obj['dice'] = Dice.dese(obj.get('dice'))
+        obj['game'] = Game.dese(obj.get('game'))
+        obj['giveaway'] = Giveaway.dese(obj.get('giveaway'))
+        obj['giveaway_winners'] = GiveawayWinners.dese(obj.get('giveaway_winners'))
+        obj['invoice'] = Invoice.dese(obj.get('invoice'))
+        obj['location'] = Location.dese(obj.get('location'))
+        obj['poll'] = Poll.dese(obj.get('poll'))
+        obj['venue'] = Venue.dese(obj.get('venue'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        origin: MessageOrigin,
+        chat: Optional[Chat] = None,
+        message_id: Optional[int] = None,
+        link_preview_options: Optional[LinkPreviewOptions] = None,
+        animation: Optional[Animation] = None,
+        audio: Optional[Audio] = None,
+        document: Optional[Document] = None,
+        photo: Optional[list[PhotoSize]] = None,
+        sticker: Optional[Sticker] = None,
+        story: Optional[Story] = None,
+        video: Optional[Video] = None,
+        video_note: Optional[VideoNote] = None,
+        voice: Optional[Voice] = None,
+        has_media_spoiler: Optional[Literal[True]] = None,
+        contact: Optional[Contact] = None,
+        dice: Optional[Dice] = None,
+        game: Optional[Game] = None,
+        giveaway: Optional[Giveaway] = None,
+        giveaway_winners: Optional[GiveawayWinners] = None,
+        invoice: Optional[Invoice] = None,
+        location: Optional[Location] = None,
+        poll: Optional[Poll] = None,
+        venue: Optional[Venue] = None,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.origin = origin
+        self.chat = chat
+        self.message_id = message_id
+        self.link_preview_options = link_preview_options
+        self.animation = animation
+        self.audio = audio
+        self.document = document
+        self.photo = photo
+        self.sticker = sticker
+        self.story = story
+        self.video = video
+        self.video_note = video_note
+        self.voice = voice
+        self.has_media_spoiler = has_media_spoiler
+        self.contact = contact
+        self.dice = dice
+        self.game = game
+        self.giveaway = giveaway
+        self.giveaway_winners = giveaway_winners
+        self.invoice = invoice
+        self.location = location
+        self.poll = poll
+        self.venue = venue
 
 
 class Update(TelegramType):
