@@ -273,6 +273,10 @@ class TelegramApi:
         method = 'forwardMessage'
         return await self._request(method, params)
 
+    async def forward_messages(self, params: dict):
+        method = 'forwardMessages'
+        return await self._request(method, params)
+
     async def copy_message(self, params: dict):
         method = 'copyMessage'
         return await self._request(method, params)

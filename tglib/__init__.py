@@ -563,6 +563,34 @@ class Client(TelegramApi):
         return Message.dese(result)
 
 
+    async def forward_messages(
+        self,
+        chat_id: Union[int, str],
+        from_chat_id: Union[int, str],
+        message_ids: list[int],
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None
+    ) -> list[MessageId]:
+        '''
+        https://core.telegram.org/bots/api#forwardmessages
+        Use this method to forward multiple messages of any kind. If some of the specified messages can't be found
+        or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album
+        grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
+        '''
+        params = {
+            'chat_id': chat_id,
+            'from_chat_id': from_chat_id,
+            'message_ids': message_ids
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        result = await super().forward_messages(params)
+        return [MessageId.dese(mid) for mid in result]
+
+
     async def copy_message(
         self,
         chat_id: Union[int, str],
