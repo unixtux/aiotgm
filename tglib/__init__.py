@@ -508,7 +508,7 @@ class Client(TelegramApi):
         message_thread_id: Optional[int] = None,
         parse_mode: Optional[str] = None,
         entities: Optional[list[MessageEntity]] = None,
-        disable_web_page_preview: Optional[bool] = None,
+        link_preview_options: Optional[LinkPreviewOptions] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
@@ -526,7 +526,7 @@ class Client(TelegramApi):
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if entities is not None: params['entities'] = entities
-        if disable_web_page_preview is not None: params['disable_web_page_preview'] = disable_web_page_preview
+        if link_preview_options is not None: params['link_preview_options'] = link_preview_options
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
@@ -2208,7 +2208,7 @@ class Client(TelegramApi):
         inline_message_id: Optional[str] = None,
         parse_mode: Optional[str] = None,
         entities: Optional[list[MessageEntity]] = None,
-        disable_web_page_preview: Optional[bool] = None,
+        link_preview_options: Optional[LinkPreviewOptions] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
         '''
@@ -2225,7 +2225,7 @@ class Client(TelegramApi):
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if entities is not None: params['entities'] = entities
-        if disable_web_page_preview is not None: params['disable_web_page_preview'] = disable_web_page_preview
+        if link_preview_options is not None: params['link_preview_options'] = link_preview_options
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_text(params)
         return Message.dese(result) if result is not True else True

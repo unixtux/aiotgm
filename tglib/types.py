@@ -96,6 +96,7 @@ __all__ = [
     'KeyboardButtonRequestChat',
     'KeyboardButtonRequestUser',
     'LabeledPrice',
+    'LinkPreviewOptions',
     'Location',
     'LoginUrl',
     'MaskPosition',
@@ -482,6 +483,37 @@ class LabeledPrice(TelegramType):
     ):
         self.label = label
         self.amount = amount
+
+
+class LinkPreviewOptions(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#linkpreviewoptions
+    Describes the options used for link preview generation.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['is_disabled'] = obj.get('is_disabled')
+        obj['url'] = obj.get('url')
+        obj['prefer_small_media'] = obj.get('prefer_small_media')
+        obj['prefer_large_media'] = obj.get('prefer_large_media')
+        obj['show_above_text'] = obj.get('show_above_text')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        is_disabled: Optional[bool] = None,
+        url: Optional[str] = None,
+        prefer_small_media: Optional[bool] = None,
+        prefer_large_media: Optional[bool] = None,
+        show_above_text: Optional[bool] = None
+    ):
+        self.is_disabled = is_disabled
+        self.url = url
+        self.prefer_small_media = prefer_small_media
+        self.prefer_large_media = prefer_large_media
+        self.show_above_text = show_above_text
 
 
 class User(TelegramType):
