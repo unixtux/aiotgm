@@ -2284,13 +2284,13 @@ class KeyboardButton(TelegramType):
     https://core.telegram.org/bots/api#keyboardbutton
     This object represents one button of the reply keyboard. For
     simple text buttons, String can be used instead of this object to specify
-    the button text. The optional fields web_app, request_user, request_chat,
+    the button text. The optional fields web_app, request_users, request_chat,
     request_contact, request_location, and request_poll are mutually exclusive.
     '''
     def __init__(
         self,
         text: str,
-        request_user: Optional[KeyboardButtonRequestUser] = None,
+        request_users: Optional[KeyboardButtonRequestUsers] = None,
         request_chat: Optional[KeyboardButtonRequestChat] = None,
         request_contact: Optional[bool] = None,
         request_location: Optional[bool] = None,
@@ -2298,7 +2298,7 @@ class KeyboardButton(TelegramType):
         web_app: Optional[WebAppInfo] = None
     ):
         self.text = text
-        self.request_user = request_user
+        self.request_users = request_users
         self.request_chat = request_chat
         self.request_contact = request_contact
         self.request_location = request_location
