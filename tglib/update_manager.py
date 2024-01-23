@@ -29,7 +29,9 @@ __all__ = [
     'POLL_ANSWER_MANAGER',
     'MY_CHAT_MEMBER_MANAGER',
     'CHAT_MEMBER_MANAGER',
-    'CHAT_JOIN_REQUEST_MANAGER'
+    'CHAT_JOIN_REQUEST_MANAGER',
+    'CHAT_BOOST_MANAGER',
+    'REMOVED_CHAT_BOOST_MANAGER'
 ]
 
 MESSAGE_MANAGER = 'message_manager'
@@ -48,6 +50,8 @@ POLL_ANSWER_MANAGER = 'poll_answer_manager'
 MY_CHAT_MEMBER_MANAGER = 'my_chat_member_manager'
 CHAT_MEMBER_MANAGER = 'chat_member_manager'
 CHAT_JOIN_REQUEST_MANAGER = 'chat_join_request_manager'
+CHAT_BOOST_MANAGER = 'chat_boost_manager'
+REMOVED_CHAT_BOOST_MANAGER = 'removed_chat_boost_manager'
 
 examples = {
     MESSAGE_MANAGER : "lambda message: message.chat.id == xyz",
@@ -65,7 +69,9 @@ examples = {
     POLL_ANSWER_MANAGER : "lambda poll_answer: poll_answer.poll_id == xyz",
     MY_CHAT_MEMBER_MANAGER : "lambda my_chat_member: my_chat_member.chat.id == xyz",
     CHAT_MEMBER_MANAGER : "lambda chat_member: chat_member.chat.id == xyz",
-    CHAT_JOIN_REQUEST_MANAGER : "lambda chat_join_request: chat_join_request.chat.id == xyz"
+    CHAT_JOIN_REQUEST_MANAGER : "lambda chat_join_request: chat_join_request.chat.id == xyz",
+    CHAT_BOOST_MANAGER: "lambda chat_boost: chat_boost.chat.id == xyz",
+    REMOVED_CHAT_BOOST_MANAGER: "lambda removed_chat_boost: removed_chat_boost.chat.id == xyz"
 }
 
 

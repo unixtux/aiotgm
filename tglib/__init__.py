@@ -82,6 +82,8 @@ class Client(TelegramApi):
         self.__my_chat_member_manager = UpdateManager(MY_CHAT_MEMBER_MANAGER, ChatMemberUpdated)
         self.__chat_member_manager = UpdateManager(CHAT_MEMBER_MANAGER, ChatMemberUpdated)
         self.__chat_join_request_manager = UpdateManager(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
+        self.__chat_boost_manager = UpdateManager(CHAT_BOOST_MANAGER, ChatBoostUpdated)
+        self.__removed_chat_boost_manager = UpdateManager(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
 
 
     @property
@@ -104,7 +106,7 @@ class Client(TelegramApi):
         self.__protect_content = val
 
 
-    # 16 UpdateManagers
+    # 18 UpdateManagers
 
     @property
     def message_manager(self) -> UpdateManager:
@@ -250,6 +252,23 @@ class Client(TelegramApi):
             self.chat_join_request_manager.add_rule(checker, func)
         return wrap
 
+    @property
+    def chat_boost_manager(self) -> UpdateManager:
+        return self.__chat_boost_manager
+
+    def manage_chat_boost(self, checker = lambda chat_boost: True):
+        def wrap(func: Callable[[ChatBoostUpdated], Any]):
+            self.chat_boost_manager.add_rule(checker, func)
+        return wrap
+
+    @property
+    def removed_chat_boost_manager(self) -> UpdateManager:
+        return self.__removed_chat_boost_manager
+
+    def manage_removed_chat_boost(self, checker = lambda removed_chat_boost: True):
+        def wrap(func: Callable[[ChatBoostRemoved], Any]):
+            self.removed_chat_boost_manager.add_rule(checker, func)
+        return wrap
 
     # Processing new updates
 
@@ -447,6 +466,25 @@ class Client(TelegramApi):
                 except:
                     return
 
+        elif update.chat_boost:
+            obj: ChatBoostUpdated = update.chat_boost
+            for rule in self.chat_boost_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                        return
+                except:
+                    return
+
+        elif update.removed_chat_boost:
+            obj: ChatBoostRemoved = update.removed_chat_boost
+            for rule in self.removed_chat_boost_manager:
+                try:
+                    result = await _run_coroutine(rule, obj)
+                    if not isinstance(result, NextManager):
+                        return
+                except:
+                    return
 
     # Available methods
 

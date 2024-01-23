@@ -19,6 +19,8 @@ __all__ = [
     'CallbackQuery',
     'Chat',
     'ChatAdministratorRights',
+    'ChatBoostUpdated',
+    'ChatBoostRemoved',
     'ChatInviteLink',
     'ChatJoinRequest',
     'ChatLocation',
@@ -5297,6 +5299,60 @@ class ExternalReplyInfo(TelegramType):
         self.venue = venue
 
 
+class ChatBoostUpdated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostupdated
+    This object represents a boost added to a chat or changed.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['boost'] = ChatBoost.dese(obj.get('boost'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        boost: ChatBoost,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.chat = chat
+        self.boost = boost
+
+
+class ChatBoostRemoved(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostremoved
+    This object represents a boost removed from a chat.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['boost_id'] = obj.get('boost_id')
+        obj['remove_date'] = obj.get('remove_date')
+        obj['source'] = ChatBoostSource.dese(obj.get('source'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        boost_id: str,
+        remove_date: int,
+        source: ChatBoostSource,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.chat = chat
+        self.boost_id = boost_id
+        self.remove_date = remove_date
+        self.source = source
+
+
 class Update(TelegramType):
     '''
     https://core.telegram.org/bots/api#update
@@ -5324,6 +5380,8 @@ class Update(TelegramType):
         obj['my_chat_member'] = ChatMemberUpdated.dese(obj.get('my_chat_member'))
         obj['chat_member'] = ChatMemberUpdated.dese(obj.get('chat_member'))
         obj['chat_join_request'] = ChatJoinRequest.dese(obj.get('chat_join_request'))
+        obj['chat_boost'] = ChatBoostUpdated.dese(obj.get('chat_boost'))
+        obj['removed_chat_boost'] = ChatBoostRemoved.dese(obj.get('removed_chat_boost'))
         return cls(**obj)
 
     def __init__(
@@ -5345,6 +5403,8 @@ class Update(TelegramType):
         my_chat_member: Optional[ChatMemberUpdated] = None,
         chat_member: Optional[ChatMemberUpdated] = None,
         chat_join_request: Optional[ChatJoinRequest] = None,
+        chat_boost: Optional[ChatBoostUpdated] = None,
+        removed_chat_boost: Optional[ChatBoostRemoved] = None,
         **kwargs
     ):
         _get_kwargs(self, kwargs)
@@ -5365,3 +5425,5 @@ class Update(TelegramType):
         self.my_chat_member = my_chat_member
         self.chat_member = chat_member
         self.chat_join_request = chat_join_request
+        self.chat_boost = chat_boost
+        self.removed_chat_boost = removed_chat_boost
