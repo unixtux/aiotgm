@@ -893,111 +893,6 @@ class ChatLocation(TelegramType):
         self.address = address
 
 
-class Chat(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chat
-    This object represents a chat.
-    '''
-    @classmethod
-    def dese(cls, result):
-        if result is None: return None
-        obj = _check_dict(result)
-        obj['id'] = obj.get('id')
-        obj['type'] = obj.get('type')
-        obj['title'] = obj.get('title')
-        obj['username'] = obj.get('username')
-        obj['first_name'] = obj.get('first_name')
-        obj['last_name'] = obj.get('last_name')
-        obj['is_forum'] = obj.get('is_forum')
-        obj['photo'] = ChatPhoto.dese(obj.get('photo'))
-        obj['active_usernames'] = obj.get('active_usernames')
-        obj['emoji_status_custom_emoji_id'] = obj.get('emoji_status_custom_emoji_id')
-        obj['emoji_status_expiration_date'] = obj.get('emoji_status_expiration_date')
-        obj['bio'] = obj.get('bio')
-        obj['has_private_forwards'] = obj.get('has_private_forwards')
-        obj['has_restricted_voice_and_video_messages'] = obj.get('has_restricted_voice_and_video_messages')
-        obj['join_to_send_messages'] = obj.get('join_to_send_messages')
-        obj['join_by_request'] = obj.get('join_by_request')
-        obj['description'] = obj.get('description')
-        obj['invite_link'] = obj.get('invite_link')
-        obj['pinned_message'] = Message.dese(obj.get('pinned_message'))
-        obj['permissions'] = ChatPermissions.dese(obj.get('permissions'))
-        obj['slow_mode_delay'] = obj.get('slow_mode_delay')
-        obj['message_auto_delete_time'] = obj.get('message_auto_delete_time')
-        obj['has_aggressive_anti_spam_enabled'] = obj.get('has_aggressive_anti_spam_enabled')
-        obj['has_hidden_members'] = obj.get('has_hidden_members')
-        obj['has_protected_content'] = obj.get('has_protected_content')
-        obj['sticker_set_name'] = obj.get('sticker_set_name')
-        obj['can_set_sticker_set'] = obj.get('can_set_sticker_set')
-        obj['linked_chat_id'] = obj.get('linked_chat_id')
-        obj['location'] = ChatLocation.dese(obj.get('location'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        id: int,
-        type: str,
-        title: Optional[str] = None,
-        username: Optional[str] = None,
-        first_name: Optional[str] = None,
-        last_name: Optional[str] = None,
-        is_forum: Optional[Literal[True]] = None,
-        photo: Optional[ChatPhoto] = None,
-        active_usernames: Optional[list[str]] = None,
-        emoji_status_custom_emoji_id: Optional[str] = None,
-        emoji_status_expiration_date: Optional[int] = None,
-        bio: Optional[str] = None,
-        has_private_forwards: Optional[Literal[True]] = None,
-        has_restricted_voice_and_video_messages: Optional[Literal[True]] = None,
-        join_to_send_messages: Optional[Literal[True]] = None,
-        join_by_request: Optional[Literal[True]] = None,
-        description: Optional[str] = None,
-        invite_link: Optional[str] = None,
-        pinned_message: Optional[Message] = None,
-        permissions: Optional[ChatPermissions] = None,
-        slow_mode_delay: Optional[int] = None,
-        message_auto_delete_time: Optional[int] = None,
-        has_aggressive_anti_spam_enabled: Optional[Literal[True]] = None,
-        has_hidden_members: Optional[Literal[True]] = None,
-        has_protected_content: Optional[Literal[True]] = None,
-        sticker_set_name: Optional[str] = None,
-        can_set_sticker_set: Optional[Literal[True]] = None,
-        linked_chat_id: Optional[int] = None,
-        location: Optional[ChatLocation] = None,
-        **kwargs
-    ):
-        _get_kwargs(self, kwargs)
-        self.id = id
-        self.type = type
-        self.title = title
-        self.username = username
-        self.first_name = first_name
-        self.last_name = last_name
-        self.is_forum = is_forum
-        self.photo = photo
-        self.active_usernames = active_usernames
-        self.emoji_status_custom_emoji_id = emoji_status_custom_emoji_id
-        self.emoji_status_expiration_date = emoji_status_expiration_date
-        self.bio = bio
-        self.has_private_forwards = has_private_forwards
-        self.has_restricted_voice_and_video_messages = has_restricted_voice_and_video_messages
-        self.join_to_send_messages = join_to_send_messages
-        self.join_by_request = join_by_request
-        self.description = description
-        self.invite_link = invite_link
-        self.pinned_message = pinned_message
-        self.permissions = permissions
-        self.slow_mode_delay = slow_mode_delay
-        self.message_auto_delete_time = message_auto_delete_time
-        self.has_aggressive_anti_spam_enabled = has_aggressive_anti_spam_enabled
-        self.has_hidden_members = has_hidden_members
-        self.has_protected_content = has_protected_content
-        self.sticker_set_name = sticker_set_name
-        self.can_set_sticker_set = can_set_sticker_set
-        self.linked_chat_id = linked_chat_id
-        self.location = location
-
-
 # ReactionType: 2 SUBCLASSES
 
 class ReactionType(TelegramType):
@@ -1063,6 +958,114 @@ class ReactionTypeCustomEmoji(ReactionType):
     ):
         self.type = type
         self.custom_emoji_id = custom_emoji_id
+
+
+class Chat(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chat
+    This object represents a chat.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['id'] = obj.get('id')
+        obj['type'] = obj.get('type')
+        obj['title'] = obj.get('title')
+        obj['username'] = obj.get('username')
+        obj['first_name'] = obj.get('first_name')
+        obj['last_name'] = obj.get('last_name')
+        obj['is_forum'] = obj.get('is_forum')
+        obj['photo'] = ChatPhoto.dese(obj.get('photo'))
+        obj['active_usernames'] = obj.get('active_usernames')
+        obj['available_reactions'] = [ReactionType.dese(kwargs) for kwargs in obj.get('available_reactions')] if 'available_reactions' in obj else None
+        obj['emoji_status_custom_emoji_id'] = obj.get('emoji_status_custom_emoji_id')
+        obj['emoji_status_expiration_date'] = obj.get('emoji_status_expiration_date')
+        obj['bio'] = obj.get('bio')
+        obj['has_private_forwards'] = obj.get('has_private_forwards')
+        obj['has_restricted_voice_and_video_messages'] = obj.get('has_restricted_voice_and_video_messages')
+        obj['join_to_send_messages'] = obj.get('join_to_send_messages')
+        obj['join_by_request'] = obj.get('join_by_request')
+        obj['description'] = obj.get('description')
+        obj['invite_link'] = obj.get('invite_link')
+        obj['pinned_message'] = Message.dese(obj.get('pinned_message'))
+        obj['permissions'] = ChatPermissions.dese(obj.get('permissions'))
+        obj['slow_mode_delay'] = obj.get('slow_mode_delay')
+        obj['message_auto_delete_time'] = obj.get('message_auto_delete_time')
+        obj['has_aggressive_anti_spam_enabled'] = obj.get('has_aggressive_anti_spam_enabled')
+        obj['has_hidden_members'] = obj.get('has_hidden_members')
+        obj['has_protected_content'] = obj.get('has_protected_content')
+        obj['sticker_set_name'] = obj.get('sticker_set_name')
+        obj['can_set_sticker_set'] = obj.get('can_set_sticker_set')
+        obj['linked_chat_id'] = obj.get('linked_chat_id')
+        obj['location'] = ChatLocation.dese(obj.get('location'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: int,
+        type: str,
+        title: Optional[str] = None,
+        username: Optional[str] = None,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
+        is_forum: Optional[Literal[True]] = None,
+        photo: Optional[ChatPhoto] = None,
+        active_usernames: Optional[list[str]] = None,
+        available_reactions: Optional[list[ReactionType]] = None,
+        emoji_status_custom_emoji_id: Optional[str] = None,
+        emoji_status_expiration_date: Optional[int] = None,
+        bio: Optional[str] = None,
+        has_private_forwards: Optional[Literal[True]] = None,
+        has_restricted_voice_and_video_messages: Optional[Literal[True]] = None,
+        join_to_send_messages: Optional[Literal[True]] = None,
+        join_by_request: Optional[Literal[True]] = None,
+        description: Optional[str] = None,
+        invite_link: Optional[str] = None,
+        pinned_message: Optional[Message] = None,
+        permissions: Optional[ChatPermissions] = None,
+        slow_mode_delay: Optional[int] = None,
+        message_auto_delete_time: Optional[int] = None,
+        has_aggressive_anti_spam_enabled: Optional[Literal[True]] = None,
+        has_hidden_members: Optional[Literal[True]] = None,
+        has_protected_content: Optional[Literal[True]] = None,
+        sticker_set_name: Optional[str] = None,
+        can_set_sticker_set: Optional[Literal[True]] = None,
+        linked_chat_id: Optional[int] = None,
+        location: Optional[ChatLocation] = None,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.id = id
+        self.type = type
+        self.title = title
+        self.username = username
+        self.first_name = first_name
+        self.last_name = last_name
+        self.is_forum = is_forum
+        self.photo = photo
+        self.active_usernames = active_usernames
+        self.available_reactions = available_reactions
+        self.emoji_status_custom_emoji_id = emoji_status_custom_emoji_id
+        self.emoji_status_expiration_date = emoji_status_expiration_date
+        self.bio = bio
+        self.has_private_forwards = has_private_forwards
+        self.has_restricted_voice_and_video_messages = has_restricted_voice_and_video_messages
+        self.join_to_send_messages = join_to_send_messages
+        self.join_by_request = join_by_request
+        self.description = description
+        self.invite_link = invite_link
+        self.pinned_message = pinned_message
+        self.permissions = permissions
+        self.slow_mode_delay = slow_mode_delay
+        self.message_auto_delete_time = message_auto_delete_time
+        self.has_aggressive_anti_spam_enabled = has_aggressive_anti_spam_enabled
+        self.has_hidden_members = has_hidden_members
+        self.has_protected_content = has_protected_content
+        self.sticker_set_name = sticker_set_name
+        self.can_set_sticker_set = can_set_sticker_set
+        self.linked_chat_id = linked_chat_id
+        self.location = location
 
 
 class MessageReactionUpdated(TelegramType):
