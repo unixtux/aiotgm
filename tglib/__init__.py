@@ -1166,6 +1166,28 @@ class Client(TelegramApi):
         return await super().send_chat_action(params)
 
 
+    async def set_message_reaction(
+        self,
+        chat_id: Union[int, str],
+        message_id: int,
+        reaction: Optional[list[ReactionType]] = None,
+        is_big: Optional[bool] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setmessagereaction
+        Use this method to change the chosen reactions on a message. Service messages can't
+        be reacted to. Automatically forwarded messages from a channel to its discussion group
+        have the same available reactions as messages in the channel. Returns True on success.
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_id': message_id
+        }
+        if reaction is not None: params['reaction'] = reaction
+        if is_big is not None: params['is_big'] = is_big
+        return await super().set_message_reaction(params)
+
+
     async def get_user_profile_photos(
         self,
         user_id: int,

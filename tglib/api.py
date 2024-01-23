@@ -340,6 +340,10 @@ class TelegramApi:
         method = 'sendChatAction'
         return await self._request(method, params)
 
+    async def set_message_reaction(self, params: dict):
+        method = 'setMessageReaction'
+        return await self._request(method, params)
+
     async def get_user_profile_photos(self, params: dict):
         method = 'getUserProfilePhotos'
         return await self._request(method, params)
