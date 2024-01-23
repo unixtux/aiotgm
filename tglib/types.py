@@ -144,6 +144,7 @@ __all__ = [
     'Story',
     'SuccessfulPayment',
     'SwitchInlineQueryChosenChat',
+    'TextQuote',
     'Update',
     'User',
     'UserProfilePhotos',
@@ -570,6 +571,35 @@ class MessageEntity(TelegramType):
         self.custom_emoji_id = custom_emoji_id
 
 
+class TextQuote(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#textquote
+    This object contains information about the quoted part of a message that is replied to by the given message.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['text'] = obj.get('text')
+        obj['position'] = obj.get('position')
+        obj['entities'] = [MessageEntity.dese(kwargs) for kwargs in obj.get('entities')] if 'entities' in obj else None
+        obj['is_manual'] = obj.get('is_manual')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        text: str,
+        position: int,
+        entities: Optional[list[MessageEntity]] = None,
+        is_manual: Optional[Literal[True]] = None,
+        **kwargs
+    ):
+        self.text = text
+        self.position = position
+        self.entities = entities
+        self.is_manual = is_manual
+
+
 class Message(TelegramType):
     '''
     https://core.telegram.org/bots/api#message
@@ -595,6 +625,7 @@ class Message(TelegramType):
         obj['is_automatic_forward'] = obj.get('is_automatic_forward')
         obj['reply_to_message'] = Message.dese(obj.get('reply_to_message'))
         obj['external_reply'] = ExternalReplyInfo.dese(obj.get('external_reply'))
+        obj['quote'] = TextQuote.dese(obj.get('quote'))
         obj['via_bot'] = User.dese(obj.get('via_bot'))
         obj['edit_date'] = obj.get('edit_date')
         obj['has_protected_content'] = obj.get('has_protected_content')
@@ -672,6 +703,7 @@ class Message(TelegramType):
         is_automatic_forward = None,
         reply_to_message = None,
         external_reply = None,
+        quote = None,
         via_bot = None,
         edit_date = None,
         has_protected_content = None,
@@ -748,6 +780,7 @@ class Message(TelegramType):
         self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
         self.reply_to_message: Optional[Message] = reply_to_message
         self.external_reply: Optional[ExternalReplyInfo] = external_reply
+        self.quote: Optional[TextQuote] = quote
         self.via_bot: Optional[User] = via_bot
         self.edit_date: Optional[int] = edit_date
         self.has_protected_content: Optional[Literal[True]] = has_protected_content
