@@ -19,6 +19,7 @@ __all__ = [
     'CallbackQuery',
     'Chat',
     'ChatAdministratorRights',
+    'ChatBoost',
     'ChatBoostUpdated',
     'ChatBoostRemoved',
     'ChatInviteLink',
@@ -5297,6 +5298,36 @@ class ExternalReplyInfo(TelegramType):
         self.location = location
         self.poll = poll
         self.venue = venue
+
+
+class ChatBoost(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboost
+    This object contains information about a chat boost.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['boost_id'] = obj.get('boost_id')
+        obj['add_date'] = obj.get('add_date')
+        obj['expiration_date'] = obj.get('expiration_date')
+        obj['source'] = ChatBoostSource.dese(obj.get('source'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        boost_id: str,
+        add_date: int,
+        expiration_date: int,
+        source: ChatBoostSource,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.boost_id = boost_id
+        self.add_date = add_date
+        self.expiration_date = expiration_date
+        self.source = source
 
 
 class ChatBoostUpdated(TelegramType):
