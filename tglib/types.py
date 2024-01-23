@@ -150,7 +150,7 @@ __all__ = [
     'Update',
     'User',
     'UserProfilePhotos',
-    'UserShared',
+    'UsersShared',
     'Venue',
     'Video',
     'VideoChatEnded',
@@ -724,7 +724,7 @@ class Message(TelegramType):
         obj['pinned_message'] = Message.dese(obj.get('pinned_message'))
         obj['invoice'] = Invoice.dese(obj.get('invoice'))
         obj['successful_payment'] = SuccessfulPayment.dese(obj.get('successful_payment'))
-        obj['user_shared'] = UserShared.dese(obj.get('user_shared'))
+        obj['users_shared'] = UsersShared.dese(obj.get('users_shared'))
         obj['chat_shared'] = ChatShared.dese(obj.get('chat_shared'))
         obj['connected_website'] = obj.get('connected_website')
         obj['write_access_allowed'] = WriteAccessAllowed.dese(obj.get('write_access_allowed'))
@@ -803,7 +803,7 @@ class Message(TelegramType):
         pinned_message = None,
         invoice = None,
         successful_payment = None,
-        user_shared = None,
+        users_shared = None,
         chat_shared = None,
         connected_website = None,
         write_access_allowed = None,
@@ -881,7 +881,7 @@ class Message(TelegramType):
         self.pinned_message: Optional[Message] = pinned_message
         self.invoice: Optional[Invoice] = invoice
         self.successful_payment: Optional[SuccessfulPayment] = successful_payment
-        self.user_shared: Optional[UserShared] = user_shared
+        self.users_shared: Optional[UsersShared] = users_shared
         self.chat_shared: Optional[ChatShared] = chat_shared
         self.connected_website: Optional[str] = connected_website
         self.write_access_allowed: Optional[WriteAccessAllowed] = write_access_allowed
@@ -1983,29 +1983,29 @@ class GeneralForumTopicUnhidden(TelegramType):
         self.__dict__ = kwargs
 
 
-class UserShared(TelegramType):
+class UsersShared(TelegramType):
     '''
-    https://core.telegram.org/bots/api#usershared
-    This object contains information about the user whose identifier
-    was shared with the bot using a KeyboardButtonRequestUser button.
+    https://core.telegram.org/bots/api#usersshared
+    This object contains information about the users whose identifiers
+    were shared with the bot using a KeyboardButtonRequestUsers button.
     '''
     @classmethod
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
         obj['request_id'] = obj.get('request_id')
-        obj['user_id'] = obj.get('user_id')
+        obj['user_ids'] = obj.get('user_ids')
         return cls(**obj)
 
     def __init__(
         self,
         request_id: int,
-        user_id: int,
+        user_ids: list[int],
         **kwargs
     ):
         _get_kwargs(self, kwargs)
         self.request_id = request_id
-        self.user_id = user_id
+        self.user_ids = user_ids
 
 
 class ChatShared(TelegramType):
