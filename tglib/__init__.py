@@ -511,8 +511,7 @@ class Client(TelegramApi):
         disable_web_page_preview: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup:  Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -531,8 +530,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_message(params)
         return Message.dese(result)
@@ -576,8 +574,7 @@ class Client(TelegramApi):
         caption_entities: Optional[list[MessageEntity]] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> MessageId:
         '''
@@ -599,8 +596,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().copy_message(params)
         return MessageId.dese(result)
@@ -617,8 +613,7 @@ class Client(TelegramApi):
         has_spoiler: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -638,8 +633,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_photo(params)
         return Message.dese(result)
@@ -659,8 +653,7 @@ class Client(TelegramApi):
         thumbnail: Optional[Union[InputFile, str]] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -686,8 +679,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_audio(params)
         return Message.dese(result)
@@ -705,8 +697,7 @@ class Client(TelegramApi):
         disable_content_type_detection: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -728,8 +719,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_document(params)
         return Message.dese(result)
@@ -751,8 +741,7 @@ class Client(TelegramApi):
         supports_streaming: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -779,8 +768,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_video(params)
         return Message.dese(result)
@@ -801,8 +789,7 @@ class Client(TelegramApi):
         has_spoiler: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -827,8 +814,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_animation(params)
         return Message.dese(result)
@@ -845,8 +831,7 @@ class Client(TelegramApi):
         duration: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -869,8 +854,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_voice(params)
         return Message.dese(result)
@@ -886,8 +870,7 @@ class Client(TelegramApi):
         thumbnail: Optional[Union[InputFile, str]] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -906,8 +889,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_video_note(params)
         return Message.dese(result)
@@ -920,8 +902,7 @@ class Client(TelegramApi):
         message_thread_id: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None
+        reply_parameters: Optional[ReplyParameters] = None
     ) -> list[Message]:
         '''
         https://core.telegram.org/bots/api#sendmediagroup
@@ -937,8 +918,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         result = await super().send_media_group(params)
         return [Message.dese(message) for message in result]
 
@@ -955,8 +935,7 @@ class Client(TelegramApi):
         proximity_alert_radius: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -976,8 +955,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_location(params)
         return Message.dese(result)
@@ -997,8 +975,7 @@ class Client(TelegramApi):
         google_place_type: Optional[str] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -1020,8 +997,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_venue(params)
         return Message.dese(result)
@@ -1037,8 +1013,7 @@ class Client(TelegramApi):
         vcard: Optional[str] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -1056,8 +1031,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_contact(params)
         return Message.dese(result)
@@ -1081,8 +1055,7 @@ class Client(TelegramApi):
         is_closed: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -1108,8 +1081,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_poll(params)
         return Message.dese(result)
@@ -1122,8 +1094,7 @@ class Client(TelegramApi):
         emoji: Optional[str] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -1139,8 +1110,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_dice(params)
         return Message.dese(result)
@@ -2460,8 +2430,7 @@ class Client(TelegramApi):
         emoji: Optional[str] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
     ) -> Message:
         '''
@@ -2478,8 +2447,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_sticker(params)
         return Message.dese(result)
@@ -2801,8 +2769,7 @@ class Client(TelegramApi):
         is_flexible: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Message:
         '''
@@ -2837,8 +2804,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_invoice(params)
         return Message.dese(result)
@@ -2967,8 +2933,7 @@ class Client(TelegramApi):
         message_thread_id: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
-        reply_to_message_id: Optional[int] = None,
-        allow_sending_without_reply: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Message:
         '''
@@ -2983,8 +2948,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_to_message_id is not None: params['reply_to_message_id'] = reply_to_message_id
-        if allow_sending_without_reply is not None: params['allow_sending_without_reply'] = allow_sending_without_reply
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_game(params)
         return Message.dese(result)

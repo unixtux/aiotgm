@@ -624,7 +624,7 @@ class ReplyParameters(TelegramType):
         self.quote_parse_mode = quote_parse_mode
         self.quote_entities = quote_entities
         self.quote_position = quote_position
-        
+
 
 class Message(TelegramType):
     '''
