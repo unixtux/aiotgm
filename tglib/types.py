@@ -94,7 +94,7 @@ __all__ = [
     'KeyboardButton',
     'KeyboardButtonPollType',
     'KeyboardButtonRequestChat',
-    'KeyboardButtonRequestUser',
+    'KeyboardButtonRequestUsers',
     'LabeledPrice',
     'LinkPreviewOptions',
     'Location',
@@ -2220,21 +2220,23 @@ class WebAppInfo(TelegramType):
         self.url = url
 
 
-class KeyboardButtonRequestUser(TelegramType):
+class KeyboardButtonRequestUsers(TelegramType):
     '''
-    https://core.telegram.org/bots/api#keyboardbuttonrequestuser
-    This object defines the criteria used to request a suitable user. The identifier of
-    the selected user will be shared with the bot when the corresponding button is pressed.
+    https://core.telegram.org/bots/api#keyboardbuttonrequestusers
+    This object defines the criteria used to request suitable users. The identifiers of
+    the selected users will be shared with the bot when the corresponding button is pressed.
     '''
     def __init__(
         self,
         request_id: int,
         user_is_bot: Optional[bool] = None,
-        user_is_premium: Optional[bool] = None
+        user_is_premium: Optional[bool] = None,
+        max_quantity: Optional[int] = None
     ):
         self.request_id = request_id
         self.user_is_bot = user_is_bot
         self.user_is_premium = user_is_premium
+        self.max_quantity = max_quantity
 
 
 class KeyboardButtonRequestChat(TelegramType):
