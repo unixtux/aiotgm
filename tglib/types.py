@@ -134,6 +134,7 @@ __all__ = [
     'ReactionTypeCustomEmoji',
     'ReplyKeyboardMarkup',
     'ReplyKeyboardRemove',
+    'ReplyParameters',
     'ResponseParameters',
     'SentWebAppMessage',
     'ShippingAddress',
@@ -594,11 +595,36 @@ class TextQuote(TelegramType):
         is_manual: Optional[Literal[True]] = None,
         **kwargs
     ):
+        _get_kwargs(self, kwargs)
         self.text = text
         self.position = position
         self.entities = entities
         self.is_manual = is_manual
 
+
+class ReplyParameters(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#replyparameters
+    Describes reply parameters for the message that is being sent.
+    '''
+    def __init__(
+        self,
+        message_id: int,
+        chat_id: Optional[Union[int, str]] = None,
+        allow_sending_without_reply: Optional[bool] = None,
+        quote: Optional[str] = None,
+        quote_parse_mode: Optional[str] = None,
+        quote_entities: Optional[list[MessageEntity]] = None,
+        quote_position: Optional[int] = None
+    ):
+        self.message_id = message_id
+        self.chat_id = chat_id
+        self.allow_sending_without_reply = allow_sending_without_reply
+        self.quote = quote
+        self.quote_parse_mode = quote_parse_mode
+        self.quote_entities = quote_entities
+        self.quote_position = quote_position
+        
 
 class Message(TelegramType):
     '''
