@@ -691,6 +691,7 @@ class Message(TelegramType):
         obj['author_signature'] = obj.get('author_signature')
         obj['text'] = obj.get('text')
         obj['entities'] = [MessageEntity.dese(kwargs) for kwargs in obj.get('entities')] if 'entities' in obj else None
+        obj['link_preview_options'] = LinkPreviewOptions.dese(obj.get('link_preview_options'))
         obj['animation'] = Animation.dese(obj.get('animation'))
         obj['audio'] = Audio.dese(obj.get('audio'))
         obj['document'] = Document.dese(obj.get('document'))
@@ -769,6 +770,7 @@ class Message(TelegramType):
         author_signature = None,
         text = None,
         entities = None,
+        link_preview_options = None,
         animation = None,
         audio = None,
         document = None,
@@ -846,6 +848,7 @@ class Message(TelegramType):
         self.author_signature: Optional[str] = author_signature
         self.text: str = text if text is not None else str() # If not text, it's str() instead of None
         self.entities: Optional[list[MessageEntity]] = entities
+        self.link_preview_options: Optional[LinkPreviewOptions] = link_preview_options
         self.animation: Optional[Animation] = animation
         self.audio: Optional[Audio] = audio
         self.document: Optional[Document] = document
