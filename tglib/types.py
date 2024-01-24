@@ -59,6 +59,7 @@ __all__ = [
     'GeneralForumTopicHidden',
     'GeneralForumTopicUnhidden',
     'Giveaway',
+    'GiveawayCreated',
     'InlineKeyboardButton',
     'InlineKeyboardMarkup',
     'InlineQuery',
@@ -745,6 +746,7 @@ class Message(TelegramType):
         obj['forum_topic_reopened'] = ForumTopicReopened.dese(obj.get('forum_topic_reopened'))
         obj['general_forum_topic_hidden'] = GeneralForumTopicHidden.dese(obj.get('general_forum_topic_hidden'))
         obj['general_forum_topic_unhidden'] = GeneralForumTopicUnhidden.dese(obj.get('general_forum_topic_unhidden'))
+        obj['giveaway_created'] = GiveawayCreated.dese(obj.get('giveaway_created'))
         obj['giveaway'] = Giveaway.dese(obj.get('giveaway'))
         obj['video_chat_scheduled'] = VideoChatScheduled.dese(obj.get('video_chat_scheduled'))
         obj['video_chat_started'] = VideoChatStarted.dese(obj.get('video_chat_started'))
@@ -825,6 +827,7 @@ class Message(TelegramType):
         forum_topic_reopened = None,
         general_forum_topic_hidden = None,
         general_forum_topic_unhidden = None,
+        giveaway_created = None,
         giveaway = None,
         video_chat_scheduled = None,
         video_chat_started = None,
@@ -904,6 +907,7 @@ class Message(TelegramType):
         self.forum_topic_reopened: Optional[ForumTopicReopened] = forum_topic_reopened
         self.general_forum_topic_hidden: Optional[GeneralForumTopicHidden] = general_forum_topic_hidden
         self.general_forum_topic_unhidden: Optional[GeneralForumTopicUnhidden] = general_forum_topic_unhidden
+        self.giveaway_created: Optional[GiveawayCreated] = giveaway_created
         self.giveaway: Optional[Giveaway] = giveaway
         self.video_chat_scheduled: Optional[VideoChatScheduled] = video_chat_scheduled
         self.video_chat_started: Optional[VideoChatStarted] = video_chat_started
@@ -5220,6 +5224,25 @@ class GameHighScore(TelegramType):
         self.position = position
         self.user = user
         self.score = score
+
+
+class GiveawayCreated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#giveawaycreated
+    This object represents a service message about the creation of a scheduled giveaway. Currently holds no information.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        return cls(**obj)
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.__dict__ = kwargs
 
 
 class Giveaway(TelegramType):
