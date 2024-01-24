@@ -60,6 +60,7 @@ __all__ = [
     'GeneralForumTopicUnhidden',
     'Giveaway',
     'GiveawayCreated',
+    'GiveawayWinners',
     'InlineKeyboardButton',
     'InlineKeyboardMarkup',
     'InlineQuery',
@@ -748,6 +749,7 @@ class Message(TelegramType):
         obj['general_forum_topic_unhidden'] = GeneralForumTopicUnhidden.dese(obj.get('general_forum_topic_unhidden'))
         obj['giveaway_created'] = GiveawayCreated.dese(obj.get('giveaway_created'))
         obj['giveaway'] = Giveaway.dese(obj.get('giveaway'))
+        obj['giveaway_winners'] = GiveawayWinners.dese(obj.get('giveaway_winners'))
         obj['video_chat_scheduled'] = VideoChatScheduled.dese(obj.get('video_chat_scheduled'))
         obj['video_chat_started'] = VideoChatStarted.dese(obj.get('video_chat_started'))
         obj['video_chat_ended'] = VideoChatEnded.dese(obj.get('video_chat_ended'))
@@ -829,6 +831,7 @@ class Message(TelegramType):
         general_forum_topic_unhidden = None,
         giveaway_created = None,
         giveaway = None,
+        giveaway_winners = None,
         video_chat_scheduled = None,
         video_chat_started = None,
         video_chat_ended = None,
@@ -909,6 +912,7 @@ class Message(TelegramType):
         self.general_forum_topic_unhidden: Optional[GeneralForumTopicUnhidden] = general_forum_topic_unhidden
         self.giveaway_created: Optional[GiveawayCreated] = giveaway_created
         self.giveaway: Optional[Giveaway] = giveaway
+        self.giveaway_winners: Optional[GiveawayWinners] = giveaway_winners
         self.video_chat_scheduled: Optional[VideoChatScheduled] = video_chat_scheduled
         self.video_chat_started: Optional[VideoChatStarted] = video_chat_started
         self.video_chat_ended: Optional[VideoChatEnded] = video_chat_ended
@@ -5243,6 +5247,57 @@ class GiveawayCreated(TelegramType):
     ):
         _get_kwargs(self, kwargs)
         self.__dict__ = kwargs
+
+
+class GiveawayWinners(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#giveawaywinners
+    This object represents a message about the completion of a giveaway with public winners.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['giveaway_message_id'] = obj.get('giveaway_message_id')
+        obj['winners_selection_date'] = obj.get('winners_selection_date')
+        obj['winner_count'] = obj.get('winner_count')
+        obj['winners'] = [User.dese(kwargs) for kwargs in obj.get('winners')]
+        obj['additional_chat_count'] = obj.get('additional_chat_count')
+        obj['premium_subscription_month_count'] = obj.get('premium_subscription_month_count')
+        obj['unclaimed_prize_count'] = obj.get('unclaimed_prize_count')
+        obj['only_new_members'] = obj.get('only_new_members')
+        obj['was_refunded'] = obj.get('was_refunded')
+        obj['prize_description'] = obj.get('prize_description')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        giveaway_message_id: int,
+        winners_selection_date: int,
+        winner_count: int,
+        winners: list[User],
+        additional_chat_count: Optional[int] = None,
+        premium_subscription_month_count: Optional[int] = None,
+        unclaimed_prize_count: Optional[int] = None,
+        only_new_members: Optional[Literal[True]] = None,
+        was_refunded: Optional[Literal[True]] = None,
+        prize_description: Optional[str] = None,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.chat = chat
+        self.giveaway_message_id = giveaway_message_id
+        self.winners_selection_date = winners_selection_date
+        self.winner_count = winner_count
+        self.winners = winners
+        self.additional_chat_count = additional_chat_count
+        self.premium_subscription_month_count = premium_subscription_month_count
+        self.unclaimed_prize_count = unclaimed_prize_count
+        self.only_new_members = only_new_members
+        self.was_refunded = was_refunded
+        self.prize_description = prize_description
 
 
 class Giveaway(TelegramType):
