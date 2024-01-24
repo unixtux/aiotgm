@@ -1101,6 +1101,10 @@ class Chat(TelegramType):
         obj['photo'] = ChatPhoto.dese(obj.get('photo'))
         obj['active_usernames'] = obj.get('active_usernames')
         obj['available_reactions'] = [ReactionType.dese(kwargs) for kwargs in obj.get('available_reactions')] if 'available_reactions' in obj else None
+        obj['accent_color_id'] = obj.get('accent_color_id')
+        obj['background_custom_emoji_id'] = obj.get('background_custom_emoji_id')
+        obj['profile_accent_color_id'] = obj.get('profile_accent_color_id')
+        obj['profile_background_custom_emoji_id'] = obj.get('profile_background_custom_emoji_id')
         obj['emoji_status_custom_emoji_id'] = obj.get('emoji_status_custom_emoji_id')
         obj['emoji_status_expiration_date'] = obj.get('emoji_status_expiration_date')
         obj['bio'] = obj.get('bio')
@@ -1135,6 +1139,10 @@ class Chat(TelegramType):
         photo: Optional[ChatPhoto] = None,
         active_usernames: Optional[list[str]] = None,
         available_reactions: Optional[list[ReactionType]] = None,
+        accent_color_id: Optional[int] = None,
+        background_custom_emoji_id: Optional[str] = None,
+        profile_accent_color_id: Optional[int] = None,
+        profile_background_custom_emoji_id: Optional[str] = None,
         emoji_status_custom_emoji_id: Optional[str] = None,
         emoji_status_expiration_date: Optional[int] = None,
         bio: Optional[str] = None,
@@ -1168,6 +1176,10 @@ class Chat(TelegramType):
         self.photo = photo
         self.active_usernames = active_usernames
         self.available_reactions = available_reactions
+        self.accent_color_id = accent_color_id
+        self.background_custom_emoji_id = background_custom_emoji_id
+        self.profile_accent_color_id = profile_accent_color_id
+        self.profile_background_custom_emoji_id = profile_background_custom_emoji_id
         self.emoji_status_custom_emoji_id = emoji_status_custom_emoji_id
         self.emoji_status_expiration_date = emoji_status_expiration_date
         self.bio = bio
