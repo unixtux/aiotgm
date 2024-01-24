@@ -3100,6 +3100,7 @@ class BotName(TelegramType):
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
+        obj['name'] = obj.get('name')
         return cls(**obj)
 
     def __init__(
