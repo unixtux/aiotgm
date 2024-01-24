@@ -1121,6 +1121,7 @@ class Chat(TelegramType):
         obj['has_aggressive_anti_spam_enabled'] = obj.get('has_aggressive_anti_spam_enabled')
         obj['has_hidden_members'] = obj.get('has_hidden_members')
         obj['has_protected_content'] = obj.get('has_protected_content')
+        obj['has_visible_history'] = obj.get('has_visible_history')
         obj['sticker_set_name'] = obj.get('sticker_set_name')
         obj['can_set_sticker_set'] = obj.get('can_set_sticker_set')
         obj['linked_chat_id'] = obj.get('linked_chat_id')
@@ -1159,6 +1160,7 @@ class Chat(TelegramType):
         has_aggressive_anti_spam_enabled: Optional[Literal[True]] = None,
         has_hidden_members: Optional[Literal[True]] = None,
         has_protected_content: Optional[Literal[True]] = None,
+        has_visible_history: Optional[Literal[True]] = None,
         sticker_set_name: Optional[str] = None,
         can_set_sticker_set: Optional[Literal[True]] = None,
         linked_chat_id: Optional[int] = None,
@@ -1196,6 +1198,7 @@ class Chat(TelegramType):
         self.has_aggressive_anti_spam_enabled = has_aggressive_anti_spam_enabled
         self.has_hidden_members = has_hidden_members
         self.has_protected_content = has_protected_content
+        self.has_visible_history = has_visible_history
         self.sticker_set_name = sticker_set_name
         self.can_set_sticker_set = can_set_sticker_set
         self.linked_chat_id = linked_chat_id
