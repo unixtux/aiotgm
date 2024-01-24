@@ -529,6 +529,10 @@ class TelegramApi:
         method = 'answerCallbackQuery'
         return await self._request(method, params)
 
+    async def get_user_chat_boosts(self, params: dict):
+        method = 'getUserChatBoosts'
+        return await self._request(method, params)
+
     async def set_my_commands(self, params: dict):
         method = 'setMyCommands'
         return await self._request(method, params)

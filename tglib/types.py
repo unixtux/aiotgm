@@ -156,6 +156,7 @@ __all__ = [
     'TextQuote',
     'Update',
     'User',
+    'UserChatBoosts',
     'UserProfilePhotos',
     'UsersShared',
     'Venue',
@@ -5430,6 +5431,27 @@ class ChatBoost(TelegramType):
         self.add_date = add_date
         self.expiration_date = expiration_date
         self.source = source
+
+
+class UserChatBoosts(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#userchatboosts
+    This object represents a list of boosts added to a chat by a user.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['boosts'] = [ChatBoost.dese(kwargs) for kwargs in obj.get('boosts')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        boosts: list[ChatBoost],
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.boosts = boosts
 
 
 class ChatBoostUpdated(TelegramType):

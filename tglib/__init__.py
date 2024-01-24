@@ -2091,6 +2091,24 @@ class Client(TelegramApi):
         return await super().answer_callback_query(params)
 
 
+    async def get_user_chat_boosts(
+        self,
+        chat_id: Union[int, str],
+        user_id: int
+    ) -> UserChatBoosts:
+        '''
+        https://core.telegram.org/bots/api#getuserchatboosts
+        Use this method to get the list of boosts added to a chat by a user.
+        Requires administrator rights in the chat. Returns a UserChatBoosts object.
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+        result = await super().get_user_chat_boosts(params)
+        return UserChatBoosts.dese(result)
+
+
     async def set_my_commands(
         self,
         commands: list[BotCommand],
