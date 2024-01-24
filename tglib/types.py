@@ -20,6 +20,10 @@ __all__ = [
     'Chat',
     'ChatAdministratorRights',
     'ChatBoost',
+    'ChatBoostSource',
+    'ChatBoostSourcePremium',
+    'ChatBoostSourceGiftCode',
+    'ChatBoostSourceGiveaway',
     'ChatBoostUpdated',
     'ChatBoostRemoved',
     'ChatInviteLink',
@@ -5298,6 +5302,104 @@ class ExternalReplyInfo(TelegramType):
         self.location = location
         self.poll = poll
         self.venue = venue
+
+
+# ChatBoostSource: 3 SUBCLASSES
+
+class ChatBoostSource(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostsource
+    This object describes the source of a chat boost. It can be one of:
+    - ChatBoostSourcePremium
+    - ChatBoostSourceGiftCode
+    - ChatBoostSourceGiveaway
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        source = obj['source']
+
+        obj['user'] = User.dese(obj.get('user'))
+
+        if source == 'premium':
+            return ChatBoostSourcePremium(**obj)
+
+        elif source == 'gift_code':
+            return ChatBoostSourceGiftCode(**obj)
+
+        elif source == 'giveaway':
+            return ChatBoostSourceGiveaway(**obj)
+        else:
+            return cls(**obj)
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        source_types = ', '.join([
+            ChatBoostSourcePremium.__name__,
+            ChatBoostSourceGiftCode.__name__,
+            ChatBoostSourceGiveaway.__name__
+        ])
+        logger.warning(
+            'ChatBoostSource warning, expected one'
+            f' of the following types: {source_types}.'
+        )
+        self.__dict__ = kwargs
+
+
+class ChatBoostSourcePremium(ChatBoostSource):
+    '''
+    https://core.telegram.org/bots/api#chatboostsourcepremium
+    The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram Premium subscription to another user.
+    '''
+    def __init__(
+        self,
+        user: User,
+        source: str = 'premium',
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.source = source
+        self.user = user
+
+
+class ChatBoostSourceGiftCode(ChatBoostSource):
+    '''
+    https://core.telegram.org/bots/api#chatboostsourcegiftcode
+    The boost was obtained by the creation of Telegram Premium gift codes to boost a chat. Each such
+    code boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+    '''
+    def __init__(
+        self,
+        user: User,
+        source: str = 'gift_code',
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.source = source
+        self.user = user
+
+
+class ChatBoostSourceGiveaway(ChatBoostSource):
+    '''
+    The boost was obtained by the creation of a Telegram Premium giveaway. This boosts
+    the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+    '''
+    def __init__(
+        self,
+        giveaway_message_id: int,
+        user: Optional[User] = None,
+        is_unclaimed: Optional[Literal[True]] = None,
+        source: str = 'giveaway',
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.source = source
+        self.giveaway_message_id = giveaway_message_id
+        self.user = user
+        self.is_unclaimed = is_unclaimed
 
 
 class ChatBoost(TelegramType):
