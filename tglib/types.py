@@ -58,6 +58,7 @@ __all__ = [
     'GameHighScore',
     'GeneralForumTopicHidden',
     'GeneralForumTopicUnhidden',
+    'Giveaway',
     'InlineKeyboardButton',
     'InlineKeyboardMarkup',
     'InlineQuery',
@@ -5216,6 +5217,48 @@ class GameHighScore(TelegramType):
         self.position = position
         self.user = user
         self.score = score
+
+
+class Giveaway(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#giveaway
+    This object represents a message about a scheduled giveaway.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['chats'] = [Chat.dese(kwargs) for kwargs in obj.get('chats')]
+        obj['winners_selection_date'] = obj.get('winners_selection_date')
+        obj['winner_count'] = obj.get('winner_count')
+        obj['only_new_members'] = obj.get('only_new_members')
+        obj['has_public_winners'] = obj.get('has_public_winners')
+        obj['prize_description'] = obj.get('prize_description')
+        obj['country_codes'] = obj.get('country_codes')
+        obj['premium_subscription_month_count'] = obj.get('premium_subscription_month_count')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chats: list[Chat],
+        winners_selection_date: int,
+        winner_count: int,
+        only_new_members: Optional[Literal[True]] = None,
+        has_public_winners: Optional[Literal[True]] = None,
+        prize_description: Optional[str] = None,
+        country_codes: Optional[list[str]] = None,
+        premium_subscription_month_count: Optional[int] = None,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.chats = chats
+        self.winners_selection_date = winners_selection_date
+        self.winner_count = winner_count
+        self.only_new_members = only_new_members
+        self.has_public_winners = has_public_winners
+        self.prize_description = prize_description
+        self.country_codes = country_codes
+        self.premium_subscription_month_count = premium_subscription_month_count
 
 
 class ExternalReplyInfo(TelegramType):
