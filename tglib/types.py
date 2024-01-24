@@ -59,6 +59,7 @@ __all__ = [
     'GeneralForumTopicHidden',
     'GeneralForumTopicUnhidden',
     'Giveaway',
+    'GiveawayCompleted',
     'GiveawayCreated',
     'GiveawayWinners',
     'InlineKeyboardButton',
@@ -750,6 +751,7 @@ class Message(TelegramType):
         obj['giveaway_created'] = GiveawayCreated.dese(obj.get('giveaway_created'))
         obj['giveaway'] = Giveaway.dese(obj.get('giveaway'))
         obj['giveaway_winners'] = GiveawayWinners.dese(obj.get('giveaway_winners'))
+        obj['giveaway_completed'] = GiveawayCompleted.dese(obj.get('giveaway_completed'))
         obj['video_chat_scheduled'] = VideoChatScheduled.dese(obj.get('video_chat_scheduled'))
         obj['video_chat_started'] = VideoChatStarted.dese(obj.get('video_chat_started'))
         obj['video_chat_ended'] = VideoChatEnded.dese(obj.get('video_chat_ended'))
@@ -832,6 +834,7 @@ class Message(TelegramType):
         giveaway_created = None,
         giveaway = None,
         giveaway_winners = None,
+        giveaway_completed = None,
         video_chat_scheduled = None,
         video_chat_started = None,
         video_chat_ended = None,
@@ -913,6 +916,7 @@ class Message(TelegramType):
         self.giveaway_created: Optional[GiveawayCreated] = giveaway_created
         self.giveaway: Optional[Giveaway] = giveaway
         self.giveaway_winners: Optional[GiveawayWinners] = giveaway_winners
+        self.giveaway_completed: Optional[GiveawayCompleted] = giveaway_completed
         self.video_chat_scheduled: Optional[VideoChatScheduled] = video_chat_scheduled
         self.video_chat_started: Optional[VideoChatStarted] = video_chat_started
         self.video_chat_ended: Optional[VideoChatEnded] = video_chat_ended
@@ -5298,6 +5302,33 @@ class GiveawayWinners(TelegramType):
         self.only_new_members = only_new_members
         self.was_refunded = was_refunded
         self.prize_description = prize_description
+
+
+class GiveawayCompleted(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#giveawaycompleted
+    This object represents a service message about the completion of a giveaway without public winners.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['winner_count'] = obj.get('winner_count')
+        obj['unclaimed_prize_count'] = obj.get('unclaimed_prize_count')
+        obj['giveaway_message'] = Message.dese(obj.get('giveaway_message'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        winner_count: int,
+        unclaimed_prize_count: Optional[int] = None,
+        giveaway_message: Optional[Message] = None,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.winner_count = winner_count
+        self.unclaimed_prize_count = unclaimed_prize_count
+        self.giveaway_message = giveaway_message
 
 
 class Giveaway(TelegramType):
