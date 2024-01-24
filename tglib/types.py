@@ -745,6 +745,7 @@ class Message(TelegramType):
         obj['forum_topic_reopened'] = ForumTopicReopened.dese(obj.get('forum_topic_reopened'))
         obj['general_forum_topic_hidden'] = GeneralForumTopicHidden.dese(obj.get('general_forum_topic_hidden'))
         obj['general_forum_topic_unhidden'] = GeneralForumTopicUnhidden.dese(obj.get('general_forum_topic_unhidden'))
+        obj['giveaway'] = Giveaway.dese(obj.get('giveaway'))
         obj['video_chat_scheduled'] = VideoChatScheduled.dese(obj.get('video_chat_scheduled'))
         obj['video_chat_started'] = VideoChatStarted.dese(obj.get('video_chat_started'))
         obj['video_chat_ended'] = VideoChatEnded.dese(obj.get('video_chat_ended'))
@@ -824,6 +825,7 @@ class Message(TelegramType):
         forum_topic_reopened = None,
         general_forum_topic_hidden = None,
         general_forum_topic_unhidden = None,
+        giveaway = None,
         video_chat_scheduled = None,
         video_chat_started = None,
         video_chat_ended = None,
@@ -902,6 +904,7 @@ class Message(TelegramType):
         self.forum_topic_reopened: Optional[ForumTopicReopened] = forum_topic_reopened
         self.general_forum_topic_hidden: Optional[GeneralForumTopicHidden] = general_forum_topic_hidden
         self.general_forum_topic_unhidden: Optional[GeneralForumTopicUnhidden] = general_forum_topic_unhidden
+        self.giveaway: Optional[Giveaway] = giveaway
         self.video_chat_scheduled: Optional[VideoChatScheduled] = video_chat_scheduled
         self.video_chat_started: Optional[VideoChatStarted] = video_chat_started
         self.video_chat_ended: Optional[VideoChatEnded] = video_chat_ended
