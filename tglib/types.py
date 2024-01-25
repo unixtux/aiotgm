@@ -119,6 +119,11 @@ __all__ = [
     'MessageAutoDeleteTimerChanged',
     'MessageEntity',
     'MessageId',
+    'MessageOrigin',
+    'MessageOriginUser',
+    'MessageOriginHiddenUser',
+    'MessageOriginChat',
+    'MessageOriginChannel',
     'MessageReactionCountUpdated',
     'MessageReactionUpdated',
     'OrderInfo',
@@ -685,12 +690,7 @@ class Message(TelegramType):
         obj['message_thread_id'] = obj.get('message_thread_id')
         obj['from_user'] = User.dese(obj.get('from_user'))
         obj['sender_chat'] = Chat.dese(obj.get('sender_chat'))
-        obj['forward_from'] = User.dese(obj.get('forward_from'))
-        obj['forward_from_chat'] = Chat.dese(obj.get('forward_from_chat'))
-        obj['forward_from_message_id'] = obj.get('forward_from_message_id')
-        obj['forward_signature'] = obj.get('forward_signature')
-        obj['forward_sender_name'] = obj.get('forward_sender_name')
-        obj['forward_date'] = obj.get('forward_date')
+        obj['forward_origin'] = MessageOrigin.dese(obj.get('forward_origin'))
         obj['is_topic_message'] = obj.get('is_topic_message')
         obj['is_automatic_forward'] = obj.get('is_automatic_forward')
         obj['reply_to_message'] = Message.dese(obj.get('reply_to_message'))
@@ -768,12 +768,7 @@ class Message(TelegramType):
         message_thread_id = None,
         from_user = None,
         sender_chat = None,
-        forward_from = None,
-        forward_from_chat = None,
-        forward_from_message_id = None,
-        forward_signature = None,
-        forward_sender_name = None,
-        forward_date = None,
+        forward_origin = None,
         is_topic_message = None,
         is_automatic_forward = None,
         reply_to_message = None,
@@ -850,12 +845,7 @@ class Message(TelegramType):
         self.message_thread_id: Optional[int] = message_thread_id
         self.from_user: Optional[User] = from_user
         self.sender_chat: Optional[Chat] = sender_chat
-        self.forward_from: Optional[User] = forward_from
-        self.forward_from_chat: Optional[Chat] = forward_from_chat
-        self.forward_from_message_id: Optional[int] = forward_from_message_id
-        self.forward_signature: Optional[str] = forward_signature
-        self.forward_sender_name: Optional[str] = forward_sender_name
-        self.forward_date: Optional[int] = forward_date
+        self.forward_origin: Optional[MessageOrigin] = forward_origin
         self.is_topic_message: Optional[Literal[True]] = is_topic_message
         self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
         self.reply_to_message: Optional[Message] = reply_to_message
@@ -5387,6 +5377,135 @@ class Giveaway(TelegramType):
         self.prize_description = prize_description
         self.country_codes = country_codes
         self.premium_subscription_month_count = premium_subscription_month_count
+
+
+# MessageOrigin: 4 SUBCLASSES
+
+class MessageOrigin(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messageorigin
+    This object describes the origin of a message. It can be one of:
+    - MessageOriginUser
+    - MessageOriginHiddenUser
+    - MessageOriginChat
+    - MessageOriginChannel
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        type = obj['type']
+
+        if type == 'user':
+            obj['sender_user'] = User.dese(obj.get('sender_user'))
+            return MessageOriginUser(**obj)
+
+        elif type == 'hidden_user':
+            return MessageOriginHiddenUser(**obj)
+
+        elif type == 'chat':
+            obj['sender_chat'] = Chat.dese(obj.get('sender_chat'))
+            return MessageOriginChat(**obj)
+
+        elif type == 'channel':
+            obj['chat'] = Chat.dese(obj.get('chat'))
+            return MessageOriginChannel(**obj)
+        else:
+            return cls(**obj)
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        origin_types = ', '.join([
+            MessageOriginUser.__name__,
+            MessageOriginHiddenUser.__name__,
+            MessageOriginChat.__name__,
+            MessageOriginChannel.__name__
+        ])
+        logger.warning(
+            'MessageOrigin warning, expected one'
+            f' of the following types: {origin_types}.'
+        )
+        self.__dict__ = kwargs
+
+
+class MessageOriginUser(MessageOrigin):
+    '''
+    https://core.telegram.org/bots/api#messageoriginuser
+    The message was originally sent by a known user.
+    '''
+    def __init__(
+        self,
+        date: int,
+        sender_user: User,
+        type: str = 'user',
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.type = type
+        self.date = date
+        self.sender_user = sender_user
+
+
+class MessageOriginHiddenUser(MessageOrigin):
+    '''
+    https://core.telegram.org/bots/api#messageoriginhiddenuser
+    The message was originally sent by an unknown user.
+    '''
+    def __init__(
+        self,
+        date: int,
+        sender_user_name: str,
+        type: str = 'hidden_user',
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.type = type
+        self.date = date
+        self.sender_user_name = sender_user_name
+
+
+class MessageOriginChat(MessageOrigin):
+    '''
+    https://core.telegram.org/bots/api#messageoriginchat
+    The message was originally sent on behalf of a chat to a group chat.
+    '''
+    def __init__(
+        self,
+        date: int,
+        sender_chat: Chat,
+        author_signature: Optional[str] = None,
+        type: str = 'chat',
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.type = type
+        self.date = date
+        self.sender_chat = sender_chat
+        self.author_signature = author_signature
+
+
+class MessageOriginChannel(MessageOrigin):
+    '''
+    https://core.telegram.org/bots/api#messageoriginchannel
+    The message was originally sent to a channel chat.
+    '''
+    def __init__(
+        self,
+        date: int,
+        chat: Chat,
+        message_id: int,
+        author_signature: Optional[str] = None,
+        type: str = 'channel',
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.type = type
+        self.date = date
+        self.chat = chat
+        self.message_id = message_id
+        self.author_signature = author_signature
 
 
 class ExternalReplyInfo(TelegramType):
