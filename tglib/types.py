@@ -62,6 +62,7 @@ __all__ = [
     'GiveawayCompleted',
     'GiveawayCreated',
     'GiveawayWinners',
+    'InaccessibleMessage',
     'InlineKeyboardButton',
     'InlineKeyboardMarkup',
     'InlineQuery',
@@ -111,6 +112,7 @@ __all__ = [
     'Location',
     'LoginUrl',
     'MaskPosition',
+    'MaybeInaccessibleMessage',
     'MenuButton',
     'MenuButtonCommands',
     'MenuButtonDefault',
@@ -675,7 +677,48 @@ class ReplyParameters(TelegramType):
         self.quote_position = quote_position
 
 
-class Message(TelegramType):
+# MaybeInaccessibleMessage: 2 SUBCLASSES
+
+class MaybeInaccessibleMessage(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#maybeinaccessiblemessage
+    This object describes a message that can be inaccessible to the bot. It can be one of:
+    - Message
+    - InaccessibleMessage
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        date = obj['date']
+
+        obj['chat'] = Chat.dese(obj.get('chat'))
+
+        if date == 0:
+            return InaccessibleMessage(**obj)
+        else:
+            return Message(**obj)
+
+
+class InaccessibleMessage(MaybeInaccessibleMessage):
+    '''
+    https://core.telegram.org/bots/api#inaccessiblemessage
+    This object describes a message that was deleted or is otherwise inaccessible to the bot.
+    '''
+    def __init__(
+        self,
+        chat,
+        message_id,
+        date = 0,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.chat: Chat = chat
+        self.message_id: int = message_id
+        self.date: int = date
+
+
+class Message(MaybeInaccessibleMessage):
     '''
     https://core.telegram.org/bots/api#message
     This object represents a message.
@@ -733,7 +776,7 @@ class Message(TelegramType):
         obj['message_auto_delete_timer_changed'] = MessageAutoDeleteTimerChanged.dese(obj.get('message_auto_delete_timer_changed'))
         obj['migrate_to_chat_id'] = obj.get('migrate_to_chat_id')
         obj['migrate_from_chat_id'] = obj.get('migrate_from_chat_id')
-        obj['pinned_message'] = Message.dese(obj.get('pinned_message'))
+        obj['pinned_message'] = MaybeInaccessibleMessage.dese(obj.get('pinned_message'))
         obj['invoice'] = Invoice.dese(obj.get('invoice'))
         obj['successful_payment'] = SuccessfulPayment.dese(obj.get('successful_payment'))
         obj['users_shared'] = UsersShared.dese(obj.get('users_shared'))
@@ -888,7 +931,7 @@ class Message(TelegramType):
         self.message_auto_delete_timer_changed: Optional[MessageAutoDeleteTimerChanged] = message_auto_delete_timer_changed
         self.migrate_to_chat_id: Optional[int] = migrate_to_chat_id
         self.migrate_from_chat_id: Optional[int] = migrate_from_chat_id
-        self.pinned_message: Optional[Message] = pinned_message
+        self.pinned_message: Optional[MaybeInaccessibleMessage] = pinned_message
         self.invoice: Optional[Invoice] = invoice
         self.successful_payment: Optional[SuccessfulPayment] = successful_payment
         self.users_shared: Optional[UsersShared] = users_shared
@@ -2507,7 +2550,7 @@ class CallbackQuery(TelegramType):
         obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['from_user'] = User.dese(obj.get('from_user'))
-        obj['message'] = Message.dese(obj.get('message'))
+        obj['message'] = MaybeInaccessibleMessage.dese(obj.get('message'))
         obj['inline_message_id'] = obj.get('inline_message_id')
         obj['chat_instance'] = obj.get('chat_instance')
         obj['data'] = obj.get('data')
@@ -2519,7 +2562,7 @@ class CallbackQuery(TelegramType):
         id: str,
         from_user: User,
         chat_instance: str,
-        message: Optional[Message] = None,
+        message: Optional[MaybeInaccessibleMessage] = None,
         inline_message_id: str = None,
         data: Optional[str] = None,
         game_short_name: Optional[str] = None,
