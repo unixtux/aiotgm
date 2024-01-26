@@ -189,6 +189,8 @@ from typing import (Any,
                     Literal,
                     Optional)
 
+from .default_literals import *
+
 from .logger import get_logger
 logger = get_logger('TelegramTypes')
 
@@ -677,7 +679,7 @@ class ReplyParameters(TelegramType):
         self.quote_position = quote_position
 
 
-# MaybeInaccessibleMessage: 2 SUBCLASSES
+# MaybeInaccessibleMessage: 2 SUBCLASSES ####
 
 class MaybeInaccessibleMessage(TelegramType):
     '''
@@ -688,6 +690,7 @@ class MaybeInaccessibleMessage(TelegramType):
     '''
     @classmethod
     def dese(cls, result):
+
         if result is None: return None
         obj = _check_dict(result)
 
@@ -975,6 +978,8 @@ class Message(TelegramType):
         self.video_chat_participants_invited: Optional[VideoChatParticipantsInvited] = video_chat_participants_invited
         self.web_app_data: Optional[WebAppData] = web_app_data
         self.reply_markup: Optional[InlineKeyboardMarkup] = reply_markup
+
+########################################################################
 
 
 class ChatPhoto(TelegramType):
@@ -5441,7 +5446,7 @@ class Giveaway(TelegramType):
         self.premium_subscription_month_count = premium_subscription_month_count
 
 
-# MessageOrigin: 4 SUBCLASSES
+# MessageOrigin: 4 SUBCLASSES ######################################
 
 class MessageOrigin(TelegramType):
     '''
@@ -5456,118 +5461,159 @@ class MessageOrigin(TelegramType):
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
-        type = obj['type']
+        type = obj.pop('type')
 
-        if type == 'user':
-            obj['sender_user'] = User.dese(obj.get('sender_user'))
-            return MessageOriginUser(**obj)
+        if type == DEFAULT_MESSAGE_ORIGIN_USER:
+            return MessageOriginUser(**obj, check_dict = False)
 
-        elif type == 'hidden_user':
-            return MessageOriginHiddenUser(**obj)
+        elif type == DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER:
+            return MessageOriginHiddenUser(**obj, check_dict = False)
 
-        elif type == 'chat':
-            obj['sender_chat'] = Chat.dese(obj.get('sender_chat'))
-            return MessageOriginChat(**obj)
+        elif type == DEFAULT_MESSAGE_ORIGIN_CHAT:
+            return MessageOriginChat(**obj, check_dict = False)
 
-        elif type == 'channel':
-            obj['chat'] = Chat.dese(obj.get('chat'))
-            return MessageOriginChannel(**obj)
+        elif type == DEFAULT_MESSAGE_ORIGIN_CHANNEL:
+            return MessageOriginChannel(**obj, check_dict = False)
         else:
-            return cls(**obj)
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        origin_types = ', '.join([
-            MessageOriginUser.__name__,
-            MessageOriginHiddenUser.__name__,
-            MessageOriginChat.__name__,
-            MessageOriginChannel.__name__
-        ])
-        logger.warning(
-            'MessageOrigin warning, expected one'
-            f' of the following types: {origin_types}.'
-        )
-        self.__dict__ = kwargs
+            raise ValueError(
+                'An error occurred during the deserialization'
+                f' of the type MessageOrigin. Invalid type: {type!r}.'
+            )
 
 
-class MessageOriginUser(MessageOrigin):
+class MessageOriginUser(TelegramType):
     '''
     https://core.telegram.org/bots/api#messageoriginuser
     The message was originally sent by a known user.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['date'] = obj.get('date')
+        obj['sender_user'] = User.dese(obj.get('sender_user'))
+
+        return cls(**obj)
+
     def __init__(
         self,
         date: int,
         sender_user: User,
-        type: str = 'user',
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.type = type
+        self.type = DEFAULT_MESSAGE_ORIGIN_USER
         self.date = date
         self.sender_user = sender_user
 
 
-class MessageOriginHiddenUser(MessageOrigin):
+class MessageOriginHiddenUser(TelegramType):
     '''
     https://core.telegram.org/bots/api#messageoriginhiddenuser
     The message was originally sent by an unknown user.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['date'] = obj.get('date')
+        obj['sender_user_name'] = obj.get('sender_user_name')
+
+        return cls(**obj)
+
     def __init__(
         self,
         date: int,
         sender_user_name: str,
-        type: str = 'hidden_user',
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.type = type
+        self.type = DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER
         self.date = date
         self.sender_user_name = sender_user_name
 
 
-class MessageOriginChat(MessageOrigin):
+class MessageOriginChat(TelegramType):
     '''
     https://core.telegram.org/bots/api#messageoriginchat
     The message was originally sent on behalf of a chat to a group chat.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['date'] = obj.get('date')
+        obj['sender_chat'] = Chat.dese(obj.get('sender_chat'))
+        obj['author_signature'] = obj.get('author_signature')
+
+        return cls(**obj)
+
     def __init__(
         self,
         date: int,
         sender_chat: Chat,
         author_signature: Optional[str] = None,
-        type: str = 'chat',
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.type = type
+        self.type = DEFAULT_MESSAGE_ORIGIN_CHAT
         self.date = date
         self.sender_chat = sender_chat
         self.author_signature = author_signature
 
 
-class MessageOriginChannel(MessageOrigin):
+class MessageOriginChannel(TelegramType):
     '''
     https://core.telegram.org/bots/api#messageoriginchannel
     The message was originally sent to a channel chat.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['date'] = obj.get('date')
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['message_id'] = obj.get('message_id')
+        obj['author_signature'] = obj.get('author_signature')
+
+        return cls(**obj)
+
     def __init__(
         self,
         date: int,
         chat: Chat,
         message_id: int,
         author_signature: Optional[str] = None,
-        type: str = 'channel',
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.type = type
+        self.type = DEFAULT_MESSAGE_ORIGIN_CHANNEL
         self.date = date
         self.chat = chat
         self.message_id = message_id
         self.author_signature = author_signature
+
+################################################
 
 
 class ExternalReplyInfo(TelegramType):
