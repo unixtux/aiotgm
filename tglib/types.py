@@ -690,21 +690,33 @@ class MaybeInaccessibleMessage(TelegramType):
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
-        date = obj['date']
 
-        obj['chat'] = Chat.dese(obj.get('chat'))
-
-        if date == 0:
-            return InaccessibleMessage(**obj)
+        if obj['date'] == 0:
+            return InaccessibleMessage.dese(**obj, check_dict = False)
         else:
-            return Message(**obj)
+            return Message.dese(**obj, check_dict = False)
 
 
-class InaccessibleMessage(MaybeInaccessibleMessage):
+class InaccessibleMessage(TelegramType):
     '''
     https://core.telegram.org/bots/api#inaccessiblemessage
     This object describes a message that was deleted or is otherwise inaccessible to the bot.
     '''
+    @classmethod
+    def dese(cls, result, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['message_id'] = obj.get('message_id')
+        obj['date'] = obj.get('date')
+
+        return cls(**obj)
+
     def __init__(
         self,
         chat,
@@ -712,21 +724,27 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         date = 0,
         **kwargs
     ):
+
         _get_kwargs(self, kwargs)
         self.chat: Chat = chat
         self.message_id: int = message_id
         self.date: int = date
 
 
-class Message(MaybeInaccessibleMessage):
+class Message(TelegramType):
     '''
     https://core.telegram.org/bots/api#message
     This object represents a message.
     '''
     @classmethod
-    def dese(cls, result):
-        if result is None: return None
-        obj = _check_dict(result)
+    def dese(cls, result, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
         obj['message_id'] = obj.get('message_id')
         obj['date'] = obj.get('date')
         obj['chat'] = Chat.dese(obj.get('chat'))
@@ -801,6 +819,7 @@ class Message(MaybeInaccessibleMessage):
         obj['video_chat_participants_invited'] = VideoChatParticipantsInvited.dese(obj.get('video_chat_participants_invited'))
         obj['web_app_data'] = WebAppData.dese(obj.get('web_app_data'))
         obj['reply_markup'] = InlineKeyboardMarkup.dese(obj.get('reply_markup'))
+
         return cls(**obj)
 
     def __init__(
