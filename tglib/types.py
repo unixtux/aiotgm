@@ -112,7 +112,7 @@ __all__ = [
     'Location',
     'LoginUrl',
     'MaskPosition',
-    #'MaybeInaccessibleMessage', # replaced with _dese_maybe_inaccessible_message()
+    'MaybeInaccessibleMessage',
     'MenuButton',
     'MenuButtonCommands',
     'MenuButtonDefault',
@@ -219,6 +219,7 @@ def _check_dict(result: dict) -> dict:
 class TelegramType:
     ...
 
+
 def _serialize(
     val: Any,
     *,
@@ -262,305 +263,6 @@ def _get_kwargs(obj: TelegramType, kwargs: dict) -> bool:
         )
         return True
     return False
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-class InaccessibleMessage(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inaccessiblemessage
-    This object describes a message that was deleted or is otherwise inaccessible to the bot.
-    '''
-    @classmethod
-    def dese(cls, result, *, check_dict: bool = True):
-
-        if check_dict:
-            if result is None: return None
-            obj = _check_dict(result)
-        else:
-            obj = result
-
-        obj['chat'] = Chat.dese(obj.get('chat'))
-        obj['message_id'] = obj.get('message_id')
-        obj['date'] = obj.get('date')
-
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat,
-        message_id,
-        date = 0,
-        **kwargs
-    ):
-        _get_kwargs(self, kwargs)
-        self.chat: Chat = chat
-        self.message_id: int = message_id
-        self.date: int = date
-
-
-class Message(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#message
-    This object represents a message.
-    '''
-    @classmethod
-    def dese(cls, result, *, check_dict: bool = True):
-
-        if check_dict:
-            if result is None: return None
-            obj = _check_dict(result)
-        else:
-            obj = result
-
-        obj['message_id'] = obj.get('message_id')
-        obj['date'] = obj.get('date')
-        obj['chat'] = Chat.dese(obj.get('chat'))
-        obj['message_thread_id'] = obj.get('message_thread_id')
-        obj['from_user'] = User.dese(obj.get('from_user'))
-        obj['sender_chat'] = Chat.dese(obj.get('sender_chat'))
-        obj['forward_origin'] = MessageOrigin.dese(obj.get('forward_origin'))
-        obj['is_topic_message'] = obj.get('is_topic_message')
-        obj['is_automatic_forward'] = obj.get('is_automatic_forward')
-        obj['reply_to_message'] = Message.dese(obj.get('reply_to_message'))
-        obj['external_reply'] = ExternalReplyInfo.dese(obj.get('external_reply'))
-        obj['quote'] = TextQuote.dese(obj.get('quote'))
-        obj['via_bot'] = User.dese(obj.get('via_bot'))
-        obj['edit_date'] = obj.get('edit_date')
-        obj['has_protected_content'] = obj.get('has_protected_content')
-        obj['media_group_id'] = obj.get('media_group_id')
-        obj['author_signature'] = obj.get('author_signature')
-        obj['text'] = obj.get('text')
-        obj['entities'] = [MessageEntity.dese(kwargs) for kwargs in obj.get('entities')] if 'entities' in obj else None
-        obj['link_preview_options'] = LinkPreviewOptions.dese(obj.get('link_preview_options'))
-        obj['animation'] = Animation.dese(obj.get('animation'))
-        obj['audio'] = Audio.dese(obj.get('audio'))
-        obj['document'] = Document.dese(obj.get('document'))
-        obj['photo'] = [PhotoSize.dese(kwargs) for kwargs in obj.get('photo')] if 'photo' in obj else None
-        obj['sticker'] = Sticker.dese(obj.get('sticker'))
-        obj['story'] = Story.dese(obj.get('story'))
-        obj['video'] = Video.dese(obj.get('video'))
-        obj['video_note'] = VideoNote.dese(obj.get('video_note'))
-        obj['voice'] = Voice.dese(obj.get('voice'))
-        obj['caption'] = obj.get('caption')
-        obj['caption_entities'] = [MessageEntity.dese(kwargs) for kwargs in obj.get('caption_entities')] if 'caption_entities' in obj else None
-        obj['has_media_spoiler'] = obj.get('has_media_spoiler')
-        obj['contact'] = Contact.dese(obj.get('contact'))
-        obj['dice'] = Dice.dese(obj.get('dice'))
-        obj['game'] = Game.dese(obj.get('game'))
-        obj['poll'] = Poll.dese(obj.get('poll'))
-        obj['venue'] = Venue.dese(obj.get('venue'))
-        obj['location'] = Location.dese(obj.get('location'))
-        obj['new_chat_members'] = [User.dese(kwargs) for kwargs in obj.get('new_chat_members')] if 'new_chat_members' in obj else None
-        obj['left_chat_member'] = User.dese(obj.get('left_chat_member'))
-        obj['new_chat_title'] = obj.get('new_chat_title')
-        obj['new_chat_photo'] = [PhotoSize.dese(kwargs) for kwargs in obj.get('new_chat_photo')] if 'new_chat_photo' in obj else None
-        obj['delete_chat_photo'] = obj.get('delete_chat_photo')
-        obj['group_chat_created'] = obj.get('group_chat_created')
-        obj['supergroup_chat_created'] = obj.get('supergroup_chat_created')
-        obj['channel_chat_created'] = obj.get('channel_chat_created')
-        obj['message_auto_delete_timer_changed'] = MessageAutoDeleteTimerChanged.dese(obj.get('message_auto_delete_timer_changed'))
-        obj['migrate_to_chat_id'] = obj.get('migrate_to_chat_id')
-        obj['migrate_from_chat_id'] = obj.get('migrate_from_chat_id')
-        obj['pinned_message'] = _dese_maybe_inaccessible_message(obj.get('pinned_message'))
-        obj['invoice'] = Invoice.dese(obj.get('invoice'))
-        obj['successful_payment'] = SuccessfulPayment.dese(obj.get('successful_payment'))
-        obj['users_shared'] = UsersShared.dese(obj.get('users_shared'))
-        obj['chat_shared'] = ChatShared.dese(obj.get('chat_shared'))
-        obj['connected_website'] = obj.get('connected_website')
-        obj['write_access_allowed'] = WriteAccessAllowed.dese(obj.get('write_access_allowed'))
-        obj['passport_data'] = PassportData.dese(obj.get('passport_data'))
-        obj['proximity_alert_triggered'] = ProximityAlertTriggered.dese(obj.get('proximity_alert_triggered'))
-        obj['forum_topic_created'] = ForumTopicCreated.dese(obj.get('forum_topic_created'))
-        obj['forum_topic_edited'] = ForumTopicEdited.dese(obj.get('forum_topic_edited'))
-        obj['forum_topic_closed'] = ForumTopicClosed.dese(obj.get('forum_topic_closed'))
-        obj['forum_topic_reopened'] = ForumTopicReopened.dese(obj.get('forum_topic_reopened'))
-        obj['general_forum_topic_hidden'] = GeneralForumTopicHidden.dese(obj.get('general_forum_topic_hidden'))
-        obj['general_forum_topic_unhidden'] = GeneralForumTopicUnhidden.dese(obj.get('general_forum_topic_unhidden'))
-        obj['giveaway_created'] = GiveawayCreated.dese(obj.get('giveaway_created'))
-        obj['giveaway'] = Giveaway.dese(obj.get('giveaway'))
-        obj['giveaway_winners'] = GiveawayWinners.dese(obj.get('giveaway_winners'))
-        obj['giveaway_completed'] = GiveawayCompleted.dese(obj.get('giveaway_completed'))
-        obj['video_chat_scheduled'] = VideoChatScheduled.dese(obj.get('video_chat_scheduled'))
-        obj['video_chat_started'] = VideoChatStarted.dese(obj.get('video_chat_started'))
-        obj['video_chat_ended'] = VideoChatEnded.dese(obj.get('video_chat_ended'))
-        obj['video_chat_participants_invited'] = VideoChatParticipantsInvited.dese(obj.get('video_chat_participants_invited'))
-        obj['web_app_data'] = WebAppData.dese(obj.get('web_app_data'))
-        obj['reply_markup'] = InlineKeyboardMarkup.dese(obj.get('reply_markup'))
-
-        return cls(**obj)
-
-    def __init__(
-        self,
-        message_id,
-        date,
-        chat,
-        message_thread_id = None,
-        from_user = None,
-        sender_chat = None,
-        forward_origin = None,
-        is_topic_message = None,
-        is_automatic_forward = None,
-        reply_to_message = None,
-        external_reply = None,
-        quote = None,
-        via_bot = None,
-        edit_date = None,
-        has_protected_content = None,
-        media_group_id = None,
-        author_signature = None,
-        text = None,
-        entities = None,
-        link_preview_options = None,
-        animation = None,
-        audio = None,
-        document = None,
-        photo = None,
-        sticker = None,
-        story = None,
-        video = None,
-        video_note = None,
-        voice = None,
-        caption = None,
-        caption_entities = None,
-        has_media_spoiler = None,
-        contact = None,
-        dice = None,
-        game = None,
-        poll = None,
-        venue = None,
-        location = None,
-        new_chat_members = None,
-        left_chat_member = None,
-        new_chat_title = None,
-        new_chat_photo = None,
-        delete_chat_photo = None,
-        group_chat_created = None,
-        supergroup_chat_created = None,
-        channel_chat_created = None,
-        message_auto_delete_timer_changed = None,
-        migrate_to_chat_id = None,
-        migrate_from_chat_id = None,
-        pinned_message = None,
-        invoice = None,
-        successful_payment = None,
-        users_shared = None,
-        chat_shared = None,
-        connected_website = None,
-        write_access_allowed = None,
-        passport_data = None,
-        proximity_alert_triggered = None,
-        forum_topic_created = None,
-        forum_topic_edited = None,
-        forum_topic_closed = None,
-        forum_topic_reopened = None,
-        general_forum_topic_hidden = None,
-        general_forum_topic_unhidden = None,
-        giveaway_created = None,
-        giveaway = None,
-        giveaway_winners = None,
-        giveaway_completed = None,
-        video_chat_scheduled = None,
-        video_chat_started = None,
-        video_chat_ended = None,
-        video_chat_participants_invited = None,
-        web_app_data = None,
-        reply_markup = None,
-        **kwargs
-    ):
-        _get_kwargs(self, kwargs)
-        self.message_id: int = message_id
-        self.date: int = date
-        self.chat: Chat = chat
-        self.message_thread_id: Optional[int] = message_thread_id
-        self.from_user: Optional[User] = from_user
-        self.sender_chat: Optional[Chat] = sender_chat
-        self.forward_origin: Optional[MessageOrigin] = forward_origin
-        self.is_topic_message: Optional[Literal[True]] = is_topic_message
-        self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
-        self.reply_to_message: Optional[Message] = reply_to_message
-        self.external_reply: Optional[ExternalReplyInfo] = external_reply
-        self.quote: Optional[TextQuote] = quote
-        self.via_bot: Optional[User] = via_bot
-        self.edit_date: Optional[int] = edit_date
-        self.has_protected_content: Optional[Literal[True]] = has_protected_content
-        self.media_group_id: Optional[str] = media_group_id
-        self.author_signature: Optional[str] = author_signature
-        self.text: str = text if text is not None else str() # If not text, it's str() instead of None
-        self.entities: Optional[list[MessageEntity]] = entities
-        self.link_preview_options: Optional[LinkPreviewOptions] = link_preview_options
-        self.animation: Optional[Animation] = animation
-        self.audio: Optional[Audio] = audio
-        self.document: Optional[Document] = document
-        self.photo: Optional[list[PhotoSize]] = photo
-        self.sticker: Optional[Sticker] = sticker
-        self.story: Optional[Story] = story
-        self.video: Optional[Video] = video
-        self.video_note: Optional[VideoNote] = video_note
-        self.voice: Optional[Voice] = voice
-        self.caption: Optional[str] = caption
-        self.caption_entities: Optional[list[MessageEntity]] = caption_entities
-        self.has_media_spoiler: Optional[Literal[True]] = has_media_spoiler
-        self.contact: Optional[Contact] = contact
-        self.dice: Optional[Dice] = dice
-        self.game: Optional[Game] = game
-        self.poll: Optional[Poll] = poll
-        self.venue: Optional[Venue] = venue
-        self.location: Optional[Location] = location
-        self.new_chat_members: Optional[list[User]] = new_chat_members
-        self.left_chat_member: Optional[User] = left_chat_member
-        self.new_chat_title: Optional[str] = new_chat_title
-        self.new_chat_photo: Optional[list[PhotoSize]] = new_chat_photo
-        self.delete_chat_photo: Optional[Literal[True]] = delete_chat_photo
-        self.group_chat_created: Optional[Literal[True]] = group_chat_created
-        self.supergroup_chat_created: Optional[Literal[True]] = supergroup_chat_created
-        self.channel_chat_created: Optional[Literal[True]] = channel_chat_created
-        self.message_auto_delete_timer_changed: Optional[MessageAutoDeleteTimerChanged] = message_auto_delete_timer_changed
-        self.migrate_to_chat_id: Optional[int] = migrate_to_chat_id
-        self.migrate_from_chat_id: Optional[int] = migrate_from_chat_id
-        self.pinned_message: Optional[MaybeInaccessibleMessage] = pinned_message
-        self.invoice: Optional[Invoice] = invoice
-        self.successful_payment: Optional[SuccessfulPayment] = successful_payment
-        self.users_shared: Optional[UsersShared] = users_shared
-        self.chat_shared: Optional[ChatShared] = chat_shared
-        self.connected_website: Optional[str] = connected_website
-        self.write_access_allowed: Optional[WriteAccessAllowed] = write_access_allowed
-        self.passport_data: Optional[PassportData] = passport_data
-        self.proximity_alert_triggered: Optional[ProximityAlertTriggered] = proximity_alert_triggered
-        self.forum_topic_created: Optional[ForumTopicCreated] = forum_topic_created
-        self.forum_topic_edited: Optional[ForumTopicEdited] = forum_topic_edited
-        self.forum_topic_closed: Optional[ForumTopicClosed] = forum_topic_closed
-        self.forum_topic_reopened: Optional[ForumTopicReopened] = forum_topic_reopened
-        self.general_forum_topic_hidden: Optional[GeneralForumTopicHidden] = general_forum_topic_hidden
-        self.general_forum_topic_unhidden: Optional[GeneralForumTopicUnhidden] = general_forum_topic_unhidden
-        self.giveaway_created: Optional[GiveawayCreated] = giveaway_created
-        self.giveaway: Optional[Giveaway] = giveaway
-        self.giveaway_winners: Optional[GiveawayWinners] = giveaway_winners
-        self.giveaway_completed: Optional[GiveawayCompleted] = giveaway_completed
-        self.video_chat_scheduled: Optional[VideoChatScheduled] = video_chat_scheduled
-        self.video_chat_started: Optional[VideoChatStarted] = video_chat_started
-        self.video_chat_ended: Optional[VideoChatEnded] = video_chat_ended
-        self.video_chat_participants_invited: Optional[VideoChatParticipantsInvited] = video_chat_participants_invited
-        self.web_app_data: Optional[WebAppData] = web_app_data
-        self.reply_markup: Optional[InlineKeyboardMarkup] = reply_markup
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-MaybeInaccessibleMessage = Union[Message, InaccessibleMessage]
-
-def _dese_maybe_inaccessible_message(result) -> Optional[MaybeInaccessibleMessage]:
-    '''
-    Function to deserialize MaybeInaccessibleMessage object.
-    '''
-    if result is None: return None
-    obj = _check_dict(result)
-
-    if obj['date'] == 0:
-        return InaccessibleMessage.dese(**obj, check_dict = False)
-    else:
-        return Message.dese(**obj, check_dict = False)
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChatPermissions(TelegramType):
@@ -973,6 +675,287 @@ class ReplyParameters(TelegramType):
         self.quote_parse_mode = quote_parse_mode
         self.quote_entities = quote_entities
         self.quote_position = quote_position
+
+
+# MaybeInaccessibleMessage: 2 SUBCLASSES
+
+class MaybeInaccessibleMessage(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#maybeinaccessiblemessage
+    This object describes a message that can be inaccessible to the bot. It can be one of:
+    - Message
+    - InaccessibleMessage
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        date = obj['date']
+
+        obj['chat'] = Chat.dese(obj.get('chat'))
+
+        if date == 0:
+            return InaccessibleMessage(**obj)
+        else:
+            return Message(**obj)
+
+
+class InaccessibleMessage(MaybeInaccessibleMessage):
+    '''
+    https://core.telegram.org/bots/api#inaccessiblemessage
+    This object describes a message that was deleted or is otherwise inaccessible to the bot.
+    '''
+    def __init__(
+        self,
+        chat,
+        message_id,
+        date = 0,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.chat: Chat = chat
+        self.message_id: int = message_id
+        self.date: int = date
+
+
+class Message(MaybeInaccessibleMessage):
+    '''
+    https://core.telegram.org/bots/api#message
+    This object represents a message.
+    '''
+    @classmethod
+    def dese(cls, result):
+        if result is None: return None
+        obj = _check_dict(result)
+        obj['message_id'] = obj.get('message_id')
+        obj['date'] = obj.get('date')
+        obj['chat'] = Chat.dese(obj.get('chat'))
+        obj['message_thread_id'] = obj.get('message_thread_id')
+        obj['from_user'] = User.dese(obj.get('from_user'))
+        obj['sender_chat'] = Chat.dese(obj.get('sender_chat'))
+        obj['forward_origin'] = MessageOrigin.dese(obj.get('forward_origin'))
+        obj['is_topic_message'] = obj.get('is_topic_message')
+        obj['is_automatic_forward'] = obj.get('is_automatic_forward')
+        obj['reply_to_message'] = Message.dese(obj.get('reply_to_message'))
+        obj['external_reply'] = ExternalReplyInfo.dese(obj.get('external_reply'))
+        obj['quote'] = TextQuote.dese(obj.get('quote'))
+        obj['via_bot'] = User.dese(obj.get('via_bot'))
+        obj['edit_date'] = obj.get('edit_date')
+        obj['has_protected_content'] = obj.get('has_protected_content')
+        obj['media_group_id'] = obj.get('media_group_id')
+        obj['author_signature'] = obj.get('author_signature')
+        obj['text'] = obj.get('text')
+        obj['entities'] = [MessageEntity.dese(kwargs) for kwargs in obj.get('entities')] if 'entities' in obj else None
+        obj['link_preview_options'] = LinkPreviewOptions.dese(obj.get('link_preview_options'))
+        obj['animation'] = Animation.dese(obj.get('animation'))
+        obj['audio'] = Audio.dese(obj.get('audio'))
+        obj['document'] = Document.dese(obj.get('document'))
+        obj['photo'] = [PhotoSize.dese(kwargs) for kwargs in obj.get('photo')] if 'photo' in obj else None
+        obj['sticker'] = Sticker.dese(obj.get('sticker'))
+        obj['story'] = Story.dese(obj.get('story'))
+        obj['video'] = Video.dese(obj.get('video'))
+        obj['video_note'] = VideoNote.dese(obj.get('video_note'))
+        obj['voice'] = Voice.dese(obj.get('voice'))
+        obj['caption'] = obj.get('caption')
+        obj['caption_entities'] = [MessageEntity.dese(kwargs) for kwargs in obj.get('caption_entities')] if 'caption_entities' in obj else None
+        obj['has_media_spoiler'] = obj.get('has_media_spoiler')
+        obj['contact'] = Contact.dese(obj.get('contact'))
+        obj['dice'] = Dice.dese(obj.get('dice'))
+        obj['game'] = Game.dese(obj.get('game'))
+        obj['poll'] = Poll.dese(obj.get('poll'))
+        obj['venue'] = Venue.dese(obj.get('venue'))
+        obj['location'] = Location.dese(obj.get('location'))
+        obj['new_chat_members'] = [User.dese(kwargs) for kwargs in obj.get('new_chat_members')] if 'new_chat_members' in obj else None
+        obj['left_chat_member'] = User.dese(obj.get('left_chat_member'))
+        obj['new_chat_title'] = obj.get('new_chat_title')
+        obj['new_chat_photo'] = [PhotoSize.dese(kwargs) for kwargs in obj.get('new_chat_photo')] if 'new_chat_photo' in obj else None
+        obj['delete_chat_photo'] = obj.get('delete_chat_photo')
+        obj['group_chat_created'] = obj.get('group_chat_created')
+        obj['supergroup_chat_created'] = obj.get('supergroup_chat_created')
+        obj['channel_chat_created'] = obj.get('channel_chat_created')
+        obj['message_auto_delete_timer_changed'] = MessageAutoDeleteTimerChanged.dese(obj.get('message_auto_delete_timer_changed'))
+        obj['migrate_to_chat_id'] = obj.get('migrate_to_chat_id')
+        obj['migrate_from_chat_id'] = obj.get('migrate_from_chat_id')
+        obj['pinned_message'] = MaybeInaccessibleMessage.dese(obj.get('pinned_message'))
+        obj['invoice'] = Invoice.dese(obj.get('invoice'))
+        obj['successful_payment'] = SuccessfulPayment.dese(obj.get('successful_payment'))
+        obj['users_shared'] = UsersShared.dese(obj.get('users_shared'))
+        obj['chat_shared'] = ChatShared.dese(obj.get('chat_shared'))
+        obj['connected_website'] = obj.get('connected_website')
+        obj['write_access_allowed'] = WriteAccessAllowed.dese(obj.get('write_access_allowed'))
+        obj['passport_data'] = PassportData.dese(obj.get('passport_data'))
+        obj['proximity_alert_triggered'] = ProximityAlertTriggered.dese(obj.get('proximity_alert_triggered'))
+        obj['forum_topic_created'] = ForumTopicCreated.dese(obj.get('forum_topic_created'))
+        obj['forum_topic_edited'] = ForumTopicEdited.dese(obj.get('forum_topic_edited'))
+        obj['forum_topic_closed'] = ForumTopicClosed.dese(obj.get('forum_topic_closed'))
+        obj['forum_topic_reopened'] = ForumTopicReopened.dese(obj.get('forum_topic_reopened'))
+        obj['general_forum_topic_hidden'] = GeneralForumTopicHidden.dese(obj.get('general_forum_topic_hidden'))
+        obj['general_forum_topic_unhidden'] = GeneralForumTopicUnhidden.dese(obj.get('general_forum_topic_unhidden'))
+        obj['giveaway_created'] = GiveawayCreated.dese(obj.get('giveaway_created'))
+        obj['giveaway'] = Giveaway.dese(obj.get('giveaway'))
+        obj['giveaway_winners'] = GiveawayWinners.dese(obj.get('giveaway_winners'))
+        obj['giveaway_completed'] = GiveawayCompleted.dese(obj.get('giveaway_completed'))
+        obj['video_chat_scheduled'] = VideoChatScheduled.dese(obj.get('video_chat_scheduled'))
+        obj['video_chat_started'] = VideoChatStarted.dese(obj.get('video_chat_started'))
+        obj['video_chat_ended'] = VideoChatEnded.dese(obj.get('video_chat_ended'))
+        obj['video_chat_participants_invited'] = VideoChatParticipantsInvited.dese(obj.get('video_chat_participants_invited'))
+        obj['web_app_data'] = WebAppData.dese(obj.get('web_app_data'))
+        obj['reply_markup'] = InlineKeyboardMarkup.dese(obj.get('reply_markup'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        message_id,
+        date,
+        chat,
+        message_thread_id = None,
+        from_user = None,
+        sender_chat = None,
+        forward_origin = None,
+        is_topic_message = None,
+        is_automatic_forward = None,
+        reply_to_message = None,
+        external_reply = None,
+        quote = None,
+        via_bot = None,
+        edit_date = None,
+        has_protected_content = None,
+        media_group_id = None,
+        author_signature = None,
+        text = None,
+        entities = None,
+        link_preview_options = None,
+        animation = None,
+        audio = None,
+        document = None,
+        photo = None,
+        sticker = None,
+        story = None,
+        video = None,
+        video_note = None,
+        voice = None,
+        caption = None,
+        caption_entities = None,
+        has_media_spoiler = None,
+        contact = None,
+        dice = None,
+        game = None,
+        poll = None,
+        venue = None,
+        location = None,
+        new_chat_members = None,
+        left_chat_member = None,
+        new_chat_title = None,
+        new_chat_photo = None,
+        delete_chat_photo = None,
+        group_chat_created = None,
+        supergroup_chat_created = None,
+        channel_chat_created = None,
+        message_auto_delete_timer_changed = None,
+        migrate_to_chat_id = None,
+        migrate_from_chat_id = None,
+        pinned_message = None,
+        invoice = None,
+        successful_payment = None,
+        users_shared = None,
+        chat_shared = None,
+        connected_website = None,
+        write_access_allowed = None,
+        passport_data = None,
+        proximity_alert_triggered = None,
+        forum_topic_created = None,
+        forum_topic_edited = None,
+        forum_topic_closed = None,
+        forum_topic_reopened = None,
+        general_forum_topic_hidden = None,
+        general_forum_topic_unhidden = None,
+        giveaway_created = None,
+        giveaway = None,
+        giveaway_winners = None,
+        giveaway_completed = None,
+        video_chat_scheduled = None,
+        video_chat_started = None,
+        video_chat_ended = None,
+        video_chat_participants_invited = None,
+        web_app_data = None,
+        reply_markup = None,
+        **kwargs
+    ):
+        _get_kwargs(self, kwargs)
+        self.message_id: int = message_id
+        self.date: int = date
+        self.chat: Chat = chat
+        self.message_thread_id: Optional[int] = message_thread_id
+        self.from_user: Optional[User] = from_user
+        self.sender_chat: Optional[Chat] = sender_chat
+        self.forward_origin: Optional[MessageOrigin] = forward_origin
+        self.is_topic_message: Optional[Literal[True]] = is_topic_message
+        self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
+        self.reply_to_message: Optional[Message] = reply_to_message
+        self.external_reply: Optional[ExternalReplyInfo] = external_reply
+        self.quote: Optional[TextQuote] = quote
+        self.via_bot: Optional[User] = via_bot
+        self.edit_date: Optional[int] = edit_date
+        self.has_protected_content: Optional[Literal[True]] = has_protected_content
+        self.media_group_id: Optional[str] = media_group_id
+        self.author_signature: Optional[str] = author_signature
+        self.text: str = text if text is not None else str() # If not text, it's str() instead of None
+        self.entities: Optional[list[MessageEntity]] = entities
+        self.link_preview_options: Optional[LinkPreviewOptions] = link_preview_options
+        self.animation: Optional[Animation] = animation
+        self.audio: Optional[Audio] = audio
+        self.document: Optional[Document] = document
+        self.photo: Optional[list[PhotoSize]] = photo
+        self.sticker: Optional[Sticker] = sticker
+        self.story: Optional[Story] = story
+        self.video: Optional[Video] = video
+        self.video_note: Optional[VideoNote] = video_note
+        self.voice: Optional[Voice] = voice
+        self.caption: Optional[str] = caption
+        self.caption_entities: Optional[list[MessageEntity]] = caption_entities
+        self.has_media_spoiler: Optional[Literal[True]] = has_media_spoiler
+        self.contact: Optional[Contact] = contact
+        self.dice: Optional[Dice] = dice
+        self.game: Optional[Game] = game
+        self.poll: Optional[Poll] = poll
+        self.venue: Optional[Venue] = venue
+        self.location: Optional[Location] = location
+        self.new_chat_members: Optional[list[User]] = new_chat_members
+        self.left_chat_member: Optional[User] = left_chat_member
+        self.new_chat_title: Optional[str] = new_chat_title
+        self.new_chat_photo: Optional[list[PhotoSize]] = new_chat_photo
+        self.delete_chat_photo: Optional[Literal[True]] = delete_chat_photo
+        self.group_chat_created: Optional[Literal[True]] = group_chat_created
+        self.supergroup_chat_created: Optional[Literal[True]] = supergroup_chat_created
+        self.channel_chat_created: Optional[Literal[True]] = channel_chat_created
+        self.message_auto_delete_timer_changed: Optional[MessageAutoDeleteTimerChanged] = message_auto_delete_timer_changed
+        self.migrate_to_chat_id: Optional[int] = migrate_to_chat_id
+        self.migrate_from_chat_id: Optional[int] = migrate_from_chat_id
+        self.pinned_message: Optional[MaybeInaccessibleMessage] = pinned_message
+        self.invoice: Optional[Invoice] = invoice
+        self.successful_payment: Optional[SuccessfulPayment] = successful_payment
+        self.users_shared: Optional[UsersShared] = users_shared
+        self.chat_shared: Optional[ChatShared] = chat_shared
+        self.connected_website: Optional[str] = connected_website
+        self.write_access_allowed: Optional[WriteAccessAllowed] = write_access_allowed
+        self.passport_data: Optional[PassportData] = passport_data
+        self.proximity_alert_triggered: Optional[ProximityAlertTriggered] = proximity_alert_triggered
+        self.forum_topic_created: Optional[ForumTopicCreated] = forum_topic_created
+        self.forum_topic_edited: Optional[ForumTopicEdited] = forum_topic_edited
+        self.forum_topic_closed: Optional[ForumTopicClosed] = forum_topic_closed
+        self.forum_topic_reopened: Optional[ForumTopicReopened] = forum_topic_reopened
+        self.general_forum_topic_hidden: Optional[GeneralForumTopicHidden] = general_forum_topic_hidden
+        self.general_forum_topic_unhidden: Optional[GeneralForumTopicUnhidden] = general_forum_topic_unhidden
+        self.giveaway_created: Optional[GiveawayCreated] = giveaway_created
+        self.giveaway: Optional[Giveaway] = giveaway
+        self.giveaway_winners: Optional[GiveawayWinners] = giveaway_winners
+        self.giveaway_completed: Optional[GiveawayCompleted] = giveaway_completed
+        self.video_chat_scheduled: Optional[VideoChatScheduled] = video_chat_scheduled
+        self.video_chat_started: Optional[VideoChatStarted] = video_chat_started
+        self.video_chat_ended: Optional[VideoChatEnded] = video_chat_ended
+        self.video_chat_participants_invited: Optional[VideoChatParticipantsInvited] = video_chat_participants_invited
+        self.web_app_data: Optional[WebAppData] = web_app_data
+        self.reply_markup: Optional[InlineKeyboardMarkup] = reply_markup
 
 
 class ChatPhoto(TelegramType):
@@ -2567,7 +2550,7 @@ class CallbackQuery(TelegramType):
         obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['from_user'] = User.dese(obj.get('from_user'))
-        obj['message'] = _dese_maybe_inaccessible_message(obj.get('message'))
+        obj['message'] = MaybeInaccessibleMessage.dese(obj.get('message'))
         obj['inline_message_id'] = obj.get('inline_message_id')
         obj['chat_instance'] = obj.get('chat_instance')
         obj['data'] = obj.get('data')
