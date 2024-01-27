@@ -721,7 +721,6 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         date = 0,
         **kwargs
     ):
-
         _get_kwargs(self, kwargs)
         self.chat: Chat = chat
         self.message_id: int = message_id
