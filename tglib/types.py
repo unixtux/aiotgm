@@ -1065,7 +1065,7 @@ class ChatLocation(TelegramType):
         self.address = address
 
 
-# ReactionType: 2 SUBCLASSES
+# ReactionType: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
 
 class ReactionType(TelegramType):
     '''
@@ -1079,29 +1079,18 @@ class ReactionType(TelegramType):
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
-        type = obj['type']
+        type = obj.pop('type')
 
-        if type == 'emoji':
-            return ReactionTypeEmoji(**obj)
+        if type == DEFAULT_REACTION_TYPE_EMOJI:
+            return ReactionTypeEmoji.dese(**obj, check_dict = False)
 
-        elif type == 'custom_emoji':
-            return ReactionTypeCustomEmoji(**obj)
+        elif type == DEFAULT_REACTION_TYPE_CUSTOM_EMOJI:
+            return ReactionTypeCustomEmoji.dese(**obj, check_dict = False)
         else:
-            return cls(**obj)
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        reaction_types = ', '.join([
-            ReactionTypeEmoji.__name__,
-            ReactionTypeCustomEmoji.__name__
-        ])
-        logger.warning(
-            'ReactionType warning, expected one'
-            f' of the following types: {reaction_types}.'
-        )
-        self.__dict__ = kwargs
+            raise ValueError(
+                'An error occurred during the deserialization'
+                f' of the type ReactionType. Invalid type: {type!r}.'
+            )
 
 
 class ReactionTypeEmoji(ReactionType):
@@ -1109,12 +1098,24 @@ class ReactionTypeEmoji(ReactionType):
     https://core.telegram.org/bots/api#reactiontypeemoji
     The reaction is based on an emoji.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['emoji'] = obj.get('emoji')
+
+        return cls(**obj)
+
     def __init__(
         self,
-        emoji: str,
-        type: str = 'emoji'
+        emoji: str
     ):
-        self.type = type
+        self.type = DEFAULT_REACTION_TYPE_EMOJI
         self.emoji = emoji
 
 
@@ -1123,13 +1124,27 @@ class ReactionTypeCustomEmoji(ReactionType):
     https://core.telegram.org/bots/api#reactiontypecustomemoji
     The reaction is based on a custom emoji.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['custom_emoji_id'] = obj.get('custom_emoji_id')
+
+        return cls(**obj)
+
     def __init__(
         self,
-        custom_emoji_id: str,
-        type: str = 'custom_emoji'
+        custom_emoji_id: str
     ):
-        self.type = type
+        self.type = DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
         self.custom_emoji_id = custom_emoji_id
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class Chat(TelegramType):
