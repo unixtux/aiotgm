@@ -1204,7 +1204,7 @@ class Chat(TelegramType):
         is_forum: Optional[Literal[True]] = None,
         photo: Optional[ChatPhoto] = None,
         active_usernames: Optional[list[str]] = None,
-        available_reactions: Optional[list[ReactionType]] = None,
+        available_reactions: Optional[Union[list[ReactionTypeEmoji], list[ReactionTypeCustomEmoji]]] = None,
         accent_color_id: Optional[int] = None,
         background_custom_emoji_id: Optional[str] = None,
         profile_accent_color_id: Optional[int] = None,
@@ -1293,8 +1293,8 @@ class MessageReactionUpdated(TelegramType):
         chat: Chat,
         message_id: int,
         date: int,
-        old_reaction: list[ReactionType],
-        new_reaction: list[ReactionType],
+        old_reaction: Union[list[ReactionTypeEmoji], list[ReactionTypeCustomEmoji]],
+        new_reaction: Union[list[ReactionTypeEmoji], list[ReactionTypeCustomEmoji]],
         user: Optional[User] = None,
         actor_chat: Optional[Chat] = None,
         **kwargs
@@ -1324,7 +1324,7 @@ class ReactionCount(TelegramType):
 
     def __init__(
         self,
-        type: ReactionType,
+        type: Union[ReactionTypeEmoji, ReactionTypeCustomEmoji],
         total_count: int,
         **kwargs
     ):

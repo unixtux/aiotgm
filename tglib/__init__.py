@@ -1237,7 +1237,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         message_id: int,
-        reaction: Optional[list[ReactionType]] = None,
+        reaction: Optional[Union[list[ReactionTypeEmoji], list[ReactionTypeCustomEmoji]]] = None,
         is_big: Optional[bool] = None
     ) -> Literal[True]:
         '''
