@@ -5844,7 +5844,7 @@ class ChatBoost(TelegramType):
         boost_id: str,
         add_date: int,
         expiration_date: int,
-        source: ChatBoostSource,
+        source: Union[ChatBoostSourcePremium, ChatBoostSourceGiftCode, ChatBoostSourceGiveaway],
         **kwargs
     ):
         _get_kwargs(self, kwargs)
@@ -5919,7 +5919,7 @@ class ChatBoostRemoved(TelegramType):
         chat: Chat,
         boost_id: str,
         remove_date: int,
-        source: ChatBoostSource,
+        source: Union[ChatBoostSourcePremium, ChatBoostSourceGiftCode, ChatBoostSourceGiveaway],
         **kwargs
     ):
         _get_kwargs(self, kwargs)
