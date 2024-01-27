@@ -234,20 +234,14 @@ def _serialize(
     elif hasattr(val, '__dict__'):
         val = '{!r}'.format(val)
 
-    if isinstance(val, (list, tuple)):
-        res = []
-        for x in val:
-            res.append(
-                _serialize(x, last = False)
-            )
-
+    if isinstance(val, (list, tuple, set)):
+        res = [
+            _serialize(x, last = False) for x in val
+        ]
     elif isinstance(val, dict):
-        res = {}
-        for x, y in val.items():
-            if y is not None:
-                res.update(
-                    {x: _serialize(y, last = False)}
-                )
+        res = {
+            x:_serialize(y, last = False) for (x, y) in val.items() if y is not None
+        }
     else:
         res = val
 
