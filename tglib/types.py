@@ -700,7 +700,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
     This object describes a message that was deleted or is otherwise inaccessible to the bot.
     '''
     @classmethod
-    def dese(cls, result, check_dict: bool = True):
+    def dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
             if result is None: return None
@@ -733,7 +733,7 @@ class Message(MaybeInaccessibleMessage):
     This object represents a message.
     '''
     @classmethod
-    def dese(cls, result, check_dict: bool = True):
+    def dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
             if result is None: return None
@@ -5452,6 +5452,7 @@ class MessageOrigin(TelegramType):
     '''
     @classmethod
     def dese(cls, result):
+
         if result is None: return None
         obj = _check_dict(result)
         type = obj.pop('type')
