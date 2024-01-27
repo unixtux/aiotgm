@@ -5711,7 +5711,7 @@ class ChatBoostSource(TelegramType):
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
-        source = obj.pop['source']
+        source = obj.pop('source')
 
         obj['user'] = User.dese(obj.get('user'))
 
