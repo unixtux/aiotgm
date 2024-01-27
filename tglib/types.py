@@ -5789,6 +5789,7 @@ class ChatBoostSourceGiftCode(ChatBoostSource):
 
 class ChatBoostSourceGiveaway(ChatBoostSource):
     '''
+    https://core.telegram.org/bots/api#chatboostsourcegiveaway
     The boost was obtained by the creation of a Telegram Premium giveaway. This boosts
     the chat 4 times for the duration of the corresponding Telegram Premium subscription.
     '''
