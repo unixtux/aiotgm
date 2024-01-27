@@ -673,7 +673,7 @@ class ReplyParameters(TelegramType):
         self.quote_position = quote_position
 
 
-# MaybeInaccessibleMessage: 2 SUBCLASSES ####
+# MaybeInaccessibleMessage: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
 
 class MaybeInaccessibleMessage(TelegramType):
     '''
@@ -972,7 +972,7 @@ class Message(MaybeInaccessibleMessage):
         self.web_app_data: Optional[WebAppData] = web_app_data
         self.reply_markup: Optional[InlineKeyboardMarkup] = reply_markup
 
-########################################################################
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChatPhoto(TelegramType):
@@ -5439,7 +5439,7 @@ class Giveaway(TelegramType):
         self.premium_subscription_month_count = premium_subscription_month_count
 
 
-# MessageOrigin: 4 SUBCLASSES ######################################
+# MessageOrigin: 4 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 class MessageOrigin(TelegramType):
     '''
@@ -5607,7 +5607,7 @@ class MessageOriginChannel(MessageOrigin):
         self.message_id = message_id
         self.author_signature = author_signature
 
-################################################
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ExternalReplyInfo(TelegramType):
