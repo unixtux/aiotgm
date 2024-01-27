@@ -5697,7 +5697,7 @@ class ExternalReplyInfo(TelegramType):
         self.venue = venue
 
 
-# ChatBoostSource: 3 SUBCLASSES
+# ChatBoostSource: 3 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
 
 class ChatBoostSource(TelegramType):
     '''
@@ -5711,35 +5711,23 @@ class ChatBoostSource(TelegramType):
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
-        source = obj['source']
+        source = obj.pop['source']
 
         obj['user'] = User.dese(obj.get('user'))
 
-        if source == 'premium':
-            return ChatBoostSourcePremium(**obj)
+        if source == DEFAULT_CHAT_BOOST_SOURCE_PREMIUM:
+            return ChatBoostSourcePremium.dese(**obj, check_dict = False)
 
-        elif source == 'gift_code':
-            return ChatBoostSourceGiftCode(**obj)
+        elif source == DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE:
+            return ChatBoostSourceGiftCode.dese(**obj, check_dict = False)
 
-        elif source == 'giveaway':
-            return ChatBoostSourceGiveaway(**obj)
+        elif source == DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY:
+            return ChatBoostSourceGiveaway.dese(**obj, check_dict = False)
         else:
-            return cls(**obj)
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        source_types = ', '.join([
-            ChatBoostSourcePremium.__name__,
-            ChatBoostSourceGiftCode.__name__,
-            ChatBoostSourceGiveaway.__name__
-        ])
-        logger.warning(
-            'ChatBoostSource warning, expected one'
-            f' of the following types: {source_types}.'
-        )
-        self.__dict__ = kwargs
+            raise ValueError(
+                'An error occurred during the deserialization of the'
+                f' type ChatBoostSource. Invalid source: {source!r}.'
+            )
 
 
 class ChatBoostSourcePremium(ChatBoostSource):
@@ -5747,14 +5735,26 @@ class ChatBoostSourcePremium(ChatBoostSource):
     https://core.telegram.org/bots/api#chatboostsourcepremium
     The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram Premium subscription to another user.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['user'] = User.dese(obj.get('user'))
+
+        return cls(**obj)
+
     def __init__(
         self,
         user: User,
-        source: str = 'premium',
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.source = source
+        self.source = DEFAULT_CHAT_BOOST_SOURCE_PREMIUM
         self.user = user
 
 
@@ -5764,14 +5764,26 @@ class ChatBoostSourceGiftCode(ChatBoostSource):
     The boost was obtained by the creation of Telegram Premium gift codes to boost a chat. Each such
     code boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['user'] = User.dese(obj.get('user'))
+
+        return cls(**obj)
+
     def __init__(
         self,
         user: User,
-        source: str = 'gift_code',
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.source = source
+        self.source = DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE
         self.user = user
 
 
@@ -5780,19 +5792,35 @@ class ChatBoostSourceGiveaway(ChatBoostSource):
     The boost was obtained by the creation of a Telegram Premium giveaway. This boosts
     the chat 4 times for the duration of the corresponding Telegram Premium subscription.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['giveaway_message_id'] = obj.get('giveaway_message_id')
+        obj['user'] = User.dese(obj.get('user'))
+        obj['is_unclaimed'] = obj.get('is_unclaimed')
+
+        return cls(**obj)
+
     def __init__(
         self,
         giveaway_message_id: int,
         user: Optional[User] = None,
         is_unclaimed: Optional[Literal[True]] = None,
-        source: str = 'giveaway',
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.source = source
+        self.source = DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY
         self.giveaway_message_id = giveaway_message_id
         self.user = user
         self.is_unclaimed = is_unclaimed
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChatBoost(TelegramType):
