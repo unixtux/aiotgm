@@ -1764,7 +1764,7 @@ class Client(TelegramApi):
     async def get_chat_administrators(
         self,
         chat_id: Union[int, str]
-    ) -> list[ChatMember]:
+    ) -> list[ChatMemberOwner | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned]:
         '''
         https://core.telegram.org/bots/api#getchatadministrators
         Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects.
@@ -1794,7 +1794,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         user_id: int
-    ) -> ChatMember:
+    ) -> Union[ChatMemberOwner, ChatMemberAdministrator, ChatMemberMember, ChatMemberRestricted, ChatMemberLeft, ChatMemberBanned]:
         '''
         https://core.telegram.org/bots/api#getchatmember
         Use this method to get information about a member of a chat. The method is only guaranteed to work

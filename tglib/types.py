@@ -2673,7 +2673,7 @@ class ChatInviteLink(TelegramType):
         self.pending_join_request_count = pending_join_request_count
 
 
-# ChatMember: 6 SUBCLASSES
+# ChatMember: 6 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 class ChatMember(TelegramType):
     '''
@@ -2691,47 +2691,31 @@ class ChatMember(TelegramType):
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)        
-        obj['user'] = User.dese(obj.get('user'))
 
-        status = obj['status']
+        status = obj.pop('status')
 
-        if status == 'creator':
-            return ChatMemberOwner(**obj)
+        if status == DEFAULT_CHAT_MEMBER_OWNER:
+            return ChatMemberOwner.dese(**obj, check_dict = False)
 
-        elif status == 'administrator':
-            return ChatMemberAdministrator(**obj)
+        elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
+            return ChatMemberAdministrator.dese(**obj, check_dict = False)
 
-        elif status == 'member':
-            return ChatMemberMember(**obj)
+        elif status == DEFAULT_CHAT_MEMBER_MEMBER:
+            return ChatMemberMember.dese(**obj, check_dict = False)
 
-        elif status == 'restricted':
-            return ChatMemberRestricted(**obj)
+        elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
+            return ChatMemberRestricted.dese(**obj, check_dict = False)
 
-        elif status == 'left':
-            return ChatMemberLeft(**obj)
+        elif status == DEFAULT_CHAT_MEMBER_LEFT:
+            return ChatMemberLeft.dese(**obj, check_dict = False)
 
-        elif status == 'kicked':
-            return ChatMemberBanned(**obj)
+        elif status == DEFAULT_CHAT_MEMBER_BANNED:
+            return ChatMemberBanned.dese(**obj, check_dict = False)
         else:
-            return cls(**obj)
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        members = ', '.join([
-            ChatMemberOwner.__name__,
-            ChatMemberAdministrator.__name__,
-            ChatMemberMember.__name__,
-            ChatMemberRestricted.__name__,
-            ChatMemberLeft.__name__,
-            ChatMemberBanned.__name__
-        ])
-        logger.warning(
-            'ChatMember warning, expected one'
-            f' of the following types: {members}.'
-        )
-        self.__dict__ = kwargs
+            raise ValueError(
+                'An error occurred during the deserialization'
+                f' of the type ChatMember. Invalid status: {status!r}.'
+            )
 
 
 class ChatMemberOwner(ChatMember):
@@ -2739,16 +2723,30 @@ class ChatMemberOwner(ChatMember):
     https://core.telegram.org/bots/api#chatmemberowner
     Represents a chat member that owns the chat and has all administrator privileges.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['user'] = User.dese(obj.get('user'))
+        obj['is_anonymous'] = obj.get('is_anonymous')
+        obj['custom_title'] = obj.get('custom_title')
+
+        return cls(**obj)
+
     def __init__(
         self,
-        status: str,
         user: User,
         is_anonymous: bool,
         custom_title: Optional[str] = None,
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.status = status
+        self.status = DEFAULT_CHAT_MEMBER_OWNER
         self.user = user
         self.is_anonymous = is_anonymous
         self.custom_title = custom_title
@@ -2759,9 +2757,38 @@ class ChatMemberAdministrator(ChatMember):
     https://core.telegram.org/bots/api#chatmemberadministrator
     Represents a chat member that has some additional privileges.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['user'] = User.dese(obj.get('user'))
+        obj['can_be_edited'] = obj.get('can_be_edited')
+        obj['is_anonymous'] = obj.get('is_anonymous')
+        obj['can_manage_chat'] = obj.get('can_manage_chat')
+        obj['can_delete_messages'] = obj.get('can_delete_messages')
+        obj['can_manage_video_chats'] = obj.get('can_manage_video_chats')
+        obj['can_restrict_members'] = obj.get('can_restrict_members')
+        obj['can_promote_members'] = obj.get('can_promote_members')
+        obj['can_change_info'] = obj.get('can_change_info')
+        obj['can_invite_users'] = obj.get('can_invite_users')
+        obj['can_post_messages'] = obj.get('can_post_messages')
+        obj['can_edit_messages'] = obj.get('can_edit_messages')
+        obj['can_pin_messages'] = obj.get('can_pin_messages')
+        obj['can_post_stories'] = obj.get('can_post_stories')
+        obj['can_edit_stories'] = obj.get('can_edit_stories')
+        obj['can_delete_stories'] = obj.get('can_delete_stories')
+        obj['can_manage_topics'] = obj.get('can_manage_topics')
+        obj['custom_title'] = obj.get('custom_title')
+
+        return cls(**obj)
+
     def __init__(
         self,
-        status: str,
         user: User,
         can_be_edited: bool,
         is_anonymous: bool,
@@ -2783,7 +2810,7 @@ class ChatMemberAdministrator(ChatMember):
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.status = status
+        self.status = DEFAULT_CHAT_MEMBER_ADMINISTRATOR
         self.user = user
         self.can_be_edited = can_be_edited
         self.is_anonymous = is_anonymous
@@ -2809,14 +2836,26 @@ class ChatMemberMember(ChatMember):
     https://core.telegram.org/bots/api#chatmembermember
     Represents a chat member that has no additional privileges or restrictions.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['user'] = User.dese(obj.get('user'))
+
+        return cls(**obj)
+
     def __init__(
         self,
-        status: str,
         user: User,
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.status = status
+        self.status = DEFAULT_CHAT_MEMBER_MEMBER
         self.user = user
 
 
@@ -2825,9 +2864,37 @@ class ChatMemberRestricted(ChatMember):
     https://core.telegram.org/bots/api#chatmemberrestricted
     Represents a chat member that is under certain restrictions in the chat. Supergroups only.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['user'] = User.dese(obj.get('user'))
+        obj['is_member'] = obj.get('is_member')
+        obj['can_send_messages'] = obj.get('can_send_messages')
+        obj['can_send_audios'] = obj.get('can_send_audios')
+        obj['can_send_documents'] = obj.get('can_send_documents')
+        obj['can_send_photos'] = obj.get('can_send_photos')
+        obj['can_send_videos'] = obj.get('can_send_videos')
+        obj['can_send_video_notes'] = obj.get('can_send_video_notes')
+        obj['can_send_voice_notes'] = obj.get('can_send_voice_notes')
+        obj['can_send_polls'] = obj.get('can_send_polls')
+        obj['can_send_other_messages'] = obj.get('can_send_other_messages')
+        obj['can_add_web_page_previews'] = obj.get('can_add_web_page_previews')
+        obj['can_change_info'] = obj.get('can_change_info')
+        obj['can_invite_users'] = obj.get('can_invite_users')
+        obj['can_pin_messages'] = obj.get('can_pin_messages')
+        obj['can_manage_topics'] = obj.get('can_manage_topics')
+        obj['until_date'] = obj.get('until_date')
+
+        return cls(**obj)
+
     def __init__(
         self,
-        status: str,
         user: User,
         is_member: bool,
         can_send_messages: bool,
@@ -2848,7 +2915,7 @@ class ChatMemberRestricted(ChatMember):
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.status = status
+        self.status = DEFAULT_CHAT_MEMBER_RESTRICTED
         self.user = user
         self.is_member = is_member
         self.can_send_messages = can_send_messages
@@ -2873,14 +2940,26 @@ class ChatMemberLeft(ChatMember):
     https://core.telegram.org/bots/api#chatmemberleft
     Represents a chat member that isn't currently a member of the chat, but may join it themselves.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['user'] = User.dese(obj.get('user'))
+
+        return cls(**obj)
+
     def __init__(
         self,
-        status: str,
         user: User,
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.status = status
+        self.status = DEFAULT_CHAT_MEMBER_LEFT
         self.user = user
 
 
@@ -2889,17 +2968,32 @@ class ChatMemberBanned(ChatMember):
     https://core.telegram.org/bots/api#chatmemberbanned
     Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['user'] = User.dese(obj.get('user'))
+        obj['until_date'] = obj.get('until_date')
+
+        return cls(**obj)
+
     def __init__(
         self,
-        status: str,
         user: User,
         until_date: int,
         **kwargs
     ):
         _get_kwargs(self, kwargs)
-        self.status = status
+        self.status = DEFAULT_CHAT_MEMBER_BANNED
         self.user = user
         self.until_date = until_date
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChatMemberUpdated(TelegramType):
@@ -2925,8 +3019,8 @@ class ChatMemberUpdated(TelegramType):
         chat: Chat,
         from_user: User,
         date: int,
-        old_chat_member: ChatMember,
-        new_chat_member: ChatMember,
+        old_chat_member: list[ChatMemberOwner | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned],
+        new_chat_member: list[ChatMemberOwner | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned],
         invite_link: Optional[ChatInviteLink] = None,
         via_chat_folder_invite_link: Optional[bool] = None,
         **kwargs
@@ -3029,12 +3123,13 @@ class BotCommand(TelegramType):
         self.description = description
 
 
-# BotCommandScope: 7 SUBCLASSES
+# BotCommandScope: 7 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 class BotCommandScope(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscope
-    This object represents the scope to which bot commands are applied. Currently, the following 7 scopes are supported:
+    This object represents the scope to which bot commands are applied.
+    Currently, the following 7 scopes are supported:
     - BotCommandScopeDefault
     - BotCommandScopeAllPrivateChats
     - BotCommandScopeAllGroupChats
