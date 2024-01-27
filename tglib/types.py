@@ -5458,16 +5458,16 @@ class MessageOrigin(TelegramType):
         type = obj.pop('type')
 
         if type == DEFAULT_MESSAGE_ORIGIN_USER:
-            return MessageOriginUser(**obj, check_dict = False)
+            return MessageOriginUser.dese(**obj, check_dict = False)
 
         elif type == DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER:
-            return MessageOriginHiddenUser(**obj, check_dict = False)
+            return MessageOriginHiddenUser.dese(**obj, check_dict = False)
 
         elif type == DEFAULT_MESSAGE_ORIGIN_CHAT:
-            return MessageOriginChat(**obj, check_dict = False)
+            return MessageOriginChat.dese(**obj, check_dict = False)
 
         elif type == DEFAULT_MESSAGE_ORIGIN_CHANNEL:
-            return MessageOriginChannel(**obj, check_dict = False)
+            return MessageOriginChannel.dese(**obj, check_dict = False)
         else:
             raise ValueError(
                 'An error occurred during the deserialization'
