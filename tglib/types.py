@@ -694,7 +694,7 @@ class MaybeInaccessibleMessage(TelegramType):
             return Message.dese(**obj, check_dict = False)
 
 
-class InaccessibleMessage(TelegramType):
+class InaccessibleMessage(MaybeInaccessibleMessage):
     '''
     https://core.telegram.org/bots/api#inaccessiblemessage
     This object describes a message that was deleted or is otherwise inaccessible to the bot.
@@ -728,7 +728,7 @@ class InaccessibleMessage(TelegramType):
         self.date: int = date
 
 
-class Message(TelegramType):
+class Message(MaybeInaccessibleMessage):
     '''
     https://core.telegram.org/bots/api#message
     This object represents a message.
@@ -904,7 +904,7 @@ class Message(TelegramType):
         self.message_thread_id: Optional[int] = message_thread_id
         self.from_user: Optional[User] = from_user
         self.sender_chat: Optional[Chat] = sender_chat
-        self.forward_origin: Optional[MessageOrigin] = forward_origin
+        self.forward_origin: Optional[Union[MessageOriginUser, MessageOriginHiddenUser, MessageOriginChat, MessageOriginChannel]] = forward_origin
         self.is_topic_message: Optional[Literal[True]] = is_topic_message
         self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
         self.reply_to_message: Optional[Message] = reply_to_message
@@ -947,7 +947,7 @@ class Message(TelegramType):
         self.message_auto_delete_timer_changed: Optional[MessageAutoDeleteTimerChanged] = message_auto_delete_timer_changed
         self.migrate_to_chat_id: Optional[int] = migrate_to_chat_id
         self.migrate_from_chat_id: Optional[int] = migrate_from_chat_id
-        self.pinned_message: Optional[MaybeInaccessibleMessage] = pinned_message
+        self.pinned_message: Optional[Union[Message, InaccessibleMessage]] = pinned_message
         self.invoice: Optional[Invoice] = invoice
         self.successful_payment: Optional[SuccessfulPayment] = successful_payment
         self.users_shared: Optional[UsersShared] = users_shared
@@ -2580,7 +2580,7 @@ class CallbackQuery(TelegramType):
         id: str,
         from_user: User,
         chat_instance: str,
-        message: Optional[MaybeInaccessibleMessage] = None,
+        message: Optional[Union[Message, InaccessibleMessage]] = None,
         inline_message_id: str = None,
         data: Optional[str] = None,
         game_short_name: Optional[str] = None,
@@ -5475,7 +5475,7 @@ class MessageOrigin(TelegramType):
             )
 
 
-class MessageOriginUser(TelegramType):
+class MessageOriginUser(MessageOrigin):
     '''
     https://core.telegram.org/bots/api#messageoriginuser
     The message was originally sent by a known user.
@@ -5506,7 +5506,7 @@ class MessageOriginUser(TelegramType):
         self.sender_user = sender_user
 
 
-class MessageOriginHiddenUser(TelegramType):
+class MessageOriginHiddenUser(MessageOrigin):
     '''
     https://core.telegram.org/bots/api#messageoriginhiddenuser
     The message was originally sent by an unknown user.
@@ -5537,7 +5537,7 @@ class MessageOriginHiddenUser(TelegramType):
         self.sender_user_name = sender_user_name
 
 
-class MessageOriginChat(TelegramType):
+class MessageOriginChat(MessageOrigin):
     '''
     https://core.telegram.org/bots/api#messageoriginchat
     The message was originally sent on behalf of a chat to a group chat.
@@ -5571,7 +5571,7 @@ class MessageOriginChat(TelegramType):
         self.author_signature = author_signature
 
 
-class MessageOriginChannel(TelegramType):
+class MessageOriginChannel(MessageOrigin):
     '''
     https://core.telegram.org/bots/api#messageoriginchannel
     The message was originally sent to a channel chat.
@@ -5646,7 +5646,7 @@ class ExternalReplyInfo(TelegramType):
 
     def __init__(
         self,
-        origin: MessageOrigin,
+        origin: Union[MessageOriginUser, MessageOriginHiddenUser, MessageOriginChat, MessageOriginChannel],
         chat: Optional[Chat] = None,
         message_id: Optional[int] = None,
         link_preview_options: Optional[LinkPreviewOptions] = None,
