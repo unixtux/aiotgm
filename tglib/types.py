@@ -1204,7 +1204,7 @@ class Chat(TelegramType):
         is_forum: Optional[Literal[True]] = None,
         photo: Optional[ChatPhoto] = None,
         active_usernames: Optional[list[str]] = None,
-        available_reactions: Optional[Union[list[ReactionTypeEmoji], list[ReactionTypeCustomEmoji]]] = None,
+        available_reactions: Optional[list[ReactionTypeEmoji | ReactionTypeCustomEmoji]] = None,
         accent_color_id: Optional[int] = None,
         background_custom_emoji_id: Optional[str] = None,
         profile_accent_color_id: Optional[int] = None,
@@ -1293,8 +1293,8 @@ class MessageReactionUpdated(TelegramType):
         chat: Chat,
         message_id: int,
         date: int,
-        old_reaction: Union[list[ReactionTypeEmoji], list[ReactionTypeCustomEmoji]],
-        new_reaction: Union[list[ReactionTypeEmoji], list[ReactionTypeCustomEmoji]],
+        old_reaction: list[ReactionTypeEmoji | ReactionTypeCustomEmoji],
+        new_reaction: list[ReactionTypeEmoji | ReactionTypeCustomEmoji],
         user: Optional[User] = None,
         actor_chat: Optional[Chat] = None,
         **kwargs
@@ -3249,6 +3249,8 @@ class BotCommandScopeChatMember(BotCommandScope):
         self.type = type
         self.chat_id = chat_id
         self.user_id = user_id
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class BotName(TelegramType):
