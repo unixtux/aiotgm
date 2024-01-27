@@ -3138,24 +3138,6 @@ class BotCommandScope(TelegramType):
     - BotCommandScopeChatAdministrators
     - BotCommandScopeChatMember
     '''
-    def __init__(
-        self,
-        **kwargs
-    ):
-        scopes = ', '.join([
-            BotCommandScopeDefault.__name__,
-            BotCommandScopeAllPrivateChats.__name__,
-            BotCommandScopeAllGroupChats.__name__,
-            BotCommandScopeAllChatAdministrators.__name__,
-            BotCommandScopeChat.__name__,
-            BotCommandScopeChatAdministrators.__name__,
-            BotCommandScopeChatMember.__name__
-        ])
-        logger.warning(
-            'BotCommandScope warning, expected one'
-            f' of the following types: {scopes}.'
-        )
-        self.__dict__ = kwargs
 
 
 class BotCommandScopeDefault(BotCommandScope):
@@ -3164,11 +3146,8 @@ class BotCommandScopeDefault(BotCommandScope):
     Represents the default scope of bot commands. Default commands are
     used if no commands with a narrower scope are specified for the user.
     '''
-    def __init__(
-        self,
-        type: str = 'default'
-    ):
-        self.type = type
+    def __init__(self):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_DEFAULT
 
 
 class BotCommandScopeAllPrivateChats(BotCommandScope):
@@ -3176,11 +3155,8 @@ class BotCommandScopeAllPrivateChats(BotCommandScope):
     https://core.telegram.org/bots/api#botcommandscopeallprivatechats
     Represents the scope of bot commands, covering all private chats.
     '''
-    def __init__(
-        self,
-        type: str = 'all_private_chats'
-    ):
-        self.type = type
+    def __init__(self):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS
 
 
 class BotCommandScopeAllGroupChats(BotCommandScope):
@@ -3188,11 +3164,8 @@ class BotCommandScopeAllGroupChats(BotCommandScope):
     https://core.telegram.org/bots/api#botcommandscopeallgroupchats
     Represents the scope of bot commands, covering all group and supergroup chats.
     '''
-    def __init__(
-        self,
-        type: str = 'all_group_chats'
-    ):
-        self.type = type
+    def __init__(self):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS
 
 
 class BotCommandScopeAllChatAdministrators(BotCommandScope):
@@ -3200,11 +3173,8 @@ class BotCommandScopeAllChatAdministrators(BotCommandScope):
     https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
     Represents the scope of bot commands, covering all group and supergroup chat administrators.
     '''
-    def __init__(
-        self,
-        type: str = 'all_chat_administrators'
-    ):
-        self.type = type
+    def __init__(self):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS
 
 
 class BotCommandScopeChat(BotCommandScope):
@@ -3214,10 +3184,9 @@ class BotCommandScopeChat(BotCommandScope):
     '''
     def __init__(
         self,
-        chat_id: Union[int, str],
-        type: str = 'chat'
+        chat_id: Union[int, str]
     ):
-        self.type = type
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT
         self.chat_id = chat_id
 
 
@@ -3228,10 +3197,9 @@ class BotCommandScopeChatAdministrators(BotCommandScope):
     '''
     def __init__(
         self,
-        chat_id: Union[int, str],
-        type: str = 'chat_administrators'
+        chat_id: Union[int, str]
     ):
-        self.type = type
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS
         self.chat_id = chat_id
 
 
@@ -3243,10 +3211,9 @@ class BotCommandScopeChatMember(BotCommandScope):
     def __init__(
         self,
         chat_id: Union[int, str],
-        user_id: int,
-        type: str = 'chat_member'
+        user_id: int
     ):
-        self.type = type
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER
         self.chat_id = chat_id
         self.user_id = user_id
 

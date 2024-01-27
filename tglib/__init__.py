@@ -2112,7 +2112,15 @@ class Client(TelegramApi):
     async def set_my_commands(
         self,
         commands: list[BotCommand],
-        scope: Optional[BotCommandScope] = None,
+        scope: Optional[Union[
+            BotCommandScopeDefault,
+            BotCommandScopeAllPrivateChats,
+            BotCommandScopeAllGroupChats,
+            BotCommandScopeAllChatAdministrators,
+            BotCommandScopeChat,
+            BotCommandScopeChatAdministrators,
+            BotCommandScopeChatMember
+        ]] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
         '''
@@ -2130,7 +2138,15 @@ class Client(TelegramApi):
 
     async def delete_my_commands(
         self,
-        scope: Optional[BotCommandScope] = None,
+        scope: Optional[Union[
+            BotCommandScopeDefault,
+            BotCommandScopeAllPrivateChats,
+            BotCommandScopeAllGroupChats,
+            BotCommandScopeAllChatAdministrators,
+            BotCommandScopeChat,
+            BotCommandScopeChatAdministrators,
+            BotCommandScopeChatMember
+        ]] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
         '''
@@ -2147,7 +2163,15 @@ class Client(TelegramApi):
 
     async def get_my_commands(
         self,
-        scope: Optional[BotCommandScope] = None,
+        scope: Optional[Union[
+            BotCommandScopeDefault,
+            BotCommandScopeAllPrivateChats,
+            BotCommandScopeAllGroupChats,
+            BotCommandScopeAllChatAdministrators,
+            BotCommandScopeChat,
+            BotCommandScopeChatAdministrators,
+            BotCommandScopeChatMember
+        ]] = None,
         language_code: Optional[str] = None
     ) -> list[BotCommand]:
         '''
