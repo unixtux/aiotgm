@@ -285,7 +285,7 @@ class Client(TelegramApi):
                     max_retries = unlimited,
                     keep_session = True
                 )
-                updates = [Update.dese(update) for update in result]
+                updates = [Update._dese(update) for update in result]
 
             except TelegramError as exc:
                 if not re.search(r'bad.*gateway', str(exc), re.IGNORECASE):
@@ -505,7 +505,7 @@ class Client(TelegramApi):
         if timeout is not None: params['timeout'] = timeout
         if allowed_updates is not None: params['allowed_updates'] = allowed_updates
         result = await super().get_updates(params)
-        return [Update.dese(update) for update in result]
+        return [Update._dese(update) for update in result]
 
 
     async def get_me(self) -> User:
@@ -515,7 +515,7 @@ class Client(TelegramApi):
         no parameters. Returns basic information about the bot in form of a User object.
         '''
         result = await super().get_me()
-        return User.dese(result)
+        return User._dese(result)
 
 
     async def log_out(self) -> Literal[True]:
@@ -571,7 +571,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_message(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def forward_message(
@@ -598,7 +598,7 @@ class Client(TelegramApi):
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
         result = await super().forward_message(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def forward_messages(
@@ -626,7 +626,7 @@ class Client(TelegramApi):
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
         result = await super().forward_messages(params)
-        return [MessageId.dese(mid) for mid in result]
+        return [MessageId._dese(mid) for mid in result]
 
 
     async def copy_message(
@@ -665,7 +665,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().copy_message(params)
-        return MessageId.dese(result)
+        return MessageId._dese(result)
 
 
     async def copy_messages(
@@ -696,7 +696,7 @@ class Client(TelegramApi):
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if remove_caption is not None: params['remove_caption'] = remove_caption
         result = await super().copy_messages(params)
-        return [MessageId.dese(mid) for mid in result]
+        return [MessageId._dese(mid) for mid in result]
 
 
     async def send_photo(
@@ -733,7 +733,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_photo(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_audio(
@@ -779,7 +779,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_audio(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_document(
@@ -819,7 +819,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_document(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_video(
@@ -868,7 +868,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_video(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_animation(
@@ -914,7 +914,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_animation(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_voice(
@@ -954,7 +954,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_voice(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_video_note(
@@ -989,7 +989,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_video_note(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_media_group(
@@ -1017,7 +1017,7 @@ class Client(TelegramApi):
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         result = await super().send_media_group(params)
-        return [Message.dese(message) for message in result]
+        return [Message._dese(message) for message in result]
 
 
     async def send_location(
@@ -1055,7 +1055,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_location(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_venue(
@@ -1097,7 +1097,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_venue(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_contact(
@@ -1131,7 +1131,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_contact(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_poll(
@@ -1181,7 +1181,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_poll(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_dice(
@@ -1210,7 +1210,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_dice(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def send_chat_action(
@@ -1271,7 +1271,7 @@ class Client(TelegramApi):
         if offset is not None: params['offset'] = offset
         if limit is not None: params['limit'] = limit
         result = await super().get_user_profile_photos(params)
-        return UserProfilePhotos.dese(result)
+        return UserProfilePhotos._dese(result)
 
 
     async def get_file(
@@ -1291,7 +1291,7 @@ class Client(TelegramApi):
             'file_id': file_id
         }
         result = await super().get_file(params)
-        return File.dese(result)
+        return File._dese(result)
 
 
     async def ban_chat_member(
@@ -1524,7 +1524,7 @@ class Client(TelegramApi):
         if member_limit is not None: params['member_limit'] = member_limit
         if creates_join_request is not None: params['creates_join_request'] = creates_join_request
         result = await super().create_chat_invite_link(params)
-        return ChatInviteLink.dese(result)
+        return ChatInviteLink._dese(result)
 
 
     async def edit_chat_invite_link(
@@ -1551,7 +1551,7 @@ class Client(TelegramApi):
         if member_limit is not None: params['member_limit'] = member_limit
         if creates_join_request is not None: params['creates_join_request'] = creates_join_request
         result = await super().edit_chat_invite_link(params)
-        return ChatInviteLink.dese(result)
+        return ChatInviteLink._dese(result)
 
 
     async def revoke_chat_invite_link(
@@ -1570,7 +1570,7 @@ class Client(TelegramApi):
             'invite_link': invite_link
         }
         result = await super().revoke_chat_invite_link(params)
-        return ChatInviteLink.dese(result)
+        return ChatInviteLink._dese(result)
 
 
     async def approve_chat_join_request(
@@ -1758,7 +1758,7 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         result = await super().get_chat(params)
-        return Chat.dese(result)
+        return Chat._dese(result)
 
 
     async def get_chat_administrators(
@@ -1773,7 +1773,7 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         result = await super().get_chat_administrators(params)
-        return [ChatMember.dese(chat_member) for chat_member in result]
+        return [ChatMember._dese(chat_member) for chat_member in result]
 
 
     async def get_chat_member_count(
@@ -1805,7 +1805,7 @@ class Client(TelegramApi):
             'user_id': user_id
         }
         result = await super().get_chat_member(params)
-        return ChatMember.dese(result)
+        return ChatMember._dese(result)
 
 
     async def set_chat_sticker_set(
@@ -1849,7 +1849,7 @@ class Client(TelegramApi):
         icon by any user. Requires no parameters. Returns an Array of Sticker objects.
         '''
         result = await super().get_forum_topic_icon_stickers()
-        return [Sticker.dese(sticker) for sticker in result]
+        return [Sticker._dese(sticker) for sticker in result]
 
 
     async def create_forum_topic(
@@ -1872,7 +1872,7 @@ class Client(TelegramApi):
         if icon_color is not None: params['icon_color'] = icon_color
         if icon_custom_emoji_id is not None: params['icon_custom_emoji_id'] = icon_custom_emoji_id
         result = await super().create_forum_topic(params)
-        return ForumTopic.dese(result)
+        return ForumTopic._dese(result)
 
 
     async def edit_forum_topic(
@@ -2106,7 +2106,7 @@ class Client(TelegramApi):
             'user_id': user_id
         }
         result = await super().get_user_chat_boosts(params)
-        return UserChatBoosts.dese(result)
+        return UserChatBoosts._dese(result)
 
 
     async def set_my_commands(
@@ -2183,7 +2183,7 @@ class Client(TelegramApi):
         if scope is not None: params['scope'] = scope
         if language_code is not None: params['language_code'] = language_code
         result = await super().get_my_commands(params)
-        return [BotCommand.dese(bot_command) for bot_command in result]
+        return [BotCommand._dese(bot_command) for bot_command in result]
 
 
     async def set_my_name(
@@ -2212,7 +2212,7 @@ class Client(TelegramApi):
         params = {}
         if language_code is not None: params['language_code'] = language_code
         result = await super().get_my_name(params)
-        return BotName.dese(result)
+        return BotName._dese(result)
 
 
     async def set_my_description(
@@ -2243,7 +2243,7 @@ class Client(TelegramApi):
         params = {}
         if language_code is not None: params['language_code'] = language_code
         result = await super().get_my_description(params)
-        return BotDescription.dese(result)
+        return BotDescription._dese(result)
 
 
     async def set_my_short_description(
@@ -2274,7 +2274,7 @@ class Client(TelegramApi):
         params = {}
         if language_code is not None: params['language_code'] = language_code
         result = await super().get_my_short_description(params)
-        return BotShortDescription.dese(result)
+        return BotShortDescription._dese(result)
 
 
     async def set_chat_menu_button(
@@ -2305,7 +2305,7 @@ class Client(TelegramApi):
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
         result = await super().get_chat_menu_button(params)
-        return MenuButton.dese(result)
+        return MenuButton._dese(result)
 
 
     async def set_my_default_administrator_rights(
@@ -2336,7 +2336,7 @@ class Client(TelegramApi):
         params = {}
         if for_channels is not None: params['for_channels'] = for_channels
         result = await super().get_my_default_administrator_rights(params)
-        return ChatAdministratorRights.dese(result)
+        return ChatAdministratorRights._dese(result)
 
 
     async def edit_message_text(
@@ -2367,7 +2367,7 @@ class Client(TelegramApi):
         if link_preview_options is not None: params['link_preview_options'] = link_preview_options
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_text(params)
-        return Message.dese(result) if result is not True else True
+        return Message._dese(result) if result is not True else True
 
 
     async def edit_message_caption(
@@ -2395,7 +2395,7 @@ class Client(TelegramApi):
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_caption(params)
-        return Message.dese(result) if result is not True else True
+        return Message._dese(result) if result is not True else True
 
 
     async def edit_message_media(
@@ -2422,7 +2422,7 @@ class Client(TelegramApi):
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_media(params)
-        return Message.dese(result) if result is not True else True
+        return Message._dese(result) if result is not True else True
 
 
     async def edit_message_live_location(
@@ -2455,7 +2455,7 @@ class Client(TelegramApi):
         if proximity_alert_radius is not None: params['proximity_alert_radius'] = proximity_alert_radius
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_live_location(params)
-        return Message.dese(result) if result is not True else True
+        return Message._dese(result) if result is not True else True
 
 
     async def stop_message_live_location(
@@ -2476,7 +2476,7 @@ class Client(TelegramApi):
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().stop_message_live_location(params)
-        return Message.dese(result) if result is not True else True
+        return Message._dese(result) if result is not True else True
 
 
     async def edit_message_reply_markup(
@@ -2497,7 +2497,7 @@ class Client(TelegramApi):
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_reply_markup(params)
-        return Message.dese(result) if result is not True else True
+        return Message._dese(result) if result is not True else True
 
 
     async def stop_poll(
@@ -2516,7 +2516,7 @@ class Client(TelegramApi):
         }
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().stop_poll(params)
-        return Poll.dese(result)
+        return Poll._dese(result)
 
 
     async def delete_message(
@@ -2589,7 +2589,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_sticker(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def get_sticker_set(
@@ -2604,7 +2604,7 @@ class Client(TelegramApi):
             'name': name
         }
         result = await super().get_sticker_set(params)
-        return StickerSet.dese(result)
+        return StickerSet._dese(result)
 
 
     async def get_custom_emoji_stickers(
@@ -2620,7 +2620,7 @@ class Client(TelegramApi):
             'custom_emoji_ids': custom_emoji_ids
         }
         result = await super().get_custom_emoji_stickers(params)
-        return [Sticker.dese(sticker) for sticker in result]
+        return [Sticker._dese(sticker) for sticker in result]
 
 
     async def upload_sticker_file(
@@ -2640,7 +2640,7 @@ class Client(TelegramApi):
             'sticker_format': sticker_format
         }
         result = await super().upload_sticker_file(params)
-        return File.dese(result)
+        return File._dese(result)
 
 
     async def create_new_sticker_set(
@@ -2920,7 +2920,7 @@ class Client(TelegramApi):
             'result': result
         }
         result = await super().answer_web_app_query(params)
-        return SentWebAppMessage.dese(result)
+        return SentWebAppMessage._dese(result)
 
 
     async def send_invoice(
@@ -2988,7 +2988,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_invoice(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def create_invoice_link(
@@ -3142,7 +3142,7 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_game(params)
-        return Message.dese(result)
+        return Message._dese(result)
 
 
     async def set_game_score(
@@ -3171,7 +3171,7 @@ class Client(TelegramApi):
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         result = await super().set_game_score(params)
-        return Message.dese(result) if result is not True else True
+        return Message._dese(result) if result is not True else True
 
 
     async def get_game_high_scores(
@@ -3193,4 +3193,4 @@ class Client(TelegramApi):
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         result = await super().get_game_high_scores(params)
-        return [GameHighScore.dese(score) for score in result]
+        return [GameHighScore._dese(score) for score in result]
