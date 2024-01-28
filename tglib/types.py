@@ -98,7 +98,7 @@ __all__ = [
     'InputMediaDocument',
     'InputMediaPhoto',
     'InputMediaVideo',
-    'InputMessageContent',
+    #'InputMessageContent',
     'InputSticker',
     'InputTextMessageContent',
     'InputVenueMessageContent',
@@ -3808,20 +3808,7 @@ class InlineQueryResultsButton(TelegramType):
 
 # InputMessageContent: 5 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
 
-class InputMessageContent(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inputmessagecontent
-    This object represents the content of a message to be sent as a result of
-    an inline query. Telegram clients currently support the following 5 types:
-    - InputTextMessageContent
-    - InputLocationMessageContent
-    - InputVenueMessageContent
-    - InputContactMessageContent
-    - InputInvoiceMessageContent
-    '''
-
-
-class InputTextMessageContent(InputMessageContent):
+class InputTextMessageContent(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputtextmessagecontent
     Represents the content of a text message to be sent as the result of an inline query.
@@ -3839,7 +3826,7 @@ class InputTextMessageContent(InputMessageContent):
         self.link_preview_options = link_preview_options
 
 
-class InputLocationMessageContent(InputMessageContent):
+class InputLocationMessageContent(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputlocationmessagecontent
     Represents the content of a location message to be sent as the result of an inline query.
@@ -3861,7 +3848,7 @@ class InputLocationMessageContent(InputMessageContent):
         self.proximity_alert_radius = proximity_alert_radius
 
 
-class InputVenueMessageContent(InputMessageContent):
+class InputVenueMessageContent(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputvenuemessagecontent
     Represents the content of a venue message to be sent as the result of an inline query.
@@ -3887,7 +3874,7 @@ class InputVenueMessageContent(InputMessageContent):
         self.google_place_type = google_place_type
 
 
-class InputContactMessageContent(InputMessageContent):
+class InputContactMessageContent(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputcontactmessagecontent
     Represents the content of a contact message to be sent as the result of an inline query.
@@ -3905,7 +3892,7 @@ class InputContactMessageContent(InputMessageContent):
         self.vcard = vcard
 
 
-class InputInvoiceMessageContent(InputMessageContent):
+class InputInvoiceMessageContent(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputinvoicemessagecontent
     Represents the content of an invoice message to be sent as the result of an inline query.
@@ -3954,6 +3941,28 @@ class InputInvoiceMessageContent(InputMessageContent):
         self.send_email_to_provider = send_email_to_provider
         self.is_flexible = is_flexible
 
+
+InputMessageContent = Union[
+    InputTextMessageContent,
+    InputLocationMessageContent,
+    InputVenueMessageContent,
+    InputContactMessageContent,
+    InputInvoiceMessageContent
+]
+'''
+https://core.telegram.org/bots/api#inputmessagecontent
+
+This object represents the content of a message to be sent as a result of an inline query.
+
+Telegram clients currently support the following 5 types:
+
+- InputTextMessageContent
+- InputLocationMessageContent
+- InputVenueMessageContent
+- InputContactMessageContent
+- InputInvoiceMessageContent
+'''
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -3996,7 +4005,7 @@ class InlineQueryResultArticle(InlineQueryResult):
         self,
         id: str,
         title: str,
-        input_message_content: Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent],
+        input_message_content: InputMessageContent,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
         url: Optional[str] = None,
         hide_url: Optional[bool] = None,
@@ -4037,7 +4046,7 @@ class InlineQueryResultPhoto(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_PHOTO
         self.id = id
@@ -4074,7 +4083,7 @@ class InlineQueryResultGif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_GIF
         self.id = id
@@ -4113,7 +4122,7 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF
         self.id = id
@@ -4153,7 +4162,7 @@ class InlineQueryResultVideo(InlineQueryResult):
         video_duration: Optional[int] = None,
         description: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_VIDEO
         self.id = id
@@ -4189,7 +4198,7 @@ class InlineQueryResultAudio(InlineQueryResult):
         performer: Optional[str] = None,
         audio_duration: Optional[int] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_AUDIO
         self.id = id
@@ -4221,7 +4230,7 @@ class InlineQueryResultVoice(InlineQueryResult):
         caption_entities: Optional[list[MessageEntity]] = None,
         voice_duration: Optional[int] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_VOICE
         self.id = id
@@ -4253,7 +4262,7 @@ class InlineQueryResultDocument(InlineQueryResult):
         caption_entities: Optional[list[MessageEntity]] = None,
         description: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
+        input_message_content: Optional[InputMessageContent] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
         thumbnail_height: Optional[int] = None
@@ -4291,7 +4300,7 @@ class InlineQueryResultLocation(InlineQueryResult):
         heading: Optional[int] = None,
         proximity_alert_radius: Optional[int] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
+        input_message_content: Optional[InputMessageContent] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
         thumbnail_height: Optional[int] = None
@@ -4330,7 +4339,7 @@ class InlineQueryResultVenue(InlineQueryResult):
         google_place_id: Optional[str] = None,
         google_place_type: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
+        input_message_content: Optional[InputMessageContent] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
         thumbnail_height: Optional[int] = None
@@ -4366,7 +4375,7 @@ class InlineQueryResultContact(InlineQueryResult):
         last_name: Optional[str] = None,
         vcard: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
+        input_message_content: Optional[InputMessageContent] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
         thumbnail_height: Optional[int] = None
@@ -4418,7 +4427,7 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO
         self.id = id
@@ -4448,7 +4457,7 @@ class InlineQueryResultCachedGif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF
         self.id = id
@@ -4477,7 +4486,7 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF
         self.id = id
@@ -4502,7 +4511,7 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
         id: str,
         sticker_file_id: str,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER
         self.id = id
@@ -4528,7 +4537,7 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT
         self.id = id
@@ -4559,7 +4568,7 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO
         self.id = id
@@ -4589,7 +4598,7 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE
         self.id = id
@@ -4617,7 +4626,7 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
+        input_message_content: Optional[InputMessageContent] = None
     ):
         self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO
         self.id = id
