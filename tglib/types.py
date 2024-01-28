@@ -92,7 +92,7 @@ __all__ = [
     'InputFile',
     'InputInvoiceMessageContent',
     'InputLocationMessageContent',
-    'InputMedia',
+    #'InputMedia',
     'InputMediaAnimation',
     'InputMediaAudio',
     'InputMediaDocument',
@@ -3451,19 +3451,7 @@ class ResponseParameters(TelegramType):
 
 # InputMedia: 5 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
 
-class InputMedia(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inputmedia
-    This object represents the content of a media message to be sent. It should be one of
-    - InputMediaAnimation
-    - InputMediaDocument
-    - InputMediaAudio
-    - InputMediaPhoto
-    - InputMediaVideo
-    '''
-
-
-class InputMediaPhoto(InputMedia):
+class InputMediaPhoto(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputmediaphoto
     Represents a photo to be sent.
@@ -3474,10 +3462,9 @@ class InputMediaPhoto(InputMedia):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
-        has_spoiler: Optional[bool] = None,
-        type: str = 'photo'
+        has_spoiler: Optional[bool] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INPUT_MEDIA_PHOTO
         self.media = media
         self.caption = caption
         self.parse_mode = parse_mode
@@ -3485,7 +3472,7 @@ class InputMediaPhoto(InputMedia):
         self.has_spoiler = has_spoiler
 
 
-class InputMediaVideo(InputMedia):
+class InputMediaVideo(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputmediavideo
     Represents a video to be sent.
@@ -3501,10 +3488,9 @@ class InputMediaVideo(InputMedia):
         height: Optional[int] = None,
         duration: Optional[int] = None,
         supports_streaming: Optional[bool] = None,
-        has_spoiler: Optional[bool] = None,
-        type: str = 'video'
+        has_spoiler: Optional[bool] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INPUT_MEDIA_VIDEO
         self.media = media
         self.thumbnail = thumbnail
         self.caption = caption
@@ -3517,7 +3503,7 @@ class InputMediaVideo(InputMedia):
         self.has_spoiler = has_spoiler
 
 
-class InputMediaAnimation(InputMedia):
+class InputMediaAnimation(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputmediaanimation
     Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
@@ -3532,10 +3518,9 @@ class InputMediaAnimation(InputMedia):
         width: Optional[int] = None,
         height: Optional[int] = None,
         duration: Optional[int] = None,
-        has_spoiler: Optional[bool] = None,
-        type: str = 'animation'
+        has_spoiler: Optional[bool] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INPUT_MEDIA_ANIMATION
         self.media = media
         self.thumbnail = thumbnail
         self.caption = caption
@@ -3547,7 +3532,7 @@ class InputMediaAnimation(InputMedia):
         self.has_spoiler = has_spoiler
 
 
-class InputMediaAudio(InputMedia):
+class InputMediaAudio(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputmediaaudio
     Represents an audio file to be treated as music to be sent.
@@ -3561,10 +3546,9 @@ class InputMediaAudio(InputMedia):
         caption_entities: Optional[list[MessageEntity]] = None,
         duration: Optional[int] = None,
         performer: Optional[str] = None,
-        title: Optional[str] = None,
-        type: str = 'audio'
+        title: Optional[str] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INPUT_MEDIA_AUDIO
         self.media = media
         self.thumbnail = thumbnail
         self.caption = caption
@@ -3575,7 +3559,7 @@ class InputMediaAudio(InputMedia):
         self.title = title
 
 
-class InputMediaDocument(InputMedia):
+class InputMediaDocument(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputmediadocument
     Represents a general file to be sent.
@@ -3587,16 +3571,35 @@ class InputMediaDocument(InputMedia):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
-        disable_content_type_detection: Optional[bool] = None,
-        type: str = 'document'
+        disable_content_type_detection: Optional[bool] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INPUT_MEDIA_DOCUMENT
         self.media = media
         self.thumbnail = thumbnail
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
         self.disable_content_type_detection = disable_content_type_detection
+
+
+InputMedia = Union[
+    InputMediaPhoto,
+    InputMediaVideo,
+    InputMediaAnimation,
+    InputMediaAudio,
+    InputMediaDocument
+]
+'''
+https://core.telegram.org/bots/api#inputmedia
+
+This object represents the content of a media message to be sent. It should be one of
+
+- InputMediaAnimation
+- InputMediaDocument
+- InputMediaAudio
+- InputMediaPhoto
+- InputMediaVideo
+'''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

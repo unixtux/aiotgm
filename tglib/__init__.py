@@ -48,7 +48,8 @@ from .types import (ReactionType,
                     _dese_chat_member,
                     BotCommandScope,
                     MenuButton,
-                    _dese_menu_button)
+                    _dese_menu_button,
+                    InputMedia)
 
 from .update_manager import *
 
@@ -1002,7 +1003,7 @@ class Client(TelegramApi):
     async def send_media_group(
         self,
         chat_id: Union[int, str],
-        media: list[Union[InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo]],
+        media: list[InputMedia],
         message_thread_id: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
