@@ -5541,16 +5541,16 @@ class MessageOrigin(TelegramType):
         type = obj.pop('type')
 
         if type == DEFAULT_MESSAGE_ORIGIN_USER:
-            return MessageOriginUser.dese(**obj, check_dict = False)
+            return MessageOriginUser.dese(obj, check_dict = False)
 
         elif type == DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER:
-            return MessageOriginHiddenUser.dese(**obj, check_dict = False)
+            return MessageOriginHiddenUser.dese(obj, check_dict = False)
 
         elif type == DEFAULT_MESSAGE_ORIGIN_CHAT:
-            return MessageOriginChat.dese(**obj, check_dict = False)
+            return MessageOriginChat.dese(obj, check_dict = False)
 
         elif type == DEFAULT_MESSAGE_ORIGIN_CHANNEL:
-            return MessageOriginChannel.dese(**obj, check_dict = False)
+            return MessageOriginChannel.dese(obj, check_dict = False)
         else:
             raise ValueError(
                 'An error occurred during the deserialization'
@@ -5799,13 +5799,13 @@ class ChatBoostSource(TelegramType):
         obj['user'] = User.dese(obj.get('user'))
 
         if source == DEFAULT_CHAT_BOOST_SOURCE_PREMIUM:
-            return ChatBoostSourcePremium.dese(**obj, check_dict = False)
+            return ChatBoostSourcePremium.dese(obj, check_dict = False)
 
         elif source == DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE:
-            return ChatBoostSourceGiftCode.dese(**obj, check_dict = False)
+            return ChatBoostSourceGiftCode.dese(obj, check_dict = False)
 
         elif source == DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY:
-            return ChatBoostSourceGiveaway.dese(**obj, check_dict = False)
+            return ChatBoostSourceGiveaway.dese(obj, check_dict = False)
         else:
             raise ValueError(
                 'An error occurred during the deserialization of the'
