@@ -29,7 +29,7 @@ __all__ = [
     'ChatInviteLink',
     'ChatJoinRequest',
     'ChatLocation',
-    'ChatMember',
+    #'ChatMember', # replaced with _dese_chat_member()
     'ChatMemberAdministrator',
     'ChatMemberBanned',
     'ChatMemberLeft',
@@ -112,7 +112,7 @@ __all__ = [
     'Location',
     'LoginUrl',
     'MaskPosition',
-    'MaybeInaccessibleMessage',
+    #'MaybeInaccessibleMessage', # replaced with _dese_maybe_inaccessible_message()
     'MenuButton',
     'MenuButtonCommands',
     'MenuButtonDefault',
@@ -148,7 +148,7 @@ __all__ = [
     'PreCheckoutQuery',
     'ProximityAlertTriggered',
     'ReactionCount',
-    'ReactionType',
+    #'ReactionType', # replaced with _dese_reaction_type()
     'ReactionTypeEmoji',
     'ReactionTypeCustomEmoji',
     'ReplyKeyboardMarkup',
@@ -240,7 +240,7 @@ def _serialize(
         ]
     elif isinstance(val, dict):
         res = {
-            x:_serialize(y, last = False) for (x, y) in val.items() if y is not None
+            x: _serialize(y, last = False) for (x, y) in val.items() if y is not None
         }
     else:
         res = val
@@ -673,28 +673,9 @@ class ReplyParameters(TelegramType):
         self.quote_position = quote_position
 
 
-# MaybeInaccessibleMessage: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
+# MaybeInaccessibleMessage: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~
 
-class MaybeInaccessibleMessage(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#maybeinaccessiblemessage
-    This object describes a message that can be inaccessible to the bot. It can be one of:
-    - Message
-    - InaccessibleMessage
-    '''
-    @classmethod
-    def _dese(cls, result):
-
-        if result is None: return None
-        obj = _check_dict(result)
-
-        if obj['date'] == 0:
-            return InaccessibleMessage._dese(obj, check_dict = False)
-        else:
-            return Message._dese(obj, check_dict = False)
-
-
-class InaccessibleMessage(MaybeInaccessibleMessage):
+class InaccessibleMessage(TelegramType):
     '''
     https://core.telegram.org/bots/api#inaccessiblemessage
     This object describes a message that was deleted or is otherwise inaccessible to the bot.
@@ -727,7 +708,7 @@ class InaccessibleMessage(MaybeInaccessibleMessage):
         self.date: int = date
 
 
-class Message(MaybeInaccessibleMessage):
+class Message(TelegramType):
     '''
     https://core.telegram.org/bots/api#message
     This object represents a message.
@@ -790,7 +771,7 @@ class Message(MaybeInaccessibleMessage):
         obj['message_auto_delete_timer_changed'] = MessageAutoDeleteTimerChanged._dese(obj.get('message_auto_delete_timer_changed'))
         obj['migrate_to_chat_id'] = obj.get('migrate_to_chat_id')
         obj['migrate_from_chat_id'] = obj.get('migrate_from_chat_id')
-        obj['pinned_message'] = MaybeInaccessibleMessage._dese(obj.get('pinned_message'))
+        obj['pinned_message'] = _dese_maybe_inaccessible_message(obj.get('pinned_message'))
         obj['invoice'] = Invoice._dese(obj.get('invoice'))
         obj['successful_payment'] = SuccessfulPayment._dese(obj.get('successful_payment'))
         obj['users_shared'] = UsersShared._dese(obj.get('users_shared'))
@@ -946,7 +927,7 @@ class Message(MaybeInaccessibleMessage):
         self.message_auto_delete_timer_changed: Optional[MessageAutoDeleteTimerChanged] = message_auto_delete_timer_changed
         self.migrate_to_chat_id: Optional[int] = migrate_to_chat_id
         self.migrate_from_chat_id: Optional[int] = migrate_from_chat_id
-        self.pinned_message: Optional[Union[Message, InaccessibleMessage]] = pinned_message
+        self.pinned_message: Optional[MaybeInaccessibleMessage] = pinned_message
         self.invoice: Optional[Invoice] = invoice
         self.successful_payment: Optional[SuccessfulPayment] = successful_payment
         self.users_shared: Optional[UsersShared] = users_shared
@@ -972,7 +953,29 @@ class Message(MaybeInaccessibleMessage):
         self.web_app_data: Optional[WebAppData] = web_app_data
         self.reply_markup: Optional[InlineKeyboardMarkup] = reply_markup
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MaybeInaccessibleMessage = Union[Message, InaccessibleMessage]
+'''
+https://core.telegram.org/bots/api#maybeinaccessiblemessage
+
+This object describes a message that can be inaccessible to the bot. It can be one of:
+- Message
+- InaccessibleMessage
+'''
+
+def _dese_maybe_inaccessible_message(result) -> MaybeInaccessibleMessage:
+    '''
+    Function to deserialize MaybeInaccessibleMessage.
+    '''
+    if result is None: return None
+    obj = _check_dict(result)
+
+    if obj['date'] == 0:
+        return InaccessibleMessage._dese(obj, check_dict = False)
+    else:
+        return Message._dese(obj, check_dict = False)
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChatPhoto(TelegramType):
@@ -1065,35 +1068,9 @@ class ChatLocation(TelegramType):
         self.address = address
 
 
-# ReactionType: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
+# ReactionType: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-class ReactionType(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#reactiontype
-    This object describes the type of a reaction.
-    Currently, it can be one of:
-    - ReactionTypeEmoji
-    - ReactionTypeCustomEmoji
-    '''
-    @classmethod
-    def _dese(cls, result):
-        if result is None: return None
-        obj = _check_dict(result)
-        type = obj.pop('type')
-
-        if type == DEFAULT_REACTION_TYPE_EMOJI:
-            return ReactionTypeEmoji._dese(obj, check_dict = False)
-
-        elif type == DEFAULT_REACTION_TYPE_CUSTOM_EMOJI:
-            return ReactionTypeCustomEmoji._dese(obj, check_dict = False)
-        else:
-            raise ValueError(
-                'An error occurred during the deserialization'
-                f' of the type ReactionType. Invalid type: {type!r}.'
-            )
-
-
-class ReactionTypeEmoji(ReactionType):
+class ReactionTypeEmoji(TelegramType):
     '''
     https://core.telegram.org/bots/api#reactiontypeemoji
     The reaction is based on an emoji.
@@ -1119,7 +1096,7 @@ class ReactionTypeEmoji(ReactionType):
         self.emoji = emoji
 
 
-class ReactionTypeCustomEmoji(ReactionType):
+class ReactionTypeCustomEmoji(TelegramType):
     '''
     https://core.telegram.org/bots/api#reactiontypecustomemoji
     The reaction is based on a custom emoji.
@@ -1144,7 +1121,37 @@ class ReactionTypeCustomEmoji(ReactionType):
         self.type = DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
         self.custom_emoji_id = custom_emoji_id
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ReactionType = Union[ReactionTypeEmoji, ReactionTypeCustomEmoji]
+'''
+https://core.telegram.org/bots/api#reactiontype
+
+This object describes the type of a reaction.
+Currently, it can be one of:
+- ReactionTypeEmoji
+- ReactionTypeCustomEmoji
+'''
+
+def _dese_reaction_type(result) -> ReactionType:
+    '''
+    Function to deserialize ReactionType.
+    '''
+    if result is None: return None
+    obj = _check_dict(result)
+    type = obj.pop('type')
+
+    if type == DEFAULT_REACTION_TYPE_EMOJI:
+        return ReactionTypeEmoji._dese(obj, check_dict = False)
+
+    elif type == DEFAULT_REACTION_TYPE_CUSTOM_EMOJI:
+        return ReactionTypeCustomEmoji._dese(obj, check_dict = False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type ReactionType. Invalid type: {type!r}.'
+        )
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class Chat(TelegramType):
@@ -1165,7 +1172,7 @@ class Chat(TelegramType):
         obj['is_forum'] = obj.get('is_forum')
         obj['photo'] = ChatPhoto._dese(obj.get('photo'))
         obj['active_usernames'] = obj.get('active_usernames')
-        obj['available_reactions'] = [ReactionType._dese(kwargs) for kwargs in obj.get('available_reactions')] if 'available_reactions' in obj else None
+        obj['available_reactions'] = [_dese_reaction_type(kwargs) for kwargs in obj.get('available_reactions')] if 'available_reactions' in obj else None
         obj['accent_color_id'] = obj.get('accent_color_id')
         obj['background_custom_emoji_id'] = obj.get('background_custom_emoji_id')
         obj['profile_accent_color_id'] = obj.get('profile_accent_color_id')
@@ -1204,7 +1211,7 @@ class Chat(TelegramType):
         is_forum: Optional[Literal[True]] = None,
         photo: Optional[ChatPhoto] = None,
         active_usernames: Optional[list[str]] = None,
-        available_reactions: Optional[list[ReactionTypeEmoji | ReactionTypeCustomEmoji]] = None,
+        available_reactions: Optional[list[ReactionType]] = None,
         accent_color_id: Optional[int] = None,
         background_custom_emoji_id: Optional[str] = None,
         profile_accent_color_id: Optional[int] = None,
@@ -1282,8 +1289,8 @@ class MessageReactionUpdated(TelegramType):
         obj['chat'] = Chat._dese(obj.get('chat'))
         obj['message_id'] = obj.get('message_id')
         obj['date'] = obj.get('date')
-        obj['old_reaction'] = [ReactionType._dese(kwargs) for kwargs in obj.get('old_reaction')]
-        obj['new_reaction'] = [ReactionType._dese(kwargs) for kwargs in obj.get('new_reaction')]
+        obj['old_reaction'] = [_dese_reaction_type(kwargs) for kwargs in obj.get('old_reaction')]
+        obj['new_reaction'] = [_dese_reaction_type(kwargs) for kwargs in obj.get('new_reaction')]
         obj['user'] = User._dese(obj.get('user'))
         obj['actor_chat'] = Chat._dese(obj.get('actor_chat'))
         return cls(**obj)
@@ -1293,8 +1300,8 @@ class MessageReactionUpdated(TelegramType):
         chat: Chat,
         message_id: int,
         date: int,
-        old_reaction: list[ReactionTypeEmoji | ReactionTypeCustomEmoji],
-        new_reaction: list[ReactionTypeEmoji | ReactionTypeCustomEmoji],
+        old_reaction: list[ReactionType],
+        new_reaction: list[ReactionType],
         user: Optional[User] = None,
         actor_chat: Optional[Chat] = None,
         **kwargs
@@ -1318,13 +1325,13 @@ class ReactionCount(TelegramType):
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
-        obj['type'] = ReactionType._dese(obj.get('type'))
+        obj['type'] = _dese_reaction_type(obj.get('type'))
         obj['total_count'] = obj.get('total_count')
         return cls(**obj)
 
     def __init__(
         self,
-        type: Union[ReactionTypeEmoji, ReactionTypeCustomEmoji],
+        type: ReactionType,
         total_count: int,
         **kwargs
     ):
@@ -2582,7 +2589,7 @@ class CallbackQuery(TelegramType):
         obj = _check_dict(result)
         obj['id'] = obj.get('id')
         obj['from_user'] = User._dese(obj.get('from_user'))
-        obj['message'] = MaybeInaccessibleMessage._dese(obj.get('message'))
+        obj['message'] = _dese_maybe_inaccessible_message(obj.get('message'))
         obj['inline_message_id'] = obj.get('inline_message_id')
         obj['chat_instance'] = obj.get('chat_instance')
         obj['data'] = obj.get('data')
@@ -2594,7 +2601,7 @@ class CallbackQuery(TelegramType):
         id: str,
         from_user: User,
         chat_instance: str,
-        message: Optional[Union[Message, InaccessibleMessage]] = None,
+        message: Optional[MaybeInaccessibleMessage] = None,
         inline_message_id: str = None,
         data: Optional[str] = None,
         game_short_name: Optional[str] = None,
@@ -2673,52 +2680,9 @@ class ChatInviteLink(TelegramType):
         self.pending_join_request_count = pending_join_request_count
 
 
-# ChatMember: 6 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ChatMember: 6 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-class ChatMember(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatmember
-    This object contains information about one member of a chat.
-    Currently, the following 6 types of chat members are supported:
-    - ChatMemberOwner
-    - ChatMemberAdministrator
-    - ChatMemberMember
-    - ChatMemberRestricted
-    - ChatMemberLeft
-    - ChatMemberBanned
-    '''
-    @classmethod
-    def _dese(cls, result):
-        if result is None: return None
-        obj = _check_dict(result)        
-
-        status = obj.pop('status')
-
-        if status == DEFAULT_CHAT_MEMBER_OWNER:
-            return ChatMemberOwner._dese(obj, check_dict = False)
-
-        elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
-            return ChatMemberAdministrator._dese(obj, check_dict = False)
-
-        elif status == DEFAULT_CHAT_MEMBER_MEMBER:
-            return ChatMemberMember._dese(obj, check_dict = False)
-
-        elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
-            return ChatMemberRestricted._dese(obj, check_dict = False)
-
-        elif status == DEFAULT_CHAT_MEMBER_LEFT:
-            return ChatMemberLeft._dese(obj, check_dict = False)
-
-        elif status == DEFAULT_CHAT_MEMBER_BANNED:
-            return ChatMemberBanned._dese(obj, check_dict = False)
-        else:
-            raise ValueError(
-                'An error occurred during the deserialization'
-                f' of the type ChatMember. Invalid status: {status!r}.'
-            )
-
-
-class ChatMemberOwner(ChatMember):
+class ChatMemberOwner(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatmemberowner
     Represents a chat member that owns the chat and has all administrator privileges.
@@ -2752,7 +2716,7 @@ class ChatMemberOwner(ChatMember):
         self.custom_title = custom_title
 
 
-class ChatMemberAdministrator(ChatMember):
+class ChatMemberAdministrator(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatmemberadministrator
     Represents a chat member that has some additional privileges.
@@ -2831,7 +2795,7 @@ class ChatMemberAdministrator(ChatMember):
         self.custom_title = custom_title
 
 
-class ChatMemberMember(ChatMember):
+class ChatMemberMember(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatmembermember
     Represents a chat member that has no additional privileges or restrictions.
@@ -2859,7 +2823,7 @@ class ChatMemberMember(ChatMember):
         self.user = user
 
 
-class ChatMemberRestricted(ChatMember):
+class ChatMemberRestricted(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatmemberrestricted
     Represents a chat member that is under certain restrictions in the chat. Supergroups only.
@@ -2935,7 +2899,7 @@ class ChatMemberRestricted(ChatMember):
         self.until_date = until_date
 
 
-class ChatMemberLeft(ChatMember):
+class ChatMemberLeft(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatmemberleft
     Represents a chat member that isn't currently a member of the chat, but may join it themselves.
@@ -2963,7 +2927,7 @@ class ChatMemberLeft(ChatMember):
         self.user = user
 
 
-class ChatMemberBanned(ChatMember):
+class ChatMemberBanned(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatmemberbanned
     Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
@@ -2993,7 +2957,63 @@ class ChatMemberBanned(ChatMember):
         self.user = user
         self.until_date = until_date
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ChatMember = Union[
+    ChatMemberOwner,
+    ChatMemberAdministrator,
+    ChatMemberMember,
+    ChatMemberRestricted,
+    ChatMemberLeft,
+    ChatMemberBanned
+]
+'''
+https://core.telegram.org/bots/api#chatmember
+
+This object contains information about one member of a chat.
+
+Currently, the following 6 types of chat members are supported:
+
+- ChatMemberOwner
+- ChatMemberAdministrator
+- ChatMemberMember
+- ChatMemberRestricted
+- ChatMemberLeft
+- ChatMemberBanned
+'''
+
+def _dese_chat_member(result) -> ChatMember:
+    '''
+    Function to deserialize ChatMember.
+    '''
+    if result is None: return None
+    obj = _check_dict(result)        
+
+    status = obj.pop('status')
+
+    if status == DEFAULT_CHAT_MEMBER_OWNER:
+        return ChatMemberOwner._dese(obj, check_dict = False)
+
+    elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
+        return ChatMemberAdministrator._dese(obj, check_dict = False)
+
+    elif status == DEFAULT_CHAT_MEMBER_MEMBER:
+        return ChatMemberMember._dese(obj, check_dict = False)
+
+    elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
+        return ChatMemberRestricted._dese(obj, check_dict = False)
+
+    elif status == DEFAULT_CHAT_MEMBER_LEFT:
+        return ChatMemberLeft._dese(obj, check_dict = False)
+
+    elif status == DEFAULT_CHAT_MEMBER_BANNED:
+        return ChatMemberBanned._dese(obj, check_dict = False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type ChatMember. Invalid status: {status!r}.'
+        )
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChatMemberUpdated(TelegramType):
@@ -3008,8 +3028,8 @@ class ChatMemberUpdated(TelegramType):
         obj['chat'] = Chat._dese(obj.get('chat'))
         obj['from_user'] = User._dese(obj.get('from_user'))
         obj['date'] = obj.get('date')
-        obj['old_chat_member'] = ChatMember._dese(obj.get('old_chat_member'))
-        obj['new_chat_member'] = ChatMember._dese(obj.get('new_chat_member'))
+        obj['old_chat_member'] = _dese_chat_member(obj.get('old_chat_member'))
+        obj['new_chat_member'] = _dese_chat_member(obj.get('new_chat_member'))
         obj['invite_link'] = ChatInviteLink._dese(obj.get('invite_link'))
         obj['via_chat_folder_invite_link'] = obj.get('via_chat_folder_invite_link')
         return cls(**obj)
@@ -3019,8 +3039,8 @@ class ChatMemberUpdated(TelegramType):
         chat: Chat,
         from_user: User,
         date: int,
-        old_chat_member: list[ChatMemberOwner | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned],
-        new_chat_member: list[ChatMemberOwner | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned],
+        old_chat_member: list[ChatMember],
+        new_chat_member: list[ChatMember],
         invite_link: Optional[ChatInviteLink] = None,
         via_chat_folder_invite_link: Optional[bool] = None,
         **kwargs

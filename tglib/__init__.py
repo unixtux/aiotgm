@@ -43,6 +43,10 @@ from .api import (
     TelegramError
 )
 from .types import *
+from .types import (ReactionType,
+                    ChatMember,
+                    _dese_chat_member)
+
 from .update_manager import *
 
 from .logger import get_logger
@@ -1237,7 +1241,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         message_id: int,
-        reaction: Optional[Union[list[ReactionTypeEmoji], list[ReactionTypeCustomEmoji]]] = None,
+        reaction: Optional[list[ReactionType]] = None,
         is_big: Optional[bool] = None
     ) -> Literal[True]:
         '''
@@ -1764,7 +1768,7 @@ class Client(TelegramApi):
     async def get_chat_administrators(
         self,
         chat_id: Union[int, str]
-    ) -> list[ChatMemberOwner | ChatMemberAdministrator | ChatMemberMember | ChatMemberRestricted | ChatMemberLeft | ChatMemberBanned]:
+    ) -> list[ChatMember]:
         '''
         https://core.telegram.org/bots/api#getchatadministrators
         Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects.
@@ -1773,7 +1777,7 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         result = await super().get_chat_administrators(params)
-        return [ChatMember._dese(chat_member) for chat_member in result]
+        return [_dese_chat_member(chat_member) for chat_member in result]
 
 
     async def get_chat_member_count(
@@ -1794,7 +1798,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         user_id: int
-    ) -> Union[ChatMemberOwner, ChatMemberAdministrator, ChatMemberMember, ChatMemberRestricted, ChatMemberLeft, ChatMemberBanned]:
+    ) -> ChatMember:
         '''
         https://core.telegram.org/bots/api#getchatmember
         Use this method to get information about a member of a chat. The method is only guaranteed to work
@@ -1805,7 +1809,7 @@ class Client(TelegramApi):
             'user_id': user_id
         }
         result = await super().get_chat_member(params)
-        return ChatMember._dese(result)
+        return _dese_chat_member(result)
 
 
     async def set_chat_sticker_set(
