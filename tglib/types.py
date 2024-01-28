@@ -5011,7 +5011,7 @@ class PassportData(TelegramType):
         self.credentials = credentials
 
 
-# PassportElementError: 5 SUBCLASSES
+# PassportElementError: 9 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
 
 class PassportElementError(TelegramType):
     '''
@@ -5028,26 +5028,6 @@ class PassportElementError(TelegramType):
     - PassportElementErrorTranslationFiles
     - PassportElementErrorUnspecified
     '''
-    def __init__(
-        self,
-        **kwargs
-    ):
-        errors = ', '.join([
-            PassportElementErrorDataField.__name__,
-            PassportElementErrorFrontSide.__name__,
-            PassportElementErrorReverseSide.__name__,
-            PassportElementErrorSelfie.__name__,
-            PassportElementErrorFile.__name__,
-            PassportElementErrorFiles.__name__,
-            PassportElementErrorTranslationFile.__name__,
-            PassportElementErrorTranslationFiles.__name__,
-            PassportElementErrorUnspecified.__name__
-        ])
-        logger.warning(
-            'PassportElementError warning, expected'
-            f' one of the following types: {errors}.'
-        )
-        self.__dict__ = kwargs
 
 
 class PassportElementErrorDataField(PassportElementError):
@@ -5068,10 +5048,9 @@ class PassportElementErrorDataField(PassportElementError):
         ],
         field_name: str,
         data_hash: str,
-        message: str,
-        source: str = 'data'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD
         self.type = type
         self.field_name = field_name
         self.data_hash = data_hash
@@ -5093,10 +5072,9 @@ class PassportElementErrorFrontSide(PassportElementError):
             'internal_passport'
         ],
         file_hash: str,
-        message: str,
-        source: str = 'front_side'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -5112,10 +5090,9 @@ class PassportElementErrorReverseSide(PassportElementError):
         self,
         type: Literal['driver_license', 'identity_card'],
         file_hash: str,
-        message: str,
-        source: str = 'reverse_side'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -5136,10 +5113,9 @@ class PassportElementErrorSelfie(PassportElementError):
             'internal_passport'
         ],
         file_hash: str,
-        message: str,
-        source: str = 'selfie'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -5161,10 +5137,9 @@ class PassportElementErrorFile(PassportElementError):
             'temporary_registration'
         ],
         file_hash: str,
-        message: str,
-        source: str = 'file'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FILE
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -5186,10 +5161,9 @@ class PassportElementErrorFiles(PassportElementError):
             'temporary_registration'
         ],
         file_hashes: list[str],
-        message: str,
-        source: str = 'files'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FILES
         self.type = type
         self.file_hashes = file_hashes
         self.message = message
@@ -5215,10 +5189,9 @@ class PassportElementErrorTranslationFile(PassportElementError):
             'temporary_registration'
         ],
         file_hash: str,
-        message: str,
-        source: str = 'translation_file'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE
         self.type = type
         self.file_hash = file_hash
         self.message = message
@@ -5244,10 +5217,9 @@ class PassportElementErrorTranslationFiles(PassportElementError):
             'temporary_registration'
         ],
         file_hashes: list[str],
-        message: str,
-        source: str = 'translation_files'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES
         self.type = type
         self.file_hashes = file_hashes
         self.message = message
@@ -5262,13 +5234,14 @@ class PassportElementErrorUnspecified(PassportElementError):
         self,
         type: str,
         element_hash: str,
-        message: str,
-        source: str = 'unspecified'
+        message: str
     ):
-        self.source = source
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED
         self.type = type
         self.element_hash = element_hash
         self.message = message
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class Game(TelegramType):

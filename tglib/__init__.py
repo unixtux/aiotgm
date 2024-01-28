@@ -3089,7 +3089,17 @@ class Client(TelegramApi):
     async def set_passport_data_errors(
         self,
         user_id: int,
-        errors: list[PassportElementError]
+        errors: list[
+            PassportElementErrorDataField |
+            PassportElementErrorFrontSide |
+            PassportElementErrorReverseSide |
+            PassportElementErrorSelfie |
+            PassportElementErrorFile |
+            PassportElementErrorFiles |
+            PassportElementErrorTranslationFile |
+            PassportElementErrorTranslationFiles |
+            PassportElementErrorUnspecified
+        ]
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#setpassportdataerrors
