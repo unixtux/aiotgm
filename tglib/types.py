@@ -689,9 +689,9 @@ class MaybeInaccessibleMessage(TelegramType):
         obj = _check_dict(result)
 
         if obj['date'] == 0:
-            return InaccessibleMessage.dese(**obj, check_dict = False)
+            return InaccessibleMessage.dese(obj, check_dict = False)
         else:
-            return Message.dese(**obj, check_dict = False)
+            return Message.dese(obj, check_dict = False)
 
 
 class InaccessibleMessage(MaybeInaccessibleMessage):
@@ -1082,10 +1082,10 @@ class ReactionType(TelegramType):
         type = obj.pop('type')
 
         if type == DEFAULT_REACTION_TYPE_EMOJI:
-            return ReactionTypeEmoji.dese(**obj, check_dict = False)
+            return ReactionTypeEmoji.dese(obj, check_dict = False)
 
         elif type == DEFAULT_REACTION_TYPE_CUSTOM_EMOJI:
-            return ReactionTypeCustomEmoji.dese(**obj, check_dict = False)
+            return ReactionTypeCustomEmoji.dese(obj, check_dict = False)
         else:
             raise ValueError(
                 'An error occurred during the deserialization'
@@ -2695,22 +2695,22 @@ class ChatMember(TelegramType):
         status = obj.pop('status')
 
         if status == DEFAULT_CHAT_MEMBER_OWNER:
-            return ChatMemberOwner.dese(**obj, check_dict = False)
+            return ChatMemberOwner.dese(obj, check_dict = False)
 
         elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
-            return ChatMemberAdministrator.dese(**obj, check_dict = False)
+            return ChatMemberAdministrator.dese(obj, check_dict = False)
 
         elif status == DEFAULT_CHAT_MEMBER_MEMBER:
-            return ChatMemberMember.dese(**obj, check_dict = False)
+            return ChatMemberMember.dese(obj, check_dict = False)
 
         elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
-            return ChatMemberRestricted.dese(**obj, check_dict = False)
+            return ChatMemberRestricted.dese(obj, check_dict = False)
 
         elif status == DEFAULT_CHAT_MEMBER_LEFT:
-            return ChatMemberLeft.dese(**obj, check_dict = False)
+            return ChatMemberLeft.dese(obj, check_dict = False)
 
         elif status == DEFAULT_CHAT_MEMBER_BANNED:
-            return ChatMemberBanned.dese(**obj, check_dict = False)
+            return ChatMemberBanned.dese(obj, check_dict = False)
         else:
             raise ValueError(
                 'An error occurred during the deserialization'
@@ -3283,7 +3283,7 @@ class BotShortDescription(TelegramType):
         self.short_description = short_description
 
 
-# MenuButton: 3 SUBCLASSES
+# MenuButton: 3 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
 
 class MenuButton(TelegramType):
     '''
@@ -3299,34 +3299,22 @@ class MenuButton(TelegramType):
     def dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
-        type = obj['type']
 
-        if type == 'commands':
-            return MenuButtonCommands(**obj)
+        type = obj.pop('type')
 
-        elif type == 'web_app':
-            obj['web_app'] = WebAppInfo.dese(obj.get('web_app'))
-            return MenuButtonWebApp(**obj)
+        if type == DEFAULT_MENU_BUTTON_COMMANDS:
+            return MenuButtonCommands.dese(obj, check_dict = False)
 
-        elif type == 'default':
-            return MenuButtonDefault(**obj)
+        elif type == DEFAULT_MENU_BUTTON_WEB_APP:
+            return MenuButtonWebApp.dese(obj, check_dict = False)
+
+        elif type == DEFAULT_MENU_BUTTON_DEFAULT:
+            return MenuButtonDefault.dese(obj, check_dict = False)
         else:
-            return cls(**obj)
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        menus = ', '.join([
-            MenuButtonCommands.__name__,
-            MenuButtonWebApp.__name__,
-            MenuButtonDefault.__name__
-        ])
-        logger.warning(
-            'MenuButton warning, expected one'
-            f' of the following types: {menus}.'
-        )
-        self.__dict__ = kwargs
+            raise ValueError(
+                'An error occurred during the deserialization'
+                f' of the type MenuButton. Invalid type: {type!r}.'
+            )
 
 
 class MenuButtonCommands(MenuButton):
@@ -3334,11 +3322,19 @@ class MenuButtonCommands(MenuButton):
     https://core.telegram.org/bots/api#menubuttoncommands
     Represents a menu button, which opens the bot's list of commands.
     '''
-    def __init__(
-        self,
-        type: str = 'commands'
-    ):
-        self.type = type
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        return cls(**obj)
+
+    def __init__(self):
+        self.type = DEFAULT_MENU_BUTTON_COMMANDS
 
 
 class MenuButtonWebApp(MenuButton):
@@ -3346,13 +3342,26 @@ class MenuButtonWebApp(MenuButton):
     https://core.telegram.org/bots/api#menubuttonwebapp
     Represents a menu button, which launches a Web App.
     '''
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        obj['text'] = obj.get('text')
+        obj['web_app'] = WebAppInfo.dese(obj.get('web_app'))
+
+        return cls(**obj)
+
     def __init__(
         self,
         text: str,
-        web_app: WebAppInfo,
-        type: str = 'web_app'
+        web_app: WebAppInfo
     ):
-        self.type = type
+        self.type = DEFAULT_MENU_BUTTON_WEB_APP
         self.text = text
         self.web_app = web_app
 
@@ -3362,11 +3371,21 @@ class MenuButtonDefault(MenuButton):
     https://core.telegram.org/bots/api#menubuttondefault
     Describes that no specific value for the menu button was set.
     '''
-    def __init__(
-        self,
-        type: str = 'default'
-    ):
-        self.type = type
+    @classmethod
+    def dese(cls, result, *, check_dict: bool = True):
+
+        if check_dict:
+            if result is None: return None
+            obj = _check_dict(result)
+        else:
+            obj = result
+
+        return cls(**obj)
+
+    def __init__(self):
+        self.type = DEFAULT_MENU_BUTTON_DEFAULT
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ResponseParameters(TelegramType):

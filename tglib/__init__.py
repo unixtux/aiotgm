@@ -2280,7 +2280,7 @@ class Client(TelegramApi):
     async def set_chat_menu_button(
         self,
         chat_id: Optional[int] = None,
-        menu_button: Optional[MenuButton] = None
+        menu_button: Optional[Union[MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault]] = None
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#setchatmenubutton
@@ -2296,7 +2296,7 @@ class Client(TelegramApi):
     async def get_chat_menu_button(
         self,
         chat_id: Optional[int] = None
-    ) -> MenuButton:
+    ) -> Union[MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault]:
         '''
         https://core.telegram.org/bots/api#getchatmenubutton
         Use this method to get the current value of the bot's menu button in a
