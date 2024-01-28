@@ -5708,8 +5708,6 @@ class ChatBoostSource(TelegramType):
         obj = _check_dict(result)
         source = obj.pop('source')
 
-        obj['user'] = User._dese(obj.get('user'))
-
         if source == DEFAULT_CHAT_BOOST_SOURCE_PREMIUM:
             return ChatBoostSourcePremium._dese(obj, check_dict = False)
 
