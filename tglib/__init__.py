@@ -45,7 +45,8 @@ from .api import (
 from .types import *
 from .types import (ReactionType,
                     ChatMember,
-                    _dese_chat_member)
+                    _dese_chat_member,
+                    BotCommandScope)
 
 from .update_manager import *
 
@@ -2116,15 +2117,7 @@ class Client(TelegramApi):
     async def set_my_commands(
         self,
         commands: list[BotCommand],
-        scope: Optional[Union[
-            BotCommandScopeDefault,
-            BotCommandScopeAllPrivateChats,
-            BotCommandScopeAllGroupChats,
-            BotCommandScopeAllChatAdministrators,
-            BotCommandScopeChat,
-            BotCommandScopeChatAdministrators,
-            BotCommandScopeChatMember
-        ]] = None,
+        scope: Optional[BotCommandScope] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
         '''
@@ -2142,15 +2135,7 @@ class Client(TelegramApi):
 
     async def delete_my_commands(
         self,
-        scope: Optional[Union[
-            BotCommandScopeDefault,
-            BotCommandScopeAllPrivateChats,
-            BotCommandScopeAllGroupChats,
-            BotCommandScopeAllChatAdministrators,
-            BotCommandScopeChat,
-            BotCommandScopeChatAdministrators,
-            BotCommandScopeChatMember
-        ]] = None,
+        scope: Optional[BotCommandScope] = None,
         language_code: Optional[str] = None
     ) -> Literal[True]:
         '''
@@ -2167,15 +2152,7 @@ class Client(TelegramApi):
 
     async def get_my_commands(
         self,
-        scope: Optional[Union[
-            BotCommandScopeDefault,
-            BotCommandScopeAllPrivateChats,
-            BotCommandScopeAllGroupChats,
-            BotCommandScopeAllChatAdministrators,
-            BotCommandScopeChat,
-            BotCommandScopeChatAdministrators,
-            BotCommandScopeChatMember
-        ]] = None,
+        scope: Optional[BotCommandScope] = None,
         language_code: Optional[str] = None
     ) -> list[BotCommand]:
         '''

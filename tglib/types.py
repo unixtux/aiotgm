@@ -4,7 +4,7 @@ __all__ = [
     'Animation',
     'Audio',
     'BotCommand',
-    'BotCommandScope',
+    #'BotCommandScope',
     'BotCommandScopeAllChatAdministrators',
     'BotCommandScopeAllGroupChats',
     'BotCommandScopeAllPrivateChats',
@@ -3145,22 +3145,7 @@ class BotCommand(TelegramType):
 
 # BotCommandScope: 7 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-class BotCommandScope(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommandscope
-    This object represents the scope to which bot commands are applied.
-    Currently, the following 7 scopes are supported:
-    - BotCommandScopeDefault
-    - BotCommandScopeAllPrivateChats
-    - BotCommandScopeAllGroupChats
-    - BotCommandScopeAllChatAdministrators
-    - BotCommandScopeChat
-    - BotCommandScopeChatAdministrators
-    - BotCommandScopeChatMember
-    '''
-
-
-class BotCommandScopeDefault(BotCommandScope):
+class BotCommandScopeDefault(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscopedefault
     Represents the default scope of bot commands. Default commands are
@@ -3170,7 +3155,7 @@ class BotCommandScopeDefault(BotCommandScope):
         self.type = DEFAULT_BOT_COMMAND_SCOPE_DEFAULT
 
 
-class BotCommandScopeAllPrivateChats(BotCommandScope):
+class BotCommandScopeAllPrivateChats(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscopeallprivatechats
     Represents the scope of bot commands, covering all private chats.
@@ -3179,7 +3164,7 @@ class BotCommandScopeAllPrivateChats(BotCommandScope):
         self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS
 
 
-class BotCommandScopeAllGroupChats(BotCommandScope):
+class BotCommandScopeAllGroupChats(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscopeallgroupchats
     Represents the scope of bot commands, covering all group and supergroup chats.
@@ -3188,7 +3173,7 @@ class BotCommandScopeAllGroupChats(BotCommandScope):
         self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS
 
 
-class BotCommandScopeAllChatAdministrators(BotCommandScope):
+class BotCommandScopeAllChatAdministrators(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
     Represents the scope of bot commands, covering all group and supergroup chat administrators.
@@ -3197,7 +3182,7 @@ class BotCommandScopeAllChatAdministrators(BotCommandScope):
         self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS
 
 
-class BotCommandScopeChat(BotCommandScope):
+class BotCommandScopeChat(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscopechat
     Represents the scope of bot commands, covering a specific chat.
@@ -3210,7 +3195,7 @@ class BotCommandScopeChat(BotCommandScope):
         self.chat_id = chat_id
 
 
-class BotCommandScopeChatAdministrators(BotCommandScope):
+class BotCommandScopeChatAdministrators(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscopechatadministrators
     Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
@@ -3223,7 +3208,7 @@ class BotCommandScopeChatAdministrators(BotCommandScope):
         self.chat_id = chat_id
 
 
-class BotCommandScopeChatMember(BotCommandScope):
+class BotCommandScopeChatMember(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscopechatmember
     Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
@@ -3236,6 +3221,32 @@ class BotCommandScopeChatMember(BotCommandScope):
         self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER
         self.chat_id = chat_id
         self.user_id = user_id
+
+
+BotCommandScope = Union[
+    BotCommandScopeDefault,
+    BotCommandScopeAllPrivateChats,
+    BotCommandScopeAllGroupChats,
+    BotCommandScopeAllChatAdministrators,
+    BotCommandScopeChat,
+    BotCommandScopeChatAdministrators,
+    BotCommandScopeChatMember
+]
+'''
+https://core.telegram.org/bots/api#botcommandscope
+
+This object represents the scope to which bot commands are applied.
+
+Currently, the following 7 scopes are supported:
+
+- BotCommandScopeDefault
+- BotCommandScopeAllPrivateChats
+- BotCommandScopeAllGroupChats
+- BotCommandScopeAllChatAdministrators
+- BotCommandScopeChat
+- BotCommandScopeChatAdministrators
+- BotCommandScopeChatMember
+'''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
