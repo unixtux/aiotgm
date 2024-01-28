@@ -3957,37 +3957,6 @@ class InlineQueryResult(TelegramType):
     - InlineQueryResultVideo
     - InlineQueryResultVoice
     '''
-    def __init__(
-        self,
-        **kwargs
-    ):
-        inline_query_results = ', '.join([
-            InlineQueryResultArticle.__name__,
-            InlineQueryResultPhoto.__name__,
-            InlineQueryResultGif.__name__,
-            InlineQueryResultMpeg4Gif.__name__,
-            InlineQueryResultVideo.__name__,
-            InlineQueryResultAudio.__name__,
-            InlineQueryResultVoice.__name__,
-            InlineQueryResultDocument.__name__,
-            InlineQueryResultLocation.__name__,
-            InlineQueryResultVenue.__name__,
-            InlineQueryResultContact.__name__,
-            InlineQueryResultGame.__name__,
-            InlineQueryResultCachedPhoto.__name__,
-            InlineQueryResultCachedGif.__name__,
-            InlineQueryResultCachedMpeg4Gif.__name__,
-            InlineQueryResultCachedSticker.__name__,
-            InlineQueryResultCachedDocument.__name__,
-            InlineQueryResultCachedVideo.__name__,
-            InlineQueryResultCachedVoice.__name__,
-            InlineQueryResultCachedAudio.__name__
-        ])
-        logger.warning(
-            'InlineQueryResult warning, expected one of'
-            f' the following types: {inline_query_results}.'
-        )
-        self.__dict__ = kwargs
 
 
 class InlineQueryResultArticle(InlineQueryResult):
@@ -4006,10 +3975,9 @@ class InlineQueryResultArticle(InlineQueryResult):
         description: Optional[str] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None,
-        type: str = 'article'
+        thumbnail_height: Optional[int] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_ARTICLE
         self.id = id
         self.title = title
         self.input_message_content = input_message_content
@@ -4041,10 +4009,9 @@ class InlineQueryResultPhoto(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'photo'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_PHOTO
         self.id = id
         self.photo_url = photo_url
         self.thumbnail_url = thumbnail_url
@@ -4079,10 +4046,9 @@ class InlineQueryResultGif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'gif'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_GIF
         self.id = id
         self.gif_url = gif_url
         self.thumbnail_url = thumbnail_url
@@ -4119,10 +4085,9 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'mpeg4_gif'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF
         self.id = id
         self.mpeg4_url = mpeg4_url
         self.thumbnail_url = thumbnail_url
@@ -4160,10 +4125,9 @@ class InlineQueryResultVideo(InlineQueryResult):
         video_duration: Optional[int] = None,
         description: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'video'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_VIDEO
         self.id = id
         self.video_url = video_url
         self.mime_type = mime_type
@@ -4197,10 +4161,9 @@ class InlineQueryResultAudio(InlineQueryResult):
         performer: Optional[str] = None,
         audio_duration: Optional[int] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'audio'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_AUDIO
         self.id = id
         self.audio_url = audio_url
         self.title = title
@@ -4230,10 +4193,9 @@ class InlineQueryResultVoice(InlineQueryResult):
         caption_entities: Optional[list[MessageEntity]] = None,
         voice_duration: Optional[int] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'voice'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_VOICE
         self.id = id
         self.voice_url = voice_url
         self.title = title
@@ -4266,10 +4228,9 @@ class InlineQueryResultDocument(InlineQueryResult):
         input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None,
-        type: str = 'document'
+        thumbnail_height: Optional[int] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_DOCUMENT
         self.id = id
         self.title = title
         self.document_url = document_url
@@ -4305,10 +4266,9 @@ class InlineQueryResultLocation(InlineQueryResult):
         input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None,
-        type: str = 'location'
+        thumbnail_height: Optional[int] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_LOCATION
         self.id = id
         self.latitude = latitude
         self.longitude = longitude
@@ -4345,10 +4305,9 @@ class InlineQueryResultVenue(InlineQueryResult):
         input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None,
-        type: str = 'venue'
+        thumbnail_height: Optional[int] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_VENUE
         self.id = id
         self.latitude = latitude
         self.longitude = longitude
@@ -4382,10 +4341,9 @@ class InlineQueryResultContact(InlineQueryResult):
         input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
         thumbnail_url: Optional[str] = None,
         thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None,
-        type: str = 'contact'
+        thumbnail_height: Optional[int] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CONTACT
         self.id = id
         self.phone_number = phone_number
         self.first_name = first_name
@@ -4407,10 +4365,9 @@ class InlineQueryResultGame(InlineQueryResult):
         self,
         id: str,
         game_short_name: str,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        type: str = 'game'
+        reply_markup: Optional[InlineKeyboardMarkup] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_GAME
         self.id = id
         self.game_short_name = game_short_name
         self.reply_markup = reply_markup
@@ -4433,10 +4390,9 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'photo'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO
         self.id = id
         self.photo_file_id = photo_file_id
         self.title = title
@@ -4464,10 +4420,9 @@ class InlineQueryResultCachedGif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'gif'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF
         self.id = id
         self.gif_file_id = gif_file_id
         self.title = title
@@ -4494,10 +4449,9 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'mpeg4_gif'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF
         self.id = id
         self.mpeg4_file_id = mpeg4_file_id
         self.title = title
@@ -4520,10 +4474,9 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
         id: str,
         sticker_file_id: str,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'sticker'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER
         self.id = id
         self.sticker_file_id = sticker_file_id
         self.reply_markup = reply_markup
@@ -4547,10 +4500,9 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'document'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT
         self.id = id
         self.title = title
         self.document_file_id = document_file_id
@@ -4579,10 +4531,9 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'video'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO
         self.id = id
         self.video_file_id = video_file_id
         self.title = title
@@ -4610,10 +4561,9 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'voice'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE
         self.id = id
         self.voice_file_id = voice_file_id
         self.title = title
@@ -4639,10 +4589,9 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None,
-        type: str = 'audio'
+        input_message_content: Optional[Union[InputTextMessageContent, InputLocationMessageContent, InputVenueMessageContent, InputContactMessageContent, InputInvoiceMessageContent]] = None
     ):
-        self.type = type
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO
         self.id = id
         self.audio_file_id = audio_file_id
         self.caption = caption
@@ -4650,6 +4599,8 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
         self.caption_entities = caption_entities
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChosenInlineResult(TelegramType):

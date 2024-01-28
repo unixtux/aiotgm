@@ -2840,7 +2840,28 @@ class Client(TelegramApi):
     async def answer_inline_query(
         self,
         inline_query_id: str,
-        results: list[InlineQueryResult],
+        results: list[
+            InlineQueryResultArticle |
+            InlineQueryResultPhoto |
+            InlineQueryResultGif |
+            InlineQueryResultMpeg4Gif |
+            InlineQueryResultVideo |
+            InlineQueryResultAudio |
+            InlineQueryResultVoice |
+            InlineQueryResultDocument |
+            InlineQueryResultLocation |
+            InlineQueryResultVenue |
+            InlineQueryResultContact |
+            InlineQueryResultGame |
+            InlineQueryResultCachedPhoto |
+            InlineQueryResultCachedGif |
+            InlineQueryResultCachedMpeg4Gif |
+            InlineQueryResultCachedSticker |
+            InlineQueryResultCachedDocument |
+            InlineQueryResultCachedVideo |
+            InlineQueryResultCachedVoice |
+            InlineQueryResultCachedAudio
+        ],
         cache_time: Optional[int] = None,
         is_personal: Optional[bool] = None,
         next_offset: Optional[str] = None,
@@ -2865,7 +2886,28 @@ class Client(TelegramApi):
     async def answer_web_app_query(
         self,
         web_app_query_id: str,
-        result: InlineQueryResult
+        result: Union[
+            InlineQueryResultArticle,
+            InlineQueryResultPhoto,
+            InlineQueryResultGif,
+            InlineQueryResultMpeg4Gif,
+            InlineQueryResultVideo,
+            InlineQueryResultAudio,
+            InlineQueryResultVoice,
+            InlineQueryResultDocument,
+            InlineQueryResultLocation,
+            InlineQueryResultVenue,
+            InlineQueryResultContact,
+            InlineQueryResultGame,
+            InlineQueryResultCachedPhoto,
+            InlineQueryResultCachedGif,
+            InlineQueryResultCachedMpeg4Gif,
+            InlineQueryResultCachedSticker,
+            InlineQueryResultCachedDocument,
+            InlineQueryResultCachedVideo,
+            InlineQueryResultCachedVoice,
+            InlineQueryResultCachedAudio
+        ]
     ) -> SentWebAppMessage:
         '''
         https://core.telegram.org/bots/api#answerwebappquery
