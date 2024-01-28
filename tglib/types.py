@@ -113,7 +113,7 @@ __all__ = [
     'LoginUrl',
     'MaskPosition',
     #'MaybeInaccessibleMessage', # replaced with _dese_maybe_inaccessible_message()
-    'MenuButton',
+    #'MenuButton', # replaced with _dese_menu_button()
     'MenuButtonCommands',
     'MenuButtonDefault',
     'MenuButtonWebApp',
@@ -3314,41 +3314,9 @@ class BotShortDescription(TelegramType):
         self.short_description = short_description
 
 
-# MenuButton: 3 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
+# MenuButton: 3 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-class MenuButton(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#menubutton
-    This object describes the bot's menu button in a private chat. It should be one of
-    - MenuButtonCommands
-    - MenuButtonWebApp
-    - MenuButtonDefault
-    If a menu button other than MenuButtonDefault is set for a private chat, then it is applied in the chat.
-    Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
-    '''
-    @classmethod
-    def _dese(cls, result):
-        if result is None: return None
-        obj = _check_dict(result)
-
-        type = obj.pop('type')
-
-        if type == DEFAULT_MENU_BUTTON_COMMANDS:
-            return MenuButtonCommands._dese(obj, check_dict = False)
-
-        elif type == DEFAULT_MENU_BUTTON_WEB_APP:
-            return MenuButtonWebApp._dese(obj, check_dict = False)
-
-        elif type == DEFAULT_MENU_BUTTON_DEFAULT:
-            return MenuButtonDefault._dese(obj, check_dict = False)
-        else:
-            raise ValueError(
-                'An error occurred during the deserialization'
-                f' of the type MenuButton. Invalid type: {type!r}.'
-            )
-
-
-class MenuButtonCommands(MenuButton):
+class MenuButtonCommands(TelegramType):
     '''
     https://core.telegram.org/bots/api#menubuttoncommands
     Represents a menu button, which opens the bot's list of commands.
@@ -3368,7 +3336,7 @@ class MenuButtonCommands(MenuButton):
         self.type = DEFAULT_MENU_BUTTON_COMMANDS
 
 
-class MenuButtonWebApp(MenuButton):
+class MenuButtonWebApp(TelegramType):
     '''
     https://core.telegram.org/bots/api#menubuttonwebapp
     Represents a menu button, which launches a Web App.
@@ -3397,7 +3365,7 @@ class MenuButtonWebApp(MenuButton):
         self.web_app = web_app
 
 
-class MenuButtonDefault(MenuButton):
+class MenuButtonDefault(TelegramType):
     '''
     https://core.telegram.org/bots/api#menubuttondefault
     Describes that no specific value for the menu button was set.
@@ -3416,7 +3384,45 @@ class MenuButtonDefault(MenuButton):
     def __init__(self):
         self.type = DEFAULT_MENU_BUTTON_DEFAULT
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MenuButton = Union[MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault]
+'''
+https://core.telegram.org/bots/api#menubutton
+
+This object describes the bot's menu button in a private chat. It should be one of
+
+- MenuButtonCommands
+- MenuButtonWebApp
+- MenuButtonDefault
+
+If a menu button other than MenuButtonDefault is set for a private chat, then it is applied in the chat.
+Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
+'''
+
+def _dese_menu_button(result) -> MenuButton: # used in tglib.__init__
+    '''
+    Function to deserialize MenuButton.
+    '''
+    if result is None: return None
+    obj = _check_dict(result)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_MENU_BUTTON_COMMANDS:
+        return MenuButtonCommands._dese(obj, check_dict = False)
+
+    elif type == DEFAULT_MENU_BUTTON_WEB_APP:
+        return MenuButtonWebApp._dese(obj, check_dict = False)
+
+    elif type == DEFAULT_MENU_BUTTON_DEFAULT:
+        return MenuButtonDefault._dese(obj, check_dict = False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type MenuButton. Invalid type: {type!r}.'
+        )
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ResponseParameters(TelegramType):

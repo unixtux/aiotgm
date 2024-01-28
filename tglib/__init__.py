@@ -46,7 +46,9 @@ from .types import *
 from .types import (ReactionType,
                     ChatMember,
                     _dese_chat_member,
-                    BotCommandScope)
+                    BotCommandScope,
+                    MenuButton,
+                    _dese_menu_button)
 
 from .update_manager import *
 
@@ -2261,7 +2263,7 @@ class Client(TelegramApi):
     async def set_chat_menu_button(
         self,
         chat_id: Optional[int] = None,
-        menu_button: Optional[Union[MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault]] = None
+        menu_button: Optional[MenuButton] = None
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#setchatmenubutton
@@ -2277,7 +2279,7 @@ class Client(TelegramApi):
     async def get_chat_menu_button(
         self,
         chat_id: Optional[int] = None
-    ) -> Union[MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault]:
+    ) -> MenuButton:
         '''
         https://core.telegram.org/bots/api#getchatmenubutton
         Use this method to get the current value of the bot's menu button in a
@@ -2286,7 +2288,7 @@ class Client(TelegramApi):
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
         result = await super().get_chat_menu_button(params)
-        return MenuButton._dese(result)
+        return _dese_menu_button(result)
 
 
     async def set_my_default_administrator_rights(
