@@ -429,6 +429,9 @@ class TelegramApi:
         method = 'deleteChatPhoto'
         return await self._request(method, params)
 
+    async def delete_chat_sticker_set(self, params: dict):
+        method = 'deleteChatStickerSet'
+        return await self._request(method, params)
 
 
     async def get_updates(self, params: dict, **kwargs):
@@ -618,10 +621,6 @@ class TelegramApi:
 
     async def set_chat_sticker_set(self, params: dict):
         method = 'setChatStickerSet'
-        return await self._request(method, params)
-
-    async def delete_chat_sticker_set(self, params: dict):
-        method = 'deleteChatStickerSet'
         return await self._request(method, params)
 
     async def get_forum_topic_icon_stickers(self):
