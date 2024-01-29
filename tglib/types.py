@@ -4,7 +4,7 @@ __all__ = [
     'Animation',
     'Audio',
     'BotCommand',
-    #'BotCommandScope',
+    #'BotCommandScope', # NO DESE
     'BotCommandScopeAllChatAdministrators',
     'BotCommandScopeAllGroupChats',
     'BotCommandScopeAllPrivateChats',
@@ -66,7 +66,7 @@ __all__ = [
     'InlineKeyboardButton',
     'InlineKeyboardMarkup',
     'InlineQuery',
-    #'InlineQueryResult',
+    #'InlineQueryResult', # NO DESE
     'InlineQueryResultArticle',
     'InlineQueryResultAudio',
     'InlineQueryResultCachedAudio',
@@ -92,13 +92,13 @@ __all__ = [
     'InputFile',
     'InputInvoiceMessageContent',
     'InputLocationMessageContent',
-    #'InputMedia',
+    #'InputMedia', # NO DESE
     'InputMediaAnimation',
     'InputMediaAudio',
     'InputMediaDocument',
     'InputMediaPhoto',
     'InputMediaVideo',
-    #'InputMessageContent',
+    #'InputMessageContent', # NO DESE
     'InputSticker',
     'InputTextMessageContent',
     'InputVenueMessageContent',
@@ -121,7 +121,7 @@ __all__ = [
     'MessageAutoDeleteTimerChanged',
     'MessageEntity',
     'MessageId',
-    'MessageOrigin',
+    #'MessageOrigin', # replaced with _dese_message_origin()
     'MessageOriginUser',
     'MessageOriginHiddenUser',
     'MessageOriginChat',
@@ -130,7 +130,7 @@ __all__ = [
     'MessageReactionUpdated',
     'OrderInfo',
     'PassportData',
-    #'PassportElementError',
+    #'PassportElementError', # NO DESE
     'PassportElementErrorDataField',
     'PassportElementErrorFile',
     'PassportElementErrorFiles',
@@ -209,7 +209,7 @@ def _check_dict(result: dict) -> dict:
     if not isinstance(result, dict):
         raise TypeError(
             'Expected dict as parameter in'
-            f' _check_dict(), got {result.__class__}'
+            f' _check_dict(), got {result.__class__.__name__}'
         )
     if 'from' in result:
         result['from_user'] = result['from']
@@ -728,7 +728,7 @@ class Message(TelegramType):
         obj['message_thread_id'] = obj.get('message_thread_id')
         obj['from_user'] = User._dese(obj.get('from_user'))
         obj['sender_chat'] = Chat._dese(obj.get('sender_chat'))
-        obj['forward_origin'] = MessageOrigin._dese(obj.get('forward_origin'))
+        obj['forward_origin'] = _dese_message_origin(obj.get('forward_origin'))
         obj['is_topic_message'] = obj.get('is_topic_message')
         obj['is_automatic_forward'] = obj.get('is_automatic_forward')
         obj['reply_to_message'] = Message._dese(obj.get('reply_to_message'))
@@ -884,7 +884,7 @@ class Message(TelegramType):
         self.message_thread_id: Optional[int] = message_thread_id
         self.from_user: Optional[User] = from_user
         self.sender_chat: Optional[Chat] = sender_chat
-        self.forward_origin: Optional[Union[MessageOriginUser, MessageOriginHiddenUser, MessageOriginChat, MessageOriginChannel]] = forward_origin
+        self.forward_origin: Optional[MessageOrigin] = forward_origin
         self.is_topic_message: Optional[Literal[True]] = is_topic_message
         self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
         self.reply_to_message: Optional[Message] = reply_to_message
@@ -959,6 +959,7 @@ MaybeInaccessibleMessage = Union[Message, InaccessibleMessage]
 https://core.telegram.org/bots/api#maybeinaccessiblemessage
 
 This object describes a message that can be inaccessible to the bot. It can be one of:
+
 - Message
 - InaccessibleMessage
 '''
@@ -5522,41 +5523,7 @@ class Giveaway(TelegramType):
 
 # MessageOrigin: 4 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-class MessageOrigin(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messageorigin
-    This object describes the origin of a message. It can be one of:
-    - MessageOriginUser
-    - MessageOriginHiddenUser
-    - MessageOriginChat
-    - MessageOriginChannel
-    '''
-    @classmethod
-    def _dese(cls, result):
-
-        if result is None: return None
-        obj = _check_dict(result)
-        type = obj.pop('type')
-
-        if type == DEFAULT_MESSAGE_ORIGIN_USER:
-            return MessageOriginUser._dese(obj, check_dict = False)
-
-        elif type == DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER:
-            return MessageOriginHiddenUser._dese(obj, check_dict = False)
-
-        elif type == DEFAULT_MESSAGE_ORIGIN_CHAT:
-            return MessageOriginChat._dese(obj, check_dict = False)
-
-        elif type == DEFAULT_MESSAGE_ORIGIN_CHANNEL:
-            return MessageOriginChannel._dese(obj, check_dict = False)
-        else:
-            raise ValueError(
-                'An error occurred during the deserialization'
-                f' of the type MessageOrigin. Invalid type: {type!r}.'
-            )
-
-
-class MessageOriginUser(MessageOrigin):
+class MessageOriginUser(TelegramType):
     '''
     https://core.telegram.org/bots/api#messageoriginuser
     The message was originally sent by a known user.
@@ -5587,7 +5554,7 @@ class MessageOriginUser(MessageOrigin):
         self.sender_user = sender_user
 
 
-class MessageOriginHiddenUser(MessageOrigin):
+class MessageOriginHiddenUser(TelegramType):
     '''
     https://core.telegram.org/bots/api#messageoriginhiddenuser
     The message was originally sent by an unknown user.
@@ -5618,7 +5585,7 @@ class MessageOriginHiddenUser(MessageOrigin):
         self.sender_user_name = sender_user_name
 
 
-class MessageOriginChat(MessageOrigin):
+class MessageOriginChat(TelegramType):
     '''
     https://core.telegram.org/bots/api#messageoriginchat
     The message was originally sent on behalf of a chat to a group chat.
@@ -5652,7 +5619,7 @@ class MessageOriginChat(MessageOrigin):
         self.author_signature = author_signature
 
 
-class MessageOriginChannel(MessageOrigin):
+class MessageOriginChannel(TelegramType):
     '''
     https://core.telegram.org/bots/api#messageoriginchannel
     The message was originally sent to a channel chat.
@@ -5688,6 +5655,52 @@ class MessageOriginChannel(MessageOrigin):
         self.message_id = message_id
         self.author_signature = author_signature
 
+
+MessageOrigin = Union[
+    MessageOriginUser,
+    MessageOriginHiddenUser,
+    MessageOriginChat,
+    MessageOriginChannel
+]
+'''
+https://core.telegram.org/bots/api#messageorigin
+
+This object describes the origin of a message.
+
+It can be one of:
+
+- MessageOriginUser
+- MessageOriginHiddenUser
+- MessageOriginChat
+- MessageOriginChannel
+'''
+
+def _dese_message_origin(result) -> MessageOrigin:
+    '''
+    Function to deserialize MessageOrigin.
+    '''
+    if result is None: return None
+    obj = _check_dict(result)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_MESSAGE_ORIGIN_USER:
+        return MessageOriginUser._dese(obj, check_dict = False)
+
+    elif type == DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER:
+        return MessageOriginHiddenUser._dese(obj, check_dict = False)
+
+    elif type == DEFAULT_MESSAGE_ORIGIN_CHAT:
+        return MessageOriginChat._dese(obj, check_dict = False)
+
+    elif type == DEFAULT_MESSAGE_ORIGIN_CHANNEL:
+        return MessageOriginChannel._dese(obj, check_dict = False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type MessageOrigin. Invalid type: {type!r}.'
+        )
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -5700,7 +5713,7 @@ class ExternalReplyInfo(TelegramType):
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
-        obj['origin'] = MessageOrigin._dese(obj.get('origin'))
+        obj['origin'] = _dese_message_origin(obj.get('origin'))
         obj['chat'] = Chat._dese(obj.get('chat'))
         obj['message_id'] = obj.get('message_id')
         obj['link_preview_options'] = LinkPreviewOptions._dese(obj.get('link_preview_options'))
@@ -5727,7 +5740,7 @@ class ExternalReplyInfo(TelegramType):
 
     def __init__(
         self,
-        origin: Union[MessageOriginUser, MessageOriginHiddenUser, MessageOriginChat, MessageOriginChannel],
+        origin: MessageOrigin,
         chat: Optional[Chat] = None,
         message_id: Optional[int] = None,
         link_preview_options: Optional[LinkPreviewOptions] = None,
