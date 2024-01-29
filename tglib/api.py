@@ -417,6 +417,10 @@ class TelegramApi:
         method = 'createInvoiceLink'
         return await self._request(method, params)
 
+    async def create_new_sticker_set(self, params: dict):
+        method = 'createNewStickerSet'
+        return await self._request(method, params)
+
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
@@ -768,10 +772,6 @@ class TelegramApi:
         method = 'uploadStickerFile'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
-
-    async def create_new_sticker_set(self, params: dict):
-        method = 'createNewStickerSet'
-        return await self._request(method, params)
 
     async def set_sticker_position_in_set(self, params: dict):
         method = 'setStickerPositionInSet'

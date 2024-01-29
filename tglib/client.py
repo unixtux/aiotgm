@@ -1191,6 +1191,50 @@ class Client(TelegramApi):
         return await super().create_invoice_link(params)
 
 
+    async def create_new_sticker_set(
+        self,
+        user_id: int,
+        name: str,
+        title: str,
+        stickers: list[InputSticker],
+        sticker_format: str,
+        sticker_type: Optional[str] = None,
+        needs_repainting: Optional[bool] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#createnewstickerset
+
+        Use this method to create a new sticker set owned by a user. The bot
+        will be able to edit the sticker set thus created. Returns :obj:`True` on success.
+
+        :param user_id: User identifier of created sticker set owner.
+        :type user_id: :obj:`int`
+        :param name: Short name of sticker set, to be used in ``t.me/addstickers/`` URLs (e.g., *animals*). Can contain only English letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in ``"_by_<bot_username>"``. ``<bot_username>`` is case insensitive. 1-64 characters.
+        :type name: :obj:`str`
+        :param title: Sticker set title, 1-64 characters.
+        :type title: :obj:`str`
+        :param stickers: A JSON-serialized list of 1-50 initial stickers to be added to the sticker set.
+        :type stickers: :obj:`list` of :obj:`~tglib.types.InputSticker`
+        :param sticker_format: Format of stickers in the set, must be one of “static”, “animated”, “video”.
+        :type sticker_format: :obj:`str`
+        :param sticker_type: Type of stickers in the set, pass “regular”, “mask”, or “custom_emoji”. By default, a regular sticker set is created.
+        :type sticker_type: :obj:`str`, optional
+        :param needs_repainting: Pass :obj:`True` if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context; for custom emoji sticker sets only.
+        :type needs_repainting: :obj:`bool`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'user_id': user_id,
+            'name': name,
+            'title': title,
+            'stickers': stickers,
+            'sticker_format': sticker_format
+        }
+        if sticker_type is not None: params['sticker_type'] = sticker_type
+        if needs_repainting is not None: params['needs_repainting'] = needs_repainting
+        return await super().create_new_sticker_set(params)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -3075,33 +3119,6 @@ class Client(TelegramApi):
         }
         result = await super().upload_sticker_file(params)
         return File._dese(result)
-
-
-    async def create_new_sticker_set(
-        self,
-        user_id: int,
-        name: str,
-        title: str,
-        stickers: list[InputSticker],
-        sticker_format: str,
-        sticker_type: Optional[str] = None,
-        needs_repainting: Optional[bool] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#createnewstickerset
-        Use this method to create a new sticker set owned by a user. The bot
-        will be able to edit the sticker set thus created. Returns True on success.
-        '''
-        params = {
-            'user_id': user_id,
-            'name': name,
-            'title': title,
-            'stickers': stickers,
-            'sticker_format': sticker_format
-        }
-        if sticker_type is not None: params['sticker_type'] = sticker_type
-        if needs_repainting is not None: params['needs_repainting'] = needs_repainting
-        return await super().create_new_sticker_set(params)
 
 
     async def set_sticker_position_in_set(
