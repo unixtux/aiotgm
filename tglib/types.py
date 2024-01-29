@@ -130,7 +130,7 @@ __all__ = [
     'MessageReactionUpdated',
     'OrderInfo',
     'PassportData',
-    'PassportElementError',
+    #'PassportElementError',
     'PassportElementErrorDataField',
     'PassportElementErrorFile',
     'PassportElementErrorFiles',
@@ -5073,24 +5073,7 @@ class PassportData(TelegramType):
 
 # PassportElementError: 9 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~
 
-class PassportElementError(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerror
-    This object represents an error in the Telegram Passport element which
-    was submitted that should be resolved by the user. It should be one of:
-    - PassportElementErrorDataField
-    - PassportElementErrorFrontSide
-    - PassportElementErrorReverseSide
-    - PassportElementErrorSelfie
-    - PassportElementErrorFile
-    - PassportElementErrorFiles
-    - PassportElementErrorTranslationFile
-    - PassportElementErrorTranslationFiles
-    - PassportElementErrorUnspecified
-    '''
-
-
-class PassportElementErrorDataField(PassportElementError):
+class PassportElementErrorDataField(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrordatafield
     Represents an issue in one of the data fields that was provided by the
@@ -5117,7 +5100,7 @@ class PassportElementErrorDataField(PassportElementError):
         self.message = message
 
 
-class PassportElementErrorFrontSide(PassportElementError):
+class PassportElementErrorFrontSide(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorfrontside
     Represents an issue with the front side of a document. The error is
@@ -5140,7 +5123,7 @@ class PassportElementErrorFrontSide(PassportElementError):
         self.message = message
 
 
-class PassportElementErrorReverseSide(PassportElementError):
+class PassportElementErrorReverseSide(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorreverseside
     Represents an issue with the reverse side of a document. The error is
@@ -5158,7 +5141,7 @@ class PassportElementErrorReverseSide(PassportElementError):
         self.message = message
 
 
-class PassportElementErrorSelfie(PassportElementError):
+class PassportElementErrorSelfie(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorselfie
     Represents an issue with the selfie with a document. The error
@@ -5181,7 +5164,7 @@ class PassportElementErrorSelfie(PassportElementError):
         self.message = message
 
 
-class PassportElementErrorFile(PassportElementError):
+class PassportElementErrorFile(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorfile
     Represents an issue with a document scan. The error is
@@ -5205,7 +5188,7 @@ class PassportElementErrorFile(PassportElementError):
         self.message = message
 
 
-class PassportElementErrorFiles(PassportElementError):
+class PassportElementErrorFiles(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorfiles
     Represents an issue with a list of scans. The error is considered
@@ -5229,7 +5212,7 @@ class PassportElementErrorFiles(PassportElementError):
         self.message = message
 
 
-class PassportElementErrorTranslationFile(PassportElementError):
+class PassportElementErrorTranslationFile(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrortranslationfile
     Represents an issue with one of the files that constitute the translation
@@ -5257,7 +5240,7 @@ class PassportElementErrorTranslationFile(PassportElementError):
         self.message = message
 
 
-class PassportElementErrorTranslationFiles(PassportElementError):
+class PassportElementErrorTranslationFiles(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrortranslationfiles
     Represents an issue with the translated version of a document. The error
@@ -5285,7 +5268,7 @@ class PassportElementErrorTranslationFiles(PassportElementError):
         self.message = message
 
 
-class PassportElementErrorUnspecified(PassportElementError):
+class PassportElementErrorUnspecified(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorunspecified
     Represents an issue in an unspecified place. The error is considered resolved when new data is added.
@@ -5300,6 +5283,37 @@ class PassportElementErrorUnspecified(PassportElementError):
         self.type = type
         self.element_hash = element_hash
         self.message = message
+
+
+PassportElementError = Union[
+    PassportElementErrorDataField,
+    PassportElementErrorFrontSide,
+    PassportElementErrorReverseSide,
+    PassportElementErrorSelfie,
+    PassportElementErrorFile,
+    PassportElementErrorFiles,
+    PassportElementErrorTranslationFile,
+    PassportElementErrorTranslationFiles,
+    PassportElementErrorUnspecified
+]
+'''
+https://core.telegram.org/bots/api#passportelementerror
+
+This object represents an error in the Telegram Passport element which
+was submitted that should be resolved by the user.
+
+It should be one of:
+
+- PassportElementErrorDataField
+- PassportElementErrorFrontSide
+- PassportElementErrorReverseSide
+- PassportElementErrorSelfie
+- PassportElementErrorFile
+- PassportElementErrorFiles
+- PassportElementErrorTranslationFile
+- PassportElementErrorTranslationFiles
+- PassportElementErrorUnspecified
+'''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

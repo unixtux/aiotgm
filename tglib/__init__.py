@@ -50,7 +50,8 @@ from .types import (ReactionType,
                     MenuButton,
                     _dese_menu_button,
                     InputMedia,
-                    InlineQueryResult)
+                    InlineQueryResult,
+                    PassportElementError)
 
 from .update_manager import *
 
@@ -3032,17 +3033,7 @@ class Client(TelegramApi):
     async def set_passport_data_errors(
         self,
         user_id: int,
-        errors: list[
-            PassportElementErrorDataField |
-            PassportElementErrorFrontSide |
-            PassportElementErrorReverseSide |
-            PassportElementErrorSelfie |
-            PassportElementErrorFile |
-            PassportElementErrorFiles |
-            PassportElementErrorTranslationFile |
-            PassportElementErrorTranslationFiles |
-            PassportElementErrorUnspecified
-        ]
+        errors: list[PassportElementError]
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#setpassportdataerrors
