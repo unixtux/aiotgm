@@ -1259,6 +1259,30 @@ class Client(TelegramApi):
         return await super().decline_chat_join_request(params)
 
 
+    async def delete_chat_photo(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#deletechatphoto
+
+        Use this method to delete a chat photo. Photos can't be changed for
+        private chats. The bot must be an administrator in the chat for this to work
+        and must have the appropriate administrator rights. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        return await super().delete_chat_photo(params)
+
+
+
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -2213,22 +2237,6 @@ class Client(TelegramApi):
             'photo': photo
         }
         return await super().set_chat_photo(params)
-
-
-    async def delete_chat_photo(
-        self,
-        chat_id: Union[int, str]
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#deletechatphoto
-        Use this method to delete a chat photo. Photos can't be changed for
-        private chats. The bot must be an administrator in the chat for this to work
-        and must have the appropriate administrator rights. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        return await super().delete_chat_photo(params)
 
 
     async def set_chat_title(

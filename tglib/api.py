@@ -425,6 +425,12 @@ class TelegramApi:
         method = 'declineChatJoinRequest'
         return await self._request(method, params)
 
+    async def delete_chat_photo(self, params: dict):
+        method = 'deleteChatPhoto'
+        return await self._request(method, params)
+
+
+
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
@@ -569,10 +575,6 @@ class TelegramApi:
         method = 'setChatPhoto'
         files = _get_files(params, 'photo')
         return await self._request(method, params, files)
-
-    async def delete_chat_photo(self, params: dict):
-        method = 'deleteChatPhoto'
-        return await self._request(method, params)
 
     async def set_chat_title(self, params: dict):
         method = 'setChatTitle'
