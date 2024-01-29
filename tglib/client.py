@@ -1235,6 +1235,30 @@ class Client(TelegramApi):
         return await super().create_new_sticker_set(params)
 
 
+    async def decline_chat_join_request(
+        self,
+        chat_id: Union[int, str],
+        user_id: int
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#declinechatjoinrequest
+
+        Use this method to decline a chat join request. The bot must be an administrator in the chat
+        for this to work and must have the *can_invite_users* administrator right. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+        return await super().decline_chat_join_request(params)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -2171,23 +2195,6 @@ class Client(TelegramApi):
         }
         result = await super().revoke_chat_invite_link(params)
         return ChatInviteLink._dese(result)
-
-
-    async def decline_chat_join_request(
-        self,
-        chat_id: Union[int, str],
-        user_id: int
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#declinechatjoinrequest
-        Use this method to decline a chat join request. The bot must be an administrator in the chat
-        for this to work and must have the can_invite_users administrator right. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id
-        }
-        return await super().decline_chat_join_request(params)
 
 
     async def set_chat_photo(

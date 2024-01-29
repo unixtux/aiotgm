@@ -421,6 +421,10 @@ class TelegramApi:
         method = 'createNewStickerSet'
         return await self._request(method, params)
 
+    async def decline_chat_join_request(self, params: dict):
+        method = 'declineChatJoinRequest'
+        return await self._request(method, params)
+
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
@@ -559,10 +563,6 @@ class TelegramApi:
 
     async def revoke_chat_invite_link(self, params: dict):
         method = 'revokeChatInviteLink'
-        return await self._request(method, params)
-
-    async def decline_chat_join_request(self, params: dict):
-        method = 'declineChatJoinRequest'
         return await self._request(method, params)
 
     async def set_chat_photo(self, params: dict):
