@@ -1289,7 +1289,7 @@ class Client(TelegramApi):
 
         Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat
         for this to work and must have the appropriate administrator rights. Use the field *can_set_sticker_set* optionally
-        returned in :meth:`~tglib.CLient.get_chat` requests to check if the bot can use this method. Returns :obj:`True` on success.
+        returned in :meth:`~tglib.Client.get_chat` requests to check if the bot can use this method. Returns :obj:`True` on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
         :type chat_id: :obj:`int` or :obj:`str`
