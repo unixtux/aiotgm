@@ -66,7 +66,7 @@ __all__ = [
     'InlineKeyboardButton',
     'InlineKeyboardMarkup',
     'InlineQuery',
-    'InlineQueryResult',
+    #'InlineQueryResult',
     'InlineQueryResultArticle',
     'InlineQueryResultAudio',
     'InlineQueryResultCachedAudio',
@@ -3968,35 +3968,7 @@ Telegram clients currently support the following 5 types:
 
 # InlineQueryResult: 20 SUBCLASSES
 
-class InlineQueryResult(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresult
-    This object represents one result of an inline query. Telegram
-    clients currently support results of the following 20 types:
-    - InlineQueryResultCachedAudio
-    - InlineQueryResultCachedDocument
-    - InlineQueryResultCachedGif
-    - InlineQueryResultCachedMpeg4Gif
-    - InlineQueryResultCachedPhoto
-    - InlineQueryResultCachedSticker
-    - InlineQueryResultCachedVideo
-    - InlineQueryResultCachedVoice
-    - InlineQueryResultArticle
-    - InlineQueryResultAudio
-    - InlineQueryResultContact
-    - InlineQueryResultGame
-    - InlineQueryResultDocument
-    - InlineQueryResultGif
-    - InlineQueryResultLocation
-    - InlineQueryResultMpeg4Gif
-    - InlineQueryResultPhoto
-    - InlineQueryResultVenue
-    - InlineQueryResultVideo
-    - InlineQueryResultVoice
-    '''
-
-
-class InlineQueryResultArticle(InlineQueryResult):
+class InlineQueryResultArticle(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultarticle
     Represents a link to an article or web page.
@@ -4027,7 +3999,7 @@ class InlineQueryResultArticle(InlineQueryResult):
         self.thumbnail_height = thumbnail_height
 
 
-class InlineQueryResultPhoto(InlineQueryResult):
+class InlineQueryResultPhoto(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultphoto
     Represents a link to a photo. By default, this photo will be sent by the user with optional caption.
@@ -4063,7 +4035,7 @@ class InlineQueryResultPhoto(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultGif(InlineQueryResult):
+class InlineQueryResultGif(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultgif
     Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional
@@ -4101,7 +4073,7 @@ class InlineQueryResultGif(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultMpeg4Gif(InlineQueryResult):
+class InlineQueryResultMpeg4Gif(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
     Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default,
@@ -4140,7 +4112,7 @@ class InlineQueryResultMpeg4Gif(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultVideo(InlineQueryResult):
+class InlineQueryResultVideo(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultvideo
     Represents a link to a page containing an embedded video player or a video file. By
@@ -4181,7 +4153,7 @@ class InlineQueryResultVideo(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultAudio(InlineQueryResult):
+class InlineQueryResultAudio(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultaudio
     Represents a link to an MP3 audio file. By default, this audio file will be sent by the user.
@@ -4213,7 +4185,7 @@ class InlineQueryResultAudio(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultVoice(InlineQueryResult):
+class InlineQueryResultVoice(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultvoice
     Represents a link to a voice recording in an .OGG container encoded with OPUS.
@@ -4244,7 +4216,7 @@ class InlineQueryResultVoice(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultDocument(InlineQueryResult):
+class InlineQueryResultDocument(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultdocument
     Represents a link to a file. By default, this file will be sent by the user with an optional
@@ -4283,7 +4255,7 @@ class InlineQueryResultDocument(InlineQueryResult):
         self.thumbnail_height = thumbnail_height
 
 
-class InlineQueryResultLocation(InlineQueryResult):
+class InlineQueryResultLocation(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultlocation
     Represents a location on a map. By default, the location will be sent by the user. Alternatively,
@@ -4321,7 +4293,7 @@ class InlineQueryResultLocation(InlineQueryResult):
         self.thumbnail_height = thumbnail_height
 
 
-class InlineQueryResultVenue(InlineQueryResult):
+class InlineQueryResultVenue(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultvenue
     Represents a venue. By default, the venue will be sent by the user. Alternatively, you can
@@ -4361,7 +4333,7 @@ class InlineQueryResultVenue(InlineQueryResult):
         self.thumbnail_height = thumbnail_height
 
 
-class InlineQueryResultContact(InlineQueryResult):
+class InlineQueryResultContact(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcontact
     Represents a contact with a phone number. By default, this contact will be sent by the user. Alternatively,
@@ -4393,7 +4365,7 @@ class InlineQueryResultContact(InlineQueryResult):
         self.thumbnail_height = thumbnail_height
 
 
-class InlineQueryResultGame(InlineQueryResult):
+class InlineQueryResultGame(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultgame
     Represents a Game.
@@ -4410,7 +4382,7 @@ class InlineQueryResultGame(InlineQueryResult):
         self.reply_markup = reply_markup
 
 
-class InlineQueryResultCachedPhoto(InlineQueryResult):
+class InlineQueryResultCachedPhoto(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedphoto
     Represents a link to a photo stored on the Telegram servers. By default, this
@@ -4441,7 +4413,7 @@ class InlineQueryResultCachedPhoto(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultCachedGif(InlineQueryResult):
+class InlineQueryResultCachedGif(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedgif
     Represents a link to an animated GIF file stored on the Telegram servers. By default,
@@ -4470,7 +4442,7 @@ class InlineQueryResultCachedGif(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
+class InlineQueryResultCachedMpeg4Gif(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif
     Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers.
@@ -4499,7 +4471,7 @@ class InlineQueryResultCachedMpeg4Gif(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultCachedSticker(InlineQueryResult):
+class InlineQueryResultCachedSticker(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedsticker
     Represents a link to a sticker stored on the Telegram servers.
@@ -4520,7 +4492,7 @@ class InlineQueryResultCachedSticker(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultCachedDocument(InlineQueryResult):
+class InlineQueryResultCachedDocument(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcacheddocument
     Represents a link to a file stored on the Telegram servers. By default, this
@@ -4551,7 +4523,7 @@ class InlineQueryResultCachedDocument(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultCachedVideo(InlineQueryResult):
+class InlineQueryResultCachedVideo(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedvideo
     Represents a link to a video file stored on the Telegram servers. By default, this
@@ -4582,7 +4554,7 @@ class InlineQueryResultCachedVideo(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultCachedVoice(InlineQueryResult):
+class InlineQueryResultCachedVoice(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedvoice
     Represents a link to a voice message stored on the Telegram servers.
@@ -4611,7 +4583,7 @@ class InlineQueryResultCachedVoice(InlineQueryResult):
         self.input_message_content = input_message_content
 
 
-class InlineQueryResultCachedAudio(InlineQueryResult):
+class InlineQueryResultCachedAudio(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
     Represents a link to an MP3 audio file stored on the Telegram servers.
@@ -4636,6 +4608,57 @@ class InlineQueryResultCachedAudio(InlineQueryResult):
         self.caption_entities = caption_entities
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
+
+
+InlineQueryResult = Union[
+    InlineQueryResultArticle,
+    InlineQueryResultPhoto,
+    InlineQueryResultGif,
+    InlineQueryResultMpeg4Gif,
+    InlineQueryResultVideo,
+    InlineQueryResultAudio,
+    InlineQueryResultVoice,
+    InlineQueryResultDocument,
+    InlineQueryResultLocation,
+    InlineQueryResultVenue,
+    InlineQueryResultContact,
+    InlineQueryResultGame,
+    InlineQueryResultCachedPhoto,
+    InlineQueryResultCachedGif,
+    InlineQueryResultCachedMpeg4Gif,
+    InlineQueryResultCachedSticker,
+    InlineQueryResultCachedDocument,
+    InlineQueryResultCachedVideo,
+    InlineQueryResultCachedVoice,
+    InlineQueryResultCachedAudio
+]
+'''
+https://core.telegram.org/bots/api#inlinequeryresult
+
+This object represents one result of an inline query.
+Telegram clients currently support results of the following 20 types:
+
+- InlineQueryResultCachedAudio
+- InlineQueryResultCachedDocument
+- InlineQueryResultCachedGif
+- InlineQueryResultCachedMpeg4Gif
+- InlineQueryResultCachedPhoto
+- InlineQueryResultCachedSticker
+- InlineQueryResultCachedVideo
+- InlineQueryResultCachedVoice
+- InlineQueryResultArticle
+- InlineQueryResultAudio
+- InlineQueryResultContact
+- InlineQueryResultGame
+- InlineQueryResultDocument
+- InlineQueryResultGif
+- InlineQueryResultLocation
+- InlineQueryResultMpeg4Gif
+- InlineQueryResultPhoto
+- InlineQueryResultVenue
+- InlineQueryResultVideo
+- InlineQueryResultVoice
+'''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

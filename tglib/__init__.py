@@ -49,7 +49,8 @@ from .types import (ReactionType,
                     BotCommandScope,
                     MenuButton,
                     _dese_menu_button,
-                    InputMedia)
+                    InputMedia,
+                    InlineQueryResult)
 
 from .update_manager import *
 
@@ -2824,28 +2825,7 @@ class Client(TelegramApi):
     async def answer_inline_query(
         self,
         inline_query_id: str,
-        results: list[
-            InlineQueryResultArticle |
-            InlineQueryResultPhoto |
-            InlineQueryResultGif |
-            InlineQueryResultMpeg4Gif |
-            InlineQueryResultVideo |
-            InlineQueryResultAudio |
-            InlineQueryResultVoice |
-            InlineQueryResultDocument |
-            InlineQueryResultLocation |
-            InlineQueryResultVenue |
-            InlineQueryResultContact |
-            InlineQueryResultGame |
-            InlineQueryResultCachedPhoto |
-            InlineQueryResultCachedGif |
-            InlineQueryResultCachedMpeg4Gif |
-            InlineQueryResultCachedSticker |
-            InlineQueryResultCachedDocument |
-            InlineQueryResultCachedVideo |
-            InlineQueryResultCachedVoice |
-            InlineQueryResultCachedAudio
-        ],
+        results: list[InlineQueryResult],
         cache_time: Optional[int] = None,
         is_personal: Optional[bool] = None,
         next_offset: Optional[str] = None,
@@ -2870,28 +2850,7 @@ class Client(TelegramApi):
     async def answer_web_app_query(
         self,
         web_app_query_id: str,
-        result: Union[
-            InlineQueryResultArticle,
-            InlineQueryResultPhoto,
-            InlineQueryResultGif,
-            InlineQueryResultMpeg4Gif,
-            InlineQueryResultVideo,
-            InlineQueryResultAudio,
-            InlineQueryResultVoice,
-            InlineQueryResultDocument,
-            InlineQueryResultLocation,
-            InlineQueryResultVenue,
-            InlineQueryResultContact,
-            InlineQueryResultGame,
-            InlineQueryResultCachedPhoto,
-            InlineQueryResultCachedGif,
-            InlineQueryResultCachedMpeg4Gif,
-            InlineQueryResultCachedSticker,
-            InlineQueryResultCachedDocument,
-            InlineQueryResultCachedVideo,
-            InlineQueryResultCachedVoice,
-            InlineQueryResultCachedAudio
-        ]
+        result: InlineQueryResult
     ) -> SentWebAppMessage:
         '''
         https://core.telegram.org/bots/api#answerwebappquery
