@@ -11,6 +11,7 @@ __all__ = [
 from .logger import get_logger
 logger = get_logger('TelegramApi')
 
+import os
 import time
 import asyncio
 from typing import (Any,
@@ -47,9 +48,8 @@ else:
         )
         SSL_CONTEXT = ssl.create_default_context()
     else:
-        try:
-            _cafile = certifi.where()
-        except FileNotFoundError:
+        _cafile = certifi.where()
+        if not os.path.isfile(_cafile):
             _cafile = None
             logger.info(
                 "CA file not found, try to"
@@ -159,11 +159,11 @@ class TelegramApi:
     ):
         if not isinstance(token, str):
             raise TypeError(
-                f"'token' must be str, got {token.__class__.__name__}"
+                f"'token' must be str, got {token.__class__.__name__}."
             )
         if not isinstance(proxy, (str, type(None))):
             raise TypeError(
-                f"'proxy' must be str or None, got {proxy.__class__.__name__}"
+                f"'proxy' must be str or None, got {proxy.__class__.__name__}."
             )
         self.__token = token
         self.__session = None

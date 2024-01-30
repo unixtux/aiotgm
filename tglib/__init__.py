@@ -104,8 +104,7 @@ class Client(TelegramApi):
     def parse_mode(self, val: Optional[str]) -> None:
         if not isinstance(val, (str, type(None))):
             raise TypeError(
-                "'parse_mode' must be str or None,"
-                f' got {val.__class__.__name__}'
+                f"'parse_mode' must be str or None, got {val.__class__.__name__}."
             )
         self.__parse_mode = val
 
