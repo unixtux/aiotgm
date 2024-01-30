@@ -60,13 +60,13 @@ else:
         )
 
 
-def _format_url(__token: str, __method: str, /) -> str:
-    return '/bot{}/{}'.format(__token, __method)
+def _format_url(token: str, method: str, /) -> str:
+    return '/bot{}/{}'.format(token, method)
 
 
-async def _parse_json(__response: ClientResponse, /) -> Any:
+async def _parse_json(response: ClientResponse, /) -> Any:
 
-    result = await __response.json(loads = json.loads)
+    result = await response.json(loads = json.loads)
 
     if RESP_DEBUG:
         logger.debug(result)
@@ -83,15 +83,15 @@ async def _parse_json(__response: ClientResponse, /) -> Any:
 
 
 def _get_files(
-    __params: dict,
+    params: dict,
     /,
-    *__file_keys: str
+    *file_keys: str
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
 
     files = {}
-    for key in __file_keys:
-        if key in __params:
-            obj = __params[key]
+    for key in file_keys:
+        if key in params:
+            obj = params[key]
             if isinstance(obj, InputFile):
                 try:
                     with open(obj.path, 'rb') as rb:
@@ -105,29 +105,29 @@ def _get_files(
                     'content': content,
                     'file_name': obj.file_name
                 }
-                del __params[key]
+                del params[key]
 
     return files or None
 
 
 def _prepare_data(
-    __params: Optional[dict],
-    __files: Optional[dict[str, dict[Literal['content', 'file_name'], Any]]],
+    params: Optional[dict],
+    files: Optional[dict[str, dict[Literal['content', 'file_name'], Any]]],
     /
 ) -> Optional[FormData]:
 
-    if __params is None:
+    if params is None:
         return None
 
-    data = FormData(__params)
+    data = FormData(params)
 
-    if __files is None:
+    if files is None:
         return data
 
-    for key, value in __files.items():
+    for key in files:
 
-        content = value['content']
-        file_name = value['file_name']
+        content = files[key]['content']
+        file_name = files[key]['file_name']
 
         data.add_field(
             key,

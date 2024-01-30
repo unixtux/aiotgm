@@ -208,87 +208,75 @@ except ImportError:
     )
 
 
-def _parse_dict(__result: dict, /) -> dict:
+def _parse_dict(res: dict, /) -> dict:
     '''
     Function to replace dict key 'from' with 'from_user'.
     '''
-    if not isinstance(__result, dict):
+    if not isinstance(res, dict):
         raise TypeError(
             'Expected dict as parameter in'
-            f' _check_dict(), got {__result.__class__.__name__}.'
+            f' _parse_dict(), got {res.__class__.__name__}.'
         )
-    if 'from' in __result:
-        __result['from_user'] = __result['from']
-        del __result['from']
+    if 'from' in res:
+        res['from_user'] = res['from']
+        del res['from']
 
-    return __result
+    return res
 
 
 class TelegramType:
     ...
 
 
-def _parse_result(__dese: Callable[[type, Optional[dict]], Optional[TelegramType]]):
+def _parse_result(_dese: Callable[[type, Optional[dict]], Optional[TelegramType]]):
     '''
     Decorator to parse the result of a Telegram object.
     '''
-    def wrap(__cls: type, __result: Optional[dict], /, *, skip_check: bool = False):
+    def wrap(cls: type, res: Optional[dict], /, *, skip_check: bool = False):
         '''
         Method to deserialize a Telegram object.
         '''
         if not skip_check:
 
-            if __result is None:
-                return None
+            if res is None: return None
 
-            return __dese(__cls, _parse_dict(__result))
+            return _dese(cls, _parse_dict(res))
         else:
-            logger.debug(f'Check skipped for {__cls.__name__}.')
-            return __dese(__cls, __result)
+            logger.debug(f'Skipped check for {cls.__name__}.')
+            return _dese(cls, res)
 
     return wrap
 
 
 def _serialize(
-    __val: Any,
+    val: Any,
     /,
     *,
     last: bool = True
 ) -> Union[Any, str, list, dict]:
 
-    if isinstance(__val, TelegramType):
-        __val = __val.__dict__
+    if isinstance(val, TelegramType):
+        val = val.__dict__
 
-    elif hasattr(__val, '__dict__'):
-        __val = '{!r}'.format(__val)
+    elif hasattr(val, '__dict__'):
+        val = '{!r}'.format(val)
 
-    if isinstance(__val, (list, tuple, set)):
+    if isinstance(val, (list, tuple, set)):
         res = [
-            _serialize(x, last = False) for x in __val
+            _serialize(x, last = False) for x in val
         ]
-    elif isinstance(__val, dict):
+    elif isinstance(val, dict):
         res = {
-            x: _serialize(y, last = False) for (x, y) in __val.items() if y is not None
+            x: _serialize(val[x], last = False) for x in val if val[x] is not None
         }
     else:
-        res = __val
+        res = val
 
     if not last:
         return res
     else:
         return res if isinstance(res, str) else json.dumps(res, ensure_ascii = False)
 
-"""
-def _get_kwargs(__obj: TelegramType, __kwargs: dict, /) -> bool:
-
-    if __kwargs:
-        logger.debug(
-            f'Got {len(__kwargs)} unexpected arguments'
-            f' in {__obj.__class__.__name__}: {__kwargs}'
-        )
-        return True
-    return False
-"""
 
 class ChatPermissions(TelegramType):
     '''
@@ -983,12 +971,12 @@ It can be one of:
 - InaccessibleMessage
 '''
 
-def _dese_maybe_inaccessible_message(__result: Optional[dict], /) -> Optional[MaybeInaccessibleMessage]:
+def _dese_maybe_inaccessible_message(res: Optional[dict], /) -> Optional[MaybeInaccessibleMessage]:
     '''
     Function to deserialize MaybeInaccessibleMessage.
     '''
-    if __result is None: return None
-    obj = _parse_dict(__result)
+    if res is None: return None
+    obj = _parse_dict(res)
 
     if obj['date'] == 0:
         return InaccessibleMessage._dese(obj, skip_check = True)
@@ -1141,12 +1129,12 @@ Currently, it can be one of:
 - ReactionTypeCustomEmoji
 '''
 
-def _dese_reaction_type(__result: Optional[dict], /) -> Optional[ReactionType]:
+def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
     '''
     Function to deserialize ReactionType.
     '''
-    if __result is None: return None
-    obj = _parse_dict(__result)
+    if res is None: return None
+    obj = _parse_dict(res)
 
     type = obj.pop('type')
 
@@ -2903,12 +2891,12 @@ Currently, the following 6 types of chat members are supported:
 - ChatMemberBanned
 '''
 
-def _dese_chat_member(__result: Optional[dict], /) -> Optional[ChatMember]:
+def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
     '''
     Function to deserialize ChatMember.
     '''
-    if __result is None: return None
-    obj = _parse_dict(__result)        
+    if res is None: return None
+    obj = _parse_dict(res)        
 
     status = obj.pop('status')
 
@@ -3312,12 +3300,12 @@ If a menu button other than MenuButtonDefault is set for a private chat, then it
 Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
 '''
 
-def _dese_menu_button(__result: Optional[dict], /) -> Optional[MenuButton]: # used in tglib.__init__
+def _dese_menu_button(res: Optional[dict], /) -> Optional[MenuButton]: # used in tglib.__init__
     '''
     Function to deserialize MenuButton.
     '''
-    if __result is None: return None
-    obj = _parse_dict(__result)
+    if res is None: return None
+    obj = _parse_dict(res)
 
     type = obj.pop('type')
 
@@ -5583,12 +5571,12 @@ It can be one of:
 - MessageOriginChannel
 '''
 
-def _dese_message_origin(__result: Optional[dict], /) -> Optional[MessageOrigin]:
+def _dese_message_origin(res: Optional[dict], /) -> Optional[MessageOrigin]:
     '''
     Function to deserialize MessageOrigin.
     '''
-    if __result is None: return None
-    obj = _parse_dict(__result)
+    if res is None: return None
+    obj = _parse_dict(res)
 
     type = obj.pop('type')
 
@@ -5784,12 +5772,12 @@ It can be one of:
 - ChatBoostSourceGiveaway
 '''
 
-def _dese_chat_boost_source(__result: Optional[dict], /) -> Optional[ChatBoostSource]:
+def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]:
     '''
     Function to deserialize ChatBoostSource.
     '''
-    if __result is None: return None
-    obj = _parse_dict(__result)
+    if res is None: return None
+    obj = _parse_dict(res)
 
     source = obj.pop('source')
 

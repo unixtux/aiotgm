@@ -6,16 +6,16 @@ __all__ = [
 
 import logging
 
-def get_logger(__name: str, /) -> logging.Logger:
+def get_logger(name: str, /) -> logging.Logger:
     """
     Function to get a preformatted Logger instance.
     If the Logger already exists, level won't be set.
     """
 
-    if __name in logging.Logger.manager.loggerDict:
-        return logging.getLogger(__name)
+    if name in logging.Logger.manager.loggerDict:
+        return logging.getLogger(name)
     else:
-        logger = logging.getLogger(__name)
+        logger = logging.getLogger(name)
         logger.setLevel(logging.INFO)
 
         handler = logging.StreamHandler()
