@@ -247,7 +247,7 @@ def _parse_result(__dese: Callable[[Optional[dict]], Optional[TelegramType]]):
                     f' _parse_result(), got {__result.__class__.__name__}.'
                 )
         else:
-            logger.debug('Check skipped for', __cls.__name__)
+            logger.debug('Check skipped for %s', __cls.__name__)
             return __dese(__cls, __result)
     return wrap
 
@@ -723,13 +723,9 @@ class InaccessibleMessage(TelegramType):
     '''
     @classmethod
     @_parse_result
-    def _dese(cls, result, *, check_dict: bool = True):
+    def _dese(cls, result):
 
-        if check_dict:
-            if result is None: return None
-            obj = _check_dict(result)
-        else:
-            obj = result
+        obj = result
 
         obj['chat'] = Chat._dese(obj.get('chat'))
         obj['message_id'] = obj.get('message_id')
@@ -1015,9 +1011,9 @@ def _dese_maybe_inaccessible_message(result) -> MaybeInaccessibleMessage:
     obj = _check_dict(result)
 
     if obj['date'] == 0:
-        return InaccessibleMessage._dese(obj, check_dict = False)
+        return InaccessibleMessage._dese(obj, to_check = False)
     else:
-        return Message._dese(obj, check_dict = False)
+        return Message._dese(obj, to_check = False)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
