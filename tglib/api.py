@@ -107,7 +107,7 @@ def _get_files(
                 }
                 del __params[key]
 
-    return files if files else None
+    return files or None
 
 
 def _prepare_data(

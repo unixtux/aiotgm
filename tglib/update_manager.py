@@ -237,7 +237,7 @@ class UpdateManager:
         __checker: Callable[[Any], Any],
         __function: Callable[[Any], Any],
         /
-    ) -> None:
+    ):
         _check_rule(
             self.__name,
             self.__obj,

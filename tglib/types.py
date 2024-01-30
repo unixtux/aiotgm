@@ -206,18 +206,16 @@ except ImportError:
 
 def _check_dict(__result: dict, /) -> dict:
 
-    res = __result
-
-    if not isinstance(res, dict):
+    if not isinstance(__result, dict):
         raise TypeError(
             'Expected dict as parameter in'
-            f' _check_dict(), got {res.__class__.__name__}'
+            f' _check_dict(), got {__result.__class__.__name__}.'
         )
-    if 'from' in res:
-        res['from_user'] = res['from']
-        del res['from']
+    if 'from' in __result:
+        __result['from_user'] = __result['from']
+        del __result['from']
 
-    return res
+    return __result
 
 
 class TelegramType:
@@ -231,24 +229,22 @@ def _serialize(
     last: bool = True
 ) -> Union[Any, str, list, dict]:
 
-    val = __val
+    if isinstance(__val, TelegramType):
+        __val = __val.__dict__
 
-    if isinstance(val, TelegramType):
-        val = val.__dict__
+    elif hasattr(__val, '__dict__'):
+        __val = '{!r}'.format(__val)
 
-    elif hasattr(val, '__dict__'):
-        val = '{!r}'.format(val)
-
-    if isinstance(val, (list, tuple, set)):
+    if isinstance(__val, (list, tuple, set)):
         res = [
-            _serialize(x, last = False) for x in val
+            _serialize(x, last = False) for x in __val
         ]
-    elif isinstance(val, dict):
+    elif isinstance(__val, dict):
         res = {
-            x: _serialize(y, last = False) for (x, y) in val.items() if y is not None
+            x: _serialize(y, last = False) for (x, y) in __val.items() if y is not None
         }
     else:
-        res = val
+        res = __val
 
     if not last:
         return res
@@ -258,12 +254,10 @@ def _serialize(
 
 def _get_kwargs(__obj: TelegramType, __kwargs: dict, /) -> bool:
 
-    obj, kwargs = __obj, __kwargs
-
-    if kwargs:
+    if __kwargs:
         logger.debug(
-            f'Got {len(kwargs)} unexpected arguments'
-            f' in {obj.__class__.__name__}: {kwargs}'
+            f'Got {len(__kwargs)} unexpected arguments'
+            f' in {__obj.__class__.__name__}: {__kwargs}'
         )
         return True
     return False
