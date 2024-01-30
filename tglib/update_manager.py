@@ -76,31 +76,34 @@ examples = {
 
 
 def _func_ok(
-    func: Callable,
+    __func: Callable,
+    /,
+    *,
     must_be_coro: bool = False
 ) -> bool:
 
-    if not inspect.isfunction(func):
+    if not inspect.isfunction(__func):
         return False
 
-    spec = inspect.getfullargspec(func)
+    spec = inspect.getfullargspec(__func)
 
-    if (len(spec.args) == 1
+    if (
+        len(spec.args) == 1
         and not spec.varargs
         and not spec.varkw
-        and not spec.kwonlyargs):
-
+        and not spec.kwonlyargs
+    ):
         if (
             must_be_coro
-            and inspect.iscoroutinefunction(func)
+            and inspect.iscoroutinefunction(__func)
         ):
             return True
 
         elif (
             not must_be_coro
-            and not inspect.iscoroutinefunction(func)
-            and not inspect.isasyncgenfunction(func)
-            and not inspect.isgeneratorfunction(func)
+            and not inspect.iscoroutinefunction(__func)
+            and not inspect.isasyncgenfunction(__func)
+            and not inspect.isgeneratorfunction(__func)
         ):
             return True
 
@@ -108,24 +111,25 @@ def _func_ok(
 
 
 def _check_rule(
-    manager: str,
-    obj: Any,
-    checker: Callable,
-    function: Callable
+    __manager: str,
+    __obj: Any,
+    __checker: Callable,
+    __function: Callable,
+    /
 ) -> None:
 
     errors = []
-    obj_name: str = obj.__name__
+    obj_name: str = __obj.__name__
 
-    if not _func_ok(checker):
+    if not _func_ok(__checker):
         errors.append(
             "ERROR 1 • The 'checker' argument must"
             ' be a normal function that takes only'
             ' one parameter, it will be processed as'
-            f' {obj_name}. E.g. -> {examples[manager]}'
+            f' {obj_name}. E.g. -> {examples[__manager]}'
         )
     if not _func_ok(
-        function,
+        __function,
         must_be_coro = True
     ):
         n = len(errors) + 1
@@ -140,7 +144,7 @@ def _check_rule(
         s = str() if len_err == 1 else 's'
         raise TypeError(
             f'{len_err} error{s} occurred while trying'
-            f' to add a rule to the {manager}, see below'
+            f' to add a rule to the {__manager}, see below'
             f' for more details.\n\n' + '\n'.join(errors)
         )
 
@@ -148,11 +152,12 @@ def _check_rule(
 class Rule:
     def __init__(
         self,
-        checker: Callable[[Any], Any],
-        function: Callable[[Any], Any]
+        __checker: Callable[[Any], Any],
+        __function: Callable[[Any], Any],
+        /
     ):
-        self.__checker = checker
-        self.__function = function
+        self.__checker = __checker
+        self.__function = __function
 
     @property
     def checker(self) -> Callable[[Any], Any]:
@@ -171,19 +176,20 @@ class NextManager:
 
 
 async def _run_coroutine(
-    rule: Rule,
-    obj: Any
+    __rule: Rule,
+    __obj: Any,
+    /
 ) -> Union[Any, NextManager]:
 
     try:
-        check = rule.checker(obj)
+        check = __rule.checker(__obj)
     except BaseException as exc:
-        code = rule.checker.__code__
+        code = __rule.checker.__code__
         lineno = code.co_firstlineno
         filename = os.path.basename(code.co_filename)
         logger.error(
             f'{exc!r} occurred in the'
-            f' function {rule.checker.__name__!r} in'
+            f' function {__rule.checker.__name__!r} in'
             f' file {filename!r} at line {lineno}.'
         )
         raise exc
@@ -192,23 +198,23 @@ async def _run_coroutine(
         return NextManager()
     else:
         try:
-            return await rule.function(obj)
+            return await __rule.function(__obj)
         except BaseException as exc:
-            code = rule.function.__code__
+            code = __rule.function.__code__
             lineno = code.co_firstlineno
             filename = os.path.basename(code.co_filename)
             logger.error(
                 f'{exc!r} occurred in the'
-                f' function {rule.function.__name__!r} in'
+                f' function {__rule.function.__name__!r} in'
                 f' file {filename!r} at line {lineno}.'
             )
             raise exc
 
 
 class UpdateManager:
-    def __init__(self, name: str, obj: Any):
-        self.__name = name
-        self.__obj = obj
+    def __init__(self, __name: str, __obj: Any, /):
+        self.__name = __name
+        self.__obj = __obj
         self.__rules = ()
 
     @property
@@ -228,13 +234,14 @@ class UpdateManager:
 
     def add_rule(
         self,
-        checker: Callable[[Any], Any],
-        function: Callable[[Any], Any]
+        __checker: Callable[[Any], Any],
+        __function: Callable[[Any], Any],
+        /
     ) -> None:
         _check_rule(
             self.__name,
             self.__obj,
-            checker,
-            function
+            __checker,
+            __function
         )
-        self.__rules += (Rule(checker, function), )
+        self.__rules += (Rule(__checker, __function), )

@@ -35,7 +35,7 @@ try:
     import ssl
 except ImportError:
     logger.info(
-        "module 'ssl' not found, SSL_CONTEXT is None"
+        "module 'ssl' not found, SSL_CONTEXT is None."
     )
     SSL_CONTEXT = None
 else:
@@ -43,22 +43,30 @@ else:
         import certifi
     except ImportError:
         logger.info(
-            "module 'certifi' not found, using default CA"
+            "module 'certifi' not found, using default CA."
         )
         SSL_CONTEXT = ssl.create_default_context()
     else:
+        try:
+            _cafile = certifi.where()
+        except FileNotFoundError:
+            _cafile = None
+            logger.info(
+                "CA file not found, try to"
+                " reinstall the module 'certifi'."
+            )
         SSL_CONTEXT = ssl.create_default_context(
-            cafile = certifi.where()
+            cafile = _cafile
         )
 
 
-def _format_url(token: str, method: str) -> str:
-    return '/bot{}/{}'.format(token, method)
+def _format_url(__token: str, __method: str, /) -> str:
+    return '/bot{}/{}'.format(__token, __method)
 
 
-async def _check_json(response: ClientResponse) -> Any:
+async def _parse_json(__response: ClientResponse, /) -> Any:
 
-    result = await response.json(loads = json.loads)
+    result = await __response.json(loads = json.loads)
 
     if RESP_DEBUG:
         logger.debug(result)
@@ -75,46 +83,48 @@ async def _check_json(response: ClientResponse) -> Any:
 
 
 def _get_files(
-    params: dict,
-    *file_keys: str
+    __params: dict,
+    /,
+    *__file_keys: str
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
 
     files = {}
-    for key in file_keys:
-        if key in params:
-            obj = params[key]
+    for key in __file_keys:
+        if key in __params:
+            obj = __params[key]
             if isinstance(obj, InputFile):
                 try:
                     with open(obj.path, 'rb') as rb:
                         content = rb.read()
                 except FileNotFoundError:
                     raise FileNotFoundError(
-                        f"File {obj.path!r} doesn't"
-                        ' exist, check your InputFile'
+                        f"Inexistent file: {obj.path!r},"
+                        ' check your InputFile object.'
                     )
                 files[key] = {
                     'content': content,
                     'file_name': obj.file_name
                 }
-                del params[key]
+                del __params[key]
 
     return files if files else None
 
 
 def _prepare_data(
-    params: Optional[dict],
-    files: Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]
+    __params: Optional[dict],
+    __files: Optional[dict[str, dict[Literal['content', 'file_name'], Any]]],
+    /
 ) -> Optional[FormData]:
 
-    if params is None:
+    if __params is None:
         return None
 
-    data = FormData(params)
+    data = FormData(__params)
 
-    if files is None:
+    if __files is None:
         return data
 
-    for key, value in files.items():
+    for key, value in __files.items():
 
         content = value['content']
         file_name = value['file_name']
@@ -148,11 +158,13 @@ class TelegramApi:
         proxy: Optional[str] = None
     ):
         if not isinstance(token, str):
-            raise TypeError(f'token must be str, got {token.__class__}')
-
+            raise TypeError(
+                f"'token' must be str, got {token.__class__.__name__}"
+            )
         if not isinstance(proxy, (str, type(None))):
-            raise TypeError(f'proxy must be str or None, got {proxy.__class__}')
-
+            raise TypeError(
+                f"'proxy' must be str or None, got {proxy.__class__.__name__}"
+            )
         self.__token = token
         self.__session = None
         self.__headers_and_proxy = {
@@ -218,7 +230,7 @@ class TelegramApi:
                     **self.__headers_and_proxy
                 ) as response:
 
-                    return await _check_json(response)
+                    return await _parse_json(response)
 
             except (ClientError, TimeoutError):
                 await asyncio.sleep(3 - (time.time() - start_time))

@@ -204,18 +204,20 @@ except ImportError:
     )
 
 
-def _check_dict(result: dict) -> dict:
+def _check_dict(__result: dict, /) -> dict:
 
-    if not isinstance(result, dict):
+    res = __result
+
+    if not isinstance(res, dict):
         raise TypeError(
             'Expected dict as parameter in'
-            f' _check_dict(), got {result.__class__.__name__}'
+            f' _check_dict(), got {res.__class__.__name__}'
         )
-    if 'from' in result:
-        result['from_user'] = result['from']
-        del result['from']
+    if 'from' in res:
+        res['from_user'] = res['from']
+        del res['from']
 
-    return result
+    return res
 
 
 class TelegramType:
@@ -223,10 +225,13 @@ class TelegramType:
 
 
 def _serialize(
-    val: Any,
+    __val: Any,
+    /,
     *,
     last: bool = True
 ) -> Union[Any, str, list, dict]:
+
+    val = __val
 
     if isinstance(val, TelegramType):
         val = val.__dict__
@@ -251,7 +256,10 @@ def _serialize(
         return res if isinstance(res, str) else json.dumps(res, ensure_ascii = False)
 
 
-def _get_kwargs(obj: TelegramType, kwargs: dict) -> bool:
+def _get_kwargs(__obj: TelegramType, __kwargs: dict, /) -> bool:
+
+    obj, kwargs = __obj, __kwargs
+
     if kwargs:
         logger.debug(
             f'Got {len(kwargs)} unexpected arguments'
@@ -2433,7 +2441,7 @@ class ReplyKeyboardMarkup(TelegramType):
         input_field_placeholder: Optional[str] = None,
         selective: Optional[bool] = None
     ):
-        self.keyboard = [] if keyboard is None else keyboard
+        self.keyboard = keyboard or []
         self.is_persistent = is_persistent
         self.resize_keyboard = resize_keyboard
         self.one_time_keyboard = one_time_keyboard
@@ -2449,7 +2457,7 @@ class ReplyKeyboardMarkup(TelegramType):
         return len(self.keyboard)
 
     @row_width.setter
-    def row_width(self, value: int) -> int:
+    def row_width(self, value: int) -> None:
 
         keyboard = []
         nested = []
@@ -2460,11 +2468,10 @@ class ReplyKeyboardMarkup(TelegramType):
                     keyboard.append(nested)
                     nested = []
 
-        if nested != []:
+        if nested:
             keyboard.append(nested)
 
         self.keyboard = keyboard
-        return self.row_width
 
 
 class ReplyKeyboardRemove(TelegramType):
@@ -2546,7 +2553,7 @@ class InlineKeyboardMarkup(TelegramType):
         self,
         inline_keyboard: Optional[list[list[InlineKeyboardButton]]] = None
     ):
-        self.inline_keyboard = [] if inline_keyboard is None else inline_keyboard
+        self.inline_keyboard = inline_keyboard or []
 
     def add(self, *buttons: InlineKeyboardButton):
         self.inline_keyboard.append(buttons)
@@ -2557,7 +2564,7 @@ class InlineKeyboardMarkup(TelegramType):
         return len(self.inline_keyboard)
 
     @row_width.setter
-    def row_width(self, value: int) -> int:
+    def row_width(self, value: int) -> None:
 
         keyboard = []
         nested = []
@@ -2568,16 +2575,16 @@ class InlineKeyboardMarkup(TelegramType):
                     keyboard.append(nested)
                     nested = []
 
-        if nested != []:
+        if nested:
             keyboard.append(nested)
 
         self.inline_keyboard = keyboard
-        return self.row_width
 
 
 class CallbackQuery(TelegramType):
     '''
     https://core.telegram.org/bots/api#callbackquery
+
     This object represents an incoming callback query from a callback button in
     an inline keyboard. If the button that originated the query was attached to a
     message sent by the bot, the field message will be present. If the button was

@@ -64,9 +64,9 @@ class Client(TelegramApi):
     def __init__(
         self,
         token: str,
+        *,
         parse_mode: Optional[str] = None,
         protect_content: Optional[bool] = None,
-        *,
         proxy: Optional[str] = None
     ):
         super().__init__(token, proxy)
@@ -103,7 +103,10 @@ class Client(TelegramApi):
     @parse_mode.setter
     def parse_mode(self, val: Optional[str]) -> None:
         if not isinstance(val, (str, type(None))):
-            raise TypeError(f'parse_mode must be str or None, got {val.__class__}')
+            raise TypeError(
+                "'parse_mode' must be str or None,"
+                f' got {val.__class__.__name__}'
+            )
         self.__parse_mode = val
 
     @property
@@ -112,7 +115,7 @@ class Client(TelegramApi):
 
     @protect_content.setter
     def protect_content(self, val: Optional[bool]) -> None:
-        val = None if not val else True
+        val = True if val else None
         self.__protect_content = val
 
 
@@ -122,162 +125,162 @@ class Client(TelegramApi):
     def message_manager(self) -> UpdateManager:
         return self.__message_manager
 
-    def manage_message(self, checker = lambda message: True):
-        def wrap(func: Callable[[Message], Any]):
-            self.message_manager.add_rule(checker, func)
+    def manage_message(self, __checker: Callable[[Message], Any] = lambda message: True, /):
+        def wrap(__function: Callable[[Message], Any]):
+            self.message_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def edited_message_manager(self) -> UpdateManager:
         return self.__edited_message_manager
 
-    def manage_edited_message(self, checker = lambda edited_message: True):
-        def wrap(func: Callable[[Message], Any]):
-            self.edited_message_manager.add_rule(checker, func)
+    def manage_edited_message(self, __checker: Callable[[Message], Any] = lambda edited_message: True, /):
+        def wrap(__function: Callable[[Message], Any]):
+            self.edited_message_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def channel_post_manager(self) -> UpdateManager:
         return self.__channel_post_manager
 
-    def manage_channel_post(self, checker = lambda channel_post: True):
-        def wrap(func: Callable[[Message], Any]):
-            self.channel_post_manager.add_rule(checker, func)
+    def manage_channel_post(self, __checker: Callable[[Message], Any] = lambda channel_post: True, /):
+        def wrap(__function: Callable[[Message], Any]):
+            self.channel_post_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def message_reaction_manager(self) -> UpdateManager:
         return self.__message_reaction_manager
 
-    def manage_message_reaction(self, checker = lambda message_reaction: True):
-        def wrap(func: Callable[[MessageReactionUpdated], Any]):
-            self.message_reaction_manager.add_rule(checker, func)
+    def manage_message_reaction(self, __checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: True, /):
+        def wrap(__function: Callable[[MessageReactionUpdated], Any]):
+            self.message_reaction_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def message_reaction_count_manager(self) -> UpdateManager:
         return self.__message_reaction_count_manager
 
-    def manage_message_reaction_count(self, checker = lambda message_reaction_count: True):
-        def wrap(func: Callable[[MessageReactionCountUpdated], Any]):
-            self.message_reaction_count_manager.add_rule(checker, func)
+    def manage_message_reaction_count(self, __checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: True, /):
+        def wrap(__function: Callable[[MessageReactionCountUpdated], Any]):
+            self.message_reaction_count_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def edited_channel_post_manager(self) -> UpdateManager:
         return self.__edited_channel_post_manager
 
-    def manage_edited_channel_post(self, checker = lambda edited_channel_post: True):
-        def wrap(func: Callable[[Message], Any]):
-            self.edited_channel_post_manager.add_rule(checker, func)
+    def manage_edited_channel_post(self, __checker: Callable[[Message], Any] = lambda edited_channel_post: True, /):
+        def wrap(__function: Callable[[Message], Any]):
+            self.edited_channel_post_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def inline_query_manager(self) -> UpdateManager:
         return self.__inline_query_manager
 
-    def manage_inline_query(self, checker = lambda inline_query: True):
-        def wrap(func: Callable[[InlineQuery], Any]):
-            self.inline_query_manager.add_rule(checker, func)
+    def manage_inline_query(self, __checker: Callable[[InlineQuery], Any] = lambda inline_query: True, /):
+        def wrap(__function: Callable[[InlineQuery], Any]):
+            self.inline_query_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def chosen_inline_result_manager(self) -> UpdateManager:
         return self.__chosen_inline_result_manager
 
-    def manage_chosen_inline_result(self, checker = lambda chosen_inline_result: True):
-        def wrap(func: Callable[[ChosenInlineResult], Any]):
-            self.chosen_inline_result_manager.add_rule(checker, func)
+    def manage_chosen_inline_result(self, __checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: True, /):
+        def wrap(__function: Callable[[ChosenInlineResult], Any]):
+            self.chosen_inline_result_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def callback_query_manager(self) -> UpdateManager:
         return self.__callback_query_manager
 
-    def manage_callback_query(self, checker = lambda callback_query: True):
-        def wrap(func: Callable[[CallbackQuery], Any]):
-            self.callback_query_manager.add_rule(checker, func)
+    def manage_callback_query(self, __checker: Callable[[CallbackQuery], Any] = lambda callback_query: True, /):
+        def wrap(__function: Callable[[CallbackQuery], Any]):
+            self.callback_query_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def shipping_query_manager(self) -> UpdateManager:
         return self.__shipping_query_manager
 
-    def manage_shipping_query(self, checker = lambda shipping_query: True):
-        def wrap(func: Callable[[ShippingQuery], Any]):
-            self.shipping_query_manager.add_rule(checker, func)
+    def manage_shipping_query(self, __checker: Callable[[ShippingQuery], Any] = lambda shipping_query: True, /):
+        def wrap(__function: Callable[[ShippingQuery], Any]):
+            self.shipping_query_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def pre_checkout_query_manager(self) -> UpdateManager:
         return self.__pre_checkout_query_manager
 
-    def manage_pre_checkout_query(self, checker = lambda pre_checkout_query: True):
-        def wrap(func: Callable[[PreCheckoutQuery], Any]):
-            self.pre_checkout_query_manager.add_rule(checker, func)
+    def manage_pre_checkout_query(self, __checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: True, /):
+        def wrap(__function: Callable[[PreCheckoutQuery], Any]):
+            self.pre_checkout_query_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def poll_manager(self) -> UpdateManager:
         return self.__poll_manager
 
-    def manage_poll(self, checker = lambda poll: True):
-        def wrap(func: Callable[[Poll], Any]):
-            self.poll_manager.add_rule(checker, func)
+    def manage_poll(self, __checker: Callable[[Poll], Any] = lambda poll: True, /):
+        def wrap(__function: Callable[[Poll], Any]):
+            self.poll_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def poll_answer_manager(self) -> UpdateManager:
         return self.__poll_answer_manager
 
-    def manage_poll_answer(self, checker = lambda poll_answer: True):
-        def wrap(func: Callable[[PollAnswer], Any]):
-            self.poll_answer_manager.add_rule(checker, func)
+    def manage_poll_answer(self, __checker: Callable[[PollAnswer], Any] = lambda poll_answer: True, /):
+        def wrap(__function: Callable[[PollAnswer], Any]):
+            self.poll_answer_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def my_chat_member_manager(self) -> UpdateManager:
         return self.__my_chat_member_manager
 
-    def manage_my_chat_member(self, checker = lambda my_chat_member: True):
-        def wrap(func: Callable[[ChatMemberUpdated], Any]):
-            self.my_chat_member_manager.add_rule(checker, func)
+    def manage_my_chat_member(self, __checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: True, /):
+        def wrap(__function: Callable[[ChatMemberUpdated], Any]):
+            self.my_chat_member_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def chat_member_manager(self) -> UpdateManager:
         return self.__chat_member_manager
 
-    def manage_chat_member(self, checker = lambda chat_member: True):
-        def wrap(func: Callable[[ChatMemberUpdated], Any]):
-            self.chat_member_manager.add_rule(checker, func)
+    def manage_chat_member(self, __checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: True, /):
+        def wrap(__function: Callable[[ChatMemberUpdated], Any]):
+            self.chat_member_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def chat_join_request_manager(self) -> UpdateManager:
         return self.__chat_join_request_manager
 
-    def manage_chat_join_request(self, checker = lambda chat_join_request: True):
-        def wrap(func: Callable[[ChatJoinRequest], Any]):
-            self.chat_join_request_manager.add_rule(checker, func)
+    def manage_chat_join_request(self, __checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: True, /):
+        def wrap(__function: Callable[[ChatJoinRequest], Any]):
+            self.chat_join_request_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def chat_boost_manager(self) -> UpdateManager:
         return self.__chat_boost_manager
 
-    def manage_chat_boost(self, checker = lambda chat_boost: True):
-        def wrap(func: Callable[[ChatBoostUpdated], Any]):
-            self.chat_boost_manager.add_rule(checker, func)
+    def manage_chat_boost(self, __checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: True, /):
+        def wrap(__function: Callable[[ChatBoostUpdated], Any]):
+            self.chat_boost_manager.add_rule(__checker, __function)
         return wrap
 
     @property
     def removed_chat_boost_manager(self) -> UpdateManager:
         return self.__removed_chat_boost_manager
 
-    def manage_removed_chat_boost(self, checker = lambda removed_chat_boost: True):
-        def wrap(func: Callable[[ChatBoostRemoved], Any]):
-            self.removed_chat_boost_manager.add_rule(checker, func)
+    def manage_removed_chat_boost(self, __checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: True, /):
+        def wrap(__function: Callable[[ChatBoostRemoved], Any]):
+            self.removed_chat_boost_manager.add_rule(__checker, __function)
         return wrap
 
     # Processing new updates
@@ -314,7 +317,7 @@ class Client(TelegramApi):
                         asyncio.create_task(self.__process_update(update))
 
 
-    async def __process_update(self, update: Update):
+    async def __process_update(self, update: Update, /):
 
         if update.message:
             obj: Message = update.message
