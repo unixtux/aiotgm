@@ -187,7 +187,8 @@ import os
 from typing import (Any,
                     Union,
                     Literal,
-                    Optional)
+                    Optional,
+                    Callable)
 
 from .default_literals import *
 
@@ -220,6 +221,32 @@ def _check_dict(__result: dict, /) -> dict:
 
 class TelegramType:
     ...
+
+
+def _parse_result(_dese: Callable[[Optional[dict]], Optional[TelegramType]]):
+    def wrap(__cls: type, __result: Optional[dict], /, *, to_check: bool = True):
+        '''
+        Decorator to parse the result of a Telegram object.
+        '''
+        print('to_check is', to_check)
+        if to_check:
+
+            if __result is None:
+                return None
+
+            if isinstance(__result, dict):
+                if 'from' in __result:
+                    __result['from_user'] = __result['from']
+                    del __result['from']
+                return _dese(__cls, __result)
+            else:
+                raise TypeError(
+                    'Expected dict or None as parameter in'
+                    f' _parse_result(), got {__result.__class__.__name__}.'
+                )
+        else:
+            return _dese(__cls, __result)
+    return wrap
 
 
 def _serialize(
@@ -269,6 +296,7 @@ class ChatPermissions(TelegramType):
     Describes actions that a non-administrator user is allowed to take in a chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -329,6 +357,7 @@ class ChatAdministratorRights(TelegramType):
     Represents the rights of an administrator in a chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -393,6 +422,7 @@ class SwitchInlineQueryChosenChat(TelegramType):
     to inline mode in a chosen chat, with an optional default inline query.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -424,6 +454,7 @@ class CallbackGame(TelegramType):
     A placeholder, currently holds no information. Use BotFather to set up your game.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -466,6 +497,7 @@ class LoginUrl(TelegramType):
     Telegram. All the user needs to do is tap/click a button and confirm that they want to log in.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -508,6 +540,7 @@ class LinkPreviewOptions(TelegramType):
     Describes the options used for link preview generation.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -539,6 +572,7 @@ class User(TelegramType):
     This object represents a Telegram user or bot.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -590,6 +624,7 @@ class MessageEntity(TelegramType):
     This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -627,6 +662,7 @@ class TextQuote(TelegramType):
     This object contains information about the quoted part of a message that is replied to by the given message.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -683,6 +719,7 @@ class InaccessibleMessage(TelegramType):
     This object describes a message that was deleted or is otherwise inaccessible to the bot.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -716,6 +753,7 @@ class Message(TelegramType):
     This object represents a message.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -987,6 +1025,7 @@ class ChatPhoto(TelegramType):
     This object represents a chat photo.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1017,6 +1056,7 @@ class Location(TelegramType):
     This object represents a point on the map.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1053,6 +1093,7 @@ class ChatLocation(TelegramType):
     Represents a location to which a chat is connected.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1079,6 +1120,7 @@ class ReactionTypeEmoji(TelegramType):
     The reaction is based on an emoji.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -1105,6 +1147,7 @@ class ReactionTypeCustomEmoji(TelegramType):
     The reaction is based on a custom emoji.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -1163,6 +1206,7 @@ class Chat(TelegramType):
     This object represents a chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1286,6 +1330,7 @@ class MessageReactionUpdated(TelegramType):
     This object represents a change of a reaction on a message performed by a user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1325,6 +1370,7 @@ class ReactionCount(TelegramType):
     Represents a reaction added to a message along with the number of times it was added.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1349,6 +1395,7 @@ class MessageReactionCountUpdated(TelegramType):
     This object represents reaction changes on a message with anonymous reactions.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1379,6 +1426,7 @@ class MessageId(TelegramType):
     This object represents a unique message identifier.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1400,6 +1448,7 @@ class PhotoSize(TelegramType):
     This object represents one size of a photo or a file / sticker thumbnail.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1433,6 +1482,7 @@ class Animation(TelegramType):
     This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1478,6 +1528,7 @@ class Audio(TelegramType):
     This object represents an audio file to be treated as music by the Telegram clients.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1523,6 +1574,7 @@ class Document(TelegramType):
     This object represents a general file (as opposed to photos, voice messages and audio files).
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1559,6 +1611,7 @@ class Story(TelegramType):
     This object represents a message about a forwarded story in the chat. Currently holds no information.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1578,6 +1631,7 @@ class Video(TelegramType):
     This object represents a video file.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1623,6 +1677,7 @@ class VideoNote(TelegramType):
     This object represents a video message (available in Telegram apps as of v.4.0).
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1659,6 +1714,7 @@ class Voice(TelegramType):
     This object represents a voice note.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1692,6 +1748,7 @@ class Contact(TelegramType):
     This object represents a phone contact.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1725,6 +1782,7 @@ class Dice(TelegramType):
     This object represents an animated emoji that displays a random value.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1749,6 +1807,7 @@ class PollOption(TelegramType):
     This object contains information about one answer option in a poll.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1773,6 +1832,7 @@ class PollAnswer(TelegramType):
     This object represents an answer of a user in a non-anonymous poll.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1803,6 +1863,7 @@ class Poll(TelegramType):
     This object contains information about a poll.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1860,6 +1921,7 @@ class Venue(TelegramType):
     This object represents a venue.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1899,6 +1961,7 @@ class WebAppData(TelegramType):
     Describes data sent from a Web App to the bot.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1924,6 +1987,7 @@ class ProximityAlertTriggered(TelegramType):
     a user in the chat triggers a proximity alert set by another user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1951,6 +2015,7 @@ class MessageAutoDeleteTimerChanged(TelegramType):
     This object represents a service message about a change in auto-delete timer settings.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -1972,6 +2037,7 @@ class ForumTopicCreated(TelegramType):
     This object represents a service message about a new forum topic created in the chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2000,6 +2066,7 @@ class ForumTopicClosed(TelegramType):
     topic closed in the chat. Currently holds no information.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2019,6 +2086,7 @@ class ForumTopicEdited(TelegramType):
     This object represents a service message about an edited forum topic.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2044,6 +2112,7 @@ class ForumTopicReopened(TelegramType):
     topic reopened in the chat. Currently holds no information.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2064,6 +2133,7 @@ class GeneralForumTopicHidden(TelegramType):
     topic hidden in the chat. Currently holds no information.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2084,6 +2154,7 @@ class GeneralForumTopicUnhidden(TelegramType):
     topic unhidden in the chat. Currently holds no information.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2104,6 +2175,7 @@ class UsersShared(TelegramType):
     were shared with the bot using a KeyboardButtonRequestUsers button.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2129,6 +2201,7 @@ class ChatShared(TelegramType):
     was shared with the bot using a KeyboardButtonRequestChat button.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2155,6 +2228,7 @@ class WriteAccessAllowed(TelegramType):
     or accepting an explicit request from a Web App sent by the method requestWriteAccess.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2182,6 +2256,7 @@ class VideoChatScheduled(TelegramType):
     This object represents a service message about a video chat scheduled in the chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2204,6 +2279,7 @@ class VideoChatStarted(TelegramType):
     chat started in the chat. Currently holds no information.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2223,6 +2299,7 @@ class VideoChatEnded(TelegramType):
     This object represents a service message about a video chat ended in the chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2244,6 +2321,7 @@ class VideoChatParticipantsInvited(TelegramType):
     This object represents a service message about new members invited to a video chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2265,6 +2343,7 @@ class UserProfilePhotos(TelegramType):
     This object represent a user's profile pictures.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2291,6 +2370,7 @@ class File(TelegramType):
     valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2321,6 +2401,7 @@ class WebAppInfo(TelegramType):
     Describes a Web App.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2491,6 +2572,7 @@ class InlineKeyboardButton(TelegramType):
     This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2537,6 +2619,7 @@ class InlineKeyboardMarkup(TelegramType):
     This object represents an inline keyboard that appears right next to the message it belongs to.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2586,6 +2669,7 @@ class CallbackQuery(TelegramType):
     will be present. Exactly one of the fields data or game_short_name will be present.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2643,6 +2727,7 @@ class ChatInviteLink(TelegramType):
     Represents an invite link for a chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -2690,6 +2775,7 @@ class ChatMemberOwner(TelegramType):
     Represents a chat member that owns the chat and has all administrator privileges.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -2724,6 +2810,7 @@ class ChatMemberAdministrator(TelegramType):
     Represents a chat member that has some additional privileges.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -2803,6 +2890,7 @@ class ChatMemberMember(TelegramType):
     Represents a chat member that has no additional privileges or restrictions.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -2831,6 +2919,7 @@ class ChatMemberRestricted(TelegramType):
     Represents a chat member that is under certain restrictions in the chat. Supergroups only.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -2907,6 +2996,7 @@ class ChatMemberLeft(TelegramType):
     Represents a chat member that isn't currently a member of the chat, but may join it themselves.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -2935,6 +3025,7 @@ class ChatMemberBanned(TelegramType):
     Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -3024,6 +3115,7 @@ class ChatMemberUpdated(TelegramType):
     This object represents changes in the status of a chat member.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3063,6 +3155,7 @@ class ChatJoinRequest(TelegramType):
     Represents a join request sent to a chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3099,6 +3192,7 @@ class ForumTopic(TelegramType):
     This object represents a forum topic.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3129,6 +3223,7 @@ class BotCommand(TelegramType):
     This object represents a bot command.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3259,6 +3354,7 @@ class BotName(TelegramType):
     This object represents the bot's name.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3280,6 +3376,7 @@ class BotDescription(TelegramType):
     This object represents the bot's description.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3301,6 +3398,7 @@ class BotShortDescription(TelegramType):
     This object represents the bot's short description.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3324,6 +3422,7 @@ class MenuButtonCommands(TelegramType):
     Represents a menu button, which opens the bot's list of commands.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -3344,6 +3443,7 @@ class MenuButtonWebApp(TelegramType):
     Represents a menu button, which launches a Web App.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -3373,6 +3473,7 @@ class MenuButtonDefault(TelegramType):
     Describes that no specific value for the menu button was set.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -3433,6 +3534,7 @@ class ResponseParameters(TelegramType):
     Describes why a request was unsuccessful.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3612,6 +3714,7 @@ class MaskPosition(TelegramType):
     This object describes the position on faces where a mask should be placed by default.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3640,6 +3743,7 @@ class Sticker(TelegramType):
     This object represents a sticker.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3703,6 +3807,7 @@ class StickerSet(TelegramType):
     This object represents a sticker set.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -3761,6 +3866,7 @@ class InlineQuery(TelegramType):
     an empty query, your bot could return some default or trending results.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4671,6 +4777,7 @@ class ChosenInlineResult(TelegramType):
     Represents a result of an inline query that was chosen by the user and sent to their chat partner.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4704,6 +4811,7 @@ class SentWebAppMessage(TelegramType):
     Describes an inline message sent by a Web App on behalf of a user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4725,6 +4833,7 @@ class Invoice(TelegramType):
     This object contains basic information about an invoice.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4758,6 +4867,7 @@ class ShippingAddress(TelegramType):
     This object represents a shipping address.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4794,6 +4904,7 @@ class OrderInfo(TelegramType):
     This object represents information about an order.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4840,6 +4951,7 @@ class SuccessfulPayment(TelegramType):
     This object contains basic information about a successful payment.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4879,6 +4991,7 @@ class ShippingQuery(TelegramType):
     This object contains information about an incoming shipping query.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4909,6 +5022,7 @@ class PreCheckoutQuery(TelegramType):
     This object contains information about an incoming pre-checkout query.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4949,6 +5063,7 @@ class PassportFile(TelegramType):
     Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -4979,6 +5094,7 @@ class EncryptedPassportElement(TelegramType):
     Describes documents or other Telegram Passport elements shared with the bot by the user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5028,6 +5144,7 @@ class EncryptedCredentials(TelegramType):
     Passport Documentation for a complete description of the data decryption and authentication processes.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5055,6 +5172,7 @@ class PassportData(TelegramType):
     Describes Telegram Passport data shared with the bot by the user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5326,6 +5444,7 @@ class Game(TelegramType):
     This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5362,6 +5481,7 @@ class GameHighScore(TelegramType):
     This object represents one row of the high scores table for a game.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5389,6 +5509,7 @@ class GiveawayCreated(TelegramType):
     This object represents a service message about the creation of a scheduled giveaway. Currently holds no information.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5408,6 +5529,7 @@ class GiveawayWinners(TelegramType):
     This object represents a message about the completion of a giveaway with public winners.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5459,6 +5581,7 @@ class GiveawayCompleted(TelegramType):
     This object represents a service message about the completion of a giveaway without public winners.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5486,6 +5609,7 @@ class Giveaway(TelegramType):
     This object represents a message about a scheduled giveaway.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5530,6 +5654,7 @@ class MessageOriginUser(TelegramType):
     The message was originally sent by a known user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -5561,6 +5686,7 @@ class MessageOriginHiddenUser(TelegramType):
     The message was originally sent by an unknown user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -5592,6 +5718,7 @@ class MessageOriginChat(TelegramType):
     The message was originally sent on behalf of a chat to a group chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -5626,6 +5753,7 @@ class MessageOriginChannel(TelegramType):
     The message was originally sent to a channel chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -5711,6 +5839,7 @@ class ExternalReplyInfo(TelegramType):
     This object contains information about a message that is being replied to, which may come from another chat or forum topic.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5800,6 +5929,7 @@ class ChatBoostSourcePremium(TelegramType):
     The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram Premium subscription to another user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -5829,6 +5959,7 @@ class ChatBoostSourceGiftCode(TelegramType):
     code boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -5858,6 +5989,7 @@ class ChatBoostSourceGiveaway(TelegramType):
     the chat 4 times for the duration of the corresponding Telegram Premium subscription.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result, *, check_dict: bool = True):
 
         if check_dict:
@@ -5931,6 +6063,7 @@ class ChatBoost(TelegramType):
     This object contains information about a chat boost.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5961,6 +6094,7 @@ class UserChatBoosts(TelegramType):
     This object represents a list of boosts added to a chat by a user.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -5982,6 +6116,7 @@ class ChatBoostUpdated(TelegramType):
     This object represents a boost added to a chat or changed.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -6006,6 +6141,7 @@ class ChatBoostRemoved(TelegramType):
     This object represents a boost removed from a chat.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
@@ -6037,6 +6173,7 @@ class Update(TelegramType):
     the optional parameters can be present in any given update.
     '''
     @classmethod
+    @_parse_result
     def _dese(cls, result):
         if result is None: return None
         obj = _check_dict(result)
