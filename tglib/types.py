@@ -242,7 +242,6 @@ def _parse_result(_dese: Callable[[type, Optional[dict]], Optional[TelegramType]
 
             return _dese(cls, _parse_dict(res))
         else:
-            logger.debug(f'Skipped check for {cls.__name__}.')
             return _dese(cls, res)
 
     return wrap
@@ -3256,7 +3255,6 @@ class MenuButtonWebApp(TelegramType):
         obj = {}
         obj['text'] = res.get('text')
         obj['web_app'] = WebAppInfo._dese(res.get('web_app'))
-
         return cls(**obj)
 
     def __init__(
