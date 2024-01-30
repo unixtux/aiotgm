@@ -1,5 +1,7 @@
 #!/bin/python3
 
+LOGGER_LEVEL = 10
+
 __all__ = [
     'Animation',
     'Audio',
@@ -194,6 +196,7 @@ from .default_literals import *
 
 from .logger import get_logger
 logger = get_logger('TelegramTypes')
+logger.setLevel(LOGGER_LEVEL)
 
 try:
     import ujson as json
@@ -223,12 +226,11 @@ class TelegramType:
     ...
 
 
-def _parse_result(_dese: Callable[[Optional[dict]], Optional[TelegramType]]):
+def _parse_result(__dese: Callable[[Optional[dict]], Optional[TelegramType]]):
     def wrap(__cls: type, __result: Optional[dict], /, *, to_check: bool = True):
         '''
         Decorator to parse the result of a Telegram object.
         '''
-        print('to_check is', to_check)
         if to_check:
 
             if __result is None:
@@ -238,14 +240,15 @@ def _parse_result(_dese: Callable[[Optional[dict]], Optional[TelegramType]]):
                 if 'from' in __result:
                     __result['from_user'] = __result['from']
                     del __result['from']
-                return _dese(__cls, __result)
+                return __dese(__cls, __result)
             else:
                 raise TypeError(
                     'Expected dict or None as parameter in'
                     f' _parse_result(), got {__result.__class__.__name__}.'
                 )
         else:
-            return _dese(__cls, __result)
+            logger.debug('Check skipped for', __cls.__name__)
+            return __dese(__cls, __result)
     return wrap
 
 
