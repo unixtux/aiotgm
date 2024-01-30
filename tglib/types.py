@@ -983,7 +983,7 @@ It can be one of:
 - InaccessibleMessage
 '''
 
-def _dese_maybe_inaccessible_message(__result: Optional[dict], /) -> MaybeInaccessibleMessage:
+def _dese_maybe_inaccessible_message(__result: Optional[dict], /) -> Optional[MaybeInaccessibleMessage]:
     '''
     Function to deserialize MaybeInaccessibleMessage.
     '''
@@ -1141,7 +1141,7 @@ Currently, it can be one of:
 - ReactionTypeCustomEmoji
 '''
 
-def _dese_reaction_type(__result: Optional[dict], /) -> ReactionType:
+def _dese_reaction_type(__result: Optional[dict], /) -> Optional[ReactionType]:
     '''
     Function to deserialize ReactionType.
     '''
@@ -2903,7 +2903,7 @@ Currently, the following 6 types of chat members are supported:
 - ChatMemberBanned
 '''
 
-def _dese_chat_member(__result: Optional[dict], /) -> ChatMember:
+def _dese_chat_member(__result: Optional[dict], /) -> Optional[ChatMember]:
     '''
     Function to deserialize ChatMember.
     '''
@@ -3312,7 +3312,7 @@ If a menu button other than MenuButtonDefault is set for a private chat, then it
 Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
 '''
 
-def _dese_menu_button(__result: Optional[dict], /) -> MenuButton: # used in tglib.__init__
+def _dese_menu_button(__result: Optional[dict], /) -> Optional[MenuButton]: # used in tglib.__init__
     '''
     Function to deserialize MenuButton.
     '''
@@ -5583,7 +5583,7 @@ It can be one of:
 - MessageOriginChannel
 '''
 
-def _dese_message_origin(__result: Optional[dict], /) -> MessageOrigin:
+def _dese_message_origin(__result: Optional[dict], /) -> Optional[MessageOrigin]:
     '''
     Function to deserialize MessageOrigin.
     '''
@@ -5784,7 +5784,7 @@ It can be one of:
 - ChatBoostSourceGiveaway
 '''
 
-def _dese_chat_boost_source(__result: Optional[dict], /) -> ChatBoostSource:
+def _dese_chat_boost_source(__result: Optional[dict], /) -> Optional[ChatBoostSource]:
     '''
     Function to deserialize ChatBoostSource.
     '''
