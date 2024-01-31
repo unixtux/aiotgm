@@ -12,6 +12,7 @@ from .logger import get_logger
 logger = get_logger('TelegramApi')
 
 import os
+import re
 import time
 import asyncio
 from typing import (Any,
@@ -230,9 +231,20 @@ class TelegramApi:
                     **self.__headers_and_proxy
                 ) as response:
 
-                    return await _parse_json(response)
+                    result = await _parse_json(response)
 
-            except (ClientError, TimeoutError):
+                    if current_try != 1:
+                        logger.info(
+                            f'Request {method!r} succeeded'
+                            f' after {current_try} retries.'
+                        )
+                    return result
+
+            except (ClientError, TimeoutError) as exc:
+                logger.info(
+                    f'{exc.__class__.__name__} occurred in request'
+                    f' {method!r}; current try: {current_try}/{max_retries}.'
+                )
                 await asyncio.sleep(3 - (time.time() - start_time))
 
             except BaseException as exc:
@@ -241,23 +253,19 @@ class TelegramApi:
                 raise exc from None
 
             finally:
-                if not (
-                    keep_session
-                    or self.session.connector._acquired
-                ):
-                    await self.session.close()
-                    logger.debug(
-                        'Session closed because there'
-                        ' are not connections in the pool.'
-                    )
+                if self.session.connector is not None:
+                    if not (
+                        keep_session
+                        or self.session.connector._acquired
+                    ):
+                        await self.session.close()
+                        logger.debug(
+                            'Session closed because there'
+                            ' are not connections in the pool.'
+                        )
         else:
-            raise TimeoutError(
-                {
-                    'method': method,
-                    'params': params,
-                    'files': files
-                }
-            )
+            raise TimeoutError(method)
+
 
 ###########################################################
 
