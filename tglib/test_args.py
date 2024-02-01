@@ -14,29 +14,51 @@ LINE_N = 0
 
 def get_dese_kwargs() -> list[str]:
     global LINE_N
-    dese_kwargs = []
+    dese_kwargs = {'args': {}}
     while True:
         if re.search(r'return.*', LINES[LINE_N]):
             return dese_kwargs
         dese_match_2 = re.search(
-            r"obj\s*\[\s*'(.*?)'\s*\]\s*=.*res\.get\(\s*'(.*?)'\s*\)",
+            r"obj\s*\[\s*'(.*?)'\s*\]\s*=.*res\s*\.get\s*\(\s*'(.*?)'\s*\)",
             LINES[LINE_N]
         )
         dese_match_3 = re.search(
-            r"obj\s*\[\s*'(.*?)'\s*\]\s*=.*res\.get\(\s*'(.*?)'\s*\).*if\s*'(.*?)'\s*in\s*res",
+            r"obj\s*\[\s*'(.*?)'\s*\]\s*=.*res\s*\.get\s*\(\s*'(.*?)'\s*\).*if\s*'(.*?)'\s*in\s*res",
+            LINES[LINE_N]
+        )
+        dese_match_type_2 = re.search(
+            r"obj\s*\[\s*'(.*)'\s*\]\s*=.*([A-Z].*)\s*\.\s*_dese.*res\s*\.get\s*\(\s*'(.*?)'\s*\)",
+            LINES[LINE_N]
+        )
+        dese_match_type_3 = re.search(
+            r"obj\s*\[\s*'(.*)'\s*\]\s*=.*([A-Z].*)\s*\.\s*_dese.*res\s*\.get\s*\(\s*'(.*?)'\s*\).*if\s*'(.*?)'\s*in\s*res",
             LINES[LINE_N]
         )
         if dese_match_2:
             group = dese_match_2.group(1, 2)
             if (group[0] == group[1]):
-                dese_kwargs.append(group[0])
+                dese_kwargs['args'].update({group[0]: {'tg_type': None}})
             else:
                 raise ValueError(LINES[LINE_N])
 
         if dese_match_3:
             group = dese_match_3.group(1, 2, 3)
             if (group[0] == group[1] == group[2]):
-                dese_kwargs.append(group[0])
+                dese_kwargs['args'].update({group[0]: {'tg_type': None}})
+            else:
+                raise ValueError(LINES[LINE_N])
+
+        if dese_match_type_2:
+            group = dese_match_type_2.group(1, 2, 3)
+            if (group[0] == group[2]):
+                dese_kwargs['args'].update({group[0]: {'tg_type': group[1]}})
+            else:
+                raise ValueError(LINES[LINE_N])
+
+        if dese_match_type_3:
+            group = dese_match_type_3.group(1, 2, 3, 4)
+            if (group[0] == group[2] == group[3]):
+                dese_kwargs['args'].update({group[0]: {'tg_type': group[1]}})
             else:
                 raise ValueError(LINES[LINE_N])
 
@@ -86,6 +108,7 @@ for type in TYPES:
         print(json.dumps({type: TYPES[type]['dese_kwargs']}, indent = 2))
     else:
         TYPES_WITHOUT_DESE.append(type)
+    #print(json.dumps({type: TYPES[type]}, indent = 2))
 
 print('Length of __all__ is:', len(tglib.types.__all__))
 print('Length of types is:', len(TYPES))
