@@ -3,7 +3,7 @@
 from logging import DEBUG, INFO
 
 LOGGER_LEVEL = INFO
-LOGGER_LEVEL = DEBUG
+#LOGGER_LEVEL = DEBUG
 
 import re
 import json
@@ -27,19 +27,19 @@ def get_dese_kwargs(__type: str) -> dict[str, str]:
     dese_kwargs = {}
     while True:
 
-        if re.search(r'return\s*cls', LINES[LINE_N]):
+        if re.match(r'\s*return\s*cls', LINES[LINE_N]):
             return dese_kwargs
  
-        elif re.search(r'(def\s*_dese)|(obj\s*=\s*\{\s*\})', LINES[LINE_N]):
+        elif re.match(r'\s*((def\s*_dese)|(obj\s*=\s*\{\s*\}))', LINES[LINE_N]):
             LINE_N += 1
             continue
 
-        dese_default = re.search(
-            r"obj\s*\[\s*'(.*?)'\s*\]\s*=.*res\s*\.get\s*\(\s*'(.*?)'\s*\)",
+        dese_default = re.match(
+            r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=.*res\s*\.get\s*\(\s*'(.*?)'\s*\)",
             LINES[LINE_N]
         )
-        dese_default_if = re.search(
-            r"obj\s*\[\s*'(.*?)'\s*\]\s*=.*res\s*\.get\s*\(\s*'(.*?)'\s*\).*if\s*'(.*?)'\s*in\s*res\s*else\s*None",
+        dese_default_if = re.match(
+            r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=.*res\s*\.get\s*\(\s*'(.*?)'\s*\).*if\s*'(.*?)'\s*in\s*res\s*else\s*None",
             LINES[LINE_N]
         )
 
@@ -47,30 +47,30 @@ def get_dese_kwargs(__type: str) -> dict[str, str]:
             group = dese_default_if.group(1, 2, 3)
             logger.debug(f'{__type} parameter {group[0]!r} is optional; line {LINE_N}.')
             if (group[0] == group[1] == group[2]):
-                dese_kwargs.update({group[0]: {'tg_type': None, 'optional': 1}})
+                dese_kwargs.update({group[0]: {'tg_type': None, 'optional': True}})
             else: # err 111
                 raise ValueError('111 at line', LINE_N, '\n' + LINES[LINE_N])
 
         elif dese_default:
             group = dese_default.group(1, 2)
             if (group[0] == group[1]):
-                dese_kwargs.update({group[0]: {'tg_type': None, 'optional': 0}})
+                dese_kwargs.update({group[0]: {'tg_type': None, 'optional': False}})
             else: # err 222
                 raise ValueError('222 at line', LINE_N, '\n' + LINES[LINE_N])
 
         else: # err 333
             raise ValueError('333 at line', LINE_N, '\n' + LINES[LINE_N])
 
-        dese_tg_type = re.search(
-            r"obj\s*\[\s*'(.*?)'\s*\]\s*=\s*(.*?)\s*\._dese",
+        dese_tg_type = re.match(
+            r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*(.*?)\s*\._dese",
             LINES[LINE_N]
         )
-        dese_list_tg_type = re.search(
-            r"obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*(.*?)\s*\._dese",
+        dese_list_tg_type = re.match(
+            r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*(.*?)\s*\._dese",
             LINES[LINE_N]
         )
-        dese_nested_tg_type = re.search(
-            r"obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*\[\s*(.*?)\s*\._dese",
+        dese_nested_tg_type = re.match(
+            r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*\[\s*(.*?)\s*\._dese",
             LINES[LINE_N]
         )
 
@@ -95,31 +95,30 @@ def get_dese_kwargs(__type: str) -> dict[str, str]:
             else:
                 dese_kwargs[group[0]]['tg_type'] = group[1]
 
-        dese_kwargs[group[0]].pop('optional')
+        dese_kwargs[group[0]] = dese_kwargs[group[0]]['tg_type']
 
         LINE_N += 1
 
 
 while LINE_N != len(LINES):
 
-    if re.search(
-            r'class\s*.*\s*\(.*\)\s*:',
-            LINES[LINE_N]
-        ):
-        match = re.search(
-            r'class\s*(.*)\s*\(\s*(.*)\s*\)\s*:',
-            LINES[LINE_N]
-        ).group(1, 2)
+    class_matched = re.match(
+        r'class\s*(.*)\s*\(\s*(.*)\s*\)\s*:',
+        LINES[LINE_N]
+    )
+    if class_matched:
+
+        match = class_matched.group(1, 2)
 
         type = match[0]
         inheritance = match[1]
 
-        TYPES[type] = {'has_dese': False, 'dese_kwargs': None}
+        TYPES[type] = {'has_dese': False}
 
         if inheritance == 'TelegramType':
             TG_TYPES += 1
 
-    if re.search(r'def.*_dese\s*\(.*\)', LINES[LINE_N]):
+    if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
         TYPES[type]['has_dese'] = True
         TYPES[type]['dese_kwargs'] = get_dese_kwargs(type)
 
@@ -152,7 +151,38 @@ print('Missing types are:', len(NOT_IN_ALL) or len(NOT_IN_TYPES))
 print('Types with _dese():', len(TYPES_WITH_DESE))
 print('Types without _dese():', len(TYPES_WITHOUT_DESE))
 
-logger.debug(
-    '\n'+ json.dumps(TYPES[tglib.types.EncryptedPassportElement.__name__]))
+
+
+"""
+with open('test_json.json', 'w') as w:
+    w.write(json.dumps(TYPES, indent = 4))
+
+with open('test_json.json', 'r') as r:
+    lines = r.readlines()
+
+f = '''\
+from typing import Optional
+from tglib.types import *
+from tglib.types import TelegramType
+
+TYPES = '''
+
+for line in lines:
+    line = re.sub(r'(\s*)"([A-Z].*)"(\s*:\s*\{)', r'\1\2\3', line)
+    line = re.sub(r'(\s*".*"\s*)(:\s*)"(.*)"', r'\1\2\3', line)
+    line = re.sub(r'(\s*)null(\s*)', r'\1None\2', line)
+    line = re.sub(r'(\s*)true(\s*)', r'\1True\2', line)
+    line = re.sub(r'(\s*)false(\s*)', r'\1False\2', line)
+    f += line
+
+f += '''
+
+for k in TYPES:
+    if not issubclass(k, TelegramType):
+        raise TypeError(k)
+'''
+
+with open('test_json.py', 'w') as w:
+    w.write(f)
 
 #"""
