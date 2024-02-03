@@ -16,7 +16,8 @@
             "can_invite_users": null,
             "can_pin_messages": null,
             "can_manage_topics": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatAdministratorRights": {
         "has_dese": true,
@@ -36,7 +37,8 @@
             "can_edit_stories": null,
             "can_delete_stories": null,
             "can_manage_topics": null
-        }
+        },
+        "init_kwargs": null
     },
     "SwitchInlineQueryChosenChat": {
         "has_dese": true,
@@ -46,14 +48,17 @@
             "allow_bot_chats": null,
             "allow_group_chats": null,
             "allow_channel_chats": null
-        }
+        },
+        "init_kwargs": null
     },
     "CallbackGame": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "InputFile": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "LoginUrl": {
         "has_dese": true,
@@ -62,10 +67,12 @@
             "forward_text": null,
             "bot_username": null,
             "request_write_access": null
-        }
+        },
+        "init_kwargs": null
     },
     "LabeledPrice": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "LinkPreviewOptions": {
         "has_dese": true,
@@ -75,7 +82,8 @@
             "prefer_small_media": null,
             "prefer_large_media": null,
             "show_above_text": null
-        }
+        },
+        "init_kwargs": null
     },
     "User": {
         "has_dese": true,
@@ -91,7 +99,8 @@
             "can_join_groups": null,
             "can_read_all_group_messages": null,
             "supports_inline_queries": null
-        }
+        },
+        "init_kwargs": null
     },
     "MessageEntity": {
         "has_dese": true,
@@ -103,7 +112,8 @@
             "user": "User",
             "language": null,
             "custom_emoji_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "TextQuote": {
         "has_dese": true,
@@ -112,10 +122,12 @@
             "position": null,
             "entities": "Optional[list[MessageEntity]]",
             "is_manual": null
-        }
+        },
+        "init_kwargs": null
     },
     "ReplyParameters": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InaccessibleMessage": {
         "has_dese": true,
@@ -123,7 +135,8 @@
             "chat": "Chat",
             "message_id": null,
             "date": null
-        }
+        },
+        "init_kwargs": null
     },
     "Message": {
         "has_dese": true,
@@ -202,7 +215,8 @@
             "video_chat_participants_invited": "VideoChatParticipantsInvited",
             "web_app_data": "WebAppData",
             "reply_markup": "InlineKeyboardMarkup"
-        }
+        },
+        "init_kwargs": null
     },
     "ChatPhoto": {
         "has_dese": true,
@@ -211,7 +225,8 @@
             "small_file_unique_id": null,
             "big_file_id": null,
             "big_file_unique_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "Location": {
         "has_dese": true,
@@ -222,26 +237,30 @@
             "live_period": null,
             "heading": null,
             "proximity_alert_radius": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatLocation": {
         "has_dese": true,
         "dese_kwargs": {
             "location": "Location",
             "address": null
-        }
+        },
+        "init_kwargs": null
     },
     "ReactionTypeEmoji": {
         "has_dese": true,
         "dese_kwargs": {
             "emoji": null
-        }
+        },
+        "init_kwargs": null
     },
     "ReactionTypeCustomEmoji": {
         "has_dese": true,
         "dese_kwargs": {
             "custom_emoji_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "Chat": {
         "has_dese": true,
@@ -281,7 +300,8 @@
             "can_set_sticker_set": null,
             "linked_chat_id": null,
             "location": "ChatLocation"
-        }
+        },
+        "init_kwargs": null
     },
     "MessageReactionUpdated": {
         "has_dese": true,
@@ -293,14 +313,16 @@
             "new_reaction": null,
             "user": "User",
             "actor_chat": "Chat"
-        }
+        },
+        "init_kwargs": null
     },
     "ReactionCount": {
         "has_dese": true,
         "dese_kwargs": {
             "type": null,
             "total_count": null
-        }
+        },
+        "init_kwargs": null
     },
     "MessageReactionCountUpdated": {
         "has_dese": true,
@@ -309,13 +331,15 @@
             "message_id": null,
             "date": null,
             "reactions": "list[ReactionCount]"
-        }
+        },
+        "init_kwargs": null
     },
     "MessageId": {
         "has_dese": true,
         "dese_kwargs": {
             "message_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "PhotoSize": {
         "has_dese": true,
@@ -325,7 +349,8 @@
             "width": null,
             "height": null,
             "file_size": null
-        }
+        },
+        "init_kwargs": null
     },
     "Animation": {
         "has_dese": true,
@@ -339,7 +364,8 @@
             "file_name": null,
             "mime_type": null,
             "file_size": null
-        }
+        },
+        "init_kwargs": null
     },
     "Audio": {
         "has_dese": true,
@@ -353,7 +379,8 @@
             "mime_type": null,
             "file_size": null,
             "thumbnail": "PhotoSize"
-        }
+        },
+        "init_kwargs": null
     },
     "Document": {
         "has_dese": true,
@@ -364,11 +391,13 @@
             "file_name": null,
             "mime_type": null,
             "file_size": null
-        }
+        },
+        "init_kwargs": null
     },
     "Story": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "Video": {
         "has_dese": true,
@@ -382,7 +411,8 @@
             "file_name": null,
             "mime_type": null,
             "file_size": null
-        }
+        },
+        "init_kwargs": null
     },
     "VideoNote": {
         "has_dese": true,
@@ -393,7 +423,8 @@
             "duration": null,
             "thumbnail": "PhotoSize",
             "file_size": null
-        }
+        },
+        "init_kwargs": null
     },
     "Voice": {
         "has_dese": true,
@@ -403,7 +434,8 @@
             "duration": null,
             "mime_type": null,
             "file_size": null
-        }
+        },
+        "init_kwargs": null
     },
     "Contact": {
         "has_dese": true,
@@ -413,21 +445,24 @@
             "last_name": null,
             "user_id": null,
             "vcard": null
-        }
+        },
+        "init_kwargs": null
     },
     "Dice": {
         "has_dese": true,
         "dese_kwargs": {
             "emoji": null,
             "value": null
-        }
+        },
+        "init_kwargs": null
     },
     "PollOption": {
         "has_dese": true,
         "dese_kwargs": {
             "text": null,
             "voter_count": null
-        }
+        },
+        "init_kwargs": null
     },
     "PollAnswer": {
         "has_dese": true,
@@ -436,7 +471,8 @@
             "option_ids": null,
             "voter_chat": "Chat",
             "user": "User"
-        }
+        },
+        "init_kwargs": null
     },
     "Poll": {
         "has_dese": true,
@@ -454,7 +490,8 @@
             "explanation_entities": "Optional[list[MessageEntity]]",
             "open_period": null,
             "close_date": null
-        }
+        },
+        "init_kwargs": null
     },
     "Venue": {
         "has_dese": true,
@@ -466,14 +503,16 @@
             "foursquare_type": null,
             "google_place_id": null,
             "google_place_type": null
-        }
+        },
+        "init_kwargs": null
     },
     "WebAppData": {
         "has_dese": true,
         "dese_kwargs": {
             "data": null,
             "button_text": null
-        }
+        },
+        "init_kwargs": null
     },
     "ProximityAlertTriggered": {
         "has_dese": true,
@@ -481,13 +520,15 @@
             "traveler": "User",
             "watcher": "User",
             "distance": null
-        }
+        },
+        "init_kwargs": null
     },
     "MessageAutoDeleteTimerChanged": {
         "has_dese": true,
         "dese_kwargs": {
             "message_auto_delete_time": null
-        }
+        },
+        "init_kwargs": null
     },
     "ForumTopicCreated": {
         "has_dese": true,
@@ -495,44 +536,52 @@
             "name": null,
             "icon_color": null,
             "icon_custom_emoji_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "ForumTopicClosed": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "ForumTopicEdited": {
         "has_dese": true,
         "dese_kwargs": {
             "name": null,
             "icon_custom_emoji_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "ForumTopicReopened": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "GeneralForumTopicHidden": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "GeneralForumTopicUnhidden": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "UsersShared": {
         "has_dese": true,
         "dese_kwargs": {
             "request_id": null,
             "user_ids": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatShared": {
         "has_dese": true,
         "dese_kwargs": {
             "request_id": null,
             "chat_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "WriteAccessAllowed": {
         "has_dese": true,
@@ -540,36 +589,42 @@
             "from_request": null,
             "web_app_name": null,
             "from_attachment_menu": null
-        }
+        },
+        "init_kwargs": null
     },
     "VideoChatScheduled": {
         "has_dese": true,
         "dese_kwargs": {
             "start_date": null
-        }
+        },
+        "init_kwargs": null
     },
     "VideoChatStarted": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "VideoChatEnded": {
         "has_dese": true,
         "dese_kwargs": {
             "duration": null
-        }
+        },
+        "init_kwargs": null
     },
     "VideoChatParticipantsInvited": {
         "has_dese": true,
         "dese_kwargs": {
             "users": "list[User]"
-        }
+        },
+        "init_kwargs": null
     },
     "UserProfilePhotos": {
         "has_dese": true,
         "dese_kwargs": {
             "total_count": null,
             "photos": "list[list[PhotoSize]]"
-        }
+        },
+        "init_kwargs": null
     },
     "File": {
         "has_dese": true,
@@ -578,31 +633,39 @@
             "file_unique_id": null,
             "file_size": null,
             "file_path": null
-        }
+        },
+        "init_kwargs": null
     },
     "WebAppInfo": {
         "has_dese": true,
         "dese_kwargs": {
             "url": null
-        }
+        },
+        "init_kwargs": null
     },
     "KeyboardButtonRequestUsers": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "KeyboardButtonRequestChat": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "KeyboardButtonPollType": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "KeyboardButton": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "ReplyKeyboardMarkup": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "ReplyKeyboardRemove": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineKeyboardButton": {
         "has_dese": true,
@@ -617,13 +680,15 @@
             "switch_inline_query_chosen_chat": "SwitchInlineQueryChosenChat",
             "callback_game": "CallbackGame",
             "pay": null
-        }
+        },
+        "init_kwargs": null
     },
     "InlineKeyboardMarkup": {
         "has_dese": true,
         "dese_kwargs": {
             "inline_keyboard": "list[list[InlineKeyboardButton]]"
-        }
+        },
+        "init_kwargs": null
     },
     "CallbackQuery": {
         "has_dese": true,
@@ -635,10 +700,12 @@
             "chat_instance": null,
             "data": null,
             "game_short_name": null
-        }
+        },
+        "init_kwargs": null
     },
     "ForceReply": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "ChatInviteLink": {
         "has_dese": true,
@@ -652,7 +719,8 @@
             "expire_date": null,
             "member_limit": null,
             "pending_join_request_count": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatMemberOwner": {
         "has_dese": true,
@@ -660,7 +728,8 @@
             "user": "User",
             "is_anonymous": null,
             "custom_title": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatMemberAdministrator": {
         "has_dese": true,
@@ -683,13 +752,15 @@
             "can_delete_stories": null,
             "can_manage_topics": null,
             "custom_title": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatMemberMember": {
         "has_dese": true,
         "dese_kwargs": {
             "user": "User"
-        }
+        },
+        "init_kwargs": null
     },
     "ChatMemberRestricted": {
         "has_dese": true,
@@ -711,20 +782,23 @@
             "can_pin_messages": null,
             "can_manage_topics": null,
             "until_date": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatMemberLeft": {
         "has_dese": true,
         "dese_kwargs": {
             "user": "User"
-        }
+        },
+        "init_kwargs": null
     },
     "ChatMemberBanned": {
         "has_dese": true,
         "dese_kwargs": {
             "user": "User",
             "until_date": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatMemberUpdated": {
         "has_dese": true,
@@ -736,7 +810,8 @@
             "new_chat_member": null,
             "invite_link": "ChatInviteLink",
             "via_chat_folder_invite_link": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatJoinRequest": {
         "has_dese": true,
@@ -747,7 +822,8 @@
             "date": null,
             "bio": null,
             "invite_link": "ChatInviteLink"
-        }
+        },
+        "init_kwargs": null
     },
     "ForumTopic": {
         "has_dese": true,
@@ -756,90 +832,111 @@
             "name": null,
             "icon_color": null,
             "icon_custom_emoji_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "BotCommand": {
         "has_dese": true,
         "dese_kwargs": {
             "command": null,
             "description": null
-        }
+        },
+        "init_kwargs": null
     },
     "BotCommandScopeDefault": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "BotCommandScopeAllPrivateChats": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "BotCommandScopeAllGroupChats": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "BotCommandScopeAllChatAdministrators": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "BotCommandScopeChat": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "BotCommandScopeChatAdministrators": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "BotCommandScopeChatMember": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "BotName": {
         "has_dese": true,
         "dese_kwargs": {
             "name": null
-        }
+        },
+        "init_kwargs": null
     },
     "BotDescription": {
         "has_dese": true,
         "dese_kwargs": {
             "description": null
-        }
+        },
+        "init_kwargs": null
     },
     "BotShortDescription": {
         "has_dese": true,
         "dese_kwargs": {
             "short_description": null
-        }
+        },
+        "init_kwargs": null
     },
     "MenuButtonCommands": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "MenuButtonWebApp": {
         "has_dese": true,
         "dese_kwargs": {
             "text": null,
             "web_app": "WebAppInfo"
-        }
+        },
+        "init_kwargs": null
     },
     "MenuButtonDefault": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "ResponseParameters": {
         "has_dese": true,
         "dese_kwargs": {
             "migrate_to_chat_id": null,
             "retry_after": null
-        }
+        },
+        "init_kwargs": null
     },
     "InputMediaPhoto": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputMediaVideo": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputMediaAnimation": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputMediaAudio": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputMediaDocument": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "MaskPosition": {
         "has_dese": true,
@@ -848,7 +945,8 @@
             "x_shift": null,
             "y_shift": null,
             "scale": null
-        }
+        },
+        "init_kwargs": null
     },
     "Sticker": {
         "has_dese": true,
@@ -868,7 +966,8 @@
             "custom_emoji_id": null,
             "needs_repainting": null,
             "file_size": null
-        }
+        },
+        "init_kwargs": null
     },
     "StickerSet": {
         "has_dese": true,
@@ -880,10 +979,12 @@
             "is_video": null,
             "stickers": "list[Sticker]",
             "thumbnail": "PhotoSize"
-        }
+        },
+        "init_kwargs": null
     },
     "InputSticker": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQuery": {
         "has_dese": true,
@@ -894,85 +995,112 @@
             "offset": null,
             "chat_type": null,
             "location": "Location"
-        }
+        },
+        "init_kwargs": null
     },
     "InlineQueryResultsButton": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputTextMessageContent": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputLocationMessageContent": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputVenueMessageContent": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputContactMessageContent": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InputInvoiceMessageContent": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultArticle": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultPhoto": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultGif": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultMpeg4Gif": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultVideo": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultAudio": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultVoice": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultDocument": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultLocation": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultVenue": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultContact": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultGame": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultCachedPhoto": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultCachedGif": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultCachedMpeg4Gif": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultCachedSticker": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultCachedDocument": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultCachedVideo": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultCachedVoice": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "InlineQueryResultCachedAudio": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "ChosenInlineResult": {
         "has_dese": true,
@@ -982,13 +1110,15 @@
             "location": "Location",
             "inline_message_id": null,
             "query": null
-        }
+        },
+        "init_kwargs": null
     },
     "SentWebAppMessage": {
         "has_dese": true,
         "dese_kwargs": {
             "inline_message_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "Invoice": {
         "has_dese": true,
@@ -998,7 +1128,8 @@
             "start_parameter": null,
             "currency": null,
             "total_amount": null
-        }
+        },
+        "init_kwargs": null
     },
     "ShippingAddress": {
         "has_dese": true,
@@ -1009,7 +1140,8 @@
             "street_line1": null,
             "street_line2": null,
             "post_code": null
-        }
+        },
+        "init_kwargs": null
     },
     "OrderInfo": {
         "has_dese": true,
@@ -1018,10 +1150,12 @@
             "phone_number": null,
             "email": null,
             "shipping_address": "ShippingAddress"
-        }
+        },
+        "init_kwargs": null
     },
     "ShippingOption": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "SuccessfulPayment": {
         "has_dese": true,
@@ -1033,7 +1167,8 @@
             "order_info": "OrderInfo",
             "telegram_payment_charge_id": null,
             "provider_payment_charge_id": null
-        }
+        },
+        "init_kwargs": null
     },
     "ShippingQuery": {
         "has_dese": true,
@@ -1042,7 +1177,8 @@
             "from_user": "User",
             "invoice_payload": null,
             "shipping_address": "ShippingAddress"
-        }
+        },
+        "init_kwargs": null
     },
     "PreCheckoutQuery": {
         "has_dese": true,
@@ -1054,7 +1190,8 @@
             "invoice_payload": null,
             "shipping_option_id": null,
             "order_info": "OrderInfo"
-        }
+        },
+        "init_kwargs": null
     },
     "PassportFile": {
         "has_dese": true,
@@ -1063,7 +1200,8 @@
             "file_unique_id": null,
             "file_size": null,
             "file_date": null
-        }
+        },
+        "init_kwargs": null
     },
     "EncryptedPassportElement": {
         "has_dese": true,
@@ -1078,7 +1216,8 @@
             "reverse_side": "PassportFile",
             "selfie": "PassportFile",
             "translation": "Optional[list[PassportFile]]"
-        }
+        },
+        "init_kwargs": null
     },
     "EncryptedCredentials": {
         "has_dese": true,
@@ -1086,41 +1225,52 @@
             "data": null,
             "hash": null,
             "secret": null
-        }
+        },
+        "init_kwargs": null
     },
     "PassportData": {
         "has_dese": true,
         "dese_kwargs": {
             "data": "list[EncryptedPassportElement]",
             "credentials": "EncryptedCredentials"
-        }
+        },
+        "init_kwargs": null
     },
     "PassportElementErrorDataField": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "PassportElementErrorFrontSide": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "PassportElementErrorReverseSide": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "PassportElementErrorSelfie": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "PassportElementErrorFile": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "PassportElementErrorFiles": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "PassportElementErrorTranslationFile": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "PassportElementErrorTranslationFiles": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "PassportElementErrorUnspecified": {
-        "has_dese": false
+        "has_dese": false,
+        "init_kwargs": null
     },
     "Game": {
         "has_dese": true,
@@ -1131,7 +1281,8 @@
             "text": null,
             "text_entities": "Optional[list[MessageEntity]]",
             "animation": "Animation"
-        }
+        },
+        "init_kwargs": null
     },
     "GameHighScore": {
         "has_dese": true,
@@ -1139,11 +1290,13 @@
             "position": null,
             "user": "User",
             "score": null
-        }
+        },
+        "init_kwargs": null
     },
     "GiveawayCreated": {
         "has_dese": true,
-        "dese_kwargs": {}
+        "dese_kwargs": {},
+        "init_kwargs": null
     },
     "GiveawayWinners": {
         "has_dese": true,
@@ -1159,7 +1312,8 @@
             "only_new_members": null,
             "was_refunded": null,
             "prize_description": null
-        }
+        },
+        "init_kwargs": null
     },
     "GiveawayCompleted": {
         "has_dese": true,
@@ -1167,7 +1321,8 @@
             "winner_count": null,
             "unclaimed_prize_count": null,
             "giveaway_message": "Message"
-        }
+        },
+        "init_kwargs": null
     },
     "Giveaway": {
         "has_dese": true,
@@ -1180,21 +1335,24 @@
             "prize_description": null,
             "country_codes": null,
             "premium_subscription_month_count": null
-        }
+        },
+        "init_kwargs": null
     },
     "MessageOriginUser": {
         "has_dese": true,
         "dese_kwargs": {
             "date": null,
             "sender_user": "User"
-        }
+        },
+        "init_kwargs": null
     },
     "MessageOriginHiddenUser": {
         "has_dese": true,
         "dese_kwargs": {
             "date": null,
             "sender_user_name": null
-        }
+        },
+        "init_kwargs": null
     },
     "MessageOriginChat": {
         "has_dese": true,
@@ -1202,7 +1360,8 @@
             "date": null,
             "sender_chat": "Chat",
             "author_signature": null
-        }
+        },
+        "init_kwargs": null
     },
     "MessageOriginChannel": {
         "has_dese": true,
@@ -1211,7 +1370,8 @@
             "chat": "Chat",
             "message_id": null,
             "author_signature": null
-        }
+        },
+        "init_kwargs": null
     },
     "ExternalReplyInfo": {
         "has_dese": true,
@@ -1239,19 +1399,22 @@
             "location": "Location",
             "poll": "Poll",
             "venue": "Venue"
-        }
+        },
+        "init_kwargs": null
     },
     "ChatBoostSourcePremium": {
         "has_dese": true,
         "dese_kwargs": {
             "user": "User"
-        }
+        },
+        "init_kwargs": null
     },
     "ChatBoostSourceGiftCode": {
         "has_dese": true,
         "dese_kwargs": {
             "user": "User"
-        }
+        },
+        "init_kwargs": null
     },
     "ChatBoostSourceGiveaway": {
         "has_dese": true,
@@ -1259,7 +1422,8 @@
             "giveaway_message_id": null,
             "user": "User",
             "is_unclaimed": null
-        }
+        },
+        "init_kwargs": null
     },
     "ChatBoost": {
         "has_dese": true,
@@ -1268,20 +1432,23 @@
             "add_date": null,
             "expiration_date": null,
             "source": null
-        }
+        },
+        "init_kwargs": null
     },
     "UserChatBoosts": {
         "has_dese": true,
         "dese_kwargs": {
             "boosts": "list[ChatBoost]"
-        }
+        },
+        "init_kwargs": null
     },
     "ChatBoostUpdated": {
         "has_dese": true,
         "dese_kwargs": {
             "chat": "Chat",
             "boost": "ChatBoost"
-        }
+        },
+        "init_kwargs": null
     },
     "ChatBoostRemoved": {
         "has_dese": true,
@@ -1290,7 +1457,8 @@
             "boost_id": null,
             "remove_date": null,
             "source": null
-        }
+        },
+        "init_kwargs": null
     },
     "Update": {
         "has_dese": true,
@@ -1314,6 +1482,7 @@
             "chat_join_request": "ChatJoinRequest",
             "chat_boost": "ChatBoostUpdated",
             "removed_chat_boost": "ChatBoostRemoved"
-        }
+        },
+        "init_kwargs": null
     }
 }

@@ -22,6 +22,14 @@ LINE_N = 0
 logger = get_logger('TypeChecker')
 logger.setLevel(LOGGER_LEVEL)
 
+def get_init_kwargs(__type: str) -> dict[str, str]:
+    self_found = False
+    global LINE_N
+    init_kwargs = {}
+    while True:
+        return
+
+
 def get_dese_kwargs(__type: str) -> dict[str, str]:
     global LINE_N
     dese_kwargs = {}
@@ -122,6 +130,9 @@ while LINE_N != len(LINES):
         TYPES[type]['has_dese'] = True
         TYPES[type]['dese_kwargs'] = get_dese_kwargs(type)
 
+    if re.match(r'\s*def\s*__init__\s*\(', LINES[LINE_N]):
+        TYPES[type]['init_kwargs'] = get_init_kwargs(type)
+
     LINE_N += 1
 
 
@@ -153,7 +164,7 @@ print('Types without _dese():', len(TYPES_WITHOUT_DESE))
 
 
 
-"""
+
 with open('test_json.json', 'w') as w:
     w.write(json.dumps(TYPES, indent = 4))
 
