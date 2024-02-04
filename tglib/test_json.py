@@ -22,20 +22,62 @@ TYPES = {
             "can_manage_topics": None
         },
         "init_kwargs": {
-            "can_send_messages": Optional[bool] ,
-            "can_send_audios": Optional[bool] ,
-            "can_send_documents": Optional[bool] ,
-            "can_send_photos": Optional[bool] ,
-            "can_send_videos": Optional[bool] ,
-            "can_send_video_notes": Optional[bool] ,
-            "can_send_voice_notes": Optional[bool] ,
-            "can_send_polls": Optional[bool] ,
-            "can_send_other_messages": Optional[bool] ,
-            "can_add_web_page_previews": Optional[bool] ,
-            "can_change_info": Optional[bool] ,
-            "can_invite_users": Optional[bool] ,
-            "can_pin_messages": Optional[bool] ,
-            "can_manage_topics": Optional[bool] 
+            "can_send_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_send_audios": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_send_documents": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_send_photos": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_send_videos": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_send_video_notes": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_send_voice_notes": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_send_polls": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_send_other_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_add_web_page_previews": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_change_info": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_invite_users": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_pin_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_manage_topics": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     ChatAdministratorRights: {
@@ -58,21 +100,58 @@ TYPES = {
             "can_manage_topics": None
         },
         "init_kwargs": {
-            "is_anonymous": bool,,
-            "can_manage_chat": bool,,
-            "can_delete_messages": bool,,
-            "can_manage_video_chats": bool,,
-            "can_restrict_members": bool,,
-            "can_promote_members": bool,,
-            "can_change_info": bool,,
-            "can_invite_users": bool,,
-            "can_post_messages": Optional[bool] ,
-            "can_edit_messages": Optional[bool] ,
-            "can_pin_messages": Optional[bool] ,
-            "can_post_stories": Optional[bool] ,
-            "can_edit_stories": Optional[bool] ,
-            "can_delete_stories": Optional[bool] ,
-            "can_manage_topics": Optional[bool] 
+            "is_anonymous": {
+                "hinting": bool
+            },
+            "can_manage_chat": {
+                "hinting": bool
+            },
+            "can_delete_messages": {
+                "hinting": bool
+            },
+            "can_manage_video_chats": {
+                "hinting": bool
+            },
+            "can_restrict_members": {
+                "hinting": bool
+            },
+            "can_promote_members": {
+                "hinting": bool
+            },
+            "can_change_info": {
+                "hinting": bool
+            },
+            "can_invite_users": {
+                "hinting": bool
+            },
+            "can_post_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_edit_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_pin_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_post_stories": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_edit_stories": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_delete_stories": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_manage_topics": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     SwitchInlineQueryChosenChat: {
@@ -85,11 +164,26 @@ TYPES = {
             "allow_channel_chats": None
         },
         "init_kwargs": {
-            "query": Optional[str] ,
-            "allow_user_chats": Optional[bool] ,
-            "allow_bot_chats": Optional[bool] ,
-            "allow_group_chats": Optional[bool] ,
-            "allow_channel_chats": Optional[bool] 
+            "query": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "allow_user_chats": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "allow_bot_chats": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "allow_group_chats": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "allow_channel_chats": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     CallbackGame: {
@@ -100,9 +194,17 @@ TYPES = {
     InputFile: {
         "has_dese": False,
         "init_kwargs": {
-            "path": str,,
-            "file_name": Optional[str] ,
-            "hide_name": Optional[bool] 
+            "path": {
+                "hinting": str
+            },
+            "file_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "hide_name": {
+                "hinting": Optional[bool],
+                "default_value": False
+            }
         }
     },
     LoginUrl: {
@@ -114,17 +216,32 @@ TYPES = {
             "request_write_access": None
         },
         "init_kwargs": {
-            "url": str,,
-            "forward_text": Optional[str] ,
-            "bot_username": Optional[str] ,
-            "request_write_access": Optional[bool] 
+            "url": {
+                "hinting": str
+            },
+            "forward_text": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "bot_username": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "request_write_access": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     LabeledPrice: {
         "has_dese": False,
         "init_kwargs": {
-            "label": str,,
-            "amount": int
+            "label": {
+                "hinting": str
+            },
+            "amount": {
+                "hinting": int
+            }
         }
     },
     LinkPreviewOptions: {
@@ -137,11 +254,26 @@ TYPES = {
             "show_above_text": None
         },
         "init_kwargs": {
-            "is_disabled": Optional[bool] ,
-            "url": Optional[str] ,
-            "prefer_small_media": Optional[bool] ,
-            "prefer_large_media": Optional[bool] ,
-            "show_above_text": Optional[bool] 
+            "is_disabled": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "prefer_small_media": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "prefer_large_media": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "show_above_text": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     User: {
@@ -160,17 +292,47 @@ TYPES = {
             "supports_inline_queries": None
         },
         "init_kwargs": {
-            "id": int,,
-            "is_bot": bool,,
-            "first_name": str,,
-            "last_name": Optional[str] ,
-            "username": Optional[str] ,
-            "language_code": Optional[str] ,
-            "is_premium": Optional[Literal[True]] ,
-            "added_to_attachment_menu": Optional[Literal[True]] ,
-            "can_join_groups": Optional[bool] ,
-            "can_read_all_group_messages": Optional[bool] ,
-            "supports_inline_queries": Optional[bool] 
+            "id": {
+                "hinting": int
+            },
+            "is_bot": {
+                "hinting": bool
+            },
+            "first_name": {
+                "hinting": str
+            },
+            "last_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "username": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "language_code": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "is_premium": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "added_to_attachment_menu": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "can_join_groups": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_read_all_group_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "supports_inline_queries": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     MessageEntity: {
@@ -185,13 +347,31 @@ TYPES = {
             "custom_emoji_id": None
         },
         "init_kwargs": {
-            "type": str,,
-            "offset": int,,
-            "length": int,,
-            "url": Optional[str] ,
-            "user": Optional[User] ,
-            "language": Optional[str] ,
-            "custom_emoji_id": Optional[str] 
+            "type": {
+                "hinting": str
+            },
+            "offset": {
+                "hinting": int
+            },
+            "length": {
+                "hinting": int
+            },
+            "url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "user": {
+                "hinting": Optional[User],
+                "default_value": None
+            },
+            "language": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "custom_emoji_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     TextQuote: {
@@ -203,22 +383,52 @@ TYPES = {
             "is_manual": None
         },
         "init_kwargs": {
-            "text": str,,
-            "position": int,,
-            "entities": Optional[list[MessageEntity]] ,
-            "is_manual": Optional[Literal[True]] 
+            "text": {
+                "hinting": str
+            },
+            "position": {
+                "hinting": int
+            },
+            "entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "is_manual": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            }
         }
     },
     ReplyParameters: {
         "has_dese": False,
         "init_kwargs": {
-            "message_id": int,,
-            "chat_id": Optional[Union[int, str]] ,
-            "allow_sending_without_reply": Optional[bool] ,
-            "quote": Optional[str] ,
-            "quote_parse_mode": Optional[str] ,
-            "quote_entities": Optional[list[MessageEntity]] ,
-            "quote_position": Optional[int] 
+            "message_id": {
+                "hinting": int
+            },
+            "chat_id": {
+                "hinting": Optional[Union[int, str]],
+                "default_value": None
+            },
+            "allow_sending_without_reply": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "quote": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "quote_parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "quote_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "quote_position": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     InaccessibleMessage: {
@@ -228,7 +438,17 @@ TYPES = {
             "message_id": None,
             "date": None
         },
-        "init_kwargs": {}
+        "init_kwargs": {
+            "c": {
+                "hinting": None
+            },
+            "m": {
+                "hinting": None
+            },
+            "d": {
+                "hinting": None
+            }
+        }
     },
     Message: {
         "has_dese": True,
@@ -308,7 +528,65 @@ TYPES = {
             "web_app_data": WebAppData,
             "reply_markup": InlineKeyboardMarkup
         },
-        "init_kwargs": {}
+        "init_kwargs": {
+            "m": {
+                "hinting": None
+            },
+            "d": {
+                "hinting": None
+            },
+            "c": {
+                "hinting": None
+            },
+            "f": {
+                "hinting": None
+            },
+            "s": {
+                "hinting": None
+            },
+            "i": {
+                "hinting": None
+            },
+            "r": {
+                "hinting": None
+            },
+            "e": {
+                "hinting": None
+            },
+            "q": {
+                "hinting": None
+            },
+            "v": {
+                "hinting": None
+            },
+            "h": {
+                "hinting": None
+            },
+            "a": {
+                "hinting": None
+            },
+            "t": {
+                "hinting": None
+            },
+            "l": {
+                "hinting": None
+            },
+            "p": {
+                "hinting": None
+            },
+            "g": {
+                "hinting": None
+            },
+            "n": {
+                "hinting": None
+            },
+            "u": {
+                "hinting": None
+            },
+            "w": {
+                "hinting": None
+            }
+        }
     },
     ChatPhoto: {
         "has_dese": True,
@@ -319,10 +597,18 @@ TYPES = {
             "big_file_unique_id": None
         },
         "init_kwargs": {
-            "small_file_id": str,,
-            "small_file_unique_id": str,,
-            "big_file_id": str,,
-            "big_file_unique_id": str
+            "small_file_id": {
+                "hinting": str
+            },
+            "small_file_unique_id": {
+                "hinting": str
+            },
+            "big_file_id": {
+                "hinting": str
+            },
+            "big_file_unique_id": {
+                "hinting": str
+            }
         }
     },
     Location: {
@@ -336,12 +622,28 @@ TYPES = {
             "proximity_alert_radius": None
         },
         "init_kwargs": {
-            "longitude": float,,
-            "latitude": float,,
-            "horizontal_accuracy": Optional[float] ,
-            "live_period": Optional[int] ,
-            "heading": Optional[int] ,
-            "proximity_alert_radius": Optional[int] 
+            "longitude": {
+                "hinting": float
+            },
+            "latitude": {
+                "hinting": float
+            },
+            "horizontal_accuracy": {
+                "hinting": Optional[float],
+                "default_value": None
+            },
+            "live_period": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "heading": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "proximity_alert_radius": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     ChatLocation: {
@@ -351,8 +653,12 @@ TYPES = {
             "address": None
         },
         "init_kwargs": {
-            "location": Location,,
-            "address": str
+            "location": {
+                "hinting": Location
+            },
+            "address": {
+                "hinting": str
+            }
         }
     },
     ReactionTypeEmoji: {
@@ -361,7 +667,9 @@ TYPES = {
             "emoji": None
         },
         "init_kwargs": {
-            "emoji": str
+            "emoji": {
+                "hinting": str
+            }
         }
     },
     ReactionTypeCustomEmoji: {
@@ -370,7 +678,9 @@ TYPES = {
             "custom_emoji_id": None
         },
         "init_kwargs": {
-            "custom_emoji_id": str
+            "custom_emoji_id": {
+                "hinting": str
+            }
         }
     },
     Chat: {
@@ -413,41 +723,144 @@ TYPES = {
             "location": ChatLocation
         },
         "init_kwargs": {
-            "id": int,,
-            "type": str,,
-            "title": Optional[str] ,
-            "username": Optional[str] ,
-            "first_name": Optional[str] ,
-            "last_name": Optional[str] ,
-            "is_forum": Optional[Literal[True]] ,
-            "photo": Optional[ChatPhoto] ,
-            "active_usernames": Optional[list[str]] ,
-            "available_reactions": Optional[list[ReactionType]] ,
-            "accent_color_id": Optional[int] ,
-            "background_custom_emoji_id": Optional[str] ,
-            "profile_accent_color_id": Optional[int] ,
-            "profile_background_custom_emoji_id": Optional[str] ,
-            "emoji_status_custom_emoji_id": Optional[str] ,
-            "emoji_status_expiration_date": Optional[int] ,
-            "bio": Optional[str] ,
-            "has_private_forwards": Optional[Literal[True]] ,
-            "has_restricted_voice_and_video_messages": Optional[Literal[True]] ,
-            "join_to_send_messages": Optional[Literal[True]] ,
-            "join_by_request": Optional[Literal[True]] ,
-            "description": Optional[str] ,
-            "invite_link": Optional[str] ,
-            "pinned_message": Optional[Message] ,
-            "permissions": Optional[ChatPermissions] ,
-            "slow_mode_delay": Optional[int] ,
-            "message_auto_delete_time": Optional[int] ,
-            "has_aggressive_anti_spam_enabled": Optional[Literal[True]] ,
-            "has_hidden_members": Optional[Literal[True]] ,
-            "has_protected_content": Optional[Literal[True]] ,
-            "has_visible_history": Optional[Literal[True]] ,
-            "sticker_set_name": Optional[str] ,
-            "can_set_sticker_set": Optional[Literal[True]] ,
-            "linked_chat_id": Optional[int] ,
-            "location": Optional[ChatLocation] 
+            "id": {
+                "hinting": int
+            },
+            "type": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "username": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "first_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "last_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "is_forum": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "photo": {
+                "hinting": Optional[ChatPhoto],
+                "default_value": None
+            },
+            "active_usernames": {
+                "hinting": Optional[list[str]],
+                "default_value": None
+            },
+            "available_reactions": {
+                "hinting": Optional[list[ReactionType]],
+                "default_value": None
+            },
+            "accent_color_id": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "background_custom_emoji_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "profile_accent_color_id": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "profile_background_custom_emoji_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "emoji_status_custom_emoji_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "emoji_status_expiration_date": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "bio": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "has_private_forwards": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "has_restricted_voice_and_video_messages": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "join_to_send_messages": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "join_by_request": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "invite_link": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "pinned_message": {
+                "hinting": Optional[Message],
+                "default_value": None
+            },
+            "permissions": {
+                "hinting": Optional[ChatPermissions],
+                "default_value": None
+            },
+            "slow_mode_delay": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "message_auto_delete_time": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "has_aggressive_anti_spam_enabled": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "has_hidden_members": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "has_protected_content": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "has_visible_history": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "sticker_set_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "can_set_sticker_set": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "linked_chat_id": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "location": {
+                "hinting": Optional[ChatLocation],
+                "default_value": None
+            }
         }
     },
     MessageReactionUpdated: {
@@ -462,13 +875,29 @@ TYPES = {
             "actor_chat": Chat
         },
         "init_kwargs": {
-            "chat": Chat,,
-            "message_id": int,,
-            "date": int,,
-            "old_reaction": list[ReactionType],,
-            "new_reaction": list[ReactionType],,
-            "user": Optional[User] ,
-            "actor_chat": Optional[Chat] 
+            "chat": {
+                "hinting": Chat
+            },
+            "message_id": {
+                "hinting": int
+            },
+            "date": {
+                "hinting": int
+            },
+            "old_reaction": {
+                "hinting": list[ReactionType]
+            },
+            "new_reaction": {
+                "hinting": list[ReactionType]
+            },
+            "user": {
+                "hinting": Optional[User],
+                "default_value": None
+            },
+            "actor_chat": {
+                "hinting": Optional[Chat],
+                "default_value": None
+            }
         }
     },
     ReactionCount: {
@@ -478,8 +907,12 @@ TYPES = {
             "total_count": None
         },
         "init_kwargs": {
-            "type": ReactionType,,
-            "total_count": int
+            "type": {
+                "hinting": ReactionType
+            },
+            "total_count": {
+                "hinting": int
+            }
         }
     },
     MessageReactionCountUpdated: {
@@ -491,10 +924,18 @@ TYPES = {
             "reactions": list[ReactionCount]
         },
         "init_kwargs": {
-            "chat": Chat,,
-            "message_id": int,,
-            "date": int,,
-            "reactions": list[ReactionCount]
+            "chat": {
+                "hinting": Chat
+            },
+            "message_id": {
+                "hinting": int
+            },
+            "date": {
+                "hinting": int
+            },
+            "reactions": {
+                "hinting": list[ReactionCount]
+            }
         }
     },
     MessageId: {
@@ -503,7 +944,9 @@ TYPES = {
             "message_id": None
         },
         "init_kwargs": {
-            "message_id": int
+            "message_id": {
+                "hinting": int
+            }
         }
     },
     PhotoSize: {
@@ -516,11 +959,22 @@ TYPES = {
             "file_size": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "width": int,,
-            "height": int,,
-            "file_size": Optional[int] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "width": {
+                "hinting": int
+            },
+            "height": {
+                "hinting": int
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     Animation: {
@@ -537,15 +991,37 @@ TYPES = {
             "file_size": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "width": int,,
-            "height": int,,
-            "duration": int,,
-            "thumbnail": Optional[PhotoSize] ,
-            "file_name": Optional[str] ,
-            "mime_type": Optional[str] ,
-            "file_size": Optional[int] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "width": {
+                "hinting": int
+            },
+            "height": {
+                "hinting": int
+            },
+            "duration": {
+                "hinting": int
+            },
+            "thumbnail": {
+                "hinting": Optional[PhotoSize],
+                "default_value": None
+            },
+            "file_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "mime_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     Audio: {
@@ -562,15 +1038,39 @@ TYPES = {
             "thumbnail": PhotoSize
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "duration": int,,
-            "performer": Optional[str] ,
-            "title": Optional[str] ,
-            "file_name": Optional[str] ,
-            "mime_type": Optional[str] ,
-            "file_size": Optional[int] ,
-            "thumbnail": Optional[PhotoSize] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "duration": {
+                "hinting": int
+            },
+            "performer": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "file_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "mime_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "thumbnail": {
+                "hinting": Optional[PhotoSize],
+                "default_value": None
+            }
         }
     },
     Document: {
@@ -584,12 +1084,28 @@ TYPES = {
             "file_size": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "thumbnail": Optional[PhotoSize] ,
-            "file_name": Optional[str] ,
-            "mime_type": Optional[str] ,
-            "file_size": Optional[int] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "thumbnail": {
+                "hinting": Optional[PhotoSize],
+                "default_value": None
+            },
+            "file_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "mime_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     Story: {
@@ -611,15 +1127,37 @@ TYPES = {
             "file_size": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "width": int,,
-            "height": int,,
-            "duration": int,,
-            "thumbnail": Optional[PhotoSize] ,
-            "file_name": Optional[str] ,
-            "mime_type": Optional[str] ,
-            "file_size": Optional[int] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "width": {
+                "hinting": int
+            },
+            "height": {
+                "hinting": int
+            },
+            "duration": {
+                "hinting": int
+            },
+            "thumbnail": {
+                "hinting": Optional[PhotoSize],
+                "default_value": None
+            },
+            "file_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "mime_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     VideoNote: {
@@ -633,12 +1171,26 @@ TYPES = {
             "file_size": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "length": int,,
-            "duration": int,,
-            "thumbnail": Optional[PhotoSize] ,
-            "file_size": Optional[int] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "length": {
+                "hinting": int
+            },
+            "duration": {
+                "hinting": int
+            },
+            "thumbnail": {
+                "hinting": Optional[PhotoSize],
+                "default_value": None
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     Voice: {
@@ -651,11 +1203,23 @@ TYPES = {
             "file_size": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "duration": int,,
-            "mime_type": Optional[str] ,
-            "file_size": Optional[int] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "duration": {
+                "hinting": int
+            },
+            "mime_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     Contact: {
@@ -668,11 +1232,24 @@ TYPES = {
             "vcard": None
         },
         "init_kwargs": {
-            "phone_number": str,,
-            "first_name": str,,
-            "last_name": Optional[str] ,
-            "user_id": Optional[int] ,
-            "vcard": Optional[str] 
+            "phone_number": {
+                "hinting": str
+            },
+            "first_name": {
+                "hinting": str
+            },
+            "last_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "user_id": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "vcard": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     Dice: {
@@ -682,8 +1259,12 @@ TYPES = {
             "value": None
         },
         "init_kwargs": {
-            "emoji": str,,
-            "value": int
+            "emoji": {
+                "hinting": str
+            },
+            "value": {
+                "hinting": int
+            }
         }
     },
     PollOption: {
@@ -693,8 +1274,12 @@ TYPES = {
             "voter_count": None
         },
         "init_kwargs": {
-            "text": str,,
-            "voter_count": int
+            "text": {
+                "hinting": str
+            },
+            "voter_count": {
+                "hinting": int
+            }
         }
     },
     PollAnswer: {
@@ -706,10 +1291,20 @@ TYPES = {
             "user": User
         },
         "init_kwargs": {
-            "poll_id": str,,
-            "option_ids": list[int],,
-            "voter_chat": Optional[Chat] ,
-            "user": Optional[User] 
+            "poll_id": {
+                "hinting": str
+            },
+            "option_ids": {
+                "hinting": list[int]
+            },
+            "voter_chat": {
+                "hinting": Optional[Chat],
+                "default_value": None
+            },
+            "user": {
+                "hinting": Optional[User],
+                "default_value": None
+            }
         }
     },
     Poll: {
@@ -730,19 +1325,50 @@ TYPES = {
             "close_date": None
         },
         "init_kwargs": {
-            "id": str,,
-            "question": str,,
-            "options": list[PollOption],,
-            "total_voter_count": int,,
-            "is_closed": bool,,
-            "is_anonymous": bool,,
-            "type": str,,
-            "allows_multiple_answers": bool,,
-            "correct_option_id": Optional[int] ,
-            "explanation": Optional[str] ,
-            "explanation_entities": Optional[list[MessageEntity]] ,
-            "open_period": Optional[int] ,
-            "close_date": Optional[int] 
+            "id": {
+                "hinting": str
+            },
+            "question": {
+                "hinting": str
+            },
+            "options": {
+                "hinting": list[PollOption]
+            },
+            "total_voter_count": {
+                "hinting": int
+            },
+            "is_closed": {
+                "hinting": bool
+            },
+            "is_anonymous": {
+                "hinting": bool
+            },
+            "type": {
+                "hinting": str
+            },
+            "allows_multiple_answers": {
+                "hinting": bool
+            },
+            "correct_option_id": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "explanation": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "explanation_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "open_period": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "close_date": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     Venue: {
@@ -757,13 +1383,31 @@ TYPES = {
             "google_place_type": None
         },
         "init_kwargs": {
-            "location": Location,,
-            "title": str,,
-            "address": str,,
-            "foursquare_id": Optional[str] ,
-            "foursquare_type": Optional[str] ,
-            "google_place_id": Optional[str] ,
-            "google_place_type": Optional[str] 
+            "location": {
+                "hinting": Location
+            },
+            "title": {
+                "hinting": str
+            },
+            "address": {
+                "hinting": str
+            },
+            "foursquare_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "foursquare_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "google_place_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "google_place_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     WebAppData: {
@@ -773,8 +1417,12 @@ TYPES = {
             "button_text": None
         },
         "init_kwargs": {
-            "data": str,,
-            "button_text": str
+            "data": {
+                "hinting": str
+            },
+            "button_text": {
+                "hinting": str
+            }
         }
     },
     ProximityAlertTriggered: {
@@ -785,9 +1433,15 @@ TYPES = {
             "distance": None
         },
         "init_kwargs": {
-            "traveler": User,,
-            "watcher": User,,
-            "distance": int
+            "traveler": {
+                "hinting": User
+            },
+            "watcher": {
+                "hinting": User
+            },
+            "distance": {
+                "hinting": int
+            }
         }
     },
     MessageAutoDeleteTimerChanged: {
@@ -796,7 +1450,9 @@ TYPES = {
             "message_auto_delete_time": None
         },
         "init_kwargs": {
-            "message_auto_delete_time": int
+            "message_auto_delete_time": {
+                "hinting": int
+            }
         }
     },
     ForumTopicCreated: {
@@ -807,9 +1463,16 @@ TYPES = {
             "icon_custom_emoji_id": None
         },
         "init_kwargs": {
-            "name": str,,
-            "icon_color": int,,
-            "icon_custom_emoji_id": Optional[str] 
+            "name": {
+                "hinting": str
+            },
+            "icon_color": {
+                "hinting": int
+            },
+            "icon_custom_emoji_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     ForumTopicClosed: {
@@ -824,8 +1487,14 @@ TYPES = {
             "icon_custom_emoji_id": None
         },
         "init_kwargs": {
-            "name": Optional[str] ,
-            "icon_custom_emoji_id": Optional[str] 
+            "name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "icon_custom_emoji_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     ForumTopicReopened: {
@@ -850,8 +1519,12 @@ TYPES = {
             "user_ids": None
         },
         "init_kwargs": {
-            "request_id": int,,
-            "user_ids": list[int]
+            "request_id": {
+                "hinting": int
+            },
+            "user_ids": {
+                "hinting": list[int]
+            }
         }
     },
     ChatShared: {
@@ -861,8 +1534,12 @@ TYPES = {
             "chat_id": None
         },
         "init_kwargs": {
-            "request_id": int,,
-            "chat_id": int
+            "request_id": {
+                "hinting": int
+            },
+            "chat_id": {
+                "hinting": int
+            }
         }
     },
     WriteAccessAllowed: {
@@ -873,9 +1550,18 @@ TYPES = {
             "from_attachment_menu": None
         },
         "init_kwargs": {
-            "from_request": Optional[bool] ,
-            "web_app_name": Optional[str] ,
-            "from_attachment_menu": Optional[bool] 
+            "from_request": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "web_app_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "from_attachment_menu": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     VideoChatScheduled: {
@@ -884,7 +1570,9 @@ TYPES = {
             "start_date": None
         },
         "init_kwargs": {
-            "start_date": int
+            "start_date": {
+                "hinting": int
+            }
         }
     },
     VideoChatStarted: {
@@ -898,7 +1586,9 @@ TYPES = {
             "duration": None
         },
         "init_kwargs": {
-            "duration": int
+            "duration": {
+                "hinting": int
+            }
         }
     },
     VideoChatParticipantsInvited: {
@@ -907,7 +1597,9 @@ TYPES = {
             "users": list[User]
         },
         "init_kwargs": {
-            "users": list[User]
+            "users": {
+                "hinting": list[User]
+            }
         }
     },
     UserProfilePhotos: {
@@ -917,8 +1609,12 @@ TYPES = {
             "photos": list[list[PhotoSize]]
         },
         "init_kwargs": {
-            "total_count": int,,
-            "photos": list[list[PhotoSize]]
+            "total_count": {
+                "hinting": int
+            },
+            "photos": {
+                "hinting": list[list[PhotoSize]]
+            }
         }
     },
     File: {
@@ -930,10 +1626,20 @@ TYPES = {
             "file_path": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "file_size": Optional[int] ,
-            "file_path": Optional[str] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "file_path": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     WebAppInfo: {
@@ -942,64 +1648,143 @@ TYPES = {
             "url": None
         },
         "init_kwargs": {
-            "url": str
+            "url": {
+                "hinting": str
+            }
         }
     },
     KeyboardButtonRequestUsers: {
         "has_dese": False,
         "init_kwargs": {
-            "request_id": int,,
-            "user_is_bot": Optional[bool] ,
-            "user_is_premium": Optional[bool] ,
-            "max_quantity": Optional[int] 
+            "request_id": {
+                "hinting": int
+            },
+            "user_is_bot": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "user_is_premium": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "max_quantity": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     KeyboardButtonRequestChat: {
         "has_dese": False,
         "init_kwargs": {
-            "request_id": int,,
-            "chat_is_channel": bool,,
-            "chat_is_forum": Optional[bool] ,
-            "chat_has_username": Optional[bool] ,
-            "chat_is_created": Optional[bool] ,
-            "user_administrator_rights": Optional[ChatAdministratorRights] ,
-            "bot_administrator_rights": Optional[ChatAdministratorRights] ,
-            "bot_is_member": Optional[bool] 
+            "request_id": {
+                "hinting": int
+            },
+            "chat_is_channel": {
+                "hinting": bool
+            },
+            "chat_is_forum": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "chat_has_username": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "chat_is_created": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "user_administrator_rights": {
+                "hinting": Optional[ChatAdministratorRights],
+                "default_value": None
+            },
+            "bot_administrator_rights": {
+                "hinting": Optional[ChatAdministratorRights],
+                "default_value": None
+            },
+            "bot_is_member": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     KeyboardButtonPollType: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Optional[str] 
+            "type": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     KeyboardButton: {
         "has_dese": False,
         "init_kwargs": {
-            "text": str,,
-            "request_users": Optional[KeyboardButtonRequestUsers] ,
-            "request_chat": Optional[KeyboardButtonRequestChat] ,
-            "request_contact": Optional[bool] ,
-            "request_location": Optional[bool] ,
-            "request_poll": Optional[KeyboardButtonPollType] ,
-            "web_app": Optional[WebAppInfo] 
+            "text": {
+                "hinting": str
+            },
+            "request_users": {
+                "hinting": Optional[KeyboardButtonRequestUsers],
+                "default_value": None
+            },
+            "request_chat": {
+                "hinting": Optional[KeyboardButtonRequestChat],
+                "default_value": None
+            },
+            "request_contact": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "request_location": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "request_poll": {
+                "hinting": Optional[KeyboardButtonPollType],
+                "default_value": None
+            },
+            "web_app": {
+                "hinting": Optional[WebAppInfo],
+                "default_value": None
+            }
         }
     },
     ReplyKeyboardMarkup: {
         "has_dese": False,
         "init_kwargs": {
-            "keyboard": Optional[list[list[KeyboardButton]]] ,
-            "is_persistent": Optional[bool] ,
-            "resize_keyboard": Optional[bool] ,
-            "one_time_keyboard": Optional[bool] ,
-            "input_field_placeholder": Optional[str] ,
-            "selective": Optional[bool] 
+            "keyboard": {
+                "hinting": Optional[list[list[KeyboardButton]]],
+                "default_value": None
+            },
+            "is_persistent": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "resize_keyboard": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "one_time_keyboard": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "input_field_placeholder": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "selective": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     ReplyKeyboardRemove: {
         "has_dese": False,
         "init_kwargs": {
-            "selective": Optional[bool] 
+            "selective": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     InlineKeyboardButton: {
@@ -1017,16 +1802,45 @@ TYPES = {
             "pay": None
         },
         "init_kwargs": {
-            "text": str,,
-            "url": Optional[str] ,
-            "callback_data": Optional[str] ,
-            "web_app": Optional[WebAppInfo] ,
-            "login_url": Optional[LoginUrl] ,
-            "switch_inline_query": Optional[str] ,
-            "switch_inline_query_current_chat": Optional[str] ,
-            "switch_inline_query_chosen_chat": Optional[SwitchInlineQueryChosenChat] ,
-            "callback_game": Optional[CallbackGame] ,
-            "pay": Optional[bool] 
+            "text": {
+                "hinting": str
+            },
+            "url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "callback_data": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "web_app": {
+                "hinting": Optional[WebAppInfo],
+                "default_value": None
+            },
+            "login_url": {
+                "hinting": Optional[LoginUrl],
+                "default_value": None
+            },
+            "switch_inline_query": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "switch_inline_query_current_chat": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "switch_inline_query_chosen_chat": {
+                "hinting": Optional[SwitchInlineQueryChosenChat],
+                "default_value": None
+            },
+            "callback_game": {
+                "hinting": Optional[CallbackGame],
+                "default_value": None
+            },
+            "pay": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     InlineKeyboardMarkup: {
@@ -1035,7 +1849,10 @@ TYPES = {
             "inline_keyboard": list[list[InlineKeyboardButton]]
         },
         "init_kwargs": {
-            "inline_keyboard": Optional[list[list[InlineKeyboardButton]]] 
+            "inline_keyboard": {
+                "hinting": Optional[list[list[InlineKeyboardButton]]],
+                "default_value": None
+            }
         }
     },
     CallbackQuery: {
@@ -1050,18 +1867,49 @@ TYPES = {
             "game_short_name": None
         },
         "init_kwargs": {
-            "id": str,,
-            "from_user": User,,
-            "chat_instance": str,,
-            "message": Optional[MaybeInaccessibleMessage] ,
-            "inline_message_id": Optional[str] ,
-            "data": Optional[str] ,
-            "game_short_name": Optional[str] 
+            "id": {
+                "hinting": str
+            },
+            "from_user": {
+                "hinting": User
+            },
+            "chat_instance": {
+                "hinting": str
+            },
+            "message": {
+                "hinting": Optional[MaybeInaccessibleMessage],
+                "default_value": None
+            },
+            "inline_message_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "data": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "game_short_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     ForceReply: {
         "has_dese": False,
-        "init_kwargs": None
+        "init_kwargs": {
+            "force_reply": {
+                "hinting": Literal[True],
+                "default_value": True
+            },
+            "input_field_placeholder": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "selective": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
+        }
     },
     ChatInviteLink: {
         "has_dese": True,
@@ -1077,15 +1925,37 @@ TYPES = {
             "pending_join_request_count": None
         },
         "init_kwargs": {
-            "invite_link": str,,
-            "creator": User,,
-            "creates_join_request": bool,,
-            "is_primary": bool,,
-            "is_revoked": bool,,
-            "name": Optional[str] ,
-            "expire_date": Optional[int] ,
-            "member_limit": Optional[int] ,
-            "pending_join_request_count": Optional[int] 
+            "invite_link": {
+                "hinting": str
+            },
+            "creator": {
+                "hinting": User
+            },
+            "creates_join_request": {
+                "hinting": bool
+            },
+            "is_primary": {
+                "hinting": bool
+            },
+            "is_revoked": {
+                "hinting": bool
+            },
+            "name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "expire_date": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "member_limit": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "pending_join_request_count": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     ChatMemberOwner: {
@@ -1096,9 +1966,16 @@ TYPES = {
             "custom_title": None
         },
         "init_kwargs": {
-            "user": User,,
-            "is_anonymous": bool,,
-            "custom_title": Optional[str] 
+            "user": {
+                "hinting": User
+            },
+            "is_anonymous": {
+                "hinting": bool
+            },
+            "custom_title": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     ChatMemberAdministrator: {
@@ -1124,24 +2001,68 @@ TYPES = {
             "custom_title": None
         },
         "init_kwargs": {
-            "user": User,,
-            "can_be_edited": bool,,
-            "is_anonymous": bool,,
-            "can_manage_chat": bool,,
-            "can_delete_messages": bool,,
-            "can_manage_video_chats": bool,,
-            "can_restrict_members": bool,,
-            "can_promote_members": bool,,
-            "can_change_info": bool,,
-            "can_invite_users": bool,,
-            "can_post_messages": Optional[bool] ,
-            "can_edit_messages": Optional[bool] ,
-            "can_pin_messages": Optional[bool] ,
-            "can_post_stories": Optional[bool] ,
-            "can_edit_stories": Optional[bool] ,
-            "can_delete_stories": Optional[bool] ,
-            "can_manage_topics": Optional[bool] ,
-            "custom_title": Optional[str] 
+            "user": {
+                "hinting": User
+            },
+            "can_be_edited": {
+                "hinting": bool
+            },
+            "is_anonymous": {
+                "hinting": bool
+            },
+            "can_manage_chat": {
+                "hinting": bool
+            },
+            "can_delete_messages": {
+                "hinting": bool
+            },
+            "can_manage_video_chats": {
+                "hinting": bool
+            },
+            "can_restrict_members": {
+                "hinting": bool
+            },
+            "can_promote_members": {
+                "hinting": bool
+            },
+            "can_change_info": {
+                "hinting": bool
+            },
+            "can_invite_users": {
+                "hinting": bool
+            },
+            "can_post_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_edit_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_pin_messages": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_post_stories": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_edit_stories": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_delete_stories": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "can_manage_topics": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "custom_title": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     ChatMemberMember: {
@@ -1150,7 +2071,9 @@ TYPES = {
             "user": User
         },
         "init_kwargs": {
-            "user": User
+            "user": {
+                "hinting": User
+            }
         }
     },
     ChatMemberRestricted: {
@@ -1175,23 +2098,57 @@ TYPES = {
             "until_date": None
         },
         "init_kwargs": {
-            "user": User,,
-            "is_member": bool,,
-            "can_send_messages": bool,,
-            "can_send_audios": bool,,
-            "can_send_documents": bool,,
-            "can_send_photos": bool,,
-            "can_send_videos": bool,,
-            "can_send_video_notes": bool,,
-            "can_send_voice_notes": bool,,
-            "can_send_polls": bool,,
-            "can_send_other_messages": bool,,
-            "can_add_web_page_previews": bool,,
-            "can_change_info": bool,,
-            "can_invite_users": bool,,
-            "can_pin_messages": bool,,
-            "can_manage_topics": bool,,
-            "until_date": int
+            "user": {
+                "hinting": User
+            },
+            "is_member": {
+                "hinting": bool
+            },
+            "can_send_messages": {
+                "hinting": bool
+            },
+            "can_send_audios": {
+                "hinting": bool
+            },
+            "can_send_documents": {
+                "hinting": bool
+            },
+            "can_send_photos": {
+                "hinting": bool
+            },
+            "can_send_videos": {
+                "hinting": bool
+            },
+            "can_send_video_notes": {
+                "hinting": bool
+            },
+            "can_send_voice_notes": {
+                "hinting": bool
+            },
+            "can_send_polls": {
+                "hinting": bool
+            },
+            "can_send_other_messages": {
+                "hinting": bool
+            },
+            "can_add_web_page_previews": {
+                "hinting": bool
+            },
+            "can_change_info": {
+                "hinting": bool
+            },
+            "can_invite_users": {
+                "hinting": bool
+            },
+            "can_pin_messages": {
+                "hinting": bool
+            },
+            "can_manage_topics": {
+                "hinting": bool
+            },
+            "until_date": {
+                "hinting": int
+            }
         }
     },
     ChatMemberLeft: {
@@ -1200,7 +2157,9 @@ TYPES = {
             "user": User
         },
         "init_kwargs": {
-            "user": User
+            "user": {
+                "hinting": User
+            }
         }
     },
     ChatMemberBanned: {
@@ -1210,8 +2169,12 @@ TYPES = {
             "until_date": None
         },
         "init_kwargs": {
-            "user": User,,
-            "until_date": int
+            "user": {
+                "hinting": User
+            },
+            "until_date": {
+                "hinting": int
+            }
         }
     },
     ChatMemberUpdated: {
@@ -1226,13 +2189,29 @@ TYPES = {
             "via_chat_folder_invite_link": None
         },
         "init_kwargs": {
-            "chat": Chat,,
-            "from_user": User,,
-            "date": int,,
-            "old_chat_member": list[ChatMember],,
-            "new_chat_member": list[ChatMember],,
-            "invite_link": Optional[ChatInviteLink] ,
-            "via_chat_folder_invite_link": Optional[bool] 
+            "chat": {
+                "hinting": Chat
+            },
+            "from_user": {
+                "hinting": User
+            },
+            "date": {
+                "hinting": int
+            },
+            "old_chat_member": {
+                "hinting": list[ChatMember]
+            },
+            "new_chat_member": {
+                "hinting": list[ChatMember]
+            },
+            "invite_link": {
+                "hinting": Optional[ChatInviteLink],
+                "default_value": None
+            },
+            "via_chat_folder_invite_link": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     ChatJoinRequest: {
@@ -1246,12 +2225,26 @@ TYPES = {
             "invite_link": ChatInviteLink
         },
         "init_kwargs": {
-            "chat": Chat,,
-            "from_user": User,,
-            "user_chat_id": int,,
-            "date": int,,
-            "bio": Optional[str] ,
-            "invite_link": Optional[ChatInviteLink] 
+            "chat": {
+                "hinting": Chat
+            },
+            "from_user": {
+                "hinting": User
+            },
+            "user_chat_id": {
+                "hinting": int
+            },
+            "date": {
+                "hinting": int
+            },
+            "bio": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "invite_link": {
+                "hinting": Optional[ChatInviteLink],
+                "default_value": None
+            }
         }
     },
     ForumTopic: {
@@ -1263,10 +2256,19 @@ TYPES = {
             "icon_custom_emoji_id": None
         },
         "init_kwargs": {
-            "message_thread_id": int,,
-            "name": str,,
-            "icon_color": int,,
-            "icon_custom_emoji_id": Optional[str] 
+            "message_thread_id": {
+                "hinting": int
+            },
+            "name": {
+                "hinting": str
+            },
+            "icon_color": {
+                "hinting": int
+            },
+            "icon_custom_emoji_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     BotCommand: {
@@ -1276,8 +2278,12 @@ TYPES = {
             "description": None
         },
         "init_kwargs": {
-            "command": str,,
-            "description": str
+            "command": {
+                "hinting": str
+            },
+            "description": {
+                "hinting": str
+            }
         }
     },
     BotCommandScopeDefault: {
@@ -1299,20 +2305,28 @@ TYPES = {
     BotCommandScopeChat: {
         "has_dese": False,
         "init_kwargs": {
-            "chat_id": Union[int, str]
+            "chat_id": {
+                "hinting": Union[int, str]
+            }
         }
     },
     BotCommandScopeChatAdministrators: {
         "has_dese": False,
         "init_kwargs": {
-            "chat_id": Union[int, str]
+            "chat_id": {
+                "hinting": Union[int, str]
+            }
         }
     },
     BotCommandScopeChatMember: {
         "has_dese": False,
         "init_kwargs": {
-            "chat_id": Union[int, str],,
-            "user_id": int
+            "chat_id": {
+                "hinting": Union[int, str]
+            },
+            "user_id": {
+                "hinting": int
+            }
         }
     },
     BotName: {
@@ -1321,7 +2335,9 @@ TYPES = {
             "name": None
         },
         "init_kwargs": {
-            "name": str
+            "name": {
+                "hinting": str
+            }
         }
     },
     BotDescription: {
@@ -1330,7 +2346,9 @@ TYPES = {
             "description": None
         },
         "init_kwargs": {
-            "description": str
+            "description": {
+                "hinting": str
+            }
         }
     },
     BotShortDescription: {
@@ -1339,7 +2357,9 @@ TYPES = {
             "short_description": None
         },
         "init_kwargs": {
-            "short_description": str
+            "short_description": {
+                "hinting": str
+            }
         }
     },
     MenuButtonCommands: {
@@ -1354,8 +2374,12 @@ TYPES = {
             "web_app": WebAppInfo
         },
         "init_kwargs": {
-            "text": str,,
-            "web_app": WebAppInfo
+            "text": {
+                "hinting": str
+            },
+            "web_app": {
+                "hinting": WebAppInfo
+            }
         }
     },
     MenuButtonDefault: {
@@ -1370,71 +2394,186 @@ TYPES = {
             "retry_after": None
         },
         "init_kwargs": {
-            "migrate_to_chat_id": Optional[int] ,
-            "retry_after": Optional[int] 
+            "migrate_to_chat_id": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "retry_after": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     InputMediaPhoto: {
         "has_dese": False,
         "init_kwargs": {
-            "media": str,,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "has_spoiler": Optional[bool] 
+            "media": {
+                "hinting": str
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "has_spoiler": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     InputMediaVideo: {
         "has_dese": False,
         "init_kwargs": {
-            "media": str,,
-            "thumbnail": Optional[Union[InputFile, str]] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "width": Optional[int] ,
-            "height": Optional[int] ,
-            "duration": Optional[int] ,
-            "supports_streaming": Optional[bool] ,
-            "has_spoiler": Optional[bool] 
+            "media": {
+                "hinting": str
+            },
+            "thumbnail": {
+                "hinting": Optional[Union[InputFile, str]],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "height": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "duration": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "supports_streaming": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "has_spoiler": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     InputMediaAnimation: {
         "has_dese": False,
         "init_kwargs": {
-            "media": str,,
-            "thumbnail": Optional[Union[InputFile, str]] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "width": Optional[int] ,
-            "height": Optional[int] ,
-            "duration": Optional[int] ,
-            "has_spoiler": Optional[bool] 
+            "media": {
+                "hinting": str
+            },
+            "thumbnail": {
+                "hinting": Optional[Union[InputFile, str]],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "height": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "duration": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "has_spoiler": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     InputMediaAudio: {
         "has_dese": False,
         "init_kwargs": {
-            "media": str,,
-            "thumbnail": Optional[Union[InputFile, str]] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "duration": Optional[int] ,
-            "performer": Optional[str] ,
-            "title": Optional[str] 
+            "media": {
+                "hinting": str
+            },
+            "thumbnail": {
+                "hinting": Optional[Union[InputFile, str]],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "duration": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "performer": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     InputMediaDocument: {
         "has_dese": False,
         "init_kwargs": {
-            "media": str,,
-            "thumbnail": Optional[Union[InputFile, str]] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "disable_content_type_detection": Optional[bool] 
+            "media": {
+                "hinting": str
+            },
+            "thumbnail": {
+                "hinting": Optional[Union[InputFile, str]],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "disable_content_type_detection": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     MaskPosition: {
@@ -1446,10 +2585,18 @@ TYPES = {
             "scale": None
         },
         "init_kwargs": {
-            "point": str,,
-            "x_shift": float,,
-            "y_shift": float,,
-            "scale": float
+            "point": {
+                "hinting": str
+            },
+            "x_shift": {
+                "hinting": float
+            },
+            "y_shift": {
+                "hinting": float
+            },
+            "scale": {
+                "hinting": float
+            }
         }
     },
     Sticker: {
@@ -1472,21 +2619,59 @@ TYPES = {
             "file_size": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "type": str,,
-            "width": int,,
-            "height": int,,
-            "is_animated": bool,,
-            "is_video": bool,,
-            "thumbnail": Optional[PhotoSize] ,
-            "emoji": Optional[str] ,
-            "set_name": Optional[str] ,
-            "premium_animation": Optional[File] ,
-            "mask_position": Optional[MaskPosition] ,
-            "custom_emoji_id": Optional[str] ,
-            "needs_repainting": Optional[Literal[True]] ,
-            "file_size": Optional[int] 
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "type": {
+                "hinting": str
+            },
+            "width": {
+                "hinting": int
+            },
+            "height": {
+                "hinting": int
+            },
+            "is_animated": {
+                "hinting": bool
+            },
+            "is_video": {
+                "hinting": bool
+            },
+            "thumbnail": {
+                "hinting": Optional[PhotoSize],
+                "default_value": None
+            },
+            "emoji": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "set_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "premium_animation": {
+                "hinting": Optional[File],
+                "default_value": None
+            },
+            "mask_position": {
+                "hinting": Optional[MaskPosition],
+                "default_value": None
+            },
+            "custom_emoji_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "needs_repainting": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "file_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     StickerSet: {
@@ -1501,22 +2686,47 @@ TYPES = {
             "thumbnail": PhotoSize
         },
         "init_kwargs": {
-            "name": str,,
-            "title": str,,
-            "sticker_type": str,,
-            "is_animated": bool,,
-            "is_video": bool,,
-            "stickers": list[Sticker],,
-            "thumbnail": Optional[PhotoSize] 
+            "name": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "sticker_type": {
+                "hinting": str
+            },
+            "is_animated": {
+                "hinting": bool
+            },
+            "is_video": {
+                "hinting": bool
+            },
+            "stickers": {
+                "hinting": list[Sticker]
+            },
+            "thumbnail": {
+                "hinting": Optional[PhotoSize],
+                "default_value": None
+            }
         }
     },
     InputSticker: {
         "has_dese": False,
         "init_kwargs": {
-            "sticker": Union[InputFile, str],,
-            "emoji_list": list[str],,
-            "mask_position": Optional[MaskPosition] ,
-            "keywords": Optional[list[str]] 
+            "sticker": {
+                "hinting": Union[InputFile, str]
+            },
+            "emoji_list": {
+                "hinting": list[str]
+            },
+            "mask_position": {
+                "hinting": Optional[MaskPosition],
+                "default_value": None
+            },
+            "keywords": {
+                "hinting": Optional[list[str]],
+                "default_value": None
+            }
         }
     },
     InlineQuery: {
@@ -1530,383 +2740,1044 @@ TYPES = {
             "location": Location
         },
         "init_kwargs": {
-            "id": str,,
-            "from_user": User,,
-            "query": str,,
-            "offset": str,,
-            "chat_type": Optional[str] ,
-            "location": Optional[Location] 
+            "id": {
+                "hinting": str
+            },
+            "from_user": {
+                "hinting": User
+            },
+            "query": {
+                "hinting": str
+            },
+            "offset": {
+                "hinting": str
+            },
+            "chat_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "location": {
+                "hinting": Optional[Location],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultsButton: {
         "has_dese": False,
         "init_kwargs": {
-            "text": str,,
-            "web_app": Optional[WebAppInfo] ,
-            "start_parameter": Optional[str] 
+            "text": {
+                "hinting": str
+            },
+            "web_app": {
+                "hinting": Optional[WebAppInfo],
+                "default_value": None
+            },
+            "start_parameter": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     InputTextMessageContent: {
         "has_dese": False,
         "init_kwargs": {
-            "message_text": str,,
-            "parse_mode": Optional[str] ,
-            "entities": Optional[list[MessageEntity]] ,
-            "link_preview_options": Optional[LinkPreviewOptions] 
+            "message_text": {
+                "hinting": str
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "link_preview_options": {
+                "hinting": Optional[LinkPreviewOptions],
+                "default_value": None
+            }
         }
     },
     InputLocationMessageContent: {
         "has_dese": False,
         "init_kwargs": {
-            "latitude": float,,
-            "longitude": float,,
-            "horizontal_accuracy": Optional[float] ,
-            "live_period": Optional[int] ,
-            "heading": Optional[int] ,
-            "proximity_alert_radius": Optional[int] 
+            "latitude": {
+                "hinting": float
+            },
+            "longitude": {
+                "hinting": float
+            },
+            "horizontal_accuracy": {
+                "hinting": Optional[float],
+                "default_value": None
+            },
+            "live_period": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "heading": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "proximity_alert_radius": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     InputVenueMessageContent: {
         "has_dese": False,
         "init_kwargs": {
-            "latitude": float,,
-            "longitude": float,,
-            "title": str,,
-            "address": str,,
-            "foursquare_id": Optional[str] ,
-            "foursquare_type": Optional[str] ,
-            "google_place_id": Optional[str] ,
-            "google_place_type": Optional[str] 
+            "latitude": {
+                "hinting": float
+            },
+            "longitude": {
+                "hinting": float
+            },
+            "title": {
+                "hinting": str
+            },
+            "address": {
+                "hinting": str
+            },
+            "foursquare_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "foursquare_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "google_place_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "google_place_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     InputContactMessageContent: {
         "has_dese": False,
         "init_kwargs": {
-            "phone_number": str,,
-            "first_name": str,,
-            "last_name": Optional[str] ,
-            "vcard": Optional[str] 
+            "phone_number": {
+                "hinting": str
+            },
+            "first_name": {
+                "hinting": str
+            },
+            "last_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "vcard": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     InputInvoiceMessageContent: {
         "has_dese": False,
         "init_kwargs": {
-            "title": str,,
-            "description": str,,
-            "payload": str,,
-            "provider_token": str,,
-            "currency": str,,
-            "prices": list[LabeledPrice],,
-            "max_tip_amount": Optional[int] ,
-            "suggested_tip_amounts": Optional[list[int]] ,
-            "provider_data": Optional[str] ,
-            "photo_url": Optional[str] ,
-            "photo_size": Optional[int] ,
-            "photo_width": Optional[int] ,
-            "photo_height": Optional[int] ,
-            "need_name": Optional[bool] ,
-            "need_phone_number": Optional[bool] ,
-            "need_email": Optional[bool] ,
-            "need_shipping_address": Optional[bool] ,
-            "send_phone_number_to_provider": Optional[bool] ,
-            "send_email_to_provider": Optional[bool] ,
-            "is_flexible": Optional[bool] 
+            "title": {
+                "hinting": str
+            },
+            "description": {
+                "hinting": str
+            },
+            "payload": {
+                "hinting": str
+            },
+            "provider_token": {
+                "hinting": str
+            },
+            "currency": {
+                "hinting": str
+            },
+            "prices": {
+                "hinting": list[LabeledPrice]
+            },
+            "max_tip_amount": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "suggested_tip_amounts": {
+                "hinting": Optional[list[int]],
+                "default_value": None
+            },
+            "provider_data": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "photo_url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "photo_size": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "photo_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "photo_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "need_name": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "need_phone_number": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "need_email": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "need_shipping_address": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "send_phone_number_to_provider": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "send_email_to_provider": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "is_flexible": {
+                "hinting": Optional[bool],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultArticle: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "title": str,,
-            "input_message_content": InputMessageContent,,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "url": Optional[str] ,
-            "hide_url": Optional[bool] ,
-            "description": Optional[str] ,
-            "thumbnail_url": Optional[str] ,
-            "thumbnail_width": Optional[int] ,
-            "thumbnail_height": Optional[int] 
+            "id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "input_message_content": {
+                "hinting": InputMessageContent
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "hide_url": {
+                "hinting": Optional[bool],
+                "default_value": None
+            },
+            "description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "thumbnail_url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "thumbnail_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "thumbnail_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultPhoto: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "photo_url": str,,
-            "thumbnail_url": str,,
-            "photo_width": Optional[int] ,
-            "photo_height": Optional[int] ,
-            "title": Optional[str] ,
-            "description": Optional[str] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "photo_url": {
+                "hinting": str
+            },
+            "thumbnail_url": {
+                "hinting": str
+            },
+            "photo_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "photo_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultGif: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "gif_url": str,,
-            "thumbnail_url": str,,
-            "gif_width": Optional[int] ,
-            "gif_height": Optional[int] ,
-            "gif_duration": Optional[int] ,
-            "thumbnail_mime_type": Optional[str] ,
-            "title": Optional[str] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "gif_url": {
+                "hinting": str
+            },
+            "thumbnail_url": {
+                "hinting": str
+            },
+            "gif_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "gif_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "gif_duration": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "thumbnail_mime_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultMpeg4Gif: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "mpeg4_url": str,,
-            "thumbnail_url": str,,
-            "mpeg4_width": Optional[int] ,
-            "mpeg4_height": Optional[int] ,
-            "mpeg4_duration": Optional[int] ,
-            "thumbnail_mime_type": Optional[str] ,
-            "title": Optional[str] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "mpeg4_url": {
+                "hinting": str
+            },
+            "thumbnail_url": {
+                "hinting": str
+            },
+            "mpeg4_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "mpeg4_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "mpeg4_duration": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "thumbnail_mime_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultVideo: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "video_url": str,,
-            "mime_type": str,,
-            "thumbnail_url": str,,
-            "title": str,,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "video_width": Optional[int] ,
-            "video_height": Optional[int] ,
-            "video_duration": Optional[int] ,
-            "description": Optional[str] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "video_url": {
+                "hinting": str
+            },
+            "mime_type": {
+                "hinting": str
+            },
+            "thumbnail_url": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "video_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "video_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "video_duration": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultAudio: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "audio_url": str,,
-            "title": str,,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "performer": Optional[str] ,
-            "audio_duration": Optional[int] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "audio_url": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "performer": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "audio_duration": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultVoice: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "voice_url": str,,
-            "title": str,,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "voice_duration": Optional[int] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "voice_url": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "voice_duration": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultDocument: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "title": str,,
-            "document_url": str,,
-            "mime_type": str,,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "description": Optional[str] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] ,
-            "thumbnail_url": Optional[str] ,
-            "thumbnail_width": Optional[int] ,
-            "thumbnail_height": Optional[int] 
+            "id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "document_url": {
+                "hinting": str
+            },
+            "mime_type": {
+                "hinting": str
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            },
+            "thumbnail_url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "thumbnail_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "thumbnail_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultLocation: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "latitude": float,,
-            "longitude": float,,
-            "title": str,,
-            "horizontal_accuracy": Optional[float] ,
-            "live_period": Optional[int] ,
-            "heading": Optional[int] ,
-            "proximity_alert_radius": Optional[int] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] ,
-            "thumbnail_url": Optional[str] ,
-            "thumbnail_width": Optional[int] ,
-            "thumbnail_height": Optional[int] 
+            "id": {
+                "hinting": str
+            },
+            "latitude": {
+                "hinting": float
+            },
+            "longitude": {
+                "hinting": float
+            },
+            "title": {
+                "hinting": str
+            },
+            "horizontal_accuracy": {
+                "hinting": Optional[float],
+                "default_value": None
+            },
+            "live_period": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "heading": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "proximity_alert_radius": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            },
+            "thumbnail_url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "thumbnail_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "thumbnail_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultVenue: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "latitude": float,,
-            "longitude": float,,
-            "title": str,,
-            "address": str,,
-            "foursquare_id": Optional[str] ,
-            "foursquare_type": Optional[str] ,
-            "google_place_id": Optional[str] ,
-            "google_place_type": Optional[str] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] ,
-            "thumbnail_url": Optional[str] ,
-            "thumbnail_width": Optional[int] ,
-            "thumbnail_height": Optional[int] 
+            "id": {
+                "hinting": str
+            },
+            "latitude": {
+                "hinting": float
+            },
+            "longitude": {
+                "hinting": float
+            },
+            "title": {
+                "hinting": str
+            },
+            "address": {
+                "hinting": str
+            },
+            "foursquare_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "foursquare_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "google_place_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "google_place_type": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            },
+            "thumbnail_url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "thumbnail_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "thumbnail_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultContact: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "phone_number": str,,
-            "first_name": str,,
-            "last_name": Optional[str] ,
-            "vcard": Optional[str] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] ,
-            "thumbnail_url": Optional[str] ,
-            "thumbnail_width": Optional[int] ,
-            "thumbnail_height": Optional[int] 
+            "id": {
+                "hinting": str
+            },
+            "phone_number": {
+                "hinting": str
+            },
+            "first_name": {
+                "hinting": str
+            },
+            "last_name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "vcard": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            },
+            "thumbnail_url": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "thumbnail_width": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "thumbnail_height": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultGame: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "game_short_name": str,,
-            "reply_markup": Optional[InlineKeyboardMarkup] 
+            "id": {
+                "hinting": str
+            },
+            "game_short_name": {
+                "hinting": str
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultCachedPhoto: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "photo_file_id": str,,
-            "title": Optional[str] ,
-            "description": Optional[str] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "photo_file_id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultCachedGif: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "gif_file_id": str,,
-            "title": Optional[str] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "gif_file_id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultCachedMpeg4Gif: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "mpeg4_file_id": str,,
-            "title": Optional[str] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "mpeg4_file_id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultCachedSticker: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "sticker_file_id": str,,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "sticker_file_id": {
+                "hinting": str
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultCachedDocument: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "title": str,,
-            "document_file_id": str,,
-            "description": Optional[str] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "document_file_id": {
+                "hinting": str
+            },
+            "description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultCachedVideo: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "video_file_id": str,,
-            "title": str,,
-            "description": Optional[str] ,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "video_file_id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultCachedVoice: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "voice_file_id": str,,
-            "title": str,,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "voice_file_id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     InlineQueryResultCachedAudio: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "audio_file_id": str,,
-            "caption": Optional[str] ,
-            "parse_mode": Optional[str] ,
-            "caption_entities": Optional[list[MessageEntity]] ,
-            "reply_markup": Optional[InlineKeyboardMarkup] ,
-            "input_message_content": Optional[InputMessageContent] 
+            "id": {
+                "hinting": str
+            },
+            "audio_file_id": {
+                "hinting": str
+            },
+            "caption": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "parse_mode": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "caption_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "reply_markup": {
+                "hinting": Optional[InlineKeyboardMarkup],
+                "default_value": None
+            },
+            "input_message_content": {
+                "hinting": Optional[InputMessageContent],
+                "default_value": None
+            }
         }
     },
     ChosenInlineResult: {
@@ -1919,11 +3790,23 @@ TYPES = {
             "query": None
         },
         "init_kwargs": {
-            "result_id": str,,
-            "from_user": User,,
-            "query": str,,
-            "location": Optional[Location] ,
-            "inline_message_id": Optional[str] 
+            "result_id": {
+                "hinting": str
+            },
+            "from_user": {
+                "hinting": User
+            },
+            "query": {
+                "hinting": str
+            },
+            "location": {
+                "hinting": Optional[Location],
+                "default_value": None
+            },
+            "inline_message_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     SentWebAppMessage: {
@@ -1932,7 +3815,10 @@ TYPES = {
             "inline_message_id": None
         },
         "init_kwargs": {
-            "inline_message_id": Optional[str] 
+            "inline_message_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     Invoice: {
@@ -1945,11 +3831,21 @@ TYPES = {
             "total_amount": None
         },
         "init_kwargs": {
-            "title": str,,
-            "description": str,,
-            "start_parameter": str,,
-            "currency": str,,
-            "total_amount": int
+            "title": {
+                "hinting": str
+            },
+            "description": {
+                "hinting": str
+            },
+            "start_parameter": {
+                "hinting": str
+            },
+            "currency": {
+                "hinting": str
+            },
+            "total_amount": {
+                "hinting": int
+            }
         }
     },
     ShippingAddress: {
@@ -1963,12 +3859,24 @@ TYPES = {
             "post_code": None
         },
         "init_kwargs": {
-            "country_code": str,,
-            "state": str,,
-            "city": str,,
-            "street_line1": str,,
-            "street_line2": str,,
-            "post_code": str
+            "country_code": {
+                "hinting": str
+            },
+            "state": {
+                "hinting": str
+            },
+            "city": {
+                "hinting": str
+            },
+            "street_line1": {
+                "hinting": str
+            },
+            "street_line2": {
+                "hinting": str
+            },
+            "post_code": {
+                "hinting": str
+            }
         }
     },
     OrderInfo: {
@@ -1980,18 +3888,36 @@ TYPES = {
             "shipping_address": ShippingAddress
         },
         "init_kwargs": {
-            "name": Optional[str] ,
-            "phone_number": Optional[str] ,
-            "email": Optional[str] ,
-            "shipping_address": Optional[ShippingAddress] 
+            "name": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "phone_number": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "email": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "shipping_address": {
+                "hinting": Optional[ShippingAddress],
+                "default_value": None
+            }
         }
     },
     ShippingOption: {
         "has_dese": False,
         "init_kwargs": {
-            "id": str,,
-            "title": str,,
-            "prices": list[LabeledPrice]
+            "id": {
+                "hinting": str
+            },
+            "title": {
+                "hinting": str
+            },
+            "prices": {
+                "hinting": list[LabeledPrice]
+            }
         }
     },
     SuccessfulPayment: {
@@ -2006,13 +3932,29 @@ TYPES = {
             "provider_payment_charge_id": None
         },
         "init_kwargs": {
-            "currency": str,,
-            "total_amount": int,,
-            "invoice_payload": str,,
-            "telegram_payment_charge_id": str,,
-            "provider_payment_charge_id": str,,
-            "shipping_option_id": Optional[str] ,
-            "order_info": Optional[OrderInfo] 
+            "currency": {
+                "hinting": str
+            },
+            "total_amount": {
+                "hinting": int
+            },
+            "invoice_payload": {
+                "hinting": str
+            },
+            "telegram_payment_charge_id": {
+                "hinting": str
+            },
+            "provider_payment_charge_id": {
+                "hinting": str
+            },
+            "shipping_option_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "order_info": {
+                "hinting": Optional[OrderInfo],
+                "default_value": None
+            }
         }
     },
     ShippingQuery: {
@@ -2024,10 +3966,18 @@ TYPES = {
             "shipping_address": ShippingAddress
         },
         "init_kwargs": {
-            "id": str,,
-            "from_user": User,,
-            "invoice_payload": str,,
-            "shipping_address": ShippingAddress
+            "id": {
+                "hinting": str
+            },
+            "from_user": {
+                "hinting": User
+            },
+            "invoice_payload": {
+                "hinting": str
+            },
+            "shipping_address": {
+                "hinting": ShippingAddress
+            }
         }
     },
     PreCheckoutQuery: {
@@ -2042,13 +3992,29 @@ TYPES = {
             "order_info": OrderInfo
         },
         "init_kwargs": {
-            "id": str,,
-            "from_user": User,,
-            "currency": str,,
-            "total_amount": int,,
-            "invoice_payload": str,,
-            "shipping_option_id": Optional[str] ,
-            "order_info": Optional[OrderInfo] 
+            "id": {
+                "hinting": str
+            },
+            "from_user": {
+                "hinting": User
+            },
+            "currency": {
+                "hinting": str
+            },
+            "total_amount": {
+                "hinting": int
+            },
+            "invoice_payload": {
+                "hinting": str
+            },
+            "shipping_option_id": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "order_info": {
+                "hinting": Optional[OrderInfo],
+                "default_value": None
+            }
         }
     },
     PassportFile: {
@@ -2060,10 +4026,18 @@ TYPES = {
             "file_date": None
         },
         "init_kwargs": {
-            "file_id": str,,
-            "file_unique_id": str,,
-            "file_size": int,,
-            "file_date": int
+            "file_id": {
+                "hinting": str
+            },
+            "file_unique_id": {
+                "hinting": str
+            },
+            "file_size": {
+                "hinting": int
+            },
+            "file_date": {
+                "hinting": int
+            }
         }
     },
     EncryptedPassportElement: {
@@ -2081,16 +4055,44 @@ TYPES = {
             "translation": Optional[list[PassportFile]]
         },
         "init_kwargs": {
-            "type": str,,
-            "hash": str,,
-            "data": Optional[str] ,
-            "phone_number": Optional[str] ,
-            "email": Optional[str] ,
-            "files": Optional[list[PassportFile]] ,
-            "front_side": Optional[PassportFile] ,
-            "reverse_side": Optional[PassportFile] ,
-            "selfie": Optional[PassportFile] ,
-            "translation": Optional[list[PassportFile]] 
+            "type": {
+                "hinting": str
+            },
+            "hash": {
+                "hinting": str
+            },
+            "data": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "phone_number": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "email": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "files": {
+                "hinting": Optional[list[PassportFile]],
+                "default_value": None
+            },
+            "front_side": {
+                "hinting": Optional[PassportFile],
+                "default_value": None
+            },
+            "reverse_side": {
+                "hinting": Optional[PassportFile],
+                "default_value": None
+            },
+            "selfie": {
+                "hinting": Optional[PassportFile],
+                "default_value": None
+            },
+            "translation": {
+                "hinting": Optional[list[PassportFile]],
+                "default_value": None
+            }
         }
     },
     EncryptedCredentials: {
@@ -2101,9 +4103,15 @@ TYPES = {
             "secret": None
         },
         "init_kwargs": {
-            "data": str,,
-            "hash": str,,
-            "secret": str
+            "data": {
+                "hinting": str
+            },
+            "hash": {
+                "hinting": str
+            },
+            "secret": {
+                "hinting": str
+            }
         }
     },
     PassportData: {
@@ -2113,81 +4121,183 @@ TYPES = {
             "credentials": EncryptedCredentials
         },
         "init_kwargs": {
-            "data": list[EncryptedPassportElement],,
-            "credentials": EncryptedCredentials
+            "data": {
+                "hinting": list[EncryptedPassportElement]
+            },
+            "credentials": {
+                "hinting": EncryptedCredentials
+            }
         }
     },
     PassportElementErrorDataField: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Literal[,
-            "field_name": str,,
-            "data_hash": str,,
-            "message": str
+            "type": {
+                "hinting": Literal[
+            },
+            "'": {
+                "hinting": None
+            },
+            "]": {
+                "hinting": None
+            },
+            "field_name": {
+                "hinting": str
+            },
+            "data_hash": {
+                "hinting": str
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     PassportElementErrorFrontSide: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Literal[,
-            "file_hash": str,,
-            "message": str
+            "type": {
+                "hinting": Literal[
+            },
+            "'": {
+                "hinting": None
+            },
+            "]": {
+                "hinting": None
+            },
+            "file_hash": {
+                "hinting": str
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     PassportElementErrorReverseSide: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Literal['driver_license', 'identity_card'],,
-            "file_hash": str,,
-            "message": str
+            "type": {
+                "hinting": Literal['driver_license', 'identity_card']
+            },
+            "file_hash": {
+                "hinting": str
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     PassportElementErrorSelfie: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Literal[,
-            "file_hash": str,,
-            "message": str
+            "type": {
+                "hinting": Literal[
+            },
+            "'": {
+                "hinting": None
+            },
+            "]": {
+                "hinting": None
+            },
+            "file_hash": {
+                "hinting": str
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     PassportElementErrorFile: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Literal[,
-            "file_hash": str,,
-            "message": str
+            "type": {
+                "hinting": Literal[
+            },
+            "'": {
+                "hinting": None
+            },
+            "]": {
+                "hinting": None
+            },
+            "file_hash": {
+                "hinting": str
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     PassportElementErrorFiles: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Literal[,
-            "file_hashes": list[str],,
-            "message": str
+            "type": {
+                "hinting": Literal[
+            },
+            "'": {
+                "hinting": None
+            },
+            "]": {
+                "hinting": None
+            },
+            "file_hashes": {
+                "hinting": list[str]
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     PassportElementErrorTranslationFile: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Literal[,
-            "file_hash": str,,
-            "message": str
+            "type": {
+                "hinting": Literal[
+            },
+            "'": {
+                "hinting": None
+            },
+            "]": {
+                "hinting": None
+            },
+            "file_hash": {
+                "hinting": str
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     PassportElementErrorTranslationFiles: {
         "has_dese": False,
         "init_kwargs": {
-            "type": Literal[,
-            "file_hashes": list[str],,
-            "message": str
+            "type": {
+                "hinting": Literal[
+            },
+            "'": {
+                "hinting": None
+            },
+            "]": {
+                "hinting": None
+            },
+            "file_hashes": {
+                "hinting": list[str]
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     PassportElementErrorUnspecified: {
         "has_dese": False,
         "init_kwargs": {
-            "type": str,,
-            "element_hash": str,,
-            "message": str
+            "type": {
+                "hinting": str
+            },
+            "element_hash": {
+                "hinting": str
+            },
+            "message": {
+                "hinting": str
+            }
         }
     },
     Game: {
@@ -2201,12 +4311,27 @@ TYPES = {
             "animation": Animation
         },
         "init_kwargs": {
-            "title": str,,
-            "description": str,,
-            "photo": list[PhotoSize],,
-            "text": Optional[str] ,
-            "text_entities": Optional[list[MessageEntity]] ,
-            "animation": Optional[Animation] 
+            "title": {
+                "hinting": str
+            },
+            "description": {
+                "hinting": str
+            },
+            "photo": {
+                "hinting": list[PhotoSize]
+            },
+            "text": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "text_entities": {
+                "hinting": Optional[list[MessageEntity]],
+                "default_value": None
+            },
+            "animation": {
+                "hinting": Optional[Animation],
+                "default_value": None
+            }
         }
     },
     GameHighScore: {
@@ -2217,9 +4342,15 @@ TYPES = {
             "score": None
         },
         "init_kwargs": {
-            "position": int,,
-            "user": User,,
-            "score": int
+            "position": {
+                "hinting": int
+            },
+            "user": {
+                "hinting": User
+            },
+            "score": {
+                "hinting": int
+            }
         }
     },
     GiveawayCreated: {
@@ -2243,17 +4374,45 @@ TYPES = {
             "prize_description": None
         },
         "init_kwargs": {
-            "chat": Chat,,
-            "giveaway_message_id": int,,
-            "winners_selection_date": int,,
-            "winner_count": int,,
-            "winners": list[User],,
-            "additional_chat_count": Optional[int] ,
-            "premium_subscription_month_count": Optional[int] ,
-            "unclaimed_prize_count": Optional[int] ,
-            "only_new_members": Optional[Literal[True]] ,
-            "was_refunded": Optional[Literal[True]] ,
-            "prize_description": Optional[str] 
+            "chat": {
+                "hinting": Chat
+            },
+            "giveaway_message_id": {
+                "hinting": int
+            },
+            "winners_selection_date": {
+                "hinting": int
+            },
+            "winner_count": {
+                "hinting": int
+            },
+            "winners": {
+                "hinting": list[User]
+            },
+            "additional_chat_count": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "premium_subscription_month_count": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "unclaimed_prize_count": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "only_new_members": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "was_refunded": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "prize_description": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     GiveawayCompleted: {
@@ -2264,9 +4423,17 @@ TYPES = {
             "giveaway_message": Message
         },
         "init_kwargs": {
-            "winner_count": int,,
-            "unclaimed_prize_count": Optional[int] ,
-            "giveaway_message": Optional[Message] 
+            "winner_count": {
+                "hinting": int
+            },
+            "unclaimed_prize_count": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "giveaway_message": {
+                "hinting": Optional[Message],
+                "default_value": None
+            }
         }
     },
     Giveaway: {
@@ -2282,14 +4449,35 @@ TYPES = {
             "premium_subscription_month_count": None
         },
         "init_kwargs": {
-            "chats": list[Chat],,
-            "winners_selection_date": int,,
-            "winner_count": int,,
-            "only_new_members": Optional[Literal[True]] ,
-            "has_public_winners": Optional[Literal[True]] ,
-            "prize_description": Optional[str] ,
-            "country_codes": Optional[list[str]] ,
-            "premium_subscription_month_count": Optional[int] 
+            "chats": {
+                "hinting": list[Chat]
+            },
+            "winners_selection_date": {
+                "hinting": int
+            },
+            "winner_count": {
+                "hinting": int
+            },
+            "only_new_members": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "has_public_winners": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "prize_description": {
+                "hinting": Optional[str],
+                "default_value": None
+            },
+            "country_codes": {
+                "hinting": Optional[list[str]],
+                "default_value": None
+            },
+            "premium_subscription_month_count": {
+                "hinting": Optional[int],
+                "default_value": None
+            }
         }
     },
     MessageOriginUser: {
@@ -2299,8 +4487,12 @@ TYPES = {
             "sender_user": User
         },
         "init_kwargs": {
-            "date": int,,
-            "sender_user": User
+            "date": {
+                "hinting": int
+            },
+            "sender_user": {
+                "hinting": User
+            }
         }
     },
     MessageOriginHiddenUser: {
@@ -2310,8 +4502,12 @@ TYPES = {
             "sender_user_name": None
         },
         "init_kwargs": {
-            "date": int,,
-            "sender_user_name": str
+            "date": {
+                "hinting": int
+            },
+            "sender_user_name": {
+                "hinting": str
+            }
         }
     },
     MessageOriginChat: {
@@ -2322,9 +4518,16 @@ TYPES = {
             "author_signature": None
         },
         "init_kwargs": {
-            "date": int,,
-            "sender_chat": Chat,,
-            "author_signature": Optional[str] 
+            "date": {
+                "hinting": int
+            },
+            "sender_chat": {
+                "hinting": Chat
+            },
+            "author_signature": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     MessageOriginChannel: {
@@ -2336,10 +4539,19 @@ TYPES = {
             "author_signature": None
         },
         "init_kwargs": {
-            "date": int,,
-            "chat": Chat,,
-            "message_id": int,,
-            "author_signature": Optional[str] 
+            "date": {
+                "hinting": int
+            },
+            "chat": {
+                "hinting": Chat
+            },
+            "message_id": {
+                "hinting": int
+            },
+            "author_signature": {
+                "hinting": Optional[str],
+                "default_value": None
+            }
         }
     },
     ExternalReplyInfo: {
@@ -2370,29 +4582,97 @@ TYPES = {
             "venue": Venue
         },
         "init_kwargs": {
-            "origin": MessageOrigin,,
-            "chat": Optional[Chat] ,
-            "message_id": Optional[int] ,
-            "link_preview_options": Optional[LinkPreviewOptions] ,
-            "animation": Optional[Animation] ,
-            "audio": Optional[Audio] ,
-            "document": Optional[Document] ,
-            "photo": Optional[list[PhotoSize]] ,
-            "sticker": Optional[Sticker] ,
-            "story": Optional[Story] ,
-            "video": Optional[Video] ,
-            "video_note": Optional[VideoNote] ,
-            "voice": Optional[Voice] ,
-            "has_media_spoiler": Optional[Literal[True]] ,
-            "contact": Optional[Contact] ,
-            "dice": Optional[Dice] ,
-            "game": Optional[Game] ,
-            "giveaway": Optional[Giveaway] ,
-            "giveaway_winners": Optional[GiveawayWinners] ,
-            "invoice": Optional[Invoice] ,
-            "location": Optional[Location] ,
-            "poll": Optional[Poll] ,
-            "venue": Optional[Venue] 
+            "origin": {
+                "hinting": MessageOrigin
+            },
+            "chat": {
+                "hinting": Optional[Chat],
+                "default_value": None
+            },
+            "message_id": {
+                "hinting": Optional[int],
+                "default_value": None
+            },
+            "link_preview_options": {
+                "hinting": Optional[LinkPreviewOptions],
+                "default_value": None
+            },
+            "animation": {
+                "hinting": Optional[Animation],
+                "default_value": None
+            },
+            "audio": {
+                "hinting": Optional[Audio],
+                "default_value": None
+            },
+            "document": {
+                "hinting": Optional[Document],
+                "default_value": None
+            },
+            "photo": {
+                "hinting": Optional[list[PhotoSize]],
+                "default_value": None
+            },
+            "sticker": {
+                "hinting": Optional[Sticker],
+                "default_value": None
+            },
+            "story": {
+                "hinting": Optional[Story],
+                "default_value": None
+            },
+            "video": {
+                "hinting": Optional[Video],
+                "default_value": None
+            },
+            "video_note": {
+                "hinting": Optional[VideoNote],
+                "default_value": None
+            },
+            "voice": {
+                "hinting": Optional[Voice],
+                "default_value": None
+            },
+            "has_media_spoiler": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            },
+            "contact": {
+                "hinting": Optional[Contact],
+                "default_value": None
+            },
+            "dice": {
+                "hinting": Optional[Dice],
+                "default_value": None
+            },
+            "game": {
+                "hinting": Optional[Game],
+                "default_value": None
+            },
+            "giveaway": {
+                "hinting": Optional[Giveaway],
+                "default_value": None
+            },
+            "giveaway_winners": {
+                "hinting": Optional[GiveawayWinners],
+                "default_value": None
+            },
+            "invoice": {
+                "hinting": Optional[Invoice],
+                "default_value": None
+            },
+            "location": {
+                "hinting": Optional[Location],
+                "default_value": None
+            },
+            "poll": {
+                "hinting": Optional[Poll],
+                "default_value": None
+            },
+            "venue": {
+                "hinting": Optional[Venue],
+                "default_value": None
+            }
         }
     },
     ChatBoostSourcePremium: {
@@ -2401,7 +4681,9 @@ TYPES = {
             "user": User
         },
         "init_kwargs": {
-            "user": User
+            "user": {
+                "hinting": User
+            }
         }
     },
     ChatBoostSourceGiftCode: {
@@ -2410,7 +4692,9 @@ TYPES = {
             "user": User
         },
         "init_kwargs": {
-            "user": User
+            "user": {
+                "hinting": User
+            }
         }
     },
     ChatBoostSourceGiveaway: {
@@ -2421,9 +4705,17 @@ TYPES = {
             "is_unclaimed": None
         },
         "init_kwargs": {
-            "giveaway_message_id": int,,
-            "user": Optional[User] ,
-            "is_unclaimed": Optional[Literal[True]] 
+            "giveaway_message_id": {
+                "hinting": int
+            },
+            "user": {
+                "hinting": Optional[User],
+                "default_value": None
+            },
+            "is_unclaimed": {
+                "hinting": Optional[Literal[True]],
+                "default_value": None
+            }
         }
     },
     ChatBoost: {
@@ -2435,10 +4727,18 @@ TYPES = {
             "source": None
         },
         "init_kwargs": {
-            "boost_id": str,,
-            "add_date": int,,
-            "expiration_date": int,,
-            "source": ChatBoostSource
+            "boost_id": {
+                "hinting": str
+            },
+            "add_date": {
+                "hinting": int
+            },
+            "expiration_date": {
+                "hinting": int
+            },
+            "source": {
+                "hinting": ChatBoostSource
+            }
         }
     },
     UserChatBoosts: {
@@ -2447,7 +4747,9 @@ TYPES = {
             "boosts": list[ChatBoost]
         },
         "init_kwargs": {
-            "boosts": list[ChatBoost]
+            "boosts": {
+                "hinting": list[ChatBoost]
+            }
         }
     },
     ChatBoostUpdated: {
@@ -2457,8 +4759,12 @@ TYPES = {
             "boost": ChatBoost
         },
         "init_kwargs": {
-            "chat": Chat,,
-            "boost": ChatBoost
+            "chat": {
+                "hinting": Chat
+            },
+            "boost": {
+                "hinting": ChatBoost
+            }
         }
     },
     ChatBoostRemoved: {
@@ -2470,10 +4776,18 @@ TYPES = {
             "source": None
         },
         "init_kwargs": {
-            "chat": Chat,,
-            "boost_id": str,,
-            "remove_date": int,,
-            "source": ChatBoostSource
+            "chat": {
+                "hinting": Chat
+            },
+            "boost_id": {
+                "hinting": str
+            },
+            "remove_date": {
+                "hinting": int
+            },
+            "source": {
+                "hinting": ChatBoostSource
+            }
         }
     },
     Update: {
@@ -2500,25 +4814,81 @@ TYPES = {
             "removed_chat_boost": ChatBoostRemoved
         },
         "init_kwargs": {
-            "update_id": int,,
-            "message": Optional[Message] ,
-            "edited_message": Optional[Message] ,
-            "channel_post": Optional[Message] ,
-            "edited_channel_post": Optional[Message] ,
-            "message_reaction": Optional[MessageReactionUpdated] ,
-            "message_reaction_count": Optional[MessageReactionCountUpdated] ,
-            "inline_query": Optional[InlineQuery] ,
-            "chosen_inline_result": Optional[ChosenInlineResult] ,
-            "callback_query": Optional[CallbackQuery] ,
-            "shipping_query": Optional[ShippingQuery] ,
-            "pre_checkout_query": Optional[PreCheckoutQuery] ,
-            "poll": Optional[Poll] ,
-            "poll_answer": Optional[PollAnswer] ,
-            "my_chat_member": Optional[ChatMemberUpdated] ,
-            "chat_member": Optional[ChatMemberUpdated] ,
-            "chat_join_request": Optional[ChatJoinRequest] ,
-            "chat_boost": Optional[ChatBoostUpdated] ,
-            "removed_chat_boost": Optional[ChatBoostRemoved] 
+            "update_id": {
+                "hinting": int
+            },
+            "message": {
+                "hinting": Optional[Message],
+                "default_value": None
+            },
+            "edited_message": {
+                "hinting": Optional[Message],
+                "default_value": None
+            },
+            "channel_post": {
+                "hinting": Optional[Message],
+                "default_value": None
+            },
+            "edited_channel_post": {
+                "hinting": Optional[Message],
+                "default_value": None
+            },
+            "message_reaction": {
+                "hinting": Optional[MessageReactionUpdated],
+                "default_value": None
+            },
+            "message_reaction_count": {
+                "hinting": Optional[MessageReactionCountUpdated],
+                "default_value": None
+            },
+            "inline_query": {
+                "hinting": Optional[InlineQuery],
+                "default_value": None
+            },
+            "chosen_inline_result": {
+                "hinting": Optional[ChosenInlineResult],
+                "default_value": None
+            },
+            "callback_query": {
+                "hinting": Optional[CallbackQuery],
+                "default_value": None
+            },
+            "shipping_query": {
+                "hinting": Optional[ShippingQuery],
+                "default_value": None
+            },
+            "pre_checkout_query": {
+                "hinting": Optional[PreCheckoutQuery],
+                "default_value": None
+            },
+            "poll": {
+                "hinting": Optional[Poll],
+                "default_value": None
+            },
+            "poll_answer": {
+                "hinting": Optional[PollAnswer],
+                "default_value": None
+            },
+            "my_chat_member": {
+                "hinting": Optional[ChatMemberUpdated],
+                "default_value": None
+            },
+            "chat_member": {
+                "hinting": Optional[ChatMemberUpdated],
+                "default_value": None
+            },
+            "chat_join_request": {
+                "hinting": Optional[ChatJoinRequest],
+                "default_value": None
+            },
+            "chat_boost": {
+                "hinting": Optional[ChatBoostUpdated],
+                "default_value": None
+            },
+            "removed_chat_boost": {
+                "hinting": Optional[ChatBoostRemoved],
+                "default_value": None
+            }
         }
     }
 }
