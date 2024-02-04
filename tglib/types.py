@@ -2555,7 +2555,7 @@ class CallbackQuery(TelegramType):
         from_user: User,
         chat_instance: str,
         message: Optional[MaybeInaccessibleMessage] = None,
-        inline_message_id: str = None,
+        inline_message_id: Optional[str] = None,
         data: Optional[str] = None,
         game_short_name: Optional[str] = None
     ):

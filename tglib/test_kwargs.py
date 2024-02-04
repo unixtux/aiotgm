@@ -1,15 +1,15 @@
 #!/bin/python3
 
 from logging import DEBUG, INFO
+from typing import Optional, Any
 
 LOGGER_LEVEL = INFO
-#LOGGER_LEVEL = DEBUG
+LOGGER_LEVEL = DEBUG
 
 import re
 import json
 import tglib
 from tglib.logger import get_logger
-
 
 with open('types.py') as r:
     LINES = r.readlines()
@@ -22,15 +22,63 @@ LINE_N = 0
 logger = get_logger('TypeChecker')
 logger.setLevel(LOGGER_LEVEL)
 
-def get_init_kwargs(__type: str) -> dict[str, str]:
+#print(json.dumps(LINES[300: 420], indent=2))
+
+def get_init_kwargs(__type: str) -> dict[str, Any]:
     self_found = False
     global LINE_N
     init_kwargs = {}
     while True:
-        return
+
+        if re.match(r'\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n', LINES[LINE_N]):
+            return init_kwargs
+
+        elif re.match(r'\s*def\s*__init__\s*\(\s*\n', LINES[LINE_N]):
+            LINE_N += 1
+            continue
+
+        elif re.match(r'\s*self\s*,\s*\n', LINES[LINE_N]):
+            self_found = True
+            LINE_N += 1
+            continue
+
+        elif re.match(r'\s*\)\s*:\s*\n', LINES[LINE_N]):
+            if self_found:
+                return init_kwargs
+            else: # err 555
+                raise ValueError('555 at line', LINE_N, LINES[LINE_N])
+
+        elif re.match(r'\s*.*\s*:\s*.*\s*=\s*.*\s*,*\n', LINES[LINE_N]):
+            match = re.match(r'\s*(.*)\s*:\s*(.*)\s*=\s*.*\s*,*\n', LINES[LINE_N])
+            if not match: # err 666
+                return
+                raise ValueError('666 at line', LINE_N, LINES[LINE_N])
+            arg = match.group(1)
+            hinting = match.group(2)
+            if not hinting.startswith('Optional'): # err 777
+                return
+                raise ValueError('777 at line', LINE_N, LINES[LINE_N], hinting)
+            init_kwargs.update({arg: hinting})
+            LINE_N += 1
+
+        elif re.match(r'\s*.*\s*:\s*.*,*\n', LINES[LINE_N]):
+            match = re.match(r'\s*(.*)\s*:\s*(.*)\s*,*\n', LINES[LINE_N])
+            if not match: # err 666
+                return
+                raise ValueError('666 at line', LINE_N, LINES[LINE_N])
+            arg = match.group(1)
+            hinting = match.group(2)
+            init_kwargs.update({arg: hinting})
+            LINE_N += 1
+
+        else: # err 444
+            logger.debug(f'\nSKIPPED {LINE_N} {LINES[LINE_N]!r}')
+            LINE_N += 1
+            continue
+            raise ValueError('444 at line', LINE_N, LINES[LINE_N])
 
 
-def get_dese_kwargs(__type: str) -> dict[str, str]:
+def get_dese_kwargs(__type: str) -> dict[str, Any]:
     global LINE_N
     dese_kwargs = {}
     while True:
@@ -57,17 +105,17 @@ def get_dese_kwargs(__type: str) -> dict[str, str]:
             if (group[0] == group[1] == group[2]):
                 dese_kwargs.update({group[0]: {'tg_type': None, 'optional': True}})
             else: # err 111
-                raise ValueError('111 at line', LINE_N, '\n' + LINES[LINE_N])
+                raise ValueError('111 at line', LINE_N, LINES[LINE_N])
 
         elif dese_default:
             group = dese_default.group(1, 2)
             if (group[0] == group[1]):
                 dese_kwargs.update({group[0]: {'tg_type': None, 'optional': False}})
             else: # err 222
-                raise ValueError('222 at line', LINE_N, '\n' + LINES[LINE_N])
+                raise ValueError('222 at line', LINE_N, LINES[LINE_N])
 
         else: # err 333
-            raise ValueError('333 at line', LINE_N, '\n' + LINES[LINE_N])
+            raise ValueError('333 at line', LINE_N, LINES[LINE_N])
 
         dese_tg_type = re.match(
             r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*(.*?)\s*\._dese",
@@ -127,6 +175,13 @@ while LINE_N != len(LINES):
             TG_TYPES += 1
 
     if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
+
+        if not re.match(r'\s*@_parse_result\s*\n', LINES[LINE_N - 1]): # err 420
+            raise ValueError('420 at line', LINE_N - 1, LINES[LINE_N - 1])
+
+        if not re.match(r'\s*@classmethod\s*\n', LINES[LINE_N - 2]):
+            raise ValueError('421 at line', LINE_N - 2, LINES[LINE_N - 2]) # err 421
+
         TYPES[type]['has_dese'] = True
         TYPES[type]['dese_kwargs'] = get_dese_kwargs(type)
 
