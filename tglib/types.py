@@ -208,14 +208,14 @@ except ImportError:
     )
 
 
-def _parse_dict(res: dict, /) -> dict:
+def _check_dict(res: dict, /) -> dict:
     '''
     Function to replace dict key 'from' with 'from_user'.
     '''
     if not isinstance(res, dict):
         raise TypeError(
             'Expected dict as parameter in'
-            f' _parse_dict(), got {res.__class__.__name__}.'
+            f' _check_dict(), got {res.__class__.__name__}.'
         )
     if 'from' in res:
         res['from_user'] = res['from']
@@ -240,7 +240,7 @@ def _parse_result(_dese: Callable[[type, Optional[dict]], Optional[TelegramType]
 
             if res is None: return None
 
-            return _dese(cls, _parse_dict(res))
+            return _dese(cls, _check_dict(res))
         else:
             return _dese(cls, res)
 
@@ -975,7 +975,7 @@ def _dese_maybe_inaccessible_message(res: Optional[dict], /) -> Optional[MaybeIn
     Function to deserialize MaybeInaccessibleMessage.
     '''
     if res is None: return None
-    obj = _parse_dict(res)
+    obj = _check_dict(res)
 
     if obj['date'] == 0:
         return InaccessibleMessage._dese(obj, skip_check = True)
@@ -1133,7 +1133,7 @@ def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
     Function to deserialize ReactionType.
     '''
     if res is None: return None
-    obj = _parse_dict(res)
+    obj = _check_dict(res)
 
     type = obj.pop('type')
 
@@ -2895,7 +2895,7 @@ def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
     Function to deserialize ChatMember.
     '''
     if res is None: return None
-    obj = _parse_dict(res)        
+    obj = _check_dict(res)        
 
     status = obj.pop('status')
 
@@ -3303,7 +3303,7 @@ def _dese_menu_button(res: Optional[dict], /) -> Optional[MenuButton]: # used in
     Function to deserialize MenuButton.
     '''
     if res is None: return None
-    obj = _parse_dict(res)
+    obj = _check_dict(res)
 
     type = obj.pop('type')
 
@@ -5574,7 +5574,7 @@ def _dese_message_origin(res: Optional[dict], /) -> Optional[MessageOrigin]:
     Function to deserialize MessageOrigin.
     '''
     if res is None: return None
-    obj = _parse_dict(res)
+    obj = _check_dict(res)
 
     type = obj.pop('type')
 
@@ -5775,7 +5775,7 @@ def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]
     Function to deserialize ChatBoostSource.
     '''
     if res is None: return None
-    obj = _parse_dict(res)
+    obj = _check_dict(res)
 
     source = obj.pop('source')
 
