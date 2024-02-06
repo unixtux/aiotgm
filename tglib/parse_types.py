@@ -4,12 +4,15 @@ from logging import DEBUG, INFO
 from typing import Optional, Any
 
 LOGGER_LEVEL = INFO
-LOGGER_LEVEL = DEBUG
+#LOGGER_LEVEL = DEBUG
+
+import sys
+sys.path.append('../')
 
 import re
 import json
-import tglib
-from tglib.logger import get_logger
+import tglib.types
+from logger import get_logger
 
 with open('types.py') as r:
     LINES = r.readlines()
@@ -23,6 +26,52 @@ logger = get_logger('TypeChecker')
 logger.setLevel(LOGGER_LEVEL)
 
 #print(json.dumps(LINES[300: 420], indent=2))
+
+def get_subclass_return(func_name: str) -> str:
+    match = re.compile(
+        r'def\s*' + func_name + r'\s*\(.*\)\s*->\s*(.*?)\s*:',
+    )
+    ln = 0
+    while ln != len(LINES):
+        if match.match(LINES[ln]):
+            hinting = match.match(LINES[ln]).group(1)
+            is_optional = re.match(r'Optional\[\s*(.*)\s*\]', hinting)
+            if is_optional:
+                hinting = is_optional.group(1)
+            return hinting
+        ln += 1
+    else:
+        raise ValueError(f'_dese func {func_name}() not found')
+
+def get_multiline_hinting(__arg: str, __start_hinting: str) -> dict[str, Any]:
+    global LINE_N
+    open_brackets = LINES[LINE_N].count('[')
+    closed_brackets = LINES[LINE_N].count(']')
+    brackets = '{0,%s}' % (open_brackets - closed_brackets)
+    LINE_N += 1
+    logger.debug(f'Diff of brackets at first line is {brackets}')
+    result = __start_hinting
+    while LINE_N != len(LINES):
+        end_of_hinting = re.match(r'\s*(\]' + brackets + r')\s*,*\s*\n', LINES[LINE_N])
+        end_of_hinting_default = re.match(r'\s*(\]' + brackets + r')\s*=\s*(.*?),*\s*\n', LINES[LINE_N])
+    
+        if end_of_hinting_default:
+            group = end_of_hinting_default.group(1, 2)
+            result += group[0]
+            return {'hinting': result, 'default': group[1]}
+
+        elif end_of_hinting:
+            result += end_of_hinting.group(1)
+            return {'hinting': result}
+        else:
+            match_line = re.match(r'\s*(.*?\s*,*\s*)\n', LINES[LINE_N]).group(1)
+            match_line = re.sub(r'(.*?),\s*', r'\1, ', match_line)
+            result += match_line
+
+        LINE_N += 1
+    else:
+        raise ValueError(f'no multiline hinting found for {__arg}')
+
 
 def get_dese_kwargs(__type: str) -> dict[str, Any]:
     global LINE_N
@@ -75,11 +124,47 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
             r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*\[\s*(.*?)\s*\._dese",
             LINES[LINE_N]
         )
+        dese_subclass = re.match(
+            r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*(_dese_.*?)\s*\(",
+            LINES[LINE_N]
+        )
+        dese_list_subclass = re.match(
+            r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*(_dese_.*?)\s*\(",
+            LINES[LINE_N]
+        )
+        dese_nested_subclass = re.match(
+            r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*\[\s*(_dese_.*?)\s*\(",
+            LINES[LINE_N]
+        )
 
-        if dese_nested_tg_type:
+        if dese_nested_subclass:
+            group = dese_nested_subclass.group(1, 2)
+            hinting = get_subclass_return(group[1])
+            if dese_kwargs[group[0]]['optional']:
+                dese_kwargs[group[0]]['tg_type'] = f'Optional[list[list[{hinting}]]]'
+            else:
+                dese_kwargs[group[0]]['tg_type'] = f'list[list[{hinting}]]'
+
+        elif dese_list_subclass:
+            group = dese_list_subclass.group(1, 2)
+            hinting = get_subclass_return(group[1])
+            if dese_kwargs[group[0]]['optional']:
+                dese_kwargs[group[0]]['tg_type'] = f'Optional[list[{hinting}]]'
+            else:
+                dese_kwargs[group[0]]['tg_type'] = f'list[{hinting}]'
+
+        elif dese_subclass:
+            group = dese_subclass.group(1, 2)
+            hinting = get_subclass_return(group[1])
+            if dese_kwargs[group[0]]['optional']:
+                dese_kwargs[group[0]]['tg_type'] = f'Optional[{hinting}]'
+            else:
+                dese_kwargs[group[0]]['tg_type'] = hinting
+
+        elif dese_nested_tg_type:
             group = dese_nested_tg_type.group(1, 2)
             if dese_kwargs[group[0]]['optional']:
-                dese_kwargs[group[0]]['tg_type'] = f'Optional[list[list[{group[1]}]]]' 
+                dese_kwargs[group[0]]['tg_type'] = f'Optional[list[list[{group[1]}]]]'
             else:
                 dese_kwargs[group[0]]['tg_type'] = f'list[list[{group[1]}]]'
 
@@ -126,35 +211,57 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             else: # err 444
                 raise ValueError('444 at line', LINE_N, LINES[LINE_N])
 
-        match_default_value = re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
-        match_no_default_value = re.match(r'\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
-        match_no_hinting = re.match(r'\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
+        match_hinting_default = re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
+        match_hinting_no_default = re.match(r"\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
+        match_no_hinting_default = re.match(r"\s*(.*?)\s*=\s*(.*?)\s*,*\n", LINES[LINE_N])
+        match_no_hinting_no_default = re.match(r"\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
+        match_multiline_hinting = re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
 
-        if match_default_value:
-            group = match_default_value.group(1, 2, 3)
-            is_none = group[2] == 'None'
+        if match_multiline_hinting:
+            group = match_multiline_hinting.group(1, 2)
+            init_kwargs[group[0]] = get_multiline_hinting(group[0], group[1])
+            LINE_N += 1
+
+        elif match_hinting_default:
+            group = match_hinting_default.group(1, 2, 3)
+            default_none = group[2] == 'None'
+
             if 'dese_kwargs' in TYPES[__type]:
-                if str(TYPES[__type]['dese_kwargs'][group[0]]).startswith('Optional'):
-                    if not is_none: # err 555
+                dese_arg: Optional[str] = TYPES[__type]['dese_kwargs'][group[0]]
+
+                if dese_arg is not None and dese_arg.startswith('Optional'):
+                    if not default_none: # err 555
                         raise ValueError('555 at line', LINE_N, LINES[LINE_N])
                     else:
                         logger.debug('ok ' + LINES[LINE_N] + str(LINE_N))
 
-            if is_none and not group[1].startswith('Optional'): # err 666
-                raise ValueError('666 at line', LINE_N, LINES[LINE_N])
-            def_val = None if is_none else group[2]
-            init_kwargs[group[0]] = {'hinting': group[1], 'default_value': def_val}
-            LINE_N += 1
+                    if group[1] != dese_arg: # err 666
+                        raise ValueError(f'[666] {group[1]} != {dese_arg}', LINE_N, LINES[LINE_N])
+                    else:
+                        logger.debug('OK ' + LINES[LINE_N] + str(LINE_N))
 
-        elif match_no_default_value:
-            group = match_no_default_value.group(1, 2)
+            default_value = None if default_none else group[2]
+            init_kwargs[group[0]] = {'hinting': group[1], 'default': default_value}
+            LINE_N += 1
+            continue
+
+        elif match_hinting_no_default:
+            group = match_hinting_no_default.group(1, 2)
             init_kwargs[group[0]] = {'hinting': group[1]}
             LINE_N += 1
+            continue
 
-        elif match_no_hinting:
-            group = match_no_hinting.group(1)
-            init_kwargs[group[0]] = {'hinting': None}
+        elif match_no_hinting_default:
+            group = match_no_hinting_default.group(1, 2)
+            init_kwargs[group[0]] = {'default': group[1]}
             LINE_N += 1
+            continue
+
+        elif match_no_hinting_no_default:
+            arg = match_no_hinting_no_default.group(1)
+            init_kwargs[arg] = None
+            LINE_N += 1
+            continue
 
         else: # err 777
             raise ValueError('777 at line', LINE_N, LINES[LINE_N])
@@ -163,7 +270,7 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
 while LINE_N != len(LINES):
 
     class_matched = re.match(
-        r'class\s*(.*)\s*\(\s*(.*)\s*\)\s*:',
+        r'class\s*(.*?)\s*\(\s*(.*?)\s*\)\s*:',
         LINES[LINE_N]
     )
     if class_matched:
@@ -202,11 +309,12 @@ TYPES_WITHOUT_DESE = []
 
 for type in tglib.types.__all__:
     if type not in TYPES:
-        NOT_IN_ALL.append(type)
+        NOT_IN_TYPES.append(type)
 
 for type in TYPES:
     if type not in tglib.types.__all__:
-        NOT_IN_TYPES.append(type)
+        NOT_IN_ALL.append(type)
+
     if TYPES[type]['has_dese']:
         TYPES_WITH_DESE.append(type)
         #print(json.dumps({type: TYPES[type]}, indent = 2))
@@ -214,26 +322,36 @@ for type in TYPES:
         TYPES_WITHOUT_DESE.append(type)
     #print(json.dumps({type: TYPES[type]}, indent = 2))
 
-print('Length of __all__ is:', len(tglib.types.__all__))
-print('Length of types is:', len(TYPES))
-print('TelegramTypes are:', TG_TYPES)
-print('Missing types are:', len(NOT_IN_ALL) or len(NOT_IN_TYPES))
-print('Types with _dese():', len(TYPES_WITH_DESE))
-print('Types without _dese():', len(TYPES_WITHOUT_DESE))
+logger.info('Length of __all__ is: %s', len(tglib.types.__all__))
+logger.info('Length of types is: %s', len(TYPES))
+logger.info('TelegramTypes are: %s', TG_TYPES)
+logger.info('Missing types are: %s', len(NOT_IN_ALL) or len(NOT_IN_TYPES))
+logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
+logger.info('Types without _dese(): %s', len(TYPES_WITHOUT_DESE))
 
 
-
-
-with open('test_json.json', 'w') as w:
+with open('test_types.json', 'w') as w:
     w.write(json.dumps(TYPES, indent = 4))
 
-with open('test_json.json', 'r') as r:
+with open('test_types.json', 'r') as r:
     lines = r.readlines()
 
 f = '''\
-from typing import Optional
-from tglib.types import *
-from tglib.types import TelegramType
+from .types import *
+from typing import (
+    Union,
+    Optional,
+    Literal
+)
+from .types import (
+    TelegramType,
+    ChatMember,
+    MessageOrigin,
+    ReactionType,
+    ChatBoostSource,
+    InputMessageContent,
+    MaybeInaccessibleMessage
+)
 
 TYPES = '''
 
@@ -252,7 +370,7 @@ for k in TYPES:
         raise TypeError(k)
 '''
 
-with open('test_json.py', 'w') as w:
+with open('test_types.py', 'w') as w:
     w.write(f)
 
 #"""

@@ -20,59 +20,59 @@
         "init_kwargs": {
             "can_send_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_send_audios": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_send_documents": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_send_photos": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_send_videos": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_send_video_notes": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_send_voice_notes": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_send_polls": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_send_other_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_add_web_page_previews": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_change_info": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_invite_users": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_pin_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_manage_topics": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -122,31 +122,31 @@
             },
             "can_post_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_edit_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_pin_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_post_stories": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_edit_stories": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_delete_stories": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_manage_topics": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -162,23 +162,23 @@
         "init_kwargs": {
             "query": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "allow_user_chats": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "allow_bot_chats": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "allow_group_chats": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "allow_channel_chats": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -195,11 +195,11 @@
             },
             "file_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "hide_name": {
                 "hinting": "Optional[bool]",
-                "default_value": "False"
+                "default": "False"
             }
         }
     },
@@ -217,15 +217,15 @@
             },
             "forward_text": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "bot_username": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "request_write_access": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -252,23 +252,23 @@
         "init_kwargs": {
             "is_disabled": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "prefer_small_media": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "prefer_large_media": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "show_above_text": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -299,35 +299,35 @@
             },
             "last_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "username": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "language_code": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "is_premium": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "added_to_attachment_menu": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "can_join_groups": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_read_all_group_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "supports_inline_queries": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -354,19 +354,19 @@
             },
             "url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "user": {
                 "hinting": "Optional[User]",
-                "default_value": null
+                "default": null
             },
             "language": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "custom_emoji_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -387,11 +387,11 @@
             },
             "entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "is_manual": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -403,27 +403,27 @@
             },
             "chat_id": {
                 "hinting": "Optional[Union[int, str]]",
-                "default_value": null
+                "default": null
             },
             "allow_sending_without_reply": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "quote": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "quote_parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "quote_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "quote_position": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -435,14 +435,10 @@
             "date": null
         },
         "init_kwargs": {
-            "c": {
-                "hinting": null
-            },
-            "m": {
-                "hinting": null
-            },
-            "d": {
-                "hinting": null
+            "chat": null,
+            "message_id": null,
+            "date": {
+                "default": "0"
             }
         }
     },
@@ -455,7 +451,7 @@
             "message_thread_id": null,
             "from_user": "User",
             "sender_chat": "Chat",
-            "forward_origin": null,
+            "forward_origin": "MessageOrigin",
             "is_topic_message": null,
             "is_automatic_forward": null,
             "reply_to_message": "Message",
@@ -498,7 +494,7 @@
             "message_auto_delete_timer_changed": "MessageAutoDeleteTimerChanged",
             "migrate_to_chat_id": null,
             "migrate_from_chat_id": null,
-            "pinned_message": null,
+            "pinned_message": "MaybeInaccessibleMessage",
             "invoice": "Invoice",
             "successful_payment": "SuccessfulPayment",
             "users_shared": "UsersShared",
@@ -525,62 +521,221 @@
             "reply_markup": "InlineKeyboardMarkup"
         },
         "init_kwargs": {
-            "m": {
-                "hinting": null
+            "message_id": null,
+            "date": null,
+            "chat": null,
+            "message_thread_id": {
+                "default": "None"
             },
-            "d": {
-                "hinting": null
+            "from_user": {
+                "default": "None"
             },
-            "c": {
-                "hinting": null
+            "sender_chat": {
+                "default": "None"
             },
-            "f": {
-                "hinting": null
+            "forward_origin": {
+                "default": "None"
             },
-            "s": {
-                "hinting": null
+            "is_topic_message": {
+                "default": "None"
             },
-            "i": {
-                "hinting": null
+            "is_automatic_forward": {
+                "default": "None"
             },
-            "r": {
-                "hinting": null
+            "reply_to_message": {
+                "default": "None"
             },
-            "e": {
-                "hinting": null
+            "external_reply": {
+                "default": "None"
             },
-            "q": {
-                "hinting": null
+            "quote": {
+                "default": "None"
             },
-            "v": {
-                "hinting": null
+            "via_bot": {
+                "default": "None"
             },
-            "h": {
-                "hinting": null
+            "edit_date": {
+                "default": "None"
             },
-            "a": {
-                "hinting": null
+            "has_protected_content": {
+                "default": "None"
             },
-            "t": {
-                "hinting": null
+            "media_group_id": {
+                "default": "None"
             },
-            "l": {
-                "hinting": null
+            "author_signature": {
+                "default": "None"
             },
-            "p": {
-                "hinting": null
+            "text": {
+                "default": "None"
             },
-            "g": {
-                "hinting": null
+            "entities": {
+                "default": "None"
             },
-            "n": {
-                "hinting": null
+            "link_preview_options": {
+                "default": "None"
             },
-            "u": {
-                "hinting": null
+            "animation": {
+                "default": "None"
             },
-            "w": {
-                "hinting": null
+            "audio": {
+                "default": "None"
+            },
+            "document": {
+                "default": "None"
+            },
+            "photo": {
+                "default": "None"
+            },
+            "sticker": {
+                "default": "None"
+            },
+            "story": {
+                "default": "None"
+            },
+            "video": {
+                "default": "None"
+            },
+            "video_note": {
+                "default": "None"
+            },
+            "voice": {
+                "default": "None"
+            },
+            "caption": {
+                "default": "None"
+            },
+            "caption_entities": {
+                "default": "None"
+            },
+            "has_media_spoiler": {
+                "default": "None"
+            },
+            "contact": {
+                "default": "None"
+            },
+            "dice": {
+                "default": "None"
+            },
+            "game": {
+                "default": "None"
+            },
+            "poll": {
+                "default": "None"
+            },
+            "venue": {
+                "default": "None"
+            },
+            "location": {
+                "default": "None"
+            },
+            "new_chat_members": {
+                "default": "None"
+            },
+            "left_chat_member": {
+                "default": "None"
+            },
+            "new_chat_title": {
+                "default": "None"
+            },
+            "new_chat_photo": {
+                "default": "None"
+            },
+            "delete_chat_photo": {
+                "default": "None"
+            },
+            "group_chat_created": {
+                "default": "None"
+            },
+            "supergroup_chat_created": {
+                "default": "None"
+            },
+            "channel_chat_created": {
+                "default": "None"
+            },
+            "message_auto_delete_timer_changed": {
+                "default": "None"
+            },
+            "migrate_to_chat_id": {
+                "default": "None"
+            },
+            "migrate_from_chat_id": {
+                "default": "None"
+            },
+            "pinned_message": {
+                "default": "None"
+            },
+            "invoice": {
+                "default": "None"
+            },
+            "successful_payment": {
+                "default": "None"
+            },
+            "users_shared": {
+                "default": "None"
+            },
+            "chat_shared": {
+                "default": "None"
+            },
+            "connected_website": {
+                "default": "None"
+            },
+            "write_access_allowed": {
+                "default": "None"
+            },
+            "passport_data": {
+                "default": "None"
+            },
+            "proximity_alert_triggered": {
+                "default": "None"
+            },
+            "forum_topic_created": {
+                "default": "None"
+            },
+            "forum_topic_edited": {
+                "default": "None"
+            },
+            "forum_topic_closed": {
+                "default": "None"
+            },
+            "forum_topic_reopened": {
+                "default": "None"
+            },
+            "general_forum_topic_hidden": {
+                "default": "None"
+            },
+            "general_forum_topic_unhidden": {
+                "default": "None"
+            },
+            "giveaway_created": {
+                "default": "None"
+            },
+            "giveaway": {
+                "default": "None"
+            },
+            "giveaway_winners": {
+                "default": "None"
+            },
+            "giveaway_completed": {
+                "default": "None"
+            },
+            "video_chat_scheduled": {
+                "default": "None"
+            },
+            "video_chat_started": {
+                "default": "None"
+            },
+            "video_chat_ended": {
+                "default": "None"
+            },
+            "video_chat_participants_invited": {
+                "default": "None"
+            },
+            "web_app_data": {
+                "default": "None"
+            },
+            "reply_markup": {
+                "default": "None"
             }
         }
     },
@@ -626,19 +781,19 @@
             },
             "horizontal_accuracy": {
                 "hinting": "Optional[float]",
-                "default_value": null
+                "default": null
             },
             "live_period": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "heading": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "proximity_alert_radius": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -691,7 +846,7 @@
             "is_forum": null,
             "photo": "ChatPhoto",
             "active_usernames": null,
-            "available_reactions": null,
+            "available_reactions": "Optional[list[ReactionType]]",
             "accent_color_id": null,
             "background_custom_emoji_id": null,
             "profile_accent_color_id": null,
@@ -727,135 +882,135 @@
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "username": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "first_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "last_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "is_forum": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "photo": {
                 "hinting": "Optional[ChatPhoto]",
-                "default_value": null
+                "default": null
             },
             "active_usernames": {
                 "hinting": "Optional[list[str]]",
-                "default_value": null
+                "default": null
             },
             "available_reactions": {
                 "hinting": "Optional[list[ReactionType]]",
-                "default_value": null
+                "default": null
             },
             "accent_color_id": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "background_custom_emoji_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "profile_accent_color_id": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "profile_background_custom_emoji_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "emoji_status_custom_emoji_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "emoji_status_expiration_date": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "bio": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "has_private_forwards": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "has_restricted_voice_and_video_messages": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "join_to_send_messages": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "join_by_request": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "invite_link": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "pinned_message": {
                 "hinting": "Optional[Message]",
-                "default_value": null
+                "default": null
             },
             "permissions": {
                 "hinting": "Optional[ChatPermissions]",
-                "default_value": null
+                "default": null
             },
             "slow_mode_delay": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "message_auto_delete_time": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "has_aggressive_anti_spam_enabled": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "has_hidden_members": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "has_protected_content": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "has_visible_history": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "sticker_set_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "can_set_sticker_set": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "linked_chat_id": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "location": {
                 "hinting": "Optional[ChatLocation]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -865,8 +1020,8 @@
             "chat": "Chat",
             "message_id": null,
             "date": null,
-            "old_reaction": null,
-            "new_reaction": null,
+            "old_reaction": "list[ReactionType]",
+            "new_reaction": "list[ReactionType]",
             "user": "User",
             "actor_chat": "Chat"
         },
@@ -888,18 +1043,18 @@
             },
             "user": {
                 "hinting": "Optional[User]",
-                "default_value": null
+                "default": null
             },
             "actor_chat": {
                 "hinting": "Optional[Chat]",
-                "default_value": null
+                "default": null
             }
         }
     },
     "ReactionCount": {
         "has_dese": true,
         "dese_kwargs": {
-            "type": null,
+            "type": "ReactionType",
             "total_count": null
         },
         "init_kwargs": {
@@ -969,7 +1124,7 @@
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1004,19 +1159,19 @@
             },
             "thumbnail": {
                 "hinting": "Optional[PhotoSize]",
-                "default_value": null
+                "default": null
             },
             "file_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "mime_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1045,27 +1200,27 @@
             },
             "performer": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "file_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "mime_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "thumbnail": {
                 "hinting": "Optional[PhotoSize]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1088,19 +1243,19 @@
             },
             "thumbnail": {
                 "hinting": "Optional[PhotoSize]",
-                "default_value": null
+                "default": null
             },
             "file_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "mime_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1140,19 +1295,19 @@
             },
             "thumbnail": {
                 "hinting": "Optional[PhotoSize]",
-                "default_value": null
+                "default": null
             },
             "file_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "mime_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1181,11 +1336,11 @@
             },
             "thumbnail": {
                 "hinting": "Optional[PhotoSize]",
-                "default_value": null
+                "default": null
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1210,11 +1365,11 @@
             },
             "mime_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1236,15 +1391,15 @@
             },
             "last_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "user_id": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "vcard": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1295,11 +1450,11 @@
             },
             "voter_chat": {
                 "hinting": "Optional[Chat]",
-                "default_value": null
+                "default": null
             },
             "user": {
                 "hinting": "Optional[User]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1347,23 +1502,23 @@
             },
             "correct_option_id": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "explanation": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "explanation_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "open_period": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "close_date": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1390,19 +1545,19 @@
             },
             "foursquare_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "foursquare_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "google_place_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "google_place_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1467,7 +1622,7 @@
             },
             "icon_custom_emoji_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1485,11 +1640,11 @@
         "init_kwargs": {
             "name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "icon_custom_emoji_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1548,15 +1703,15 @@
         "init_kwargs": {
             "from_request": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "web_app_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "from_attachment_menu": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1630,11 +1785,11 @@
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "file_path": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1657,15 +1812,15 @@
             },
             "user_is_bot": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "user_is_premium": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "max_quantity": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1680,27 +1835,27 @@
             },
             "chat_is_forum": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "chat_has_username": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "chat_is_created": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "user_administrator_rights": {
                 "hinting": "Optional[ChatAdministratorRights]",
-                "default_value": null
+                "default": null
             },
             "bot_administrator_rights": {
                 "hinting": "Optional[ChatAdministratorRights]",
-                "default_value": null
+                "default": null
             },
             "bot_is_member": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1709,7 +1864,7 @@
         "init_kwargs": {
             "type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1721,27 +1876,27 @@
             },
             "request_users": {
                 "hinting": "Optional[KeyboardButtonRequestUsers]",
-                "default_value": null
+                "default": null
             },
             "request_chat": {
                 "hinting": "Optional[KeyboardButtonRequestChat]",
-                "default_value": null
+                "default": null
             },
             "request_contact": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "request_location": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "request_poll": {
                 "hinting": "Optional[KeyboardButtonPollType]",
-                "default_value": null
+                "default": null
             },
             "web_app": {
                 "hinting": "Optional[WebAppInfo]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1750,27 +1905,27 @@
         "init_kwargs": {
             "keyboard": {
                 "hinting": "Optional[list[list[KeyboardButton]]]",
-                "default_value": null
+                "default": null
             },
             "is_persistent": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "resize_keyboard": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "one_time_keyboard": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "input_field_placeholder": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "selective": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1779,7 +1934,7 @@
         "init_kwargs": {
             "selective": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1803,39 +1958,39 @@
             },
             "url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "callback_data": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "web_app": {
                 "hinting": "Optional[WebAppInfo]",
-                "default_value": null
+                "default": null
             },
             "login_url": {
                 "hinting": "Optional[LoginUrl]",
-                "default_value": null
+                "default": null
             },
             "switch_inline_query": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "switch_inline_query_current_chat": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "switch_inline_query_chosen_chat": {
                 "hinting": "Optional[SwitchInlineQueryChosenChat]",
-                "default_value": null
+                "default": null
             },
             "callback_game": {
                 "hinting": "Optional[CallbackGame]",
-                "default_value": null
+                "default": null
             },
             "pay": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1847,7 +2002,7 @@
         "init_kwargs": {
             "inline_keyboard": {
                 "hinting": "Optional[list[list[InlineKeyboardButton]]]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1856,7 +2011,7 @@
         "dese_kwargs": {
             "id": null,
             "from_user": "User",
-            "message": null,
+            "message": "MaybeInaccessibleMessage",
             "inline_message_id": null,
             "chat_instance": null,
             "data": null,
@@ -1874,19 +2029,19 @@
             },
             "message": {
                 "hinting": "Optional[MaybeInaccessibleMessage]",
-                "default_value": null
+                "default": null
             },
             "inline_message_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "data": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "game_short_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1895,15 +2050,15 @@
         "init_kwargs": {
             "force_reply": {
                 "hinting": "Literal[True]",
-                "default_value": "True"
+                "default": "True"
             },
             "input_field_placeholder": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "selective": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1938,19 +2093,19 @@
             },
             "name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "expire_date": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "member_limit": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "pending_join_request_count": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -1970,7 +2125,7 @@
             },
             "custom_title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2029,35 +2184,35 @@
             },
             "can_post_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_edit_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_pin_messages": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_post_stories": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_edit_stories": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_delete_stories": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "can_manage_topics": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "custom_title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2179,8 +2334,8 @@
             "chat": "Chat",
             "from_user": "User",
             "date": null,
-            "old_chat_member": null,
-            "new_chat_member": null,
+            "old_chat_member": "ChatMember",
+            "new_chat_member": "ChatMember",
             "invite_link": "ChatInviteLink",
             "via_chat_folder_invite_link": null
         },
@@ -2202,11 +2357,11 @@
             },
             "invite_link": {
                 "hinting": "Optional[ChatInviteLink]",
-                "default_value": null
+                "default": null
             },
             "via_chat_folder_invite_link": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2235,11 +2390,11 @@
             },
             "bio": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "invite_link": {
                 "hinting": "Optional[ChatInviteLink]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2263,7 +2418,7 @@
             },
             "icon_custom_emoji_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2392,11 +2547,11 @@
         "init_kwargs": {
             "migrate_to_chat_id": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "retry_after": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2408,19 +2563,19 @@
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "has_spoiler": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2432,39 +2587,39 @@
             },
             "thumbnail": {
                 "hinting": "Optional[Union[InputFile, str]]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "duration": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "supports_streaming": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "has_spoiler": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2476,35 +2631,35 @@
             },
             "thumbnail": {
                 "hinting": "Optional[Union[InputFile, str]]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "duration": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "has_spoiler": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2516,31 +2671,31 @@
             },
             "thumbnail": {
                 "hinting": "Optional[Union[InputFile, str]]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "duration": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "performer": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2552,23 +2707,23 @@
             },
             "thumbnail": {
                 "hinting": "Optional[Union[InputFile, str]]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "disable_content_type_detection": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2638,35 +2793,35 @@
             },
             "thumbnail": {
                 "hinting": "Optional[PhotoSize]",
-                "default_value": null
+                "default": null
             },
             "emoji": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "set_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "premium_animation": {
                 "hinting": "Optional[File]",
-                "default_value": null
+                "default": null
             },
             "mask_position": {
                 "hinting": "Optional[MaskPosition]",
-                "default_value": null
+                "default": null
             },
             "custom_emoji_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "needs_repainting": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "file_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2702,7 +2857,7 @@
             },
             "thumbnail": {
                 "hinting": "Optional[PhotoSize]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2717,11 +2872,11 @@
             },
             "mask_position": {
                 "hinting": "Optional[MaskPosition]",
-                "default_value": null
+                "default": null
             },
             "keywords": {
                 "hinting": "Optional[list[str]]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2750,11 +2905,11 @@
             },
             "chat_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "location": {
                 "hinting": "Optional[Location]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2766,11 +2921,11 @@
             },
             "web_app": {
                 "hinting": "Optional[WebAppInfo]",
-                "default_value": null
+                "default": null
             },
             "start_parameter": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2782,15 +2937,15 @@
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "link_preview_options": {
                 "hinting": "Optional[LinkPreviewOptions]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2805,19 +2960,19 @@
             },
             "horizontal_accuracy": {
                 "hinting": "Optional[float]",
-                "default_value": null
+                "default": null
             },
             "live_period": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "heading": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "proximity_alert_radius": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2838,19 +2993,19 @@
             },
             "foursquare_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "foursquare_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "google_place_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "google_place_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2865,11 +3020,11 @@
             },
             "last_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "vcard": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2896,59 +3051,59 @@
             },
             "max_tip_amount": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "suggested_tip_amounts": {
                 "hinting": "Optional[list[int]]",
-                "default_value": null
+                "default": null
             },
             "provider_data": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "photo_url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "photo_size": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "photo_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "photo_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "need_name": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "need_phone_number": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "need_email": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "need_shipping_address": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "send_phone_number_to_provider": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "send_email_to_provider": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "is_flexible": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -2966,31 +3121,31 @@
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "hide_url": {
                 "hinting": "Optional[bool]",
-                "default_value": null
+                "default": null
             },
             "description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3008,39 +3163,39 @@
             },
             "photo_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "photo_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3058,43 +3213,43 @@
             },
             "gif_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "gif_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "gif_duration": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_mime_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3112,43 +3267,43 @@
             },
             "mpeg4_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "mpeg4_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "mpeg4_duration": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_mime_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3172,39 +3327,39 @@
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "video_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "video_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "video_duration": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3222,31 +3377,31 @@
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "performer": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "audio_duration": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3264,27 +3419,27 @@
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "voice_duration": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3305,39 +3460,39 @@
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3358,39 +3513,39 @@
             },
             "horizontal_accuracy": {
                 "hinting": "Optional[float]",
-                "default_value": null
+                "default": null
             },
             "live_period": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "heading": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "proximity_alert_radius": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3414,39 +3569,39 @@
             },
             "foursquare_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "foursquare_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "google_place_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "google_place_type": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3464,31 +3619,31 @@
             },
             "last_name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "vcard": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_url": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_width": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "thumbnail_height": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3503,7 +3658,7 @@
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3518,31 +3673,31 @@
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3557,27 +3712,27 @@
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3592,27 +3747,27 @@
             },
             "title": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3627,11 +3782,11 @@
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3649,27 +3804,27 @@
             },
             "description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3687,27 +3842,27 @@
             },
             "description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3725,23 +3880,23 @@
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3756,23 +3911,23 @@
             },
             "caption": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "parse_mode": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "caption_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "reply_markup": {
                 "hinting": "Optional[InlineKeyboardMarkup]",
-                "default_value": null
+                "default": null
             },
             "input_message_content": {
                 "hinting": "Optional[InputMessageContent]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3797,11 +3952,11 @@
             },
             "location": {
                 "hinting": "Optional[Location]",
-                "default_value": null
+                "default": null
             },
             "inline_message_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3813,7 +3968,7 @@
         "init_kwargs": {
             "inline_message_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3886,19 +4041,19 @@
         "init_kwargs": {
             "name": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "phone_number": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "email": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "shipping_address": {
                 "hinting": "Optional[ShippingAddress]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -3945,11 +4100,11 @@
             },
             "shipping_option_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "order_info": {
                 "hinting": "Optional[OrderInfo]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4005,11 +4160,11 @@
             },
             "shipping_option_id": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "order_info": {
                 "hinting": "Optional[OrderInfo]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4059,35 +4214,35 @@
             },
             "data": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "phone_number": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "email": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "files": {
                 "hinting": "Optional[list[PassportFile]]",
-                "default_value": null
+                "default": null
             },
             "front_side": {
                 "hinting": "Optional[PassportFile]",
-                "default_value": null
+                "default": null
             },
             "reverse_side": {
                 "hinting": "Optional[PassportFile]",
-                "default_value": null
+                "default": null
             },
             "selfie": {
                 "hinting": "Optional[PassportFile]",
-                "default_value": null
+                "default": null
             },
             "translation": {
                 "hinting": "Optional[list[PassportFile]]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4129,13 +4284,7 @@
         "has_dese": false,
         "init_kwargs": {
             "type": {
-                "hinting": "Literal["
-            },
-            "'": {
-                "hinting": null
-            },
-            "]": {
-                "hinting": null
+                "hinting": "Literal['personal_details', 'passport', 'driver_license', 'identity_card', 'internal_passport', 'address']"
             },
             "field_name": {
                 "hinting": "str"
@@ -4152,13 +4301,7 @@
         "has_dese": false,
         "init_kwargs": {
             "type": {
-                "hinting": "Literal["
-            },
-            "'": {
-                "hinting": null
-            },
-            "]": {
-                "hinting": null
+                "hinting": "Literal['passport', 'driver_license', 'identity_card', 'internal_passport']"
             },
             "file_hash": {
                 "hinting": "str"
@@ -4186,13 +4329,7 @@
         "has_dese": false,
         "init_kwargs": {
             "type": {
-                "hinting": "Literal["
-            },
-            "'": {
-                "hinting": null
-            },
-            "]": {
-                "hinting": null
+                "hinting": "Literal['passport', 'driver_license', 'identity_card', 'internal_passport']"
             },
             "file_hash": {
                 "hinting": "str"
@@ -4206,13 +4343,7 @@
         "has_dese": false,
         "init_kwargs": {
             "type": {
-                "hinting": "Literal["
-            },
-            "'": {
-                "hinting": null
-            },
-            "]": {
-                "hinting": null
+                "hinting": "Literal['utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration']"
             },
             "file_hash": {
                 "hinting": "str"
@@ -4226,13 +4357,7 @@
         "has_dese": false,
         "init_kwargs": {
             "type": {
-                "hinting": "Literal["
-            },
-            "'": {
-                "hinting": null
-            },
-            "]": {
-                "hinting": null
+                "hinting": "Literal['utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration']"
             },
             "file_hashes": {
                 "hinting": "list[str]"
@@ -4246,13 +4371,7 @@
         "has_dese": false,
         "init_kwargs": {
             "type": {
-                "hinting": "Literal["
-            },
-            "'": {
-                "hinting": null
-            },
-            "]": {
-                "hinting": null
+                "hinting": "Literal['passport', 'driver_license', 'identity_card', 'internal_passport', 'utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration']"
             },
             "file_hash": {
                 "hinting": "str"
@@ -4266,13 +4385,7 @@
         "has_dese": false,
         "init_kwargs": {
             "type": {
-                "hinting": "Literal["
-            },
-            "'": {
-                "hinting": null
-            },
-            "]": {
-                "hinting": null
+                "hinting": "Literal['passport', 'driver_license', 'identity_card', 'internal_passport', 'utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration']"
             },
             "file_hashes": {
                 "hinting": "list[str]"
@@ -4318,15 +4431,15 @@
             },
             "text": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "text_entities": {
                 "hinting": "Optional[list[MessageEntity]]",
-                "default_value": null
+                "default": null
             },
             "animation": {
                 "hinting": "Optional[Animation]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4387,27 +4500,27 @@
             },
             "additional_chat_count": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "premium_subscription_month_count": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "unclaimed_prize_count": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "only_new_members": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "was_refunded": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "prize_description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4424,11 +4537,11 @@
             },
             "unclaimed_prize_count": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "giveaway_message": {
                 "hinting": "Optional[Message]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4456,23 +4569,23 @@
             },
             "only_new_members": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "has_public_winners": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "prize_description": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             },
             "country_codes": {
                 "hinting": "Optional[list[str]]",
-                "default_value": null
+                "default": null
             },
             "premium_subscription_month_count": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4522,7 +4635,7 @@
             },
             "author_signature": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4546,14 +4659,14 @@
             },
             "author_signature": {
                 "hinting": "Optional[str]",
-                "default_value": null
+                "default": null
             }
         }
     },
     "ExternalReplyInfo": {
         "has_dese": true,
         "dese_kwargs": {
-            "origin": null,
+            "origin": "MessageOrigin",
             "chat": "Chat",
             "message_id": null,
             "link_preview_options": "LinkPreviewOptions",
@@ -4583,91 +4696,91 @@
             },
             "chat": {
                 "hinting": "Optional[Chat]",
-                "default_value": null
+                "default": null
             },
             "message_id": {
                 "hinting": "Optional[int]",
-                "default_value": null
+                "default": null
             },
             "link_preview_options": {
                 "hinting": "Optional[LinkPreviewOptions]",
-                "default_value": null
+                "default": null
             },
             "animation": {
                 "hinting": "Optional[Animation]",
-                "default_value": null
+                "default": null
             },
             "audio": {
                 "hinting": "Optional[Audio]",
-                "default_value": null
+                "default": null
             },
             "document": {
                 "hinting": "Optional[Document]",
-                "default_value": null
+                "default": null
             },
             "photo": {
                 "hinting": "Optional[list[PhotoSize]]",
-                "default_value": null
+                "default": null
             },
             "sticker": {
                 "hinting": "Optional[Sticker]",
-                "default_value": null
+                "default": null
             },
             "story": {
                 "hinting": "Optional[Story]",
-                "default_value": null
+                "default": null
             },
             "video": {
                 "hinting": "Optional[Video]",
-                "default_value": null
+                "default": null
             },
             "video_note": {
                 "hinting": "Optional[VideoNote]",
-                "default_value": null
+                "default": null
             },
             "voice": {
                 "hinting": "Optional[Voice]",
-                "default_value": null
+                "default": null
             },
             "has_media_spoiler": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             },
             "contact": {
                 "hinting": "Optional[Contact]",
-                "default_value": null
+                "default": null
             },
             "dice": {
                 "hinting": "Optional[Dice]",
-                "default_value": null
+                "default": null
             },
             "game": {
                 "hinting": "Optional[Game]",
-                "default_value": null
+                "default": null
             },
             "giveaway": {
                 "hinting": "Optional[Giveaway]",
-                "default_value": null
+                "default": null
             },
             "giveaway_winners": {
                 "hinting": "Optional[GiveawayWinners]",
-                "default_value": null
+                "default": null
             },
             "invoice": {
                 "hinting": "Optional[Invoice]",
-                "default_value": null
+                "default": null
             },
             "location": {
                 "hinting": "Optional[Location]",
-                "default_value": null
+                "default": null
             },
             "poll": {
                 "hinting": "Optional[Poll]",
-                "default_value": null
+                "default": null
             },
             "venue": {
                 "hinting": "Optional[Venue]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4706,11 +4819,11 @@
             },
             "user": {
                 "hinting": "Optional[User]",
-                "default_value": null
+                "default": null
             },
             "is_unclaimed": {
                 "hinting": "Optional[Literal[True]]",
-                "default_value": null
+                "default": null
             }
         }
     },
@@ -4720,7 +4833,7 @@
             "boost_id": null,
             "add_date": null,
             "expiration_date": null,
-            "source": null
+            "source": "ChatBoostSource"
         },
         "init_kwargs": {
             "boost_id": {
@@ -4769,7 +4882,7 @@
             "chat": "Chat",
             "boost_id": null,
             "remove_date": null,
-            "source": null
+            "source": "ChatBoostSource"
         },
         "init_kwargs": {
             "chat": {
@@ -4815,75 +4928,75 @@
             },
             "message": {
                 "hinting": "Optional[Message]",
-                "default_value": null
+                "default": null
             },
             "edited_message": {
                 "hinting": "Optional[Message]",
-                "default_value": null
+                "default": null
             },
             "channel_post": {
                 "hinting": "Optional[Message]",
-                "default_value": null
+                "default": null
             },
             "edited_channel_post": {
                 "hinting": "Optional[Message]",
-                "default_value": null
+                "default": null
             },
             "message_reaction": {
                 "hinting": "Optional[MessageReactionUpdated]",
-                "default_value": null
+                "default": null
             },
             "message_reaction_count": {
                 "hinting": "Optional[MessageReactionCountUpdated]",
-                "default_value": null
+                "default": null
             },
             "inline_query": {
                 "hinting": "Optional[InlineQuery]",
-                "default_value": null
+                "default": null
             },
             "chosen_inline_result": {
                 "hinting": "Optional[ChosenInlineResult]",
-                "default_value": null
+                "default": null
             },
             "callback_query": {
                 "hinting": "Optional[CallbackQuery]",
-                "default_value": null
+                "default": null
             },
             "shipping_query": {
                 "hinting": "Optional[ShippingQuery]",
-                "default_value": null
+                "default": null
             },
             "pre_checkout_query": {
                 "hinting": "Optional[PreCheckoutQuery]",
-                "default_value": null
+                "default": null
             },
             "poll": {
                 "hinting": "Optional[Poll]",
-                "default_value": null
+                "default": null
             },
             "poll_answer": {
                 "hinting": "Optional[PollAnswer]",
-                "default_value": null
+                "default": null
             },
             "my_chat_member": {
                 "hinting": "Optional[ChatMemberUpdated]",
-                "default_value": null
+                "default": null
             },
             "chat_member": {
                 "hinting": "Optional[ChatMemberUpdated]",
-                "default_value": null
+                "default": null
             },
             "chat_join_request": {
                 "hinting": "Optional[ChatJoinRequest]",
-                "default_value": null
+                "default": null
             },
             "chat_boost": {
                 "hinting": "Optional[ChatBoostUpdated]",
-                "default_value": null
+                "default": null
             },
             "removed_chat_boost": {
                 "hinting": "Optional[ChatBoostRemoved]",
-                "default_value": null
+                "default": null
             }
         }
     }
