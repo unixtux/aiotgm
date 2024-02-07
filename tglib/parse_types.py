@@ -38,7 +38,7 @@ def raise_err(__file_line: int, *args: Any):
 def get_subclass_return(func_name: str) -> str:
     'Return hinting of the dese functions for subclasses.'
     dese_subclass = re.compile(
-        r'^def\s*' + func_name + r'\s*\(.*\)\s*->\s*(.*?)\s*:',
+        r'def\s*' + func_name + r'\s*\(.*\)\s*->\s*(.*?)\s*:',
     )
     ln = 0
     while ln != len(LINES):
@@ -50,20 +50,20 @@ def get_subclass_return(func_name: str) -> str:
             return hinting
         ln += 1
     else:
-        raise_err(55, f'_dese func {func_name}() not found.')
+        raise_err(53, f'_dese func {func_name}() not found.')
 
 
 def get_multiline_hinting(__type: str, __arg: str, __start_hinting: str, ) -> dict[str, Any]:
     global LINE_N
     open_brackets = LINES[LINE_N].count('[')
     closed_brackets = LINES[LINE_N].count(']')
-    brackets = '{0,%s}' % (open_brackets - closed_brackets)
+    n_brackets = '{0,%s}' % (open_brackets - closed_brackets)
     LINE_N += 1
-    logger.debug(f'Diff of brackets at first line is {brackets}')
+    logger.debug(f'Diff of brackets at first line is {n_brackets}')
     result = __start_hinting
     while LINE_N != len(LINES):
-        end_of_hinting =         re.match(r'\s*(\]\s*)' + brackets + r'\s*,*\s*\n', LINES[LINE_N])
-        end_of_hinting_default = re.match(r'\s*(\]\s*)' + brackets + r'\s*=\s*(.*?),*\s*\n', LINES[LINE_N])
+        end_of_hinting =         re.match(r'\s*(\]\s*)' + n_brackets + r'\s*,*\s*\n', LINES[LINE_N])
+        end_of_hinting_default = re.match(r'\s*(\]\s*)' + n_brackets + r'\s*=\s*(.*?),*\s*\n', LINES[LINE_N])
     
         if end_of_hinting_default:
             group = end_of_hinting_default.group(1, 2)
@@ -80,7 +80,7 @@ def get_multiline_hinting(__type: str, __arg: str, __start_hinting: str, ) -> di
 
         LINE_N += 1
     else:
-        raise_err(85, f'no multiline hinting found for {__arg}')
+        raise_err(83, f'no multiline hinting found for {__arg}')
 
 
 def get_dese_kwargs(__type: str) -> dict[str, Any]:
@@ -104,7 +104,7 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
             if (group[0] == group[1] == group[2]):
                 dese_kwargs.update({group[0]: {'tg_type': None, 'optional': True}})
             else:
-                raise_err(109, LINE_N, LINES[LINE_N])
+                raise_err(107, LINE_N, LINES[LINE_N])
 
         elif dese_default:
             group = dese_default.group(1, 2)
@@ -112,10 +112,10 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
             if (group[0] == group[1]):
                 dese_kwargs.update({group[0]: {'tg_type': None, 'optional': False}})
             else:
-                raise_err(117, LINE_N, LINES[LINE_N])
+                raise_err(115, LINE_N, LINES[LINE_N])
 
         else:
-            raise_err(120, LINE_N, LINES[LINE_N])
+            raise_err(118, LINE_N, LINES[LINE_N])
 
         dese_nested_subclass = re.match(r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*\[\s*(_dese_.*?)\s*\(", LINES[LINE_N])
         dese_list_subclass =   re.match(r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*(_dese_.*?)\s*\(", LINES[LINE_N])
@@ -196,7 +196,7 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             if self_found:
                 return init_kwargs
             else:
-                raise_err(201, f'self not found in {__type}.__init__()', LINE_N, LINES[LINE_N])
+                raise_err(199, f'self not found in {__type}.__init__()', LINE_N, LINES[LINE_N])
 
         match_multiline_hinting = re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
         match_hinting_default = re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
@@ -223,12 +223,12 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
                 if dese_hinting is not None and dese_hinting.startswith('Optional'):
 
                     if default_value is not None:
-                        raise_err(228, 'Default value should be None',  LINE_N, LINES[LINE_N])
+                        raise_err(226, 'Default value should be None',  LINE_N, LINES[LINE_N])
                     else:
                         ...
 
                     if dese_hinting != hinting:
-                        raise_err(233, f'{dese_hinting} != {hinting}', LINE_N, LINES[LINE_N])
+                        raise_err(231, f'{dese_hinting} != {hinting}', LINE_N, LINES[LINE_N])
                     else:
                         ...
 
@@ -259,7 +259,7 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             continue
 
         else:
-            raise_err(264, LINE_N, LINES[LINE_N])
+            raise_err(262, LINE_N, LINES[LINE_N])
 
 
 while LINE_N != len(LINES):
@@ -280,10 +280,10 @@ while LINE_N != len(LINES):
     if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
 
         if not re.match(r'\s*@_parse_result\s*\n', LINES[LINE_N - 1]):
-            raise_err(285, LINE_N - 1, LINES[LINE_N - 1])
+            raise_err(283, LINE_N - 1, LINES[LINE_N - 1])
 
         if not re.match(r'\s*@classmethod\s*\n', LINES[LINE_N - 2]):
-            raise_err(288, LINE_N - 2, LINES[LINE_N - 2])
+            raise_err(286, LINE_N - 2, LINES[LINE_N - 2])
 
         TYPES[type]['has_dese'] = True
         LINE_N += 1
