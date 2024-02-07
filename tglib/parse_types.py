@@ -330,6 +330,8 @@ with open('test_types.json', 'r') as r:
     lines = r.readlines()
 
 f = '''\
+#!/bin/python3
+
 import sys
 sys.path.append('../')
 
