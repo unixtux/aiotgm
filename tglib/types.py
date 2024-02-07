@@ -458,7 +458,7 @@ class InputFile(TelegramType):
         self,
         path: str,
         file_name: Optional[str] = None,
-        hide_name: Optional[bool] = False
+        hide_name: bool = False
     ):
         self.path = path
 
