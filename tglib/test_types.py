@@ -1,10 +1,14 @@
-from .types import *
+import sys
+sys.path.append('../')
+
+from inspect import isclass
 from typing import (
     Union,
     Optional,
     Literal
 )
-from .types import (
+from tglib.types import *
+from tglib.types import (
     TelegramType,
     ChatMember,
     MessageOrigin,
@@ -214,7 +218,7 @@ TYPES = {
                 "default": None
             },
             "hide_name": {
-                "hinting": Optional[bool],
+                "hinting": bool,
                 "default": False
             }
         }
@@ -5019,5 +5023,12 @@ TYPES = {
 }
 
 for k in TYPES:
+    if not isclass(k):
+        raise TypeError(
+            f'Invalid key {k!r}: expected a type, got {k.__class__.__name__}.'
+        )
     if not issubclass(k, TelegramType):
-        raise TypeError(k)
+        raise TypeError(
+            f'{k.__name__} is not a subclass of TelegramType.'
+        )
+print('All the types are subclass of TelegramType.')

@@ -198,8 +198,8 @@
                 "default": null
             },
             "hide_name": {
-                "hinting": "Optional[bool]",
-                "default": "False"
+                "hinting": "bool",
+                "default": false
             }
         }
     },
@@ -438,7 +438,7 @@
             "chat": null,
             "message_id": null,
             "date": {
-                "default": "0"
+                "default": 0
             }
         }
     },
@@ -2050,7 +2050,7 @@
         "init_kwargs": {
             "force_reply": {
                 "hinting": "Literal[True]",
-                "default": "True"
+                "default": true
             },
             "input_field_placeholder": {
                 "hinting": "Optional[str]",
