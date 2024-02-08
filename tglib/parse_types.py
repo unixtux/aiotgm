@@ -335,7 +335,6 @@ f = '''\
 import sys
 sys.path.append('../')
 
-from inspect import isclass
 from typing import (
     Union,
     Optional,
@@ -364,6 +363,8 @@ for line in lines:
 
 f += '''
 
+from inspect import isclass
+
 for k in TYPES:
     if not isclass(k):
         raise TypeError(
@@ -371,7 +372,7 @@ for k in TYPES:
         )
     if not issubclass(k, TelegramType):
         raise TypeError(
-            f'{k.__name__} is not a subclass of TelegramType.'
+            f'{k.__name__} is not a subclasses of TelegramType.'
         )
 print('All the types are subclass of TelegramType.')
 '''
