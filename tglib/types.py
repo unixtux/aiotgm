@@ -899,7 +899,7 @@ class Message(TelegramType):
         self.has_protected_content: Optional[Literal[True]] = has_protected_content
         self.media_group_id: Optional[str] = media_group_id
         self.author_signature: Optional[str] = author_signature
-        self.text: str = text if text is not None else str() # If not text, it's str() instead of None
+        self.text: str = text or str() # If not text, it's str() instead of None
         self.entities: Optional[list[MessageEntity]] = entities
         self.link_preview_options: Optional[LinkPreviewOptions] = link_preview_options
         self.animation: Optional[Animation] = animation
