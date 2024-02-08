@@ -4,7 +4,7 @@ from logging import DEBUG, INFO
 from typing import Optional, Any
 
 LOGGER_LEVEL = INFO
-#LOGGER_LEVEL = DEBUG
+LOGGER_LEVEL = DEBUG
 
 import sys
 sys.path.append('../')
@@ -58,17 +58,19 @@ def get_multiline_hinting(__type: str, __arg: str, __start_hinting: str, ) -> di
     open_brackets = LINES[LINE_N].count('[')
     closed_brackets = LINES[LINE_N].count(']')
     n_brackets = '{0,%s}' % (open_brackets - closed_brackets)
+
     LINE_N += 1
-    logger.debug(f'Diff of brackets at first line is {n_brackets}')
     result = __start_hinting
+
     while LINE_N != len(LINES):
-        end_of_hinting =         re.match(r'\s*(\]\s*)' + n_brackets + r'\s*,*\s*\n', LINES[LINE_N])
-        end_of_hinting_default = re.match(r'\s*(\]\s*)' + n_brackets + r'\s*=\s*(.*?),*\s*\n', LINES[LINE_N])
-    
+
+        end_of_hinting_default = re.match(r'\s*((\]\s*)' + n_brackets + r')\s*=\s*(.*?),*\s*\n', LINES[LINE_N])
+        end_of_hinting =         re.match(r'\s*((\]\s*)' + n_brackets + r')\s*,*\s*\n', LINES[LINE_N])
+
         if end_of_hinting_default:
-            group = end_of_hinting_default.group(1, 2)
-            result += group[0]
-            return {'hinting': result, 'default': group[1]}
+            group = end_of_hinting_default.group(1, 2, 3)
+            result += group[0].rstrip() # right stripped because of spaces after the last bracket.
+            return {'hinting': result, 'default': group[2]}
 
         elif end_of_hinting:
             result += end_of_hinting.group(1)
@@ -80,7 +82,7 @@ def get_multiline_hinting(__type: str, __arg: str, __start_hinting: str, ) -> di
 
         LINE_N += 1
     else:
-        raise_err(83, f'no multiline hinting found for {__arg}')
+        raise_err(83, f'no multiline hinting found for arg {__arg!r} of the type {__type}.')
 
 
 def get_dese_kwargs(__type: str) -> dict[str, Any]:
