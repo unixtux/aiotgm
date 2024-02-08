@@ -200,10 +200,10 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             else:
                 raise_err(199, f'self not found in {__type}.__init__()', LINE_N, LINES[LINE_N])
 
-        match_multiline_hinting = re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
-        match_hinting_default = re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
-        match_hinting_no_default = re.match(r"\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
-        match_no_hinting_default = re.match(r"\s*(.*?)\s*=\s*(.*?)\s*,*\n", LINES[LINE_N])
+        match_multiline_hinting =     re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
+        match_hinting_default =       re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
+        match_hinting_no_default =    re.match(r"\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
+        match_no_hinting_default =    re.match(r"\s*(.*?)\s*=\s*(.*?)\s*,*\n", LINES[LINE_N])
         match_no_hinting_no_default = re.match(r"\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
 
         if match_multiline_hinting:
@@ -249,7 +249,13 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
         elif match_no_hinting_default:
             group = match_no_hinting_default.group(1, 2)
             arg = group[0]
-            default_value = int(group[1]) if group[1].isdigit() else group[1]
+            default_value = group[1]
+
+            if default_value in JSON_LITERALS:
+                default_value = JSON_LITERALS[default_value]
+            elif default_value.isdigit():
+                default_value = int(default_value)
+
             init_kwargs[arg] = {'default': default_value}
             LINE_N += 1
             continue
@@ -270,37 +276,42 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
     if not re.match(r"\s*\)\s*:\s*\n|\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n", LINES[LINE_N]):
         raise_err(269)
 
-    self_kwargs = {}
+    self_kwargs = {'warning': {}}
 
     LINE_N += 1
     while LINE_N != len(LINES):
 
+        if re.match('\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
+            if not self_kwargs['warning']: self_kwargs.pop('warning')
+            return self_kwargs
+
         new_attribute_hinting = re.match(r"\s*self\s*\.\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
         new_attribute =         re.match(r"\s*self\s*\.\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
 
-        if re.match('\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
-            return self_kwargs
-
         if not (new_attribute_hinting or new_attribute):
-            raise_err(276, LINE_N, LINES[LINE_N])
+            raise_err(298, LINE_N, LINES[LINE_N])
         else:
             if new_attribute_hinting:
                 group = new_attribute_hinting.group(1, 2, 3)
-                #logger.debug(group[2])
-                if (group[0] != re.match(r"(.*)\s*", group[2]).group(1)) and not (__type == 'Message' and group[0] == 'text') and (not re.match(r"[A-Z_]+", group[2])):
-                    raise_err(290, LINE_N, LINES[LINE_N])
                 arg = group[0]
                 hinting = group[1]
-                self_kwargs[arg] = {'hinting': hinting, 'default': None}
+                default_value = group[2]
+
+                if arg != default_value:
+                    self_kwargs['warning'].update({arg: default_value, 'hinting': hinting})
+                else:
+                    self_kwargs[arg] = 'ok.'
 
             elif new_attribute:
                 group = new_attribute.group(1, 2)
-                logger.debug(f'{group[1]!r}')
-                logger.debug("'" + re.match(r"(\w*?)", group[1]).group(1) + "'")
-                if (group[0] != re.match(r"(\w*?)", group[1]).group(1)) and (not re.match(r"[A-Z_]+", group[1])):
-                    raise_err(298, LINE_N, LINES[LINE_N])
+
                 arg = group[0]
-                self_kwargs[arg] = {'default': None}
+                default_value = group[1]
+
+                if arg != default_value:
+                    self_kwargs['warning'].update({arg: default_value})
+                else:
+                    self_kwargs[arg] = 'ok.'
 
         LINE_N += 1
 
@@ -338,7 +349,9 @@ while LINE_N != len(LINES):
         TYPES[type]['init_kwargs'] = get_init_kwargs(type)
         TYPES[type]['self_kwargs'] = get_self_kwargs(type)
 
-    LINE_N += 1
+
+    if LINE_N != len(LINES):
+        LINE_N += 1
 
 
 NOT_IN_ALL = []
@@ -394,12 +407,13 @@ from tglib.types import (
     InputMessageContent,
     MaybeInaccessibleMessage
 )
+from tglib.default_literals import *
 
 TYPES = '''
 
 for line in lines:
-    line = re.sub(r'(\s*)"([A-Z].*)"(\s*:\s*\{)', r'\1\2\3', line)
-    line = re.sub(r'(\s*".*"\s*)(:\s*)"(.*)"', r'\1\2\3', line)
+    line = re.sub(r'(\s*)"([A-Z]\w*)"(\s*:\s*\{)', r'\1\2\3', line)
+    line = re.sub(r'(\s*".*"\s*)(:\s*)"([\w\[\]]*)"', r'\1\2\3', line)
     line = re.sub(r'(\s*)null(\s*)', r'\1None\2', line)
     line = re.sub(r'(\s*)true(\s*)', r'\1True\2', line)
     line = re.sub(r'(\s*)false(\s*)', r'\1False\2', line)
@@ -416,9 +430,37 @@ for k in TYPES:
         )
     if not issubclass(k, TelegramType):
         raise TypeError(
-            f'{k.__name__} is not a subclasses of TelegramType.'
+            f'{k.__name__} is not a subclass of TelegramType.'
         )
-print('All the types are subclass of TelegramType.')
+print('All the types are subclasses of TelegramType.')
+
+from tglib.logger import get_logger
+logger = get_logger('TypesChecker')
+logger.setLevel(10)
+
+for k in TYPES:
+    if TYPES[k]['has_dese']:
+        has_dese = True
+        for arg in TYPES[k]['dese_kwargs']:
+            if arg not in TYPES[k]['init_kwargs']:
+                logger.debug('%s, %s: %s', k.__name__, arg, 'not in init_kwargs')
+            if arg not in TYPES[k]['self_kwargs']:
+                logger.debug('%s, %s: %s', k.__name__, arg, 'not in self_kwargs')
+    else:
+        has_dese = False
+
+    for arg in TYPES[k]['init_kwargs']:
+        if has_dese and arg not in TYPES[k]['dese_kwargs']:
+            logger.debug('%s, %s: %s', k.__name__, arg, 'not in dese_kwargs')
+        if arg not in TYPES[k]['self_kwargs']:
+            logger.debug('%s, %s: %s', k.__name__, arg, 'not in self_kwargs')
+
+    for arg in TYPES[k]['self_kwargs']:
+        if has_dese and arg not in TYPES[k]['dese_kwargs']:
+            logger.debug('%s, %s: %s', k.__name__, arg, 'not in dese_kwargs')
+        if arg not in TYPES[k]['init_kwargs']:
+            logger.debug('%s, %s: %s', k.__name__, arg, 'not in init_kwargs')
+
 '''
 
 with open('test_types.py', 'w') as w:
