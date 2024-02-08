@@ -264,6 +264,47 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             raise_err(262, LINE_N, LINES[LINE_N])
 
 
+def get_self_kwargs(__type: str) -> dict[str, Any]:
+    global LINE_N
+
+    if not re.match(r"\s*\)\s*:\s*\n|\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n", LINES[LINE_N]):
+        raise_err(269)
+
+    self_kwargs = {}
+
+    LINE_N += 1
+    while LINE_N != len(LINES):
+
+        new_attribute_hinting = re.match(r"\s*self\s*\.\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
+        new_attribute =         re.match(r"\s*self\s*\.\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
+
+        if re.match('\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
+            return self_kwargs
+
+        if not (new_attribute_hinting or new_attribute):
+            raise_err(276, LINE_N, LINES[LINE_N])
+        else:
+            if new_attribute_hinting:
+                group = new_attribute_hinting.group(1, 2, 3)
+                #logger.debug(group[2])
+                if (group[0] != re.match(r"(.*)\s*", group[2]).group(1)) and not (__type == 'Message' and group[0] == 'text') and (not re.match(r"[A-Z_]+", group[2])):
+                    raise_err(290, LINE_N, LINES[LINE_N])
+                arg = group[0]
+                hinting = group[1]
+                self_kwargs[arg] = {'hinting': hinting, 'default': None}
+
+            elif new_attribute:
+                group = new_attribute.group(1, 2)
+                logger.debug(f'{group[1]!r}')
+                logger.debug("'" + re.match(r"(\w*?)", group[1]).group(1) + "'")
+                if (group[0] != re.match(r"(\w*?)", group[1]).group(1)) and (not re.match(r"[A-Z_]+", group[1])):
+                    raise_err(298, LINE_N, LINES[LINE_N])
+                arg = group[0]
+                self_kwargs[arg] = {'default': None}
+
+        LINE_N += 1
+
+
 while LINE_N != len(LINES):
 
     class_matched = re.match(r'class\s*(.*?)\s*\(\s*(.*?)\s*\)\s*:', LINES[LINE_N])
@@ -295,6 +336,7 @@ while LINE_N != len(LINES):
         # Not add a line to check
         # def __init__(self): ...
         TYPES[type]['init_kwargs'] = get_init_kwargs(type)
+        TYPES[type]['self_kwargs'] = get_self_kwargs(type)
 
     LINE_N += 1
 
