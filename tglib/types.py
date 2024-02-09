@@ -2949,8 +2949,8 @@ class ChatMemberUpdated(TelegramType):
         chat: Chat,
         from_user: User,
         date: int,
-        old_chat_member: list[ChatMember],
-        new_chat_member: list[ChatMember],
+        old_chat_member: ChatMember,
+        new_chat_member: ChatMember,
         invite_link: Optional[ChatInviteLink] = None,
         via_chat_folder_invite_link: Optional[bool] = None
     ):
