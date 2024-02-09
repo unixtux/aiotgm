@@ -298,9 +298,9 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 default_value = group[2]
 
                 if arg != default_value:
-                    self_kwargs['warning'].update({arg: default_value, 'hinting': hinting})
+                    self_kwargs['warning'][arg] = {'val': default_value, 'hinting': hinting}
                 else:
-                    self_kwargs[arg] = 'ok.'
+                    self_kwargs[arg] = {'val': 'ok.', 'hinting': hinting}
 
             elif new_attribute:
                 group = new_attribute.group(1, 2)
@@ -311,7 +311,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 if arg != default_value:
                     self_kwargs['warning'].update({arg: default_value})
                 else:
-                    self_kwargs[arg] = 'ok.'
+                    self_kwargs[arg] = {'val': 'ok.'}
 
         LINE_N += 1
 
