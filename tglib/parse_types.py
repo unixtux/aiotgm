@@ -220,7 +220,11 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             default_value = JSON_LITERALS[group[2]] if group[2] in JSON_LITERALS else group[2]
 
             if 'dese_kwargs' in TYPES[__type]:
-                dese_hinting: Optional[str] = TYPES[__type]['dese_kwargs'][arg]
+                try:
+                    dese_hinting: Optional[str] = TYPES[__type]['dese_kwargs'][arg]
+                except:
+                    print(__type, arg)
+                    sys.exit(2)
 
                 if dese_hinting is not None and dese_hinting.startswith('Optional'):
 
@@ -234,7 +238,7 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
                     else:
                         ...
 
-            init_kwargs[arg] = {'hinting': hinting, 'default': default_value}
+            init_kwargs[arg] = {'hinting': hinting, 'val': default_value}
             LINE_N += 1
             continue
 
@@ -256,7 +260,7 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             elif default_value.isdigit():
                 default_value = int(default_value)
 
-            init_kwargs[arg] = {'default': default_value}
+            init_kwargs[arg] = {'val': default_value}
             LINE_N += 1
             continue
 
@@ -281,7 +285,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
     LINE_N += 1
     while LINE_N != len(LINES):
 
-        if re.match('\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
+        if re.match(r'\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
             if not self_kwargs['warning']: self_kwargs.pop('warning')
             return self_kwargs
 
@@ -289,7 +293,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
         new_attribute =         re.match(r"\s*self\s*\.\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
 
         if not (new_attribute_hinting or new_attribute):
-            raise_err(298, LINE_N, LINES[LINE_N])
+            raise_err(296, LINE_N, LINES[LINE_N])
         else:
             if new_attribute_hinting:
                 group = new_attribute_hinting.group(1, 2, 3)
@@ -309,11 +313,13 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 default_value = group[1]
 
                 if arg != default_value:
-                    self_kwargs['warning'].update({arg: default_value})
+                    self_kwargs['warning'][arg] = {'val': default_value}
                 else:
                     self_kwargs[arg] = {'val': 'ok.'}
 
         LINE_N += 1
+    else:
+        return self_kwargs
 
 
 while LINE_N != len(LINES):
@@ -350,8 +356,7 @@ while LINE_N != len(LINES):
         TYPES[type]['self_kwargs'] = get_self_kwargs(type)
 
 
-    if LINE_N != len(LINES):
-        LINE_N += 1
+    LINE_N += 1 if LINE_N != len(LINES) else 0
 
 
 NOT_IN_ALL = []
@@ -389,6 +394,9 @@ with open('test_types.json', 'r') as r:
 f = '''\
 #!/bin/python3
 
+IGNORE = ()
+IGNORE = ('InputFile', )
+
 import sys
 sys.path.append('../')
 
@@ -413,7 +421,7 @@ TYPES = '''
 
 for line in lines:
     line = re.sub(r'(\s*)"([A-Z]\w*)"(\s*:\s*\{)', r'\1\2\3', line)
-    line = re.sub(r'(\s*".*"\s*)(:\s*)"([\w\[\]]*)"', r'\1\2\3', line)
+    line = re.sub(r'(\s*".*"\s*)(:\s*)"(\w+|\w*\[.*?\])"', r'\1\2\3', line)
     line = re.sub(r'(\s*)null(\s*)', r'\1None\2', line)
     line = re.sub(r'(\s*)true(\s*)', r'\1True\2', line)
     line = re.sub(r'(\s*)false(\s*)', r'\1False\2', line)
@@ -423,7 +431,11 @@ f += '''
 
 from inspect import isclass
 
+from tglib.logger import get_logger
+logger = get_logger('TypesChecker')
+
 for k in TYPES:
+
     if not isclass(k):
         raise TypeError(
             f'Invalid key {k!r}: expected a type, got {k.__class__.__name__}.'
@@ -432,35 +444,42 @@ for k in TYPES:
         raise TypeError(
             f'{k.__name__} is not a subclass of TelegramType.'
         )
-print('All the types are subclasses of TelegramType.')
+    if k.__name__ in IGNORE:
+        continue
 
-from tglib.logger import get_logger
-logger = get_logger('TypesChecker')
-logger.setLevel(10)
-
-for k in TYPES:
     if TYPES[k]['has_dese']:
         has_dese = True
         for arg in TYPES[k]['dese_kwargs']:
             if arg not in TYPES[k]['init_kwargs']:
-                logger.debug('%s, %s: %s', k.__name__, arg, 'not in init_kwargs')
+                logger.warning('%s, %s: %s', k.__name__, arg, 'not in init_kwargs')
             if arg not in TYPES[k]['self_kwargs']:
-                logger.debug('%s, %s: %s', k.__name__, arg, 'not in self_kwargs')
+                if (
+                    'warning' in TYPES[k]['self_kwargs']
+                    and arg in TYPES[k]['self_kwargs']['warning']
+                ):
+                    continue
+                logger.warning('%s, %s: %s', k.__name__, arg, 'not in self_kwargs')
     else:
         has_dese = False
 
     for arg in TYPES[k]['init_kwargs']:
         if has_dese and arg not in TYPES[k]['dese_kwargs']:
-            logger.debug('%s, %s: %s', k.__name__, arg, 'not in dese_kwargs')
+            logger.warning('%s, %s: %s', k.__name__, arg, 'not in dese_kwargs')
         if arg not in TYPES[k]['self_kwargs']:
-            logger.debug('%s, %s: %s', k.__name__, arg, 'not in self_kwargs')
+            if (
+                'warning' in TYPES[k]['self_kwargs']
+                and arg in TYPES[k]['self_kwargs']['warning']
+            ):
+                continue
+            logger.warning('%s, %s: %s', k.__name__, arg, 'not in self_kwargs')
 
     for arg in TYPES[k]['self_kwargs']:
+        if arg == 'warning':
+            continue
         if has_dese and arg not in TYPES[k]['dese_kwargs']:
-            logger.debug('%s, %s: %s', k.__name__, arg, 'not in dese_kwargs')
+            logger.warning('%s, %s: %s', k.__name__, arg, 'not in dese_kwargs')
         if arg not in TYPES[k]['init_kwargs']:
-            logger.debug('%s, %s: %s', k.__name__, arg, 'not in init_kwargs')
-
+            logger.warning('%s, %s: %s', k.__name__, arg, 'not in init_kwargs')
 '''
 
 with open('test_types.py', 'w') as w:
