@@ -17,7 +17,7 @@ from tglib.logger import get_logger
 with open('types.py') as r:
     LINES = r.readlines()
 
-TYPES = {}
+TYPES: dict[str, dict | Any] = {}
 TG_TYPES = []
 
 LINE_N = 0
@@ -30,6 +30,8 @@ JSON_LITERALS = {
     'False': False,
     'None': None
 }
+
+OPTIONAL = re.compile(r'Optional\s*\[\s*(.*)\s*\]')
 
 def raise_err(__file_line: int, *args: Any):
     if not isinstance(__file_line, int):
@@ -214,18 +216,44 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
 
         if match_multiline_hinting:
             match = match_multiline_hinting.group(1, 2)
-            (arg, start_hinting) = match[0], match[1]
-            init_kwargs[arg] = get_multiline_hint(__type, arg, start_hinting)
+            (arg, start_hint) = match[0], match[1]
+            multi_line_hint = get_multiline_hint(__type, arg, start_hint)
+            type_hint = multi_line_hint['type_hint']
+            if TYPES[__type]['has_dese']:
+                dese_hint = TYPES[__type]['dese_kwargs'][arg]
+                if dese_hint is not None:
+                    if dese_hint != type_hint:
+                        raise_err(224, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
+            init_kwargs[arg] = multi_line_hint
 
         elif match_hinting_default:
             match = match_hinting_default.group(1, 2, 3)
             (arg, type_hint) = match[0], match[1]
             default_value = JSON_LITERALS[match[2]] if match[2] in JSON_LITERALS else match[2]
+            if TYPES[__type]['has_dese']:
+                dese_hint = TYPES[__type]['dese_kwargs'][arg]
+                if dese_hint is not None:
+                    if OPTIONAL.match(type_hint):
+                        if default_value is not None:
+                            raise_err(237, __type, arg, 'should be None by default', LINE_N, LINES[LINE_N])
+                        if not OPTIONAL.match(dese_hint):
+                            __type_hint = OPTIONAL.match(type_hint).group(1)
+                        else:
+                            __type_hint = type_hint
+                    else:
+                        __type_hint = type_hint
+                    if dese_hint != __type_hint:
+                        raise_err(245, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
             init_kwargs[arg] = {'type_hint': type_hint, 'default': default_value}
 
         elif match_hinting_no_default:
             match = match_hinting_no_default.group(1, 2)
             (arg, type_hint) = match[0], match[1]
+            if TYPES[__type]['has_dese']:
+                dese_hint = TYPES[__type]['dese_kwargs'][arg]
+                if dese_hint is not None:
+                    if dese_hint != type_hint:
+                        raise_err(255, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
             init_kwargs[arg] = {'type_hint': type_hint}
 
         elif match_no_hinting_default:
@@ -235,55 +263,93 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
                 default_value = JSON_LITERALS[default_value]
             elif default_value.isdigit():
                 default_value = int(default_value)
-            init_kwargs[arg] = {'default': default_value}
+            type_hint = None
+            if TYPES[__type]['has_dese']:
+                dese_hint = TYPES[__type]['dese_kwargs'][arg]
+                if dese_hint is not None:
+                    type_hint = dese_hint
+            result = {'default': default_value} if type_hint is None else {'type_hint': type_hint, 'default': default_value}
+            init_kwargs[arg] = result
 
         elif match_no_hinting_no_default:
             arg = match_no_hinting_no_default.group(1)
-            init_kwargs[arg] = None
+            type_hint = None
+            if TYPES[__type]['has_dese']:
+                dese_hint = TYPES[__type]['dese_kwargs'][arg]
+                if dese_hint is not None:
+                    type_hint = dese_hint
+            result = None if type_hint is None else {'type_hint': type_hint}
+            init_kwargs[arg] = result
         else:
-            raise_err(244, LINE_N, LINES[LINE_N])
+            raise_err(283, LINE_N, LINES[LINE_N])
 
         LINE_N += 1
     else:
-        raise_err(248)
+        raise_err(287)
 
 
 def get_self_kwargs(__type: str) -> dict[str, Any]:
     global LINE_N
 
     if not re.match(r"\s*\)\s*:\s*\n|\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n", LINES[LINE_N]):
-        raise_err(255)
+        raise_err(294)
 
-    self_kwargs = {'warning': {}}
+    self_kwargs = {}
     LINE_N += 1
 
     while LINE_N != len(LINES):
 
         if re.match(r'\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
-            if not self_kwargs['warning']: self_kwargs.pop('warning')
             return self_kwargs
 
-        new_attribute_hinting = re.match(r"\s*self\s*\.\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
+        new_attribute_type_hint = re.match(r"\s*self\s*\.\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
         new_attribute =         re.match(r"\s*self\s*\.\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
 
-        if not (new_attribute_hinting or new_attribute):
-            raise_err(270, LINE_N, LINES[LINE_N])
+        if not (new_attribute_type_hint or new_attribute):
+            raise_err(308, LINE_N, LINES[LINE_N])
         else:
-            if new_attribute_hinting:
-                match = new_attribute_hinting.group(1, 2, 3)
+            if new_attribute_type_hint:
+                match = new_attribute_type_hint.group(1, 2, 3)
                 (arg, type_hint, default_value) = match[0], match[1], match[2]
-                if arg != default_value:
-                    self_kwargs['warning'][arg] = {'default': default_value, 'type_hint': type_hint}
+                warnings = []
+                if arg not in TYPES[__type]['kwargs']:
+                    warnings.append('not in __init__() args')
                 else:
-                    self_kwargs[arg] = {'default': 'ok.', 'type_hint': type_hint}
+                    check_arg = TYPES[__type]['kwargs'][arg]
+                    if check_arg is not None:
+                        if 'type_hint' in check_arg:
+                            __type_hint = type_hint
+                            if OPTIONAL.match(type_hint):
+                                if TYPES[type]['kwargs'][arg]['default'] is not None:
+                                    raise_err(323, arg, LINES[LINE_N], LINE_N)
+                                if not OPTIONAL.match(check_arg['type_hint']):
+                                    __type_hint = OPTIONAL.match(type_hint).group(1)
+                            if check_arg['type_hint'] != __type_hint:
+                                raise_err(327, check_arg, type_hint)
+                        else:
+                            TYPES[__type]['kwargs'][arg]['type_hint'] = type_hint
+                    else:
+                        TYPES[__type]['kwargs'][arg] = {'type_hint': type_hint}
+
+                if arg != default_value:
+                    warnings.append('default value is something else.')
+
+                if warnings:
+                    self_kwargs.update({arg: warnings})
+
 
             elif new_attribute:
                 match = new_attribute.group(1, 2)
                 (arg, default_value) = match[0], match[1]
+                warnings = []
+                if arg not in TYPES[__type]['kwargs']:
+                    warnings.append('not in __init__() args')
+
                 if arg != default_value:
-                    self_kwargs['warning'][arg] = {'default': default_value}
-                else:
-                    self_kwargs[arg] = {'default': 'ok.'}
+                    warnings.append('default value is something else.')
+
+                if warnings:
+                    self_kwargs.update({arg: warnings})
 
         LINE_N += 1
     else:
@@ -300,7 +366,7 @@ while LINE_N != len(LINES):
         type = match[0]
         inheritance = match[1]
 
-        TYPES[type] = {'has_dese': False}
+        TYPES[type] = {'has_dese': False, 'kwargs': {}, 'init_kwargs': {}, 'self_kwargs': {}}
 
         if inheritance == 'TelegramType':
             TG_TYPES.append(type)
@@ -320,13 +386,31 @@ while LINE_N != len(LINES):
     if re.match(r'\s*def\s*__init__\s*\(', LINES[LINE_N]):
         # Not add a line to check
         # def __init__(self): ...
-        TYPES[type]['init_kwargs'] = get_init_kwargs(type)
-        TYPES[type]['self_kwargs'] = get_self_kwargs(type)
+        init_kwargs = get_init_kwargs(type)
+        if TYPES[type]['has_dese']:
+            for arg in TYPES[type]['dese_kwargs']:
+                if arg not in init_kwargs:
+                    raise_err(369, type, arg, LINE_N, LINES[LINE_N])
+            TYPES[type].pop('dese_kwargs')
+
+        TYPES[type]['kwargs'] = init_kwargs
+        TYPES[type].pop('init_kwargs')
+        warnings = get_self_kwargs(type)
+        if warnings:
+            for arg in warnings.copy():
+                if arg in TYPES[type]['kwargs']:
+                    assert len(warnings[arg]) == 1
+                    TYPES[type]['kwargs'][arg].update({'warning': warnings[arg][0]})
+                    warnings.pop(arg)
+            if warnings:
+                TYPES[type].update({'warnings': warnings})
+
+        TYPES[type].pop('self_kwargs')
 
 
     LINE_N += 1 if LINE_N != len(LINES) else 0
 
-
+"""
 NOT_IN_ALL = []
 NOT_IN_TYPES = []
 TYPES_WITH_DESE = []
@@ -353,27 +437,6 @@ logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
 logger.info('Types without _dese(): %s', len(TYPES_WITHOUT_DESE))
 #"""
 
-args = []
-
-for type in TYPES:
-    type_hint = None
-    default = None
-    has_dese = True if TYPES[type]['has_dese'] else False
-    dede_kwargs = TYPES[type]['dese_kwargs'] if has_dese else None
-    init_kwargs = TYPES[type]['init_kwargs']
-    self_kwargs = TYPES[type]['self_kwargs']
-
-    if has_dese:
-        for dese_argument in dede_kwargs:
-            if dese_argument not in init_kwargs:
-                raise_err(369, type, dese_argument, 'missing in init_kwargs')
-            if dese_argument not in self_kwargs:
-                if dese_argument not in self_kwargs['warning']:
-                    raise_err(372, type, dese_argument, 'missing in self_kwargs and self_kwargs["warning"]')
-
-
-
-"""
 with open('test_types.json', 'w') as w:
     w.write(json.dumps(TYPES, indent = 4))
     logger.info('test_types.json has been written.')
@@ -384,17 +447,13 @@ with open('test_types.json', 'r') as r:
 f = '''\
 #!/bin/python3
 
-IGNORE = ()
-IGNORE = ('InputFile', )
-
 import sys
 sys.path.append('../')
 
 from typing import (
     Union,
     Optional,
-    Literal,
-    _UnionGenericAlias
+    Literal
 )
 from tglib.types import *
 from tglib.types import (
@@ -427,81 +486,22 @@ logger = get_logger('TypesChecker')
 
 logger.setLevel(10)
 
-for k in TYPES:
+for type in TYPES:
 
-    if not isclass(k):
+    if not isclass(type):
         raise TypeError(
-            f'Invalid key {k!r}: expected a type, got {k.__class__.__name__}.'
+            f'Invalid key {type!r}: expected a type, got {type.__class__.__name__}.'
         )
-    if not issubclass(k, TelegramType):
+    if not issubclass(type, TelegramType):
         raise TypeError(
-            f'{k.__name__} is not a subclass of TelegramType.'
+            f'{type.__name__} is not a subclass of TelegramType.'
         )
-    if k.__name__ in IGNORE:
-        continue
-
-    if TYPES[k]['has_dese']:
-        has_dese = True
-        for arg in TYPES[k]['dese_kwargs']:
-            if TYPES[k]['dese_kwargs'][arg] is None:
-                continue
-            if arg not in TYPES[k]['init_kwargs']:
-                logger.warning('%s, %s: %s', k.__name__, arg, 'not in init_kwargs')
-            else:
-                init_arg = TYPES[k]['init_kwargs'][arg]
-                if init_arg is not None and 'type_hint' in init_arg:
-                    init_type_hint = init_arg['type_hint']
-                    dese_type_hint = TYPES[k]['dese_kwargs'][arg]
-
-                    if type(dese_type_hint) is _UnionGenericAlias and type(init_type_hint) is _UnionGenericAlias:
-                        if type(None) in dese_type_hint.__dict__['__args__']:
-                            if not type(None) in init_type_hint.__dict__['__args__']:
-                                raise ValueError(f'Argument {arg!r} should be Optional in {k.__name__}.__init__(), got {dese_type_hint}')
-                            else:
-                                logger.debug('{} was optional in {}.dese()'.format(dese_type_hint, k.__name__))
-
-                        if type(None) not in dese_type_hint.__dict__['__args__'] and type(None) in init_type_hint.__dict__['__args__']:
-                            dese_type_hint = Optional[dese_type_hint]
-
-                    elif not type(dese_type_hint) is _UnionGenericAlias and type(init_type_hint) is _UnionGenericAlias:
-                        if type(None) in init_type_hint.__dict__['__args__']:
-                            dese_type_hint = Optional[dese_type_hint]
-
-                    if dese_type_hint != init_type_hint:
-                        raise ValueError(init_type_hint, dese_type_hint, k.__name__)
-
-            if arg not in TYPES[k]['self_kwargs']:
-                if (
-                    'warning' in TYPES[k]['self_kwargs']
-                    and arg in TYPES[k]['self_kwargs']['warning']
-                ):
-                    continue
-                logger.warning('%s, %s: %s', k.__name__, arg, 'not in self_kwargs')
-    else:
-        has_dese = False
-
-    for arg in TYPES[k]['init_kwargs']:
-        if has_dese and arg not in TYPES[k]['dese_kwargs']:
-            logger.warning('%s, %s: %s', k.__name__, arg, 'not in dese_kwargs')
-        if arg not in TYPES[k]['self_kwargs']:
-            if (
-                'warning' in TYPES[k]['self_kwargs']
-                and arg in TYPES[k]['self_kwargs']['warning']
-            ):
-                continue
-            logger.warning('%s, %s: %s', k.__name__, arg, 'not in self_kwargs')
-
-    for arg in TYPES[k]['self_kwargs']:
-        if arg == 'warning':
-            continue
-        if has_dese and arg not in TYPES[k]['dese_kwargs']:
-            logger.warning('%s, %s: %s', k.__name__, arg, 'not in dese_kwargs')
-        if arg not in TYPES[k]['init_kwargs']:
-            logger.warning('%s, %s: %s', k.__name__, arg, 'not in init_kwargs')
+    if 'warnings' in TYPES[type]:
+        logger.warning('{!r}, {!r}'.format(type.__name__, TYPES[type]['warnings']))
+    for arg in TYPES[type]['kwargs']:
+        if 'warning' in TYPES[type]['kwargs'][arg]:
+            logger.warning('{!r}, {!r}, {!r}'.format(type.__name__, arg, TYPES[type]['kwargs'][arg]['warning']))
 '''
-
 with open('test_types.py', 'w') as w:
     w.write(f)
     logger.info('test_types.py has been written.')
-
-#"""
