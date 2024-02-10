@@ -154,11 +154,17 @@
             },
             "file_name": {
                 "type_hint": "Optional[str]",
-                "default": null
+                "default": null,
+                "warnings": [
+                    "not found in self...=..."
+                ]
             },
             "hide_name": {
                 "type_hint": "bool",
-                "default": false
+                "default": false,
+                "warnings": [
+                    "not found in self...=..."
+                ]
             }
         }
     },
@@ -431,7 +437,9 @@
             "text": {
                 "default": null,
                 "type_hint": "str",
-                "warning": "default value is something else."
+                "warnings": [
+                    "default value is text or str() # If not text, it's str() instead of None"
+                ]
             },
             "entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
@@ -723,8 +731,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_REACTION_TYPE_EMOJI"
             ]
         }
     },
@@ -737,8 +745,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
             ]
         }
     },
@@ -1585,7 +1593,9 @@
             "keyboard": {
                 "type_hint": "Optional[list[list[KeyboardButton]]]",
                 "default": null,
-                "warning": "default value is something else."
+                "warnings": [
+                    "default value is keyboard or []"
+                ]
             },
             "is_persistent": {
                 "type_hint": "Optional[bool]",
@@ -1619,8 +1629,8 @@
         },
         "warnings": {
             "remove_keyboard": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is True"
             ]
         }
     },
@@ -1674,7 +1684,9 @@
             "inline_keyboard": {
                 "type_hint": "Optional[list[list[InlineKeyboardButton]]]",
                 "default": null,
-                "warning": "default value is something else."
+                "warnings": [
+                    "default value is inline_keyboard or []"
+                ]
             }
         }
     },
@@ -1777,8 +1789,8 @@
         },
         "warnings": {
             "status": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_MEMBER_OWNER"
             ]
         }
     },
@@ -1850,8 +1862,8 @@
         },
         "warnings": {
             "status": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
             ]
         }
     },
@@ -1864,8 +1876,8 @@
         },
         "warnings": {
             "status": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_MEMBER_MEMBER"
             ]
         }
     },
@@ -1926,8 +1938,8 @@
         },
         "warnings": {
             "status": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_MEMBER_RESTRICTED"
             ]
         }
     },
@@ -1940,8 +1952,8 @@
         },
         "warnings": {
             "status": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_MEMBER_LEFT"
             ]
         }
     },
@@ -1957,8 +1969,8 @@
         },
         "warnings": {
             "status": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_MEMBER_BANNED"
             ]
         }
     },
@@ -2049,8 +2061,8 @@
         "kwargs": {},
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_BOT_COMMAND_SCOPE_DEFAULT"
             ]
         }
     },
@@ -2059,8 +2071,8 @@
         "kwargs": {},
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS"
             ]
         }
     },
@@ -2069,8 +2081,8 @@
         "kwargs": {},
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS"
             ]
         }
     },
@@ -2079,8 +2091,8 @@
         "kwargs": {},
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS"
             ]
         }
     },
@@ -2093,8 +2105,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT"
             ]
         }
     },
@@ -2107,8 +2119,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
             ]
         }
     },
@@ -2124,8 +2136,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
             ]
         }
     },
@@ -2158,8 +2170,8 @@
         "kwargs": {},
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_MENU_BUTTON_COMMANDS"
             ]
         }
     },
@@ -2175,8 +2187,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_MENU_BUTTON_WEB_APP"
             ]
         }
     },
@@ -2185,8 +2197,8 @@
         "kwargs": {},
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_MENU_BUTTON_DEFAULT"
             ]
         }
     },
@@ -2228,8 +2240,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INPUT_MEDIA_PHOTO"
             ]
         }
     },
@@ -2278,8 +2290,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INPUT_MEDIA_VIDEO"
             ]
         }
     },
@@ -2324,8 +2336,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INPUT_MEDIA_ANIMATION"
             ]
         }
     },
@@ -2366,8 +2378,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INPUT_MEDIA_AUDIO"
             ]
         }
     },
@@ -2400,8 +2412,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INPUT_MEDIA_DOCUMENT"
             ]
         }
     },
@@ -2788,8 +2800,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
             ]
         }
     },
@@ -2844,8 +2856,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_PHOTO"
             ]
         }
     },
@@ -2904,8 +2916,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_GIF"
             ]
         }
     },
@@ -2964,8 +2976,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
             ]
         }
     },
@@ -3026,8 +3038,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_VIDEO"
             ]
         }
     },
@@ -3074,8 +3086,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_AUDIO"
             ]
         }
     },
@@ -3118,8 +3130,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_VOICE"
             ]
         }
     },
@@ -3177,8 +3189,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
             ]
         }
     },
@@ -3236,8 +3248,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_LOCATION"
             ]
         }
     },
@@ -3298,8 +3310,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_VENUE"
             ]
         }
     },
@@ -3346,8 +3358,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CONTACT"
             ]
         }
     },
@@ -3367,8 +3379,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_GAME"
             ]
         }
     },
@@ -3412,8 +3424,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
             ]
         }
     },
@@ -3453,8 +3465,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
             ]
         }
     },
@@ -3494,8 +3506,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
             ]
         }
     },
@@ -3519,8 +3531,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
             ]
         }
     },
@@ -3563,8 +3575,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
             ]
         }
     },
@@ -3607,8 +3619,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
             ]
         }
     },
@@ -3647,8 +3659,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
             ]
         }
     },
@@ -3684,8 +3696,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
             ]
         }
     },
@@ -3974,8 +3986,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
             ]
         }
     },
@@ -3994,8 +4006,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
             ]
         }
     },
@@ -4014,8 +4026,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
             ]
         }
     },
@@ -4034,8 +4046,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
             ]
         }
     },
@@ -4054,8 +4066,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
             ]
         }
     },
@@ -4074,8 +4086,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
             ]
         }
     },
@@ -4094,8 +4106,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
             ]
         }
     },
@@ -4114,8 +4126,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
             ]
         }
     },
@@ -4134,8 +4146,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
             ]
         }
     },
@@ -4289,8 +4301,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_MESSAGE_ORIGIN_USER"
             ]
         }
     },
@@ -4306,8 +4318,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
             ]
         }
     },
@@ -4327,8 +4339,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_MESSAGE_ORIGIN_CHAT"
             ]
         }
     },
@@ -4351,8 +4363,8 @@
         },
         "warnings": {
             "type": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_MESSAGE_ORIGIN_CHANNEL"
             ]
         }
     },
@@ -4461,8 +4473,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
             ]
         }
     },
@@ -4475,8 +4487,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
             ]
         }
     },
@@ -4497,8 +4509,8 @@
         },
         "warnings": {
             "source": [
-                "not in __init__() args",
-                "default value is something else."
+                "not in __init__()",
+                "default value is DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
             ]
         }
     },

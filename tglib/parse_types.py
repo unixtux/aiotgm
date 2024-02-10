@@ -313,7 +313,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 (arg, type_hint, default_value) = match[0], match[1], match[2]
                 warnings = []
                 if arg not in TYPES[__type]['kwargs']:
-                    warnings.append('not in __init__() args')
+                    warnings.append('not in __init__()')
                 else:
                     check_arg = TYPES[__type]['kwargs'][arg]
                     if check_arg is not None:
@@ -331,25 +331,21 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                     else:
                         TYPES[__type]['kwargs'][arg] = {'type_hint': type_hint}
 
+                self_kwargs[arg] = {}
                 if arg != default_value:
-                    warnings.append('default value is something else.')
-
-                if warnings:
-                    self_kwargs.update({arg: warnings})
-
+                    warnings.append(f'default value is {default_value}')
+                self_kwargs[arg]['warnings'] = warnings
 
             elif new_attribute:
                 match = new_attribute.group(1, 2)
                 (arg, default_value) = match[0], match[1]
                 warnings = []
                 if arg not in TYPES[__type]['kwargs']:
-                    warnings.append('not in __init__() args')
-
+                    warnings.append('not in __init__()')
                 if arg != default_value:
-                    warnings.append('default value is something else.')
-
-                if warnings:
-                    self_kwargs.update({arg: warnings})
+                    warnings.append(f'default value is {default_value}')
+                self_kwargs[arg] = {}
+                self_kwargs[arg]['warnings'] = warnings
 
         LINE_N += 1
     else:
@@ -395,15 +391,22 @@ while LINE_N != len(LINES):
 
         TYPES[type]['kwargs'] = init_kwargs
         TYPES[type].pop('init_kwargs')
-        warnings = get_self_kwargs(type)
-        if warnings:
-            for arg in warnings.copy():
-                if arg in TYPES[type]['kwargs']:
-                    assert len(warnings[arg]) == 1
-                    TYPES[type]['kwargs'][arg].update({'warning': warnings[arg][0]})
-                    warnings.pop(arg)
+        self_kwargs = get_self_kwargs(type)
+        for arg in TYPES[type]['kwargs']:
+            if arg not in self_kwargs:
+                TYPES[type]['kwargs'][arg].update({'warnings': ['not found in self...=...']})
+
+        for arg in self_kwargs.copy():
+            warnings = self_kwargs[arg]['warnings']
             if warnings:
-                TYPES[type].update({'warnings': warnings})
+                if arg in TYPES[type]['kwargs']:
+                    assert len(warnings) == 1
+                    if 'warnings' in TYPES[type]['kwargs'][arg]:
+                        TYPES[type]['kwargs'][arg]['warnings'].append(warnings[0])
+                    else:
+                        TYPES[type]['kwargs'][arg].update({'warnings': warnings})
+                else:
+                    TYPES[type].update({'warnings': {arg: warnings}})
 
         TYPES[type].pop('self_kwargs')
 
@@ -484,7 +487,9 @@ from inspect import isclass
 from tglib.logger import get_logger
 logger = get_logger('TypesChecker')
 
-logger.setLevel(10)
+logger.setLevel(20)
+
+warnings = []
 
 for type in TYPES:
 
@@ -497,10 +502,21 @@ for type in TYPES:
             f'{type.__name__} is not a subclass of TelegramType.'
         )
     if 'warnings' in TYPES[type]:
-        logger.warning('{!r}, {!r}'.format(type.__name__, TYPES[type]['warnings']))
+        logger.debug('{!r}, {!r}'.format(type.__name__, TYPES[type]['warnings']))
+        for arg in TYPES[type]['warnings']:
+            warnings.append(f'{arg!r} in {type.__name__} warning: ' + ' & '.join(TYPES[type]['warnings'][arg]))
+
     for arg in TYPES[type]['kwargs']:
-        if 'warning' in TYPES[type]['kwargs'][arg]:
-            logger.warning('{!r}, {!r}, {!r}'.format(type.__name__, arg, TYPES[type]['kwargs'][arg]['warning']))
+        if 'warnings' in TYPES[type]['kwargs'][arg]:
+            logger.debug('{!r}, {!r}, {!r}'.format(type.__name__, arg, TYPES[type]['kwargs'][arg]['warnings']))
+            warnings.append(f'{arg!r} in {type.__name__} warning: ' + ' & '.join(TYPES[type]['kwargs'][arg]['warnings']))
+
+if warnings:
+    with open('types_warnings.txt', 'w') as w:
+        w.write('\\n'.join(warnings))
+        logger.warning(f'{len(warnings)} warnings have been saved in \\'types_warnings.txt\\'')
+else:
+    logger.info(f'{len(warnings)} warnings')
 '''
 with open('test_types.py', 'w') as w:
     w.write(f)
