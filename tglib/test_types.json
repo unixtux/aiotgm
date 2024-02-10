@@ -156,14 +156,14 @@
                 "type_hint": "Optional[str]",
                 "default": null,
                 "warnings": [
-                    "not found in self...=..."
+                    "no match self.file_name = ..."
                 ]
             },
             "hide_name": {
                 "type_hint": "bool",
                 "default": false,
                 "warnings": [
-                    "not found in self...=..."
+                    "no match self.hide_name = ..."
                 ]
             }
         }
@@ -730,10 +730,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_REACTION_TYPE_EMOJI"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_REACTION_TYPE_EMOJI"
+                ]
+            }
         }
     },
     "ReactionTypeCustomEmoji": {
@@ -744,10 +746,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
+                ]
+            }
         }
     },
     "Chat": {
@@ -1628,10 +1632,13 @@
             }
         },
         "warnings": {
-            "remove_keyboard": [
-                "not in __init__()",
-                "default value is: True"
-            ]
+            "remove_keyboard": {
+                "type_hint": "Literal[True]",
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: True"
+                ]
+            }
         }
     },
     "InlineKeyboardButton": {
@@ -1788,10 +1795,12 @@
             }
         },
         "warnings": {
-            "status": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_MEMBER_OWNER"
-            ]
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_OWNER"
+                ]
+            }
         }
     },
     "ChatMemberAdministrator": {
@@ -1861,10 +1870,12 @@
             }
         },
         "warnings": {
-            "status": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
-            ]
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
+                ]
+            }
         }
     },
     "ChatMemberMember": {
@@ -1875,10 +1886,12 @@
             }
         },
         "warnings": {
-            "status": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_MEMBER_MEMBER"
-            ]
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_MEMBER"
+                ]
+            }
         }
     },
     "ChatMemberRestricted": {
@@ -1937,10 +1950,12 @@
             }
         },
         "warnings": {
-            "status": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_MEMBER_RESTRICTED"
-            ]
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_RESTRICTED"
+                ]
+            }
         }
     },
     "ChatMemberLeft": {
@@ -1951,10 +1966,12 @@
             }
         },
         "warnings": {
-            "status": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_MEMBER_LEFT"
-            ]
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_LEFT"
+                ]
+            }
         }
     },
     "ChatMemberBanned": {
@@ -1968,10 +1985,12 @@
             }
         },
         "warnings": {
-            "status": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_MEMBER_BANNED"
-            ]
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_BANNED"
+                ]
+            }
         }
     },
     "ChatMemberUpdated": {
@@ -2060,40 +2079,48 @@
         "has_dese": false,
         "kwargs": {},
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_BOT_COMMAND_SCOPE_DEFAULT"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_BOT_COMMAND_SCOPE_DEFAULT"
+                ]
+            }
         }
     },
     "BotCommandScopeAllPrivateChats": {
         "has_dese": false,
         "kwargs": {},
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS"
+                ]
+            }
         }
     },
     "BotCommandScopeAllGroupChats": {
         "has_dese": false,
         "kwargs": {},
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS"
+                ]
+            }
         }
     },
     "BotCommandScopeAllChatAdministrators": {
         "has_dese": false,
         "kwargs": {},
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS"
+                ]
+            }
         }
     },
     "BotCommandScopeChat": {
@@ -2104,10 +2131,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT"
+                ]
+            }
         }
     },
     "BotCommandScopeChatAdministrators": {
@@ -2118,10 +2147,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
+                ]
+            }
         }
     },
     "BotCommandScopeChatMember": {
@@ -2135,10 +2166,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
+                ]
+            }
         }
     },
     "BotName": {
@@ -2169,10 +2202,12 @@
         "has_dese": true,
         "kwargs": {},
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_MENU_BUTTON_COMMANDS"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_MENU_BUTTON_COMMANDS"
+                ]
+            }
         }
     },
     "MenuButtonWebApp": {
@@ -2186,20 +2221,24 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_MENU_BUTTON_WEB_APP"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_MENU_BUTTON_WEB_APP"
+                ]
+            }
         }
     },
     "MenuButtonDefault": {
         "has_dese": true,
         "kwargs": {},
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_MENU_BUTTON_DEFAULT"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_MENU_BUTTON_DEFAULT"
+                ]
+            }
         }
     },
     "ResponseParameters": {
@@ -2239,10 +2278,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INPUT_MEDIA_PHOTO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INPUT_MEDIA_PHOTO"
+                ]
+            }
         }
     },
     "InputMediaVideo": {
@@ -2289,10 +2330,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INPUT_MEDIA_VIDEO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INPUT_MEDIA_VIDEO"
+                ]
+            }
         }
     },
     "InputMediaAnimation": {
@@ -2335,10 +2378,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INPUT_MEDIA_ANIMATION"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INPUT_MEDIA_ANIMATION"
+                ]
+            }
         }
     },
     "InputMediaAudio": {
@@ -2377,10 +2422,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INPUT_MEDIA_AUDIO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INPUT_MEDIA_AUDIO"
+                ]
+            }
         }
     },
     "InputMediaDocument": {
@@ -2411,10 +2458,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INPUT_MEDIA_DOCUMENT"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INPUT_MEDIA_DOCUMENT"
+                ]
+            }
         }
     },
     "MaskPosition": {
@@ -2799,10 +2848,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
+                ]
+            }
         }
     },
     "InlineQueryResultPhoto": {
@@ -2855,10 +2906,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO"
+                ]
+            }
         }
     },
     "InlineQueryResultGif": {
@@ -2915,10 +2968,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_GIF"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_GIF"
+                ]
+            }
         }
     },
     "InlineQueryResultMpeg4Gif": {
@@ -2975,10 +3030,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
+                ]
+            }
         }
     },
     "InlineQueryResultVideo": {
@@ -3037,10 +3094,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO"
+                ]
+            }
         }
     },
     "InlineQueryResultAudio": {
@@ -3085,10 +3144,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO"
+                ]
+            }
         }
     },
     "InlineQueryResultVoice": {
@@ -3129,10 +3190,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE"
+                ]
+            }
         }
     },
     "InlineQueryResultDocument": {
@@ -3188,10 +3251,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
+                ]
+            }
         }
     },
     "InlineQueryResultLocation": {
@@ -3247,10 +3312,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION"
+                ]
+            }
         }
     },
     "InlineQueryResultVenue": {
@@ -3309,10 +3376,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_VENUE"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_VENUE"
+                ]
+            }
         }
     },
     "InlineQueryResultContact": {
@@ -3357,10 +3426,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT"
+                ]
+            }
         }
     },
     "InlineQueryResultGame": {
@@ -3378,10 +3449,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_GAME"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_GAME"
+                ]
+            }
         }
     },
     "InlineQueryResultCachedPhoto": {
@@ -3423,10 +3496,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
+                ]
+            }
         }
     },
     "InlineQueryResultCachedGif": {
@@ -3464,10 +3539,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
+                ]
+            }
         }
     },
     "InlineQueryResultCachedMpeg4Gif": {
@@ -3505,10 +3582,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
+                ]
+            }
         }
     },
     "InlineQueryResultCachedSticker": {
@@ -3530,10 +3609,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
+                ]
+            }
         }
     },
     "InlineQueryResultCachedDocument": {
@@ -3574,10 +3655,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
+                ]
+            }
         }
     },
     "InlineQueryResultCachedVideo": {
@@ -3618,10 +3701,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
+                ]
+            }
         }
     },
     "InlineQueryResultCachedVoice": {
@@ -3658,10 +3743,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
+                ]
+            }
         }
     },
     "InlineQueryResultCachedAudio": {
@@ -3695,10 +3782,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
+                ]
+            }
         }
     },
     "ChosenInlineResult": {
@@ -3985,10 +4074,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
+                ]
+            }
         }
     },
     "PassportElementErrorFrontSide": {
@@ -4005,10 +4096,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
+                ]
+            }
         }
     },
     "PassportElementErrorReverseSide": {
@@ -4025,10 +4118,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
+                ]
+            }
         }
     },
     "PassportElementErrorSelfie": {
@@ -4045,10 +4140,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
+                ]
+            }
         }
     },
     "PassportElementErrorFile": {
@@ -4065,10 +4162,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
+                ]
+            }
         }
     },
     "PassportElementErrorFiles": {
@@ -4085,10 +4184,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
+                ]
+            }
         }
     },
     "PassportElementErrorTranslationFile": {
@@ -4105,10 +4206,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
+                ]
+            }
         }
     },
     "PassportElementErrorTranslationFiles": {
@@ -4125,10 +4228,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
+                ]
+            }
         }
     },
     "PassportElementErrorUnspecified": {
@@ -4145,10 +4250,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
+                ]
+            }
         }
     },
     "Game": {
@@ -4300,10 +4407,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_MESSAGE_ORIGIN_USER"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_MESSAGE_ORIGIN_USER"
+                ]
+            }
         }
     },
     "MessageOriginHiddenUser": {
@@ -4317,10 +4426,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
+                ]
+            }
         }
     },
     "MessageOriginChat": {
@@ -4338,10 +4449,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_MESSAGE_ORIGIN_CHAT"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_MESSAGE_ORIGIN_CHAT"
+                ]
+            }
         }
     },
     "MessageOriginChannel": {
@@ -4362,10 +4475,12 @@
             }
         },
         "warnings": {
-            "type": [
-                "not in __init__()",
-                "default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL"
-            ]
+            "type": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL"
+                ]
+            }
         }
     },
     "ExternalReplyInfo": {
@@ -4472,10 +4587,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
+                ]
+            }
         }
     },
     "ChatBoostSourceGiftCode": {
@@ -4486,10 +4603,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
+                ]
+            }
         }
     },
     "ChatBoostSourceGiveaway": {
@@ -4508,10 +4627,12 @@
             }
         },
         "warnings": {
-            "source": [
-                "not in __init__()",
-                "default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
-            ]
+            "source": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
+                ]
+            }
         }
     },
     "ChatBoost": {

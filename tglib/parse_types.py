@@ -50,13 +50,12 @@ def get_subclass_hint(__func_name: str) -> str:
     while ln != len(LINES):
         if dese_function.match(LINES[ln]):
             type_hint = dese_function.match(LINES[ln]).group(1)
-            optional = re.match(r'Optional\s*\[\s*(.*)\s*\]', type_hint)
-            if optional:
-                type_hint = optional.group(1)
+            if OPTIONAL.match(type_hint):
+                type_hint = OPTIONAL.match(type_hint).group(1)
             return type_hint
         ln += 1
     else:
-        raise_err(57, f'Function {__func_name}() not found.')
+        raise_err(58, f'Function {__func_name}() not found.')
 
 
 def get_multiline_hint(__type: str, __arg: str, __start_hint: str, ) -> dict[str, Any]:
@@ -82,7 +81,10 @@ def get_multiline_hint(__type: str, __arg: str, __start_hint: str, ) -> dict[str
         if end_of_hint_default:
             match = end_of_hint_default.group(1, 2, 3)
             type_hint += match[0].rstrip() # right stripped because of spaces after the last bracket.
-            return {'type_hint': type_hint, 'default': match[2]}
+            default_value = JSON_LITERALS[match[2]] if match[2] in JSON_LITERALS else match[2]
+            if OPTIONAL.match(type_hint) and default_value is not None:
+                raise_err(86, __arg, 'in', __type, 'should be None by default.')
+            return {'type_hint': type_hint, 'default': default_value}
 
         elif end_of_hint:
             return {'type_hint': type_hint + end_of_hint.group(1)}
@@ -334,7 +336,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 self_kwargs[arg] = {}
                 if arg != default_value:
                     warnings.append(f'default value is: {default_value}')
-                self_kwargs[arg]['warnings'] = warnings
+                self_kwargs[arg] = {'type_hint': type_hint, 'warnings': warnings}
 
             elif new_attribute:
                 match = new_attribute.group(1, 2)
@@ -399,7 +401,7 @@ while LINE_N != len(LINES):
         self_kwargs = get_self_kwargs(type)
         for arg in TYPES[type]['kwargs']:
             if arg not in self_kwargs:
-                TYPES[type]['kwargs'][arg].update({'warnings': ['not found in self...=...']})
+                TYPES[type]['kwargs'][arg].update({'warnings': [f'no match self.{arg} = ...']})
 
         for arg in self_kwargs.copy():
             warnings = self_kwargs[arg]['warnings']
@@ -411,14 +413,17 @@ while LINE_N != len(LINES):
                     else:
                         TYPES[type]['kwargs'][arg].update({'warnings': warnings})
                 else:
-                    TYPES[type].update({'warnings': {arg: warnings}})
+                    if 'warnings' in TYPES[type]:
+                        TYPES[type]['warnings'].update({arg: self_kwargs[arg]})
+                    else:
+                        TYPES[type].update({'warnings': {arg: self_kwargs[arg]}})
 
         TYPES[type].pop('self_kwargs')
 
 
     LINE_N += 1 if LINE_N != len(LINES) else 0
 
-"""
+
 NOT_IN_ALL = []
 NOT_IN_TYPES = []
 TYPES_WITH_DESE = []
@@ -442,7 +447,7 @@ logger.info('Length of types is: %s', len(TYPES))
 logger.info('TelegramTypes are: %s', len(TG_TYPES))
 logger.info('Missing types are: %s', len(NOT_IN_ALL) or len(NOT_IN_TYPES))
 logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
-logger.info('Types without _dese(): %s', len(TYPES_WITHOUT_DESE))
+logger.info('Types without _dese(): %s\n', len(TYPES_WITHOUT_DESE))
 #"""
 
 with open('test_types.json', 'w') as w:
@@ -509,17 +514,20 @@ for type in TYPES:
     if 'warnings' in TYPES[type]:
         logger.debug('{!r}, {!r}'.format(type.__name__, TYPES[type]['warnings']))
         for arg in TYPES[type]['warnings']:
-            warnings.append(f'{type.__name__}.{arg}: ' + ' & '.join(TYPES[type]['warnings'][arg]))
+            warnings.append(f'{type.__name__}.{arg}: ' + ' & '.join(TYPES[type]['warnings'][arg]['warnings']))
 
     for arg in TYPES[type]['kwargs']:
         if 'warnings' in TYPES[type]['kwargs'][arg]:
             logger.debug('{!r}, {!r}, {!r}'.format(type.__name__, arg, TYPES[type]['kwargs'][arg]['warnings']))
             warnings.append(f'{type.__name__}.{arg}: ' + ' & '.join(TYPES[type]['kwargs'][arg]['warnings']))
+        type_hint = TYPES[type]['kwargs'][arg]['type_hint']
+        if type_hint.__name__ == 'Optional' and TYPES[type]['kwargs'][arg]['default'] is not None:
+            raise ValueError(f"\\n\\nIn {type.__name__}, argument {arg!r} should be None by default, got {TYPES[type]['kwargs'][arg]['default']!r}")
 
 if warnings:
     with open('types_warnings.txt', 'w') as w:
         w.write('\\n'.join(warnings))
-        logger.warning(f'{len(warnings)} warnings have been saved in \\'types_warnings.txt\\'')
+        logger.warning(f'{len(warnings)} warnings have been saved in "types_warnings.txt"')
 else:
     logger.info(f'{len(warnings)} warnings')
 '''
