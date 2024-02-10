@@ -4693,12 +4693,12 @@ for type in TYPES:
     if 'warnings' in TYPES[type]:
         logger.debug('{!r}, {!r}'.format(type.__name__, TYPES[type]['warnings']))
         for arg in TYPES[type]['warnings']:
-            warnings.append(f'{arg!r} in {type.__name__} warning: ' + ' & '.join(TYPES[type]['warnings'][arg]))
+            warnings.append(f'{type.__name__}.{arg}: ' + ' & '.join(TYPES[type]['warnings'][arg]))
 
     for arg in TYPES[type]['kwargs']:
         if 'warnings' in TYPES[type]['kwargs'][arg]:
             logger.debug('{!r}, {!r}, {!r}'.format(type.__name__, arg, TYPES[type]['kwargs'][arg]['warnings']))
-            warnings.append(f'{arg!r} in {type.__name__} warning: ' + ' & '.join(TYPES[type]['kwargs'][arg]['warnings']))
+            warnings.append(f'{type.__name__}.{arg}: ' + ' & '.join(TYPES[type]['kwargs'][arg]['warnings']))
 
 if warnings:
     with open('types_warnings.txt', 'w') as w:
