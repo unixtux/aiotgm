@@ -387,6 +387,11 @@ while LINE_N != len(LINES):
             for arg in TYPES[type]['dese_kwargs']:
                 if arg not in init_kwargs:
                     raise_err(369, type, arg, LINE_N, LINES[LINE_N])
+
+            for arg in TYPES[type]['dese_kwargs']:
+                if arg not in init_kwargs:
+                    raise_err(393, arg, type)
+
             TYPES[type].pop('dese_kwargs')
 
         TYPES[type]['kwargs'] = init_kwargs
