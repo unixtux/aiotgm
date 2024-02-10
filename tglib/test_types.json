@@ -438,7 +438,7 @@
                 "default": null,
                 "type_hint": "str",
                 "warnings": [
-                    "default value is text or str() # If not text, it's str() instead of None"
+                    "default value is: text or str() # If not text, it's str() instead of None"
                 ]
             },
             "entities": {
@@ -732,7 +732,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_REACTION_TYPE_EMOJI"
+                "default value is: DEFAULT_REACTION_TYPE_EMOJI"
             ]
         }
     },
@@ -746,7 +746,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
+                "default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
             ]
         }
     },
@@ -1594,7 +1594,7 @@
                 "type_hint": "Optional[list[list[KeyboardButton]]]",
                 "default": null,
                 "warnings": [
-                    "default value is keyboard or []"
+                    "default value is: keyboard or []"
                 ]
             },
             "is_persistent": {
@@ -1630,7 +1630,7 @@
         "warnings": {
             "remove_keyboard": [
                 "not in __init__()",
-                "default value is True"
+                "default value is: True"
             ]
         }
     },
@@ -1685,7 +1685,7 @@
                 "type_hint": "Optional[list[list[InlineKeyboardButton]]]",
                 "default": null,
                 "warnings": [
-                    "default value is inline_keyboard or []"
+                    "default value is: inline_keyboard or []"
                 ]
             }
         }
@@ -1790,7 +1790,7 @@
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_OWNER"
+                "default value is: DEFAULT_CHAT_MEMBER_OWNER"
             ]
         }
     },
@@ -1863,7 +1863,7 @@
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
+                "default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
             ]
         }
     },
@@ -1877,7 +1877,7 @@
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_MEMBER"
+                "default value is: DEFAULT_CHAT_MEMBER_MEMBER"
             ]
         }
     },
@@ -1939,7 +1939,7 @@
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_RESTRICTED"
+                "default value is: DEFAULT_CHAT_MEMBER_RESTRICTED"
             ]
         }
     },
@@ -1953,7 +1953,7 @@
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_LEFT"
+                "default value is: DEFAULT_CHAT_MEMBER_LEFT"
             ]
         }
     },
@@ -1970,7 +1970,7 @@
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_BANNED"
+                "default value is: DEFAULT_CHAT_MEMBER_BANNED"
             ]
         }
     },
@@ -2062,7 +2062,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_DEFAULT"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_DEFAULT"
             ]
         }
     },
@@ -2072,7 +2072,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS"
             ]
         }
     },
@@ -2082,7 +2082,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS"
             ]
         }
     },
@@ -2092,7 +2092,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS"
             ]
         }
     },
@@ -2106,7 +2106,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT"
             ]
         }
     },
@@ -2120,7 +2120,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
             ]
         }
     },
@@ -2137,7 +2137,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
             ]
         }
     },
@@ -2171,7 +2171,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MENU_BUTTON_COMMANDS"
+                "default value is: DEFAULT_MENU_BUTTON_COMMANDS"
             ]
         }
     },
@@ -2188,7 +2188,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MENU_BUTTON_WEB_APP"
+                "default value is: DEFAULT_MENU_BUTTON_WEB_APP"
             ]
         }
     },
@@ -2198,7 +2198,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MENU_BUTTON_DEFAULT"
+                "default value is: DEFAULT_MENU_BUTTON_DEFAULT"
             ]
         }
     },
@@ -2241,7 +2241,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_PHOTO"
+                "default value is: DEFAULT_INPUT_MEDIA_PHOTO"
             ]
         }
     },
@@ -2291,7 +2291,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_VIDEO"
+                "default value is: DEFAULT_INPUT_MEDIA_VIDEO"
             ]
         }
     },
@@ -2337,7 +2337,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_ANIMATION"
+                "default value is: DEFAULT_INPUT_MEDIA_ANIMATION"
             ]
         }
     },
@@ -2379,7 +2379,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_AUDIO"
+                "default value is: DEFAULT_INPUT_MEDIA_AUDIO"
             ]
         }
     },
@@ -2413,7 +2413,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_DOCUMENT"
+                "default value is: DEFAULT_INPUT_MEDIA_DOCUMENT"
             ]
         }
     },
@@ -2801,7 +2801,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
             ]
         }
     },
@@ -2857,7 +2857,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_PHOTO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO"
             ]
         }
     },
@@ -2917,7 +2917,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_GIF"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_GIF"
             ]
         }
     },
@@ -2977,7 +2977,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
             ]
         }
     },
@@ -3039,7 +3039,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_VIDEO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO"
             ]
         }
     },
@@ -3087,7 +3087,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_AUDIO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO"
             ]
         }
     },
@@ -3131,7 +3131,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_VOICE"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE"
             ]
         }
     },
@@ -3190,7 +3190,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
             ]
         }
     },
@@ -3249,7 +3249,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_LOCATION"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION"
             ]
         }
     },
@@ -3311,7 +3311,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_VENUE"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_VENUE"
             ]
         }
     },
@@ -3359,7 +3359,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CONTACT"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT"
             ]
         }
     },
@@ -3380,7 +3380,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_GAME"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_GAME"
             ]
         }
     },
@@ -3425,7 +3425,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
             ]
         }
     },
@@ -3466,7 +3466,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
             ]
         }
     },
@@ -3507,7 +3507,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
             ]
         }
     },
@@ -3532,7 +3532,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
             ]
         }
     },
@@ -3576,7 +3576,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
             ]
         }
     },
@@ -3620,7 +3620,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
             ]
         }
     },
@@ -3660,7 +3660,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
             ]
         }
     },
@@ -3697,7 +3697,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
             ]
         }
     },
@@ -3987,7 +3987,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
             ]
         }
     },
@@ -4007,7 +4007,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
             ]
         }
     },
@@ -4027,7 +4027,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
             ]
         }
     },
@@ -4047,7 +4047,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
             ]
         }
     },
@@ -4067,7 +4067,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
             ]
         }
     },
@@ -4087,7 +4087,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
             ]
         }
     },
@@ -4107,7 +4107,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
             ]
         }
     },
@@ -4127,7 +4127,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
             ]
         }
     },
@@ -4147,7 +4147,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
             ]
         }
     },
@@ -4302,7 +4302,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MESSAGE_ORIGIN_USER"
+                "default value is: DEFAULT_MESSAGE_ORIGIN_USER"
             ]
         }
     },
@@ -4319,7 +4319,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
+                "default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
             ]
         }
     },
@@ -4340,7 +4340,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MESSAGE_ORIGIN_CHAT"
+                "default value is: DEFAULT_MESSAGE_ORIGIN_CHAT"
             ]
         }
     },
@@ -4364,7 +4364,7 @@
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MESSAGE_ORIGIN_CHANNEL"
+                "default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL"
             ]
         }
     },
@@ -4474,7 +4474,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
+                "default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
             ]
         }
     },
@@ -4488,7 +4488,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
+                "default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
             ]
         }
     },
@@ -4510,7 +4510,7 @@
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
+                "default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
             ]
         }
     },

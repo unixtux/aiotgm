@@ -333,7 +333,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
 
                 self_kwargs[arg] = {}
                 if arg != default_value:
-                    warnings.append(f'default value is {default_value}')
+                    warnings.append(f'default value is: {default_value}')
                 self_kwargs[arg]['warnings'] = warnings
 
             elif new_attribute:
@@ -343,7 +343,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 if arg not in TYPES[__type]['kwargs']:
                     warnings.append('not in __init__()')
                 if arg != default_value:
-                    warnings.append(f'default value is {default_value}')
+                    warnings.append(f'default value is: {default_value}')
                 self_kwargs[arg] = {}
                 self_kwargs[arg]['warnings'] = warnings
 

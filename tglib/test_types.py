@@ -460,7 +460,7 @@ TYPES = {
                 "default": None,
                 "type_hint": str,
                 "warnings": [
-                    "default value is text or str() # If not text, it's str() instead of None"
+                    "default value is: text or str() # If not text, it's str() instead of None"
                 ]
             },
             "entities": {
@@ -754,7 +754,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_REACTION_TYPE_EMOJI"
+                "default value is: DEFAULT_REACTION_TYPE_EMOJI"
             ]
         }
     },
@@ -768,7 +768,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
+                "default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
             ]
         }
     },
@@ -1616,7 +1616,7 @@ TYPES = {
                 "type_hint": Optional[list[list[KeyboardButton]]],
                 "default": None,
                 "warnings": [
-                    "default value is keyboard or []"
+                    "default value is: keyboard or []"
                 ]
             },
             "is_persistent": {
@@ -1652,7 +1652,7 @@ TYPES = {
         "warnings": {
             "remove_keyboard": [
                 "not in __init__()",
-                "default value is True"
+                "default value is: True"
             ]
         }
     },
@@ -1707,7 +1707,7 @@ TYPES = {
                 "type_hint": Optional[list[list[InlineKeyboardButton]]],
                 "default": None,
                 "warnings": [
-                    "default value is inline_keyboard or []"
+                    "default value is: inline_keyboard or []"
                 ]
             }
         }
@@ -1812,7 +1812,7 @@ TYPES = {
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_OWNER"
+                "default value is: DEFAULT_CHAT_MEMBER_OWNER"
             ]
         }
     },
@@ -1885,7 +1885,7 @@ TYPES = {
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
+                "default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
             ]
         }
     },
@@ -1899,7 +1899,7 @@ TYPES = {
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_MEMBER"
+                "default value is: DEFAULT_CHAT_MEMBER_MEMBER"
             ]
         }
     },
@@ -1961,7 +1961,7 @@ TYPES = {
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_RESTRICTED"
+                "default value is: DEFAULT_CHAT_MEMBER_RESTRICTED"
             ]
         }
     },
@@ -1975,7 +1975,7 @@ TYPES = {
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_LEFT"
+                "default value is: DEFAULT_CHAT_MEMBER_LEFT"
             ]
         }
     },
@@ -1992,7 +1992,7 @@ TYPES = {
         "warnings": {
             "status": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_MEMBER_BANNED"
+                "default value is: DEFAULT_CHAT_MEMBER_BANNED"
             ]
         }
     },
@@ -2084,7 +2084,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_DEFAULT"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_DEFAULT"
             ]
         }
     },
@@ -2094,7 +2094,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS"
             ]
         }
     },
@@ -2104,7 +2104,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS"
             ]
         }
     },
@@ -2114,7 +2114,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS"
             ]
         }
     },
@@ -2128,7 +2128,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT"
             ]
         }
     },
@@ -2142,7 +2142,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
             ]
         }
     },
@@ -2159,7 +2159,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
+                "default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
             ]
         }
     },
@@ -2193,7 +2193,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MENU_BUTTON_COMMANDS"
+                "default value is: DEFAULT_MENU_BUTTON_COMMANDS"
             ]
         }
     },
@@ -2210,7 +2210,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MENU_BUTTON_WEB_APP"
+                "default value is: DEFAULT_MENU_BUTTON_WEB_APP"
             ]
         }
     },
@@ -2220,7 +2220,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MENU_BUTTON_DEFAULT"
+                "default value is: DEFAULT_MENU_BUTTON_DEFAULT"
             ]
         }
     },
@@ -2263,7 +2263,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_PHOTO"
+                "default value is: DEFAULT_INPUT_MEDIA_PHOTO"
             ]
         }
     },
@@ -2313,7 +2313,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_VIDEO"
+                "default value is: DEFAULT_INPUT_MEDIA_VIDEO"
             ]
         }
     },
@@ -2359,7 +2359,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_ANIMATION"
+                "default value is: DEFAULT_INPUT_MEDIA_ANIMATION"
             ]
         }
     },
@@ -2401,7 +2401,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_AUDIO"
+                "default value is: DEFAULT_INPUT_MEDIA_AUDIO"
             ]
         }
     },
@@ -2435,7 +2435,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INPUT_MEDIA_DOCUMENT"
+                "default value is: DEFAULT_INPUT_MEDIA_DOCUMENT"
             ]
         }
     },
@@ -2823,7 +2823,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
             ]
         }
     },
@@ -2879,7 +2879,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_PHOTO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO"
             ]
         }
     },
@@ -2939,7 +2939,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_GIF"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_GIF"
             ]
         }
     },
@@ -2999,7 +2999,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
             ]
         }
     },
@@ -3061,7 +3061,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_VIDEO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO"
             ]
         }
     },
@@ -3109,7 +3109,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_AUDIO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO"
             ]
         }
     },
@@ -3153,7 +3153,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_VOICE"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE"
             ]
         }
     },
@@ -3212,7 +3212,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
             ]
         }
     },
@@ -3271,7 +3271,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_LOCATION"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION"
             ]
         }
     },
@@ -3333,7 +3333,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_VENUE"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_VENUE"
             ]
         }
     },
@@ -3381,7 +3381,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CONTACT"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT"
             ]
         }
     },
@@ -3402,7 +3402,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_GAME"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_GAME"
             ]
         }
     },
@@ -3447,7 +3447,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
             ]
         }
     },
@@ -3488,7 +3488,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
             ]
         }
     },
@@ -3529,7 +3529,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
             ]
         }
     },
@@ -3554,7 +3554,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
             ]
         }
     },
@@ -3598,7 +3598,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
             ]
         }
     },
@@ -3642,7 +3642,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
             ]
         }
     },
@@ -3682,7 +3682,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
             ]
         }
     },
@@ -3719,7 +3719,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
+                "default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
             ]
         }
     },
@@ -4009,7 +4009,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
             ]
         }
     },
@@ -4029,7 +4029,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
             ]
         }
     },
@@ -4049,7 +4049,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
             ]
         }
     },
@@ -4069,7 +4069,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
             ]
         }
     },
@@ -4089,7 +4089,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
             ]
         }
     },
@@ -4109,7 +4109,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
             ]
         }
     },
@@ -4129,7 +4129,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
             ]
         }
     },
@@ -4149,7 +4149,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
             ]
         }
     },
@@ -4169,7 +4169,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
+                "default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
             ]
         }
     },
@@ -4324,7 +4324,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MESSAGE_ORIGIN_USER"
+                "default value is: DEFAULT_MESSAGE_ORIGIN_USER"
             ]
         }
     },
@@ -4341,7 +4341,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
+                "default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
             ]
         }
     },
@@ -4362,7 +4362,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MESSAGE_ORIGIN_CHAT"
+                "default value is: DEFAULT_MESSAGE_ORIGIN_CHAT"
             ]
         }
     },
@@ -4386,7 +4386,7 @@ TYPES = {
         "warnings": {
             "type": [
                 "not in __init__()",
-                "default value is DEFAULT_MESSAGE_ORIGIN_CHANNEL"
+                "default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL"
             ]
         }
     },
@@ -4496,7 +4496,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
+                "default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
             ]
         }
     },
@@ -4510,7 +4510,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
+                "default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
             ]
         }
     },
@@ -4532,7 +4532,7 @@ TYPES = {
         "warnings": {
             "source": [
                 "not in __init__()",
-                "default value is DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
+                "default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
             ]
         }
     },
