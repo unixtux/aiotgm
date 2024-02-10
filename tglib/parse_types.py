@@ -37,7 +37,7 @@ def raise_err(__file_line: int, *args: Any):
     raise ValueError(f'at line: {__file_line}', *args)
 
 
-def get_subclass_return(__func_name: str) -> str:
+def get_subclass_hint(__func_name: str) -> str:
     '''
     Function to get the type-hint of the subclasses.
     '''
@@ -57,7 +57,7 @@ def get_subclass_return(__func_name: str) -> str:
         raise_err(57, f'Function {__func_name}() not found.')
 
 
-def get_multiline_hinting(__type: str, __arg: str, __start_hinting: str, ) -> dict[str, Any]:
+def get_multiline_hint(__type: str, __arg: str, __start_hint: str, ) -> dict[str, Any]:
     '''
     Function to get the type-hint of an __init__() argument in more than one line.\n
     E.g. Literal[
@@ -67,25 +67,25 @@ def get_multiline_hinting(__type: str, __arg: str, __start_hinting: str, ) -> di
     global LINE_N
     open_brackets = LINES[LINE_N].count('[')
     closed_brackets = LINES[LINE_N].count(']')
-    n_brackets = '{0,%s}' % (open_brackets - closed_brackets)
+    n_brackets = '{%s}' % (open_brackets - closed_brackets)
 
-    result = __start_hinting
+    type_hint = __start_hint
     LINE_N += 1
 
     while LINE_N != len(LINES):
 
-        end_of_hinting_default = re.match(r'\s*((\]\s*)' + n_brackets + r')\s*=\s*(.*?),*\s*\n', LINES[LINE_N])
-        end_of_hinting =         re.match(r'\s*((\]\s*)' + n_brackets + r')\s*,*\s*\n', LINES[LINE_N])
+        end_of_hint_default = re.match(r'\s*((\]\s*)' + n_brackets + r')\s*=\s*(.*?),*\s*\n', LINES[LINE_N])
+        end_of_hint =         re.match(r'\s*((\]\s*)' + n_brackets + r')\s*,*\s*\n', LINES[LINE_N])
 
-        if end_of_hinting_default:
-            match = end_of_hinting_default.group(1, 2, 3)
-            result += match[0].rstrip() # right stripped because of spaces after the last bracket.
-            return {'hinting': result, 'default': match[2]}
+        if end_of_hint_default:
+            match = end_of_hint_default.group(1, 2, 3)
+            type_hint += match[0].rstrip() # right stripped because of spaces after the last bracket.
+            return {'type_hint': type_hint, 'default': match[2]}
 
-        elif end_of_hinting:
-            return {'hinting': result + end_of_hinting.group(1)}
+        elif end_of_hint:
+            return {'type_hint': type_hint + end_of_hint.group(1)}
         else:
-            result += re.sub(r'(.*?,)', r'\1 ', re.match(r'\s*(.*?\s*,*)\s*\n', LINES[LINE_N]).group(1))
+            type_hint += re.sub(r'(.*?,)', r'\1 ', re.match(r'\s*(.*?\s*,*)\s*\n', LINES[LINE_N]).group(1))
 
         LINE_N += 1
     else:
@@ -110,14 +110,14 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
         if dese_default_if:
             match = dese_default_if.group(1, 2, 3)
             if (match[0] == match[1] == match[2]):
-                dese_kwargs[match[0]] = {'type': None, 'optional': True}
+                dese_kwargs[match[0]] = {'type_hint': None, 'optional': True}
             else:
                 raise_err(115, LINE_N, LINES[LINE_N])
 
         elif dese_default:
             match = dese_default.group(1, 2)
             if (match[0] == match[1]):
-                dese_kwargs[match[0]] = {'type': None, 'optional': False}
+                dese_kwargs[match[0]] = {'type_hint': None, 'optional': False}
             else:
                 raise_err(122, LINE_N, LINES[LINE_N])
         else:
@@ -132,50 +132,50 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
 
         if dese_nested_subclass:
             match = dese_nested_subclass.group(1, 2)
-            hinting = get_subclass_return(match[1])
+            type_hint = get_subclass_hint(match[1])
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type'] = f'Optional[list[list[{hinting}]]]'
+                dese_kwargs[match[0]]['type_hint'] = f'Optional[list[list[{type_hint}]]]'
             else:
-                dese_kwargs[match[0]]['type'] = f'list[list[{hinting}]]'
+                dese_kwargs[match[0]]['type_hint'] = f'list[list[{type_hint}]]'
 
         elif dese_list_subclass:
             match = dese_list_subclass.group(1, 2)
-            hinting = get_subclass_return(match[1])
+            type_hint = get_subclass_hint(match[1])
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type'] = f'Optional[list[{hinting}]]'
+                dese_kwargs[match[0]]['type_hint'] = f'Optional[list[{type_hint}]]'
             else:
-                dese_kwargs[match[0]]['type'] = f'list[{hinting}]'
+                dese_kwargs[match[0]]['type_hint'] = f'list[{type_hint}]'
 
         elif dese_subclass:
             match = dese_subclass.group(1, 2)
-            hinting = get_subclass_return(match[1])
+            type_hint = get_subclass_hint(match[1])
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type'] = f'Optional[{hinting}]'
+                dese_kwargs[match[0]]['type_hint'] = f'Optional[{type_hint}]'
             else:
-                dese_kwargs[match[0]]['type'] = hinting
+                dese_kwargs[match[0]]['type_hint'] = type_hint
 
         elif dese_nested_tg_type:
             match = dese_nested_tg_type.group(1, 2)
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type'] = f'Optional[list[list[{match[1]}]]]'
+                dese_kwargs[match[0]]['type_hint'] = f'Optional[list[list[{match[1]}]]]'
             else:
-                dese_kwargs[match[0]]['type'] = f'list[list[{match[1]}]]'
+                dese_kwargs[match[0]]['type_hint'] = f'list[list[{match[1]}]]'
 
         elif dese_list_tg_type:
             match = dese_list_tg_type.group(1, 2)
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type'] = f'Optional[list[{match[1]}]]'
+                dese_kwargs[match[0]]['type_hint'] = f'Optional[list[{match[1]}]]'
             else:
-                dese_kwargs[match[0]]['type'] = f'list[{match[1]}]'
+                dese_kwargs[match[0]]['type_hint'] = f'list[{match[1]}]'
 
         elif dese_tg_type:
             match = dese_tg_type.group(1, 2)
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type'] = f'Optional[{match[1]}]'
+                dese_kwargs[match[0]]['type_hint'] = f'Optional[{match[1]}]'
             else:
-                dese_kwargs[match[0]]['type'] = match[1]
+                dese_kwargs[match[0]]['type_hint'] = match[1]
 
-        dese_kwargs[match[0]] = dese_kwargs[match[0]]['type']
+        dese_kwargs[match[0]] = dese_kwargs[match[0]]['type_hint']
 
         LINE_N += 1
     else:
@@ -215,13 +215,13 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
         if match_multiline_hinting:
             match = match_multiline_hinting.group(1, 2)
             (arg, start_hinting) = match[0], match[1]
-            init_kwargs[arg] = get_multiline_hinting(__type, arg, start_hinting)
+            init_kwargs[arg] = get_multiline_hint(__type, arg, start_hinting)
 
         elif match_hinting_default:
             match = match_hinting_default.group(1, 2, 3)
             (arg, type_hint) = match[0], match[1]
             default_value = JSON_LITERALS[match[2]] if match[2] in JSON_LITERALS else match[2]
-            init_kwargs[arg] = {'type_hint': type_hint, 'default_value': default_value}
+            init_kwargs[arg] = {'type_hint': type_hint, 'default': default_value}
 
         elif match_hinting_no_default:
             match = match_hinting_no_default.group(1, 2)
@@ -235,7 +235,7 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
                 default_value = JSON_LITERALS[default_value]
             elif default_value.isdigit():
                 default_value = int(default_value)
-            init_kwargs[arg] = {'default_value': default_value}
+            init_kwargs[arg] = {'default': default_value}
 
         elif match_no_hinting_no_default:
             arg = match_no_hinting_no_default.group(1)
@@ -273,17 +273,17 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 match = new_attribute_hinting.group(1, 2, 3)
                 (arg, type_hint, default_value) = match[0], match[1], match[2]
                 if arg != default_value:
-                    self_kwargs['warning'][arg] = {'value': default_value, 'type_hint': type_hint}
+                    self_kwargs['warning'][arg] = {'default': default_value, 'type_hint': type_hint}
                 else:
-                    self_kwargs[arg] = {'value': 'ok.', 'hinting': type_hint}
+                    self_kwargs[arg] = {'value': 'ok.', 'type_hint': type_hint}
 
             elif new_attribute:
                 match = new_attribute.group(1, 2)
                 (arg, default_value) = match[0], match[1]
                 if arg != default_value:
-                    self_kwargs['warning'][arg] = {'value': default_value}
+                    self_kwargs['warning'][arg] = {'default': default_value}
                 else:
-                    self_kwargs[arg] = {'value': 'ok.'}
+                    self_kwargs[arg] = {'default': 'ok.'}
 
         LINE_N += 1
     else:
@@ -345,7 +345,6 @@ for type in TYPES:
     else:
         TYPES_WITHOUT_DESE.append(type)
 
-"""
 logger.info('Length of __all__ is: %s', len(tglib.types.__all__))
 logger.info('Length of types is: %s', len(TYPES))
 logger.info('TelegramTypes are: %s', len(TG_TYPES))
