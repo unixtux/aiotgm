@@ -275,7 +275,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 if arg != default_value:
                     self_kwargs['warning'][arg] = {'default': default_value, 'type_hint': type_hint}
                 else:
-                    self_kwargs[arg] = {'value': 'ok.', 'type_hint': type_hint}
+                    self_kwargs[arg] = {'default': 'ok.', 'type_hint': type_hint}
 
             elif new_attribute:
                 match = new_attribute.group(1, 2)
@@ -353,7 +353,27 @@ logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
 logger.info('Types without _dese(): %s', len(TYPES_WITHOUT_DESE))
 #"""
 
-#"""
+args = []
+
+for type in TYPES:
+    type_hint = None
+    default = None
+    has_dese = True if TYPES[type]['has_dese'] else False
+    dede_kwargs = TYPES[type]['dese_kwargs'] if has_dese else None
+    init_kwargs = TYPES[type]['init_kwargs']
+    self_kwargs = TYPES[type]['self_kwargs']
+
+    if has_dese:
+        for dese_argument in dede_kwargs:
+            if dese_argument not in init_kwargs:
+                raise_err(369, type, dese_argument, 'missing in init_kwargs')
+            if dese_argument not in self_kwargs:
+                if dese_argument not in self_kwargs['warning']:
+                    raise_err(372, type, dese_argument, 'missing in self_kwargs and self_kwargs["warning"]')
+
+
+
+"""
 with open('test_types.json', 'w') as w:
     w.write(json.dumps(TYPES, indent = 4))
     logger.info('test_types.json has been written.')
