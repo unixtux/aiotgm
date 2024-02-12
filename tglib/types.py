@@ -193,7 +193,7 @@ from typing import (Any,
 from .default_literals import *
 
 from .logger import get_logger
-logger = get_logger('TelegramTypes')
+logger = get_logger('TelegramApi')
 
 try:
     import ujson as json
