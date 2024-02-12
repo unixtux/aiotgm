@@ -1,7 +1,7 @@
 #!/bin/python3
 
-REQ_DEBUG = False
-RESP_DEBUG = False
+REQ_DEBUG = 1
+RESP_DEBUG = 0
 
 __all__ = [
     'TelegramApi',
@@ -16,8 +16,10 @@ import re
 import time
 import asyncio
 from typing import (Any,
+                    Union,
                     Literal,
-                    Optional)
+                    Optional,
+                    Iterable)
 
 from aiohttp import (
     FormData,
@@ -30,6 +32,7 @@ from aiohttp import (
 from .types import (
     json,
     InputFile,
+    InputMedia,
     _serialize
 )
 
@@ -108,6 +111,52 @@ def _get_files(
                 }
                 del params[key]
 
+    return files or None
+
+
+def _convert_input_media(media: InputMedia, files: dict, /) -> None:
+    '''
+    used only in _convert_input_media_files()
+    '''
+    if not isinstance(media, InputMedia.__args__):
+        raise TypeError(f'Expected InputMedia, got {media.__class__.__name__}.')
+
+    if not isinstance(media.media, str):
+        raise TypeError(f'InputMedia.media must be str, got {media.media.__class__.__name__}.')
+
+    media_file = re.match(r'attach://(.*)', media.media)
+    if media_file:
+        path = media_file.group(1)
+        try:
+            with open(path, 'rb') as rb:
+                content = rb.read()
+        except FileNotFoundError:
+            raise FileNotFoundError(
+                f"Inexistent file: {path!r},"
+                ' check your InputMedia object;'
+                ' InputMedia.media must be in the'
+                ' format "attach://<file_name>" to send a new file.'
+            )
+        files[path] = {
+            'content': content,
+            'file_name': None
+        }
+
+
+def _get_input_media_files(
+    params: dict,
+    /,
+    *file_keys: str
+) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
+    files = {}
+    for key in file_keys:
+        if key in params:
+            obj: Union[InputMedia, list[InputMedia]] = params[key]
+            if isinstance(obj, Iterable):
+                for x in obj:
+                    _convert_input_media(x, files)
+            else:
+                _convert_input_media(obj, files)
     return files or None
 
 
@@ -342,7 +391,8 @@ class TelegramApi:
 
     async def send_media_group(self, params: dict):
         method = 'sendMediaGroup'
-        return await self._request(method, params)
+        files = _get_input_media_files(params, 'media')
+        return await self._request(method, params, files)
 
     async def send_location(self, params: dict):
         method = 'sendLocation'
@@ -615,7 +665,8 @@ class TelegramApi:
 
     async def edit_message_media(self, params: dict):
         method = 'editMessageMedia'
-        return await self._request(method, params)
+        files = _get_input_media_files(params, 'media')
+        return await self._request(method, params, files)
 
     async def edit_message_live_location(self, params: dict):
         method = 'editMessageLiveLocation'
