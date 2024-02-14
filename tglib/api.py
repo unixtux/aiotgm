@@ -1,6 +1,6 @@
 #!/bin/python3
 
-REQ_DEBUG = 1
+REQ_DEBUG = 0
 RESP_DEBUG = 0
 
 __all__ = [
@@ -19,7 +19,8 @@ from typing import (Any,
                     Union,
                     Literal,
                     Optional,
-                    Iterable)
+                    Iterable,
+                    GenericAlias)
 
 from aiohttp import (
     FormData,
@@ -32,8 +33,12 @@ from aiohttp import (
 from .types import (
     json,
     InputFile,
+    _serialize,
     InputMedia,
-    _serialize
+    InputMediaAudio,
+    InputMediaDocument,
+    InputMediaPhoto,
+    InputMediaVideo,
 )
 
 try:
@@ -114,49 +119,60 @@ def _get_files(
     return files or None
 
 
-def _convert_input_media(media: InputMedia, files: dict, /) -> None:
+def _convert_input_media(
+    media: InputMedia,
+    files: dict,
+    types_check: tuple[type],
+    /
+) -> None:
     '''
-    used only in _convert_input_media_files()
+    Used in _get_input_media_files() to check and add to files InputMedia objects.
     '''
-    if not isinstance(media, InputMedia.__args__):
-        raise TypeError(f'Expected InputMedia, got {media.__class__.__name__}.')
-
-    if not isinstance(media.media, str):
-        raise TypeError(f'InputMedia.media must be str, got {media.media.__class__.__name__}.')
-
-    media_file = re.match(r'attach://(.*)', media.media)
-    if media_file:
-        path = media_file.group(1)
-        try:
-            with open(path, 'rb') as rb:
-                content = rb.read()
-        except FileNotFoundError:
-            raise FileNotFoundError(
-                f"Inexistent file: {path!r},"
-                ' check your InputMedia object;'
-                ' InputMedia.media must be in the'
-                ' format "attach://<file_name>" to send a new file.'
-            )
-        files[path] = {
-            'content': content,
-            'file_name': None
-        }
+    if not isinstance(media, types_check):
+        raise TypeError(
+            f'Expected one of the following types:'
+            f' {", ".join([t.__name__ for t in types_check])}, got {media.__class__.__name__}.'
+        )
+    if isinstance(media.media, str):
+        media_file = re.match(r'attach://(.*)', media.media)
+        if media_file:
+            path = media_file.group(1)
+            try:
+                with open(path, 'rb') as rb:
+                    content = rb.read()
+            except FileNotFoundError:
+                raise FileNotFoundError(
+                    f"Inexistent file: {path!r},"
+                    ' check your InputMedia object;'
+                    ' InputMedia.media must be in the'
+                    ' format "attach://<file_name>" to'
+                    ' post a file using multipart/form-data.'
+                )
+            files[path] = {
+                'content': content,
+                'file_name': path
+            }
 
 
 def _get_input_media_files(
     params: dict,
     /,
-    *file_keys: str
+    *file_keys: str,
+    types_check: Union[type, GenericAlias]
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
+
+    types_check = tuple(types_check.__args__)
+
     files = {}
     for key in file_keys:
         if key in params:
-            obj: Union[InputMedia, list[InputMedia]] = params[key]
+            obj = params[key]
             if isinstance(obj, Iterable):
-                for x in obj:
-                    _convert_input_media(x, files)
+                for t in obj:
+                    _convert_input_media(t, files, types_check)
             else:
-                _convert_input_media(obj, files)
+                _convert_input_media(obj, files, types_check)
+
     return files or None
 
 
@@ -205,7 +221,8 @@ class TelegramApi:
     def __init__(
         self,
         token: str,
-        proxy: Optional[str] = None
+        proxy: Optional[str] = None,
+        debug: bool = False
     ):
         if not isinstance(token, str):
             raise TypeError(
@@ -215,6 +232,9 @@ class TelegramApi:
             raise TypeError(
                 f"'proxy' must be str or None, got {proxy.__class__.__name__}."
             )
+        if debug:
+            logger.setLevel(10)
+
         self.__token = token
         self.__session = None
         self.__headers_and_proxy = {
@@ -391,7 +411,11 @@ class TelegramApi:
 
     async def send_media_group(self, params: dict):
         method = 'sendMediaGroup'
-        files = _get_input_media_files(params, 'media')
+        files = _get_input_media_files(
+            params,
+            'media',
+            types_check = list[InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo]
+        )
         return await self._request(method, params, files)
 
     async def send_location(self, params: dict):
@@ -665,7 +689,7 @@ class TelegramApi:
 
     async def edit_message_media(self, params: dict):
         method = 'editMessageMedia'
-        files = _get_input_media_files(params, 'media')
+        files = _get_input_media_files(params, 'media', types_check = InputMedia)
         return await self._request(method, params, files)
 
     async def edit_message_live_location(self, params: dict):
