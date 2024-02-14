@@ -1010,7 +1010,7 @@ class Client(TelegramApi):
     async def send_media_group(
         self,
         chat_id: Union[int, str],
-        media: list[InputMedia],
+        media: list[InputMediaPhoto | InputMediaAudio | InputMediaVideo | InputMediaDocument],
         message_thread_id: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,

@@ -20,7 +20,7 @@ from typing import (Any,
                     Literal,
                     Optional,
                     Iterable,
-                    GenericAlias)
+                    _UnionGenericAlias)
 
 from aiohttp import (
     FormData,
@@ -129,9 +129,10 @@ def _convert_input_media(
     Used in _get_input_media_files() to check and add to files InputMedia objects.
     '''
     if not isinstance(media, types_check):
+        available_types = ', '.join([t.__name__ for t in types_check])
         raise TypeError(
             f'Expected one of the following types:'
-            f' {", ".join([t.__name__ for t in types_check])}, got {media.__class__.__name__}.'
+            f' {available_types}, got {media.__class__.__name__}.'
         )
     if isinstance(media.media, str):
         media_file = re.match(r'attach://(.*)', media.media)
@@ -158,10 +159,11 @@ def _get_input_media_files(
     params: dict,
     /,
     *file_keys: str,
-    types_check: Union[type, GenericAlias]
+    types_check: _UnionGenericAlias
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
 
-    types_check = tuple(types_check.__args__)
+    assert isinstance(types_check, _UnionGenericAlias)
+    types_check = types_check.__args__
 
     files = {}
     for key in file_keys:
@@ -414,7 +416,7 @@ class TelegramApi:
         files = _get_input_media_files(
             params,
             'media',
-            types_check = list[InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo]
+            types_check = Union[InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument]
         )
         return await self._request(method, params, files)
 
