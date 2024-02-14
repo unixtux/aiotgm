@@ -68,9 +68,10 @@ class Client(TelegramApi):
         *,
         parse_mode: Optional[str] = None,
         protect_content: Optional[bool] = None,
-        proxy: Optional[str] = None
+        proxy: Optional[str] = None,
+        debug: bool = False
     ):
-        super().__init__(token, proxy)
+        super().__init__(token, proxy, debug)
 
         self.__offset = None
 
