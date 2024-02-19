@@ -384,10 +384,14 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                                 raise_err(385, check_arg, type_hint)
                             else:
                                 TYPES_CHECKER.add(37)
-                                TYPES[__type]['kwargs'][arg]['type_hint'] = type_hint
+                                default = 'not found' if 'default' not in TYPES[__type]['kwargs'][arg] else TYPES[__type]['kwargs'][arg]['default']
+                                update = {'type_hint': type_hint} if default == 'not found' else {'type_hint': type_hint, 'default': default}
+                                TYPES[__type]['kwargs'][arg] = update
                         else:
                             TYPES_CHECKER.add(38)
-                            TYPES[__type]['kwargs'][arg]['type_hint'] = type_hint
+                            default = 'not found' if 'default' not in TYPES[__type]['kwargs'][arg] else TYPES[__type]['kwargs'][arg]['default']
+                            update = {'type_hint': type_hint} if default == 'not found' else {'type_hint': type_hint, 'default': default}
+                            TYPES[__type]['kwargs'][arg] = update
                     else:
                         TYPES_CHECKER.add(39)
                         TYPES[__type]['kwargs'][arg] = {'type_hint': type_hint}

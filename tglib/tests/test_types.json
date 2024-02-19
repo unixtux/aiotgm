@@ -361,8 +361,8 @@
                 "type_hint": "int"
             },
             "date": {
-                "default": 0,
-                "type_hint": "int"
+                "type_hint": "int",
+                "default": 0
             }
         }
     },
@@ -379,8 +379,8 @@
                 "type_hint": "Chat"
             },
             "message_thread_id": {
-                "default": null,
-                "type_hint": "Optional[int]"
+                "type_hint": "Optional[int]",
+                "default": null
             },
             "from_user": {
                 "type_hint": "Optional[User]",
@@ -395,12 +395,12 @@
                 "default": null
             },
             "is_topic_message": {
-                "default": null,
-                "type_hint": "Optional[Literal[True]]"
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
             },
             "is_automatic_forward": {
-                "default": null,
-                "type_hint": "Optional[Literal[True]]"
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
             },
             "reply_to_message": {
                 "type_hint": "Optional[Message]",
@@ -419,24 +419,24 @@
                 "default": null
             },
             "edit_date": {
-                "default": null,
-                "type_hint": "Optional[int]"
+                "type_hint": "Optional[int]",
+                "default": null
             },
             "has_protected_content": {
-                "default": null,
-                "type_hint": "Optional[Literal[True]]"
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
             },
             "media_group_id": {
-                "default": null,
-                "type_hint": "Optional[str]"
+                "type_hint": "Optional[str]",
+                "default": null
             },
             "author_signature": {
-                "default": null,
-                "type_hint": "Optional[str]"
+                "type_hint": "Optional[str]",
+                "default": null
             },
             "text": {
-                "default": null,
                 "type_hint": "str",
+                "default": null,
                 "warnings": [
                     "default value is: text or str() # If not text, it's str() instead of None"
                 ]
@@ -486,16 +486,16 @@
                 "default": null
             },
             "caption": {
-                "default": null,
-                "type_hint": "Optional[str]"
+                "type_hint": "Optional[str]",
+                "default": null
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
                 "default": null
             },
             "has_media_spoiler": {
-                "default": null,
-                "type_hint": "Optional[Literal[True]]"
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
             },
             "contact": {
                 "type_hint": "Optional[Contact]",
@@ -530,40 +530,40 @@
                 "default": null
             },
             "new_chat_title": {
-                "default": null,
-                "type_hint": "Optional[str]"
+                "type_hint": "Optional[str]",
+                "default": null
             },
             "new_chat_photo": {
                 "type_hint": "Optional[list[PhotoSize]]",
                 "default": null
             },
             "delete_chat_photo": {
-                "default": null,
-                "type_hint": "Optional[Literal[True]]"
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
             },
             "group_chat_created": {
-                "default": null,
-                "type_hint": "Optional[Literal[True]]"
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
             },
             "supergroup_chat_created": {
-                "default": null,
-                "type_hint": "Optional[Literal[True]]"
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
             },
             "channel_chat_created": {
-                "default": null,
-                "type_hint": "Optional[Literal[True]]"
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
             },
             "message_auto_delete_timer_changed": {
                 "type_hint": "Optional[MessageAutoDeleteTimerChanged]",
                 "default": null
             },
             "migrate_to_chat_id": {
-                "default": null,
-                "type_hint": "Optional[int]"
+                "type_hint": "Optional[int]",
+                "default": null
             },
             "migrate_from_chat_id": {
-                "default": null,
-                "type_hint": "Optional[int]"
+                "type_hint": "Optional[int]",
+                "default": null
             },
             "pinned_message": {
                 "type_hint": "Optional[MaybeInaccessibleMessage]",
@@ -586,8 +586,8 @@
                 "default": null
             },
             "connected_website": {
-                "default": null,
-                "type_hint": "Optional[str]"
+                "type_hint": "Optional[str]",
+                "default": null
             },
             "write_access_allowed": {
                 "type_hint": "Optional[WriteAccessAllowed]",
