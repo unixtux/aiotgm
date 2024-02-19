@@ -9,11 +9,12 @@ if __name__ != '__main__':
 
 sys.path.append('../..')
 
-from logging import DEBUG, INFO
+from logging import DEBUG, INFO, WARNING
 from typing import Any
 
 LOGGER_LEVEL = INFO
 LOGGER_LEVEL = DEBUG
+#LOGGER_LEVEL = WARNING
 
 import re
 import json
@@ -44,6 +45,15 @@ def raise_err(__file_line: int, *args: Any):
         raise TypeError(f'__file_line must be int, got {__file_line.__class__.__name__}')
     raise ValueError(f'at line: {__file_line}', *args)
 
+class TypesChecker:
+    def __init__(self):
+        self.tasks = {}
+    def add(self, task_n: int, value: Any = None):
+        assert isinstance(task_n, int)
+        if task_n not in self.tasks:
+            self.tasks.update({task_n: value})
+
+TYPES_CHECKER = TypesChecker()
 
 def get_subclass_hint(__func_name: str) -> str:
     '''
@@ -56,12 +66,14 @@ def get_subclass_hint(__func_name: str) -> str:
     while ln != len(LINES):
         if dese_function.match(LINES[ln]):
             type_hint = dese_function.match(LINES[ln]).group(1)
+            TYPES_CHECKER.add(1)
             if OPTIONAL.match(type_hint):
+                TYPES_CHECKER.add(2)
                 type_hint = OPTIONAL.match(type_hint).group(1)
             return type_hint
         ln += 1
     else:
-        raise_err(64, f'Function {__func_name}() not found.')
+        raise_err(76, f'Function {__func_name}() not found.')
 
 
 def get_multiline_hint(__type: str, __arg: str, __start_hint: str, ) -> dict[str, Any]:
@@ -89,17 +101,20 @@ def get_multiline_hint(__type: str, __arg: str, __start_hint: str, ) -> dict[str
             type_hint += match[0].rstrip() # right stripped because of spaces after the last bracket.
             default_value = JSON_LITERALS[match[2]] if match[2] in JSON_LITERALS else match[2]
             if OPTIONAL.match(type_hint) and default_value is not None:
-                raise_err(92, __arg, 'in', __type, 'should be None by default.')
+                raise_err(104, __arg, 'in', __type, 'should be None by default.')
+            TYPES_CHECKER.add(3, 'end of multiline hint with default value.')
             return {'type_hint': type_hint, 'default': default_value}
 
         elif end_of_hint:
+            TYPES_CHECKER.add(4)
             return {'type_hint': type_hint + end_of_hint.group(1)}
         else:
+            TYPES_CHECKER.add(5)
             type_hint += re.sub(r'(.*?,)', r'\1 ', re.match(r'\s*(.*?\s*,*)\s*\n', LINES[LINE_N]).group(1))
 
         LINE_N += 1
     else:
-        raise_err(102, f'No multiline hint found for argument {__arg!r} of the type {__type}.')
+        raise_err(117, f'No multiline hint found for argument {__arg!r} of the type {__type}.')
 
 
 def get_dese_kwargs(__type: str) -> dict[str, Any]:
@@ -108,10 +123,12 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
     while LINE_N != len(LINES):
 
         if re.match(r'\s*return\s*cls\s*\(\s*\*\*obj\s*\)\s*\n', LINES[LINE_N]):
+            TYPES_CHECKER.add(6)
             return dese_kwargs
  
         elif re.match(r'\s*obj\s*=\s*\{\s*\}\n', LINES[LINE_N]):
             LINE_N += 1
+            TYPES_CHECKER.add(7)
             continue
 
         dese_default_if = re.match(r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=.*?res\s*\.get\s*\(\s*'(.*?)'\s*\).*?if\s*'(.*?)'\s*in\s*res\s*else\s*None\s*\n", LINES[LINE_N])
@@ -120,18 +137,20 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
         if dese_default_if:
             match = dese_default_if.group(1, 2, 3)
             if (match[0] == match[1] == match[2]):
-                dese_kwargs[match[0]] = {'type_hint': None, 'optional': True}
+                dese_kwargs[match[0]] = {'optional': True}
             else:
-                raise_err(125, LINE_N, LINES[LINE_N])
+                raise_err(142, LINE_N, LINES[LINE_N])
+            TYPES_CHECKER.add(8)
 
         elif dese_default:
             match = dese_default.group(1, 2)
             if (match[0] == match[1]):
-                dese_kwargs[match[0]] = {'type_hint': None, 'optional': False}
+                dese_kwargs[match[0]] = {'optional': False}
             else:
-                raise_err(132, LINE_N, LINES[LINE_N])
+                raise_err(150, LINE_N, LINES[LINE_N])
+            TYPES_CHECKER.add(9)
         else:
-            raise_err(134, LINE_N, LINES[LINE_N])
+            raise_err(153, LINE_N, LINES[LINE_N])
 
         dese_nested_subclass = re.match(r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*\[\s*(_dese_.*?)\s*\(", LINES[LINE_N])
         dese_list_subclass =   re.match(r"\s*obj\s*\[\s*'(.*?)'\s*\]\s*=\s*\[\s*(_dese_.*?)\s*\(", LINES[LINE_N])
@@ -144,52 +163,60 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
             match = dese_nested_subclass.group(1, 2)
             type_hint = get_subclass_hint(match[1])
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type_hint'] = f'Optional[list[list[{type_hint}]]]'
+                dese_kwargs[match[0]] = f'Optional[list[list[{type_hint}]]]'
             else:
-                dese_kwargs[match[0]]['type_hint'] = f'list[list[{type_hint}]]'
+                dese_kwargs[match[0]] = f'list[list[{type_hint}]]'
+            TYPES_CHECKER.add(10, 'nested list with subclasses.')
 
         elif dese_list_subclass:
             match = dese_list_subclass.group(1, 2)
             type_hint = get_subclass_hint(match[1])
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type_hint'] = f'Optional[list[{type_hint}]]'
+                dese_kwargs[match[0]] = f'Optional[list[{type_hint}]]'
             else:
-                dese_kwargs[match[0]]['type_hint'] = f'list[{type_hint}]'
+                dese_kwargs[match[0]] = f'list[{type_hint}]'
+            TYPES_CHECKER.add(11)
 
         elif dese_subclass:
             match = dese_subclass.group(1, 2)
             type_hint = get_subclass_hint(match[1])
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type_hint'] = f'Optional[{type_hint}]'
+                dese_kwargs[match[0]] = f'Optional[{type_hint}]'
             else:
-                dese_kwargs[match[0]]['type_hint'] = type_hint
+                dese_kwargs[match[0]] = type_hint
+            TYPES_CHECKER.add(12)
 
         elif dese_nested_tg_type:
             match = dese_nested_tg_type.group(1, 2)
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type_hint'] = f'Optional[list[list[{match[1]}]]]'
+                dese_kwargs[match[0]] = f'Optional[list[list[{match[1]}]]]'
             else:
-                dese_kwargs[match[0]]['type_hint'] = f'list[list[{match[1]}]]'
+                dese_kwargs[match[0]] = f'list[list[{match[1]}]]'
+            TYPES_CHECKER.add(13)
 
         elif dese_list_tg_type:
             match = dese_list_tg_type.group(1, 2)
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type_hint'] = f'Optional[list[{match[1]}]]'
+                dese_kwargs[match[0]] = f'Optional[list[{match[1]}]]'
             else:
-                dese_kwargs[match[0]]['type_hint'] = f'list[{match[1]}]'
+                dese_kwargs[match[0]] = f'list[{match[1]}]'
+            TYPES_CHECKER.add(14)
 
         elif dese_tg_type:
             match = dese_tg_type.group(1, 2)
             if dese_kwargs[match[0]]['optional']:
-                dese_kwargs[match[0]]['type_hint'] = f'Optional[{match[1]}]'
+                dese_kwargs[match[0]] = f'Optional[{match[1]}]'
             else:
-                dese_kwargs[match[0]]['type_hint'] = match[1]
+                dese_kwargs[match[0]] = match[1]
+            TYPES_CHECKER.add(15)
 
-        dese_kwargs[match[0]] = dese_kwargs[match[0]]['type_hint']
+        else:
+            dese_kwargs[match[0]] = None
+            TYPES_CHECKER.add(16)
 
         LINE_N += 1
     else:
-        raise_err(192)
+        raise_err(219)
 
 
 def get_init_kwargs(__type: str) -> dict[str, Any]:
@@ -199,43 +226,49 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
     while LINE_N != len(LINES):
 
         if re.match(r'\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n', LINES[LINE_N]):
+            TYPES_CHECKER.add(17)
             return init_kwargs
 
         elif re.match(r'\s*def\s*__init__\s*\(\s*\n', LINES[LINE_N]):
             LINE_N += 1
+            TYPES_CHECKER.add(18)
             continue
 
         elif re.match(r'\s*self\s*,\s*\n', LINES[LINE_N]):
             self_found = True
             LINE_N += 1
+            TYPES_CHECKER.add(19)
             continue
 
         elif re.match(r'\s*\)\s*:\s*\n', LINES[LINE_N]):
+            TYPES_CHECKER.add(20)
             if self_found:
                 return init_kwargs
             else:
-                raise_err(217, f'self argument not found in {__type}.__init__()', LINE_N, LINES[LINE_N])
+                raise_err(248, f'self argument not found in {__type}.__init__()', LINE_N, LINES[LINE_N])
 
-        match_multiline_hinting =     re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
-        match_hinting_default =       re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
-        match_hinting_no_default =    re.match(r"\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
-        match_no_hinting_default =    re.match(r"\s*(.*?)\s*=\s*(.*?)\s*,*\n", LINES[LINE_N])
-        match_no_hinting_no_default = re.match(r"\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
+        match_multiline_hint =     re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
+        match_hint_default =       re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
+        match_hint_no_default =    re.match(r"\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
+        match_no_hint_default =    re.match(r"\s*(.*?)\s*=\s*(.*?)\s*,*\n", LINES[LINE_N])
+        match_no_hint_no_default = re.match(r"\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
 
-        if match_multiline_hinting:
-            match = match_multiline_hinting.group(1, 2)
+        if match_multiline_hint:
+            match = match_multiline_hint.group(1, 2)
             (arg, start_hint) = match[0], match[1]
             multi_line_hint = get_multiline_hint(__type, arg, start_hint)
             type_hint = multi_line_hint['type_hint']
             if TYPES[__type]['has_dese']:
                 dese_hint = TYPES[__type]['dese_kwargs'][arg]
                 if dese_hint is not None:
+                    TYPES_CHECKER.add(21, 'check dese_hint with multiline hint without default value')
                     if dese_hint != type_hint:
-                        raise_err(234, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
+                        raise_err(266, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
             init_kwargs[arg] = multi_line_hint
+            TYPES_CHECKER.add(22)
 
-        elif match_hinting_default:
-            match = match_hinting_default.group(1, 2, 3)
+        elif match_hint_default:
+            match = match_hint_default.group(1, 2, 3)
             (arg, type_hint) = match[0], match[1]
             default_value = JSON_LITERALS[match[2]] if match[2] in JSON_LITERALS else match[2]
             if TYPES[__type]['has_dese']:
@@ -243,64 +276,75 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
                 if dese_hint is not None:
                     if OPTIONAL.match(type_hint):
                         if default_value is not None:
-                            raise_err(246, __type, arg, 'should be None by default', LINE_N, LINES[LINE_N])
+                            raise_err(279, __type, arg, 'should be None by default', LINE_N, LINES[LINE_N])
                         if not OPTIONAL.match(dese_hint):
                             __type_hint = OPTIONAL.match(type_hint).group(1)
                         else:
                             __type_hint = type_hint
                     else:
                         __type_hint = type_hint
+                    TYPES_CHECKER.add(23)
                     if dese_hint != __type_hint:
-                        raise_err(254, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
+                        raise_err(288, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
             init_kwargs[arg] = {'type_hint': type_hint, 'default': default_value}
+            TYPES_CHECKER.add(24)
 
-        elif match_hinting_no_default:
-            match = match_hinting_no_default.group(1, 2)
+        elif match_hint_no_default:
+            match = match_hint_no_default.group(1, 2)
             (arg, type_hint) = match[0], match[1]
             if TYPES[__type]['has_dese']:
                 dese_hint = TYPES[__type]['dese_kwargs'][arg]
                 if dese_hint is not None:
+                    TYPES_CHECKER.add(25)
                     if dese_hint != type_hint:
-                        raise_err(264, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
+                        raise_err(300, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
             init_kwargs[arg] = {'type_hint': type_hint}
+            TYPES_CHECKER.add(26)
 
-        elif match_no_hinting_default:
-            match = match_no_hinting_default.group(1, 2)
+        elif match_no_hint_default:
+            match = match_no_hint_default.group(1, 2)
             (arg, default_value) = match[0], match[1]
             if default_value in JSON_LITERALS:
+                TYPES_CHECKER.add(27)
                 default_value = JSON_LITERALS[default_value]
             elif default_value.isdigit():
+                TYPES_CHECKER.add(28)
                 default_value = int(default_value)
             type_hint = None
             if TYPES[__type]['has_dese']:
                 dese_hint = TYPES[__type]['dese_kwargs'][arg]
                 if dese_hint is not None:
+                    TYPES_CHECKER.add(29)
                     type_hint = dese_hint
             result = {'default': default_value} if type_hint is None else {'type_hint': type_hint, 'default': default_value}
             init_kwargs[arg] = result
+            TYPES_CHECKER.add(30)
 
-        elif match_no_hinting_no_default:
-            arg = match_no_hinting_no_default.group(1)
+        elif match_no_hint_no_default:
+            arg = match_no_hint_no_default.group(1)
             type_hint = None
             if TYPES[__type]['has_dese']:
                 dese_hint = TYPES[__type]['dese_kwargs'][arg]
                 if dese_hint is not None:
+                    TYPES_CHECKER.add(31)
                     type_hint = dese_hint
             result = None if type_hint is None else {'type_hint': type_hint}
             init_kwargs[arg] = result
+            TYPES_CHECKER.add(32)
+
         else:
-            raise_err(292, LINE_N, LINES[LINE_N])
+            raise_err(336, LINE_N, LINES[LINE_N])
 
         LINE_N += 1
     else:
-        raise_err(296)
+        raise_err(340)
 
 
 def get_self_kwargs(__type: str) -> dict[str, Any]:
     global LINE_N
 
     if not re.match(r"\s*\)\s*:\s*\n|\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n", LINES[LINE_N]):
-        raise_err(303)
+        raise_err(347)
 
     self_kwargs = {}
     LINE_N += 1
@@ -308,35 +352,41 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
     while LINE_N != len(LINES):
 
         if re.match(r'\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
+            TYPES_CHECKER.add(33)
             return self_kwargs
 
         new_attribute_type_hint = re.match(r"\s*self\s*\.\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
         new_attribute =         re.match(r"\s*self\s*\.\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
 
         if not (new_attribute_type_hint or new_attribute):
-            raise_err(317, LINE_N, LINES[LINE_N])
+            raise_err(362, LINE_N, LINES[LINE_N])
         else:
             if new_attribute_type_hint:
                 match = new_attribute_type_hint.group(1, 2, 3)
                 (arg, type_hint, default_value) = match[0], match[1], match[2]
                 warnings = []
                 if arg not in TYPES[__type]['kwargs']:
+                    TYPES_CHECKER.add(34)
                     warnings.append('not in __init__()')
                 else:
+                    TYPES_CHECKER.add(35)
                     check_arg = TYPES[__type]['kwargs'][arg]
                     if check_arg is not None:
                         if 'type_hint' in check_arg:
+                            TYPES_CHECKER.add(36)
                             __type_hint = type_hint
                             if OPTIONAL.match(type_hint):
                                 if TYPES[type]['kwargs'][arg]['default'] is not None:
-                                    raise_err(332, arg, LINES[LINE_N], LINE_N)
+                                    raise_err(380, arg, LINES[LINE_N], LINE_N)
                                 if not OPTIONAL.match(check_arg['type_hint']):
                                     __type_hint = OPTIONAL.match(type_hint).group(1)
                             if check_arg['type_hint'] != __type_hint:
-                                raise_err(336, check_arg, type_hint)
+                                raise_err(384, check_arg, type_hint)
                         else:
+                            TYPES_CHECKER.add(37)
                             TYPES[__type]['kwargs'][arg]['type_hint'] = type_hint
                     else:
+                        TYPES_CHECKER.add(38)
                         TYPES[__type]['kwargs'][arg] = {'type_hint': type_hint}
 
                 self_kwargs[arg] = {}
@@ -345,6 +395,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 self_kwargs[arg] = {'type_hint': type_hint, 'warnings': warnings}
 
             elif new_attribute:
+                TYPES_CHECKER.add(39)
                 match = new_attribute.group(1, 2)
                 (arg, default_value) = match[0], match[1]
                 warnings = []
@@ -365,6 +416,7 @@ while LINE_N != len(LINES):
     class_matched = re.match(r'class\s*(.*?)\s*\(\s*(.*?)\s*\)\s*:', LINES[LINE_N])
 
     if class_matched:
+        TYPES_CHECKER.add(40)
         match = class_matched.group(1, 2)
 
         type = match[0]
@@ -377,28 +429,27 @@ while LINE_N != len(LINES):
 
     if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
 
+        TYPES_CHECKER.add(41)
+
         if not re.match(r'\s*@_parse_result\s*\n', LINES[LINE_N - 1]):
-            raise_err(381, LINE_N - 1, LINES[LINE_N - 1])
+            raise_err(435, LINE_N - 1, LINES[LINE_N - 1])
 
         if not re.match(r'\s*@classmethod\s*\n', LINES[LINE_N - 2]):
-            raise_err(384, LINE_N - 2, LINES[LINE_N - 2])
+            raise_err(438, LINE_N - 2, LINES[LINE_N - 2])
 
         TYPES[type]['has_dese'] = True
         LINE_N += 1
         TYPES[type]['dese_kwargs'] = get_dese_kwargs(type)
 
     if re.match(r'\s*def\s*__init__\s*\(', LINES[LINE_N]):
+        TYPES_CHECKER.add(42)
         # Not add a line to check
         # def __init__(self): ...
         init_kwargs = get_init_kwargs(type)
         if TYPES[type]['has_dese']:
             for arg in TYPES[type]['dese_kwargs']:
                 if arg not in init_kwargs:
-                    raise_err(397, type, arg, LINE_N, LINES[LINE_N])
-
-            for arg in TYPES[type]['dese_kwargs']:
-                if arg not in init_kwargs:
-                    raise_err(401, arg, type)
+                    raise_err(452, type, arg, LINE_N, LINES[LINE_N])
 
             TYPES[type].pop('dese_kwargs')
 
@@ -407,18 +458,22 @@ while LINE_N != len(LINES):
         self_kwargs = get_self_kwargs(type)
         for arg in TYPES[type]['kwargs']:
             if arg not in self_kwargs:
+                TYPES_CHECKER.add(43)
                 TYPES[type]['kwargs'][arg].update({'warnings': [f'no match self.{arg} = ...']})
 
         for arg in self_kwargs.copy():
             warnings = self_kwargs[arg]['warnings']
             if warnings:
+                TYPES_CHECKER.add(44)
                 if arg in TYPES[type]['kwargs']:
+                    TYPES_CHECKER.add(45)
                     assert len(warnings) == 1
                     if 'warnings' in TYPES[type]['kwargs'][arg]:
                         TYPES[type]['kwargs'][arg]['warnings'].append(warnings[0])
                     else:
                         TYPES[type]['kwargs'][arg].update({'warnings': warnings})
                 else:
+                    TYPES_CHECKER.add(46)
                     if 'warnings' in TYPES[type]:
                         TYPES[type]['warnings'].update({arg: self_kwargs[arg]})
                     else:
@@ -455,6 +510,10 @@ logger.info('Missing types are: %s', len(NOT_IN_ALL) or len(NOT_IN_TYPES))
 logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
 logger.info('Types without _dese(): %s\n', len(TYPES_WITHOUT_DESE))
 #"""
+
+for n in range(1, 47):
+    if n not in TYPES_CHECKER.tasks:
+        logger.warning(f'task {n} has not been not executed.\n')
 
 with open('test_types.json', 'w') as w:
     w.write(json.dumps(TYPES, indent = 4))
