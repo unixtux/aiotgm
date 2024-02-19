@@ -1,5 +1,6 @@
 {
     "ChatPermissions": {
+        "link": "https://core.telegram.org/bots/api#chatpermissions",
         "has_dese": true,
         "kwargs": {
             "can_send_messages": {
@@ -61,6 +62,7 @@
         }
     },
     "ChatAdministratorRights": {
+        "link": "https://core.telegram.org/bots/api#chatadministratorrights",
         "has_dese": true,
         "kwargs": {
             "is_anonymous": {
@@ -118,6 +120,7 @@
         }
     },
     "SwitchInlineQueryChosenChat": {
+        "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
         "has_dese": true,
         "kwargs": {
             "query": {
@@ -143,10 +146,12 @@
         }
     },
     "CallbackGame": {
+        "link": "https://core.telegram.org/bots/api#callbackgame",
         "has_dese": true,
         "kwargs": {}
     },
     "InputFile": {
+        "link": "https://core.telegram.org/bots/api#inputfile",
         "has_dese": false,
         "kwargs": {
             "path": {
@@ -169,6 +174,7 @@
         }
     },
     "LoginUrl": {
+        "link": "https://core.telegram.org/bots/api#loginurl",
         "has_dese": true,
         "kwargs": {
             "url": {
@@ -189,6 +195,7 @@
         }
     },
     "LabeledPrice": {
+        "link": "https://core.telegram.org/bots/api#labeledprice",
         "has_dese": false,
         "kwargs": {
             "label": {
@@ -200,6 +207,7 @@
         }
     },
     "LinkPreviewOptions": {
+        "link": "https://core.telegram.org/bots/api#linkpreviewoptions",
         "has_dese": true,
         "kwargs": {
             "is_disabled": {
@@ -225,6 +233,7 @@
         }
     },
     "User": {
+        "link": "https://core.telegram.org/bots/api#user",
         "has_dese": true,
         "kwargs": {
             "id": {
@@ -271,6 +280,7 @@
         }
     },
     "MessageEntity": {
+        "link": "https://core.telegram.org/bots/api#messageentity",
         "has_dese": true,
         "kwargs": {
             "type": {
@@ -301,6 +311,7 @@
         }
     },
     "TextQuote": {
+        "link": "https://core.telegram.org/bots/api#textquote",
         "has_dese": true,
         "kwargs": {
             "text": {
@@ -320,6 +331,7 @@
         }
     },
     "ReplyParameters": {
+        "link": "https://core.telegram.org/bots/api#replyparameters",
         "has_dese": false,
         "kwargs": {
             "message_id": {
@@ -352,6 +364,7 @@
         }
     },
     "InaccessibleMessage": {
+        "link": "https://core.telegram.org/bots/api#inaccessiblemessage",
         "has_dese": true,
         "kwargs": {
             "chat": {
@@ -367,6 +380,7 @@
         }
     },
     "Message": {
+        "link": "https://core.telegram.org/bots/api#message",
         "has_dese": true,
         "kwargs": {
             "message_id": {
@@ -668,6 +682,7 @@
         }
     },
     "ChatPhoto": {
+        "link": "https://core.telegram.org/bots/api#chatphoto",
         "has_dese": true,
         "kwargs": {
             "small_file_id": {
@@ -685,6 +700,7 @@
         }
     },
     "Location": {
+        "link": "https://core.telegram.org/bots/api#location",
         "has_dese": true,
         "kwargs": {
             "longitude": {
@@ -712,6 +728,7 @@
         }
     },
     "ChatLocation": {
+        "link": "https://core.telegram.org/bots/api#chatlocation",
         "has_dese": true,
         "kwargs": {
             "location": {
@@ -723,6 +740,7 @@
         }
     },
     "ReactionTypeEmoji": {
+        "link": "https://core.telegram.org/bots/api#reactiontypeemoji",
         "has_dese": true,
         "kwargs": {
             "emoji": {
@@ -739,6 +757,7 @@
         }
     },
     "ReactionTypeCustomEmoji": {
+        "link": "https://core.telegram.org/bots/api#reactiontypecustomemoji",
         "has_dese": true,
         "kwargs": {
             "custom_emoji_id": {
@@ -755,6 +774,7 @@
         }
     },
     "Chat": {
+        "link": "https://core.telegram.org/bots/api#chat",
         "has_dese": true,
         "kwargs": {
             "id": {
@@ -898,6 +918,7 @@
         }
     },
     "MessageReactionUpdated": {
+        "link": "https://core.telegram.org/bots/api#messagereactionupdated",
         "has_dese": true,
         "kwargs": {
             "chat": {
@@ -926,6 +947,7 @@
         }
     },
     "ReactionCount": {
+        "link": "https://core.telegram.org/bots/api#reactioncount",
         "has_dese": true,
         "kwargs": {
             "type": {
@@ -937,6 +959,7 @@
         }
     },
     "MessageReactionCountUpdated": {
+        "link": "https://core.telegram.org/bots/api#messagereactioncountupdated",
         "has_dese": true,
         "kwargs": {
             "chat": {
@@ -954,6 +977,7 @@
         }
     },
     "MessageId": {
+        "link": "https://core.telegram.org/bots/api#messageid",
         "has_dese": true,
         "kwargs": {
             "message_id": {
@@ -962,6 +986,7 @@
         }
     },
     "PhotoSize": {
+        "link": "https://core.telegram.org/bots/api#photosize",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -983,6 +1008,7 @@
         }
     },
     "Animation": {
+        "link": "https://core.telegram.org/bots/api#animation",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -1019,6 +1045,7 @@
         }
     },
     "Audio": {
+        "link": "https://core.telegram.org/bots/api#audio",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -1057,6 +1084,7 @@
         }
     },
     "Document": {
+        "link": "https://core.telegram.org/bots/api#document",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -1084,10 +1112,12 @@
         }
     },
     "Story": {
+        "link": "https://core.telegram.org/bots/api#story",
         "has_dese": true,
         "kwargs": {}
     },
     "Video": {
+        "link": "https://core.telegram.org/bots/api#video",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -1124,6 +1154,7 @@
         }
     },
     "VideoNote": {
+        "link": "https://core.telegram.org/bots/api#videonote",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -1149,6 +1180,7 @@
         }
     },
     "Voice": {
+        "link": "https://core.telegram.org/bots/api#voice",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -1171,6 +1203,7 @@
         }
     },
     "Contact": {
+        "link": "https://core.telegram.org/bots/api#contact",
         "has_dese": true,
         "kwargs": {
             "phone_number": {
@@ -1194,6 +1227,7 @@
         }
     },
     "Dice": {
+        "link": "https://core.telegram.org/bots/api#dice",
         "has_dese": true,
         "kwargs": {
             "emoji": {
@@ -1205,6 +1239,7 @@
         }
     },
     "PollOption": {
+        "link": "https://core.telegram.org/bots/api#polloption",
         "has_dese": true,
         "kwargs": {
             "text": {
@@ -1216,6 +1251,7 @@
         }
     },
     "PollAnswer": {
+        "link": "https://core.telegram.org/bots/api#pollanswer",
         "has_dese": true,
         "kwargs": {
             "poll_id": {
@@ -1235,6 +1271,7 @@
         }
     },
     "Poll": {
+        "link": "https://core.telegram.org/bots/api#poll",
         "has_dese": true,
         "kwargs": {
             "id": {
@@ -1284,6 +1321,7 @@
         }
     },
     "Venue": {
+        "link": "https://core.telegram.org/bots/api#venue",
         "has_dese": true,
         "kwargs": {
             "location": {
@@ -1314,6 +1352,7 @@
         }
     },
     "WebAppData": {
+        "link": "https://core.telegram.org/bots/api#webappdata",
         "has_dese": true,
         "kwargs": {
             "data": {
@@ -1325,6 +1364,7 @@
         }
     },
     "ProximityAlertTriggered": {
+        "link": "https://core.telegram.org/bots/api#proximityalerttriggered",
         "has_dese": true,
         "kwargs": {
             "traveler": {
@@ -1339,6 +1379,7 @@
         }
     },
     "MessageAutoDeleteTimerChanged": {
+        "link": "https://core.telegram.org/bots/api#messageautodeletetimerchanged",
         "has_dese": true,
         "kwargs": {
             "message_auto_delete_time": {
@@ -1347,6 +1388,7 @@
         }
     },
     "ForumTopicCreated": {
+        "link": "https://core.telegram.org/bots/api#forumtopiccreated",
         "has_dese": true,
         "kwargs": {
             "name": {
@@ -1362,10 +1404,12 @@
         }
     },
     "ForumTopicClosed": {
+        "link": "https://core.telegram.org/bots/api#forumtopicclosed",
         "has_dese": true,
         "kwargs": {}
     },
     "ForumTopicEdited": {
+        "link": "https://core.telegram.org/bots/api#forumtopicedited",
         "has_dese": true,
         "kwargs": {
             "name": {
@@ -1379,18 +1423,22 @@
         }
     },
     "ForumTopicReopened": {
+        "link": "https://core.telegram.org/bots/api#forumtopicreopened",
         "has_dese": true,
         "kwargs": {}
     },
     "GeneralForumTopicHidden": {
+        "link": "https://core.telegram.org/bots/api#generalforumtopichidden",
         "has_dese": true,
         "kwargs": {}
     },
     "GeneralForumTopicUnhidden": {
+        "link": "https://core.telegram.org/bots/api#generalforumtopicunhidden",
         "has_dese": true,
         "kwargs": {}
     },
     "UsersShared": {
+        "link": "https://core.telegram.org/bots/api#usersshared",
         "has_dese": true,
         "kwargs": {
             "request_id": {
@@ -1402,6 +1450,7 @@
         }
     },
     "ChatShared": {
+        "link": "https://core.telegram.org/bots/api#chatshared",
         "has_dese": true,
         "kwargs": {
             "request_id": {
@@ -1413,6 +1462,7 @@
         }
     },
     "WriteAccessAllowed": {
+        "link": "https://core.telegram.org/bots/api#writeaccessallowed",
         "has_dese": true,
         "kwargs": {
             "from_request": {
@@ -1430,6 +1480,7 @@
         }
     },
     "VideoChatScheduled": {
+        "link": "https://core.telegram.org/bots/api#videochatscheduled",
         "has_dese": true,
         "kwargs": {
             "start_date": {
@@ -1438,10 +1489,12 @@
         }
     },
     "VideoChatStarted": {
+        "link": "https://core.telegram.org/bots/api#videochatstarted",
         "has_dese": true,
         "kwargs": {}
     },
     "VideoChatEnded": {
+        "link": "https://core.telegram.org/bots/api#videochatended",
         "has_dese": true,
         "kwargs": {
             "duration": {
@@ -1450,6 +1503,7 @@
         }
     },
     "VideoChatParticipantsInvited": {
+        "link": "https://core.telegram.org/bots/api#videochatparticipantsinvited",
         "has_dese": true,
         "kwargs": {
             "users": {
@@ -1458,6 +1512,7 @@
         }
     },
     "UserProfilePhotos": {
+        "link": "https://core.telegram.org/bots/api#userprofilephotos",
         "has_dese": true,
         "kwargs": {
             "total_count": {
@@ -1469,6 +1524,7 @@
         }
     },
     "File": {
+        "link": "https://core.telegram.org/bots/api#file",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -1488,6 +1544,7 @@
         }
     },
     "WebAppInfo": {
+        "link": "https://core.telegram.org/bots/api#webappinfo",
         "has_dese": true,
         "kwargs": {
             "url": {
@@ -1496,6 +1553,7 @@
         }
     },
     "KeyboardButtonRequestUsers": {
+        "link": "https://core.telegram.org/bots/api#keyboardbuttonrequestusers",
         "has_dese": false,
         "kwargs": {
             "request_id": {
@@ -1516,6 +1574,7 @@
         }
     },
     "KeyboardButtonRequestChat": {
+        "link": "https://core.telegram.org/bots/api#keyboardbuttonrequestchat",
         "has_dese": false,
         "kwargs": {
             "request_id": {
@@ -1551,6 +1610,7 @@
         }
     },
     "KeyboardButtonPollType": {
+        "link": "https://core.telegram.org/bots/api#keyboardbuttonpolltype",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -1560,6 +1620,7 @@
         }
     },
     "KeyboardButton": {
+        "link": "https://core.telegram.org/bots/api#keyboardbutton",
         "has_dese": false,
         "kwargs": {
             "text": {
@@ -1592,6 +1653,7 @@
         }
     },
     "ReplyKeyboardMarkup": {
+        "link": "https://core.telegram.org/bots/api#replykeyboardmarkup",
         "has_dese": false,
         "kwargs": {
             "keyboard": {
@@ -1624,6 +1686,7 @@
         }
     },
     "ReplyKeyboardRemove": {
+        "link": "https://core.telegram.org/bots/api#replykeyboardremove",
         "has_dese": false,
         "kwargs": {
             "selective": {
@@ -1642,6 +1705,7 @@
         }
     },
     "InlineKeyboardButton": {
+        "link": "https://core.telegram.org/bots/api#inlinekeyboardbutton",
         "has_dese": true,
         "kwargs": {
             "text": {
@@ -1686,6 +1750,7 @@
         }
     },
     "InlineKeyboardMarkup": {
+        "link": "https://core.telegram.org/bots/api#inlinekeyboardmarkup",
         "has_dese": true,
         "kwargs": {
             "inline_keyboard": {
@@ -1698,6 +1763,7 @@
         }
     },
     "CallbackQuery": {
+        "link": "https://core.telegram.org/bots/api#callbackquery",
         "has_dese": true,
         "kwargs": {
             "id": {
@@ -1728,6 +1794,7 @@
         }
     },
     "ForceReply": {
+        "link": "https://core.telegram.org/bots/api#forcereply",
         "has_dese": false,
         "kwargs": {
             "force_reply": {
@@ -1745,6 +1812,7 @@
         }
     },
     "ChatInviteLink": {
+        "link": "https://core.telegram.org/bots/api#chatinvitelink",
         "has_dese": true,
         "kwargs": {
             "invite_link": {
@@ -1781,6 +1849,7 @@
         }
     },
     "ChatMemberOwner": {
+        "link": "https://core.telegram.org/bots/api#chatmemberowner",
         "has_dese": true,
         "kwargs": {
             "user": {
@@ -1804,6 +1873,7 @@
         }
     },
     "ChatMemberAdministrator": {
+        "link": "https://core.telegram.org/bots/api#chatmemberadministrator",
         "has_dese": true,
         "kwargs": {
             "user": {
@@ -1879,6 +1949,7 @@
         }
     },
     "ChatMemberMember": {
+        "link": "https://core.telegram.org/bots/api#chatmembermember",
         "has_dese": true,
         "kwargs": {
             "user": {
@@ -1895,6 +1966,7 @@
         }
     },
     "ChatMemberRestricted": {
+        "link": "https://core.telegram.org/bots/api#chatmemberrestricted",
         "has_dese": true,
         "kwargs": {
             "user": {
@@ -1959,6 +2031,7 @@
         }
     },
     "ChatMemberLeft": {
+        "link": "https://core.telegram.org/bots/api#chatmemberleft",
         "has_dese": true,
         "kwargs": {
             "user": {
@@ -1975,6 +2048,7 @@
         }
     },
     "ChatMemberBanned": {
+        "link": "https://core.telegram.org/bots/api#chatmemberbanned",
         "has_dese": true,
         "kwargs": {
             "user": {
@@ -1994,6 +2068,7 @@
         }
     },
     "ChatMemberUpdated": {
+        "link": "https://core.telegram.org/bots/api#chatmemberupdated",
         "has_dese": true,
         "kwargs": {
             "chat": {
@@ -2022,6 +2097,7 @@
         }
     },
     "ChatJoinRequest": {
+        "link": "https://core.telegram.org/bots/api#chatjoinrequest",
         "has_dese": true,
         "kwargs": {
             "chat": {
@@ -2047,6 +2123,7 @@
         }
     },
     "ForumTopic": {
+        "link": "https://core.telegram.org/bots/api#forumtopic",
         "has_dese": true,
         "kwargs": {
             "message_thread_id": {
@@ -2065,6 +2142,7 @@
         }
     },
     "BotCommand": {
+        "link": "https://core.telegram.org/bots/api#botcommand",
         "has_dese": true,
         "kwargs": {
             "command": {
@@ -2076,6 +2154,7 @@
         }
     },
     "BotCommandScopeDefault": {
+        "link": "https://core.telegram.org/bots/api#botcommandscopedefault",
         "has_dese": false,
         "kwargs": {},
         "warnings": {
@@ -2088,6 +2167,7 @@
         }
     },
     "BotCommandScopeAllPrivateChats": {
+        "link": "https://core.telegram.org/bots/api#botcommandscopeallprivatechats",
         "has_dese": false,
         "kwargs": {},
         "warnings": {
@@ -2100,6 +2180,7 @@
         }
     },
     "BotCommandScopeAllGroupChats": {
+        "link": "https://core.telegram.org/bots/api#botcommandscopeallgroupchats",
         "has_dese": false,
         "kwargs": {},
         "warnings": {
@@ -2112,6 +2193,7 @@
         }
     },
     "BotCommandScopeAllChatAdministrators": {
+        "link": "https://core.telegram.org/bots/api#botcommandscopeallchatadministrators",
         "has_dese": false,
         "kwargs": {},
         "warnings": {
@@ -2124,6 +2206,7 @@
         }
     },
     "BotCommandScopeChat": {
+        "link": "https://core.telegram.org/bots/api#botcommandscopechat",
         "has_dese": false,
         "kwargs": {
             "chat_id": {
@@ -2140,6 +2223,7 @@
         }
     },
     "BotCommandScopeChatAdministrators": {
+        "link": "https://core.telegram.org/bots/api#botcommandscopechatadministrators",
         "has_dese": false,
         "kwargs": {
             "chat_id": {
@@ -2156,6 +2240,7 @@
         }
     },
     "BotCommandScopeChatMember": {
+        "link": "https://core.telegram.org/bots/api#botcommandscopechatmember",
         "has_dese": false,
         "kwargs": {
             "chat_id": {
@@ -2175,6 +2260,7 @@
         }
     },
     "BotName": {
+        "link": "https://core.telegram.org/bots/api#botname",
         "has_dese": true,
         "kwargs": {
             "name": {
@@ -2183,6 +2269,7 @@
         }
     },
     "BotDescription": {
+        "link": "https://core.telegram.org/bots/api#botdescription",
         "has_dese": true,
         "kwargs": {
             "description": {
@@ -2191,6 +2278,7 @@
         }
     },
     "BotShortDescription": {
+        "link": "https://core.telegram.org/bots/api#botshortdescription",
         "has_dese": true,
         "kwargs": {
             "short_description": {
@@ -2199,6 +2287,7 @@
         }
     },
     "MenuButtonCommands": {
+        "link": "https://core.telegram.org/bots/api#menubuttoncommands",
         "has_dese": true,
         "kwargs": {},
         "warnings": {
@@ -2211,6 +2300,7 @@
         }
     },
     "MenuButtonWebApp": {
+        "link": "https://core.telegram.org/bots/api#menubuttonwebapp",
         "has_dese": true,
         "kwargs": {
             "text": {
@@ -2230,6 +2320,7 @@
         }
     },
     "MenuButtonDefault": {
+        "link": "https://core.telegram.org/bots/api#menubuttondefault",
         "has_dese": true,
         "kwargs": {},
         "warnings": {
@@ -2242,6 +2333,7 @@
         }
     },
     "ResponseParameters": {
+        "link": "https://core.telegram.org/bots/api#responseparameters",
         "has_dese": true,
         "kwargs": {
             "migrate_to_chat_id": {
@@ -2255,6 +2347,7 @@
         }
     },
     "InputMediaPhoto": {
+        "link": "https://core.telegram.org/bots/api#inputmediaphoto",
         "has_dese": false,
         "kwargs": {
             "media": {
@@ -2287,6 +2380,7 @@
         }
     },
     "InputMediaVideo": {
+        "link": "https://core.telegram.org/bots/api#inputmediavideo",
         "has_dese": false,
         "kwargs": {
             "media": {
@@ -2339,6 +2433,7 @@
         }
     },
     "InputMediaAnimation": {
+        "link": "https://core.telegram.org/bots/api#inputmediaanimation",
         "has_dese": false,
         "kwargs": {
             "media": {
@@ -2387,6 +2482,7 @@
         }
     },
     "InputMediaAudio": {
+        "link": "https://core.telegram.org/bots/api#inputmediaaudio",
         "has_dese": false,
         "kwargs": {
             "media": {
@@ -2431,6 +2527,7 @@
         }
     },
     "InputMediaDocument": {
+        "link": "https://core.telegram.org/bots/api#inputmediadocument",
         "has_dese": false,
         "kwargs": {
             "media": {
@@ -2467,6 +2564,7 @@
         }
     },
     "MaskPosition": {
+        "link": "https://core.telegram.org/bots/api#maskposition",
         "has_dese": true,
         "kwargs": {
             "point": {
@@ -2484,6 +2582,7 @@
         }
     },
     "Sticker": {
+        "link": "https://core.telegram.org/bots/api#sticker",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -2542,6 +2641,7 @@
         }
     },
     "StickerSet": {
+        "link": "https://core.telegram.org/bots/api#stickerset",
         "has_dese": true,
         "kwargs": {
             "name": {
@@ -2569,6 +2669,7 @@
         }
     },
     "InputSticker": {
+        "link": "https://core.telegram.org/bots/api#inputsticker",
         "has_dese": false,
         "kwargs": {
             "sticker": {
@@ -2588,6 +2689,7 @@
         }
     },
     "InlineQuery": {
+        "link": "https://core.telegram.org/bots/api#inlinequery",
         "has_dese": true,
         "kwargs": {
             "id": {
@@ -2613,6 +2715,7 @@
         }
     },
     "InlineQueryResultsButton": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultsbutton",
         "has_dese": false,
         "kwargs": {
             "text": {
@@ -2629,6 +2732,7 @@
         }
     },
     "InputTextMessageContent": {
+        "link": "https://core.telegram.org/bots/api#inputtextmessagecontent",
         "has_dese": false,
         "kwargs": {
             "message_text": {
@@ -2649,6 +2753,7 @@
         }
     },
     "InputLocationMessageContent": {
+        "link": "https://core.telegram.org/bots/api#inputlocationmessagecontent",
         "has_dese": false,
         "kwargs": {
             "latitude": {
@@ -2676,6 +2781,7 @@
         }
     },
     "InputVenueMessageContent": {
+        "link": "https://core.telegram.org/bots/api#inputvenuemessagecontent",
         "has_dese": false,
         "kwargs": {
             "latitude": {
@@ -2709,6 +2815,7 @@
         }
     },
     "InputContactMessageContent": {
+        "link": "https://core.telegram.org/bots/api#inputcontactmessagecontent",
         "has_dese": false,
         "kwargs": {
             "phone_number": {
@@ -2728,6 +2835,7 @@
         }
     },
     "InputInvoiceMessageContent": {
+        "link": "https://core.telegram.org/bots/api#inputinvoicemessagecontent",
         "has_dese": false,
         "kwargs": {
             "title": {
@@ -2807,6 +2915,7 @@
         }
     },
     "InlineQueryResultArticle": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultarticle",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -2857,6 +2966,7 @@
         }
     },
     "InlineQueryResultPhoto": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultphoto",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -2915,6 +3025,7 @@
         }
     },
     "InlineQueryResultGif": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultgif",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -2977,6 +3088,7 @@
         }
     },
     "InlineQueryResultMpeg4Gif": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3039,6 +3151,7 @@
         }
     },
     "InlineQueryResultVideo": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultvideo",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3103,6 +3216,7 @@
         }
     },
     "InlineQueryResultAudio": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultaudio",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3153,6 +3267,7 @@
         }
     },
     "InlineQueryResultVoice": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultvoice",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3199,6 +3314,7 @@
         }
     },
     "InlineQueryResultDocument": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultdocument",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3260,6 +3376,7 @@
         }
     },
     "InlineQueryResultLocation": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultlocation",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3321,6 +3438,7 @@
         }
     },
     "InlineQueryResultVenue": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultvenue",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3385,6 +3503,7 @@
         }
     },
     "InlineQueryResultContact": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcontact",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3435,6 +3554,7 @@
         }
     },
     "InlineQueryResultGame": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultgame",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3458,6 +3578,7 @@
         }
     },
     "InlineQueryResultCachedPhoto": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedphoto",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3505,6 +3626,7 @@
         }
     },
     "InlineQueryResultCachedGif": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedgif",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3548,6 +3670,7 @@
         }
     },
     "InlineQueryResultCachedMpeg4Gif": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3591,6 +3714,7 @@
         }
     },
     "InlineQueryResultCachedSticker": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedsticker",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3618,6 +3742,7 @@
         }
     },
     "InlineQueryResultCachedDocument": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcacheddocument",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3664,6 +3789,7 @@
         }
     },
     "InlineQueryResultCachedVideo": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvideo",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3710,6 +3836,7 @@
         }
     },
     "InlineQueryResultCachedVoice": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvoice",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3752,6 +3879,7 @@
         }
     },
     "InlineQueryResultCachedAudio": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedaudio",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3791,6 +3919,7 @@
         }
     },
     "ChosenInlineResult": {
+        "link": "https://core.telegram.org/bots/api#choseninlineresult",
         "has_dese": true,
         "kwargs": {
             "result_id": {
@@ -3813,6 +3942,7 @@
         }
     },
     "SentWebAppMessage": {
+        "link": "https://core.telegram.org/bots/api#sentwebappmessage",
         "has_dese": true,
         "kwargs": {
             "inline_message_id": {
@@ -3822,6 +3952,7 @@
         }
     },
     "Invoice": {
+        "link": "https://core.telegram.org/bots/api#invoice",
         "has_dese": true,
         "kwargs": {
             "title": {
@@ -3842,6 +3973,7 @@
         }
     },
     "ShippingAddress": {
+        "link": "https://core.telegram.org/bots/api#shippingaddress",
         "has_dese": true,
         "kwargs": {
             "country_code": {
@@ -3865,6 +3997,7 @@
         }
     },
     "OrderInfo": {
+        "link": "https://core.telegram.org/bots/api#orderinfo",
         "has_dese": true,
         "kwargs": {
             "name": {
@@ -3886,6 +4019,7 @@
         }
     },
     "ShippingOption": {
+        "link": "https://core.telegram.org/bots/api#shippingoption",
         "has_dese": false,
         "kwargs": {
             "id": {
@@ -3900,6 +4034,7 @@
         }
     },
     "SuccessfulPayment": {
+        "link": "https://core.telegram.org/bots/api#successfulpayment",
         "has_dese": true,
         "kwargs": {
             "currency": {
@@ -3928,6 +4063,7 @@
         }
     },
     "ShippingQuery": {
+        "link": "https://core.telegram.org/bots/api#shippingquery",
         "has_dese": true,
         "kwargs": {
             "id": {
@@ -3945,6 +4081,7 @@
         }
     },
     "PreCheckoutQuery": {
+        "link": "https://core.telegram.org/bots/api#precheckoutquery",
         "has_dese": true,
         "kwargs": {
             "id": {
@@ -3973,6 +4110,7 @@
         }
     },
     "PassportFile": {
+        "link": "https://core.telegram.org/bots/api#passportfile",
         "has_dese": true,
         "kwargs": {
             "file_id": {
@@ -3990,6 +4128,7 @@
         }
     },
     "EncryptedPassportElement": {
+        "link": "https://core.telegram.org/bots/api#encryptedpassportelement",
         "has_dese": true,
         "kwargs": {
             "type": {
@@ -4033,6 +4172,7 @@
         }
     },
     "EncryptedCredentials": {
+        "link": "https://core.telegram.org/bots/api#encryptedcredentials",
         "has_dese": true,
         "kwargs": {
             "data": {
@@ -4047,6 +4187,7 @@
         }
     },
     "PassportData": {
+        "link": "https://core.telegram.org/bots/api#passportdata",
         "has_dese": true,
         "kwargs": {
             "data": {
@@ -4058,6 +4199,7 @@
         }
     },
     "PassportElementErrorDataField": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrordatafield",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4083,6 +4225,7 @@
         }
     },
     "PassportElementErrorFrontSide": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrorfrontside",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4105,6 +4248,7 @@
         }
     },
     "PassportElementErrorReverseSide": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrorreverseside",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4127,6 +4271,7 @@
         }
     },
     "PassportElementErrorSelfie": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrorselfie",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4149,6 +4294,7 @@
         }
     },
     "PassportElementErrorFile": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrorfile",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4171,6 +4317,7 @@
         }
     },
     "PassportElementErrorFiles": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrorfiles",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4193,6 +4340,7 @@
         }
     },
     "PassportElementErrorTranslationFile": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrortranslationfile",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4215,6 +4363,7 @@
         }
     },
     "PassportElementErrorTranslationFiles": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrortranslationfiles",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4237,6 +4386,7 @@
         }
     },
     "PassportElementErrorUnspecified": {
+        "link": "https://core.telegram.org/bots/api#passportelementerrorunspecified",
         "has_dese": false,
         "kwargs": {
             "type": {
@@ -4259,6 +4409,7 @@
         }
     },
     "Game": {
+        "link": "https://core.telegram.org/bots/api#game",
         "has_dese": true,
         "kwargs": {
             "title": {
@@ -4285,6 +4436,7 @@
         }
     },
     "GameHighScore": {
+        "link": "https://core.telegram.org/bots/api#gamehighscore",
         "has_dese": true,
         "kwargs": {
             "position": {
@@ -4299,10 +4451,12 @@
         }
     },
     "GiveawayCreated": {
+        "link": "https://core.telegram.org/bots/api#giveawaycreated",
         "has_dese": true,
         "kwargs": {}
     },
     "GiveawayWinners": {
+        "link": "https://core.telegram.org/bots/api#giveawaywinners",
         "has_dese": true,
         "kwargs": {
             "chat": {
@@ -4347,6 +4501,7 @@
         }
     },
     "GiveawayCompleted": {
+        "link": "https://core.telegram.org/bots/api#giveawaycompleted",
         "has_dese": true,
         "kwargs": {
             "winner_count": {
@@ -4363,6 +4518,7 @@
         }
     },
     "Giveaway": {
+        "link": "https://core.telegram.org/bots/api#giveaway",
         "has_dese": true,
         "kwargs": {
             "chats": {
@@ -4397,6 +4553,7 @@
         }
     },
     "MessageOriginUser": {
+        "link": "https://core.telegram.org/bots/api#messageoriginuser",
         "has_dese": true,
         "kwargs": {
             "date": {
@@ -4416,6 +4573,7 @@
         }
     },
     "MessageOriginHiddenUser": {
+        "link": "https://core.telegram.org/bots/api#messageoriginhiddenuser",
         "has_dese": true,
         "kwargs": {
             "date": {
@@ -4435,6 +4593,7 @@
         }
     },
     "MessageOriginChat": {
+        "link": "https://core.telegram.org/bots/api#messageoriginchat",
         "has_dese": true,
         "kwargs": {
             "date": {
@@ -4458,6 +4617,7 @@
         }
     },
     "MessageOriginChannel": {
+        "link": "https://core.telegram.org/bots/api#messageoriginchannel",
         "has_dese": true,
         "kwargs": {
             "date": {
@@ -4484,6 +4644,7 @@
         }
     },
     "ExternalReplyInfo": {
+        "link": "https://core.telegram.org/bots/api#externalreplyinfo",
         "has_dese": true,
         "kwargs": {
             "origin": {
@@ -4580,6 +4741,7 @@
         }
     },
     "ChatBoostSourcePremium": {
+        "link": "https://core.telegram.org/bots/api#chatboostsourcepremium",
         "has_dese": true,
         "kwargs": {
             "user": {
@@ -4596,6 +4758,7 @@
         }
     },
     "ChatBoostSourceGiftCode": {
+        "link": "https://core.telegram.org/bots/api#chatboostsourcegiftcode",
         "has_dese": true,
         "kwargs": {
             "user": {
@@ -4612,6 +4775,7 @@
         }
     },
     "ChatBoostSourceGiveaway": {
+        "link": "https://core.telegram.org/bots/api#chatboostsourcegiveaway",
         "has_dese": true,
         "kwargs": {
             "giveaway_message_id": {
@@ -4636,6 +4800,7 @@
         }
     },
     "ChatBoost": {
+        "link": "https://core.telegram.org/bots/api#chatboost",
         "has_dese": true,
         "kwargs": {
             "boost_id": {
@@ -4653,6 +4818,7 @@
         }
     },
     "UserChatBoosts": {
+        "link": "https://core.telegram.org/bots/api#userchatboosts",
         "has_dese": true,
         "kwargs": {
             "boosts": {
@@ -4661,6 +4827,7 @@
         }
     },
     "ChatBoostUpdated": {
+        "link": "https://core.telegram.org/bots/api#chatboostupdated",
         "has_dese": true,
         "kwargs": {
             "chat": {
@@ -4672,6 +4839,7 @@
         }
     },
     "ChatBoostRemoved": {
+        "link": "https://core.telegram.org/bots/api#chatboostremoved",
         "has_dese": true,
         "kwargs": {
             "chat": {
@@ -4689,6 +4857,7 @@
         }
     },
     "Update": {
+        "link": "https://core.telegram.org/bots/api#update",
         "has_dese": true,
         "kwargs": {
             "update_id": {
