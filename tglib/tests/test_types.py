@@ -1,7 +1,13 @@
 #!/bin/python3
 
 import sys
-sys.path.append('../')
+
+if __name__ != '__main__':
+    import os
+    print(f'{os.path.basename(__file__)} must be launched from __main__')
+    sys.exit(1)
+
+sys.path.append('../..')
 
 from typing import (
     Union,
