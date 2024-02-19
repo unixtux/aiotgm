@@ -381,12 +381,15 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                                 if not OPTIONAL.match(check_arg['type_hint']):
                                     __type_hint = OPTIONAL.match(type_hint).group(1)
                             if check_arg['type_hint'] != __type_hint:
-                                raise_err(384, check_arg, type_hint)
+                                raise_err(385, check_arg, type_hint)
+                            else:
+                                TYPES_CHECKER.add(37)
+                                TYPES[__type]['kwargs'][arg]['type_hint'] = type_hint
                         else:
-                            TYPES_CHECKER.add(37)
+                            TYPES_CHECKER.add(38)
                             TYPES[__type]['kwargs'][arg]['type_hint'] = type_hint
                     else:
-                        TYPES_CHECKER.add(38)
+                        TYPES_CHECKER.add(39)
                         TYPES[__type]['kwargs'][arg] = {'type_hint': type_hint}
 
                 self_kwargs[arg] = {}
@@ -395,7 +398,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 self_kwargs[arg] = {'type_hint': type_hint, 'warnings': warnings}
 
             elif new_attribute:
-                TYPES_CHECKER.add(39)
+                TYPES_CHECKER.add(40)
                 match = new_attribute.group(1, 2)
                 (arg, default_value) = match[0], match[1]
                 warnings = []
@@ -416,7 +419,7 @@ while LINE_N != len(LINES):
     class_matched = re.match(r'class\s*(.*?)\s*\(\s*(.*?)\s*\)\s*:', LINES[LINE_N])
 
     if class_matched:
-        TYPES_CHECKER.add(40)
+        TYPES_CHECKER.add(41)
         match = class_matched.group(1, 2)
 
         type = match[0]
@@ -429,7 +432,7 @@ while LINE_N != len(LINES):
 
     if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
 
-        TYPES_CHECKER.add(41)
+        TYPES_CHECKER.add(42)
 
         if not re.match(r'\s*@_parse_result\s*\n', LINES[LINE_N - 1]):
             raise_err(435, LINE_N - 1, LINES[LINE_N - 1])
@@ -442,7 +445,7 @@ while LINE_N != len(LINES):
         TYPES[type]['dese_kwargs'] = get_dese_kwargs(type)
 
     if re.match(r'\s*def\s*__init__\s*\(', LINES[LINE_N]):
-        TYPES_CHECKER.add(42)
+        TYPES_CHECKER.add(43)
         # Not add a line to check
         # def __init__(self): ...
         init_kwargs = get_init_kwargs(type)
@@ -458,22 +461,22 @@ while LINE_N != len(LINES):
         self_kwargs = get_self_kwargs(type)
         for arg in TYPES[type]['kwargs']:
             if arg not in self_kwargs:
-                TYPES_CHECKER.add(43)
+                TYPES_CHECKER.add(44)
                 TYPES[type]['kwargs'][arg].update({'warnings': [f'no match self.{arg} = ...']})
 
         for arg in self_kwargs.copy():
             warnings = self_kwargs[arg]['warnings']
             if warnings:
-                TYPES_CHECKER.add(44)
+                TYPES_CHECKER.add(45)
                 if arg in TYPES[type]['kwargs']:
-                    TYPES_CHECKER.add(45)
+                    TYPES_CHECKER.add(46)
                     assert len(warnings) == 1
                     if 'warnings' in TYPES[type]['kwargs'][arg]:
                         TYPES[type]['kwargs'][arg]['warnings'].append(warnings[0])
                     else:
                         TYPES[type]['kwargs'][arg].update({'warnings': warnings})
                 else:
-                    TYPES_CHECKER.add(46)
+                    TYPES_CHECKER.add(47)
                     if 'warnings' in TYPES[type]:
                         TYPES[type]['warnings'].update({arg: self_kwargs[arg]})
                     else:
@@ -511,7 +514,7 @@ logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
 logger.info('Types without _dese(): %s\n', len(TYPES_WITHOUT_DESE))
 #"""
 
-for n in range(1, 47):
+for n in range(1, 48):
     if n not in TYPES_CHECKER.tasks:
         logger.warning(f'task {n} has not been not executed.\n')
 

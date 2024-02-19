@@ -411,15 +411,15 @@ TYPES = {
                 "type_hint": Optional[int]
             },
             "from_user": {
-                "type_hint": User,
+                "type_hint": Optional[User],
                 "default": None
             },
             "sender_chat": {
-                "type_hint": Chat,
+                "type_hint": Optional[Chat],
                 "default": None
             },
             "forward_origin": {
-                "type_hint": MessageOrigin,
+                "type_hint": Optional[MessageOrigin],
                 "default": None
             },
             "is_topic_message": {
@@ -431,19 +431,19 @@ TYPES = {
                 "type_hint": Optional[Literal[True]]
             },
             "reply_to_message": {
-                "type_hint": Message,
+                "type_hint": Optional[Message],
                 "default": None
             },
             "external_reply": {
-                "type_hint": ExternalReplyInfo,
+                "type_hint": Optional[ExternalReplyInfo],
                 "default": None
             },
             "quote": {
-                "type_hint": TextQuote,
+                "type_hint": Optional[TextQuote],
                 "default": None
             },
             "via_bot": {
-                "type_hint": User,
+                "type_hint": Optional[User],
                 "default": None
             },
             "edit_date": {
@@ -474,19 +474,19 @@ TYPES = {
                 "default": None
             },
             "link_preview_options": {
-                "type_hint": LinkPreviewOptions,
+                "type_hint": Optional[LinkPreviewOptions],
                 "default": None
             },
             "animation": {
-                "type_hint": Animation,
+                "type_hint": Optional[Animation],
                 "default": None
             },
             "audio": {
-                "type_hint": Audio,
+                "type_hint": Optional[Audio],
                 "default": None
             },
             "document": {
-                "type_hint": Document,
+                "type_hint": Optional[Document],
                 "default": None
             },
             "photo": {
@@ -494,23 +494,23 @@ TYPES = {
                 "default": None
             },
             "sticker": {
-                "type_hint": Sticker,
+                "type_hint": Optional[Sticker],
                 "default": None
             },
             "story": {
-                "type_hint": Story,
+                "type_hint": Optional[Story],
                 "default": None
             },
             "video": {
-                "type_hint": Video,
+                "type_hint": Optional[Video],
                 "default": None
             },
             "video_note": {
-                "type_hint": VideoNote,
+                "type_hint": Optional[VideoNote],
                 "default": None
             },
             "voice": {
-                "type_hint": Voice,
+                "type_hint": Optional[Voice],
                 "default": None
             },
             "caption": {
@@ -526,27 +526,27 @@ TYPES = {
                 "type_hint": Optional[Literal[True]]
             },
             "contact": {
-                "type_hint": Contact,
+                "type_hint": Optional[Contact],
                 "default": None
             },
             "dice": {
-                "type_hint": Dice,
+                "type_hint": Optional[Dice],
                 "default": None
             },
             "game": {
-                "type_hint": Game,
+                "type_hint": Optional[Game],
                 "default": None
             },
             "poll": {
-                "type_hint": Poll,
+                "type_hint": Optional[Poll],
                 "default": None
             },
             "venue": {
-                "type_hint": Venue,
+                "type_hint": Optional[Venue],
                 "default": None
             },
             "location": {
-                "type_hint": Location,
+                "type_hint": Optional[Location],
                 "default": None
             },
             "new_chat_members": {
@@ -554,7 +554,7 @@ TYPES = {
                 "default": None
             },
             "left_chat_member": {
-                "type_hint": User,
+                "type_hint": Optional[User],
                 "default": None
             },
             "new_chat_title": {
@@ -582,7 +582,7 @@ TYPES = {
                 "type_hint": Optional[Literal[True]]
             },
             "message_auto_delete_timer_changed": {
-                "type_hint": MessageAutoDeleteTimerChanged,
+                "type_hint": Optional[MessageAutoDeleteTimerChanged],
                 "default": None
             },
             "migrate_to_chat_id": {
@@ -594,23 +594,23 @@ TYPES = {
                 "type_hint": Optional[int]
             },
             "pinned_message": {
-                "type_hint": MaybeInaccessibleMessage,
+                "type_hint": Optional[MaybeInaccessibleMessage],
                 "default": None
             },
             "invoice": {
-                "type_hint": Invoice,
+                "type_hint": Optional[Invoice],
                 "default": None
             },
             "successful_payment": {
-                "type_hint": SuccessfulPayment,
+                "type_hint": Optional[SuccessfulPayment],
                 "default": None
             },
             "users_shared": {
-                "type_hint": UsersShared,
+                "type_hint": Optional[UsersShared],
                 "default": None
             },
             "chat_shared": {
-                "type_hint": ChatShared,
+                "type_hint": Optional[ChatShared],
                 "default": None
             },
             "connected_website": {
@@ -618,79 +618,79 @@ TYPES = {
                 "type_hint": Optional[str]
             },
             "write_access_allowed": {
-                "type_hint": WriteAccessAllowed,
+                "type_hint": Optional[WriteAccessAllowed],
                 "default": None
             },
             "passport_data": {
-                "type_hint": PassportData,
+                "type_hint": Optional[PassportData],
                 "default": None
             },
             "proximity_alert_triggered": {
-                "type_hint": ProximityAlertTriggered,
+                "type_hint": Optional[ProximityAlertTriggered],
                 "default": None
             },
             "forum_topic_created": {
-                "type_hint": ForumTopicCreated,
+                "type_hint": Optional[ForumTopicCreated],
                 "default": None
             },
             "forum_topic_edited": {
-                "type_hint": ForumTopicEdited,
+                "type_hint": Optional[ForumTopicEdited],
                 "default": None
             },
             "forum_topic_closed": {
-                "type_hint": ForumTopicClosed,
+                "type_hint": Optional[ForumTopicClosed],
                 "default": None
             },
             "forum_topic_reopened": {
-                "type_hint": ForumTopicReopened,
+                "type_hint": Optional[ForumTopicReopened],
                 "default": None
             },
             "general_forum_topic_hidden": {
-                "type_hint": GeneralForumTopicHidden,
+                "type_hint": Optional[GeneralForumTopicHidden],
                 "default": None
             },
             "general_forum_topic_unhidden": {
-                "type_hint": GeneralForumTopicUnhidden,
+                "type_hint": Optional[GeneralForumTopicUnhidden],
                 "default": None
             },
             "giveaway_created": {
-                "type_hint": GiveawayCreated,
+                "type_hint": Optional[GiveawayCreated],
                 "default": None
             },
             "giveaway": {
-                "type_hint": Giveaway,
+                "type_hint": Optional[Giveaway],
                 "default": None
             },
             "giveaway_winners": {
-                "type_hint": GiveawayWinners,
+                "type_hint": Optional[GiveawayWinners],
                 "default": None
             },
             "giveaway_completed": {
-                "type_hint": GiveawayCompleted,
+                "type_hint": Optional[GiveawayCompleted],
                 "default": None
             },
             "video_chat_scheduled": {
-                "type_hint": VideoChatScheduled,
+                "type_hint": Optional[VideoChatScheduled],
                 "default": None
             },
             "video_chat_started": {
-                "type_hint": VideoChatStarted,
+                "type_hint": Optional[VideoChatStarted],
                 "default": None
             },
             "video_chat_ended": {
-                "type_hint": VideoChatEnded,
+                "type_hint": Optional[VideoChatEnded],
                 "default": None
             },
             "video_chat_participants_invited": {
-                "type_hint": VideoChatParticipantsInvited,
+                "type_hint": Optional[VideoChatParticipantsInvited],
                 "default": None
             },
             "web_app_data": {
-                "type_hint": WebAppData,
+                "type_hint": Optional[WebAppData],
                 "default": None
             },
             "reply_markup": {
-                "type_hint": InlineKeyboardMarkup,
+                "type_hint": Optional[InlineKeyboardMarkup],
                 "default": None
             }
         }
