@@ -2,9 +2,9 @@
 
 #
 
-<h3 align="center">Python module to build your telegram bot client</h3>
+<h3 align="center">Build your telegram bot client</h3>
 
-<h3 align="center">Supported Bot Api version <a href="https://core.telegram.org/bots/api#december-29-2023">7.0</a></h3>
+<h3 align="center">Supported Bot Api version <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
 
 #
 
