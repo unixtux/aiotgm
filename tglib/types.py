@@ -196,15 +196,6 @@ from .default_literals import *
 from .logger import get_logger
 logger = get_logger('TelegramApi')
 
-try:
-    import ujson as json
-except ImportError:
-    import json
-    logger.info(
-        "module 'ujson' not found, the"
-        " default 'json' was imported."
-    )
-
 
 def _check_dict(res: dict, /) -> dict:
     '''
@@ -243,36 +234,6 @@ def _parse_result(_dese: Callable[[type, Optional[dict]], Optional[TelegramType]
             return _dese(cls, res)
 
     return wrap
-
-
-def _serialize(
-    val: Any,
-    /,
-    *,
-    last: bool = True
-) -> Union[Any, str, list, dict]:
-
-    if isinstance(val, TelegramType):
-        val = val.__dict__
-
-    elif hasattr(val, '__dict__'):
-        val = '{!r}'.format(val)
-
-    if isinstance(val, (list, tuple, set)):
-        res = [
-            _serialize(x, last = False) for x in val
-        ]
-    elif isinstance(val, dict):
-        res = {
-            x: _serialize(val[x], last = False) for x in val if val[x] is not None
-        }
-    else:
-        res = val
-
-    if not last:
-        return res
-    else:
-        return res if isinstance(res, str) else json.dumps(res, ensure_ascii = False)
 
 
 class ChatBoostAdded(TelegramType):

@@ -19,8 +19,7 @@ from typing import (Any,
                     Union,
                     Literal,
                     Optional,
-                    Iterable,
-                    _UnionGenericAlias)
+                    Iterable)
 
 from aiohttp import (
     FormData,
@@ -31,14 +30,13 @@ from aiohttp import (
     ClientResponse
 )
 from .types import (
-    json,
+    TelegramType, # to serialize telegram objects
     InputFile,
-    _serialize,
     InputMedia,
     InputMediaAudio,
     InputMediaDocument,
     InputMediaPhoto,
-    InputMediaVideo,
+    InputMediaVideo
 )
 
 try:
@@ -67,6 +65,45 @@ else:
         SSL_CONTEXT = ssl.create_default_context(
             cafile = _cafile
         )
+        del _cafile
+
+try:
+    import ujson as json
+except ImportError:
+    import json
+    logger.info(
+        "module 'ujson' not found, the"
+        " default 'json' was imported."
+    )
+
+def _serialize(
+    val: Any,
+    /,
+    *,
+    last: bool = True
+) -> Union[Any, str, list, dict]:
+
+    if isinstance(val, TelegramType):
+        val = val.__dict__
+
+    elif hasattr(val, '__dict__'):
+        val = '{!r}'.format(val)
+
+    if isinstance(val, (list, tuple, set)):
+        res = [
+            _serialize(x, last = False) for x in val
+        ]
+    elif isinstance(val, dict):
+        res = {
+            x: _serialize(val[x], last = False) for x in val if val[x] is not None
+        }
+    else:
+        res = val
+
+    if not last:
+        return res
+    else:
+        return res if isinstance(res, str) else json.dumps(res, ensure_ascii = False)
 
 
 def _format_url(token: str, method: str, /) -> str:
@@ -159,10 +196,10 @@ def _get_input_media_files(
     params: dict,
     /,
     *file_keys: str,
-    types_check: _UnionGenericAlias
+    types_check: type
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
 
-    assert isinstance(types_check, _UnionGenericAlias)
+    assert hasattr(types_check, '__origin__') and types_check.__origin__ is Union
     types_check = types_check.__args__
 
     files = {}
