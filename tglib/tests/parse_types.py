@@ -1,12 +1,10 @@
 #!/bin/python3
 
-import sys
-
 if __name__ != '__main__':
     import os
-    print(f'{os.path.basename(__file__)} must be launched from __main__')
-    sys.exit(1)
+    raise OSError(f'{os.path.basename(__file__)} must be launched from __main__')
 
+import sys
 sys.path.append('../..')
 
 from logging import DEBUG, INFO, WARNING
@@ -576,13 +574,11 @@ with open('test_types.json', 'r') as r:
 f = '''\
 #!/bin/python3
 
-import sys
-
 if __name__ != '__main__':
     import os
-    print(f'{os.path.basename(__file__)} must be launched from __main__')
-    sys.exit(1)
+    raise OSError(f'{os.path.basename(__file__)} must be launched from __main__')
 
+import sys
 sys.path.append('../..')
 
 from typing import (

@@ -1,10 +1,10 @@
-import sys
+#!/bin/python3
 
 if __name__ != '__main__':
     import os
-    print(f'{os.path.basename(__file__)} must be launched from __main__')
-    sys.exit(1)
+    raise OSError(f'{os.path.basename(__file__)} must be launched from __main__')
 
+import sys
 sys.path.append('../..')
 from tglib.update_manager import _func_ok
 
