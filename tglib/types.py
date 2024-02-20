@@ -20,6 +20,7 @@ __all__ = [
     'Chat',
     'ChatAdministratorRights',
     'ChatBoost',
+    'ChatBoostAdded',
     #'ChatBoostSource', # replaced with _dese_chat_boost_source()
     'ChatBoostSourcePremium',
     'ChatBoostSourceGiftCode',
@@ -272,6 +273,26 @@ def _serialize(
         return res
     else:
         return res if isinstance(res, str) else json.dumps(res, ensure_ascii = False)
+
+
+class ChatBoostAdded(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostadded
+
+    This object represents a service message about a user boosting a chat.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['boost_count'] = res.get('boost_count')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        boost_count: int
+    ):
+        self.boost_count = boost_count
 
 
 class ChatPermissions(TelegramType):
@@ -784,6 +805,7 @@ class Message(TelegramType):
         obj['write_access_allowed'] = WriteAccessAllowed._dese(res.get('write_access_allowed'))
         obj['passport_data'] = PassportData._dese(res.get('passport_data'))
         obj['proximity_alert_triggered'] = ProximityAlertTriggered._dese(res.get('proximity_alert_triggered'))
+        obj['boost_added'] = ChatBoostAdded._dese(res.get('boost_added'))
         obj['forum_topic_created'] = ForumTopicCreated._dese(res.get('forum_topic_created'))
         obj['forum_topic_edited'] = ForumTopicEdited._dese(res.get('forum_topic_edited'))
         obj['forum_topic_closed'] = ForumTopicClosed._dese(res.get('forum_topic_closed'))
@@ -862,6 +884,7 @@ class Message(TelegramType):
         write_access_allowed = None,
         passport_data = None,
         proximity_alert_triggered = None,
+        boost_added = None,
         forum_topic_created = None,
         forum_topic_edited = None,
         forum_topic_closed = None,
@@ -937,6 +960,7 @@ class Message(TelegramType):
         self.write_access_allowed: Optional[WriteAccessAllowed] = write_access_allowed
         self.passport_data: Optional[PassportData] = passport_data
         self.proximity_alert_triggered: Optional[ProximityAlertTriggered] = proximity_alert_triggered
+        self.boost_added: Optional[ChatBoostAdded] = boost_added
         self.forum_topic_created: Optional[ForumTopicCreated] = forum_topic_created
         self.forum_topic_edited: Optional[ForumTopicEdited] = forum_topic_edited
         self.forum_topic_closed: Optional[ForumTopicClosed] = forum_topic_closed
