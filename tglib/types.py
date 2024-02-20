@@ -1575,10 +1575,17 @@ class Story(TelegramType):
     @_parse_result
     def _dese(cls, res: dict):
         obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['id'] = res.get('id')
         return cls(**obj)
 
-    def __init__(self):
-        ...
+    def __init__(
+        self,
+        chat: Chat,
+        id: int
+    ):
+        self.chat = chat
+        self.id = id
 
 
 class Video(TelegramType):
