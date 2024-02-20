@@ -69,7 +69,7 @@ def raise_err(__file_line: int, *args: Any):
 
 def parse_number(__val: str) -> int | float | str:
     integer = re.match(r'([0-9]+$)', __val)
-    double = re.match(r'([0-9]+\.[0-9]*$)', __val)
+    double = re.match(r'([0-9]+\.[0-9]*$|[0-9]*\.[0-9]+$)', __val)
     if integer:
         return int(integer.group(1))
     elif double:
