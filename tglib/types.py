@@ -1214,6 +1214,7 @@ class Chat(TelegramType):
         obj['pinned_message'] = Message._dese(res.get('pinned_message'))
         obj['permissions'] = ChatPermissions._dese(res.get('permissions'))
         obj['slow_mode_delay'] = res.get('slow_mode_delay')
+        obj['unrestrict_boost_count'] = res.get('unrestrict_boost_count')
         obj['message_auto_delete_time'] = res.get('message_auto_delete_time')
         obj['has_aggressive_anti_spam_enabled'] = res.get('has_aggressive_anti_spam_enabled')
         obj['has_hidden_members'] = res.get('has_hidden_members')
@@ -1221,6 +1222,7 @@ class Chat(TelegramType):
         obj['has_visible_history'] = res.get('has_visible_history')
         obj['sticker_set_name'] = res.get('sticker_set_name')
         obj['can_set_sticker_set'] = res.get('can_set_sticker_set')
+        obj['custom_emoji_sticker_set_name'] = res.get('custom_emoji_sticker_set_name')
         obj['linked_chat_id'] = res.get('linked_chat_id')
         obj['location'] = ChatLocation._dese(res.get('location'))
         return cls(**obj)
@@ -1253,6 +1255,7 @@ class Chat(TelegramType):
         pinned_message: Optional[Message] = None,
         permissions: Optional[ChatPermissions] = None,
         slow_mode_delay: Optional[int] = None,
+        unrestrict_boost_count: Optional[int] = None,
         message_auto_delete_time: Optional[int] = None,
         has_aggressive_anti_spam_enabled: Optional[Literal[True]] = None,
         has_hidden_members: Optional[Literal[True]] = None,
@@ -1260,6 +1263,7 @@ class Chat(TelegramType):
         has_visible_history: Optional[Literal[True]] = None,
         sticker_set_name: Optional[str] = None,
         can_set_sticker_set: Optional[Literal[True]] = None,
+        custom_emoji_sticker_set_name: Optional[str] = None,
         linked_chat_id: Optional[int] = None,
         location: Optional[ChatLocation] = None
     ):
@@ -1289,6 +1293,7 @@ class Chat(TelegramType):
         self.pinned_message = pinned_message
         self.permissions = permissions
         self.slow_mode_delay = slow_mode_delay
+        self.unrestrict_boost_count = unrestrict_boost_count
         self.message_auto_delete_time = message_auto_delete_time
         self.has_aggressive_anti_spam_enabled = has_aggressive_anti_spam_enabled
         self.has_hidden_members = has_hidden_members
@@ -1296,6 +1301,7 @@ class Chat(TelegramType):
         self.has_visible_history = has_visible_history
         self.sticker_set_name = sticker_set_name
         self.can_set_sticker_set = can_set_sticker_set
+        self.custom_emoji_sticker_set_name = custom_emoji_sticker_set_name
         self.linked_chat_id = linked_chat_id
         self.location = location
 
