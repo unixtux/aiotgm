@@ -1,4 +1,13 @@
 {
+    "ChatBoostAdded": {
+        "link": "https://core.telegram.org/bots/api#chatboostadded",
+        "has_dese": true,
+        "kwargs": {
+            "boost_count": {
+                "type_hint": "int"
+            }
+        }
+    },
     "ChatPermissions": {
         "link": "https://core.telegram.org/bots/api#chatpermissions",
         "has_dese": true,
@@ -404,6 +413,10 @@
                 "type_hint": "Optional[Chat]",
                 "default": null
             },
+            "sender_boost_count": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
             "forward_origin": {
                 "type_hint": "Optional[MessageOrigin]",
                 "default": null
@@ -426,6 +439,10 @@
             },
             "quote": {
                 "type_hint": "Optional[TextQuote]",
+                "default": null
+            },
+            "reply_to_story": {
+                "type_hint": "Optional[Story]",
                 "default": null
             },
             "via_bot": {
@@ -613,6 +630,10 @@
             },
             "proximity_alert_triggered": {
                 "type_hint": "Optional[ProximityAlertTriggered]",
+                "default": null
+            },
+            "boost_added": {
+                "type_hint": "Optional[ChatBoostAdded]",
                 "default": null
             },
             "forum_topic_created": {
@@ -879,6 +900,10 @@
                 "type_hint": "Optional[int]",
                 "default": null
             },
+            "unrestrict_boost_count": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
             "message_auto_delete_time": {
                 "type_hint": "Optional[int]",
                 "default": null
@@ -905,6 +930,10 @@
             },
             "can_set_sticker_set": {
                 "type_hint": "Optional[Literal[True]]",
+                "default": null
+            },
+            "custom_emoji_sticker_set_name": {
+                "type_hint": "Optional[str]",
                 "default": null
             },
             "linked_chat_id": {
@@ -1114,7 +1143,14 @@
     "Story": {
         "link": "https://core.telegram.org/bots/api#story",
         "has_dese": true,
-        "kwargs": {}
+        "kwargs": {
+            "chat": {
+                "type_hint": "Chat"
+            },
+            "id": {
+                "type_hint": "int"
+            }
+        }
     },
     "Video": {
         "link": "https://core.telegram.org/bots/api#video",

@@ -1,12 +1,10 @@
 #!/bin/python3
 
-import sys
-
 if __name__ != '__main__':
     import os
-    print(f'{os.path.basename(__file__)} must be launched from __main__')
-    sys.exit(1)
+    raise OSError(f'{os.path.basename(__file__)} must be launched from __main__')
 
+import sys
 sys.path.append('../..')
 
 from typing import (
@@ -27,6 +25,15 @@ from tglib.types import (
 from tglib.default_literals import *
 
 TYPES = {
+    ChatBoostAdded: {
+        "link": "https://core.telegram.org/bots/api#chatboostadded",
+        "has_dese": True,
+        "kwargs": {
+            "boost_count": {
+                "type_hint": int
+            }
+        }
+    },
     ChatPermissions: {
         "link": "https://core.telegram.org/bots/api#chatpermissions",
         "has_dese": True,
@@ -432,6 +439,10 @@ TYPES = {
                 "type_hint": Optional[Chat],
                 "default": None
             },
+            "sender_boost_count": {
+                "type_hint": Optional[int],
+                "default": None
+            },
             "forward_origin": {
                 "type_hint": Optional[MessageOrigin],
                 "default": None
@@ -454,6 +465,10 @@ TYPES = {
             },
             "quote": {
                 "type_hint": Optional[TextQuote],
+                "default": None
+            },
+            "reply_to_story": {
+                "type_hint": Optional[Story],
                 "default": None
             },
             "via_bot": {
@@ -641,6 +656,10 @@ TYPES = {
             },
             "proximity_alert_triggered": {
                 "type_hint": Optional[ProximityAlertTriggered],
+                "default": None
+            },
+            "boost_added": {
+                "type_hint": Optional[ChatBoostAdded],
                 "default": None
             },
             "forum_topic_created": {
@@ -907,6 +926,10 @@ TYPES = {
                 "type_hint": Optional[int],
                 "default": None
             },
+            "unrestrict_boost_count": {
+                "type_hint": Optional[int],
+                "default": None
+            },
             "message_auto_delete_time": {
                 "type_hint": Optional[int],
                 "default": None
@@ -933,6 +956,10 @@ TYPES = {
             },
             "can_set_sticker_set": {
                 "type_hint": Optional[Literal[True]],
+                "default": None
+            },
+            "custom_emoji_sticker_set_name": {
+                "type_hint": Optional[str],
                 "default": None
             },
             "linked_chat_id": {
@@ -1142,7 +1169,14 @@ TYPES = {
     Story: {
         "link": "https://core.telegram.org/bots/api#story",
         "has_dese": True,
-        "kwargs": {}
+        "kwargs": {
+            "chat": {
+                "type_hint": Chat
+            },
+            "id": {
+                "type_hint": int
+            }
+        }
     },
     Video: {
         "link": "https://core.telegram.org/bots/api#video",
