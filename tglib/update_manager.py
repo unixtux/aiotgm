@@ -112,20 +112,19 @@ def _func_ok(
 
 def _check_rule(
     manager: str,
-    obj: Any,
+    obj: object,
     checker: Callable[[Any], Any],
     function: Callable[[Any], Any],
     /
 ):
     errors = []
-    obj_name: str = obj.__name__
 
     if not _func_ok(checker):
         errors.append(
             "ERROR 1 • The 'checker' argument must"
             ' be a normal function that takes only'
             ' one parameter, it will be processed as'
-            f' {obj_name}. E.g. -> {examples[manager]}'
+            f' {obj.__name__}. E.g. -> {examples[manager]}'
         )
     if not _func_ok(
         function,
@@ -136,7 +135,7 @@ def _check_rule(
             f'ERROR {n} • The wrapped function must be'
             ' an async def (async generator is not allowed)'
             ' that takes only one argument. E.g. -> async def'
-            f' foo({obj_name.lower()}: {obj_name}): return ...'
+            f' foo({obj.__name__.lower()}: {obj.__name__}): return ...'
         )
     if errors:
         len_err = len(errors)
@@ -155,16 +154,16 @@ class Rule:
         function: Callable[[Any], Any],
         /
     ):
-        self.__checker = checker
-        self.__function = function
+        self._checker = checker
+        self._function = function
 
     @property
     def checker(self) -> Callable[[Any], Any]:
-        return self.__checker
+        return self._checker
 
     @property
     def function(self) -> Callable[[Any], Any]:
-        return self.__function
+        return self._function
 
 
 class NextManager:
@@ -212,24 +211,24 @@ async def _run_coroutine(
 
 class UpdateManager:
     def __init__(self, name: str, obj: Any, /):
-        self.__name = name
-        self.__obj = obj
-        self.__rules = ()
+        self._name = name
+        self._obj = obj
+        self._rules = ()
 
     @property
     def rules(self) -> tuple[Rule]:
-        return self.__rules
+        return self._rules
 
     def __iter__(self):
-        self.__index = 0
-        self.__end = len(self.rules)
+        self._index = 0
+        self._end = len(self.rules)
         return self
 
     def __next__(self):
-        if self.__index == self.__end:
+        if self._index == self._end:
             raise StopIteration
-        self.__index += 1
-        return self.rules[self.__index - 1]
+        self._index += 1
+        return self.rules[self._index - 1]
 
     def add_rule(
         self,
@@ -238,9 +237,9 @@ class UpdateManager:
         /
     ):
         _check_rule(
-            self.__name,
-            self.__obj,
+            self._name,
+            self._obj,
             checker,
             function
         )
-        self.__rules += (Rule(checker, function), )
+        self._rules += (Rule(checker, function),)

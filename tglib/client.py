@@ -48,34 +48,34 @@ class Client(TelegramApi):
     ):
         super().__init__(token, proxy, debug)
 
-        self.__offset = None
+        self._offset = None
 
         self.parse_mode = parse_mode
         self.protect_content = protect_content
 
-        self.__message_manager = UpdateManager(MESSAGE_MANAGER, Message)
-        self.__edited_message_manager = UpdateManager(EDITED_MESSAGE_MANAGER, Message)
-        self.__channel_post_manager = UpdateManager(CHANNEL_POST_MANAGER, Message)
-        self.__edited_channel_post_manager = UpdateManager(EDITED_CHANNEL_POST_MANAGER, Message)
-        self.__message_reaction_manager = UpdateManager(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
-        self.__message_reaction_count_manager = UpdateManager(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
-        self.__inline_query_manager = UpdateManager(INLINE_QUERY_MANAGER, InlineQuery)
-        self.__chosen_inline_result_manager = UpdateManager(CHOSEN_INLINE_RESULT_MANAGER, ChosenInlineResult)
-        self.__callback_query_manager = UpdateManager(CALLBACK_QUERY_MANAGER, CallbackQuery)
-        self.__shipping_query_manager = UpdateManager(SHIPPING_QUERY_MANAGER, ShippingQuery)
-        self.__pre_checkout_query_manager = UpdateManager(PRE_CHECKOUT_QUERY_MANAGER, PreCheckoutQuery)
-        self.__poll_manager = UpdateManager(POLL_MANAGER, Poll)
-        self.__poll_answer_manager = UpdateManager(POLL_ANSWER_MANAGER, PollAnswer)
-        self.__my_chat_member_manager = UpdateManager(MY_CHAT_MEMBER_MANAGER, ChatMemberUpdated)
-        self.__chat_member_manager = UpdateManager(CHAT_MEMBER_MANAGER, ChatMemberUpdated)
-        self.__chat_join_request_manager = UpdateManager(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
-        self.__chat_boost_manager = UpdateManager(CHAT_BOOST_MANAGER, ChatBoostUpdated)
-        self.__removed_chat_boost_manager = UpdateManager(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
+        self._message_manager = UpdateManager(MESSAGE_MANAGER, Message)
+        self._edited_message_manager = UpdateManager(EDITED_MESSAGE_MANAGER, Message)
+        self._channel_post_manager = UpdateManager(CHANNEL_POST_MANAGER, Message)
+        self._edited_channel_post_manager = UpdateManager(EDITED_CHANNEL_POST_MANAGER, Message)
+        self._message_reaction_manager = UpdateManager(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
+        self._message_reaction_count_manager = UpdateManager(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
+        self._inline_query_manager = UpdateManager(INLINE_QUERY_MANAGER, InlineQuery)
+        self._chosen_inline_result_manager = UpdateManager(CHOSEN_INLINE_RESULT_MANAGER, ChosenInlineResult)
+        self._callback_query_manager = UpdateManager(CALLBACK_QUERY_MANAGER, CallbackQuery)
+        self._shipping_query_manager = UpdateManager(SHIPPING_QUERY_MANAGER, ShippingQuery)
+        self._pre_checkout_query_manager = UpdateManager(PRE_CHECKOUT_QUERY_MANAGER, PreCheckoutQuery)
+        self._poll_manager = UpdateManager(POLL_MANAGER, Poll)
+        self._poll_answer_manager = UpdateManager(POLL_ANSWER_MANAGER, PollAnswer)
+        self._my_chat_member_manager = UpdateManager(MY_CHAT_MEMBER_MANAGER, ChatMemberUpdated)
+        self._chat_member_manager = UpdateManager(CHAT_MEMBER_MANAGER, ChatMemberUpdated)
+        self._chat_join_request_manager = UpdateManager(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
+        self._chat_boost_manager = UpdateManager(CHAT_BOOST_MANAGER, ChatBoostUpdated)
+        self._removed_chat_boost_manager = UpdateManager(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
 
 
     @property
     def parse_mode(self) -> Optional[str]:
-        return self.__parse_mode
+        return self._parse_mode
 
     @parse_mode.setter
     def parse_mode(self, val: Optional[str]):
@@ -84,22 +84,22 @@ class Client(TelegramApi):
                 "'parse_mode' must be str or"
                 f" None, got {val.__class__.__name__}."
             )
-        self.__parse_mode = val
+        self._parse_mode = val
 
     @property
     def protect_content(self) -> Optional[bool]:
-        return self.__protect_content
+        return self._protect_content
 
     @protect_content.setter
     def protect_content(self, val: Optional[bool]):
-        self.__protect_content = True if val else None
+        self._protect_content = True if val else None
 
 
     # 18 UpdateManagers
 
     @property
     def message_manager(self) -> UpdateManager:
-        return self.__message_manager
+        return self._message_manager
 
     def manage_message(self, checker: Callable[[Message], Any] = lambda message: True, /):
         def wrap(function: Callable[[Message], Any]):
@@ -108,7 +108,7 @@ class Client(TelegramApi):
 
     @property
     def edited_message_manager(self) -> UpdateManager:
-        return self.__edited_message_manager
+        return self._edited_message_manager
 
     def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: True, /):
         def wrap(function: Callable[[Message], Any]):
@@ -117,7 +117,7 @@ class Client(TelegramApi):
 
     @property
     def channel_post_manager(self) -> UpdateManager:
-        return self.__channel_post_manager
+        return self._channel_post_manager
 
     def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: True, /):
         def wrap(function: Callable[[Message], Any]):
@@ -126,7 +126,7 @@ class Client(TelegramApi):
 
     @property
     def message_reaction_manager(self) -> UpdateManager:
-        return self.__message_reaction_manager
+        return self._message_reaction_manager
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: True, /):
         def wrap(function: Callable[[MessageReactionUpdated], Any]):
@@ -135,7 +135,7 @@ class Client(TelegramApi):
 
     @property
     def message_reaction_count_manager(self) -> UpdateManager:
-        return self.__message_reaction_count_manager
+        return self._message_reaction_count_manager
 
     def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: True, /):
         def wrap(function: Callable[[MessageReactionCountUpdated], Any]):
@@ -144,7 +144,7 @@ class Client(TelegramApi):
 
     @property
     def edited_channel_post_manager(self) -> UpdateManager:
-        return self.__edited_channel_post_manager
+        return self._edited_channel_post_manager
 
     def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: True, /):
         def wrap(function: Callable[[Message], Any]):
@@ -153,7 +153,7 @@ class Client(TelegramApi):
 
     @property
     def inline_query_manager(self) -> UpdateManager:
-        return self.__inline_query_manager
+        return self._inline_query_manager
 
     def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: True, /):
         def wrap(function: Callable[[InlineQuery], Any]):
@@ -162,7 +162,7 @@ class Client(TelegramApi):
 
     @property
     def chosen_inline_result_manager(self) -> UpdateManager:
-        return self.__chosen_inline_result_manager
+        return self._chosen_inline_result_manager
 
     def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: True, /):
         def wrap(function: Callable[[ChosenInlineResult], Any]):
@@ -171,7 +171,7 @@ class Client(TelegramApi):
 
     @property
     def callback_query_manager(self) -> UpdateManager:
-        return self.__callback_query_manager
+        return self._callback_query_manager
 
     def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: True, /):
         def wrap(function: Callable[[CallbackQuery], Any]):
@@ -180,7 +180,7 @@ class Client(TelegramApi):
 
     @property
     def shipping_query_manager(self) -> UpdateManager:
-        return self.__shipping_query_manager
+        return self._shipping_query_manager
 
     def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: True, /):
         def wrap(function: Callable[[ShippingQuery], Any]):
@@ -189,7 +189,7 @@ class Client(TelegramApi):
 
     @property
     def pre_checkout_query_manager(self) -> UpdateManager:
-        return self.__pre_checkout_query_manager
+        return self._pre_checkout_query_manager
 
     def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: True, /):
         def wrap(function: Callable[[PreCheckoutQuery], Any]):
@@ -198,7 +198,7 @@ class Client(TelegramApi):
 
     @property
     def poll_manager(self) -> UpdateManager:
-        return self.__poll_manager
+        return self._poll_manager
 
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: True, /):
         def wrap(function: Callable[[Poll], Any]):
@@ -207,7 +207,7 @@ class Client(TelegramApi):
 
     @property
     def poll_answer_manager(self) -> UpdateManager:
-        return self.__poll_answer_manager
+        return self._poll_answer_manager
 
     def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: True, /):
         def wrap(function: Callable[[PollAnswer], Any]):
@@ -216,7 +216,7 @@ class Client(TelegramApi):
 
     @property
     def my_chat_member_manager(self) -> UpdateManager:
-        return self.__my_chat_member_manager
+        return self._my_chat_member_manager
 
     def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: True, /):
         def wrap(function: Callable[[ChatMemberUpdated], Any]):
@@ -225,7 +225,7 @@ class Client(TelegramApi):
 
     @property
     def chat_member_manager(self) -> UpdateManager:
-        return self.__chat_member_manager
+        return self._chat_member_manager
 
     def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: True, /):
         def wrap(function: Callable[[ChatMemberUpdated], Any]):
@@ -234,7 +234,7 @@ class Client(TelegramApi):
 
     @property
     def chat_join_request_manager(self) -> UpdateManager:
-        return self.__chat_join_request_manager
+        return self._chat_join_request_manager
 
     def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: True, /):
         def wrap(function: Callable[[ChatJoinRequest], Any]):
@@ -243,7 +243,7 @@ class Client(TelegramApi):
 
     @property
     def chat_boost_manager(self) -> UpdateManager:
-        return self.__chat_boost_manager
+        return self._chat_boost_manager
 
     def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: True, /):
         def wrap(function: Callable[[ChatBoostUpdated], Any]):
@@ -252,7 +252,7 @@ class Client(TelegramApi):
 
     @property
     def removed_chat_boost_manager(self) -> UpdateManager:
-        return self.__removed_chat_boost_manager
+        return self._removed_chat_boost_manager
 
     def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: True, /):
         def wrap(function: Callable[[ChatBoostRemoved], Any]):
@@ -267,8 +267,8 @@ class Client(TelegramApi):
         params = {'timeout': timeout}
         while True:
             try:
-                if self.__offset is not None:
-                    params['offset'] = self.__offset
+                if self._offset is not None:
+                    params['offset'] = self._offset
 
                 result = await super().get_updates(
                     params = params,
@@ -289,12 +289,12 @@ class Client(TelegramApi):
                 raise exc from None
             else:
                 if updates:
-                    self.__offset = updates[-1].update_id + 1
+                    self._offset = updates[-1].update_id + 1
                     for update in updates:
-                        asyncio.create_task(self.__process_update(update))
+                        asyncio.create_task(self._process_update(update))
 
 
-    async def __process_update(self, update: Update, /):
+    async def _process_update(self, update: Update, /):
 
         if update.message:
             obj: Message = update.message

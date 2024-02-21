@@ -274,22 +274,22 @@ class TelegramApi:
         if debug:
             logger.setLevel(10)
 
-        self.__token = token
-        self.__session = None
-        self.__headers_and_proxy = {
+        self._token = token
+        self._session = None
+        self._headers_and_proxy = {
             'proxy': proxy,
             'headers': HEADERS
         }
-        logger.debug(self.__headers_and_proxy)
+        logger.debug(self._headers_and_proxy)
 
     @property
     def session(self) -> Optional[ClientSession]:
-        return self.__session
+        return self._session
 
     def _get_session(self) -> ClientSession:
 
         if self.session is None or self.session.closed:
-            self.__session = ClientSession(
+            self._session = ClientSession(
                 base_url = BASE_URL,
                 timeout = CLIENT_TIMEOUT,
                 json_serialize = json.dumps,
@@ -334,9 +334,9 @@ class TelegramApi:
                 data = _prepare_data(params, files)
 
                 async with self.session.post(
-                    url = _format_url(self.__token, method),
+                    url = _format_url(self._token, method),
                     data = data,
-                    **self.__headers_and_proxy
+                    **self._headers_and_proxy
                 ) as response:
 
                     result = await _parse_json(response)
