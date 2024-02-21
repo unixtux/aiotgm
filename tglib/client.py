@@ -275,7 +275,7 @@ class Client(TelegramApi):
                     max_retries = unlimited,
                     keep_session = True
                 )
-                updates: list[Update] = [Update._dese(update) for update in result]
+                updates = [Update._dese(update) for update in result]
 
             except TelegramError as exc:
                 if not re.search(r'bad.*gateway', str(exc), re.IGNORECASE):

@@ -1,5 +1,7 @@
 #!/bin/python3
 
+from __future__ import annotations
+
 __all__ = [
     'Animation',
     'Audio',
@@ -186,6 +188,7 @@ __all__ = [
 
 import os
 from typing import (Any,
+                    Self,
                     Union,
                     Literal,
                     Optional,
@@ -217,7 +220,7 @@ class TelegramType:
     ...
 
 
-def _parse_result(_dese: Callable[[type, Optional[dict]], Optional[TelegramType]]):
+def _parse_result(_dese):
     '''
     Decorator to parse the result of a Telegram object.
     '''
@@ -689,13 +692,13 @@ class InaccessibleMessage(TelegramType):
 
     def __init__(
         self,
-        chat,
-        message_id,
-        date = 0
+        chat: Chat,
+        message_id: int,
+        date: int = 0
     ):
-        self.chat: Chat = chat
-        self.message_id: int = message_id
-        self.date: int = date
+        self.chat = chat
+        self.message_id = message_id
+        self.date = date
 
 
 class Message(TelegramType):
@@ -789,161 +792,161 @@ class Message(TelegramType):
 
     def __init__(
         self,
-        message_id,
-        date,
-        chat,
-        message_thread_id = None,
-        from_user = None,
-        sender_chat = None,
-        sender_boost_count = None,
-        forward_origin = None,
-        is_topic_message = None,
-        is_automatic_forward = None,
-        reply_to_message = None,
-        external_reply = None,
-        quote = None,
-        reply_to_story = None,
-        via_bot = None,
-        edit_date = None,
-        has_protected_content = None,
-        media_group_id = None,
-        author_signature = None,
-        text = None,
-        entities = None,
-        link_preview_options = None,
-        animation = None,
-        audio = None,
-        document = None,
-        photo = None,
-        sticker = None,
-        story = None,
-        video = None,
-        video_note = None,
-        voice = None,
-        caption = None,
-        caption_entities = None,
-        has_media_spoiler = None,
-        contact = None,
-        dice = None,
-        game = None,
-        poll = None,
-        venue = None,
-        location = None,
-        new_chat_members = None,
-        left_chat_member = None,
-        new_chat_title = None,
-        new_chat_photo = None,
-        delete_chat_photo = None,
-        group_chat_created = None,
-        supergroup_chat_created = None,
-        channel_chat_created = None,
-        message_auto_delete_timer_changed = None,
-        migrate_to_chat_id = None,
-        migrate_from_chat_id = None,
-        pinned_message = None,
-        invoice = None,
-        successful_payment = None,
-        users_shared = None,
-        chat_shared = None,
-        connected_website = None,
-        write_access_allowed = None,
-        passport_data = None,
-        proximity_alert_triggered = None,
-        boost_added = None,
-        forum_topic_created = None,
-        forum_topic_edited = None,
-        forum_topic_closed = None,
-        forum_topic_reopened = None,
-        general_forum_topic_hidden = None,
-        general_forum_topic_unhidden = None,
-        giveaway_created = None,
-        giveaway = None,
-        giveaway_winners = None,
-        giveaway_completed = None,
-        video_chat_scheduled = None,
-        video_chat_started = None,
-        video_chat_ended = None,
-        video_chat_participants_invited = None,
-        web_app_data = None,
-        reply_markup = None
+        message_id: int,
+        date: int,
+        chat: Chat,
+        message_thread_id: Optional[int] = None,
+        from_user: Optional[User] = None,
+        sender_chat: Optional[Chat] = None,
+        sender_boost_count: Optional[int] = None,
+        forward_origin: Optional[MessageOrigin] = None,
+        is_topic_message: Optional[Literal[True]] = None,
+        is_automatic_forward: Optional[Literal[True]] = None,
+        reply_to_message: Optional[Message] = None,
+        external_reply: Optional[ExternalReplyInfo] = None,
+        quote: Optional[TextQuote] = None,
+        reply_to_story: Optional[Story] = None,
+        via_bot: Optional[User] = None,
+        edit_date: Optional[int] = None,
+        has_protected_content: Optional[Literal[True]] = None,
+        media_group_id: Optional[str] = None,
+        author_signature: Optional[str] = None,
+        text: str = None,
+        entities: Optional[list[MessageEntity]] = None,
+        link_preview_options: Optional[LinkPreviewOptions] = None,
+        animation: Optional[Animation] = None,
+        audio: Optional[Audio] = None,
+        document: Optional[Document] = None,
+        photo: Optional[list[PhotoSize]] = None,
+        sticker: Optional[Sticker] = None,
+        story: Optional[Story] = None,
+        video: Optional[Video] = None,
+        video_note: Optional[VideoNote] = None,
+        voice: Optional[Voice] = None,
+        caption: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        has_media_spoiler: Optional[Literal[True]] = None,
+        contact: Optional[Contact] = None,
+        dice: Optional[Dice] = None,
+        game: Optional[Game] = None,
+        poll: Optional[Poll] = None,
+        venue: Optional[Venue] = None,
+        location: Optional[Location] = None,
+        new_chat_members: Optional[list[User]] = None,
+        left_chat_member: Optional[User] = None,
+        new_chat_title: Optional[str] = None,
+        new_chat_photo: Optional[list[PhotoSize]] = None,
+        delete_chat_photo: Optional[Literal[True]] = None,
+        group_chat_created: Optional[Literal[True]] = None,
+        supergroup_chat_created: Optional[Literal[True]] = None,
+        channel_chat_created: Optional[Literal[True]] = None,
+        message_auto_delete_timer_changed: Optional[MessageAutoDeleteTimerChanged] = None,
+        migrate_to_chat_id: Optional[int] = None,
+        migrate_from_chat_id: Optional[int] = None,
+        pinned_message: Optional[MaybeInaccessibleMessage] = None,
+        invoice: Optional[Invoice] = None,
+        successful_payment: Optional[SuccessfulPayment] = None,
+        users_shared: Optional[UsersShared] = None,
+        chat_shared: Optional[ChatShared] = None,
+        connected_website: Optional[str] = None,
+        write_access_allowed: Optional[WriteAccessAllowed] = None,
+        passport_data: Optional[PassportData] = None,
+        proximity_alert_triggered: Optional[ProximityAlertTriggered] = None,
+        boost_added: Optional[ChatBoostAdded] = None,
+        forum_topic_created: Optional[ForumTopicCreated] = None,
+        forum_topic_edited: Optional[ForumTopicEdited] = None,
+        forum_topic_closed: Optional[ForumTopicClosed] = None,
+        forum_topic_reopened: Optional[ForumTopicReopened] = None,
+        general_forum_topic_hidden: Optional[GeneralForumTopicHidden] = None,
+        general_forum_topic_unhidden: Optional[GeneralForumTopicUnhidden] = None,
+        giveaway_created: Optional[GiveawayCreated] = None,
+        giveaway: Optional[Giveaway] = None,
+        giveaway_winners: Optional[GiveawayWinners] = None,
+        giveaway_completed: Optional[GiveawayCompleted] = None,
+        video_chat_scheduled: Optional[VideoChatScheduled] = None,
+        video_chat_started: Optional[VideoChatStarted] = None,
+        video_chat_ended: Optional[VideoChatEnded] = None,
+        video_chat_participants_invited: Optional[VideoChatParticipantsInvited] = None,
+        web_app_data: Optional[WebAppData] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None
     ):
-        self.message_id: int = message_id
-        self.date: int = date
-        self.chat: Chat = chat
-        self.message_thread_id: Optional[int] = message_thread_id
-        self.from_user: Optional[User] = from_user
-        self.sender_chat: Optional[Chat] = sender_chat
-        self.sender_boost_count: Optional[int] = sender_boost_count
-        self.forward_origin: Optional[MessageOrigin] = forward_origin
-        self.is_topic_message: Optional[Literal[True]] = is_topic_message
-        self.is_automatic_forward: Optional[Literal[True]] = is_automatic_forward
-        self.reply_to_message: Optional[Message] = reply_to_message
-        self.external_reply: Optional[ExternalReplyInfo] = external_reply
-        self.quote: Optional[TextQuote] = quote
-        self.reply_to_story: Optional[Story] = reply_to_story
-        self.via_bot: Optional[User] = via_bot
-        self.edit_date: Optional[int] = edit_date
-        self.has_protected_content: Optional[Literal[True]] = has_protected_content
-        self.media_group_id: Optional[str] = media_group_id
-        self.author_signature: Optional[str] = author_signature
-        self.text: str = text or str() # If not text, it's str() instead of None
-        self.entities: Optional[list[MessageEntity]] = entities
-        self.link_preview_options: Optional[LinkPreviewOptions] = link_preview_options
-        self.animation: Optional[Animation] = animation
-        self.audio: Optional[Audio] = audio
-        self.document: Optional[Document] = document
-        self.photo: Optional[list[PhotoSize]] = photo
-        self.sticker: Optional[Sticker] = sticker
-        self.story: Optional[Story] = story
-        self.video: Optional[Video] = video
-        self.video_note: Optional[VideoNote] = video_note
-        self.voice: Optional[Voice] = voice
-        self.caption: Optional[str] = caption
-        self.caption_entities: Optional[list[MessageEntity]] = caption_entities
-        self.has_media_spoiler: Optional[Literal[True]] = has_media_spoiler
-        self.contact: Optional[Contact] = contact
-        self.dice: Optional[Dice] = dice
-        self.game: Optional[Game] = game
-        self.poll: Optional[Poll] = poll
-        self.venue: Optional[Venue] = venue
-        self.location: Optional[Location] = location
-        self.new_chat_members: Optional[list[User]] = new_chat_members
-        self.left_chat_member: Optional[User] = left_chat_member
-        self.new_chat_title: Optional[str] = new_chat_title
-        self.new_chat_photo: Optional[list[PhotoSize]] = new_chat_photo
-        self.delete_chat_photo: Optional[Literal[True]] = delete_chat_photo
-        self.group_chat_created: Optional[Literal[True]] = group_chat_created
-        self.supergroup_chat_created: Optional[Literal[True]] = supergroup_chat_created
-        self.channel_chat_created: Optional[Literal[True]] = channel_chat_created
-        self.message_auto_delete_timer_changed: Optional[MessageAutoDeleteTimerChanged] = message_auto_delete_timer_changed
-        self.migrate_to_chat_id: Optional[int] = migrate_to_chat_id
-        self.migrate_from_chat_id: Optional[int] = migrate_from_chat_id
-        self.pinned_message: Optional[MaybeInaccessibleMessage] = pinned_message
-        self.invoice: Optional[Invoice] = invoice
-        self.successful_payment: Optional[SuccessfulPayment] = successful_payment
-        self.users_shared: Optional[UsersShared] = users_shared
-        self.chat_shared: Optional[ChatShared] = chat_shared
-        self.connected_website: Optional[str] = connected_website
-        self.write_access_allowed: Optional[WriteAccessAllowed] = write_access_allowed
-        self.passport_data: Optional[PassportData] = passport_data
-        self.proximity_alert_triggered: Optional[ProximityAlertTriggered] = proximity_alert_triggered
-        self.boost_added: Optional[ChatBoostAdded] = boost_added
-        self.forum_topic_created: Optional[ForumTopicCreated] = forum_topic_created
-        self.forum_topic_edited: Optional[ForumTopicEdited] = forum_topic_edited
-        self.forum_topic_closed: Optional[ForumTopicClosed] = forum_topic_closed
-        self.forum_topic_reopened: Optional[ForumTopicReopened] = forum_topic_reopened
-        self.general_forum_topic_hidden: Optional[GeneralForumTopicHidden] = general_forum_topic_hidden
-        self.general_forum_topic_unhidden: Optional[GeneralForumTopicUnhidden] = general_forum_topic_unhidden
-        self.giveaway_created: Optional[GiveawayCreated] = giveaway_created
-        self.giveaway: Optional[Giveaway] = giveaway
-        self.giveaway_winners: Optional[GiveawayWinners] = giveaway_winners
-        self.giveaway_completed: Optional[GiveawayCompleted] = giveaway_completed
-        self.video_chat_scheduled: Optional[VideoChatScheduled] = video_chat_scheduled
-        self.video_chat_started: Optional[VideoChatStarted] = video_chat_started
-        self.video_chat_ended: Optional[VideoChatEnded] = video_chat_ended
-        self.video_chat_participants_invited: Optional[VideoChatParticipantsInvited] = video_chat_participants_invited
-        self.web_app_data: Optional[WebAppData] = web_app_data
-        self.reply_markup: Optional[InlineKeyboardMarkup] = reply_markup
+        self.message_id = message_id
+        self.date = date
+        self.chat = chat
+        self.message_thread_id = message_thread_id
+        self.from_user = from_user
+        self.sender_chat = sender_chat
+        self.sender_boost_count = sender_boost_count
+        self.forward_origin = forward_origin
+        self.is_topic_message = is_topic_message
+        self.is_automatic_forward = is_automatic_forward
+        self.reply_to_message = reply_to_message
+        self.external_reply = external_reply
+        self.quote = quote
+        self.reply_to_story = reply_to_story
+        self.via_bot = via_bot
+        self.edit_date = edit_date
+        self.has_protected_content = has_protected_content
+        self.media_group_id = media_group_id
+        self.author_signature = author_signature
+        self.text = text or str() # If not text, it's str() instead of None
+        self.entities = entities
+        self.link_preview_options = link_preview_options
+        self.animation = animation
+        self.audio = audio
+        self.document = document
+        self.photo = photo
+        self.sticker = sticker
+        self.story = story
+        self.video = video
+        self.video_note = video_note
+        self.voice = voice
+        self.caption = caption
+        self.caption_entities = caption_entities
+        self.has_media_spoiler = has_media_spoiler
+        self.contact = contact
+        self.dice = dice
+        self.game = game
+        self.poll = poll
+        self.venue = venue
+        self.location = location
+        self.new_chat_members = new_chat_members
+        self.left_chat_member = left_chat_member
+        self.new_chat_title = new_chat_title
+        self.new_chat_photo = new_chat_photo
+        self.delete_chat_photo = delete_chat_photo
+        self.group_chat_created = group_chat_created
+        self.supergroup_chat_created = supergroup_chat_created
+        self.channel_chat_created = channel_chat_created
+        self.message_auto_delete_timer_changed = message_auto_delete_timer_changed
+        self.migrate_to_chat_id = migrate_to_chat_id
+        self.migrate_from_chat_id = migrate_from_chat_id
+        self.pinned_message = pinned_message
+        self.invoice = invoice
+        self.successful_payment = successful_payment
+        self.users_shared = users_shared
+        self.chat_shared = chat_shared
+        self.connected_website = connected_website
+        self.write_access_allowed = write_access_allowed
+        self.passport_data = passport_data
+        self.proximity_alert_triggered = proximity_alert_triggered
+        self.boost_added = boost_added
+        self.forum_topic_created = forum_topic_created
+        self.forum_topic_edited = forum_topic_edited
+        self.forum_topic_closed = forum_topic_closed
+        self.forum_topic_reopened = forum_topic_reopened
+        self.general_forum_topic_hidden = general_forum_topic_hidden
+        self.general_forum_topic_unhidden = general_forum_topic_unhidden
+        self.giveaway_created = giveaway_created
+        self.giveaway = giveaway
+        self.giveaway_winners = giveaway_winners
+        self.giveaway_completed = giveaway_completed
+        self.video_chat_scheduled = video_chat_scheduled
+        self.video_chat_started = video_chat_started
+        self.video_chat_ended = video_chat_ended
+        self.video_chat_participants_invited = video_chat_participants_invited
+        self.web_app_data = web_app_data
+        self.reply_markup = reply_markup
 
 
 MaybeInaccessibleMessage = Union[Message, InaccessibleMessage]
