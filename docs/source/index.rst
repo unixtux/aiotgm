@@ -19,5 +19,5 @@
    types
    next_manager
    telegram_error
-   :maxdepth: 5
+   :maxdepth: 3
    :caption: Contents:

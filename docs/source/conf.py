@@ -6,6 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import sys
+sys.path.insert(0, '..')
+
 project = 'tglib'
 copyright = '2024, unixtux'
 author = 'unixtux'
@@ -19,6 +22,7 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', ]
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+autodoc_typehints = 'description'
 autodoc_typehints_format = 'short'
 
 # -- Options for HTML output -------------------------------------------------

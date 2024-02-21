@@ -1,6 +1,6 @@
-===================
-**Available Types**
-===================
+=================
+*Available Types*
+=================
 
 .. automodule:: tglib.types
    :members:

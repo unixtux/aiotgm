@@ -1,8 +1,8 @@
-==========
-**Client**
-==========
+========
+*Client*
+========
 
-.. autoclass:: tglib::Client
+.. autoclass:: tglib.Client
     :members:
     :undoc-members:
     :no-index:
@@ -25,6 +25,7 @@
         tglib.Client.chat_join_request_manager,
         tglib.Client.chat_boost_manager,
         tglib.Client.removed_chat_boost_manager
+
 
     ==============================
     *Decorators to manage updates*

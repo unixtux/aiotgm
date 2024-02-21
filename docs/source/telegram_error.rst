@@ -1,6 +1,6 @@
-=================
-**TelegramError**
-=================
+===============
+*TelegramError*
+===============
 
 .. autoexception:: tglib.TelegramError
    :members:
