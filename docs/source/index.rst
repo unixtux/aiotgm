@@ -10,9 +10,9 @@
 .. * :ref:`modindex`
 .. * :ref:`search`
 
-===================
-tglib Documentation
-===================
+======================
+Documentation of tglib
+======================
 
 .. toctree::
    client

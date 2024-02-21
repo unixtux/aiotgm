@@ -2,6 +2,6 @@
 Telegram Bot Client
 ===================
 
-.. autoclass:: tglib.client.Client
+.. autoclass:: tglib.Client
    :members:
    :undoc-members:

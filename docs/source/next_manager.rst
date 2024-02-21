@@ -2,6 +2,6 @@
 NextManager
 ===========
 
-.. autoclass:: tglib.update_manager.NextManager
+.. autoclass:: tglib.NextManager
    :members:
    :undoc-members:
