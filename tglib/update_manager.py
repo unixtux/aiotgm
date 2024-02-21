@@ -169,8 +169,8 @@ class Rule:
 
 class NextManager:
     """
-    A new update will be processed by the next manager returning
-    the instance of this class in your decorated functions.
+    A new update will be processed by the next manager
+    returning the instance of this class in your wrapped functions.
     """
 
 

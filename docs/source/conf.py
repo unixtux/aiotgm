@@ -8,7 +8,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../tglib'))
+sys.path.insert(0, os.path.abspath('../../tglib'))
 
 project = 'tglib'
 copyright = '2024, unixtux'

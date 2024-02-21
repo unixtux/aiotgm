@@ -1,2 +1,1 @@
-tglib
 sphinx_rtd_theme

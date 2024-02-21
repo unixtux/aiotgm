@@ -15,35 +15,30 @@
 
 * #### Installation
 ```powershell
-python -m pip install tglib
-```
-
-* #### Update the module
-```powershell
-python -m pip install -U tglib
+$ pip install -U tglib
 ```
 
 #
 
 * #### 18 managers for different [updates](https://core.telegram.org/bots/api#update)
-  * message_manager
-  * edited_message_manager
-  * channel_post_manager
-  * edited_channel_post_manager
-  * message_reaction_manager
-  * message_reaction_count_manager
-  * inline_query_manager
-  * chosen_inline_result_manager
-  * callback_query_manager
-  * shipping_query_manager
-  * pre_checkout_query_manager
-  * poll_manager
-  * poll_answer_manager
-  * my_chat_member_manager
-  * chat_member_manager
-  * chat_join_request_manager
-  * chat_boost_manager
-  * removed_chat_boost_manager
+  * [message_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.message_manager)
+  * [edited_message_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.edited_message_manager)
+  * [channel_post_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.channel_post_manager)
+  * [edited_channel_post_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.edited_channel_post_manager)
+  * [message_reaction_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.message_reaction_manager)
+  * [message_reaction_count_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.message_reaction_count_manager)
+  * [inline_query_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.inline_query_manager)
+  * [chosen_inline_result_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.chosen_inline_result_manager)
+  * [callback_query_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.callback_query_manager)
+  * [shipping_query_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.shipping_query_manager)
+  * [pre_checkout_query_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.pre_checkout_query_manager)
+  * [poll_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.poll_manager)
+  * [poll_answer_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.poll_answer_manager)
+  * [my_chat_member_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.my_chat_member_manager)
+  * [chat_member_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.chat_member_manager)
+  * [chat_join_request_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.chat_join_request_manager)
+  * [chat_boost_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.chat_boost_manager)
+  * [removed_chat_boost_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.client.Client.removed_chat_boost_manager)
 
 #
 
@@ -96,6 +91,8 @@ You require a good **Python knowledge**, some skills with the **asyncio module**
 
 * #### Usage
 ```python
+#!/bin/python3
+
 from tglib import (
     Client,
     NextManager,
@@ -111,12 +108,11 @@ bot = Client('<your_token>')
 # check rules in the same order they were added.
 
 @bot.manage_message(lambda message: message.text == '/start')
-async def start_message(message: Message):
-    user = message.from_user.first_name
+async def foo(message: Message):
     try:
-        await bot.send_message(message.chat.id, f'welcome {user}')
+        await bot.send_message(message.chat.id, 'Welcome!')
     except (TimeoutError, TelegramError):
-        return
+        pass
         # Two errors can be raised in requests:
         # - TimeoutError if a response
         #   is not returned in 5 minutes.
@@ -125,18 +121,18 @@ async def start_message(message: Message):
     else:
         return NextManager()
         # Returning a NextManager instance, you will pass
-        # the update to the following manager of same kind.
+        # the update to the following manager of the same kind.
 
 # You can also add rules with the
 # method 'add_rule' of the managers.
 
-def help_checker(message: Message):
+def checker(message: Message):
     return message.text == '/help'
 
-async def help_function(message: Message):
-    await bot.send_message(message.chat.id, 'Do you need help?')
+async def bar(message: Message):
+    await bot.send_message(message.chat.id, 'Need help?')
 
-bot.message_manager.add_rule(help_checker, help_function)
+bot.message_manager.add_rule(checker, bar)
 
 # Calling the method 'long_polling',
 # the bot starts receiving updates by
