@@ -1,6 +1,6 @@
-===================
-Telegram Bot Client
-===================
+==========
+The Client
+==========
 
 .. autoclass:: tglib.Client
    :members:
