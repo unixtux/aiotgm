@@ -10,14 +10,14 @@
 .. * :ref:`modindex`
 .. * :ref:`search`
 
-======================
-Documentation of tglib
-======================
+=======================
+**tglib Documentation**
+=======================
 
 .. toctree::
    client
    types
    next_manager
    telegram_error
-   :maxdepth: 2
+   :maxdepth: 5
    :caption: Contents:

@@ -1,6 +1,6 @@
-===========
-NextManager
-===========
+===============
+**NextManager**
+===============
 
 .. autoclass:: tglib.NextManager
    :members:

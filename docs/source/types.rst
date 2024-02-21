@@ -1,6 +1,6 @@
-==============
-Telegram Types
-==============
+===================
+**Available Types**
+===================
 
 .. automodule:: tglib.types
    :members:
