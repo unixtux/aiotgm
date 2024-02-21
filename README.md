@@ -2,9 +2,9 @@
 
 #
 
-<h3 align="center">Build your telegram bot client</h3>
+<h3 align="center">Build your Telegram Bot Client</h3>
 
-<h3 align="center">Supported Bot Api version <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
+<h3 align="center">Supported Bot Api <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
 
 #
 
