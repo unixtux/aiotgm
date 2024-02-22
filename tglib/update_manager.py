@@ -1,6 +1,7 @@
 #!/bin/python3
 
 import os
+import re
 import inspect
 from typing import (Any,
                     Union,
@@ -130,12 +131,13 @@ def _check_rule(
         function,
         must_be_coro = True
     ):
+        obj_lower = re.sub(r'_manager$', '', manager)
         n = len(errors) + 1
         errors.append(
             f'ERROR {n} • The wrapped function must be'
             ' an async def (async generator is not allowed)'
             ' that takes only one argument. E.g. -> async def'
-            f' foo({obj.__name__.lower()}: {obj.__name__}): return ...'
+            f' foo({obj_lower}: {obj.__name__}): return ...'
         )
     if errors:
         len_err = len(errors)
