@@ -350,8 +350,8 @@ class TelegramApi:
 
             except (ClientError, TimeoutError) as exc:
                 logger.info(
-                    f'{exc.__class__.__name__} occurred in request'
-                    f' {method!r}; current try: {current_try}/{max_retries}.'
+                    f'{exc.__class__.__name__} in {method!r},'
+                    f' current try: {current_try}/{max_retries}.'
                 )
                 await asyncio.sleep(3 - (time.time() - start_time))
 
