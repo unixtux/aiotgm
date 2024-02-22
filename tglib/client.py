@@ -112,7 +112,7 @@ class Client(TelegramApi):
     def message_manager(self) -> UpdateManager:
         return self._message_manager
 
-    def manage_message(self, checker: Callable[[Message], Any] = lambda message: True, /):
+    def manage_message(self, checker: Callable[[Message], Any] = lambda message: ..., /):
         '''
         Call this decorator to manage a new message :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -135,7 +135,7 @@ class Client(TelegramApi):
     def edited_message_manager(self) -> UpdateManager:
         return self._edited_message_manager
 
-    def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: True, /):
+    def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: ..., /):
         '''
         Call this decorator to manage a new edited message :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -158,7 +158,7 @@ class Client(TelegramApi):
     def channel_post_manager(self) -> UpdateManager:
         return self._channel_post_manager
 
-    def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: True, /):
+    def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: ..., /):
         '''
         Call this decorator to manage a new channel post :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -181,7 +181,7 @@ class Client(TelegramApi):
     def edited_channel_post_manager(self) -> UpdateManager:
         return self._edited_channel_post_manager
 
-    def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: True, /):
+    def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: ..., /):
         '''
         Call this decorator to manage a new edited channel post :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -204,7 +204,7 @@ class Client(TelegramApi):
     def message_reaction_manager(self) -> UpdateManager:
         return self._message_reaction_manager
 
-    def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: True, /):
+    def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
         '''
         Call this decorator to manage a new message reaction :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -227,7 +227,7 @@ class Client(TelegramApi):
     def message_reaction_count_manager(self) -> UpdateManager:
         return self._message_reaction_count_manager
 
-    def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: True, /):
+    def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: ..., /):
         '''
         Call this decorator to manage a new message reaction count :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -250,7 +250,7 @@ class Client(TelegramApi):
     def inline_query_manager(self) -> UpdateManager:
         return self._inline_query_manager
 
-    def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: True, /):
+    def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: ..., /):
         '''
         Call this decorator to manage a new inline query :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -273,7 +273,7 @@ class Client(TelegramApi):
     def chosen_inline_result_manager(self) -> UpdateManager:
         return self._chosen_inline_result_manager
 
-    def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: True, /):
+    def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: ..., /):
         '''
         Call this decorator to manage a new chosen inline result :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -296,7 +296,7 @@ class Client(TelegramApi):
     def callback_query_manager(self) -> UpdateManager:
         return self._callback_query_manager
 
-    def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: True, /):
+    def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
         '''
         Call this decorator to manage a new callback query :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -319,7 +319,7 @@ class Client(TelegramApi):
     def shipping_query_manager(self) -> UpdateManager:
         return self._shipping_query_manager
 
-    def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: True, /):
+    def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: ..., /):
         '''
         Call this decorator to manage a new shipping query :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -342,7 +342,7 @@ class Client(TelegramApi):
     def pre_checkout_query_manager(self) -> UpdateManager:
         return self._pre_checkout_query_manager
 
-    def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: True, /):
+    def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
         '''
         Call this decorator to manage a new pre checkout query :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -365,7 +365,7 @@ class Client(TelegramApi):
     def poll_manager(self) -> UpdateManager:
         return self._poll_manager
 
-    def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: True, /):
+    def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
         '''
         Call this decorator to manage a new poll :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -388,7 +388,7 @@ class Client(TelegramApi):
     def poll_answer_manager(self) -> UpdateManager:
         return self._poll_answer_manager
 
-    def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: True, /):
+    def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
         '''
         Call this decorator to manage a new poll answer :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -411,7 +411,7 @@ class Client(TelegramApi):
     def my_chat_member_manager(self) -> UpdateManager:
         return self._my_chat_member_manager
 
-    def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: True, /):
+    def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
         '''
         Call this decorator to manage a new my chat member :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -434,7 +434,7 @@ class Client(TelegramApi):
     def chat_member_manager(self) -> UpdateManager:
         return self._chat_member_manager
 
-    def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: True, /):
+    def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
         '''
         Call this decorator to manage a new chat memeber :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -457,7 +457,7 @@ class Client(TelegramApi):
     def chat_join_request_manager(self) -> UpdateManager:
         return self._chat_join_request_manager
 
-    def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: True, /):
+    def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
         '''
         Call this decorator to manage a new chat join request :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -480,7 +480,7 @@ class Client(TelegramApi):
     def chat_boost_manager(self) -> UpdateManager:
         return self._chat_boost_manager
 
-    def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: True, /):
+    def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
         '''
         Call this decorator to manage a new chat boost :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -503,7 +503,7 @@ class Client(TelegramApi):
     def removed_chat_boost_manager(self) -> UpdateManager:
         return self._removed_chat_boost_manager
 
-    def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: True, /):
+    def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
         '''
         Call this decorator to manage a new removed chat boost :class:`~tglib.types.Update`.
         You need to wrap an async function that takes only one argument, it
@@ -562,181 +562,127 @@ class Client(TelegramApi):
         if update.message:
             obj: Message = update.message
             for rule in self.message_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.edited_message:
             obj: Message = update.edited_message
             for rule in self.edited_message_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.channel_post:
             obj: Message = update.channel_post
             for rule in self.channel_post_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.edited_channel_post:
             obj: Message = update.edited_channel_post
             for rule in self.edited_channel_post_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.message_reaction:
             obj: MessageReactionUpdated = update.message_reaction
             for rule in self.message_reaction_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                        return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.message_reaction_count:
             obj: MessageReactionCountUpdated = update.message_reaction_count
             for rule in self.message_reaction_count_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                        return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.inline_query:
             obj: InlineQuery = update.inline_query
             for rule in self.inline_query_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.chosen_inline_result:
             obj: ChosenInlineResult = update.chosen_inline_result
             for rule in self.chosen_inline_result_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.callback_query:
             obj: CallbackQuery = update.callback_query
             for rule in self.callback_query_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.shipping_query:
             obj: ShippingQuery = update.shipping_query
             for rule in self.shipping_query_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.pre_checkout_query:
             obj: PreCheckoutQuery = update.pre_checkout_query
             for rule in self.pre_checkout_query_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.poll:
             obj: Poll = update.poll
             for rule in self.poll_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.poll_answer:
             obj: PollAnswer = update.poll_answer
             for rule in self.poll_answer_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.my_chat_member:
             obj: ChatMemberUpdated = update.my_chat_member
             for rule in self.my_chat_member_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.chat_member:
             obj: ChatMemberUpdated = update.chat_member
             for rule in self.chat_member_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.chat_join_request:
             obj: ChatJoinRequest = update.chat_join_request
             for rule in self.chat_join_request_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                       return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.chat_boost:
             obj: ChatBoostUpdated = update.chat_boost
             for rule in self.chat_boost_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                        return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
         elif update.removed_chat_boost:
             obj: ChatBoostRemoved = update.removed_chat_boost
             for rule in self.removed_chat_boost_manager:
-                try:
-                    result = await _run_coroutine(rule, obj)
-                    if not isinstance(result, NextManager):
-                        return
-                except:
+                result = await _run_coroutine(rule, obj)
+                if not isinstance(result, NextManager):
                     return
 
     # Available methods

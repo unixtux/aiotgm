@@ -189,7 +189,7 @@ async def _run_coroutine(
             f' function {rule.checker.__name__!r} in'
             f' file {filename!r} at line {lineno}.'
         )
-        raise exc
+        return
 
     if not check:
         return NextManager()
@@ -204,7 +204,7 @@ async def _run_coroutine(
             f' function {rule.function.__name__!r} in'
             f' file {filename!r} at line {lineno}.'
         )
-        raise exc
+        return
 
 
 class UpdateManager:
