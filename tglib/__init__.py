@@ -1,6 +1,6 @@
 #!/bin/python3
 
-__version__ = '1.2.7'
+__version__ = '1.2.8'
 VERSION = __version__
 
 __all__ = [

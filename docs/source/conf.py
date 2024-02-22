@@ -6,13 +6,15 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+'''
 import sys
 sys.path.insert(0, '..')
+#'''
 
 project = 'tglib'
 copyright = '2024, unixtux'
 author = 'unixtux'
-release = '1.2.7'
+release = '1.2.8'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
