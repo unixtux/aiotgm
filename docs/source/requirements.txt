@@ -1,1 +1,2 @@
 tglib==1.2.8
+sphinx_rtd_theme
