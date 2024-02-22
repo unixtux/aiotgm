@@ -36,7 +36,21 @@ logger = get_logger('TelegramApi')
 
 
 class Client(TelegramApi):
+    '''
+    :param token: The token obtained via `@Botfather <https://t.me/botfather>`_.
+    :param parse_mode: TODO
+    :param protect_content: TODO
+    :param proxy: TODO
+    :param debug: TODO
 
+    .. code-block:: python3
+
+        from tglib import Client
+        bot = Client('<your_token>')
+
+        # For all the code block examples, we
+        # will call the instance of this class "bot".
+    '''
     def __init__(
         self,
         token: str,
@@ -44,7 +58,7 @@ class Client(TelegramApi):
         parse_mode: Optional[str] = None,
         protect_content: Optional[bool] = None,
         proxy: Optional[str] = None,
-        debug: bool = False
+        debug: Optional[bool] = None
     ):
         super().__init__(token, proxy, debug)
 
@@ -102,6 +116,20 @@ class Client(TelegramApi):
         return self._message_manager
 
     def manage_message(self, checker: Callable[[Message], Any] = lambda message: True, /):
+        '''
+        Call this decorator to manage a new message :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.Message`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[Message], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_message(lambda message: message.chat.id == xyz)
+            async def foo(message: Message):
+                ...
+        '''
         def wrap(function: Callable[[Message], Any]):
             self.message_manager.add_rule(checker, function)
         return wrap
@@ -111,6 +139,20 @@ class Client(TelegramApi):
         return self._edited_message_manager
 
     def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: True, /):
+        '''
+        Call this decorator to manage a new edited message :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.Message`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[Message], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_edited_message(lambda edited_message: edited_message.chat.id == xyz)
+            async def foo(edited_message: Message):
+                ...
+        '''
         def wrap(function: Callable[[Message], Any]):
             self.edited_message_manager.add_rule(checker, function)
         return wrap
@@ -120,8 +162,45 @@ class Client(TelegramApi):
         return self._channel_post_manager
 
     def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: True, /):
+        '''
+        Call this decorator to manage a new channel post :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.Message`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[Message], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_channel_post(lambda channel_post: channel_post.chat.id == xyz)
+            async def foo(channel_post: Message):
+                ...
+        '''
         def wrap(function: Callable[[Message], Any]):
             self.channel_post_manager.add_rule(checker, function)
+        return wrap
+
+    @property
+    def edited_channel_post_manager(self) -> UpdateManager:
+        return self._edited_channel_post_manager
+
+    def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: True, /):
+        '''
+        Call this decorator to manage a new edited channel post :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.Message`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[Message], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_edited_channel_post(lambda edited_channel_post: edited_channel_post.chat.id == xyz)
+            async def foo(edited_channel_post: Message):
+                ...
+        '''
+        def wrap(function: Callable[[Message], Any]):
+            self.edited_channel_post_manager.add_rule(checker, function)
         return wrap
 
     @property
@@ -129,6 +208,20 @@ class Client(TelegramApi):
         return self._message_reaction_manager
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: True, /):
+        '''
+        Call this decorator to manage a new message reaction :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.MessageReactionUpdated`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[MessageReactionUpdated], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_message_reaction(lambda message_reaction: message_reaction.chat.id == xyz)
+            async def foo(message_reaction: MessageReactionUpdated):
+                ...
+        '''
         def wrap(function: Callable[[MessageReactionUpdated], Any]):
             self.message_reaction_manager.add_rule(checker, function)
         return wrap
@@ -138,17 +231,22 @@ class Client(TelegramApi):
         return self._message_reaction_count_manager
 
     def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: True, /):
+        '''
+        Call this decorator to manage a new message reaction count :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.MessageReactionCountUpdated`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[MessageReactionCountUpdated], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_message_reaction_count(lambda message_reaction_count: message_reaction_count.chat.id == xyz)
+            async def foo(message_reaction_count: MessageReactionCountUpdated):
+                ...
+        '''
         def wrap(function: Callable[[MessageReactionCountUpdated], Any]):
             self.message_reaction_count_manager.add_rule(checker, function)
-        return wrap
-
-    @property
-    def edited_channel_post_manager(self) -> UpdateManager:
-        return self._edited_channel_post_manager
-
-    def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: True, /):
-        def wrap(function: Callable[[Message], Any]):
-            self.edited_channel_post_manager.add_rule(checker, function)
         return wrap
 
     @property
@@ -156,6 +254,20 @@ class Client(TelegramApi):
         return self._inline_query_manager
 
     def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: True, /):
+        '''
+        Call this decorator to manage a new inline query :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.InlineQuery`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[InlineQuery], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_inline_query(lambda inline_query: inline_query.from_user.id == xyz)
+            async def foo(inline_query: InlineQuery):
+                ...
+        '''
         def wrap(function: Callable[[InlineQuery], Any]):
             self.inline_query_manager.add_rule(checker, function)
         return wrap
@@ -165,6 +277,20 @@ class Client(TelegramApi):
         return self._chosen_inline_result_manager
 
     def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: True, /):
+        '''
+        Call this decorator to manage a new chosen inline result :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.ChosenInlineResult`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[ChosenInlineResult], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_chosen_inline_result(lambda chosen_inline_result: chosen_inline_result.from_user.id == xyz)
+            async def foo(chosen_inline_result: ChosenInlineResult):
+                ...
+        '''
         def wrap(function: Callable[[ChosenInlineResult], Any]):
             self.chosen_inline_result_manager.add_rule(checker, function)
         return wrap
@@ -174,6 +300,20 @@ class Client(TelegramApi):
         return self._callback_query_manager
 
     def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: True, /):
+        '''
+        Call this decorator to manage a new callback query :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.CallbackQuery`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[CallbackQuery], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_callback_query(lambda callback_query: callback_query.from_user.id == xyz)
+            async def foo(callback_query: CallbackQuery):
+                ...
+        '''
         def wrap(function: Callable[[CallbackQuery], Any]):
             self.callback_query_manager.add_rule(checker, function)
         return wrap
@@ -183,6 +323,20 @@ class Client(TelegramApi):
         return self._shipping_query_manager
 
     def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: True, /):
+        '''
+        Call this decorator to manage a new shipping query :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.ShippingQuery`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[ShippingQuery], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_shipping_query(lambda shipping_query: shipping_query.from_user.id == xyz)
+            async def foo(shipping_query: ShippingQuery):
+                ...
+        '''
         def wrap(function: Callable[[ShippingQuery], Any]):
             self.shipping_query_manager.add_rule(checker, function)
         return wrap
@@ -192,6 +346,20 @@ class Client(TelegramApi):
         return self._pre_checkout_query_manager
 
     def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: True, /):
+        '''
+        Call this decorator to manage a new pre checkout query :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.PreCheckoutQuery`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[PreCheckoutQuery], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_pre_checkout_query(lambda pre_checkout_query: pre_checkout_query.from_user.id == xyz)
+            async def foo(pre_checkout_query: PreCheckoutQuery):
+                ...
+        '''
         def wrap(function: Callable[[PreCheckoutQuery], Any]):
             self.pre_checkout_query_manager.add_rule(checker, function)
         return wrap
@@ -201,6 +369,20 @@ class Client(TelegramApi):
         return self._poll_manager
 
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: True, /):
+        '''
+        Call this decorator to manage a new poll :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.Poll`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[Poll], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_poll(lambda poll: poll.id == xyz)
+            async def foo(poll: Poll):
+                ...
+        '''
         def wrap(function: Callable[[Poll], Any]):
             self.poll_manager.add_rule(checker, function)
         return wrap
@@ -210,6 +392,20 @@ class Client(TelegramApi):
         return self._poll_answer_manager
 
     def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: True, /):
+        '''
+        Call this decorator to manage a new poll answer :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.PollAnswer`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[PollAnswer], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_poll_answer(lambda poll_answer: poll_answer.poll_id == xyz)
+            async def foo(poll_answer: PollAnswer):
+                ...
+        '''
         def wrap(function: Callable[[PollAnswer], Any]):
             self.poll_answer_manager.add_rule(checker, function)
         return wrap
@@ -219,6 +415,20 @@ class Client(TelegramApi):
         return self._my_chat_member_manager
 
     def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: True, /):
+        '''
+        Call this decorator to manage a new my chat member :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.ChatMemberUpdated`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[ChatMemberUpdated], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_my_chat_member(lambda my_chat_member: my_chat_member.chat.id == xyz)
+            async def foo(my_chat_member: ChatMemberUpdated):
+                ...
+        '''
         def wrap(function: Callable[[ChatMemberUpdated], Any]):
             self.my_chat_member_manager.add_rule(checker, function)
         return wrap
@@ -228,6 +438,20 @@ class Client(TelegramApi):
         return self._chat_member_manager
 
     def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: True, /):
+        '''
+        Call this decorator to manage a new chat memeber :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.ChatMemberUpdated`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[ChatMemberUpdated], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_chat_member(lambda chat_member: chat_member.chat.id == xyz)
+            async def foo(chat_member: ChatMemberUpdated):
+                ...
+        '''
         def wrap(function: Callable[[ChatMemberUpdated], Any]):
             self.chat_member_manager.add_rule(checker, function)
         return wrap
@@ -237,6 +461,20 @@ class Client(TelegramApi):
         return self._chat_join_request_manager
 
     def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: True, /):
+        '''
+        Call this decorator to manage a new chat join request :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.ChatJoinRequest`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[ChatJoinRequest], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_chat_join_request(lambda chat_join_request: chat_join_request.chat.id == xyz)
+            async def foo(chat_join_request: ChatJoinRequest):
+                ...
+        '''
         def wrap(function: Callable[[ChatJoinRequest], Any]):
             self.chat_join_request_manager.add_rule(checker, function)
         return wrap
@@ -246,6 +484,20 @@ class Client(TelegramApi):
         return self._chat_boost_manager
 
     def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: True, /):
+        '''
+        Call this decorator to manage a new chat boost :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.ChatBoostUpdated`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[ChatBoostUpdated], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_chat_boost(lambda chat_boost: chat_boost.chat.id == xyz)
+            async def foo(chat_boost: ChatBoostUpdated):
+                ...
+        '''
         def wrap(function: Callable[[ChatBoostUpdated], Any]):
             self.chat_boost_manager.add_rule(checker, function)
         return wrap
@@ -255,6 +507,20 @@ class Client(TelegramApi):
         return self._removed_chat_boost_manager
 
     def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: True, /):
+        '''
+        Call this decorator to manage a new removed chat boost :class:`~tglib.types.Update`.
+        You need to wrap an async function that takes only one argument, it
+        will be processed as :class:`~tglib.types.ChatBoostRemoved`.
+
+        :param checker: Pass a function to filter the new update.
+        :type checker: Callable[[ChatBoostRemoved], Any]
+
+        .. code-block:: python3
+
+            @bot.manage_removed_chat_boost(lambda removed_chat_boost: removed_chat_boost.chat.id == xyz)
+            async def foo(removed_chat_boost: ChatBoostRemoved):
+                ...
+        '''
         def wrap(function: Callable[[ChatBoostRemoved], Any]):
             self.removed_chat_boost_manager.add_rule(checker, function)
         return wrap
