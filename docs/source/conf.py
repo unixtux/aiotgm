@@ -22,7 +22,7 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', ]
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-autodoc_typehints = 'description'
+autodoc_typehints = 'description' # 'none'
 autodoc_typehints_format = 'short'
 
 # -- Options for HTML output -------------------------------------------------

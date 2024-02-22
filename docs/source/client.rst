@@ -7,6 +7,23 @@
     :undoc-members:
     :no-index:
         tglib.Client.manage_message,
+        tglib.Client.manage_edited_message,
+        tglib.Client.manage_channel_post,
+        tglib.Client.manage_edited_channel_post,
+        tglib.Client.manage_message_reaction,
+        tglib.Client.manage_message_reaction_count,
+        tglib.Client.manage_inline_query,
+        tglib.Client.manage_chosen_inline_result,
+        tglib.Client.manage_callback_query,
+        tglib.Client.manage_shipping_query,
+        tglib.Client.manage_pre_checkout_query,
+        tglib.Client.manage_poll,
+        tglib.Client.manage_poll_answer,
+        tglib.Client.manage_my_chat_member,
+        tglib.Client.manage_chat_member,
+        tglib.Client.manage_chat_join_request,
+        tglib.Client.manage_chat_boost,
+        tglib.Client.manage_removed_chat_boost,
         tglib.Client.message_manager,
         tglib.Client.edited_message_manager,
         tglib.Client.channel_post_manager,
@@ -26,15 +43,48 @@
         tglib.Client.chat_boost_manager,
         tglib.Client.removed_chat_boost_manager
 
+    *Decorators*
+    ------------
 
-    ==============================
-    *Decorators to manage updates*
-    ==============================
-    .. autodecorator:: tglib::Client.manage_message
+    .. autodecorator:: tglib.Client::manage_message(checker=lambda message: True, /)
 
-    =================
-    *Update Managers*
-    =================
+    .. autodecorator:: tglib.Client::manage_edited_message(checker=lambda edited_message: True, /)
+
+    .. autodecorator:: tglib.Client::manage_channel_post(checker=lambda channel_post: True, /)
+
+    .. autodecorator:: tglib.Client::manage_edited_channel_post(checker=lambda edited_channel_post: True, /)
+
+    .. autodecorator:: tglib.Client::manage_message_reaction(checker=lambda message_reaction: True, /)
+
+    .. autodecorator:: tglib.Client::manage_message_reaction_count(checker=lambda message_reaction_count: True, /)
+
+    .. autodecorator:: tglib.Client::manage_inline_query(checker=lambda inline_query: True, /)
+
+    .. autodecorator:: tglib.Client::manage_chosen_inline_result(checker=lambda chosen_inline_result: True, /)
+
+    .. autodecorator:: tglib.Client::manage_callback_query(checker=lambda callback_query: True, /)
+
+    .. autodecorator:: tglib.Client::manage_shipping_query(checker=lambda shipping_query: True, /)
+
+    .. autodecorator:: tglib.Client::manage_pre_checkout_query(checker=lambda pre_checkout_query: True, /)
+
+    .. autodecorator:: tglib.Client::manage_poll(checker=lambda poll: True, /)
+
+    .. autodecorator:: tglib.Client::manage_poll_answer(checker=lambda poll_answer: True, /)
+
+    .. autodecorator:: tglib.Client::manage_my_chat_member(checker=lambda my_chat_member: True, /)
+
+    .. autodecorator:: tglib.Client::manage_chat_member(checker=lambda chat_member: True, /)
+
+    .. autodecorator:: tglib.Client::manage_chat_join_request(checker=lambda chat_join_request: True, /)
+
+    .. autodecorator:: tglib.Client::manage_chat_boost(checker=lambda chat_boost: True, /)
+
+    .. autodecorator:: tglib.Client::manage_removed_chat_boost(checker=lambda removed_chat_boost: True, /)
+
+    *UpdateManagers*
+    ----------------
+
     .. autoproperty:: tglib::Client.message_manager
     .. autoproperty:: tglib::Client.edited_message_manager
     .. autoproperty:: tglib::Client.channel_post_manager
@@ -54,6 +104,5 @@
     .. autoproperty:: tglib::Client.chat_boost_manager
     .. autoproperty:: tglib::Client.removed_chat_boost_manager
 
-    ===================
     *Available methods*
-    ===================
+    -------------------
