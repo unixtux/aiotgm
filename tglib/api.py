@@ -261,7 +261,7 @@ class TelegramApi:
         self,
         token: str,
         proxy: Optional[str] = None,
-        debug: bool = False
+        debug: Optional[bool] = None
     ):
         if not isinstance(token, str):
             raise TypeError(
