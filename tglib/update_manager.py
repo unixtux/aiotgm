@@ -55,9 +55,9 @@ REMOVED_CHAT_BOOST_MANAGER = 'removed_chat_boost_manager'
 
 examples = {
     MESSAGE_MANAGER : "lambda message: message.chat.id == xyz",
-    EDITED_MESSAGE_MANAGER : "lambda message: message.chat.id == xyz",
-    CHANNEL_POST_MANAGER : "lambda message: message.chat.id == xyz",
-    EDITED_CHANNEL_POST_MANAGER : "lambda message: message.chat.id == xyz",
+    EDITED_MESSAGE_MANAGER : "lambda edited_message: edited_message.chat.id == xyz",
+    CHANNEL_POST_MANAGER : "lambda channel_post: channel_post.chat.id == xyz",
+    EDITED_CHANNEL_POST_MANAGER : "lambda edited_channel_post: edited_channel_post.chat.id == xyz",
     MESSAGE_REACTION_MANAGER: "lambda message_reaction: message_reaction.chat.id == xyz",
     MESSAGE_REACTION_COUNT_MANAGER: "lambda message_reaction_count: message_reaction_count.chat.id == xyz",
     INLINE_QUERY_MANAGER : "lambda inline_query: inline_query.from_user.id == xyz",
