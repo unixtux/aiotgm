@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__all__ = [
+__all__ = (
     'Animation',
     'Audio',
     'BotCommand',
@@ -183,13 +183,11 @@ __all__ = [
     'Voice',
     'WebAppData',
     'WebAppInfo',
-    'WriteAccessAllowed'
-]
+    'WriteAccessAllowed',
+)
 
 import os
-from typing import (Any,
-                    Self,
-                    Union,
+from typing import (Union,
                     Literal,
                     Optional,
                     Callable)
@@ -220,11 +218,11 @@ class TelegramType:
     ...
 
 
-def _parse_result(_dese):
+def _parse_result(_dese: Callable[[type, dict], TelegramType]):
     '''
     Decorator to parse the result of a Telegram object.
     '''
-    def wrap(cls: type, res: Optional[dict], /, *, skip_check: bool = False):
+    def wrap(cls: type, res: Optional[dict], *, skip_check: bool = False):
         '''
         Method to deserialize a Telegram object.
         '''

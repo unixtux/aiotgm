@@ -1,7 +1,6 @@
 #!/bin/python3
 
 import os
-import re
 import inspect
 from typing import (Any,
                     Union,
@@ -10,7 +9,7 @@ from typing import (Any,
 from .logger import get_logger
 logger = get_logger('TelegramApi')
 
-__all__ = [
+__all__ = (
     '_run_coroutine',
     'UpdateManager',
     'NextManager',
@@ -32,8 +31,8 @@ __all__ = [
     'CHAT_MEMBER_MANAGER',
     'CHAT_JOIN_REQUEST_MANAGER',
     'CHAT_BOOST_MANAGER',
-    'REMOVED_CHAT_BOOST_MANAGER'
-]
+    'REMOVED_CHAT_BOOST_MANAGER',
+)
 
 MESSAGE_MANAGER = 'message_manager'
 EDITED_MESSAGE_MANAGER = 'edited_message_manager'
@@ -54,31 +53,30 @@ CHAT_JOIN_REQUEST_MANAGER = 'chat_join_request_manager'
 CHAT_BOOST_MANAGER = 'chat_boost_manager'
 REMOVED_CHAT_BOOST_MANAGER = 'removed_chat_boost_manager'
 
-examples = {
-    MESSAGE_MANAGER : "lambda message: message.chat.id == xyz",
-    EDITED_MESSAGE_MANAGER : "lambda edited_message: edited_message.chat.id == xyz",
-    CHANNEL_POST_MANAGER : "lambda channel_post: channel_post.chat.id == xyz",
-    EDITED_CHANNEL_POST_MANAGER : "lambda edited_channel_post: edited_channel_post.chat.id == xyz",
-    MESSAGE_REACTION_MANAGER: "lambda message_reaction: message_reaction.chat.id == xyz",
-    MESSAGE_REACTION_COUNT_MANAGER: "lambda message_reaction_count: message_reaction_count.chat.id == xyz",
-    INLINE_QUERY_MANAGER : "lambda inline_query: inline_query.from_user.id == xyz",
-    CHOSEN_INLINE_RESULT_MANAGER : "lambda chosen_inline_result: chosen_inline_result.from_user.id == xyz",
-    CALLBACK_QUERY_MANAGER : "lambda callback_query: callback_query.from_user.id == xyz",
-    SHIPPING_QUERY_MANAGER : "lambda shipping_query: shipping_query.from_user.id == xyz",
-    PRE_CHECKOUT_QUERY_MANAGER : "lambda pre_checkout_query: pre_checkout_query.from_user.id == xyz",
-    POLL_MANAGER : "lambda poll: poll.id == xyz",
-    POLL_ANSWER_MANAGER : "lambda poll_answer: poll_answer.poll_id == xyz",
-    MY_CHAT_MEMBER_MANAGER : "lambda my_chat_member: my_chat_member.chat.id == xyz",
-    CHAT_MEMBER_MANAGER : "lambda chat_member: chat_member.chat.id == xyz",
-    CHAT_JOIN_REQUEST_MANAGER : "lambda chat_join_request: chat_join_request.chat.id == xyz",
-    CHAT_BOOST_MANAGER: "lambda chat_boost: chat_boost.chat.id == xyz",
-    REMOVED_CHAT_BOOST_MANAGER: "lambda removed_chat_boost: removed_chat_boost.chat.id == xyz"
+EXAMPLES = {
+    MESSAGE_MANAGER : ("message", "lambda message: message.chat.id == xyz"),
+    EDITED_MESSAGE_MANAGER : ("edited_message", "lambda edited_message: edited_message.chat.id == xyz"),
+    CHANNEL_POST_MANAGER : ("channel_post", "lambda channel_post: channel_post.chat.id == xyz"),
+    EDITED_CHANNEL_POST_MANAGER : ("edited_channel_post", "lambda edited_channel_post: edited_channel_post.chat.id == xyz"),
+    MESSAGE_REACTION_MANAGER: ("message_reaction", "lambda message_reaction: message_reaction.chat.id == xyz"),
+    MESSAGE_REACTION_COUNT_MANAGER: ("message_reaction_count", "lambda message_reaction_count: message_reaction_count.chat.id == xyz"),
+    INLINE_QUERY_MANAGER : ("inline_query", "lambda inline_query: inline_query.from_user.id == xyz"),
+    CHOSEN_INLINE_RESULT_MANAGER : ("chosen_inline_result", "lambda chosen_inline_result: chosen_inline_result.from_user.id == xyz"),
+    CALLBACK_QUERY_MANAGER : ("callback_query", "lambda callback_query: callback_query.from_user.id == xyz"),
+    SHIPPING_QUERY_MANAGER : ("shipping_query", "lambda shipping_query: shipping_query.from_user.id == xyz"),
+    PRE_CHECKOUT_QUERY_MANAGER : ("pre_checkout_query", "lambda pre_checkout_query: pre_checkout_query.from_user.id == xyz"),
+    POLL_MANAGER : ("poll", "lambda poll: poll.id == xyz"),
+    POLL_ANSWER_MANAGER : ("poll_answer", "lambda poll_answer: poll_answer.poll_id == xyz"),
+    MY_CHAT_MEMBER_MANAGER : ("my_chat_member", "lambda my_chat_member: my_chat_member.chat.id == xyz"),
+    CHAT_MEMBER_MANAGER : ("chat_member", "lambda chat_member: chat_member.chat.id == xyz"),
+    CHAT_JOIN_REQUEST_MANAGER : ("chat_join_request", "lambda chat_join_request: chat_join_request.chat.id == xyz"),
+    CHAT_BOOST_MANAGER: ("chat_boost", "lambda chat_boost: chat_boost.chat.id == xyz"),
+    REMOVED_CHAT_BOOST_MANAGER: ("removed_chat_boost", "lambda removed_chat_boost: removed_chat_boost.chat.id == xyz")
 }
 
 
 def _func_ok(
     func: Callable,
-    /,
     *,
     must_be_coro: bool = False
 ) -> bool:
@@ -125,19 +123,18 @@ def _check_rule(
             "ERROR 1 • The 'checker' argument must"
             ' be a normal function that takes only'
             ' one parameter, it will be processed as'
-            f' {obj.__name__}. E.g. -> {examples[manager]}'
+            f' {obj.__name__}. E.g. -> {EXAMPLES[manager][1]}'
         )
     if not _func_ok(
         function,
         must_be_coro = True
     ):
-        obj_lower = re.sub(r'_manager$', '', manager)
         n = len(errors) + 1
         errors.append(
             f'ERROR {n} • The wrapped function must be'
             ' an async def (async generator is not allowed)'
             ' that takes only one argument. E.g. -> async def'
-            f' foo({obj_lower}: {obj.__name__}): return ...'
+            f' foo({EXAMPLES[manager][0]}: {obj.__name__}): return ...'
         )
     if errors:
         len_err = len(errors)
@@ -169,10 +166,10 @@ class Rule:
 
 
 class NextManager:
-    """
+    '''
     A new update will be processed by the next manager
     returning the instance of this class in your wrapped functions.
-    """
+    '''
 
 
 async def _run_coroutine(
@@ -196,19 +193,18 @@ async def _run_coroutine(
 
     if not check:
         return NextManager()
-    else:
-        try:
-            return await rule.function(obj)
-        except BaseException as exc:
-            code = rule.function.__code__
-            lineno = code.co_firstlineno
-            filename = os.path.basename(code.co_filename)
-            logger.error(
-                f'{exc!r} occurred in the'
-                f' function {rule.function.__name__!r} in'
-                f' file {filename!r} at line {lineno}.'
-            )
-            raise exc
+    try:
+        return await rule.function(obj)
+    except BaseException as exc:
+        code = rule.function.__code__
+        lineno = code.co_firstlineno
+        filename = os.path.basename(code.co_filename)
+        logger.error(
+            f'{exc!r} occurred in the'
+            f' function {rule.function.__name__!r} in'
+            f' file {filename!r} at line {lineno}.'
+        )
+        raise exc
 
 
 class UpdateManager:

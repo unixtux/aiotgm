@@ -3,10 +3,10 @@
 REQ_DEBUG = 0
 RESP_DEBUG = 0
 
-__all__ = [
+__all__ = (
     'TelegramApi',
-    'TelegramError'
-]
+    'TelegramError',
+)
 
 from .logger import get_logger
 logger = get_logger('TelegramApi')

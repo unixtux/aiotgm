@@ -1,10 +1,10 @@
 #!/bin/python3
 
-__all__ = [
+__all__ = (
     'Client',
     'NextManager',
-    'TelegramError'
-]
+    'TelegramError',
+)
 
 import re
 import asyncio
@@ -47,9 +47,6 @@ class Client(TelegramApi):
 
         from tglib import Client
         bot = Client('<your_token>')
-
-        # For all the code block examples, we
-        # will call the instance of this class "bot".
     '''
     def __init__(
         self,
@@ -541,7 +538,7 @@ class Client(TelegramApi):
                     max_retries = unlimited,
                     keep_session = True
                 )
-                updates = [Update._dese(update) for update in result]
+                updates: list[Update] = [Update._dese(update) for update in result]
 
             except TelegramError as exc:
                 if not re.search(r'bad.*gateway', str(exc), re.IGNORECASE):

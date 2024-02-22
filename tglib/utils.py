@@ -1,8 +1,8 @@
 #!/bin/python3
 
-__all__ = [
-    'MARKDOWN_ESCAPES'
-]
+__all__ = (
+    'MARKDOWN_ESCAPES',
+)
 
 MARKDOWN_ESCAPES = {
     '_': '\_',

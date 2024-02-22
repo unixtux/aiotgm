@@ -3,14 +3,14 @@
 __version__ = '1.2.8'
 VERSION = __version__
 
-__all__ = [
+__all__ = (
     '__version__',
     'VERSION',
     'Client',
     'NextManager',
     'TelegramError',
-    'MARKDOWN_ESCAPES'
-]
+    'MARKDOWN_ESCAPES',
+)
 
 from .client import (
     Client,
