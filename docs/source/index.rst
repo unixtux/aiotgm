@@ -3,13 +3,6 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. Indices and tables
-.. ==================
-
- * :ref:`genindex`
- * :ref:`modindex`
- * :ref:`search`
-
 **tglib Documentation**
 =======================
 
@@ -21,3 +14,10 @@
    next_manager
    :maxdepth: 2
    :caption: Contents:
+
+Indices and tables
+==================
+
+ * :ref:`genindex`
+ * :ref:`modindex`
+ * :ref:`search`
