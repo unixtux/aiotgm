@@ -6,9 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-'''
+#'''
 import sys
-sys.path.insert(0, '../')
+import os
+sys.path.insert(0, os.path.abspath('../../'))
 #'''
 
 import tglib
@@ -26,15 +27,18 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', ]
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+'''
 autodoc_type_aliases = {
-    'Optional': 'Optional',
-    'Union': 'Union',
+    'InputMedia': 'InputMedia'
+#    'Optional': 'Optional',
+#    'Union': 'Union',
 }
+#'''
 
 autodoc_preserve_defaults = True # to preserve default arguments value
 autodoc_typehints = 'description' # 'none'
 autodoc_typehints_format = 'short'
-#toc_object_entries = False # to not index members
+toc_object_entries = True # to not index members
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
