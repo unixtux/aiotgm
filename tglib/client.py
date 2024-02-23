@@ -21,8 +21,15 @@ from .api import (
     TelegramError
 )
 from .types import *
-from .types import (_dese_chat_member,
-                    _dese_menu_button)
+from .types import (#ChatMember,
+                    #MenuButton,
+                    #InputMedia,
+                    #ReactionType,
+                    #BotCommandScope,
+                    #InlineQueryResult,
+                    #PassportElementError,
+                    _dese_chat_member,
+                    _dese_menu_button,)
 
 from .update_manager import *
 
@@ -35,10 +42,15 @@ class Client(TelegramApi):
     Main class to comunicate with the Telegram Bot API Server.
 
     :param token: Api token obtained from `@BotFather <https://t.me/botfather>`_.
+    :type token: :obj:`str`
     :param parse_mode: Select a default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overridden in the methods).
+    :type parse_mode: :obj:`str` or :obj:`None`
     :param protect_content: Pass :obj:`True` to use the protect content option by default (it can be overridden in the methods).
+    :type protect_content: :obj:`bool` or :obj:`None`
     :param proxy: Pass a proxy string to be used in the http requests.
+    :type proxy: :obj:`str` or :obj:`None`
     :param debug: Pass :obj:`True` for more information about http requests (useful for debugging).
+    :type debug: :obj:`bool` or :obj:`None`
     '''
     def __init__(
         self,
@@ -2649,10 +2661,19 @@ class Client(TelegramApi):
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#addstickertoset
+
         Use this method to add a new sticker to a set created by the bot. The format of the
         added sticker must match the format of the other stickers in the set. Emoji sticker
         sets can have up to 200 stickers. Animated and video sticker sets can have up to 50
         stickers. Static sticker sets can have up to 120 stickers. Returns True on success.
+
+        :param user_id: User identifier of sticker set owner.
+        :type user_id: :obj:`int`
+        :param name: Sticker set name.
+        :type name: :obj:`str`
+        :param sticker: A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn't changed.
+        :type sticker: :obj:`~tglib.types.InputSticker`
+        :rtype: :obj:`True`
         '''
         params = {
             'user_id': user_id,
