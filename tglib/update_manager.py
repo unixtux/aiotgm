@@ -167,7 +167,9 @@ class Rule:
 
 class NextManager:
     '''
-    you must return the instance of this object in your wrapped functions, to pass the update to the next manager of the same type.
+    you must return the instance of this object in
+    your wrapped functions, to pass the update to
+    the next manager of the same type.
     '''
 
 
