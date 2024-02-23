@@ -6,7 +6,7 @@ __all__ = (
     'Animation',
     'Audio',
     'BotCommand',
-    #'BotCommandScope', # NO DESE
+    'BotCommandScope', # NO DESE
     'BotCommandScopeAllChatAdministrators',
     'BotCommandScopeAllGroupChats',
     'BotCommandScopeAllPrivateChats',
@@ -23,7 +23,7 @@ __all__ = (
     'ChatAdministratorRights',
     'ChatBoost',
     'ChatBoostAdded',
-    #'ChatBoostSource', # replaced with _dese_chat_boost_source()
+    'ChatBoostSource', # replaced with _dese_chat_boost_source()
     'ChatBoostSourcePremium',
     'ChatBoostSourceGiftCode',
     'ChatBoostSourceGiveaway',
@@ -32,7 +32,7 @@ __all__ = (
     'ChatInviteLink',
     'ChatJoinRequest',
     'ChatLocation',
-    #'ChatMember', # replaced with _dese_chat_member()
+    'ChatMember', # replaced with _dese_chat_member()
     'ChatMemberAdministrator',
     'ChatMemberBanned',
     'ChatMemberLeft',
@@ -69,7 +69,7 @@ __all__ = (
     'InlineKeyboardButton',
     'InlineKeyboardMarkup',
     'InlineQuery',
-    #'InlineQueryResult', # NO DESE
+    'InlineQueryResult', # NO DESE
     'InlineQueryResultArticle',
     'InlineQueryResultAudio',
     'InlineQueryResultCachedAudio',
@@ -95,13 +95,13 @@ __all__ = (
     'InputFile',
     'InputInvoiceMessageContent',
     'InputLocationMessageContent',
-    #'InputMedia', # NO DESE
+    'InputMedia', # NO DESE
     'InputMediaAnimation',
     'InputMediaAudio',
     'InputMediaDocument',
     'InputMediaPhoto',
     'InputMediaVideo',
-    #'InputMessageContent', # NO DESE
+    'InputMessageContent', # NO DESE
     'InputSticker',
     'InputTextMessageContent',
     'InputVenueMessageContent',
@@ -115,8 +115,8 @@ __all__ = (
     'Location',
     'LoginUrl',
     'MaskPosition',
-    #'MaybeInaccessibleMessage', # replaced with _dese_maybe_inaccessible_message()
-    #'MenuButton', # replaced with _dese_menu_button()
+    'MaybeInaccessibleMessage', # replaced with _dese_maybe_inaccessible_message()
+    'MenuButton', # replaced with _dese_menu_button()
     'MenuButtonCommands',
     'MenuButtonDefault',
     'MenuButtonWebApp',
@@ -124,7 +124,7 @@ __all__ = (
     'MessageAutoDeleteTimerChanged',
     'MessageEntity',
     'MessageId',
-    #'MessageOrigin', # replaced with _dese_message_origin()
+    'MessageOrigin', # replaced with _dese_message_origin()
     'MessageOriginUser',
     'MessageOriginHiddenUser',
     'MessageOriginChat',
@@ -133,7 +133,7 @@ __all__ = (
     'MessageReactionUpdated',
     'OrderInfo',
     'PassportData',
-    #'PassportElementError', # NO DESE
+    'PassportElementError', # NO DESE
     'PassportElementErrorDataField',
     'PassportElementErrorFile',
     'PassportElementErrorFiles',
@@ -151,7 +151,7 @@ __all__ = (
     'PreCheckoutQuery',
     'ProximityAlertTriggered',
     'ReactionCount',
-    #'ReactionType', # replaced with _dese_reaction_type()
+    'ReactionType', # replaced with _dese_reaction_type()
     'ReactionTypeEmoji',
     'ReactionTypeCustomEmoji',
     'ReplyKeyboardMarkup',
