@@ -1,5 +1,7 @@
 #!/bin/python3
 
+from __future__ import annotations
+
 __all__ = (
     'Client',
     'NextManager',
@@ -19,15 +21,8 @@ from .api import (
     TelegramError
 )
 from .types import *
-from .types import (ReactionType,
-                    ChatMember,
-                    _dese_chat_member,
-                    BotCommandScope,
-                    MenuButton,
-                    _dese_menu_button,
-                    InputMedia,
-                    InlineQueryResult,
-                    PassportElementError)
+from .types import (_dese_chat_member,
+                    _dese_menu_button)
 
 from .update_manager import *
 
@@ -38,6 +33,12 @@ logger = get_logger('TelegramApi')
 class Client(TelegramApi):
     '''
     Main class to comunicate with the Telegram Bot API Server.
+
+    :param token: Api token obtained from `@BotFather <https://t.me/botfather>`_.
+    :param parse_mode: Select a default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overridden in the methods).
+    :param protect_content: Pass :obj:`True` to use the protect content option by default (it can be overridden in the methods).
+    :param proxy: Pass a proxy string to be used in the http requests.
+    :param debug: Pass :obj:`True` for more information about http requests (useful for debugging).
     '''
     def __init__(
         self,
@@ -77,6 +78,7 @@ class Client(TelegramApi):
 
     @property
     def parse_mode(self) -> Optional[str]:
+        '''Default parse mode option (it can be overridden in the methods).'''
         return self._parse_mode
 
     @parse_mode.setter
@@ -90,6 +92,7 @@ class Client(TelegramApi):
 
     @property
     def protect_content(self) -> Optional[bool]:
+        '''Default protect content option (it can be overridden in the methods).'''
         return self._protect_content
 
     @protect_content.setter
@@ -105,6 +108,7 @@ class Client(TelegramApi):
 
     def manage_message(self, checker: Callable[[Message], Any] = lambda message: ..., /):
         '''
+        Use this decorator to manage a message :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Message], Any]):
             self.message_manager.add_rule(checker, function)
@@ -116,6 +120,7 @@ class Client(TelegramApi):
 
     def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: ..., /):
         '''
+        Use this decorator to manage an edited_message :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Message], Any]):
             self.edited_message_manager.add_rule(checker, function)
@@ -127,6 +132,7 @@ class Client(TelegramApi):
 
     def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: ..., /):
         '''
+        Use this decorator to manage a channel_post :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Message], Any]):
             self.channel_post_manager.add_rule(checker, function)
@@ -138,6 +144,7 @@ class Client(TelegramApi):
 
     def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: ..., /):
         '''
+        Use this decorator to manage an edited_channel_post :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Message], Any]):
             self.edited_channel_post_manager.add_rule(checker, function)
@@ -149,6 +156,7 @@ class Client(TelegramApi):
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
         '''
+        Use this decorator to manage a message_reaction :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[MessageReactionUpdated], Any]):
             self.message_reaction_manager.add_rule(checker, function)
@@ -160,6 +168,7 @@ class Client(TelegramApi):
 
     def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: ..., /):
         '''
+        Use this decorator to manage a message_reaction_count :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[MessageReactionCountUpdated], Any]):
             self.message_reaction_count_manager.add_rule(checker, function)
@@ -171,6 +180,7 @@ class Client(TelegramApi):
 
     def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: ..., /):
         '''
+        Use this decorator to manage an inline_query :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[InlineQuery], Any]):
             self.inline_query_manager.add_rule(checker, function)
@@ -182,6 +192,7 @@ class Client(TelegramApi):
 
     def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: ..., /):
         '''
+        Use this decorator to manage a chosen_inline_result :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChosenInlineResult], Any]):
             self.chosen_inline_result_manager.add_rule(checker, function)
@@ -193,6 +204,7 @@ class Client(TelegramApi):
 
     def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
         '''
+        Use this decorator to manage a callback_query :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[CallbackQuery], Any]):
             self.callback_query_manager.add_rule(checker, function)
@@ -204,6 +216,7 @@ class Client(TelegramApi):
 
     def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: ..., /):
         '''
+        Use this decorator to manage a shipping_query :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ShippingQuery], Any]):
             self.shipping_query_manager.add_rule(checker, function)
@@ -215,6 +228,7 @@ class Client(TelegramApi):
 
     def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
         '''
+        Use this decorator to manage a pre_checkout_query :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[PreCheckoutQuery], Any]):
             self.pre_checkout_query_manager.add_rule(checker, function)
@@ -226,6 +240,7 @@ class Client(TelegramApi):
 
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
         '''
+        Use this decorator to manage a poll :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Poll], Any]):
             self.poll_manager.add_rule(checker, function)
@@ -237,6 +252,7 @@ class Client(TelegramApi):
 
     def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
         '''
+        Use this decorator to manage a poll_answer :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[PollAnswer], Any]):
             self.poll_answer_manager.add_rule(checker, function)
@@ -248,6 +264,7 @@ class Client(TelegramApi):
 
     def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
         '''
+        Use this decorator to manage a my_chat_member :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatMemberUpdated], Any]):
             self.my_chat_member_manager.add_rule(checker, function)
@@ -259,6 +276,7 @@ class Client(TelegramApi):
 
     def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
         '''
+        Use this decorator to manage a chat_member :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatMemberUpdated], Any]):
             self.chat_member_manager.add_rule(checker, function)
@@ -270,6 +288,7 @@ class Client(TelegramApi):
 
     def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
         '''
+        Use this decorator to manage a chat_join_request :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatJoinRequest], Any]):
             self.chat_join_request_manager.add_rule(checker, function)
@@ -281,6 +300,7 @@ class Client(TelegramApi):
 
     def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
         '''
+        Use this decorator to manage a chat_boost :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatBoostUpdated], Any]):
             self.chat_boost_manager.add_rule(checker, function)
@@ -292,6 +312,7 @@ class Client(TelegramApi):
 
     def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
         '''
+        Use this decorator to manage a removed_chat_boost :class:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatBoostRemoved], Any]):
             self.removed_chat_boost_manager.add_rule(checker, function)
@@ -969,7 +990,7 @@ class Client(TelegramApi):
     async def send_media_group(
         self,
         chat_id: Union[int, str],
-        media: list[InputMediaPhoto | InputMediaAudio | InputMediaVideo | InputMediaDocument],
+        media: list[Union[InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument]],
         message_thread_id: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
