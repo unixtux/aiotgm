@@ -167,8 +167,7 @@ class Rule:
 
 class NextManager:
     '''
-    A new update will be processed by the next manager
-    returning the instance of this class in your wrapped functions.
+    you must return the instance of this object in your wrapped functions, to pass the update to the next manager of the same type.
     '''
 
 
