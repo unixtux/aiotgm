@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/env python3
 
 __version__ = '1.2.9'
 VERSION = __version__
@@ -7,15 +7,12 @@ __all__ = (
     '__version__',
     'VERSION',
     'Client',
-    'NextManager',
+    'NextFunction',
     'TelegramError',
-    'MARKDOWN_ESCAPES',
 )
 
 from .client import (
     Client,
-    NextManager,
+    NextFunction,
     TelegramError
 )
-
-from .utils import MARKDOWN_ESCAPES

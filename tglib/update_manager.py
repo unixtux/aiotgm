@@ -12,7 +12,7 @@ logger = get_logger('TelegramApi')
 __all__ = (
     '_run_coroutine',
     'UpdateManager',
-    'NextManager',
+    'NextFunction',
     # aliases
     'MESSAGE_MANAGER',
     'EDITED_MESSAGE_MANAGER',
@@ -165,45 +165,46 @@ class Rule:
         return self._function
 
 
-class NextManager:
+class NextFunction:
     '''
-    You can return the instance of this object in
-    your wrapped functions, to pass the update to
-    the next manager of the same type.
+    You can return the instance of this class in a wrapped
+    function, to pass the :obj:`~tglib.types.Update` to the next one.
 
-    Usage:
+    * Usage:
 
-    .. code-block:: python3
+        .. code-block:: python3
 
-        # script.py
+            # script.py
 
-        import tglib
-        import asyncio
+            import tglib
+            import asyncio
 
-        bot = tglib.Client("api_token")
+            bot = tglib.Client("api_token")
 
-        @bot.manage_message()
-        async def foo(message):
-            print("First.")
-            return NextManager()
+            @bot.manage_message()
+            async def foo(message):
+                print("First.")
+                return NextFunction()
 
-        @bot.manage_message()
-        async def bar(message):
-            print("Second.")
+            @bot.manage_message()
+            async def bar(message):
+                print("Second.")
 
-        @bot.manage_message()
-        async def baz(message):
-            print("Third.")
+            @bot.manage_message()
+            async def baz(message):
+                print("Third.")
 
-        asyncio.run(bot.long_polling())
+            asyncio.run(bot.long_polling())
     
-    This is the ouput in the shell when a new message is arriving.
+        This is the ouput in the shell when a new :obj:`~tglib.types.Message` is arriving.
 
-    .. code-block:: bash
+        .. code-block:: bash
 
-        $ python3 script.py
-        First.
-        Second.
+            $ python3 script.py
+            First.
+            Second.
+
+        As you can see, *foo()* returns a :obj:`~tglib.NextFunction` object, so the update is passed to *bar()*.
     '''
 
 
@@ -211,7 +212,7 @@ async def _run_coroutine(
     rule: Rule,
     obj: Any,
     /
-) -> Union[Any, NextManager]:
+) -> Union[Any, NextFunction]:
 
     try:
         check = rule.checker(obj)
@@ -227,7 +228,7 @@ async def _run_coroutine(
         return
 
     if not check:
-        return NextManager()
+        return NextFunction()
     try:
         return await rule.function(obj)
     except BaseException as exc:

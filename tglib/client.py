@@ -1,10 +1,10 @@
-#!/bin/python3
+#!/bin/env python3
 
 from __future__ import annotations
 
 __all__ = (
     'Client',
-    'NextManager',
+    'NextFunction',
     'TelegramError',
 )
 
@@ -113,7 +113,7 @@ class Client(TelegramApi):
 
     def manage_message(self, checker: Callable[[Message], Any] = lambda message: ..., /):
         '''
-        Use this decorator to manage a message :class:`~tglib.types.Update`.
+        Use this decorator to manage a message :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Message], Any]):
             self.message_manager.add_rule(checker, function)
@@ -125,7 +125,7 @@ class Client(TelegramApi):
 
     def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: ..., /):
         '''
-        Use this decorator to manage an edited_message :class:`~tglib.types.Update`.
+        Use this decorator to manage an edited_message :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Message], Any]):
             self.edited_message_manager.add_rule(checker, function)
@@ -137,7 +137,7 @@ class Client(TelegramApi):
 
     def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: ..., /):
         '''
-        Use this decorator to manage a channel_post :class:`~tglib.types.Update`.
+        Use this decorator to manage a channel_post :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Message], Any]):
             self.channel_post_manager.add_rule(checker, function)
@@ -149,7 +149,7 @@ class Client(TelegramApi):
 
     def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: ..., /):
         '''
-        Use this decorator to manage an edited_channel_post :class:`~tglib.types.Update`.
+        Use this decorator to manage an edited_channel_post :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Message], Any]):
             self.edited_channel_post_manager.add_rule(checker, function)
@@ -161,7 +161,7 @@ class Client(TelegramApi):
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
         '''
-        Use this decorator to manage a message_reaction :class:`~tglib.types.Update`.
+        Use this decorator to manage a message_reaction :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[MessageReactionUpdated], Any]):
             self.message_reaction_manager.add_rule(checker, function)
@@ -173,7 +173,7 @@ class Client(TelegramApi):
 
     def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: ..., /):
         '''
-        Use this decorator to manage a message_reaction_count :class:`~tglib.types.Update`.
+        Use this decorator to manage a message_reaction_count :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[MessageReactionCountUpdated], Any]):
             self.message_reaction_count_manager.add_rule(checker, function)
@@ -185,7 +185,7 @@ class Client(TelegramApi):
 
     def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: ..., /):
         '''
-        Use this decorator to manage an inline_query :class:`~tglib.types.Update`.
+        Use this decorator to manage an inline_query :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[InlineQuery], Any]):
             self.inline_query_manager.add_rule(checker, function)
@@ -197,7 +197,7 @@ class Client(TelegramApi):
 
     def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: ..., /):
         '''
-        Use this decorator to manage a chosen_inline_result :class:`~tglib.types.Update`.
+        Use this decorator to manage a chosen_inline_result :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChosenInlineResult], Any]):
             self.chosen_inline_result_manager.add_rule(checker, function)
@@ -209,7 +209,7 @@ class Client(TelegramApi):
 
     def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
         '''
-        Use this decorator to manage a callback_query :class:`~tglib.types.Update`.
+        Use this decorator to manage a callback_query :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[CallbackQuery], Any]):
             self.callback_query_manager.add_rule(checker, function)
@@ -221,7 +221,7 @@ class Client(TelegramApi):
 
     def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: ..., /):
         '''
-        Use this decorator to manage a shipping_query :class:`~tglib.types.Update`.
+        Use this decorator to manage a shipping_query :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ShippingQuery], Any]):
             self.shipping_query_manager.add_rule(checker, function)
@@ -233,7 +233,7 @@ class Client(TelegramApi):
 
     def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
         '''
-        Use this decorator to manage a pre_checkout_query :class:`~tglib.types.Update`.
+        Use this decorator to manage a pre_checkout_query :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[PreCheckoutQuery], Any]):
             self.pre_checkout_query_manager.add_rule(checker, function)
@@ -245,7 +245,7 @@ class Client(TelegramApi):
 
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
         '''
-        Use this decorator to manage a poll :class:`~tglib.types.Update`.
+        Use this decorator to manage a poll :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[Poll], Any]):
             self.poll_manager.add_rule(checker, function)
@@ -257,7 +257,7 @@ class Client(TelegramApi):
 
     def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
         '''
-        Use this decorator to manage a poll_answer :class:`~tglib.types.Update`.
+        Use this decorator to manage a poll_answer :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[PollAnswer], Any]):
             self.poll_answer_manager.add_rule(checker, function)
@@ -269,7 +269,7 @@ class Client(TelegramApi):
 
     def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
         '''
-        Use this decorator to manage a my_chat_member :class:`~tglib.types.Update`.
+        Use this decorator to manage a my_chat_member :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatMemberUpdated], Any]):
             self.my_chat_member_manager.add_rule(checker, function)
@@ -281,7 +281,7 @@ class Client(TelegramApi):
 
     def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
         '''
-        Use this decorator to manage a chat_member :class:`~tglib.types.Update`.
+        Use this decorator to manage a chat_member :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatMemberUpdated], Any]):
             self.chat_member_manager.add_rule(checker, function)
@@ -293,7 +293,7 @@ class Client(TelegramApi):
 
     def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
         '''
-        Use this decorator to manage a chat_join_request :class:`~tglib.types.Update`.
+        Use this decorator to manage a chat_join_request :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatJoinRequest], Any]):
             self.chat_join_request_manager.add_rule(checker, function)
@@ -305,7 +305,7 @@ class Client(TelegramApi):
 
     def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
         '''
-        Use this decorator to manage a chat_boost :class:`~tglib.types.Update`.
+        Use this decorator to manage a chat_boost :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatBoostUpdated], Any]):
             self.chat_boost_manager.add_rule(checker, function)
@@ -317,7 +317,7 @@ class Client(TelegramApi):
 
     def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
         '''
-        Use this decorator to manage a removed_chat_boost :class:`~tglib.types.Update`.
+        Use this decorator to manage a removed_chat_boost :obj:`~tglib.types.Update`.
         '''
         def wrap(function: Callable[[ChatBoostRemoved], Any]):
             self.removed_chat_boost_manager.add_rule(checker, function)
@@ -364,126 +364,126 @@ class Client(TelegramApi):
             obj: Message = update.message
             for rule in self.message_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.edited_message:
             obj: Message = update.edited_message
             for rule in self.edited_message_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.channel_post:
             obj: Message = update.channel_post
             for rule in self.channel_post_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.edited_channel_post:
             obj: Message = update.edited_channel_post
             for rule in self.edited_channel_post_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.message_reaction:
             obj: MessageReactionUpdated = update.message_reaction
             for rule in self.message_reaction_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.message_reaction_count:
             obj: MessageReactionCountUpdated = update.message_reaction_count
             for rule in self.message_reaction_count_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.inline_query:
             obj: InlineQuery = update.inline_query
             for rule in self.inline_query_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.chosen_inline_result:
             obj: ChosenInlineResult = update.chosen_inline_result
             for rule in self.chosen_inline_result_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.callback_query:
             obj: CallbackQuery = update.callback_query
             for rule in self.callback_query_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.shipping_query:
             obj: ShippingQuery = update.shipping_query
             for rule in self.shipping_query_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.pre_checkout_query:
             obj: PreCheckoutQuery = update.pre_checkout_query
             for rule in self.pre_checkout_query_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.poll:
             obj: Poll = update.poll
             for rule in self.poll_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.poll_answer:
             obj: PollAnswer = update.poll_answer
             for rule in self.poll_answer_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.my_chat_member:
             obj: ChatMemberUpdated = update.my_chat_member
             for rule in self.my_chat_member_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.chat_member:
             obj: ChatMemberUpdated = update.chat_member
             for rule in self.chat_member_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.chat_join_request:
             obj: ChatJoinRequest = update.chat_join_request
             for rule in self.chat_join_request_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.chat_boost:
             obj: ChatBoostUpdated = update.chat_boost
             for rule in self.chat_boost_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
         elif update.removed_chat_boost:
             obj: ChatBoostRemoved = update.removed_chat_boost
             for rule in self.removed_chat_boost_manager:
                 result = await _run_coroutine(rule, obj)
-                if not isinstance(result, NextManager):
+                if not isinstance(result, NextFunction):
                     return
 
     # Available methods

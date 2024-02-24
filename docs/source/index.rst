@@ -13,7 +13,7 @@
     client
     types
     exceptions
-    next_manager
+    next_function
     :maxdepth: 3
     :caption: Contents:
 

@@ -4,9 +4,9 @@
 
 All the names of the types are exactly the same described in the `offical documentation <https://core.telegram.org/bots/api#available-types>`_.
 
-* **Note**:
+* Note:
     * Attribute *from* of the types, has been changed to *from_user* because in python it causes conflict.
-    * If the :obj:`~tglib.types.Message` has not *text*, it's an empty string instead of :obj:`None`, so you can do as follows without getting an `AttributeError <https://docs.python.org/3/library/exceptions.html#AttributeError>`_.
+    * If the type :obj:`~tglib.types.Message` has not *text*, it's an empty string instead of :obj:`None`, so you can do as follows without getting an `AttributeError <https://docs.python.org/3/library/exceptions.html#AttributeError>`_.
 
     .. code-block:: python3
 
