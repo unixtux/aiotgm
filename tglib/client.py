@@ -2077,9 +2077,23 @@ class Client(TelegramApi):
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#answercallbackquery
-        Use this method to send answers to callback queries sent from inline
-        keyboards. The answer will be displayed to the user as a notification at
-        the top of the chat screen or as an alert. On success, True is returned.
+
+        Use this method to send answers to callback queries sent from `inline
+        keyboards <https://core.telegram.org/bots/features#inline-keyboards>`_.
+        The answer will be displayed to the user as a notification at the top
+        of the chat screen or as an alert. On success, True is returned.
+
+        :param callback_query_id: Unique identifier for the query to be answered.
+        :type callback_query_id: :obj:`str`
+        :param text: Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
+        :type text: :obj:`str` or :obj:`None`
+        :param show_alert: If :obj:`True`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to :obj:`False`.
+        :type show_alert: :obj:`bool` or :obj:`None`
+        :param url: URL that will be opened by the user's client.
+        :type url: :obj:`str` or :obj:`None`
+        :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to :obj:`0`.
+        :type cache_time: :obj:`int` or :obj:`None`
+        :rtype: :obj:`True`
         '''
         params = {
             'callback_query_id': callback_query_id
