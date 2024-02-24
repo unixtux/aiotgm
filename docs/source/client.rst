@@ -14,6 +14,3 @@ They are all *asynchronous*, so you must use them in `await <https://docs.python
     :members:
     :undoc-members:
 ..        :no-index:
-
-    *Available methods*
-    -------------------
