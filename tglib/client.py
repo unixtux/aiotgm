@@ -606,7 +606,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#answerprecheckoutquery
 
         Once the user has confirmed their payment and shipping details, the Bot API sends the
-        final confirmation in the form of an :class:`~tglib.types.Update` with the field *pre_checkout_query*. Use this
+        final confirmation in the form of an :obj:`~tglib.types.Update` with the field *pre_checkout_query*. Use this
         method to respond to such pre-checkout queries. On success, :obj:`True` is returned. **Note**: The
         Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
 
@@ -624,6 +624,39 @@ class Client(TelegramApi):
         }
         if error_message is not None: params['error_message'] = error_message
         return await super().answer_pre_checkout_query(params)
+
+
+    async def answer_shipping_query(
+        self,
+        shipping_query_id: str,
+        ok: bool,
+        shipping_options: Optional[list[ShippingOption]] = None,
+        error_message: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#answershippingquery
+
+        If you sent an invoice requesting a shipping address and the parameter *is_flexible*
+        was specified, the Bot API will send an :obj:`~tglib.types.Update` with a *shipping_query* field to the
+        bot. Use this method to reply to shipping queries. On success, :obj:`True` is returned.
+
+        :param shipping_query_id: Unique identifier for the query to be answered.
+        :type shipping_query_id: :obj:`str`
+        :param ok: Pass :obj:`True` if delivery to the specified address is possible and :obj:`False` if there are any problems (for example, if delivery to the specified address is not possible).
+        :type ok: :obj:`bool`
+        :param shipping_options: Required if *ok* is :obj:`True`. A JSON-serialized array of available shipping options.
+        :type shipping_options: :obj:`list` of :obj:`~tglib.types.ShippingOption` or :obj:`None`
+        :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains why it is impossible to complete the order. Telegram will display this message to the user.
+        :type error_message: :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'shipping_query_id': shipping_query_id,
+            'ok': ok
+        }
+        if shipping_options is not None: params['shipping_options'] = shipping_options
+        if error_message is not None: params['error_message'] = error_message
+        return await super().answer_shipping_query(params)
 
 
     async def get_updates(
@@ -3043,28 +3076,6 @@ class Client(TelegramApi):
         if send_email_to_provider is not None: params['send_email_to_provider'] = send_email_to_provider
         if is_flexible is not None: params['is_flexible'] = is_flexible
         return await super().create_invoice_link(params)
-
-
-    async def answer_shipping_query(
-        self,
-        shipping_query_id: str,
-        ok: bool,
-        shipping_options: Optional[list[ShippingOption]] = None,
-        error_message: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#answershippingquery
-        If you sent an invoice requesting a shipping address and the parameter is_flexible
-        was specified, the Bot API will send an Update with a shipping_query field to the
-        bot. Use this method to reply to shipping queries. On success, True is returned.
-        '''
-        params = {
-            'shipping_query_id': shipping_query_id,
-            'ok': ok
-        }
-        if shipping_options is not None: params['shipping_options'] = shipping_options
-        if error_message is not None: params['error_message'] = error_message
-        return await super().answer_shipping_query(params)
 
 
     async def set_passport_data_errors(
