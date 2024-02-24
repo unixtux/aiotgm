@@ -199,7 +199,7 @@ class NextManager:
     
     This is the ouput in the shell when a new message is arriving.
 
-    .. code-block:: shell
+    .. code-block:: bash
 
         $ python3 script.py
         First.
