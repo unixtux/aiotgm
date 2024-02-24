@@ -2946,9 +2946,16 @@ class Client(TelegramApi):
     ) -> SentWebAppMessage:
         '''
         https://core.telegram.org/bots/api#answerwebappquery
-        Use this method to set the result of an interaction with a Web App and
-        send a corresponding message on behalf of the user to the chat from which
-        the query originated. On success, a SentWebAppMessage object is returned.
+
+        Use this method to set the result of an interaction with a
+        `Web App <https://core.telegram.org/bots/webapps>`_ and send a corresponding message on behalf of
+        the user to the chat from which the query originated. On success, a :obj:`~tglib.types.SentWebAppMessage` object is returned.
+
+        :param web_app_query_id: Unique identifier for the query to be answered.
+        :type web_app_query_id: :obj:`str`
+        :param result: A JSON-serialized object describing the message to be sent.
+        :type result: :obj:`~tglib.types.InlineQueryResult`
+        :rtype: :obj:`~tglib.types.SentWebAppMessage`
         '''
         params = {
             'web_app_query_id': web_app_query_id,
