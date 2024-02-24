@@ -11,10 +11,9 @@ They are all *asynchronous*, so you must use them in `await <https://docs.python
 ---------------------------
 
 .. autoclass:: tglib.Client
-
-    *Available methods*
-    -------------------
-
     :members:
     :undoc-members:
 ..        :no-index:
+
+    *Available methods*
+    -------------------
