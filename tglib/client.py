@@ -488,6 +488,114 @@ class Client(TelegramApi):
 
     # Available methods
 
+    async def add_sticker_to_set(
+        self,
+        user_id: int,
+        name: str,
+        sticker: InputSticker
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#addstickertoset
+
+        Use this method to add a new sticker to a set created by the bot. The format of the
+        added sticker must match the format of the other stickers in the set. Emoji sticker
+        sets can have up to 200 stickers. Animated and video sticker sets can have up to 50
+        stickers. Static sticker sets can have up to 120 stickers. Returns :obj:`True` on success.
+
+        :param user_id: User identifier of sticker set owner.
+        :type user_id: :obj:`int`
+        :param name: Sticker set name.
+        :type name: :obj:`str`
+        :param sticker: A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn't changed.
+        :type sticker: :obj:`~tglib.types.InputSticker`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'user_id': user_id,
+            'name': name,
+            'sticker': sticker
+        }
+        return await super().add_sticker_to_set(params)
+
+
+    async def answer_callback_query(
+        self,
+        callback_query_id: str,
+        text: Optional[str] = None,
+        show_alert: Optional[bool] = None,
+        url: Optional[str] = None,
+        cache_time: Optional[int] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#answercallbackquery
+
+        Use this method to send answers to callback queries sent from `inline
+        keyboards <https://core.telegram.org/bots/features#inline-keyboards>`_.
+        The answer will be displayed to the user as a notification at the top
+        of the chat screen or as an alert. On success, :obj:`True` is returned.
+
+        :param callback_query_id: Unique identifier for the query to be answered.
+        :type callback_query_id: :obj:`str`
+        :param text: Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
+        :type text: :obj:`str` or :obj:`None`
+        :param show_alert: If :obj:`True`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to :obj:`False`.
+        :type show_alert: :obj:`bool` or :obj:`None`
+        :param url: URL that will be opened by the user's client.
+        :type url: :obj:`str` or :obj:`None`
+        :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to :obj:`0`.
+        :type cache_time: :obj:`int` or :obj:`None`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'callback_query_id': callback_query_id
+        }
+        if text is not None: params['text'] = text
+        if show_alert is not None: params['show_alert'] = show_alert
+        if url is not None: params['url'] = url
+        if cache_time is not None: params['cache_time'] = cache_time
+        return await super().answer_callback_query(params)
+
+
+    async def answer_inline_query(
+        self,
+        inline_query_id: str,
+        results: list[InlineQueryResult],
+        cache_time: Optional[int] = None,
+        is_personal: Optional[bool] = None,
+        next_offset: Optional[str] = None,
+        button: Optional[InlineQueryResultsButton] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#answerinlinequery
+
+        Use this method to send answers to an inline query. On success,
+        :obj:`True` is returned. No more than 50 results per query are allowed.
+
+        :param inline_query_id: Unique identifier for the answered query.
+        :type inline_query_id: :obj:`str`
+        :param results: A JSON-serialized array of results for the inline query.
+        :type results: :obj:`list` of :obj:`~tglib.types.InlineQueryResult`
+        :param cache_time: The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to :obj:`300`.
+        :type cache_time: :obj:`int` or :obj:`None`
+        :param is_personal: Pass :obj:`True` if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query.
+        :type is_personal: :obj:`bool` or :obj:`None`
+        :param next_offset: Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
+        :type next_offset: :obj:`str` or :obj:`None`
+        :param button: A JSON-serialized object describing a button to be shown above inline query results.
+        :type button: :obj:`~tglib.types.InlineQueryResultsButton` or :obj:`None`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'inline_query_id': inline_query_id,
+            'results': results
+        }
+        if cache_time is not None: params['cache_time'] = cache_time
+        if is_personal is not None: params['is_personal'] = is_personal
+        if next_offset is not None: params['next_offset'] = next_offset
+        if button is not None: params['button'] = button
+        return await super().answer_inline_query(params)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -2067,44 +2175,6 @@ class Client(TelegramApi):
         return await super().unpin_all_general_forum_topic_messages(params)
 
 
-    async def answer_callback_query(
-        self,
-        callback_query_id: str,
-        text: Optional[str] = None,
-        show_alert: Optional[bool] = None,
-        url: Optional[str] = None,
-        cache_time: Optional[int] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#answercallbackquery
-
-        Use this method to send answers to callback queries sent from `inline
-        keyboards <https://core.telegram.org/bots/features#inline-keyboards>`_.
-        The answer will be displayed to the user as a notification at the top
-        of the chat screen or as an alert. On success, :obj:`True` is returned.
-
-        :param callback_query_id: Unique identifier for the query to be answered.
-        :type callback_query_id: :obj:`str`
-        :param text: Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
-        :type text: :obj:`str` or :obj:`None`
-        :param show_alert: If :obj:`True`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to :obj:`False`.
-        :type show_alert: :obj:`bool` or :obj:`None`
-        :param url: URL that will be opened by the user's client.
-        :type url: :obj:`str` or :obj:`None`
-        :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to :obj:`0`.
-        :type cache_time: :obj:`int` or :obj:`None`
-        :rtype: :obj:`True`
-        '''
-        params = {
-            'callback_query_id': callback_query_id
-        }
-        if text is not None: params['text'] = text
-        if show_alert is not None: params['show_alert'] = show_alert
-        if url is not None: params['url'] = url
-        if cache_time is not None: params['cache_time'] = cache_time
-        return await super().answer_callback_query(params)
-
-
     async def get_user_chat_boosts(
         self,
         chat_id: Union[int, str],
@@ -2660,36 +2730,6 @@ class Client(TelegramApi):
         return await super().create_new_sticker_set(params)
 
 
-    async def add_sticker_to_set(
-        self,
-        user_id: int,
-        name: str,
-        sticker: InputSticker
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#addstickertoset
-
-        Use this method to add a new sticker to a set created by the bot. The format of the
-        added sticker must match the format of the other stickers in the set. Emoji sticker
-        sets can have up to 200 stickers. Animated and video sticker sets can have up to 50
-        stickers. Static sticker sets can have up to 120 stickers. Returns :obj:`True` on success.
-
-        :param user_id: User identifier of sticker set owner.
-        :type user_id: :obj:`int`
-        :param name: Sticker set name.
-        :type name: :obj:`str`
-        :param sticker: A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn't changed.
-        :type sticker: :obj:`~tglib.types.InputSticker`
-        :rtype: :obj:`True`
-        '''
-        params = {
-            'user_id': user_id,
-            'name': name,
-            'sticker': sticker
-        }
-        return await super().add_sticker_to_set(params)
-
-
     async def set_sticker_position_in_set(
         self,
         sticker: str,
@@ -2834,46 +2874,6 @@ class Client(TelegramApi):
             'name': name
         }
         return await super().delete_sticker_set(params)
-
-
-    async def answer_inline_query(
-        self,
-        inline_query_id: str,
-        results: list[InlineQueryResult],
-        cache_time: Optional[int] = None,
-        is_personal: Optional[bool] = None,
-        next_offset: Optional[str] = None,
-        button: Optional[InlineQueryResultsButton] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#answerinlinequery
-
-        Use this method to send answers to an inline query. On success,
-        :obj:`True` is returned. No more than 50 results per query are allowed.
-
-        :param inline_query_id: Unique identifier for the answered query.
-        :type inline_query_id: :obj:`str`
-        :param results: A JSON-serialized array of results for the inline query.
-        :type results: :obj:`list` of :obj:`~tglib.types.InlineQueryResult`
-        :param cache_time: The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to :obj:`300`.
-        :type cache_time: :obj:`int` or :obj:`None`
-        :param is_personal: Pass :obj:`True` if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query.
-        :type is_personal: :obj:`bool` or :obj:`None`
-        :param next_offset: Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
-        :type next_offset: :obj:`str` or :obj:`None`
-        :param button: A JSON-serialized object describing a button to be shown above inline query results.
-        :type button: :obj:`~tglib.types.InlineQueryResultsButton` or :obj:`None`
-        :rtype: :obj:`True`
-        '''
-        params = {
-            'inline_query_id': inline_query_id,
-            'results': results
-        }
-        if cache_time is not None: params['cache_time'] = cache_time
-        if is_personal is not None: params['is_personal'] = is_personal
-        if next_offset is not None: params['next_offset'] = next_offset
-        if button is not None: params['button'] = button
-        return await super().answer_inline_query(params)
 
 
     async def answer_web_app_query(
