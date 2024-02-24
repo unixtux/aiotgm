@@ -177,20 +177,20 @@ class NextFunction:
         import tglib
         import asyncio
 
-        bot = tglib.Client("api_token")
+        bot = tglib.Client('api_token')
 
         @bot.manage_message()
         async def foo(message):
-            print("First.")
+            print('I am the function number one.')
             return NextFunction()
 
         @bot.manage_message()
         async def bar(message):
-            print("Second.")
+            print('I am the function number two.')
 
         @bot.manage_message()
         async def baz(message):
-            print("Third.")
+            print('I am the function number three.')
 
         asyncio.run(bot.long_polling())
     
@@ -199,8 +199,8 @@ class NextFunction:
     .. code-block:: bash
 
         $ python3 script.py
-        First.
-        Second.
+        I am the function number one.
+        I am the function number two.
 
     As you can see, *foo()* returns a :obj:`~tglib.NextFunction` object, so the update is passed to *bar()*.
     '''
