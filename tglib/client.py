@@ -83,7 +83,7 @@ class Client(TelegramApi):
 
     @property
     def parse_mode(self) -> Optional[str]:
-        '''Default parse mode option (it can be overridden in the methods).'''
+        '''Default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overridden in the methods).'''
         return self._parse_mode
 
     @parse_mode.setter
@@ -683,6 +683,30 @@ class Client(TelegramApi):
         }
         result = await super().answer_web_app_query(params)
         return SentWebAppMessage._dese(result)
+
+
+    async def approve_chat_join_request(
+        self,
+        chat_id: Union[int, str],
+        user_id: int
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#approvechatjoinrequest
+
+        Use this method to approve a chat join request. The bot must be an administrator in the chat
+        for this to work and must have the *can_invite_users* administrator right. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+        return await super().approve_chat_join_request(params)
 
 
     async def get_updates(
@@ -1768,23 +1792,6 @@ class Client(TelegramApi):
         }
         result = await super().revoke_chat_invite_link(params)
         return ChatInviteLink._dese(result)
-
-
-    async def approve_chat_join_request(
-        self,
-        chat_id: Union[int, str],
-        user_id: int
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#approvechatjoinrequest
-        Use this method to approve a chat join request. The bot must be an administrator in the chat
-        for this to work and must have the can_invite_users administrator right. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id
-        }
-        return await super().approve_chat_join_request(params)
 
 
     async def decline_chat_join_request(
