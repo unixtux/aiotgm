@@ -6,8 +6,8 @@
 **tglib Documentation**
 =======================
 
-Indices and tables
-------------------
+Indices
+-------
 
 * :ref:`genindex`
 
