@@ -167,9 +167,37 @@ class Rule:
 
 class NextManager:
     '''
-    you must return the instance of this object in
+    You can return the instance of this object in
     your wrapped functions, to pass the update to
     the next manager of the same type.
+
+    Usage:
+    .. code-block: python3
+
+    #!/bin/env python3
+    # example.py
+
+    import tglib
+    import asyncio
+   
+    bot = tglib.Client("your_token")
+
+    @bot.manage_message()
+    async def foo(message):
+        print("This is foo")
+        return NextManager()
+
+    @bot.manage_message()
+    async def bar(message):
+        print("This is bar")
+
+    asyncio.run(bot.long_polling())
+
+    .. code-block: shell
+
+    >>> python3 example.py
+    >>> 'This is foo'
+        'This is bar'
     '''
 
 
