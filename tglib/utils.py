@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/env python3
 
 __all__ = (
     'MARKDOWN_ESCAPES',

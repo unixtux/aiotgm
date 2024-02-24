@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/env python3
 
 REQ_DEBUG = 0
 RESP_DEBUG = 0

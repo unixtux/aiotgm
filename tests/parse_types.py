@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/env python3
 
 if __name__ != '__main__':
     import os
@@ -572,7 +572,7 @@ with open('test_types.json', 'r') as r:
     lines = r.readlines()
 
 f = '''\
-#!/bin/python3
+#!/bin/env python3
 
 if __name__ != '__main__':
     import os
