@@ -169,7 +169,7 @@ class Rule:
 class NextFunction:
     '''
     You can return the instance of this class in a wrapped
-    function, to pass the :obj:`~tglib.types.Update` to the next one.
+    coroutine, to pass the :obj:`~tglib.types.Update` to the next one.
 
     .. code-block:: python3
 
@@ -272,7 +272,7 @@ class UpdateManager:
         '''
         :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Update`.
         :type checker: :obj:`Callable[[Any], Any]`
-        :param coroutine: Pass a `coroutine <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ to be called if the :obj:`~tglib.types.Update` passes the check. It must takes only one argument.
+        :param coroutine: Pass a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ to be called if the :obj:`~tglib.types.Update` passes the check. It must takes only one argument.
         :type coroutine: :obj:`Callable[[Any], Awaitable]`
         '''
         _check_rule(
