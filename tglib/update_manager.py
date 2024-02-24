@@ -170,41 +170,39 @@ class NextFunction:
     You can return the instance of this class in a wrapped
     function, to pass the :obj:`~tglib.types.Update` to the next one.
 
-    * Usage:
+    .. code-block:: python3
 
-        .. code-block:: python3
+        # script.py
 
-            # script.py
+        import tglib
+        import asyncio
 
-            import tglib
-            import asyncio
+        bot = tglib.Client("api_token")
 
-            bot = tglib.Client("api_token")
+        @bot.manage_message()
+        async def foo(message):
+            print("First.")
+            return NextFunction()
 
-            @bot.manage_message()
-            async def foo(message):
-                print("First.")
-                return NextFunction()
+        @bot.manage_message()
+        async def bar(message):
+            print("Second.")
 
-            @bot.manage_message()
-            async def bar(message):
-                print("Second.")
+        @bot.manage_message()
+        async def baz(message):
+            print("Third.")
 
-            @bot.manage_message()
-            async def baz(message):
-                print("Third.")
-
-            asyncio.run(bot.long_polling())
+        asyncio.run(bot.long_polling())
     
-        This is the ouput in the shell when a new :obj:`~tglib.types.Message` is arriving.
+    This is the ouput in the shell when a new :obj:`~tglib.types.Message` is arriving.
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            $ python3 script.py
-            First.
-            Second.
+        $ python3 script.py
+        First.
+        Second.
 
-        As you can see, *foo()* returns a :obj:`~tglib.NextFunction` object, so the update is passed to *bar()*.
+    As you can see, *foo()* returns a :obj:`~tglib.NextFunction` object, so the update is passed to *bar()*.
     '''
 
 
