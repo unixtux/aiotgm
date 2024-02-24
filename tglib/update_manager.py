@@ -172,15 +172,15 @@ class NextManager:
     the next manager of the same type.
 
     Usage:
+
     .. code-block:: python3
 
         #!/bin/env python3
-        # example.py
 
         import tglib
         import asyncio
 
-        bot = tglib.Client("your_token")
+        bot = tglib.Client("api_token")
 
         @bot.manage_message()
         async def foo(message):
@@ -195,15 +195,14 @@ class NextManager:
         async def baz(message):
             print("Third.")
 
-    asyncio.run(bot.long_polling())
-
+        asyncio.run(bot.long_polling())
+    
     In the shell this is the output.
 
     .. code-block:: shell
 
-        >>> python3 example.py
         >>> 'First.'
-            'Second'.
+            'Second.'
     '''
 
 
