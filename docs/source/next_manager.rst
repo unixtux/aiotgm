@@ -3,5 +3,5 @@
 =============
 
 .. autoclass:: tglib.NextManager
-   :members:
-   :undoc-members:
+    :members:
+    :undoc-members:

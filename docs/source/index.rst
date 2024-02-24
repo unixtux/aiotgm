@@ -9,13 +9,13 @@
 * :ref:`genindex`
 
 .. toctree::
-   installation
-   client
-   types
-   exceptions
-   next_manager
-   :maxdepth: 3
-   :caption: Contents:
+    installation
+    client
+    types
+    exceptions
+    next_manager
+    :maxdepth: 3
+    :caption: Contents:
 
 ..  * :ref:`modindex`
 ..  * :ref:`search`

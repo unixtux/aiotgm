@@ -2,9 +2,7 @@
 
 #
 
-<h3 align="center">Build your Telegram Bot Client</h3>
-
-<h3 align="center">Supported Bot API <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
+<h3 align="center">Python implementation of the Telegram Bot API <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
 
 #
 
@@ -39,24 +37,6 @@ $ pip install -U tglib
   * [chat_join_request_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.chat_join_request_manager)
   * [chat_boost_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.chat_boost_manager)
   * [removed_chat_boost_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.removed_chat_boost_manager)
-
-#
-
-* #### Available methods
-
-All the **methods** are the same described in the **[offical documentation](https://core.telegram.org/bots/api#available-methods)**, changed from camelCase to snake_case. They are all **asynchronous**, so you must use them in **await** expression.
-
-#
-
-* #### Available Types
-
-All the **types** are the same described in the **[offical documentation](https://core.telegram.org/bots/api#available-types)**.
-
-> Attribute "**from**" of the types, has been changed to "**from_user**" because in python it causes conflict.
-
-> If the attribute "**text**" of the Message is empty, it's **str()** instead of **None**, so you can use for example **text.startswith()** without getting errors.
-
-> All other optional attributes of the objects are **None** if they are not in the **JSON** received as response.
 
 #
 
