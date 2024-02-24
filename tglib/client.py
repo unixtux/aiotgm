@@ -2081,7 +2081,7 @@ class Client(TelegramApi):
         Use this method to send answers to callback queries sent from `inline
         keyboards <https://core.telegram.org/bots/features#inline-keyboards>`_.
         The answer will be displayed to the user as a notification at the top
-        of the chat screen or as an alert. On success, True is returned.
+        of the chat screen or as an alert. On success, :obj:`True` is returned.
 
         :param callback_query_id: Unique identifier for the query to be answered.
         :type callback_query_id: :obj:`str`
@@ -2672,7 +2672,7 @@ class Client(TelegramApi):
         Use this method to add a new sticker to a set created by the bot. The format of the
         added sticker must match the format of the other stickers in the set. Emoji sticker
         sets can have up to 200 stickers. Animated and video sticker sets can have up to 50
-        stickers. Static sticker sets can have up to 120 stickers. Returns True on success.
+        stickers. Static sticker sets can have up to 120 stickers. Returns :obj:`True` on success.
 
         :param user_id: User identifier of sticker set owner.
         :type user_id: :obj:`int`
@@ -2849,7 +2849,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#answerinlinequery
 
         Use this method to send answers to an inline query. On success,
-        True is returned. No more than 50 results per query are allowed.
+        :obj:`True` is returned. No more than 50 results per query are allowed.
 
         :param inline_query_id: Unique identifier for the answered query.
         :type inline_query_id: :obj:`str`
