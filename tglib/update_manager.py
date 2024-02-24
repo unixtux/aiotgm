@@ -168,7 +168,7 @@ class Rule:
 class NextFunction:
     '''
     You can return the instance of this class in a wrapped
-    function, to pass the :obj:`~tglib.types.Update` to the next one.
+    function, to pass the :obj:`~tglib.types.Update` to the next function.
 
     .. code-block:: python3
 
@@ -181,28 +181,28 @@ class NextFunction:
 
         @bot.manage_message()
         async def foo(message):
-            print('I am the number one.')
+            print('I am the number ONE.')
             return NextFunction()
 
         @bot.manage_message()
         async def bar(message):
-            print('I am the number two.')
+            print('I am the number TWO.')
 
         @bot.manage_message()
         async def baz(message):
-            print('I am the number three.')
+            print('I am the number THREE.')
 
         asyncio.run(bot.long_polling())
-    
-    This is the ouput in the shell when a new :obj:`~tglib.types.Message` is arriving.
+
+    The following is the ouput in the shell when the bot receives a new message :obj:`~tglib.types.Update`.
 
     .. code-block:: bash
 
         $ python3 script.py
-        I am the number one.
-        I am the number two.
+        I am the number ONE.
+        I am the number TWO.
 
-    As you can see, *foo()* returns a :obj:`~tglib.NextFunction` object, so the update is passed to *bar()*.
+    As you can see, *foo()* returns a :obj:`~tglib.NextFunction` object, so the :obj:`~tglib.types.Update` is passed to *bar()*.
     '''
 
 
