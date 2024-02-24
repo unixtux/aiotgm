@@ -175,7 +175,7 @@ class NextManager:
 
     .. code-block:: python3
 
-        #!/bin/env python3
+        # script.py
 
         import tglib
         import asyncio
@@ -197,12 +197,13 @@ class NextManager:
 
         asyncio.run(bot.long_polling())
     
-    In the shell this is the output.
+    This is the ouput in the shell when a new message is arriving.
 
     .. code-block:: shell
 
-        >>> 'First.'
-            'Second.'
+        $ python3 script.py
+        First.
+        Second.
     '''
 
 
