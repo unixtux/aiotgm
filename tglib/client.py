@@ -596,6 +596,36 @@ class Client(TelegramApi):
         return await super().answer_inline_query(params)
 
 
+    async def answer_pre_checkout_query(
+        self,
+        pre_checkout_query_id: str,
+        ok: bool,
+        error_message: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#answerprecheckoutquery
+
+        Once the user has confirmed their payment and shipping details, the Bot API sends the
+        final confirmation in the form of an :class:`~tglib.types.Update` with the field *pre_checkout_query*. Use this
+        method to respond to such pre-checkout queries. On success, :obj:`True` is returned. **Note**: The
+        Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
+
+        :param pre_checkout_query_id: Unique identifier for the query to be answered.
+        :type pre_checkout_query_id: :obj:`str`
+        :param ok: Specify :obj:`True` if everything is alright (goods are available, etc.) and the bot is ready to proceed with the order. Use :obj:`False` if there are any problems.
+        :type ok: :obj:`bool`
+        :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains the reason for failure to proceed with the checkout. Telegram will display this message to the user.
+        :type error_message: :obj:`str` or :obj:`None`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'pre_checkout_query_id': pre_checkout_query_id,
+            'ok': ok
+        }
+        if error_message is not None: params['error_message'] = error_message
+        return await super().answer_pre_checkout_query(params)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -3035,27 +3065,6 @@ class Client(TelegramApi):
         if shipping_options is not None: params['shipping_options'] = shipping_options
         if error_message is not None: params['error_message'] = error_message
         return await super().answer_shipping_query(params)
-
-
-    async def answer_pre_checkout_query(
-        self,
-        pre_checkout_query_id: str,
-        ok: bool,
-        error_message: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#answerprecheckoutquery
-        Once the user has confirmed their payment and shipping details, the Bot API sends the
-        final confirmation in the form of an Update with the field pre_checkout_query. Use this
-        method to respond to such pre-checkout queries. On success, True is returned. Note: The
-        Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
-        '''
-        params = {
-            'pre_checkout_query_id': pre_checkout_query_id,
-            'ok': ok
-        }
-        if error_message is not None: params['error_message'] = error_message
-        return await super().answer_pre_checkout_query(params)
 
 
     async def set_passport_data_errors(
