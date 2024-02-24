@@ -2,7 +2,7 @@
 
 #
 
-<h3 align="center">Python implementation of the Telegram Bot API <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
+<h3 align="center">Asynchronous python implementation of the Telegram Bot API <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
 
 #
 
