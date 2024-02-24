@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/bin/env python3
 
 import os
 import inspect
@@ -172,7 +172,7 @@ class NextManager:
     the next manager of the same type.
 
     Usage:
-    .. code-block: python3
+    .. code-block:: python3
 
         #!/bin/env python3
         # example.py
@@ -184,26 +184,26 @@ class NextManager:
 
         @bot.manage_message()
         async def foo(message):
-            print("First")
+            print("First.")
             return NextManager()
 
         @bot.manage_message()
         async def bar(message):
-            print("Second")
+            print("Second.")
 
         @bot.manage_message()
-        async def null(message):
-            print("Third")
+        async def baz(message):
+            print("Third.")
 
     asyncio.run(bot.long_polling())
 
     In the shell this is the output.
 
-    .. code-block: shell
+    .. code-block:: shell
 
         >>> python3 example.py
-        >>> 'First'
-            'Second'
+        >>> 'First.'
+            'Second'.
     '''
 
 
