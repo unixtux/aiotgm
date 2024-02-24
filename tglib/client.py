@@ -14,7 +14,8 @@ from typing import (Any,
                     Union,
                     Literal,
                     Optional,
-                    Callable)
+                    Callable,
+                    Awaitable)
 
 from .api import (
     TelegramApi,
@@ -111,6 +112,7 @@ class Client(TelegramApi):
     def message_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._message_manager
 
@@ -118,14 +120,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a message :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[Message], Any]):
-            self.message_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[Message], Awaitable]):
+            self.message_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def edited_message_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._edited_message_manager
 
@@ -133,14 +136,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage an edited_message :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[Message], Any]):
-            self.edited_message_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[Message], Awaitable]):
+            self.edited_message_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def channel_post_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._channel_post_manager
 
@@ -148,14 +152,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a channel_post :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[Message], Any]):
-            self.channel_post_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[Message], Awaitable]):
+            self.channel_post_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def edited_channel_post_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._edited_channel_post_manager
 
@@ -163,14 +168,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage an edited_channel_post :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[Message], Any]):
-            self.edited_channel_post_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[Message], Awaitable]):
+            self.edited_channel_post_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def message_reaction_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._message_reaction_manager
 
@@ -178,14 +184,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a message_reaction :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[MessageReactionUpdated], Any]):
-            self.message_reaction_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[MessageReactionUpdated], Awaitable]):
+            self.message_reaction_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def message_reaction_count_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._message_reaction_count_manager
 
@@ -193,14 +200,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a message_reaction_count :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[MessageReactionCountUpdated], Any]):
-            self.message_reaction_count_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[MessageReactionCountUpdated], Awaitable]):
+            self.message_reaction_count_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def inline_query_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._inline_query_manager
 
@@ -208,14 +216,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage an inline_query :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[InlineQuery], Any]):
-            self.inline_query_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[InlineQuery], Awaitable]):
+            self.inline_query_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def chosen_inline_result_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._chosen_inline_result_manager
 
@@ -223,14 +232,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a chosen_inline_result :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[ChosenInlineResult], Any]):
-            self.chosen_inline_result_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[ChosenInlineResult], Awaitable]):
+            self.chosen_inline_result_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def callback_query_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._callback_query_manager
 
@@ -238,14 +248,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a callback_query :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[CallbackQuery], Any]):
-            self.callback_query_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[CallbackQuery], Awaitable]):
+            self.callback_query_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def shipping_query_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._shipping_query_manager
 
@@ -253,14 +264,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a shipping_query :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[ShippingQuery], Any]):
-            self.shipping_query_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[ShippingQuery], Awaitable]):
+            self.shipping_query_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def pre_checkout_query_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._pre_checkout_query_manager
 
@@ -268,14 +280,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a pre_checkout_query :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[PreCheckoutQuery], Any]):
-            self.pre_checkout_query_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[PreCheckoutQuery], Awaitable]):
+            self.pre_checkout_query_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def poll_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._poll_manager
 
@@ -283,14 +296,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a poll :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[Poll], Any]):
-            self.poll_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[Poll], Awaitable]):
+            self.poll_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def poll_answer_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._poll_answer_manager
 
@@ -298,14 +312,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a poll_answer :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[PollAnswer], Any]):
-            self.poll_answer_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[PollAnswer], Awaitable]):
+            self.poll_answer_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def my_chat_member_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._my_chat_member_manager
 
@@ -313,14 +328,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a my_chat_member :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[ChatMemberUpdated], Any]):
-            self.my_chat_member_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
+            self.my_chat_member_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def chat_member_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._chat_member_manager
 
@@ -328,14 +344,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a chat_member :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[ChatMemberUpdated], Any]):
-            self.chat_member_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
+            self.chat_member_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def chat_join_request_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._chat_join_request_manager
 
@@ -343,14 +360,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a chat_join_request :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[ChatJoinRequest], Any]):
-            self.chat_join_request_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[ChatJoinRequest], Awaitable]):
+            self.chat_join_request_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def chat_boost_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._chat_boost_manager
 
@@ -358,14 +376,15 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a chat_boost :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[ChatBoostUpdated], Any]):
-            self.chat_boost_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[ChatBoostUpdated], Awaitable]):
+            self.chat_boost_manager.add_rule(checker, coroutine)
         return wrap
 
     @property
     def removed_chat_boost_manager(self) -> UpdateManager:
         '''
         .. automethod:: tglib.update_manager.UpdateManager::add_rule
+            :no-index:
         '''
         return self._removed_chat_boost_manager
 
@@ -373,8 +392,8 @@ class Client(TelegramApi):
         '''
         Use this decorator to manage a removed_chat_boost :obj:`~tglib.types.Update`.
         '''
-        def wrap(function: Callable[[ChatBoostRemoved], Any]):
-            self.removed_chat_boost_manager.add_rule(checker, function)
+        def wrap(coroutine: Callable[[ChatBoostRemoved], Awaitable]):
+            self.removed_chat_boost_manager.add_rule(checker, coroutine)
         return wrap
 
 

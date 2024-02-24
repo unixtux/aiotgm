@@ -4,7 +4,8 @@ import os
 import inspect
 from typing import (Any,
                     Union,
-                    Callable)
+                    Callable,
+                    Awaitable)
 
 from .logger import get_logger
 logger = get_logger('TelegramApi')
@@ -113,26 +114,26 @@ def _check_rule(
     manager: str,
     obj: object,
     checker: Callable[[Any], Any],
-    function: Callable[[Any], Any],
+    coroutine: Callable[[Any], Awaitable],
     /
 ):
     errors = []
 
     if not _func_ok(checker):
         errors.append(
-            "ERROR 1 • The 'checker' argument must"
-            ' be a normal function that takes only'
+            "ERROR 1 • The 'checker' argument"
+            ' must be a function that takes only'
             ' one parameter, it will be processed as'
             f' {obj.__name__}. E.g. -> {EXAMPLES[manager][1]}'
         )
     if not _func_ok(
-        function,
+        coroutine,
         must_be_coro = True
     ):
         n = len(errors) + 1
         errors.append(
-            f'ERROR {n} • The wrapped function must be'
-            ' an async def (async generator is not allowed)'
+            f'ERROR {n} • The wrapped coroutine must be'
+            ' an awaitable (async generator is not allowed)'
             ' that takes only one argument. E.g. -> async def'
             f' foo({EXAMPLES[manager][0]}: {obj.__name__}): return ...'
         )
@@ -150,25 +151,25 @@ class Rule:
     def __init__(
         self,
         checker: Callable[[Any], Any],
-        function: Callable[[Any], Any],
+        coroutine: Callable[[Any], Awaitable],
         /
     ):
         self._checker = checker
-        self._function = function
+        self._coroutine = coroutine
 
     @property
-    def checker(self) -> Callable[[Any], Any]:
+    def checker(self):
         return self._checker
 
     @property
-    def function(self) -> Callable[[Any], Any]:
-        return self._function
+    def coroutine(self):
+        return self._coroutine
 
 
 class NextFunction:
     '''
     You can return the instance of this class in a wrapped
-    function, to pass the :obj:`~tglib.types.Update` to the next function.
+    function, to pass the :obj:`~tglib.types.Update` to the next one.
 
     .. code-block:: python3
 
@@ -228,14 +229,14 @@ async def _run_coroutine(
     if not check:
         return NextFunction()
     try:
-        return await rule.function(obj)
+        return await rule.coroutine(obj)
     except BaseException as exc:
-        code = rule.function.__code__
+        code = rule.coroutine.__code__
         lineno = code.co_firstlineno
         filename = os.path.basename(code.co_filename)
         logger.error(
             f'{exc!r} occurred in the'
-            f' function {rule.function.__name__!r} in'
+            f' function {rule.coroutine.__name__!r} in'
             f' file {filename!r} at line {lineno}.'
         )
         return
@@ -265,19 +266,19 @@ class UpdateManager:
     def add_rule(
         self,
         checker: Callable[[Any], Any],
-        function: Callable[[Any], Any],
+        coroutine: Callable[[Any], Awaitable],
         /
     ):
         '''
-        :param checker: 
-        :type checker: (Any) -> Any
-        :param function: 
-        :type function: (Any) -> Any
+        :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Update`.
+        :type checker: :obj:`Callable[[Any], Any]`
+        :param coroutine: Pass a `coroutine <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ to be called if the :obj:`~tglib.types.Update` passes the check. It must takes only one argument.
+        :type coroutine: :obj:`Callable[[Any], Awaitable]`
         '''
         _check_rule(
             self._name,
             self._obj,
             checker,
-            function
+            coroutine
         )
-        self._rules += (Rule(checker, function),)
+        self._rules += (Rule(checker, coroutine),)
