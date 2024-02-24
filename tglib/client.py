@@ -743,6 +743,32 @@ class Client(TelegramApi):
         return await super().ban_chat_member(params)
 
 
+    async def ban_chat_sender_chat(
+        self,
+        chat_id: Union[int, str],
+        sender_chat_id: int
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#banchatsenderchat
+
+        Use this method to ban a channel chat in a supergroup or a channel. Until the chat
+        is :meth:`unbanned <tglib.Client.unban_chat_sender_chat>`, the owner of the banned chat won't be able to
+        send messages on behalf of **any of their channels**. The bot must be an administrator in the supergroup or
+        channel for this to work and must have the appropriate administrator rights. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param sender_chat_id: Unique identifier of the target sender chat.
+        :type sender_chat_id: :obj:`int`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'sender_chat_id': sender_chat_id
+        }
+        return await super().ban_chat_sender_chat(params)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -1660,25 +1686,6 @@ class Client(TelegramApi):
             'custom_title': custom_title
         }
         return await super().set_chat_administrator_custom_title(params)
-
-
-    async def ban_chat_sender_chat(
-        self,
-        chat_id: Union[int, str],
-        sender_chat_id: int
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#banchatsenderchat
-        Use this method to ban a channel chat in a supergroup or a channel. Until
-        the chat is unbanned, the owner of the banned chat won't be able to send messages
-        on behalf of any of their channels. The bot must be an administrator in the supergroup or
-        channel for this to work and must have the appropriate administrator rights. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'sender_chat_id': sender_chat_id
-        }
-        return await super().ban_chat_sender_chat(params)
 
 
     async def unban_chat_sender_chat(
