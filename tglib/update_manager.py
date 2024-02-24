@@ -268,6 +268,12 @@ class UpdateManager:
         function: Callable[[Any], Any],
         /
     ):
+        '''
+        :param checker: 
+        :type checker: (Any) -> Any
+        :param function: 
+        :type function: (Any) -> Any
+        '''
         _check_rule(
             self._name,
             self._obj,
