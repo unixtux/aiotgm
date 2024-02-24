@@ -174,30 +174,36 @@ class NextManager:
     Usage:
     .. code-block: python3
 
-    #!/bin/env python3
-    # example.py
+        #!/bin/env python3
+        # example.py
 
-    import tglib
-    import asyncio
-   
-    bot = tglib.Client("your_token")
+        import tglib
+        import asyncio
 
-    @bot.manage_message()
-    async def foo(message):
-        print("This is foo")
-        return NextManager()
+        bot = tglib.Client("your_token")
 
-    @bot.manage_message()
-    async def bar(message):
-        print("This is bar")
+        @bot.manage_message()
+        async def foo(message):
+            print("First")
+            return NextManager()
+
+        @bot.manage_message()
+        async def bar(message):
+            print("Second")
+
+        @bot.manage_message()
+        async def null(message):
+            print("Third")
 
     asyncio.run(bot.long_polling())
 
+    In the shell this is the output.
+
     .. code-block: shell
 
-    >>> python3 example.py
-    >>> 'This is foo'
-        'This is bar'
+        >>> python3 example.py
+        >>> 'First'
+            'Second'
     '''
 
 
