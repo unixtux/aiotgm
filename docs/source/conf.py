@@ -44,4 +44,9 @@ toc_object_entries = True # to not index members
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'furo' #'sphinx_rtd_theme' # 'alabaster'
-html_static_path = [] # ['_static']
+html_static_path = ['_static']
+html_theme_options = {
+    'light_logo': 'tux.png',
+    'dark_logo': 'tux.png',
+#    'navigation_with_keys': True
+}
