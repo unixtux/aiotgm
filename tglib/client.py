@@ -569,7 +569,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#answerinlinequery
 
         Use this method to send answers to an inline query. On success,
-        :obj:`True` is returned. No more than 50 results per query are allowed.
+        :obj:`True` is returned. No more than **50** results per query are allowed.
 
         :param inline_query_id: Unique identifier for the answered query.
         :type inline_query_id: :obj:`str`
