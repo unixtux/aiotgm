@@ -659,6 +659,32 @@ class Client(TelegramApi):
         return await super().answer_shipping_query(params)
 
 
+    async def answer_web_app_query(
+        self,
+        web_app_query_id: str,
+        result: InlineQueryResult
+    ) -> SentWebAppMessage:
+        '''
+        https://core.telegram.org/bots/api#answerwebappquery
+
+        Use this method to set the result of an interaction with a
+        `Web App <https://core.telegram.org/bots/webapps>`_ and send a corresponding message on behalf of
+        the user to the chat from which the query originated. On success, a :obj:`~tglib.types.SentWebAppMessage` object is returned.
+
+        :param web_app_query_id: Unique identifier for the query to be answered.
+        :type web_app_query_id: :obj:`str`
+        :param result: A JSON-serialized object describing the message to be sent.
+        :type result: :obj:`~tglib.types.InlineQueryResult`
+        :rtype: :obj:`~tglib.types.SentWebAppMessage`
+        '''
+        params = {
+            'web_app_query_id': web_app_query_id,
+            'result': result
+        }
+        result = await super().answer_web_app_query(params)
+        return SentWebAppMessage._dese(result)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -2937,32 +2963,6 @@ class Client(TelegramApi):
             'name': name
         }
         return await super().delete_sticker_set(params)
-
-
-    async def answer_web_app_query(
-        self,
-        web_app_query_id: str,
-        result: InlineQueryResult
-    ) -> SentWebAppMessage:
-        '''
-        https://core.telegram.org/bots/api#answerwebappquery
-
-        Use this method to set the result of an interaction with a
-        `Web App <https://core.telegram.org/bots/webapps>`_ and send a corresponding message on behalf of
-        the user to the chat from which the query originated. On success, a :obj:`~tglib.types.SentWebAppMessage` object is returned.
-
-        :param web_app_query_id: Unique identifier for the query to be answered.
-        :type web_app_query_id: :obj:`str`
-        :param result: A JSON-serialized object describing the message to be sent.
-        :type result: :obj:`~tglib.types.InlineQueryResult`
-        :rtype: :obj:`~tglib.types.SentWebAppMessage`
-        '''
-        params = {
-            'web_app_query_id': web_app_query_id,
-            'result': result
-        }
-        result = await super().answer_web_app_query(params)
-        return SentWebAppMessage._dese(result)
 
 
     async def send_invoice(
