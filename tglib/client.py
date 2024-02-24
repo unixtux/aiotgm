@@ -109,6 +109,9 @@ class Client(TelegramApi):
 
     @property
     def message_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._message_manager
 
     def manage_message(self, checker: Callable[[Message], Any] = lambda message: ..., /):
@@ -121,6 +124,9 @@ class Client(TelegramApi):
 
     @property
     def edited_message_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._edited_message_manager
 
     def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: ..., /):
@@ -133,6 +139,9 @@ class Client(TelegramApi):
 
     @property
     def channel_post_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._channel_post_manager
 
     def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: ..., /):
@@ -145,6 +154,9 @@ class Client(TelegramApi):
 
     @property
     def edited_channel_post_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._edited_channel_post_manager
 
     def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: ..., /):
@@ -157,6 +169,9 @@ class Client(TelegramApi):
 
     @property
     def message_reaction_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._message_reaction_manager
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
@@ -169,6 +184,9 @@ class Client(TelegramApi):
 
     @property
     def message_reaction_count_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._message_reaction_count_manager
 
     def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: ..., /):
@@ -181,6 +199,9 @@ class Client(TelegramApi):
 
     @property
     def inline_query_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._inline_query_manager
 
     def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: ..., /):
@@ -193,6 +214,9 @@ class Client(TelegramApi):
 
     @property
     def chosen_inline_result_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._chosen_inline_result_manager
 
     def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: ..., /):
@@ -205,6 +229,9 @@ class Client(TelegramApi):
 
     @property
     def callback_query_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._callback_query_manager
 
     def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
@@ -217,6 +244,9 @@ class Client(TelegramApi):
 
     @property
     def shipping_query_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._shipping_query_manager
 
     def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: ..., /):
@@ -229,6 +259,9 @@ class Client(TelegramApi):
 
     @property
     def pre_checkout_query_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._pre_checkout_query_manager
 
     def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
@@ -241,6 +274,9 @@ class Client(TelegramApi):
 
     @property
     def poll_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._poll_manager
 
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
@@ -253,6 +289,9 @@ class Client(TelegramApi):
 
     @property
     def poll_answer_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._poll_answer_manager
 
     def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
@@ -265,6 +304,9 @@ class Client(TelegramApi):
 
     @property
     def my_chat_member_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._my_chat_member_manager
 
     def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
@@ -277,6 +319,9 @@ class Client(TelegramApi):
 
     @property
     def chat_member_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._chat_member_manager
 
     def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
@@ -289,6 +334,9 @@ class Client(TelegramApi):
 
     @property
     def chat_join_request_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._chat_join_request_manager
 
     def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
@@ -301,6 +349,9 @@ class Client(TelegramApi):
 
     @property
     def chat_boost_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._chat_boost_manager
 
     def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
@@ -313,6 +364,9 @@ class Client(TelegramApi):
 
     @property
     def removed_chat_boost_manager(self) -> UpdateManager:
+        '''
+        .. automethod:: tglib.update_manager.UpdateManager::add_rule
+        '''
         return self._removed_chat_boost_manager
 
     def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
