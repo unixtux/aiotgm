@@ -21,14 +21,7 @@ from .api import (
     TelegramError
 )
 from .types import *
-from .types import (#ChatMember,
-                    #MenuButton,
-                    #InputMedia,
-                    #ReactionType,
-                    #BotCommandScope,
-                    #InlineQueryResult,
-                    #PassportElementError,
-                    _dese_chat_member,
+from .types import (_dese_chat_member,
                     _dese_menu_button,)
 
 from .update_manager import *
