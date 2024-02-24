@@ -1,4 +1,4 @@
-[![pypi](https://img.shields.io/badge/pypi-tglib-blue)](https://pypi.org/project/tglib/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1) [![Documentation Status](https://readthedocs.org/projects/tglib/badge/?version=latest)](https://tglib.readthedocs.io/en/latest/?badge=latest)
+[![pypi](https://img.shields.io/badge/pypi-tglib-blue)](https://pypi.org/project/tglib/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1) [![docs](https://readthedocs.org/projects/tglib/badge/?version=latest)](https://tglib.readthedocs.io/en/latest/?badge=latest)
 
 #
 
@@ -13,30 +13,18 @@
 
 * #### Installation
 ```powershell
+$ pip install tglib
+```
+
+* #### Keep it updated
+```powershell
 $ pip install -U tglib
 ```
 
 #
 
-* #### 18 managers for different [updates](https://core.telegram.org/bots/api#update)
-  * [message_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.message_manager)
-  * [edited_message_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.edited_message_manager)
-  * [channel_post_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.channel_post_manager)
-  * [edited_channel_post_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.edited_channel_post_manager)
-  * [message_reaction_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.message_reaction_manager)
-  * [message_reaction_count_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.message_reaction_count_manager)
-  * [inline_query_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.inline_query_manager)
-  * [chosen_inline_result_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.chosen_inline_result_manager)
-  * [callback_query_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.callback_query_manager)
-  * [shipping_query_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.shipping_query_manager)
-  * [pre_checkout_query_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.pre_checkout_query_manager)
-  * [poll_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.poll_manager)
-  * [poll_answer_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.poll_answer_manager)
-  * [my_chat_member_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.my_chat_member_manager)
-  * [chat_member_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.chat_member_manager)
-  * [chat_join_request_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.chat_join_request_manager)
-  * [chat_boost_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.chat_boost_manager)
-  * [removed_chat_boost_manager](https://tglib.readthedocs.io/en/latest/client.html#tglib.Client.removed_chat_boost_manager)
+* #### Prerequisites
+You require a good **python knowledge** with the **[asyncio module](https://docs.python.org/3/library/asyncio.html)** and a Telegram Bot API token, you can get it via **[@BotFather](https://t.me/botfather)**.
 
 #
 
@@ -61,11 +49,6 @@ markup.row_width = 4
 * #### Notes
 
 > Webhook has not been implemented yet.
-
-#
-
-* #### Prerequisites
-You require a good **Python knowledge**, some skills with the **asyncio module** and a telegram bot API token, you can get it via **[@BotFather](https://t.me/botfather)**.
 
 #
 
