@@ -537,13 +537,13 @@ class Client(TelegramApi):
         :param callback_query_id: Unique identifier for the query to be answered.
         :type callback_query_id: :obj:`str`
         :param text: Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
-        :type text: :obj:`str` or :obj:`None`
+        :type text: :obj:`str`, optional
         :param show_alert: If :obj:`True`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to :obj:`False`.
-        :type show_alert: :obj:`bool` or :obj:`None`
+        :type show_alert: :obj:`bool`, optional
         :param url: URL that will be opened by the user's client.
-        :type url: :obj:`str` or :obj:`None`
+        :type url: :obj:`str`, optional
         :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to :obj:`0`.
-        :type cache_time: :obj:`int` or :obj:`None`
+        :type cache_time: :obj:`int`, optional
         :rtype: :obj:`True`
         '''
         params = {
@@ -576,13 +576,13 @@ class Client(TelegramApi):
         :param results: A JSON-serialized array of results for the inline query.
         :type results: :obj:`list` of :obj:`~tglib.types.InlineQueryResult`
         :param cache_time: The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to :obj:`300`.
-        :type cache_time: :obj:`int` or :obj:`None`
+        :type cache_time: :obj:`int`, optional
         :param is_personal: Pass :obj:`True` if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query.
-        :type is_personal: :obj:`bool` or :obj:`None`
+        :type is_personal: :obj:`bool`, optional
         :param next_offset: Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
-        :type next_offset: :obj:`str` or :obj:`None`
+        :type next_offset: :obj:`str`, optional
         :param button: A JSON-serialized object describing a button to be shown above inline query results.
-        :type button: :obj:`~tglib.types.InlineQueryResultsButton` or :obj:`None`
+        :type button: :obj:`~tglib.types.InlineQueryResultsButton`, optional
         :rtype: :obj:`True`
         '''
         params = {
@@ -615,7 +615,7 @@ class Client(TelegramApi):
         :param ok: Specify :obj:`True` if everything is alright (goods are available, etc.) and the bot is ready to proceed with the order. Use :obj:`False` if there are any problems.
         :type ok: :obj:`bool`
         :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains the reason for failure to proceed with the checkout. Telegram will display this message to the user.
-        :type error_message: :obj:`str` or :obj:`None`
+        :type error_message: :obj:`str`, optional
         :rtype: :obj:`True`
         '''
         params = {
@@ -645,9 +645,9 @@ class Client(TelegramApi):
         :param ok: Pass :obj:`True` if delivery to the specified address is possible and :obj:`False` if there are any problems (for example, if delivery to the specified address is not possible).
         :type ok: :obj:`bool`
         :param shipping_options: Required if *ok* is :obj:`True`. A JSON-serialized array of available shipping options.
-        :type shipping_options: :obj:`list` of :obj:`~tglib.types.ShippingOption` or :obj:`None`
+        :type shipping_options: :obj:`list` of :obj:`~tglib.types.ShippingOption`, optional
         :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains why it is impossible to complete the order. Telegram will display this message to the user.
-        :type error_message: :obj:`str`
+        :type error_message: :obj:`str`, optional
         :rtype: :obj:`True`
         '''
         params = {
@@ -707,6 +707,40 @@ class Client(TelegramApi):
             'user_id': user_id
         }
         return await super().approve_chat_join_request(params)
+
+
+    async def ban_chat_member(
+        self,
+        chat_id: Union[int, str],
+        user_id: int,
+        until_date: Optional[int] = None,
+        revoke_messages: Optional[bool] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#banchatmember
+
+        Use this method to ban a user in a group, a supergroup or a channel. In the case of
+        supergroups and channels, the user will not be able to return to the chat on their own using
+        invite links, etc., unless :meth:`unbanned <tglib.Client.unban_chat_member>` first. The bot must be an administrator
+        in the chat for this to work and must have the appropriate administrator rights. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target group or username of the target supergroup or channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :param until_date: Date when the user will be unbanned; Unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.
+        :type until_date: :obj:`int`, optional
+        :param revoke_messages: Pass :obj:`True` to delete all messages from the chat for the user that is being removed. If :obj:`False`, the user will be able to see messages in the group that were sent before the user was removed. Always :obj:`True` for supergroups and channels.
+        :type revoke_messages: :obj:`bool`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+        if until_date is not None: params['until_date'] = until_date
+        if revoke_messages is not None: params['revoke_messages'] = revoke_messages
+        return await super().ban_chat_member(params)
 
 
     async def get_updates(
@@ -1513,29 +1547,6 @@ class Client(TelegramApi):
         }
         result = await super().get_file(params)
         return File._dese(result)
-
-
-    async def ban_chat_member(
-        self,
-        chat_id: Union[int, str],
-        user_id: int,
-        until_date: Optional[int] = None,
-        revoke_messages: Optional[bool] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#banchatmember
-        Use this method to ban a user in a group, a supergroup or a channel. In the case
-        of supergroups and channels, the user will not be able to return to the chat on their
-        own using invite links, etc., unless unbanned first. The bot must be an administrator
-        in the chat for this to work and must have the appropriate administrator rights. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id
-        }
-        if until_date is not None: params['until_date'] = until_date
-        if revoke_messages is not None: params['revoke_messages'] = revoke_messages
-        return await super().ban_chat_member(params)
 
 
     async def unban_chat_member(
