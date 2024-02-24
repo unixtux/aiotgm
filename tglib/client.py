@@ -842,6 +842,31 @@ class Client(TelegramApi):
         return await super().ban_chat_sender_chat(params)
 
 
+    async def close_forum_topic(
+        self,
+        chat_id: Union[int, str],
+        message_thread_id: int
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#closeforumtopic
+
+        Use this method to close an open topic in a forum supergroup chat. The bot must
+        be an administrator in the chat for this to work and must have the *can_manage_topics*
+        administrator rights, unless it is the creator of the topic. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id:  :obj:`int` or :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread of the forum topic.
+        :type message_thread_id: :obj:`int`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_thread_id': message_thread_id
+        }
+        return await super().close_forum_topic(params)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -2190,24 +2215,6 @@ class Client(TelegramApi):
         if name is not None: params['name'] = name
         if icon_custom_emoji_id is not None: params['icon_custom_emoji_id'] = icon_custom_emoji_id
         return await super().edit_forum_topic(params)
-
-
-    async def close_forum_topic(
-        self,
-        chat_id: Union[int, str],
-        message_thread_id: int
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#closeforumtopic
-        Use this method to close an open topic in a forum supergroup chat. The bot must
-        be an administrator in the chat for this to work and must have the can_manage_topics
-        administrator rights, unless it is the creator of the topic. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'message_thread_id': message_thread_id
-        }
-        return await super().close_forum_topic(params)
 
 
     async def reopen_forum_topic(
