@@ -7,7 +7,7 @@
 #
 
 * #### Prerequisites
-You require a good **python knowledge** with the [asyncio module](https://docs.python.org/3/library/asyncio.html) and a Telegram Bot API token, you can get it via [@BotFather](https://t.me/botfather).
+You require a good python knowledge with the [asyncio module](https://docs.python.org/3/library/asyncio.html) and a Telegram Bot API token, you can get it via [@BotFather](https://t.me/botfather).
 
 #
 
