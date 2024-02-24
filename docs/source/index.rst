@@ -6,6 +6,11 @@
 **tglib Documentation**
 =======================
 
+Indices and tables
+==================
+
+* :ref:`genindex`
+
 .. toctree::
    installation
    client
@@ -15,9 +20,5 @@
    :maxdepth: 3
    :caption: Contents:
 
-Indices and tables
-==================
-
- * :ref:`genindex`
- * :ref:`modindex`
- * :ref:`search`
+..  * :ref:`modindex`
+..  * :ref:`search`
