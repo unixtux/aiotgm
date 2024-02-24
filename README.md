@@ -6,7 +6,12 @@
 
 #
 
-* #### Requirements
+* #### Prerequisites
+You require a good **python knowledge** with the [asyncio module](https://docs.python.org/3/library/asyncio.html) and a Telegram Bot API token, you can get it via [@BotFather](https://t.me/botfather).
+
+#
+
+* #### Dependencies
   * Python >= 3.8
   * [aiohttp](https://github.com/aio-libs/aiohttp)
   * Optional [ujson](https://github.com/ultrajson/ultrajson) & [certifi](https://github.com/certifi/python-certifi)
@@ -20,11 +25,6 @@ $ pip install tglib
 ```powershell
 $ pip install -U tglib
 ```
-
-#
-
-* #### Prerequisites
-You require a good **python knowledge** with the [asyncio module](https://docs.python.org/3/library/asyncio.html) and a Telegram Bot API token, you can get it via [@BotFather](https://t.me/botfather).
 
 #
 
