@@ -842,6 +842,19 @@ class Client(TelegramApi):
         return await super().ban_chat_sender_chat(params)
 
 
+    async def close(self) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#close
+
+        Use this method to close the bot instance before moving it from one local server to another. You need to delete the
+        webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will
+        return error 429 in the first 10 minutes after the bot is launched. Returns :obj:`True` on success. Requires no parameters.
+
+        :rtype: :obj:`True`
+        '''
+        return await super().close()
+
+
     async def close_forum_topic(
         self,
         chat_id: Union[int, str],
@@ -906,16 +919,6 @@ class Client(TelegramApi):
         not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
         '''
         return await super().log_out()
-
-
-    async def close(self) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#close
-        Use this method to close the bot instance before moving it from one local server to another. You need to delete the
-        webhook before calling this method to ensure that the bot isn't launched again after server restart. The method will
-        return error 429 in the first 10 minutes after the bot is launched. Returns True on success. Requires no parameters.
-        '''
-        return await super().close()
 
 
     async def send_message(
