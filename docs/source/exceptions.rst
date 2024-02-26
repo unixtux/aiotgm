@@ -7,4 +7,4 @@
     :undoc-members:
     :show-inheritance:
 
-.. class:: TimeoutError
+.. exception:: TimeoutError

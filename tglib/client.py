@@ -967,6 +967,54 @@ class Client(TelegramApi):
         return MessageId._dese(result)
 
 
+    async def copy_messages(
+        self,
+        chat_id: Union[int, str],
+        from_chat_id: Union[int, str],
+        message_ids: list[int],
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        remove_caption: Optional[bool] = None
+    ) -> list[MessageId]:
+        '''
+        https://core.telegram.org/bots/api#copymessages
+
+        Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service
+        messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz :obj:`poll <tglib.types.Poll>` can be copied only if the value
+        of the field *correct_option_id* is known to the bot. The method is analogous to the method :meth:`~tglib.Client.forward_messages`, but the copied messages don't have
+        a link to the original message. Album grouping is kept for copied messages. On success, an array of :obj:`~tglib.types.MessageId` of the sent messages is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param from_chat_id: Unique identifier for the chat where the original messages were sent (or channel username in the format ``@channelusername``).
+        :type from_chat_id: :obj:`int` or :obj:`str`
+        :param message_ids: Identifiers of 1-100 messages in the chat *from_chat_id* to copy. The identifiers must be specified in a strictly increasing order.
+        :type message_ids: :obj:`list` of :obj:`int`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param disable_notification: Sends the messages `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent messages from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param remove_caption: Pass :obj:`True` to copy the messages without their captions.
+        :type remove_caption: :obj:`bool`, optional
+        :rtype: :obj:`list` of :obj:`~tglib.types.MessageId`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'from_chat_id': from_chat_id,
+            'message_ids': message_ids
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if remove_caption is not None: params['remove_caption'] = remove_caption
+        result = await super().copy_messages(params)
+        return [MessageId._dese(mid) for mid in result]
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -1095,37 +1143,6 @@ class Client(TelegramApi):
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
         result = await super().forward_messages(params)
-        return [MessageId._dese(mid) for mid in result]
-
-
-    async def copy_messages(
-        self,
-        chat_id: Union[int, str],
-        from_chat_id: Union[int, str],
-        message_ids: list[int],
-        message_thread_id: Optional[int] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        remove_caption: Optional[bool] = None
-    ) -> list[MessageId]:
-        '''
-        https://core.telegram.org/bots/api#copymessages
-        Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service
-        messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz poll can be copied only if the value
-        of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages, but the copied messages don't have
-        a link to the original message. Album grouping is kept for copied messages. On success, an array of MessageId of the sent messages is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'from_chat_id': from_chat_id,
-            'message_ids': message_ids
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if remove_caption is not None: params['remove_caption'] = remove_caption
-        result = await super().copy_messages(params)
         return [MessageId._dese(mid) for mid in result]
 
 
