@@ -31,13 +31,13 @@ logger = get_logger('TelegramApi')
 
 class Client(TelegramApi):
     '''
-    Main class to comunicate with the Telegram Bot API Server.
+    Main class to communicate with the `Telegram Bot API <https://core.telegram.org/bots/api>`_.
 
     :param token: Api token obtained from `@BotFather <https://t.me/botfather>`_.
     :type token: :obj:`str`
-    :param parse_mode: Select a default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overridden in the methods).
+    :param parse_mode: Select a default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overwritten in the methods).
     :type parse_mode: :obj:`str`, optional
-    :param protect_content: Pass :obj:`True` to use the protect content option by default (it can be overridden in the methods).
+    :param protect_content: Pass :obj:`True` to use the protect content option by default (it can be overwritten in the methods).
     :type protect_content: :obj:`bool`, optional
     :param proxy: Pass a proxy string to be used in the http requests.
     :type proxy: :obj:`str`, optional
@@ -82,7 +82,7 @@ class Client(TelegramApi):
 
     @property
     def parse_mode(self) -> Optional[str]:
-        '''Default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overridden in the methods).'''
+        '''Default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overwritten in the methods).'''
         return self._parse_mode
 
     @parse_mode.setter
@@ -96,7 +96,7 @@ class Client(TelegramApi):
 
     @property
     def protect_content(self) -> Optional[bool]:
-        '''Default protect content option (it can be overridden in the methods).'''
+        '''Default protect content option (it can be overwritten in the methods).'''
         return self._protect_content
 
     @protect_content.setter
