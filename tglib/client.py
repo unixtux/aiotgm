@@ -721,7 +721,7 @@ class Client(TelegramApi):
         :type ok: :obj:`bool`
         :param shipping_options: Required if *ok* is :obj:`True`. A JSON-serialized array of available shipping options.
         :type shipping_options: :obj:`list` of :obj:`~tglib.types.ShippingOption`, optional
-        :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user.
+        :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable"). Telegram will display this message to the user.
         :type error_message: :obj:`str`, optional
         :rtype: :obj:`True`
         '''
