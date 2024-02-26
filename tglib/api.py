@@ -375,7 +375,63 @@ class TelegramApi:
             raise TimeoutError(method)
 
 
-###########################################################
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    async def add_sticker_to_set(self, params: dict):
+        method = 'addStickerToSet'
+        return await self._request(method, params)
+
+    async def answer_callback_query(self, params: dict):
+        method = 'answerCallbackQuery'
+        return await self._request(method, params)
+
+    async def answer_inline_query(self, params: dict):
+        method = 'answerInlineQuery'
+        return await self._request(method, params)
+
+    async def answer_pre_checkout_query(self, params: dict):
+        method = 'answerPreCheckoutQuery'
+        return await self._request(method, params)
+
+    async def answer_shipping_query(self, params: dict):
+        method = 'answerShippingQuery'
+        return await self._request(method, params)
+
+    async def answer_web_app_query(self, params: dict):
+        method = 'answerWebAppQuery'
+        return await self._request(method, params)
+
+    async def approve_chat_join_request(self, params: dict):
+        method = 'approveChatJoinRequest'
+        return await self._request(method, params)
+
+    async def ban_chat_member(self, params: dict):
+        method = 'banChatMember'
+        return await self._request(method, params)
+
+    async def ban_chat_sender_chat(self, params: dict):
+        method = 'banChatSenderChat'
+        return await self._request(method, params)
+
+    async def close(self):
+        method = 'close'
+        return await self._request(method)
+
+    async def close_forum_topic(self, params: dict):
+        method = 'closeForumTopic'
+        return await self._request(method, params)
+
+    async def close_general_forum_topic(self, params: dict):
+        method = 'closeGeneralForumTopic'
+        return await self._request(method, params)
+
+    async def copy_message(self, params: dict):
+        method = 'copyMessage'
+        return await self._request(method, params)
+
+    async def copy_messages(self, params: dict):
+        method = 'copyMessages'
+        return await self._request(method, params)
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -393,24 +449,12 @@ class TelegramApi:
         method = 'logOut'
         return await self._request(method)
 
-    async def close(self):
-        method = 'close'
-        return await self._request(method)
-
     async def forward_message(self, params: dict):
         method = 'forwardMessage'
         return await self._request(method, params)
 
     async def forward_messages(self, params: dict):
         method = 'forwardMessages'
-        return await self._request(method, params)
-
-    async def copy_message(self, params: dict):
-        method = 'copyMessage'
-        return await self._request(method, params)
-
-    async def copy_messages(self, params: dict):
-        method = 'copyMessages'
         return await self._request(method, params)
 
     async def send_photo(self, params: dict):
@@ -493,10 +537,6 @@ class TelegramApi:
         method = 'getFile'
         return await self._request(method, params)
 
-    async def ban_chat_member(self, params: dict):
-        method = 'banChatMember'
-        return await self._request(method, params)
-
     async def unban_chat_member(self, params: dict):
         method = 'unbanChatMember'
         return await self._request(method, params)
@@ -511,10 +551,6 @@ class TelegramApi:
 
     async def set_chat_administrator_custom_title(self, params: dict):
         method = 'setChatAdministratorCustomTitle'
-        return await self._request(method, params)
-
-    async def ban_chat_sender_chat(self, params: dict):
-        method = 'banChatSenderChat'
         return await self._request(method, params)
 
     async def unban_chat_sender_chat(self, params: dict):
@@ -539,10 +575,6 @@ class TelegramApi:
 
     async def revoke_chat_invite_link(self, params: dict):
         method = 'revokeChatInviteLink'
-        return await self._request(method, params)
-
-    async def approve_chat_join_request(self, params: dict):
-        method = 'approveChatJoinRequest'
         return await self._request(method, params)
 
     async def decline_chat_join_request(self, params: dict):
@@ -618,10 +650,6 @@ class TelegramApi:
         method = 'editForumTopic'
         return await self._request(method, params)
 
-    async def close_forum_topic(self, params: dict):
-        method = 'closeForumTopic'
-        return await self._request(method, params)
-
     async def reopen_forum_topic(self, params: dict):
         method = 'reopenForumTopic'
         return await self._request(method, params)
@@ -638,10 +666,6 @@ class TelegramApi:
         method = 'editGeneralForumTopic'
         return await self._request(method, params)
 
-    async def close_general_forum_topic(self, params: dict):
-        method = 'closeGeneralForumTopic'
-        return await self._request(method, params)
-
     async def reopen_general_forum_topic(self, params: dict):
         method = 'reopenGeneralForumTopic'
         return await self._request(method, params)
@@ -656,10 +680,6 @@ class TelegramApi:
 
     async def unpin_all_general_forum_topic_messages(self, params: dict):
         method = 'unpinAllGeneralForumTopicMessages'
-        return await self._request(method, params)
-
-    async def answer_callback_query(self, params: dict):
-        method = 'answerCallbackQuery'
         return await self._request(method, params)
 
     async def get_user_chat_boosts(self, params: dict):
@@ -777,10 +797,6 @@ class TelegramApi:
         method = 'createNewStickerSet'
         return await self._request(method, params)
 
-    async def add_sticker_to_set(self, params: dict):
-        method = 'addStickerToSet'
-        return await self._request(method, params)
-
     async def set_sticker_position_in_set(self, params: dict):
         method = 'setStickerPositionInSet'
         return await self._request(method, params)
@@ -818,28 +834,12 @@ class TelegramApi:
         method = 'deleteStickerSet'
         return await self._request(method, params)
 
-    async def answer_inline_query(self, params: dict):
-        method = 'answerInlineQuery'
-        return await self._request(method, params)
-
-    async def answer_web_app_query(self, params: dict):
-        method = 'answerWebAppQuery'
-        return await self._request(method, params)
-
     async def send_invoice(self, params: dict):
         method = 'sendInvoice'
         return await self._request(method, params)
 
     async def create_invoice_link(self, params: dict):
         method = 'createInvoiceLink'
-        return await self._request(method, params)
-
-    async def answer_shipping_query(self, params: dict):
-        method = 'answerShippingQuery'
-        return await self._request(method, params)
-
-    async def answer_pre_checkout_query(self, params: dict):
-        method = 'answerPreCheckoutQuery'
         return await self._request(method, params)
 
     async def set_passport_data_errors(self, params: dict):

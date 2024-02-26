@@ -882,6 +882,91 @@ class Client(TelegramApi):
         return await super().close_forum_topic(params)
 
 
+    async def close_general_forum_topic(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#closegeneralforumtopic
+
+        Use this method to close an open 'General' topic in a forum supergroup chat.
+        The bot must be an administrator in the chat for this to work and must have
+        the *can_manage_topics* administrator rights. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        return await super().close_general_forum_topic(params)
+
+
+    async def copy_message(
+        self,
+        chat_id: Union[int, str],
+        from_chat_id: Union[int, str],
+        message_id: int,
+        message_thread_id: Optional[int] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
+        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+    ) -> MessageId:
+        '''
+        https://core.telegram.org/bots/api#copymessage
+
+        Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied.
+        A quiz :obj:`poll <tglib.types.Poll>` can be copied only if the value of the field *correct_option_id* is known to the bot. The method is analogous to the method
+        :meth:`~tglib.Client.forward_message`, but the copied message doesn't have a link to the original message. Returns the :obj:`~tglib.types.MessageId` of the sent message on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param from_chat_id: Unique identifier for the chat where the original message was sent (or channel username in the format ``@channelusername``).
+        :type from_chat_id: :obj:`int` or :obj:`str`
+        :param message_id: Message identifier in the chat specified in *from_chat_id*.
+        :type message_id: :obj:`int`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param caption: New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept.
+        :type caption: :obj:`str`, optional
+        :param parse_mode: Mode for parsing entities in the new caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        :type parse_mode: :obj:`str`, optional
+        :param caption_entities: A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of *parse_mode*.
+        :type caption_entities: :obj:`list` of :obj:`~tglib.types.MessageEntity`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~tglib.types.ReplyParameters`, optional
+        :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
+        :type reply_markup: :obj:`~tglib.types.InlineKeyboardMarkup` or :obj:`~tglib.types.ReplyKeyboardMarkup` or :obj:`~tglib.types.ReplyKeyboardRemove` or :obj:`~tglib.types.ForceReply`, optional
+        :rtype: :obj:`~tglib.types.MessageId`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'from_chat_id': from_chat_id,
+            'message_id': message_id
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if caption is not None: params['caption'] = caption
+        if parse_mode is not None: params['parse_mode'] = parse_mode
+        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
+        if caption_entities is not None: params['caption_entities'] = caption_entities
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().copy_message(params)
+        return MessageId._dese(result)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -1011,45 +1096,6 @@ class Client(TelegramApi):
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
         result = await super().forward_messages(params)
         return [MessageId._dese(mid) for mid in result]
-
-
-    async def copy_message(
-        self,
-        chat_id: Union[int, str],
-        from_chat_id: Union[int, str],
-        message_id: int,
-        message_thread_id: Optional[int] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
-    ) -> MessageId:
-        '''
-        https://core.telegram.org/bots/api#copymessage
-        Use this method to copy messages of any kind. Service messages and invoice messages can't be copied. A quiz poll can be
-        copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessage,
-        but the copied message doesn't have a link to the original message. Returns the MessageId of the sent message on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'from_chat_id': from_chat_id,
-            'message_id': message_id
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if caption is not None: params['caption'] = caption
-        if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
-        if caption_entities is not None: params['caption_entities'] = caption_entities
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().copy_message(params)
-        return MessageId._dese(result)
 
 
     async def copy_messages(
@@ -2292,22 +2338,6 @@ class Client(TelegramApi):
             'name': name
         }
         return await super().edit_general_forum_topic(params)
-
-
-    async def close_general_forum_topic(
-        self,
-        chat_id: Union[int, str]
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#closegeneralforumtopic
-        Use this method to close an open 'General' topic in a forum supergroup chat.
-        The bot must be an administrator in the chat for this to work and must have
-        the can_manage_topics administrator rights. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        return await super().close_general_forum_topic(params)
 
 
     async def reopen_general_forum_topic(
