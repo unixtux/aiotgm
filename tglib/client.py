@@ -1,7 +1,5 @@
 #!/bin/env python3
 
-from __future__ import annotations
-
 __all__ = (
     'Client',
     'NextFunction',
@@ -38,13 +36,13 @@ class Client(TelegramApi):
     :param token: Api token obtained from `@BotFather <https://t.me/botfather>`_.
     :type token: :obj:`str`
     :param parse_mode: Select a default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overridden in the methods).
-    :type parse_mode: :obj:`str` or :obj:`None`
+    :type parse_mode: :obj:`str`, optional
     :param protect_content: Pass :obj:`True` to use the protect content option by default (it can be overridden in the methods).
-    :type protect_content: :obj:`bool` or :obj:`None`
+    :type protect_content: :obj:`bool`, optional
     :param proxy: Pass a proxy string to be used in the http requests.
-    :type proxy: :obj:`str` or :obj:`None`
+    :type proxy: :obj:`str`, optional
     :param debug: Pass :obj:`True` for more information about http requests (useful for debugging).
-    :type debug: :obj:`bool` or :obj:`None`
+    :type debug: :obj:`bool`, optional
     '''
     def __init__(
         self,
