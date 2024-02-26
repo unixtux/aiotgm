@@ -23,7 +23,7 @@ from .api import (
 )
 from .types import *
 from .types import (_dese_chat_member,
-                    _dese_menu_button,)
+                    _dese_menu_button)
 
 from .update_manager import *
 
@@ -607,13 +607,17 @@ class Client(TelegramApi):
         The answer will be displayed to the user as a notification at the top
         of the chat screen or as an alert. On success, :obj:`True` is returned.
 
+            Alternatively, the user can be redirected to the specified Game URL.
+            For this option to work, you must first create a game for your bot via `@BotFather <https://t.me/botfather>`_ and accept the terms.
+            Otherwise, you may use links like ``t.me/your_bot?start=XXXX`` that open your bot with a parameter.
+
         :param callback_query_id: Unique identifier for the query to be answered.
         :type callback_query_id: :obj:`str`
         :param text: Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters.
         :type text: :obj:`str`, optional
         :param show_alert: If :obj:`True`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to :obj:`False`.
         :type show_alert: :obj:`bool`, optional
-        :param url: URL that will be opened by the user's client.
+        :param url: URL that will be opened by the user's client. If you have created a :obj:`~tglib.types.Game` and accepted the conditions via `@BotFather <https://t.me/botfather>`_, specify the URL that opens your game - note that this will only work if the query comes from a :obj:`callback_game <tglib.types.InlineKeyboardButton>` button. Otherwise, you may use links like ``t.me/your_bot?start=XXXX`` that open your bot with a parameter.
         :type url: :obj:`str`, optional
         :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to :obj:`0`.
         :type cache_time: :obj:`int`, optional
@@ -687,7 +691,7 @@ class Client(TelegramApi):
         :type pre_checkout_query_id: :obj:`str`
         :param ok: Specify :obj:`True` if everything is alright (goods are available, etc.) and the bot is ready to proceed with the order. Use :obj:`False` if there are any problems.
         :type ok: :obj:`bool`
-        :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains the reason for failure to proceed with the checkout. Telegram will display this message to the user.
+        :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains the reason for failure to proceed with the checkout (e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!"). Telegram will display this message to the user.
         :type error_message: :obj:`str`, optional
         :rtype: :obj:`True`
         '''
@@ -719,7 +723,7 @@ class Client(TelegramApi):
         :type ok: :obj:`bool`
         :param shipping_options: Required if *ok* is :obj:`True`. A JSON-serialized array of available shipping options.
         :type shipping_options: :obj:`list` of :obj:`~tglib.types.ShippingOption`, optional
-        :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains why it is impossible to complete the order. Telegram will display this message to the user.
+        :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user.
         :type error_message: :obj:`str`, optional
         :rtype: :obj:`True`
         '''
