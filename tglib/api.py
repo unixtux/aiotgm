@@ -433,6 +433,10 @@ class TelegramApi:
         method = 'copyMessages'
         return await self._request(method, params)
 
+    async def create_chat_invite_link(self, params: dict):
+        method = 'createChatInviteLink'
+        return await self._request(method, params)
+
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
@@ -563,10 +567,6 @@ class TelegramApi:
 
     async def export_chat_invite_link(self, params: dict):
         method = 'exportChatInviteLink'
-        return await self._request(method, params)
-
-    async def create_chat_invite_link(self, params: dict):
-        method = 'createChatInviteLink'
         return await self._request(method, params)
 
     async def edit_chat_invite_link(self, params: dict):

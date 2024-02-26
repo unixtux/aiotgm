@@ -1015,6 +1015,44 @@ class Client(TelegramApi):
         return [MessageId._dese(mid) for mid in result]
 
 
+    async def create_chat_invite_link(
+        self,
+        chat_id: Union[int, str],
+        name: Optional[str] = None,
+        expire_date: Optional[int] = None,
+        member_limit: Optional[int] = None,
+        creates_join_request: Optional[bool] = None
+    ) -> ChatInviteLink:
+        '''
+        https://core.telegram.org/bots/api#createchatinvitelink
+
+        Use this method to create an additional invite link for a chat. The bot must be an administrator
+        in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the
+        method :meth:`~tglib.Client.revoke_chat_invite_link`. Returns the new invite link as :obj:`~tglib.types.ChatInviteLink` object.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param name: Invite link name; 0-32 characters.
+        :type name: :obj:`str`, optional
+        :param expire_date: Point in time (Unix timestamp) when the link will expire.
+        :type expire_date: :obj:`int`, optional
+        :param member_limit: The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999.
+        :type member_limit: :obj:`int`, optional
+        :param creates_join_request: :obj:`True`, if users joining the chat via the link need to be approved by chat administrators. If :obj:`True`, *member_limit* can't be specified.
+        :type creates_join_request: :obj:`bool`, optional
+        :rtype: :obj:`~tglib.types.ChatInviteLink`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        if name is not None: params['name'] = name
+        if expire_date is not None: params['expire_date'] = expire_date
+        if member_limit is not None: params['member_limit'] = member_limit
+        if creates_join_request is not None: params['creates_join_request'] = creates_join_request
+        result = await super().create_chat_invite_link(params)
+        return ChatInviteLink._dese(result)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -1905,31 +1943,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().export_chat_invite_link(params)
-
-
-    async def create_chat_invite_link(
-        self,
-        chat_id: Union[int, str],
-        name: Optional[str] = None,
-        expire_date: Optional[int] = None,
-        member_limit: Optional[int] = None,
-        creates_join_request: Optional[bool] = None
-    ) -> ChatInviteLink:
-        '''
-        https://core.telegram.org/bots/api#createchatinvitelink
-        Use this method to create an additional invite link for a chat. The bot must be an administrator
-        in the chat for this to work and must have the appropriate administrator rights. The link can be
-        revoked using the method revokeChatInviteLink. Returns the new invite link as ChatInviteLink object.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        if name is not None: params['name'] = name
-        if expire_date is not None: params['expire_date'] = expire_date
-        if member_limit is not None: params['member_limit'] = member_limit
-        if creates_join_request is not None: params['creates_join_request'] = creates_join_request
-        result = await super().create_chat_invite_link(params)
-        return ChatInviteLink._dese(result)
 
 
     async def edit_chat_invite_link(
