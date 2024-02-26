@@ -437,6 +437,10 @@ class TelegramApi:
         method = 'createChatInviteLink'
         return await self._request(method, params)
 
+    async def create_forum_topic(self, params: dict):
+        method = 'createForumTopic'
+        return await self._request(method, params)
+
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
@@ -641,10 +645,6 @@ class TelegramApi:
     async def get_forum_topic_icon_stickers(self):
         method = 'getForumTopicIconStickers'
         return await self._request(method)
-
-    async def create_forum_topic(self, params: dict):
-        method = 'createForumTopic'
-        return await self._request(method, params)
 
     async def edit_forum_topic(self, params: dict):
         method = 'editForumTopic'

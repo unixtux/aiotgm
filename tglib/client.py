@@ -1053,6 +1053,40 @@ class Client(TelegramApi):
         return ChatInviteLink._dese(result)
 
 
+    async def create_forum_topic(
+        self,
+        chat_id: Union[int, str],
+        name: str,
+        icon_color: Optional[int] = None,
+        icon_custom_emoji_id: Optional[str] = None
+    ) -> ForumTopic:
+        '''
+        https://core.telegram.org/bots/api#createforumtopic
+
+        Use this method to create a topic in a forum supergroup chat. The bot must be an
+        administrator in the chat for this to work and must have the *can_manage_topics* administrator
+        rights. Returns information about the created topic as a :obj:`~tglib.types.ForumTopic` object.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param name: Topic name, 1-128 characters.
+        :type name: :obj:`str`
+        :param icon_color: Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F).
+        :type icon_color: :obj:`int`, optional
+        :param icon_custom_emoji_id: Unique identifier of the custom emoji shown as the topic icon. Use :meth:`~tglib.Client.get_forum_topic_icon_stickers` to get all allowed custom emoji identifiers.
+        :type icon_custom_emoji_id: :obj:`str`, optional
+        :rtype: :obj:`~tglib.types.ForumTopic`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'name': name
+        }
+        if icon_color is not None: params['icon_color'] = icon_color
+        if icon_custom_emoji_id is not None: params['icon_custom_emoji_id'] = icon_custom_emoji_id
+        result = await super().create_forum_topic(params)
+        return ForumTopic._dese(result)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -2251,29 +2285,6 @@ class Client(TelegramApi):
         '''
         result = await super().get_forum_topic_icon_stickers()
         return [Sticker._dese(sticker) for sticker in result]
-
-
-    async def create_forum_topic(
-        self,
-        chat_id: Union[int, str],
-        name: str,
-        icon_color: Optional[int] = None,
-        icon_custom_emoji_id: Optional[str] = None
-    ) -> ForumTopic:
-        '''
-        https://core.telegram.org/bots/api#createforumtopic
-        Use this method to create a topic in a forum supergroup chat. The bot must be
-        an administrator in the chat for this to work and must have the can_manage_topics
-        administrator rights. Returns information about the created topic as a ForumTopic object.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'name': name
-        }
-        if icon_color is not None: params['icon_color'] = icon_color
-        if icon_custom_emoji_id is not None: params['icon_custom_emoji_id'] = icon_custom_emoji_id
-        result = await super().create_forum_topic(params)
-        return ForumTopic._dese(result)
 
 
     async def edit_forum_topic(
