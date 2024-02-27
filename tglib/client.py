@@ -870,7 +870,7 @@ class Client(TelegramApi):
         administrator rights, unless it is the creator of the topic. Returns :obj:`True` on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
-        :type chat_id:  :obj:`int` or :obj:`str`
+        :type chat_id: :obj:`int` or :obj:`str`
         :param message_thread_id: Unique identifier for the target message thread of the forum topic.
         :type message_thread_id: :obj:`int`
         :rtype: :obj:`True`
