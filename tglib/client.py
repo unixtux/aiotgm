@@ -1087,6 +1087,101 @@ class Client(TelegramApi):
         return ForumTopic._dese(result)
 
 
+    async def create_invoice_link(
+        self,
+        title: str,
+        description: str,
+        payload: str,
+        provider_token: str,
+        currency: str,
+        prices: list[LabeledPrice],
+        max_tip_amount: Optional[int] = None,
+        suggested_tip_amounts: Optional[list[int]] = None,
+        provider_data: Optional[str] = None,
+        photo_url: Optional[str] = None,
+        photo_size: Optional[int] = None,
+        photo_width: Optional[int] = None,
+        photo_height: Optional[int] = None,
+        need_name: Optional[bool] = None,
+        need_phone_number: Optional[bool] = None,
+        need_email: Optional[bool] = None,
+        need_shipping_address: Optional[bool] = None,
+        send_phone_number_to_provider: Optional[bool] = None,
+        send_email_to_provider: Optional[bool] = None,
+        is_flexible: Optional[bool] = None
+    ) -> str:
+        '''
+        https://core.telegram.org/bots/api#createinvoicelink
+
+        Use this method to create a link for an invoice. Returns the created invoice link as :obj:`String` on success.
+
+        :param title: Product name, 1-32 characters.
+        :type title: :obj:`str`
+        :param description: Product description, 1-255 characters.
+        :type description: :obj:`str`
+        :param payload: Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+        :type payload: :obj:`str`
+        :param provider_token: Payment provider token, obtained via `BotFather <https://t.me/botfather>`_.
+        :type provider_token: :obj:`str`
+        :param currency: Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_.
+        :type currency: :obj:`str`
+        :param prices: Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.).
+        :type prices: :obj:`list` of :obj:`~tglib.types.LabeledPrice`
+        :param max_tip_amount: The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of ``US$ 1.45`` pass ``max_tip_amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to :obj:`0`.
+        :type max_tip_amount: :obj:`int`, optional
+        :param suggested_tip_amounts: A JSON-serialized array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.
+        :type suggested_tip_amounts: :obj:`list` of :obj:`int`, optional
+        :param provider_data: JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.
+        :type provider_data: :obj:`str`, optional
+        :param photo_url: URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
+        :type photo_url: :obj:`str`, optional
+        :param photo_size: Photo size in bytes.
+        :type photo_size: :obj:`int`, optional
+        :param photo_width: Photo width.
+        :type photo_width: :obj:`int`, optional
+        :param photo_height: Photo height.
+        :type photo_height: :obj:`int`, optional
+        :param need_name: Pass :obj:`True` if you require the user's full name to complete the order.
+        :type need_name: :obj:`bool`, optional
+        :param need_phone_number: Pass :obj:`True` if you require the user's phone number to complete the order.
+        :type need_phone_number: :obj:`bool`, optional
+        :param need_email: Pass :obj:`True` if you require the user's email address to complete the order.
+        :type need_email: :obj:`bool`, optional
+        :param need_shipping_address: Pass :obj:`True` if you require the user's shipping address to complete the order.
+        :type need_shipping_address: :obj:`bool`, optional
+        :param send_phone_number_to_provider: Pass :obj:`True` if the user's phone number should be sent to the provider.
+        :type send_phone_number_to_provider: :obj:`bool`, optional
+        :param send_email_to_provider: Pass :obj:`True` if the user's email address should be sent to the provider.
+        :type send_email_to_provider: :obj:`bool`, optional
+        :param is_flexible: Pass :obj:`True` if the final price depends on the shipping method.
+        :type is_flexible: :obj:`bool`, optional
+        :rtype: :obj:`str`
+        '''
+        params = {
+            'title': title,
+            'description': description,
+            'payload': payload,
+            'provider_token': provider_token,
+            'currency': currency,
+            'prices': prices
+        }
+        if max_tip_amount is not None: params['max_tip_amount'] = max_tip_amount
+        if suggested_tip_amounts is not None: params['suggested_tip_amounts'] = suggested_tip_amounts
+        if provider_data is not None: params['provider_data'] = provider_data
+        if photo_url is not None: params['photo_url'] = photo_url
+        if photo_size is not None: params['photo_size'] = photo_size
+        if photo_width is not None: params['photo_width'] = photo_width
+        if photo_height is not None: params['photo_height'] = photo_height
+        if need_name is not None: params['need_name'] = need_name
+        if need_phone_number is not None: params['need_phone_number'] = need_phone_number
+        if need_email is not None: params['need_email'] = need_email
+        if need_shipping_address is not None: params['need_shipping_address'] = need_shipping_address
+        if send_phone_number_to_provider is not None: params['send_phone_number_to_provider'] = send_phone_number_to_provider
+        if send_email_to_provider is not None: params['send_email_to_provider'] = send_email_to_provider
+        if is_flexible is not None: params['is_flexible'] = is_flexible
+        return await super().create_invoice_link(params)
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -3212,58 +3307,6 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_invoice(params)
         return Message._dese(result)
-
-
-    async def create_invoice_link(
-        self,
-        title: str,
-        description: str,
-        payload: str,
-        provider_token: str,
-        currency: str,
-        prices: list[LabeledPrice],
-        max_tip_amount: Optional[int] = None,
-        suggested_tip_amounts: Optional[list[int]] = None,
-        provider_data: Optional[str] = None,
-        photo_url: Optional[str] = None,
-        photo_size: Optional[int] = None,
-        photo_width: Optional[int] = None,
-        photo_height: Optional[int] = None,
-        need_name: Optional[bool] = None,
-        need_phone_number: Optional[bool] = None,
-        need_email: Optional[bool] = None,
-        need_shipping_address: Optional[bool] = None,
-        send_phone_number_to_provider: Optional[bool] = None,
-        send_email_to_provider: Optional[bool] = None,
-        is_flexible: Optional[bool] = None
-    ) -> str:
-        '''
-        https://core.telegram.org/bots/api#createinvoicelink
-        Use this method to create a link for an invoice. Returns the created invoice link as String on success.
-        '''
-        params = {
-            'title': title,
-            'description': description,
-            'payload': payload,
-            'provider_token': provider_token,
-            'currency': currency,
-            'prices': prices
-        }
-        if max_tip_amount is not None: params['max_tip_amount'] = max_tip_amount
-        if suggested_tip_amounts is not None: params['suggested_tip_amounts'] = suggested_tip_amounts
-        if provider_data is not None: params['provider_data'] = provider_data
-        if photo_url is not None: params['photo_url'] = photo_url
-        if photo_size is not None: params['photo_size'] = photo_size
-        if photo_width is not None: params['photo_width'] = photo_width
-        if photo_height is not None: params['photo_height'] = photo_height
-        if need_name is not None: params['need_name'] = need_name
-        if need_phone_number is not None: params['need_phone_number'] = need_phone_number
-        if need_email is not None: params['need_email'] = need_email
-        if need_shipping_address is not None: params['need_shipping_address'] = need_shipping_address
-        if send_phone_number_to_provider is not None: params['send_phone_number_to_provider'] = send_phone_number_to_provider
-        if send_email_to_provider is not None: params['send_email_to_provider'] = send_email_to_provider
-        if is_flexible is not None: params['is_flexible'] = is_flexible
-        return await super().create_invoice_link(params)
 
 
     async def set_passport_data_errors(

@@ -441,6 +441,10 @@ class TelegramApi:
         method = 'createForumTopic'
         return await self._request(method, params)
 
+    async def create_invoice_link(self, params: dict):
+        method = 'createInvoiceLink'
+        return await self._request(method, params)
+
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
@@ -836,10 +840,6 @@ class TelegramApi:
 
     async def send_invoice(self, params: dict):
         method = 'sendInvoice'
-        return await self._request(method, params)
-
-    async def create_invoice_link(self, params: dict):
-        method = 'createInvoiceLink'
         return await self._request(method, params)
 
     async def set_passport_data_errors(self, params: dict):
