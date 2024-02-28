@@ -190,7 +190,7 @@ import os
 from typing import (Union,
                     Literal,
                     Optional,
-                    Callable)
+                    Callable,)
 
 from .default_literals import *
 
@@ -967,9 +967,9 @@ def _dese_maybe_inaccessible_message(res: Optional[dict], /) -> Optional[MaybeIn
     obj = _check_dict(res)
 
     if obj['date'] == 0:
-        return InaccessibleMessage._dese(obj, skip_check = True)
+        return InaccessibleMessage._dese(obj, skip_check=True)
     else:
-        return Message._dese(obj, skip_check = True)
+        return Message._dese(obj, skip_check=True)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1127,10 +1127,10 @@ def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
     type = obj.pop('type')
 
     if type == DEFAULT_REACTION_TYPE_EMOJI:
-        return ReactionTypeEmoji._dese(obj, skip_check = True)
+        return ReactionTypeEmoji._dese(obj, skip_check=True)
 
     elif type == DEFAULT_REACTION_TYPE_CUSTOM_EMOJI:
-        return ReactionTypeCustomEmoji._dese(obj, skip_check = True)
+        return ReactionTypeCustomEmoji._dese(obj, skip_check=True)
     else:
         raise ValueError(
             'An error occurred during the deserialization'
@@ -2902,22 +2902,22 @@ def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
     status = obj.pop('status')
 
     if status == DEFAULT_CHAT_MEMBER_OWNER:
-        return ChatMemberOwner._dese(obj, skip_check = True)
+        return ChatMemberOwner._dese(obj, skip_check=True)
 
     elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
-        return ChatMemberAdministrator._dese(obj, skip_check = True)
+        return ChatMemberAdministrator._dese(obj, skip_check=True)
 
     elif status == DEFAULT_CHAT_MEMBER_MEMBER:
-        return ChatMemberMember._dese(obj, skip_check = True)
+        return ChatMemberMember._dese(obj, skip_check=True)
 
     elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
-        return ChatMemberRestricted._dese(obj, skip_check = True)
+        return ChatMemberRestricted._dese(obj, skip_check=True)
 
     elif status == DEFAULT_CHAT_MEMBER_LEFT:
-        return ChatMemberLeft._dese(obj, skip_check = True)
+        return ChatMemberLeft._dese(obj, skip_check=True)
 
     elif status == DEFAULT_CHAT_MEMBER_BANNED:
-        return ChatMemberBanned._dese(obj, skip_check = True)
+        return ChatMemberBanned._dese(obj, skip_check=True)
     else:
         raise ValueError(
             'An error occurred during the deserialization'
@@ -3310,13 +3310,13 @@ def _dese_menu_button(res: Optional[dict], /) -> Optional[MenuButton]: # used in
     type = obj.pop('type')
 
     if type == DEFAULT_MENU_BUTTON_COMMANDS:
-        return MenuButtonCommands._dese(obj, skip_check = True)
+        return MenuButtonCommands._dese(obj, skip_check=True)
 
     elif type == DEFAULT_MENU_BUTTON_WEB_APP:
-        return MenuButtonWebApp._dese(obj, skip_check = True)
+        return MenuButtonWebApp._dese(obj, skip_check=True)
 
     elif type == DEFAULT_MENU_BUTTON_DEFAULT:
-        return MenuButtonDefault._dese(obj, skip_check = True)
+        return MenuButtonDefault._dese(obj, skip_check=True)
     else:
         raise ValueError(
             'An error occurred during the deserialization'
@@ -5581,16 +5581,16 @@ def _dese_message_origin(res: Optional[dict], /) -> Optional[MessageOrigin]:
     type = obj.pop('type')
 
     if type == DEFAULT_MESSAGE_ORIGIN_USER:
-        return MessageOriginUser._dese(obj, skip_check = True)
+        return MessageOriginUser._dese(obj, skip_check=True)
 
     elif type == DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER:
-        return MessageOriginHiddenUser._dese(obj, skip_check = True)
+        return MessageOriginHiddenUser._dese(obj, skip_check=True)
 
     elif type == DEFAULT_MESSAGE_ORIGIN_CHAT:
-        return MessageOriginChat._dese(obj, skip_check = True)
+        return MessageOriginChat._dese(obj, skip_check=True)
 
     elif type == DEFAULT_MESSAGE_ORIGIN_CHANNEL:
-        return MessageOriginChannel._dese(obj, skip_check = True)
+        return MessageOriginChannel._dese(obj, skip_check=True)
     else:
         raise ValueError(
             'An error occurred during the deserialization'
@@ -5782,13 +5782,13 @@ def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]
     source = obj.pop('source')
 
     if source == DEFAULT_CHAT_BOOST_SOURCE_PREMIUM:
-        return ChatBoostSourcePremium._dese(obj, skip_check = True)
+        return ChatBoostSourcePremium._dese(obj, skip_check=True)
 
     elif source == DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE:
-        return ChatBoostSourceGiftCode._dese(obj, skip_check = True)
+        return ChatBoostSourceGiftCode._dese(obj, skip_check=True)
 
     elif source == DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY:
-        return ChatBoostSourceGiveaway._dese(obj, skip_check = True)
+        return ChatBoostSourceGiveaway._dese(obj, skip_check=True)
     else:
         raise ValueError(
             'An error occurred during the deserialization of the'
