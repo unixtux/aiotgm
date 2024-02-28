@@ -14,6 +14,7 @@ __all__ = (
     '_run_coroutine',
     'UpdateManager',
     'NextFunction',
+    '_next_function',
     # aliases
     'MESSAGE_MANAGER',
     'EDITED_MESSAGE_MANAGER',
@@ -165,6 +166,9 @@ class Rule:
     def coroutine(self):
         return self._coroutine
 
+
+def _next_function(obj, /) -> bool:
+    return isinstance(obj, NextFunction) or obj is NextFunction
 
 class NextFunction:
     '''
