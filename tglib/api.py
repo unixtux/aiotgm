@@ -76,7 +76,14 @@ except ImportError:
         " default 'json' was imported."
     )
 
-def _serialize(val, *, last: bool = True) -> Union[Any, str, list, dict]:
+def _serialize(
+    val,
+    *,
+    last: bool = True,
+    ignore: Optional[tuple[type, ...]] = (str,)
+) -> Union[Any, str, list, dict]:
+
+    ignore = ignore if ignore is not None else ()
 
     if isinstance(val, TelegramType):
         val = val.__dict__
@@ -98,7 +105,7 @@ def _serialize(val, *, last: bool = True) -> Union[Any, str, list, dict]:
     if not last:
         return res
     else:
-        return res if isinstance(res, str) else json.dumps(res, ensure_ascii=False)
+        return res if type(res) in ignore else json.dumps(res, ensure_ascii=False)
 
 
 def _format_url(token: str, method: str, /) -> str:
@@ -193,9 +200,6 @@ def _get_input_media_files(
     *file_keys: str,
     types_check: tuple[type, ...]
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
-
-    assert hasattr(types_check, '__origin__') and types_check.__origin__ is Union
-    types_check = types_check.__args__
 
     files = {}
     for key in file_keys:
@@ -504,7 +508,7 @@ class TelegramApi:
         files = _get_input_media_files(
             params,
             'media',
-            types_check = Union[InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument]
+            types_check=(InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument)
         )
         return await self._request(method, params, files)
 
@@ -747,7 +751,7 @@ class TelegramApi:
 
     async def edit_message_media(self, params: dict):
         method = 'editMessageMedia'
-        files = _get_input_media_files(params, 'media', types_check = InputMedia)
+        files = _get_input_media_files(params, 'media', types_check=InputMedia.__args__)
         return await self._request(method, params, files)
 
     async def edit_message_live_location(self, params: dict):
