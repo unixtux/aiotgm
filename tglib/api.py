@@ -7,7 +7,6 @@ __all__ = (
     'TelegramApi',
     'TelegramError',
 )
-
 from .logger import get_logger
 logger = get_logger('TelegramApi')
 
@@ -15,12 +14,14 @@ import os
 import re
 import time
 import asyncio
-from typing import (Any,
-                    Union,
-                    Literal,
-                    Optional,
-                    Iterable,)
-
+from typing import (
+    Any,
+    Union,
+    Literal,
+    Optional,
+    Iterable,
+)
+from types import UnionType # just for type-checking in _convert_input_media()
 from aiohttp import (
     FormData,
     ClientError,
@@ -30,7 +31,7 @@ from aiohttp import (
     ClientResponse,
 )
 from .types import (
-    TelegramType, # to serialize telegram objects
+    TelegramType, # to serialize Telegram types in _serialize()
     InputFile,
     InputMedia,
     InputMediaAudio,
@@ -38,11 +39,10 @@ from .types import (
     InputMediaPhoto,
     InputMediaVideo,
 )
-
 try:
     import ssl
 except ImportError:
-    logger.info(
+    logger.warning(
         "module 'ssl' not found, SSL_CONTEXT is None."
     )
     SSL_CONTEXT = None
@@ -50,7 +50,7 @@ else:
     try:
         import certifi
     except ImportError:
-        logger.info(
+        logger.warning(
             "module 'certifi' not found, using default CA."
         )
         SSL_CONTEXT = ssl.create_default_context()
@@ -58,12 +58,12 @@ else:
         _cafile = certifi.where()
         if not os.path.isfile(_cafile):
             _cafile = None
-            logger.info(
+            logger.warning(
                 "CA file not found, try to"
                 " reinstall the module 'certifi'."
             )
         SSL_CONTEXT = ssl.create_default_context(
-            cafile = _cafile
+            cafile=_cafile
         )
         del _cafile
 
@@ -132,7 +132,6 @@ async def _parse_json(response: ClientResponse, /) -> Any:
 
 def _get_files(
     params: dict,
-    /,
     *file_keys: str
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
 
@@ -161,14 +160,14 @@ def _get_files(
 def _convert_input_media(
     media: InputMedia,
     files: dict,
-    types_check: tuple[type, ...],
+    types_check: UnionType,
     /
 ) -> None:
     '''
     Used in _get_input_media_files() to check and add to files InputMedia objects.
     '''
     if not isinstance(media, types_check):
-        available_types = ', '.join([t.__name__ for t in types_check])
+        available_types = ', '.join([t.__name__ for t in types_check.__args__])
         raise TypeError(
             f'Expected one of the following types:'
             f' {available_types}, got {media.__class__.__name__}.'
@@ -196,9 +195,8 @@ def _convert_input_media(
 
 def _get_input_media_files(
     params: dict,
-    /,
     *file_keys: str,
-    types_check: tuple[type, ...]
+    types_check: UnionType
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
 
     files = {}
@@ -242,15 +240,13 @@ def _prepare_data(
 
 
 class TelegramError(Exception):
-    """
+    '''
     Class to handle exceptions during Telegram requests.
-    """
-
+    '''
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119.0) Gecko/20100101 Firefox/119.0'
 }
-BASE_URL = 'https://api.telegram.org'
 CLIENT_TIMEOUT = ClientTimeout(total=300, connect=3)
 
 
@@ -289,10 +285,10 @@ class TelegramApi:
 
         if self.session is None or self.session.closed:
             self._session = ClientSession(
-                base_url = BASE_URL,
-                timeout = CLIENT_TIMEOUT,
-                json_serialize = json.dumps,
-                connector = TCPConnector(ssl = SSL_CONTEXT)
+                base_url='https://api.telegram.org',
+                timeout=CLIENT_TIMEOUT,
+                json_serialize=json.dumps,
+                connector=TCPConnector(ssl=SSL_CONTEXT)
             )
             logger.debug('New session initialized.')
 
@@ -306,9 +302,8 @@ class TelegramApi:
         files: Optional[dict] = None,
         *,
         max_retries: int = 100,
-        keep_session: Optional[bool] = None
+        keep_alive: bool = False
     ):
-
         if params is not None:
             for key in params:
                 params[key] = _serialize(params[key])
@@ -362,7 +357,7 @@ class TelegramApi:
             finally:
                 if self.session.connector is not None:
                     if not (
-                        keep_session
+                        keep_alive
                         or self.session.connector._acquired
                     ):
                         await self.session.close()
@@ -508,7 +503,7 @@ class TelegramApi:
         files = _get_input_media_files(
             params,
             'media',
-            types_check=(InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument)
+            types_check=Union[InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument]
         )
         return await self._request(method, params, files)
 
@@ -751,7 +746,7 @@ class TelegramApi:
 
     async def edit_message_media(self, params: dict):
         method = 'editMessageMedia'
-        files = _get_input_media_files(params, 'media', types_check=InputMedia.__args__)
+        files = _get_input_media_files(params, 'media', types_check=InputMedia)
         return await self._request(method, params, files)
 
     async def edit_message_live_location(self, params: dict):

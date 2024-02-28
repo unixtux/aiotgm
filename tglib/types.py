@@ -192,7 +192,7 @@ from typing import (Union,
                     Optional,
                     Callable,)
 
-from .default_literals import *
+from .constants import *
 
 from .logger import get_logger
 logger = get_logger('TelegramApi')

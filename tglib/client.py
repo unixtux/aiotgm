@@ -408,7 +408,7 @@ class Client(TelegramApi):
                 result = await super().get_updates(
                     params,
                     max_retries=unlimited,
-                    keep_session=True
+                    keep_alive=True
                 )
                 updates: list[Update] = [Update._dese(update) for update in result]
 
