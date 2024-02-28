@@ -336,14 +336,14 @@ class TelegramApi:
                     result = await _parse_json(response)
 
                     if current_try != 1:
-                        logger.info(
+                        logger.debug(
                             f'Request {method!r} succeeded'
                             f' after {current_try} retries.'
                         )
                     return result
 
             except (ClientError, TimeoutError) as exc:
-                logger.info(
+                logger.debug(
                     f'{exc.__class__.__name__} in {method!r},'
                     f' current try: {current_try}/{max_retries}.'
                 )
