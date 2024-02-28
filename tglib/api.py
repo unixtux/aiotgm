@@ -91,14 +91,14 @@ def _serialize(
     elif hasattr(val, '__dict__'):
         val = '{!r}'.format(val)
 
-    if isinstance(val, (list, tuple)):
-        res = [
-            _serialize(x, last=False) for x in val
-        ]
-    elif isinstance(val, dict):
+    if isinstance(val, dict):
         res = {
             x: _serialize(val[x], last=False) for x in val if val[x] is not None
         }
+    elif isinstance(val, Iterable):
+        res = [
+            _serialize(x, last=False) for x in val
+        ]
     else:
         res = val
 
