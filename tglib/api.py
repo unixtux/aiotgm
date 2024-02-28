@@ -19,7 +19,7 @@ from typing import (Any,
                     Union,
                     Literal,
                     Optional,
-                    Iterable)
+                    Iterable,)
 
 from aiohttp import (
     FormData,
@@ -27,7 +27,7 @@ from aiohttp import (
     TCPConnector,
     ClientSession,
     ClientTimeout,
-    ClientResponse
+    ClientResponse,
 )
 from .types import (
     TelegramType, # to serialize telegram objects
@@ -36,7 +36,7 @@ from .types import (
     InputMediaAudio,
     InputMediaDocument,
     InputMediaPhoto,
-    InputMediaVideo
+    InputMediaVideo,
 )
 
 try:
@@ -76,12 +76,7 @@ except ImportError:
         " default 'json' was imported."
     )
 
-def _serialize(
-    val: Any,
-    /,
-    *,
-    last: bool = True
-) -> Union[Any, str, list, dict]:
+def _serialize(val, *, last: bool = True) -> Union[Any, str, list, dict]:
 
     if isinstance(val, TelegramType):
         val = val.__dict__
@@ -89,13 +84,13 @@ def _serialize(
     elif hasattr(val, '__dict__'):
         val = '{!r}'.format(val)
 
-    if isinstance(val, (list, tuple, set)):
+    if isinstance(val, (list, tuple)):
         res = [
-            _serialize(x, last = False) for x in val
+            _serialize(x, last=False) for x in val
         ]
     elif isinstance(val, dict):
         res = {
-            x: _serialize(val[x], last = False) for x in val if val[x] is not None
+            x: _serialize(val[x], last=False) for x in val if val[x] is not None
         }
     else:
         res = val
@@ -103,7 +98,7 @@ def _serialize(
     if not last:
         return res
     else:
-        return res if isinstance(res, str) else json.dumps(res, ensure_ascii = False)
+        return res if isinstance(res, str) else json.dumps(res, ensure_ascii=False)
 
 
 def _format_url(token: str, method: str, /) -> str:
@@ -112,7 +107,7 @@ def _format_url(token: str, method: str, /) -> str:
 
 async def _parse_json(response: ClientResponse, /) -> Any:
 
-    result = await response.json(loads = json.loads)
+    result = await response.json(loads=json.loads)
 
     if RESP_DEBUG:
         logger.debug(result)
@@ -159,7 +154,7 @@ def _get_files(
 def _convert_input_media(
     media: InputMedia,
     files: dict,
-    types_check: tuple[type],
+    types_check: tuple[type, ...],
     /
 ) -> None:
     '''
@@ -196,7 +191,7 @@ def _get_input_media_files(
     params: dict,
     /,
     *file_keys: str,
-    types_check: type
+    types_check: tuple[type, ...]
 ) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
 
     assert hasattr(types_check, '__origin__') and types_check.__origin__ is Union
@@ -237,7 +232,7 @@ def _prepare_data(
         data.add_field(
             key,
             content,
-            filename = file_name
+            filename=file_name
         )
     return data
 
@@ -252,7 +247,7 @@ HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119.0) Gecko/20100101 Firefox/119.0'
 }
 BASE_URL = 'https://api.telegram.org'
-CLIENT_TIMEOUT = ClientTimeout(total = 300, connect = 3)
+CLIENT_TIMEOUT = ClientTimeout(total=300, connect=3)
 
 
 class TelegramApi:
@@ -334,8 +329,8 @@ class TelegramApi:
                 data = _prepare_data(params, files)
 
                 async with self.session.post(
-                    url = _format_url(self._token, method),
-                    data = data,
+                    url=_format_url(self._token, method),
+                    data=data,
                     **self._headers_and_proxy
                 ) as response:
 
