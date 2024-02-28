@@ -5,7 +5,7 @@ import inspect
 from typing import (Any,
                     Union,
                     Callable,
-                    Awaitable)
+                    Awaitable,)
 
 from .logger import get_logger
 logger = get_logger('TelegramApi')
