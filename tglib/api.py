@@ -76,14 +76,7 @@ except ImportError:
         " default 'json' was imported."
     )
 
-def _serialize(
-    val,
-    *,
-    last: bool = True,
-    ignore: Optional[tuple[type, ...]] = (str,)
-) -> Union[Any, str, list, dict]:
-
-    ignore = ignore if ignore is not None else ()
+def _serialize(val, *, last: bool = True) -> Union[Any, str, list, dict]:
 
     if isinstance(val, TelegramType):
         val = val.__dict__
@@ -92,20 +85,17 @@ def _serialize(
         val = '{!r}'.format(val)
 
     if isinstance(val, dict):
-        res = {
-            x: _serialize(val[x], last=False) for x in val if val[x] is not None
-        }
+        res = {x: _serialize(val[x], last=False) for x in val if val[x] is not None}
+
     elif isinstance(val, (list, tuple)):
-        res = [
-            _serialize(x, last=False) for x in val
-        ]
+        res = [_serialize(x, last=False) for x in val]
     else:
         res = val
 
     if not last:
         return res
     else:
-        return res if type(res) in ignore else json.dumps(res, ensure_ascii=False)
+        return res if isinstance(res, str) else json.dumps(res, ensure_ascii=False)
 
 
 def _format_url(token: str, method: str, /) -> str:
@@ -116,8 +106,10 @@ async def _parse_json(response: ClientResponse, /) -> Any:
 
     result = await response.json(loads=json.loads)
 
+    '''
     if RESP_DEBUG:
         logger.debug(result)
+    '''
 
     if result['ok'] is True:
         return result['result']
@@ -308,10 +300,12 @@ class TelegramApi:
             for key in params:
                 params[key] = _serialize(params[key])
 
+        '''
         if REQ_DEBUG:
             logger.debug(
                 f'method: {method!r}, params: {params}, files: {files}'
             )
+        '''
 
         current_try = 0
 
@@ -333,7 +327,7 @@ class TelegramApi:
                     **self._headers_and_proxy
                 ) as response:
 
-                    result = await _parse_json(response)
+                    return await _parse_json(response)
 
                     if current_try != 1:
                         logger.debug(
@@ -343,10 +337,12 @@ class TelegramApi:
                     return result
 
             except (ClientError, TimeoutError) as exc:
+                '''
                 logger.debug(
                     f'{exc.__class__.__name__} in {method!r},'
                     f' current try: {current_try}/{max_retries}.'
                 )
+                '''
                 await asyncio.sleep(3 - (time.time() - start_time))
 
             except BaseException as exc:
