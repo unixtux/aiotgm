@@ -11,11 +11,12 @@ import sys
 sys.path.insert(0, os.path.abspath('../../'))
 
 import tglib
+from datetime import datetime as dtm
 
-project = tglib.__name__
 author = 'unixtux'
-copyright = f'2024, {author}'
 release = tglib.VERSION
+project = tglib.__name__
+copyright = f'{dtm.now().year}, {author}'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
