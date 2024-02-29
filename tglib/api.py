@@ -4,15 +4,14 @@ __all__ = (
     'TelegramApi',
     'TelegramError',
 )
-from .logger import get_logger
-logger = get_logger('TelegramApi')
-
+from .client import logger
 import os
 import re
 import time
 import asyncio
 from typing import (
     Any,
+    Dict,
     Union,
     Literal,
     Optional,
@@ -124,7 +123,7 @@ async def _parse_json(response: ClientResponse, /):
         raise TelegramError(result['error_code'], result['description'])
 
 
-FilesDict = dict[str, dict[Literal['content', 'file_name'], Any]]
+FilesDict = Dict[str, Dict[Literal['content'], bytes] | Dict[Literal['file_name'], str | None]]
 
 def _get_files(
     params: dict,
@@ -341,7 +340,7 @@ class TelegramApi:
                             ' are not connections in the pool.'
                         )
         else:
-            raise TimeoutError(method)
+            raise TimeoutError('Connection lost in method {!r}.'.format(method))
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
