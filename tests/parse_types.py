@@ -596,7 +596,7 @@ from tglib.types import (
     InputMessageContent,
     MaybeInaccessibleMessage
 )
-from tglib.default_literals import *
+from tglib.constants import *
 
 TYPES = '''
 
