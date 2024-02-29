@@ -1,7 +1,6 @@
 #!/bin/env python3
-
 '''
-Literals by default of the SUBCLASSES
+Constants attributes of the SUBCLASSES.
 '''
 
 # MessageOrigin (4)

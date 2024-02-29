@@ -1,8 +1,5 @@
 #!/bin/env python3
 
-REQ_DEBUG = 0
-RESP_DEBUG = 0
-
 __all__ = (
     'TelegramApi',
     'TelegramError',
@@ -102,30 +99,37 @@ def _format_url(token: str, method: str, /) -> str:
     return '/bot{}/{}'.format(token, method)
 
 
-async def _parse_json(response: ClientResponse, /) -> Any:
+class TelegramError(Exception):
+    '''
+    Class to handle exceptions during Telegram requests.
+    '''
+    def __init__(self, error_code: int, description: str):
+        self.error_code = error_code
+        self.description = description
+
+    def __str__(self) -> str:
+        return self.description
+
+    def __repr__(self) -> str:
+        return '{}({!r})'.format(self.__class__.__name__, self.description)
+
+
+async def _parse_json(response: ClientResponse, /):
 
     result = await response.json(loads=json.loads)
-
-    '''
-    if RESP_DEBUG:
-        logger.debug(result)
-    '''
 
     if result['ok'] is True:
         return result['result']
     else:
-        raise TelegramError(
-            {
-                'error_code': result['error_code'],
-                'description': result['description']
-            }
-        )
+        raise TelegramError(result['error_code'], result['description'])
 
+
+FilesDict = dict[str, dict[Literal['content', 'file_name'], Any]]
 
 def _get_files(
     params: dict,
     *file_keys: str
-) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
+) -> Optional[FilesDict]:
 
     files = {}
     for key in file_keys:
@@ -151,7 +155,7 @@ def _get_files(
 
 def _convert_input_media(
     media: InputMedia,
-    files: dict,
+    files: FilesDict,
     types_check: UnionType,
     /
 ) -> None:
@@ -161,7 +165,7 @@ def _convert_input_media(
     if not isinstance(media, types_check):
         available_types = ', '.join([t.__name__ for t in types_check.__args__])
         raise TypeError(
-            f'Expected one of the following types:'
+            'Expected one of the following types:'
             f' {available_types}, got {media.__class__.__name__}.'
         )
     if isinstance(media.media, str):
@@ -189,15 +193,15 @@ def _get_input_media_files(
     params: dict,
     *file_keys: str,
     types_check: UnionType
-) -> Optional[dict[str, dict[Literal['content', 'file_name'], Any]]]:
+) -> Optional[FilesDict]:
 
     files = {}
     for key in file_keys:
         if key in params:
             obj = params[key]
             if isinstance(obj, Iterable):
-                for t in obj:
-                    _convert_input_media(t, files, types_check)
+                for tp in obj:
+                    _convert_input_media(tp, files, types_check)
             else:
                 _convert_input_media(obj, files, types_check)
 
@@ -206,7 +210,7 @@ def _get_input_media_files(
 
 def _prepare_data(
     params: Optional[dict],
-    files: Optional[dict[str, dict[Literal['content', 'file_name'], Any]]],
+    files: Optional[FilesDict],
     /
 ) -> Optional[FormData]:
 
@@ -230,11 +234,6 @@ def _prepare_data(
         )
     return data
 
-
-class TelegramError(Exception):
-    '''
-    Class to handle exceptions during Telegram requests.
-    '''
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119.0) Gecko/20100101 Firefox/119.0'
@@ -300,13 +299,6 @@ class TelegramApi:
             for key in params:
                 params[key] = _serialize(params[key])
 
-        '''
-        if REQ_DEBUG:
-            logger.debug(
-                f'method: {method!r}, params: {params}, files: {files}'
-            )
-        '''
-
         current_try = 0
 
         while current_try < max_retries:
@@ -329,20 +321,7 @@ class TelegramApi:
 
                     return await _parse_json(response)
 
-                    if current_try != 1:
-                        logger.debug(
-                            f'Request {method!r} succeeded'
-                            f' after {current_try} retries.'
-                        )
-                    return result
-
             except (ClientError, TimeoutError) as exc:
-                '''
-                logger.debug(
-                    f'{exc.__class__.__name__} in {method!r},'
-                    f' current try: {current_try}/{max_retries}.'
-                )
-                '''
                 await asyncio.sleep(3 - (time.time() - start_time))
 
             except BaseException as exc:

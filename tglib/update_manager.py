@@ -14,7 +14,7 @@ __all__ = (
     '_run_coroutine',
     'UpdateManager',
     'NextFunction',
-    '_next_function',
+    '_is_next_function',
     # aliases
     'MESSAGE_MANAGER',
     'EDITED_MESSAGE_MANAGER',
@@ -167,7 +167,7 @@ class Rule:
         return self._coroutine
 
 
-def _next_function(obj, /) -> bool:
+def _is_next_function(obj, /) -> bool:
     return isinstance(obj, NextFunction) or obj is NextFunction
 
 class NextFunction:
@@ -223,12 +223,11 @@ async def _run_coroutine(
         code = rule.checker.__code__
         lineno = code.co_firstlineno
         filename = os.path.basename(code.co_filename)
-        logger.error(
+        return logger.error(
             f'{exc!r} occurred in the'
-            f' function {rule.checker.__name__!r} in'
-            f' file {filename!r} at line {lineno}.'
+            f' checker {rule.checker.__name__!r}'
+            f' in file {filename!r} at line {lineno}.'
         )
-        return
 
     if not check:
         return NextFunction()
@@ -238,12 +237,11 @@ async def _run_coroutine(
         code = rule.coroutine.__code__
         lineno = code.co_firstlineno
         filename = os.path.basename(code.co_filename)
-        logger.error(
+        return logger.error(
             f'{exc!r} occurred in the'
-            f' function {rule.coroutine.__name__!r} in'
-            f' file {filename!r} at line {lineno}.'
+            f' coroutine {rule.coroutine.__name__!r}'
+            f' in file {filename!r} at line {lineno}.'
         )
-        return
 
 
 class UpdateManager:
