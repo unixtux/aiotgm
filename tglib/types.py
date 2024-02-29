@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-__all__ = (
+(
     'Animation',
     'Audio',
     'BotCommand',
-    'BotCommandScope', # NO DESE
+    'BotCommandScope', # No deserialization.
     'BotCommandScopeAllChatAdministrators',
     'BotCommandScopeAllGroupChats',
     'BotCommandScopeAllPrivateChats',
@@ -23,16 +23,16 @@ __all__ = (
     'ChatAdministratorRights',
     'ChatBoost',
     'ChatBoostAdded',
-    'ChatBoostSource', # replaced with _dese_chat_boost_source()
-    'ChatBoostSourcePremium',
+    'ChatBoostRemoved',
+    'ChatBoostSource', # Deserialized in _dese_chat_boost_source()
     'ChatBoostSourceGiftCode',
     'ChatBoostSourceGiveaway',
+    'ChatBoostSourcePremium',
     'ChatBoostUpdated',
-    'ChatBoostRemoved',
     'ChatInviteLink',
     'ChatJoinRequest',
     'ChatLocation',
-    'ChatMember', # replaced with _dese_chat_member()
+    'ChatMember', # Deserialized in _dese_chat_member()
     'ChatMemberAdministrator',
     'ChatMemberBanned',
     'ChatMemberLeft',
@@ -69,7 +69,7 @@ __all__ = (
     'InlineKeyboardButton',
     'InlineKeyboardMarkup',
     'InlineQuery',
-    'InlineQueryResult', # NO DESE
+    'InlineQueryResult', # No deserialization.
     'InlineQueryResultArticle',
     'InlineQueryResultAudio',
     'InlineQueryResultCachedAudio',
@@ -95,13 +95,13 @@ __all__ = (
     'InputFile',
     'InputInvoiceMessageContent',
     'InputLocationMessageContent',
-    'InputMedia', # NO DESE
+    'InputMedia', # No deserialization.
     'InputMediaAnimation',
     'InputMediaAudio',
     'InputMediaDocument',
     'InputMediaPhoto',
     'InputMediaVideo',
-    'InputMessageContent', # NO DESE
+    'InputMessageContent', # No deserialization.
     'InputSticker',
     'InputTextMessageContent',
     'InputVenueMessageContent',
@@ -115,8 +115,8 @@ __all__ = (
     'Location',
     'LoginUrl',
     'MaskPosition',
-    'MaybeInaccessibleMessage', # replaced with _dese_maybe_inaccessible_message()
-    'MenuButton', # replaced with _dese_menu_button()
+    'MaybeInaccessibleMessage', # Deserialized in _dese_maybe_inaccessible_message()
+    'MenuButton', # Deserialized in _dese_menu_button()
     'MenuButtonCommands',
     'MenuButtonDefault',
     'MenuButtonWebApp',
@@ -124,16 +124,16 @@ __all__ = (
     'MessageAutoDeleteTimerChanged',
     'MessageEntity',
     'MessageId',
-    'MessageOrigin', # replaced with _dese_message_origin()
-    'MessageOriginUser',
-    'MessageOriginHiddenUser',
-    'MessageOriginChat',
+    'MessageOrigin', # Deserialized in _dese_message_origin()
     'MessageOriginChannel',
+    'MessageOriginChat',
+    'MessageOriginHiddenUser',
+    'MessageOriginUser',
     'MessageReactionCountUpdated',
     'MessageReactionUpdated',
     'OrderInfo',
     'PassportData',
-    'PassportElementError', # NO DESE
+    'PassportElementError', # No deserialization.
     'PassportElementErrorDataField',
     'PassportElementErrorFile',
     'PassportElementErrorFiles',
@@ -151,9 +151,9 @@ __all__ = (
     'PreCheckoutQuery',
     'ProximityAlertTriggered',
     'ReactionCount',
-    'ReactionType', # replaced with _dese_reaction_type()
-    'ReactionTypeEmoji',
+    'ReactionType', # Deserialized in _dese_reaction_type()
     'ReactionTypeCustomEmoji',
+    'ReactionTypeEmoji',
     'ReplyKeyboardMarkup',
     'ReplyKeyboardRemove',
     'ReplyParameters',
@@ -185,33 +185,30 @@ __all__ = (
     'WebAppInfo',
     'WriteAccessAllowed',
 )
-
 import os
-from typing import (Union,
-                    Literal,
-                    Optional,
-                    Callable,)
-
+from typing import (
+    Union,
+    Literal,
+    Optional,
+    Callable,
+)
 from .constants import *
-
-from .logger import get_logger
-logger = get_logger('TelegramApi')
 
 
 def _check_dict(res: dict, /) -> dict:
     '''
-    Function to replace dict key 'from' with 'from_user'.
+    Function to replace the dict key 'from' with 'from_user'.
     '''
-    if not isinstance(res, dict):
+    if isinstance(res, dict):
+        if 'from' in res:
+            res['from_user'] = res['from']
+            del res['from']
+        return res
+    else:
         raise TypeError(
             'Expected dict as parameter in'
             f' _check_dict(), got {res.__class__.__name__}.'
         )
-    if 'from' in res:
-        res['from_user'] = res['from']
-        del res['from']
-
-    return res
 
 
 class TelegramType:
