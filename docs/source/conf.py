@@ -14,9 +14,10 @@ import tglib
 from datetime import datetime as dtm
 
 author = 'unixtux'
+year = dtm.now().year
 release = tglib.VERSION
 project = tglib.__name__
-copyright = f'{dtm.now().year}, {author}'
+copyright = f'{year}, {author}'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
