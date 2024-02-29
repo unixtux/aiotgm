@@ -2,13 +2,13 @@
 
 import os
 import inspect
-from typing import (Any,
-                    Union,
-                    Callable,
-                    Awaitable,)
-
-from .logger import get_logger
-logger = get_logger('TelegramApi')
+from typing import (
+    Any,
+    Union,
+    Callable,
+    Awaitable,
+)
+from .client import logger
 
 __all__ = (
     '_run_coroutine',

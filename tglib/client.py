@@ -5,16 +5,13 @@ __all__ = (
     'NextFunction',
     'TelegramError',
 )
+from . import VERSION
+from .logger import get_logger
+logger = get_logger('tglib ' + VERSION)
+del VERSION, get_logger
 
 import re
 import asyncio
-from typing import (Any,
-                    Union,
-                    Literal,
-                    Optional,
-                    Callable,
-                    Awaitable,)
-
 from .api import (
     TelegramApi,
     TelegramError,
@@ -22,12 +19,15 @@ from .api import (
 from .types import *
 from .types import (_dese_chat_member,
                     _dese_menu_button,)
-
+from typing import (
+    Any,
+    Union,
+    Literal,
+    Optional,
+    Callable,
+    Awaitable,
+)
 from .update_manager import *
-
-from .logger import get_logger
-logger = get_logger('TelegramApi')
-
 
 class Client(TelegramApi):
     '''
