@@ -8,8 +8,8 @@ __all__ = (
     'NextFunction',
     'TelegramError',
 )
-
 from .client import (
+    logger,
     Client,
     NextFunction,
     TelegramError,
