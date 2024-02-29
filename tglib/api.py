@@ -95,7 +95,7 @@ def _serialize(
         res = {
             x: _serialize(val[x], last=False) for x in val if val[x] is not None
         }
-    elif isinstance(val, Iterable):
+    elif isinstance(val, (list, tuple)):
         res = [
             _serialize(x, last=False) for x in val
         ]
