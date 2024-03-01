@@ -6,6 +6,10 @@
 **tglib**
 =========
 
+.. * :ref:`search`
+.. * :ref:`modindex`
+.. * :ref:`genindex`
+
 .. toctree::
     installation
     client
@@ -14,7 +18,3 @@
     next_function
     :maxdepth: 3
     :caption: Contents:
-
-.. * :ref:`genindex`
-* :ref:`modindex`
-..  * :ref:`search`
