@@ -219,7 +219,7 @@ def _parse_result(_dese: Callable[[type, dict], TelegramType]):
     '''
     Decorator to parse the result of a Telegram object.
     '''
-    def wrap(cls: type, res: Optional[dict], *, skip_check: bool = False):
+    def wrap(cls: type, res: Optional[dict], *, skip_check: bool = False) -> Optional[TelegramType]:
         '''
         Method to deserialize a Telegram object.
         '''

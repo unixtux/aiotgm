@@ -39,7 +39,7 @@ try:
     import ssl
 except ImportError:
     logger.warning(
-        "module 'ssl' not found, SSL_CONTEXT is None."
+        "No such module 'ssl', SSL_CONTEXT is None."
     )
     SSL_CONTEXT = None
 else:
@@ -47,7 +47,7 @@ else:
         import certifi
     except ImportError:
         logger.warning(
-            "module 'certifi' not found, using default CA."
+            "No such module 'certifi', using default CA."
         )
         SSL_CONTEXT = ssl.create_default_context()
     else:
@@ -55,7 +55,7 @@ else:
         if not os.path.isfile(_cafile):
             _cafile = None
             logger.warning(
-                "CA file not found, try to"
+                "No such CA file, try to"
                 " reinstall the module 'certifi'."
             )
         SSL_CONTEXT = ssl.create_default_context(
@@ -68,7 +68,7 @@ try:
 except ImportError:
     import json
     logger.info(
-        "module 'ujson' not found, the"
+        "No such module 'ujson', the"
         " default 'json' was imported."
     )
 
@@ -112,10 +112,7 @@ class TelegramError(Exception):
         self.description = description
 
     def __str__(self) -> str:
-        return self.description
-
-    def __repr__(self) -> str:
-        return '{}({!r})'.format(self.__class__.__name__, self.description)
+        return '[Errno {}] {}'.format(self.error_code, self.description)
 
 
 async def _parse_json(response: ClientResponse, /):
@@ -145,7 +142,7 @@ def _get_files(
                         content = rb.read()
                 except FileNotFoundError:
                     raise FileNotFoundError(
-                        f"Inexistent file: {obj.path!r},"
+                        f'No such file {obj.path!r},'
                         ' check your InputFile object.'
                     )
                 files[key] = {
@@ -181,8 +178,8 @@ def _convert_input_media(
                     content = rb.read()
             except FileNotFoundError:
                 raise FileNotFoundError(
-                    f"Inexistent file: {path!r},"
-                    ' check your InputMedia object;'
+                    f'No such file {path!r},'
+                    ' check your InputMedia object,'
                     ' InputMedia.media must be in the'
                     ' format "attach://<file_name>" to'
                     ' post a file using multipart/form-data.'
@@ -238,12 +235,11 @@ def _prepare_data(
         )
     return data
 
-
+BASE_URL = 'https://api.telegram.org'
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119.0) Gecko/20100101 Firefox/119.0'
 }
 CLIENT_TIMEOUT = ClientTimeout(total=300, connect=3)
-
 
 class TelegramApi:
 
@@ -280,7 +276,7 @@ class TelegramApi:
 
         if self.session is None or self.session.closed:
             self._session = ClientSession(
-                base_url='https://api.telegram.org',
+                base_url=BASE_URL,
                 timeout=CLIENT_TIMEOUT,
                 json_serialize=json.dumps,
                 connector=TCPConnector(ssl=SSL_CONTEXT)
@@ -345,7 +341,7 @@ class TelegramApi:
                             ' are not connections in the pool.'
                         )
         else:
-            raise TimeoutError('Connection lost in method {!r}.'.format(method))
+            raise TimeoutError(f'Connection lost in method {method!r}.')
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

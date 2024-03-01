@@ -400,6 +400,8 @@ class Client(TelegramApi):
     async def long_polling(self, timeout: int = 60):
         unlimited = float('inf')
         params = {'timeout': timeout}
+        logger.info('long polling has been started.')
+        bad_gateway = re.compile(r'bad.*gateway', re.IGNORECASE)
         while True:
             try:
                 if self._offset is not None:
@@ -413,7 +415,10 @@ class Client(TelegramApi):
                 updates: list[Update] = [Update._dese(update) for update in result]
 
             except TelegramError as exc:
-                if not re.search(r'bad.*gateway', str(exc), re.IGNORECASE):
+                if bad_gateway.search(exc.description):
+                    logger.info('{} in long polling.'.format(exc))
+                    await asyncio.sleep(2)
+                else:
                     await self.session.close()
                     logger.info('long polling was interrupted.')
                     raise exc from None
