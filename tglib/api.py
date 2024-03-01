@@ -100,7 +100,12 @@ def _format_url(token: str, method: str, /) -> str:
 
 class TelegramError(Exception):
     '''
-    Class to handle exceptions during Telegram requests.
+    Class to handle unsuccessful requests to the Telegram Bot API.
+
+    :param error_code: The status code of the unsuccessful request.
+    :type error_code: :obj:`int`
+    :param description: Description of why the request was unsuccessful.
+    :type description: :obj:`str`
     '''
     def __init__(self, error_code: int, description: str):
         self.error_code = error_code
