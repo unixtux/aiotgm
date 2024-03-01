@@ -11,15 +11,16 @@ All the names of the types are exactly the same described in the `offical docume
 
 .. code-block:: python3
 
-    bot = Client('api_token')
+    bot = Client('<api_token>')
 
     @bot.manage_message()
-    async def foo(message: Message):
-        if message.text.startswith('/start'): ...
+    async def foo(msg: Message):
+        if msg.text.startswith('/start'):
+            ...
             # An error will never be raised
             # because the text is always of type string.
 
-* All other attributes are :obj:`None` if they are not in the received *JSON*.
+* All other optional attributes are :obj:`None` if they are not in the received *JSON*.
 
 ---------------------------
 
