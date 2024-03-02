@@ -56,7 +56,7 @@ class Client(TelegramApi):
         super().__init__(token, proxy, debug)
 
         self._offset = None
-
+        self._user = None # set in long_polling()
         self.parse_mode = parse_mode
         self.protect_content = protect_content
 
@@ -79,6 +79,9 @@ class Client(TelegramApi):
         self._chat_boost_manager = UpdateManager(CHAT_BOOST_MANAGER, ChatBoostUpdated)
         self._removed_chat_boost_manager = UpdateManager(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
 
+    @property
+    def user(self) -> User:
+        return self._user # set in get_me()
 
     @property
     def parse_mode(self) -> Optional[str]:
@@ -398,6 +401,7 @@ class Client(TelegramApi):
     # Processing new updates
 
     async def long_polling(self, timeout: int = 60):
+        assert isinstance(timeout, (int, float)) and timeout >= 10, 'long polling timeout must be int and at least 10 seconds.'
         unlimited = float('inf')
         params = {'timeout': timeout}
         logger.info('long polling has been started.')
@@ -1213,8 +1217,12 @@ class Client(TelegramApi):
         A simple method for testing your bot's authentication token. Requires
         no parameters. Returns basic information about the bot in form of a User object.
         '''
-        result = await super().get_me()
-        return User._dese(result)
+        if self.user is not None:
+            return self.user
+        else:
+            result = await super().get_me()
+            self._user = User._dese(result)
+            return self.user
 
 
     async def log_out(self) -> Literal[True]:

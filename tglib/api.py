@@ -301,7 +301,7 @@ class TelegramApi:
             for key in params:
                 params[key] = _serialize(params[key])
 
-        logger.debug(f'method: {method}, params; {params}, files: {files}.')
+        logger.debug(f'method: {method!r}, params; {params}, files: {files}.')
 
         current_try = 0
 
