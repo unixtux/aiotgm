@@ -401,7 +401,8 @@ class Client(TelegramApi):
     # Processing new updates
 
     async def long_polling(self, timeout: int = 60):
-        assert isinstance(timeout, (int, float)) and timeout >= 10, 'long polling timeout must be int and at least 10 seconds.'
+        if not isinstance(timeout, (int, float)) or timeout < 10:
+            raise ValueError('long polling timeout must be int and at least 10 seconds.')
         unlimited = float('inf')
         params = {'timeout': timeout}
         logger.info('long polling has been started.')
