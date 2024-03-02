@@ -56,7 +56,7 @@ class Client(TelegramApi):
         super().__init__(token, proxy, debug)
 
         self._offset = None
-        self._user = None # set in long_polling()
+        self._user = None
         self.parse_mode = parse_mode
         self.protect_content = protect_content
 
@@ -81,7 +81,7 @@ class Client(TelegramApi):
 
     @property
     def user(self) -> User:
-        return self._user # set in get_me()
+        return self._user # set in get_me() just the first time.
 
     @property
     def parse_mode(self) -> Optional[str]:
