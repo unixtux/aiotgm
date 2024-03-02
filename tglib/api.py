@@ -119,6 +119,8 @@ async def _parse_json(response: ClientResponse, /):
 
     result = await response.json(loads=json.loads)
 
+    logger.debug(result)
+
     if result['ok'] is True:
         return result['result']
     else:
@@ -161,7 +163,7 @@ def _convert_input_media(
     /
 ) -> None:
     '''
-    Used in _get_input_media_files() to check and add to files InputMedia objects.
+    Used in _get_input_media_files() to add InputMedia types to FilesDict.
     '''
     if not isinstance(media, types_check):
         available_types = ', '.join([t.__name__ for t in types_check.__args__])
@@ -299,6 +301,8 @@ class TelegramApi:
             for key in params:
                 params[key] = _serialize(params[key])
 
+        logger.debug(f'method: {method}, params; {params}, files: {files}.')
+
         current_try = 0
 
         while current_try < max_retries:
@@ -337,8 +341,8 @@ class TelegramApi:
                     ):
                         await self.session.close()
                         logger.debug(
-                            'Session closed because there'
-                            ' are not connections in the pool.'
+                            'Session closed because there are'
+                            ' no more open connections in the pool.'
                         )
         else:
             raise TimeoutError(f'Connection lost in method {method!r}.')
