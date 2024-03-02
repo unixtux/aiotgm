@@ -396,10 +396,13 @@ class Client(TelegramApi):
 
     # Processing new updates
 
-    async def long_polling(self, timeout: int = 60):
-        if not isinstance(timeout, (int, float)) or timeout < 10:
-            raise ValueError('long polling timeout must be int and at least 10 seconds.')
-        unlimited = float('inf')
+    async def long_polling(self, timeout: int = 45):
+
+        if not type(timeout) in (int, float):
+            raise TypeError(
+                'long polling timeout must be int or float,'
+                ' got {}.'.format(timeout.__class__.__name__)
+            )
         params = {'timeout': timeout}
         logger.info('long polling has been started.')
         bad_gateway = re.compile(r'bad.*gateway', re.IGNORECASE)
@@ -410,7 +413,7 @@ class Client(TelegramApi):
 
                 result = await super().get_updates(
                     params,
-                    max_retries=unlimited,
+                    max_retries=float('inf'),
                     keep_alive=True
                 )
                 updates: list[Update] = [Update._dese(update) for update in result]

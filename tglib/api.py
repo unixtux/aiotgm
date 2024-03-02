@@ -301,14 +301,13 @@ class TelegramApi:
             for key in params:
                 params[key] = _serialize(params[key])
 
-        logger.debug(f'method: {method!r}, params; {params}, files: {files}.')
+        logger.debug(f'method: {method!r}, params: {params}, files: {files}.')
 
         current_try = 0
 
         while current_try < max_retries:
 
             current_try += 1
-            self._get_session()
             start_time = time.time()
             try:
                 # Convert the params to
@@ -317,7 +316,7 @@ class TelegramApi:
                 # a RuntimeError from aiohttp.
                 data = _prepare_data(params, files)
 
-                async with self.session.post(
+                async with self._get_session().post(
                     url=_format_url(self._token, method),
                     data=data,
                     **self._headers_and_proxy
