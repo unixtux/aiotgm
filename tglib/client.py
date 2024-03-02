@@ -56,7 +56,7 @@ class Client(TelegramApi):
         super().__init__(token, proxy, debug)
 
         self._offset = None
-        self._user = None
+
         self.parse_mode = parse_mode
         self.protect_content = protect_content
 
@@ -78,10 +78,6 @@ class Client(TelegramApi):
         self._chat_join_request_manager = UpdateManager(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
         self._chat_boost_manager = UpdateManager(CHAT_BOOST_MANAGER, ChatBoostUpdated)
         self._removed_chat_boost_manager = UpdateManager(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
-
-    @property
-    def user(self) -> User:
-        return self._user # set in get_me() just the first time.
 
     @property
     def parse_mode(self) -> Optional[str]:
@@ -1218,12 +1214,8 @@ class Client(TelegramApi):
         A simple method for testing your bot's authentication token. Requires
         no parameters. Returns basic information about the bot in form of a User object.
         '''
-        if self.user is not None:
-            return self.user
-        else:
-            result = await super().get_me()
-            self._user = User._dese(result)
-            return self.user
+        result = await super().get_me()
+        return  User._dese(result)
 
 
     async def log_out(self) -> Literal[True]:
