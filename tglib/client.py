@@ -27,7 +27,26 @@ from typing import (
     Callable,
     Awaitable,
 )
-from .update_manager import *
+from .update_manager import (
+    MessageManager,
+    EditedMessageManager, 
+    ChannelPostManager, 
+    EditedChannelPostManager,
+    MessageReactionManager,
+    MessageReactionCountManager,
+    InlineQueryManager,
+    ChosenInlineResultManager,
+    CallbackQueryManager,
+    ShippingQueryManager,
+    PrecheckoutQueryManager,
+    PollManager,
+    PollAnswerManager,
+    MyChatMemberManager,
+    ChatMemberManager,
+    ChatJoinRequestManager,
+    ChatBoostManager,
+    RemovedChatBoostManager,
+)
 
 
 class Client(TelegramApi):
@@ -61,24 +80,24 @@ class Client(TelegramApi):
         self.parse_mode = parse_mode
         self.protect_content = protect_content
 
-        self._message_manager = UpdateManager(MESSAGE_MANAGER, Message)
-        self._edited_message_manager = UpdateManager(EDITED_MESSAGE_MANAGER, Message)
-        self._channel_post_manager = UpdateManager(CHANNEL_POST_MANAGER, Message)
-        self._edited_channel_post_manager = UpdateManager(EDITED_CHANNEL_POST_MANAGER, Message)
-        self._message_reaction_manager = UpdateManager(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
-        self._message_reaction_count_manager = UpdateManager(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
-        self._inline_query_manager = UpdateManager(INLINE_QUERY_MANAGER, InlineQuery)
-        self._chosen_inline_result_manager = UpdateManager(CHOSEN_INLINE_RESULT_MANAGER, ChosenInlineResult)
-        self._callback_query_manager = UpdateManager(CALLBACK_QUERY_MANAGER, CallbackQuery)
-        self._shipping_query_manager = UpdateManager(SHIPPING_QUERY_MANAGER, ShippingQuery)
-        self._pre_checkout_query_manager = UpdateManager(PRE_CHECKOUT_QUERY_MANAGER, PreCheckoutQuery)
-        self._poll_manager = UpdateManager(POLL_MANAGER, Poll)
-        self._poll_answer_manager = UpdateManager(POLL_ANSWER_MANAGER, PollAnswer)
-        self._my_chat_member_manager = UpdateManager(MY_CHAT_MEMBER_MANAGER, ChatMemberUpdated)
-        self._chat_member_manager = UpdateManager(CHAT_MEMBER_MANAGER, ChatMemberUpdated)
-        self._chat_join_request_manager = UpdateManager(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
-        self._chat_boost_manager = UpdateManager(CHAT_BOOST_MANAGER, ChatBoostUpdated)
-        self._removed_chat_boost_manager = UpdateManager(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
+        self._message_manager = MessageManager()
+        self._edited_message_manager = EditedMessageManager()
+        self._channel_post_manager = ChannelPostManager()
+        self._edited_channel_post_manager = EditedChannelPostManager()
+        self._message_reaction_manager = MessageReactionManager()
+        self._message_reaction_count_manager = MessageReactionCountUpdated()
+        self._inline_query_manager = InlineQueryManager()
+        self._chosen_inline_result_manager = ChosenInlineResultManager()
+        self._callback_query_manager = CallbackQueryManager()
+        self._shipping_query_manager = ShippingQueryManager()
+        self._pre_checkout_query_manager = PrecheckoutQueryManager()
+        self._poll_manager = PollManager()
+        self._poll_answer_manager = PollAnswerManager()
+        self._my_chat_member_manager = MyChatMemberManager()
+        self._chat_member_manager = ChatMemberManager()
+        self._chat_join_request_manager = ChatJoinRequestManager()
+        self._chat_boost_manager = ChatBoostManager()
+        self._removed_chat_boost_manager = RemovedChatBoostManager()
 
     @property
     def parse_mode(self) -> Optional[str]:

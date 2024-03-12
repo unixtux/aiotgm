@@ -1,5 +1,7 @@
 #!/bin/env python3
 
+__all__ = ()
+
 import os
 import inspect
 from typing import (
@@ -9,32 +11,7 @@ from typing import (
     Awaitable,
 )
 from .client import logger
-
-__all__ = (
-    '_run_coroutine',
-    'UpdateManager',
-    'NextFunction',
-    '_is_next_function',
-    # aliases
-    'MESSAGE_MANAGER',
-    'EDITED_MESSAGE_MANAGER',
-    'CHANNEL_POST_MANAGER',
-    'EDITED_CHANNEL_POST_MANAGER',
-    'MESSAGE_REACTION_MANAGER',
-    'MESSAGE_REACTION_COUNT_MANAGER',
-    'INLINE_QUERY_MANAGER',
-    'CHOSEN_INLINE_RESULT_MANAGER',
-    'CALLBACK_QUERY_MANAGER',
-    'SHIPPING_QUERY_MANAGER',
-    'PRE_CHECKOUT_QUERY_MANAGER',
-    'POLL_MANAGER',
-    'POLL_ANSWER_MANAGER',
-    'MY_CHAT_MEMBER_MANAGER',
-    'CHAT_MEMBER_MANAGER',
-    'CHAT_JOIN_REQUEST_MANAGER',
-    'CHAT_BOOST_MANAGER',
-    'REMOVED_CHAT_BOOST_MANAGER',
-)
+from .types import *
 
 MESSAGE_MANAGER = 'message_manager'
 EDITED_MESSAGE_MANAGER = 'edited_message_manager'
@@ -243,11 +220,10 @@ async def _run_coroutine(
             f' in file {filename!r} at line {lineno}.'
         )
 
-
 class UpdateManager:
-    def __init__(self, name: str, obj: Any, /):
+    def __init__(self, name: str, type: type, /):
         self._name = name
-        self._obj = obj
+        self._type = type
         self._rules = ()
 
     @property
@@ -273,8 +249,80 @@ class UpdateManager:
     ):
         _check_rule(
             self._name,
-            self._obj,
+            self._type,
             checker,
             coroutine
         )
         self._rules += (Rule(checker, coroutine),)
+
+class MessageManager(UpdateManager):
+    def __init__(self):
+        super().__init__(MESSAGE_MANAGER, Message)
+
+class EditedMessageManager(UpdateManager):
+    def __init__(self):
+        super().__init__(EDITED_MESSAGE_MANAGER, Message)
+
+class ChannelPostManager(UpdateManager):
+    def __init__(self):
+        super().__init__(CHANNEL_POST_MANAGER, Message)
+
+class EditedChannelPostManager(UpdateManager):
+    def __init__(self):
+        super().__init__(EDITED_CHANNEL_POST_MANAGER, Message)
+
+class MessageReactionManager(UpdateManager):
+    def __init__(self):
+        super().__init__(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
+
+class MessageReactionCountManager(UpdateManager):
+    def __init__(self):
+        super().__init__(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
+
+class InlineQueryManager(UpdateManager):
+    def __init__(self):
+        super().__init__(INLINE_QUERY_MANAGER, InlineQuery)
+
+class ChosenInlineResultManager(UpdateManager):
+    def __init__(self):
+        super().__init__(CHOSEN_INLINE_RESULT_MANAGER, ChosenInlineResult)
+
+class CallbackQueryManager(UpdateManager):
+    def __init__(self):
+        super().__init__(CALLBACK_QUERY_MANAGER, CallbackQuery)
+
+class ShippingQueryManager(UpdateManager):
+    def __init__(self):
+        super().__init__(SHIPPING_QUERY_MANAGER, ShippingQuery)
+
+class PrecheckoutQueryManager(UpdateManager):
+    def __init__(self):
+        super().__init__(PRE_CHECKOUT_QUERY_MANAGER, PreCheckoutQuery)
+
+class PollManager(UpdateManager):
+    def __init__(self):
+        super().__init__(POLL_MANAGER, Poll)
+
+class PollAnswerManager(UpdateManager):
+    def __init__(self):
+        super().__init__(POLL_ANSWER_MANAGER, PollAnswer)
+
+class MyChatMemberManager(UpdateManager):
+    def __init__(self):
+        super().__init__(MY_CHAT_MEMBER_MANAGER, ChatMemberUpdated)
+
+class ChatMemberManager(UpdateManager):
+    def __init__(self):
+        super().__init__(CHAT_MEMBER_MANAGER, ChatMemberUpdated)
+
+class ChatJoinRequestManager(UpdateManager):
+    def __init__(self):
+        super().__init__(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
+
+class ChatBoostManager(UpdateManager):
+    def __init__(self):
+        super().__init__(CHAT_BOOST_MANAGER, ChatBoostUpdated)
+
+class RemovedChatBoostManager(UpdateManager):
+    def __init__(self):
+        super().__init__(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
