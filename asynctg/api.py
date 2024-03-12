@@ -115,11 +115,12 @@ class TelegramError(Exception):
         return '[Errno {}] {}'.format(self.error_code, self.description)
 
 
-async def _parse_json(response: ClientResponse, /):
+async def _parse_json(response: ClientResponse, deep_debug: bool, /):
 
     result = await response.json(loads=json.loads)
 
-    logger.debug(result)
+    if deep_debug:
+        logger.debug(result)
 
     if result['ok'] is True:
         return result['result']
@@ -249,7 +250,8 @@ class TelegramApi:
         self,
         token: str,
         proxy: Optional[str] = None,
-        debug: Optional[bool] = None
+        debug: Optional[bool] = None,
+        deep_debug: Optional[bool] = None
     ):
         if not isinstance(token, str):
             raise TypeError(
@@ -261,7 +263,10 @@ class TelegramApi:
             )
         if debug:
             logger.setLevel(10)
+        elif deep_debug:
+            logger.setLevel(10)
 
+        self.deep_debug = deep_debug
         self._token = token
         self._session = None
         self._headers_and_proxy = {
@@ -301,7 +306,8 @@ class TelegramApi:
             for key in params:
                 params[key] = _serialize(params[key])
 
-        logger.debug(f'method: {method!r}, params: {params}, files: {files}.')
+        if self.deep_debug:
+            logger.debug(f'method: {method!r}, params: {params}, files: {files}.')
 
         current_try = 0
 
@@ -322,7 +328,7 @@ class TelegramApi:
                     **self._headers_and_proxy
                 ) as response:
 
-                    return await _parse_json(response)
+                    return await _parse_json(response, self.deep_debug)
 
             except (ClientError, TimeoutError) as exc:
                 await asyncio.sleep(3 - (time.time() - start_time))

@@ -65,8 +65,10 @@ class Client(TelegramApi):
     :type protect_content: :obj:`bool`, optional
     :param proxy: Pass a proxy string to be used in the http requests.
     :type proxy: :obj:`str`, optional
-    :param debug: Pass :obj:`True` for more information about http requests (useful for debugging).
+    :param debug: Pass :obj:`True` to log some debug information.
     :type debug: :obj:`bool`, optional
+    :param deep_debug: Pass :obj:`True` for more information about http requests (useful for debugging).
+    :type deep_debug: :obj:`bool`, optional
     '''
     def __init__(
         self,
@@ -75,9 +77,10 @@ class Client(TelegramApi):
         parse_mode: Optional[str] = None,
         protect_content: Optional[bool] = None,
         proxy: Optional[str] = None,
-        debug: Optional[bool] = None
+        debug: Optional[bool] = None,
+        deep_debug: Optional[bool] = None
     ):
-        super().__init__(token, proxy, debug)
+        super().__init__(token, proxy, debug, deep_debug)
 
         self._offset = None
 
