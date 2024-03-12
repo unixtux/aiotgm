@@ -10,13 +10,13 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../../'))
 
-import tglib
+import asynctg
 from datetime import datetime as dtm
 
 author = 'unixtux'
 year = dtm.now().year
-release = tglib.VERSION
-project = tglib.__name__
+release = asynctg.VERSION
+project = asynctg.__name__
 copyright = f'{year}, {author}'
 
 # -- General configuration ---------------------------------------------------

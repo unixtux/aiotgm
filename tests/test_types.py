@@ -12,8 +12,8 @@ from typing import (
     Optional,
     Literal
 )
-from tglib.types import *
-from tglib.types import (
+from asynctg.types import *
+from asynctg.types import (
     TelegramType,
     ChatMember,
     MessageOrigin,
@@ -22,7 +22,7 @@ from tglib.types import (
     InputMessageContent,
     MaybeInaccessibleMessage
 )
-from tglib.constants import *
+from asynctg.constants import *
 
 TYPES = {
     ChatBoostAdded: {
@@ -5003,7 +5003,7 @@ TYPES = {
 
 from inspect import isclass
 
-from tglib.logger import get_logger
+from asynctg.logger import get_logger
 logger = get_logger('TypesChecker')
 
 logger.setLevel(20)

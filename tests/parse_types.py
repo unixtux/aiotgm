@@ -16,19 +16,18 @@ LOGGER_LEVEL = DEBUG
 
 import re
 import json
-import tglib.types
-from tglib.logger import get_logger
+import asynctg.types
+from asynctg.logger import get_logger
+logger = get_logger('TypeChecker')
+logger.setLevel(LOGGER_LEVEL)
 
-with open('../tglib/types.py') as r:
+with open('../asynctg/types.py') as r:
     LINES = r.readlines()
 
 TYPES: dict[str, dict | Any] = {}
 TG_TYPES = []
 
 LINE_N = 0
-
-logger = get_logger('TypeChecker')
-logger.setLevel(LOGGER_LEVEL)
 
 JSON_LITERALS = {
     'True': True,
@@ -536,12 +535,12 @@ NOT_IN_TYPES = []
 TYPES_WITH_DESE = []
 TYPES_WITHOUT_DESE = []
 
-for type in tglib.types.__all__:
+for type in asynctg.types.__all__:
     if type not in TYPES:
         NOT_IN_TYPES.append(type)
 
 for type in TYPES:
-    if type not in tglib.types.__all__:
+    if type not in asynctg.types.__all__:
         NOT_IN_ALL.append(type)
 
     if TYPES[type]['link'] is None:
@@ -552,7 +551,7 @@ for type in TYPES:
     else:
         TYPES_WITHOUT_DESE.append(type)
 
-logger.info('Length of __all__ is: %s', len(tglib.types.__all__))
+logger.info('Length of __all__ is: %s', len(asynctg.types.__all__))
 logger.info('Length of types is: %s', len(TYPES))
 logger.info('TelegramTypes are: %s', len(TG_TYPES))
 logger.info('Missing types are: %s', len(NOT_IN_ALL) or len(NOT_IN_TYPES))
@@ -586,8 +585,8 @@ from typing import (
     Optional,
     Literal
 )
-from tglib.types import *
-from tglib.types import (
+from asynctg.types import *
+from asynctg.types import (
     TelegramType,
     ChatMember,
     MessageOrigin,
@@ -596,7 +595,7 @@ from tglib.types import (
     InputMessageContent,
     MaybeInaccessibleMessage
 )
-from tglib.constants import *
+from asynctg.constants import *
 
 TYPES = '''
 
@@ -612,7 +611,7 @@ f += '''
 
 from inspect import isclass
 
-from tglib.logger import get_logger
+from asynctg.logger import get_logger
 logger = get_logger('TypesChecker')
 
 logger.setLevel(20)

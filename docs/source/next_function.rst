@@ -2,6 +2,6 @@
 *NextFunction*
 ==============
 
-.. autoclass:: tglib.NextFunction
+.. autoclass:: asynctg.NextFunction
     :members:
     :undoc-members:

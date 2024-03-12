@@ -7,7 +7,7 @@ __all__ = (
 )
 from . import VERSION
 from .logger import get_logger
-logger = get_logger('tglib (' + VERSION + ')')
+logger = get_logger('asynctg (' + VERSION + ')')
 del VERSION, get_logger
 
 import re
@@ -231,8 +231,8 @@ class Client(TelegramApi):
 
         .. code-block:: python3
 
-            from tglib import Client
-            from tglib.types import Message
+            from asynctg import Client
+            from asynctg.types import Message
 
             bot = Client('<your_api_token>')
 
@@ -247,9 +247,9 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *message* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *message* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._message_manager
@@ -257,14 +257,14 @@ class Client(TelegramApi):
     @property
     def edited_message_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *edited_message* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *edited_message* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._edited_message_manager
@@ -272,14 +272,14 @@ class Client(TelegramApi):
     @property
     def channel_post_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *channel_post* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *channel_post* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._channel_post_manager
@@ -287,14 +287,14 @@ class Client(TelegramApi):
     @property
     def edited_channel_post_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *edited_channel_post* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *edited_channel_post* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._edited_channel_post_manager
@@ -302,14 +302,14 @@ class Client(TelegramApi):
     @property
     def message_reaction_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *message_reaction* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *message_reaction* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.MessageReactionUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.MessageReactionUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.MessageReactionUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.MessageReactionUpdated`.
             :type coroutine: :obj:`Callable[[MessageReactionUpdated], Awaitable]`
         '''
         return self._message_reaction_manager
@@ -317,14 +317,14 @@ class Client(TelegramApi):
     @property
     def message_reaction_count_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *message_reaction_count* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *message_reaction_count* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.MessageReactionCountUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.MessageReactionCountUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.MessageReactionCountUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.MessageReactionCountUpdated`.
             :type coroutine: :obj:`Callable[[MessageReactionCountUpdated], Awaitable]`
         '''
         return self._message_reaction_count_manager
@@ -332,14 +332,14 @@ class Client(TelegramApi):
     @property
     def inline_query_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *inline_query* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *inline_query* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[InlineQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.InlineQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.InlineQuery`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.InlineQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.InlineQuery`.
             :type coroutine: :obj:`Callable[[InlineQuery], Awaitable]`
         '''
         return self._inline_query_manager
@@ -347,14 +347,14 @@ class Client(TelegramApi):
     @property
     def chosen_inline_result_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *chosen_inline_result* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *chosen_inline_result* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChosenInlineResult` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChosenInlineResult`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.ChosenInlineResult` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.ChosenInlineResult`.
             :type coroutine: :obj:`Callable[[ChosenInlineResult], Awaitable]`
         '''
         return self._chosen_inline_result_manager
@@ -362,14 +362,14 @@ class Client(TelegramApi):
     @property
     def callback_query_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *callback_query* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *callback_query* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[CallbackQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.CallbackQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.CallbackQuery`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.CallbackQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.CallbackQuery`.
             :type coroutine: :obj:`Callable[[CallbackQuery], Awaitable]`
         '''
         return self._callback_query_manager
@@ -377,14 +377,14 @@ class Client(TelegramApi):
     @property
     def shipping_query_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *shipping_query* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *shipping_query* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[ShippingQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ShippingQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ShippingQuery`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.ShippingQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.ShippingQuery`.
             :type coroutine: :obj:`Callable[[ShippingQuery], Awaitable]`
         '''
         return self._shipping_query_manager
@@ -392,14 +392,14 @@ class Client(TelegramApi):
     @property
     def pre_checkout_query_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *pre_checkout_query* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *pre_checkout_query* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[PreCheckoutQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.PreCheckoutQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.PreCheckoutQuery`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.PreCheckoutQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.PreCheckoutQuery`.
             :type coroutine: :obj:`Callable[[PreCheckoutQuery], Awaitable]`
         '''
         return self._pre_checkout_query_manager
@@ -407,14 +407,14 @@ class Client(TelegramApi):
     @property
     def poll_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *poll* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *poll* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[Poll], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Poll` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Poll`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.Poll` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.Poll`.
             :type coroutine: :obj:`Callable[[Poll], Awaitable]`
         '''
         return self._poll_manager
@@ -422,14 +422,14 @@ class Client(TelegramApi):
     @property
     def poll_answer_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *poll_answer* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *poll_answer* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[PollAnswer], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.PollAnswer` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.PollAnswer`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.PollAnswer` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.PollAnswer`.
             :type coroutine: :obj:`Callable[[PollAnswer], Awaitable]`
         '''
         return self._poll_answer_manager
@@ -437,14 +437,14 @@ class Client(TelegramApi):
     @property
     def my_chat_member_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *my_chat_member* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *my_chat_member* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatMemberUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.ChatMemberUpdated`.
             :type coroutine: :obj:`Callable[[ChatMemberUpdated], Awaitable]`
         '''
         return self._my_chat_member_manager
@@ -452,14 +452,14 @@ class Client(TelegramApi):
     @property
     def chat_member_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *chat_member* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *chat_member* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatMemberUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.ChatMemberUpdated`.
             :type coroutine: :obj:`Callable[[ChatMemberUpdated], Awaitable]`
         '''
         return self._chat_member_manager
@@ -467,14 +467,14 @@ class Client(TelegramApi):
     @property
     def chat_join_request_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *chat_join_request* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *chat_join_request* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[ChatJoinRequest], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatJoinRequest` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatJoinRequest`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.ChatJoinRequest` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.ChatJoinRequest`.
             :type coroutine: :obj:`Callable[[ChatJoinRequest], Awaitable]`
         '''
         return self._chat_join_request_manager
@@ -482,14 +482,14 @@ class Client(TelegramApi):
     @property
     def chat_boost_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *chat_boost* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *chat_boost* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[ChatBoostUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatBoostUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatBoostUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.ChatBoostUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.ChatBoostUpdated`.
             :type coroutine: :obj:`Callable[[ChatBoostUpdated], Awaitable]`
         '''
         return self._chat_boost_manager
@@ -497,14 +497,14 @@ class Client(TelegramApi):
     @property
     def removed_chat_boost_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~asynctg.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming *removed_chat_boost* :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming *removed_chat_boost* :obj:`~asynctg.types.Update`.
             :type checker: :obj:`Callable[[ChatBoostRemoved], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatBoostRemoved` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatBoostRemoved`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~asynctg.types.ChatBoostRemoved` passes the check. It must takes only one argument, it will be processed as :obj:`~asynctg.types.ChatBoostRemoved`.
             :type coroutine: :obj:`Callable[[ChatBoostRemoved], Awaitable]`
         '''
         return self._removed_chat_boost_manager
@@ -705,7 +705,7 @@ class Client(TelegramApi):
         :param name: Sticker set name.
         :type name: :obj:`str`
         :param sticker: A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn't changed.
-        :type sticker: :obj:`~tglib.types.InputSticker`
+        :type sticker: :obj:`~asynctg.types.InputSticker`
         :rtype: :obj:`True`
         '''
         params = {
@@ -742,7 +742,7 @@ class Client(TelegramApi):
         :type text: :obj:`str`, optional
         :param show_alert: If :obj:`True`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to :obj:`False`.
         :type show_alert: :obj:`bool`, optional
-        :param url: URL that will be opened by the user's client. If you have created a :obj:`~tglib.types.Game` and accepted the conditions via `@BotFather <https://t.me/botfather>`_, specify the URL that opens your game - note that this will only work if the query comes from a :obj:`callback_game <tglib.types.InlineKeyboardButton>` button. Otherwise, you may use links like ``t.me/your_bot?start=XXXX`` that open your bot with a parameter.
+        :param url: URL that will be opened by the user's client. If you have created a :obj:`~asynctg.types.Game` and accepted the conditions via `@BotFather <https://t.me/botfather>`_, specify the URL that opens your game - note that this will only work if the query comes from a :obj:`callback_game <asynctg.types.InlineKeyboardButton>` button. Otherwise, you may use links like ``t.me/your_bot?start=XXXX`` that open your bot with a parameter.
         :type url: :obj:`str`, optional
         :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to :obj:`0`.
         :type cache_time: :obj:`int`, optional
@@ -776,7 +776,7 @@ class Client(TelegramApi):
         :param inline_query_id: Unique identifier for the answered query.
         :type inline_query_id: :obj:`str`
         :param results: A JSON-serialized array of results for the inline query.
-        :type results: :obj:`list` of :obj:`~tglib.types.InlineQueryResult`
+        :type results: :obj:`list` of :obj:`~asynctg.types.InlineQueryResult`
         :param cache_time: The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to :obj:`300`.
         :type cache_time: :obj:`int`, optional
         :param is_personal: Pass :obj:`True` if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query.
@@ -784,7 +784,7 @@ class Client(TelegramApi):
         :param next_offset: Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
         :type next_offset: :obj:`str`, optional
         :param button: A JSON-serialized object describing a button to be shown above inline query results.
-        :type button: :obj:`~tglib.types.InlineQueryResultsButton`, optional
+        :type button: :obj:`~asynctg.types.InlineQueryResultsButton`, optional
         :rtype: :obj:`True`
         '''
         params = {
@@ -808,7 +808,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#answerprecheckoutquery
 
         Once the user has confirmed their payment and shipping details, the Bot API sends the
-        final confirmation in the form of an :obj:`~tglib.types.Update` with the field *pre_checkout_query*. Use this
+        final confirmation in the form of an :obj:`~asynctg.types.Update` with the field *pre_checkout_query*. Use this
         method to respond to such pre-checkout queries. On success, :obj:`True` is returned. **Note**: The
         Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
 
@@ -839,7 +839,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#answershippingquery
 
         If you sent an invoice requesting a shipping address and the parameter *is_flexible*
-        was specified, the Bot API will send an :obj:`~tglib.types.Update` with a *shipping_query* field to the
+        was specified, the Bot API will send an :obj:`~asynctg.types.Update` with a *shipping_query* field to the
         bot. Use this method to reply to shipping queries. On success, :obj:`True` is returned.
 
         :param shipping_query_id: Unique identifier for the query to be answered.
@@ -847,7 +847,7 @@ class Client(TelegramApi):
         :param ok: Pass :obj:`True` if delivery to the specified address is possible and :obj:`False` if there are any problems (for example, if delivery to the specified address is not possible).
         :type ok: :obj:`bool`
         :param shipping_options: Required if *ok* is :obj:`True`. A JSON-serialized array of available shipping options.
-        :type shipping_options: :obj:`list` of :obj:`~tglib.types.ShippingOption`, optional
+        :type shipping_options: :obj:`list` of :obj:`~asynctg.types.ShippingOption`, optional
         :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable"). Telegram will display this message to the user.
         :type error_message: :obj:`str`, optional
         :rtype: :obj:`True`
@@ -871,13 +871,13 @@ class Client(TelegramApi):
 
         Use this method to set the result of an interaction with a
         `Web App <https://core.telegram.org/bots/webapps>`_ and send a corresponding message on behalf of
-        the user to the chat from which the query originated. On success, a :obj:`~tglib.types.SentWebAppMessage` object is returned.
+        the user to the chat from which the query originated. On success, a :obj:`~asynctg.types.SentWebAppMessage` object is returned.
 
         :param web_app_query_id: Unique identifier for the query to be answered.
         :type web_app_query_id: :obj:`str`
         :param result: A JSON-serialized object describing the message to be sent.
-        :type result: :obj:`~tglib.types.InlineQueryResult`
-        :rtype: :obj:`~tglib.types.SentWebAppMessage`
+        :type result: :obj:`~asynctg.types.InlineQueryResult`
+        :rtype: :obj:`~asynctg.types.SentWebAppMessage`
         '''
         params = {
             'web_app_query_id': web_app_query_id,
@@ -923,7 +923,7 @@ class Client(TelegramApi):
 
         Use this method to ban a user in a group, a supergroup or a channel. In the case of
         supergroups and channels, the user will not be able to return to the chat on their own using
-        invite links, etc., unless :meth:`unbanned <tglib.Client.unban_chat_member>` first. The bot must be an administrator
+        invite links, etc., unless :meth:`unbanned <asynctg.Client.unban_chat_member>` first. The bot must be an administrator
         in the chat for this to work and must have the appropriate administrator rights. Returns :obj:`True` on success.
 
         :param chat_id: Unique identifier for the target group or username of the target supergroup or channel (in the format ``@channelusername``).
@@ -954,7 +954,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#banchatsenderchat
 
         Use this method to ban a channel chat in a supergroup or a channel. Until the chat
-        is :meth:`unbanned <tglib.Client.unban_chat_sender_chat>`, the owner of the banned chat won't be able to
+        is :meth:`unbanned <asynctg.Client.unban_chat_sender_chat>`, the owner of the banned chat won't be able to
         send messages on behalf of **any of their channels**. The bot must be an administrator in the supergroup or
         channel for this to work and must have the appropriate administrator rights. Returns :obj:`True` on success.
 
@@ -1048,8 +1048,8 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#copymessage
 
         Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied.
-        A quiz :obj:`poll <tglib.types.Poll>` can be copied only if the value of the field *correct_option_id* is known to the bot. The method is analogous to the method
-        :meth:`~tglib.Client.forward_message`, but the copied message doesn't have a link to the original message. Returns the :obj:`~tglib.types.MessageId` of the sent message on success.
+        A quiz :obj:`poll <asynctg.types.Poll>` can be copied only if the value of the field *correct_option_id* is known to the bot. The method is analogous to the method
+        :meth:`~asynctg.Client.forward_message`, but the copied message doesn't have a link to the original message. Returns the :obj:`~asynctg.types.MessageId` of the sent message on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1064,16 +1064,16 @@ class Client(TelegramApi):
         :param parse_mode: Mode for parsing entities in the new caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
         :type parse_mode: :obj:`str`, optional
         :param caption_entities: A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of *parse_mode*.
-        :type caption_entities: :obj:`list` of :obj:`~tglib.types.MessageEntity`, optional
+        :type caption_entities: :obj:`list` of :obj:`~asynctg.types.MessageEntity`, optional
         :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
         :type disable_notification: :obj:`bool`, optional
         :param protect_content: Protects the contents of the sent message from forwarding and saving.
         :type protect_content: :obj:`bool`, optional
         :param reply_parameters: Description of the message to reply to.
-        :type reply_parameters: :obj:`~tglib.types.ReplyParameters`, optional
+        :type reply_parameters: :obj:`~asynctg.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~tglib.types.InlineKeyboardMarkup` or :obj:`~tglib.types.ReplyKeyboardMarkup` or :obj:`~tglib.types.ReplyKeyboardRemove` or :obj:`~tglib.types.ForceReply`, optional
-        :rtype: :obj:`~tglib.types.MessageId`
+        :type reply_markup: :obj:`~asynctg.types.InlineKeyboardMarkup` or :obj:`~asynctg.types.ReplyKeyboardMarkup` or :obj:`~asynctg.types.ReplyKeyboardRemove` or :obj:`~asynctg.types.ForceReply`, optional
+        :rtype: :obj:`~asynctg.types.MessageId`
         '''
         params = {
             'chat_id': chat_id,
@@ -1108,9 +1108,9 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#copymessages
 
         Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service
-        messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz :obj:`poll <tglib.types.Poll>` can be copied only if the value
-        of the field *correct_option_id* is known to the bot. The method is analogous to the method :meth:`~tglib.Client.forward_messages`, but the copied messages don't have
-        a link to the original message. Album grouping is kept for copied messages. On success, an array of :obj:`~tglib.types.MessageId` of the sent messages is returned.
+        messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz :obj:`poll <asynctg.types.Poll>` can be copied only if the value
+        of the field *correct_option_id* is known to the bot. The method is analogous to the method :meth:`~asynctg.Client.forward_messages`, but the copied messages don't have
+        a link to the original message. Album grouping is kept for copied messages. On success, an array of :obj:`~asynctg.types.MessageId` of the sent messages is returned.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1126,7 +1126,7 @@ class Client(TelegramApi):
         :type protect_content: :obj:`bool`, optional
         :param remove_caption: Pass :obj:`True` to copy the messages without their captions.
         :type remove_caption: :obj:`bool`, optional
-        :rtype: :obj:`list` of :obj:`~tglib.types.MessageId`
+        :rtype: :obj:`list` of :obj:`~asynctg.types.MessageId`
         '''
         params = {
             'chat_id': chat_id,
@@ -1155,7 +1155,7 @@ class Client(TelegramApi):
 
         Use this method to create an additional invite link for a chat. The bot must be an administrator
         in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the
-        method :meth:`~tglib.Client.revoke_chat_invite_link`. Returns the new invite link as :obj:`~tglib.types.ChatInviteLink` object.
+        method :meth:`~asynctg.Client.revoke_chat_invite_link`. Returns the new invite link as :obj:`~asynctg.types.ChatInviteLink` object.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1167,7 +1167,7 @@ class Client(TelegramApi):
         :type member_limit: :obj:`int`, optional
         :param creates_join_request: :obj:`True`, if users joining the chat via the link need to be approved by chat administrators. If :obj:`True`, *member_limit* can't be specified.
         :type creates_join_request: :obj:`bool`, optional
-        :rtype: :obj:`~tglib.types.ChatInviteLink`
+        :rtype: :obj:`~asynctg.types.ChatInviteLink`
         '''
         params = {
             'chat_id': chat_id
@@ -1192,7 +1192,7 @@ class Client(TelegramApi):
 
         Use this method to create a topic in a forum supergroup chat. The bot must be an
         administrator in the chat for this to work and must have the *can_manage_topics* administrator
-        rights. Returns information about the created topic as a :obj:`~tglib.types.ForumTopic` object.
+        rights. Returns information about the created topic as a :obj:`~asynctg.types.ForumTopic` object.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1200,9 +1200,9 @@ class Client(TelegramApi):
         :type name: :obj:`str`
         :param icon_color: Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F).
         :type icon_color: :obj:`int`, optional
-        :param icon_custom_emoji_id: Unique identifier of the custom emoji shown as the topic icon. Use :meth:`~tglib.Client.get_forum_topic_icon_stickers` to get all allowed custom emoji identifiers.
+        :param icon_custom_emoji_id: Unique identifier of the custom emoji shown as the topic icon. Use :meth:`~asynctg.Client.get_forum_topic_icon_stickers` to get all allowed custom emoji identifiers.
         :type icon_custom_emoji_id: :obj:`str`, optional
-        :rtype: :obj:`~tglib.types.ForumTopic`
+        :rtype: :obj:`~asynctg.types.ForumTopic`
         '''
         params = {
             'chat_id': chat_id,
@@ -1253,7 +1253,7 @@ class Client(TelegramApi):
         :param currency: Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_.
         :type currency: :obj:`str`
         :param prices: Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.).
-        :type prices: :obj:`list` of :obj:`~tglib.types.LabeledPrice`
+        :type prices: :obj:`list` of :obj:`~asynctg.types.LabeledPrice`
         :param max_tip_amount: The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of ``US$ 1.45`` pass ``max_tip_amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to :obj:`0`.
         :type max_tip_amount: :obj:`int`, optional
         :param suggested_tip_amounts: A JSON-serialized array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.
@@ -1332,7 +1332,7 @@ class Client(TelegramApi):
         :param title: Sticker set title, 1-64 characters.
         :type title: :obj:`str`
         :param stickers: A JSON-serialized list of 1-50 initial stickers to be added to the sticker set.
-        :type stickers: :obj:`list` of :obj:`~tglib.types.InputSticker`
+        :type stickers: :obj:`list` of :obj:`~asynctg.types.InputSticker`
         :param sticker_format: Format of stickers in the set, must be one of “static”, “animated”, “video”.
         :type sticker_format: :obj:`str`
         :param sticker_type: Type of stickers in the set, pass “regular”, “mask”, or “custom_emoji”. By default, a regular sticker set is created.
@@ -1407,7 +1407,7 @@ class Client(TelegramApi):
 
         Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat
         for this to work and must have the appropriate administrator rights. Use the field *can_set_sticker_set* optionally
-        returned in :meth:`~tglib.Client.get_chat` requests to check if the bot can use this method. Returns :obj:`True` on success.
+        returned in :meth:`~asynctg.Client.get_chat` requests to check if the bot can use this method. Returns :obj:`True` on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
         :type chat_id: :obj:`int` or :obj:`str`

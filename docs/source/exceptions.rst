@@ -2,7 +2,7 @@
 *Exceptions*
 ============
 
-.. autoexception:: tglib.TelegramError
+.. autoexception:: asynctg.TelegramError
     :members:
     :undoc-members:
     :show-inheritance:
