@@ -197,7 +197,7 @@ class Client(TelegramApi):
         return wrap
 
     @property
-    def message_manager(self) -> UpdateManager[Message]:
+    def message_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -210,7 +210,7 @@ class Client(TelegramApi):
         return self._message_manager
 
     @property
-    def edited_message_manager(self) -> UpdateManager[Message]:
+    def edited_message_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -223,7 +223,7 @@ class Client(TelegramApi):
         return self._edited_message_manager
 
     @property
-    def channel_post_manager(self) -> UpdateManager[Message]:
+    def channel_post_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -236,7 +236,7 @@ class Client(TelegramApi):
         return self._channel_post_manager
 
     @property
-    def edited_channel_post_manager(self) -> UpdateManager[Message]:
+    def edited_channel_post_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -249,7 +249,7 @@ class Client(TelegramApi):
         return self._edited_channel_post_manager
 
     @property
-    def message_reaction_manager(self) -> UpdateManager[MessageReactionUpdated]:
+    def message_reaction_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -262,7 +262,7 @@ class Client(TelegramApi):
         return self._message_reaction_manager
 
     @property
-    def message_reaction_count_manager(self) -> UpdateManager[MessageReactionCountUpdated]:
+    def message_reaction_count_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -275,7 +275,7 @@ class Client(TelegramApi):
         return self._message_reaction_count_manager
 
     @property
-    def inline_query_manager(self) -> UpdateManager[InlineQuery]:
+    def inline_query_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -288,7 +288,7 @@ class Client(TelegramApi):
         return self._inline_query_manager
 
     @property
-    def chosen_inline_result_manager(self) -> UpdateManager[ChosenInlineResult]:
+    def chosen_inline_result_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -301,7 +301,7 @@ class Client(TelegramApi):
         return self._chosen_inline_result_manager
 
     @property
-    def callback_query_manager(self) -> UpdateManager[CallbackQuery]:
+    def callback_query_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -314,7 +314,7 @@ class Client(TelegramApi):
         return self._callback_query_manager
 
     @property
-    def shipping_query_manager(self) -> UpdateManager[ShippingQuery]:
+    def shipping_query_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -327,7 +327,7 @@ class Client(TelegramApi):
         return self._shipping_query_manager
 
     @property
-    def pre_checkout_query_manager(self) -> UpdateManager[PreCheckoutQuery]:
+    def pre_checkout_query_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -340,7 +340,7 @@ class Client(TelegramApi):
         return self._pre_checkout_query_manager
 
     @property
-    def poll_manager(self) -> UpdateManager[Poll]:
+    def poll_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -353,7 +353,7 @@ class Client(TelegramApi):
         return self._poll_manager
 
     @property
-    def poll_answer_manager(self) -> UpdateManager[PollAnswer]:
+    def poll_answer_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -366,7 +366,7 @@ class Client(TelegramApi):
         return self._poll_answer_manager
 
     @property
-    def my_chat_member_manager(self) -> UpdateManager[ChatMemberUpdated]:
+    def my_chat_member_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -379,7 +379,7 @@ class Client(TelegramApi):
         return self._my_chat_member_manager
 
     @property
-    def chat_member_manager(self) -> UpdateManager[ChatMemberUpdated]:
+    def chat_member_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -392,7 +392,7 @@ class Client(TelegramApi):
         return self._chat_member_manager
 
     @property
-    def chat_join_request_manager(self) -> UpdateManager[ChatJoinRequest]:
+    def chat_join_request_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -405,7 +405,7 @@ class Client(TelegramApi):
         return self._chat_join_request_manager
 
     @property
-    def chat_boost_manager(self) -> UpdateManager[ChatBoostUpdated]:
+    def chat_boost_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -418,7 +418,7 @@ class Client(TelegramApi):
         return self._chat_boost_manager
 
     @property
-    def removed_chat_boost_manager(self) -> UpdateManager[ChatBoostRemoved]:
+    def removed_chat_boost_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
