@@ -308,10 +308,6 @@ class Client(TelegramApi):
 
     @property
     def pre_checkout_query_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
         return self._pre_checkout_query_manager
 
     def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
@@ -324,10 +320,6 @@ class Client(TelegramApi):
 
     @property
     def poll_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
         return self._poll_manager
 
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
@@ -340,10 +332,6 @@ class Client(TelegramApi):
 
     @property
     def poll_answer_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
         return self._poll_answer_manager
 
     def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
@@ -356,10 +344,6 @@ class Client(TelegramApi):
 
     @property
     def my_chat_member_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
         return self._my_chat_member_manager
 
     def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
@@ -372,10 +356,6 @@ class Client(TelegramApi):
 
     @property
     def chat_member_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
         return self._chat_member_manager
 
     def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
@@ -388,10 +368,6 @@ class Client(TelegramApi):
 
     @property
     def chat_join_request_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
         return self._chat_join_request_manager
 
     def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
@@ -404,10 +380,6 @@ class Client(TelegramApi):
 
     @property
     def chat_boost_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
         return self._chat_boost_manager
 
     def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
@@ -420,10 +392,6 @@ class Client(TelegramApi):
 
     @property
     def removed_chat_boost_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
         return self._removed_chat_boost_manager
 
     def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
