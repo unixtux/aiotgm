@@ -11,7 +11,7 @@ from typing import (
     Awaitable,
 )
 from .client import logger
-from .types import *
+from . import types
 
 MESSAGE_MANAGER = 'message_manager'
 EDITED_MESSAGE_MANAGER = 'edited_message_manager'
@@ -257,72 +257,72 @@ class UpdateManager:
 
 class MessageManager(UpdateManager):
     def __init__(self):
-        super().__init__(MESSAGE_MANAGER, Message)
+        super().__init__(MESSAGE_MANAGER, types.Message)
 
 class EditedMessageManager(UpdateManager):
     def __init__(self):
-        super().__init__(EDITED_MESSAGE_MANAGER, Message)
+        super().__init__(EDITED_MESSAGE_MANAGER, types.Message)
 
 class ChannelPostManager(UpdateManager):
     def __init__(self):
-        super().__init__(CHANNEL_POST_MANAGER, Message)
+        super().__init__(CHANNEL_POST_MANAGER, types.Message)
 
 class EditedChannelPostManager(UpdateManager):
     def __init__(self):
-        super().__init__(EDITED_CHANNEL_POST_MANAGER, Message)
+        super().__init__(EDITED_CHANNEL_POST_MANAGER, types.Message)
 
 class MessageReactionManager(UpdateManager):
     def __init__(self):
-        super().__init__(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
+        super().__init__(MESSAGE_REACTION_MANAGER, types.MessageReactionUpdated)
 
 class MessageReactionCountManager(UpdateManager):
     def __init__(self):
-        super().__init__(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
+        super().__init__(MESSAGE_REACTION_COUNT_MANAGER, types.MessageReactionCountUpdated)
 
 class InlineQueryManager(UpdateManager):
     def __init__(self):
-        super().__init__(INLINE_QUERY_MANAGER, InlineQuery)
+        super().__init__(INLINE_QUERY_MANAGER, types.InlineQuery)
 
 class ChosenInlineResultManager(UpdateManager):
     def __init__(self):
-        super().__init__(CHOSEN_INLINE_RESULT_MANAGER, ChosenInlineResult)
+        super().__init__(CHOSEN_INLINE_RESULT_MANAGER, types.ChosenInlineResult)
 
 class CallbackQueryManager(UpdateManager):
     def __init__(self):
-        super().__init__(CALLBACK_QUERY_MANAGER, CallbackQuery)
+        super().__init__(CALLBACK_QUERY_MANAGER, types.CallbackQuery)
 
 class ShippingQueryManager(UpdateManager):
     def __init__(self):
-        super().__init__(SHIPPING_QUERY_MANAGER, ShippingQuery)
+        super().__init__(SHIPPING_QUERY_MANAGER, types.ShippingQuery)
 
 class PrecheckoutQueryManager(UpdateManager):
     def __init__(self):
-        super().__init__(PRE_CHECKOUT_QUERY_MANAGER, PreCheckoutQuery)
+        super().__init__(PRE_CHECKOUT_QUERY_MANAGER, types.PreCheckoutQuery)
 
 class PollManager(UpdateManager):
     def __init__(self):
-        super().__init__(POLL_MANAGER, Poll)
+        super().__init__(POLL_MANAGER, types.Poll)
 
 class PollAnswerManager(UpdateManager):
     def __init__(self):
-        super().__init__(POLL_ANSWER_MANAGER, PollAnswer)
+        super().__init__(POLL_ANSWER_MANAGER, types.PollAnswer)
 
 class MyChatMemberManager(UpdateManager):
     def __init__(self):
-        super().__init__(MY_CHAT_MEMBER_MANAGER, ChatMemberUpdated)
+        super().__init__(MY_CHAT_MEMBER_MANAGER, types.ChatMemberUpdated)
 
 class ChatMemberManager(UpdateManager):
     def __init__(self):
-        super().__init__(CHAT_MEMBER_MANAGER, ChatMemberUpdated)
+        super().__init__(CHAT_MEMBER_MANAGER, types.ChatMemberUpdated)
 
 class ChatJoinRequestManager(UpdateManager):
     def __init__(self):
-        super().__init__(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
+        super().__init__(CHAT_JOIN_REQUEST_MANAGER, types.ChatJoinRequest)
 
 class ChatBoostManager(UpdateManager):
     def __init__(self):
-        super().__init__(CHAT_BOOST_MANAGER, ChatBoostUpdated)
+        super().__init__(CHAT_BOOST_MANAGER, types.ChatBoostUpdated)
 
 class RemovedChatBoostManager(UpdateManager):
     def __init__(self):
-        super().__init__(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
+        super().__init__(REMOVED_CHAT_BOOST_MANAGER, types.ChatBoostRemoved)
