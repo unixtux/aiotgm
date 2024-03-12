@@ -1,7 +1,7 @@
 #!/bin/env python3
 
 __all__ = (
-    'MARKDOWN_ESCAPES',
+    'escape_markdown',
 )
 
 MARKDOWN_ESCAPES = {
@@ -24,3 +24,6 @@ MARKDOWN_ESCAPES = {
     '.': '\.',
     '!': '\!'
 }
+
+def escape_markdown(text: str) -> str:
+    return text.translate(str.maketrans(MARKDOWN_ESCAPES))
