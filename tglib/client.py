@@ -202,7 +202,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Update` with attribute *message*.
             :type checker: :obj:`Callable[[Message], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
@@ -215,7 +215,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *edited_message*.
             :type checker: :obj:`Callable[[Message], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
@@ -228,7 +228,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *channel_post*.
             :type checker: :obj:`Callable[[Message], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
@@ -241,7 +241,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *edited_channel_post*.
             :type checker: :obj:`Callable[[Message], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
@@ -254,7 +254,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.MessageReactionUpdated` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *message_reaction*.
             :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.MessageReactionUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.MessageReactionUpdated`.
             :type coroutine: :obj:`Callable[[MessageReactionUpdated], Awaitable]`
@@ -267,7 +267,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.MessageReactionCountUpdated` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *message_reaction_count*.
             :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.MessageReactionCountUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.MessageReactionCountUpdated`.
             :type coroutine: :obj:`Callable[[MessageReactionCountUpdated], Awaitable]`
@@ -280,7 +280,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.InlineQuery` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *inline_query*.
             :type checker: :obj:`Callable[[InlineQuery], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.InlineQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.InlineQuery`.
             :type coroutine: :obj:`Callable[[InlineQuery], Awaitable]`
@@ -293,7 +293,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ChosenInlineResult` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *chosen_inline_result*.
             :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChosenInlineResult` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChosenInlineResult`.
             :type coroutine: :obj:`Callable[[ChosenInlineResult], Awaitable]`
@@ -306,7 +306,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.CallbackQuery` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *callback_query*.
             :type checker: :obj:`Callable[[CallbackQuery], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.CallbackQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.CallbackQuery`.
             :type coroutine: :obj:`Callable[[CallbackQuery], Awaitable]`
@@ -319,7 +319,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ShippingQuery` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *shipping_query*.
             :type checker: :obj:`Callable[[ShippingQuery], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ShippingQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ShippingQuery`.
             :type coroutine: :obj:`Callable[[ShippingQuery], Awaitable]`
@@ -332,7 +332,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.PreCheckoutQuery` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *pre_checkout_query*.
             :type checker: :obj:`Callable[[PreCheckoutQuery], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.PreCheckoutQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.PreCheckoutQuery`.
             :type coroutine: :obj:`Callable[[PreCheckoutQuery], Awaitable]`
@@ -345,7 +345,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Poll` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *poll*.
             :type checker: :obj:`Callable[[Poll], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Poll` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Poll`.
             :type coroutine: :obj:`Callable[[Poll], Awaitable]`
@@ -358,7 +358,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.PollAnswer` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *poll_answer*.
             :type checker: :obj:`Callable[[PollAnswer], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.PollAnswer` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.PollAnswer`.
             :type coroutine: :obj:`Callable[[PollAnswer], Awaitable]`
@@ -371,7 +371,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ChatMemberUpdated` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *my_chat_member*.
             :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatMemberUpdated`.
             :type coroutine: :obj:`Callable[[ChatMemberUpdated], Awaitable]`
@@ -384,7 +384,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ChatMemberUpdated` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *chat_member*.
             :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatMemberUpdated`.
             :type coroutine: :obj:`Callable[[ChatMemberUpdated], Awaitable]`
@@ -397,7 +397,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ChatJoinRequest` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *chat_join_request*.
             :type checker: :obj:`Callable[[ChatJoinRequest], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatJoinRequest` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatJoinRequest`.
             :type coroutine: :obj:`Callable[[ChatJoinRequest], Awaitable]`
@@ -410,7 +410,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ChatBoostUpdated` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *chat_boost*.
             :type checker: :obj:`Callable[[ChatBoostUpdated], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatBoostUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatBoostUpdated`.
             :type coroutine: :obj:`Callable[[ChatBoostUpdated], Awaitable]`
@@ -423,7 +423,7 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ChatBoostRemoved` :obj:`~tglib.types.Update`.
+            :param checker: A function that takes only one argument to filter incoming :obj:`~tglib.types.Update` with attribute *removed_chat_boost*.
             :type checker: :obj:`Callable[[ChatBoostRemoved], Any]`
             :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChatBoostRemoved` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChatBoostRemoved`.
             :type coroutine: :obj:`Callable[[ChatBoostRemoved], Awaitable]`
