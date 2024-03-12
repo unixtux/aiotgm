@@ -29,6 +29,16 @@ from typing import (
 )
 from .update_manager import *
 
+msg_doc =  '''\
+        .. method:: add_rule(checker, coroutine, /)
+
+            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ChosenInlineResult` :obj:`~tglib.types.Update`.
+            :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ChosenInlineResult` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ChosenInlineResult`.
+            :type coroutine: :obj:`Callable[[ChosenInlineResult], Awaitable]`
+        '''
+
+
 class Client(TelegramApi):
     '''
     Main class to communicate with the `Telegram Bot API <https://core.telegram.org/bots/api>`_.
@@ -267,10 +277,7 @@ class Client(TelegramApi):
 
     @property
     def callback_query_manager(self) -> UpdateManager:
-        '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
-        '''
+        msg_doc
         return self._callback_query_manager
 
     def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
