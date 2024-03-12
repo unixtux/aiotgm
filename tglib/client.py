@@ -148,8 +148,12 @@ class Client(TelegramApi):
     @property
     def channel_post_manager(self) -> UpdateManager:
         '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
+        .. method:: add_rule(checker, coroutine, /)
+
+            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
+            :type checker: :obj:`Callable[[Message], Any]`
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ than will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will processed as :obj:`~tglib.types.Message`.
+            :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._channel_post_manager
 
