@@ -112,7 +112,7 @@ class Client(TelegramApi):
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ than will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will processed as :obj:`~tglib.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._message_manager
@@ -132,7 +132,7 @@ class Client(TelegramApi):
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ than will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will processed as :obj:`~tglib.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._edited_message_manager
@@ -152,7 +152,7 @@ class Client(TelegramApi):
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ than will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will processed as :obj:`~tglib.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._channel_post_manager
@@ -172,7 +172,7 @@ class Client(TelegramApi):
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ than will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will processed as :obj:`~tglib.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._edited_channel_post_manager
