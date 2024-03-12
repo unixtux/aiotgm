@@ -271,12 +271,6 @@ class UpdateManager:
         coroutine: Callable[[Any], Awaitable],
         /
     ):
-        '''
-        :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Update`.
-        :type checker: :obj:`Callable[[Any], Any]`
-        :param coroutine: Pass a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ to be called if the :obj:`~tglib.types.Update` passes the check. It must takes only one argument.
-        :type coroutine: :obj:`Callable[[Any], Awaitable]`
-        '''
         _check_rule(
             self._name,
             self._obj,
