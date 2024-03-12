@@ -104,7 +104,7 @@ class Client(TelegramApi):
         self._removed_chat_boost_manager = RemovedChatBoostManager()
 
     @property
-    def me(self) -> User:
+    def me(self) -> Optional[User]:
         return self._me
 
     @property
@@ -469,7 +469,7 @@ class Client(TelegramApi):
             )
         params = {'timeout': timeout}
         self._me = await self.get_me()
-        logger.info('Welcome @{}!'.format(self.me.username))
+        logger.info('Welcome @{}.'.format(self.me.username))
         logger.info('long polling has been started.')
         bad_gateway = re.compile(r'bad.*gateway', re.IGNORECASE)
         while True:
