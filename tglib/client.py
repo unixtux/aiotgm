@@ -256,7 +256,7 @@ class Client(TelegramApi):
     @property
     def edited_message_manager(self) -> EditedMessageManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -271,7 +271,7 @@ class Client(TelegramApi):
     @property
     def channel_post_manager(self) -> ChannelPostManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -286,7 +286,7 @@ class Client(TelegramApi):
     @property
     def edited_channel_post_manager(self) -> EditedChannelPostManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -301,7 +301,7 @@ class Client(TelegramApi):
     @property
     def message_reaction_manager(self) -> MessageReactionManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -316,7 +316,7 @@ class Client(TelegramApi):
     @property
     def message_reaction_count_manager(self) -> MessageReactionCountManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -331,7 +331,7 @@ class Client(TelegramApi):
     @property
     def inline_query_manager(self) -> InlineQueryManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -346,7 +346,7 @@ class Client(TelegramApi):
     @property
     def chosen_inline_result_manager(self) -> ChosenInlineResultManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -361,7 +361,7 @@ class Client(TelegramApi):
     @property
     def callback_query_manager(self) -> CallbackQueryManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -376,7 +376,7 @@ class Client(TelegramApi):
     @property
     def shipping_query_manager(self) -> ShippingQueryManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -391,7 +391,7 @@ class Client(TelegramApi):
     @property
     def pre_checkout_query_manager(self) -> PrecheckoutQueryManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -406,7 +406,7 @@ class Client(TelegramApi):
     @property
     def poll_manager(self) -> PollManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -421,7 +421,7 @@ class Client(TelegramApi):
     @property
     def poll_answer_manager(self) -> PollAnswerManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -436,7 +436,7 @@ class Client(TelegramApi):
     @property
     def my_chat_member_manager(self) -> MyChatMemberManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -451,7 +451,7 @@ class Client(TelegramApi):
     @property
     def chat_member_manager(self) -> ChatMemberManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -466,7 +466,7 @@ class Client(TelegramApi):
     @property
     def chat_join_request_manager(self) -> ChatJoinRequestManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -481,7 +481,7 @@ class Client(TelegramApi):
     @property
     def chat_boost_manager(self) -> ChatBoostManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -496,7 +496,7 @@ class Client(TelegramApi):
     @property
     def removed_chat_boost_manager(self) -> RemovedChatBoostManager:
         '''
-        For the usage see to the :obj:`~tglib.Client.message_manager` reference.
+        For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
