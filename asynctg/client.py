@@ -7,7 +7,7 @@ __all__ = (
 )
 from . import VERSION
 from .logger import get_logger
-logger = get_logger('asynctg (' + VERSION + ')')
+logger = get_logger('asynctg ' + VERSION)
 del VERSION, get_logger
 
 import re
@@ -65,9 +65,9 @@ class Client(TelegramApi):
     :type protect_content: :obj:`bool`, optional
     :param proxy: Pass a proxy string to be used in the http requests.
     :type proxy: :obj:`str`, optional
-    :param debug: Pass :obj:`True` to log some debug information.
+    :param debug: Pass :obj:`True` for some debug information.
     :type debug: :obj:`bool`, optional
-    :param deep_debug: Pass :obj:`True` for more information about http requests (useful for debugging).
+    :param deep_debug: Pass :obj:`True` for more debug information about http requests.
     :type deep_debug: :obj:`bool`, optional
     '''
     def __init__(

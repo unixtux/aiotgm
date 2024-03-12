@@ -1,4 +1,4 @@
-[![pypi](https://img.shields.io/badge/pypi-tglib-blue)](https://pypi.org/project/tglib/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1) [![docs](https://readthedocs.org/projects/tglib/badge/?version=latest)](https://tglib.readthedocs.io/en/latest/?badge=latest)
+[![pypi](https://img.shields.io/badge/pypi-tglib-blue)](https://pypi.org/project/tglib/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1) [![Documentation Status](https://readthedocs.org/projects/asynctg/badge/?version=latest)](https://asynctg.readthedocs.io/en/latest/?badge=latest)
 
 #
 
