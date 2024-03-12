@@ -11,7 +11,10 @@ All the names of the types are exactly the same described in the `offical docume
 
 .. code-block:: python3
 
-    bot = Client('<api_token>')
+    from tglib import Client
+    from tglib.types import Message
+
+    bot = Client('<yor_api_token>')
 
     @bot.manage_message()
     async def foo(msg: Message):

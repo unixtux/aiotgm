@@ -154,35 +154,42 @@ class NextFunction:
 
     .. code-block:: python3
 
-        # script.py
+        # myscript.py
 
-        import tglib
         import asyncio
+        from tglib import Client, NextFunction
 
-        bot = tglib.Client('api_token')
+        bot = Client('<your_api_token>')
 
         @bot.manage_message()
-        async def foo(message):
-            print('I am foo and I received the update.')
+        async def foo(msg):
+            print('I am foo!')
             return NextFunction()
+            # you return this object and the
+            # update is passed to the next coroutine.
 
         @bot.manage_message()
-        async def bar(message):
-            print('I am bar and I received the update.')
+        async def bar(msg):
+            print('I am bar!')
+            # This coroutine will runs, because the
+            # previous one returns a NextFunction object.
 
         @bot.manage_message()
-        async def baz(message):
-            print('I am baz and I did not receive the update.')
+        async def baz(msg):
+            print('I am baz!')
+            # This coroutine will never runs, because the
+            # previous one doesn't return a NextFunction object.
 
+        # Listen for updates...
         asyncio.run(bot.long_polling())
 
-    The following is the ouput in the shell when the bot receives a new message :obj:`~tglib.types.Update`.
+    The following is the ouput in the shell when the bot receives a *message* :obj:`~tglib.types.Update`.
 
     .. code-block:: bash
 
-        $ python3 script.py
-        I am foo and I received the update.
-        I am bar and I received the update.
+        $ python3 myscript.py
+        I am foo!
+        I am bar!
 
     As you can see, *foo()* returns a :obj:`~tglib.NextFunction` object, so the :obj:`~tglib.types.Update` is passed to *bar()*.
     '''
