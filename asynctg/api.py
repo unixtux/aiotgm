@@ -72,7 +72,7 @@ except ImportError:
         " default 'json' was imported."
     )
 
-def _serialize(val, *, last: bool = True) -> Union[Any, str, list, dict]:
+def _serialize(val, *, last: bool = True, indent: int = 0) -> Union[Any, str, list, dict]:
 
     if isinstance(val, TelegramType):
         val = val.__dict__
@@ -91,7 +91,7 @@ def _serialize(val, *, last: bool = True) -> Union[Any, str, list, dict]:
     if not last:
         return res
     else:
-        return res if isinstance(res, str) else json.dumps(res, ensure_ascii=False)
+        return res if isinstance(res, str) else json.dumps(res, indent=indent, ensure_ascii=False)
 
 
 def _format_url(token: str, method: str, /) -> str:
