@@ -13,5 +13,3 @@ They are all *asynchronous*, so you must use them in `await <https://docs.python
 .. autoclass:: tglib.Client
     :members:
     :undoc-members:
-..        :no-index:
-            
