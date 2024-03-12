@@ -438,9 +438,9 @@ class TelegramApi:
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
 
-    async def get_me(self):
+    async def get_me(self, **kwargs):
         method = 'getMe'
-        return await self._request(method)
+        return await self._request(method, **kwargs)
 
     async def send_message(self, params: dict):
         method = 'sendMessage'
