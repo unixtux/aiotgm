@@ -110,6 +110,7 @@ class Client(TelegramApi):
     def message_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
@@ -130,6 +131,7 @@ class Client(TelegramApi):
     def edited_message_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
@@ -150,6 +152,7 @@ class Client(TelegramApi):
     def channel_post_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
@@ -170,6 +173,7 @@ class Client(TelegramApi):
     def edited_channel_post_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.Message` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
@@ -190,6 +194,7 @@ class Client(TelegramApi):
     def message_reaction_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.MessageReactionUpdated` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
@@ -210,6 +215,7 @@ class Client(TelegramApi):
     def message_reaction_count_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.MessageReactionCountUpdated` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
@@ -230,6 +236,7 @@ class Client(TelegramApi):
     def inline_query_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.InlineQuery` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[InlineQuery], Any]`
@@ -250,6 +257,7 @@ class Client(TelegramApi):
     def chosen_inline_result_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ChosenInlineResult` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
@@ -270,6 +278,7 @@ class Client(TelegramApi):
     def callback_query_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.CallbackQuery` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[CallbackQuery], Any]`
@@ -290,6 +299,7 @@ class Client(TelegramApi):
     def shipping_query_manager(self) -> UpdateManager:
         '''
         .. method:: add_rule(checker, coroutine, /)
+            :no-index:
 
             :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ShippingQuery` :obj:`~tglib.types.Update`.
             :type checker: :obj:`Callable[[ShippingQuery], Any]`
