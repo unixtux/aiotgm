@@ -29,26 +29,27 @@ from typing import (
 )
 from .update_manager import (
     NextFunction,
+    UpdateManager,
     _run_coroutine,
     _is_next_function,
-    MessageManager,
-    EditedMessageManager, 
-    ChannelPostManager, 
-    EditedChannelPostManager,
-    MessageReactionManager,
-    MessageReactionCountManager,
-    InlineQueryManager,
-    ChosenInlineResultManager,
-    CallbackQueryManager,
-    ShippingQueryManager,
-    PrecheckoutQueryManager,
-    PollManager,
-    PollAnswerManager,
-    MyChatMemberManager,
-    ChatMemberManager,
-    ChatJoinRequestManager,
-    ChatBoostManager,
-    RemovedChatBoostManager,
+    MESSAGE_MANAGER,
+    EDITED_MESSAGE_MANAGER, 
+    CHANNEL_POST_MANAGER, 
+    EDITED_CHANNEL_POST_MANAGER,
+    MESSAGE_REACTION_MANAGER,
+    MESSAGE_REACTION_COUNT_MANAGER,
+    INLINE_QUERY_MANAGER,
+    CHOSEN_INLINE_RESULT_MANAGER,
+    CALLBACK_QUERY_MANAGER,
+    SHIPPING_QUERY_MANAGER,
+    PRE_CHECKOUT_QUERY_MANAGER,
+    POLL_MANAGER,
+    POLL_ANSWER_MANAGER,
+    MY_CHAT_MEMBER_MANAGER,
+    CHAT_MEMBER_MANAGER,
+    CHAT_JOIN_REQUEST_MANAGER,
+    CHAT_BOOST_MANAGER,
+    REMOVED_CHAT_BOOST_MANAGER,
 )
 
 
@@ -84,24 +85,24 @@ class Client(TelegramApi):
         self.parse_mode = parse_mode
         self.protect_content = protect_content
 
-        self._message_manager = MessageManager()
-        self._edited_message_manager = EditedMessageManager()
-        self._channel_post_manager = ChannelPostManager()
-        self._edited_channel_post_manager = EditedChannelPostManager()
-        self._message_reaction_manager = MessageReactionManager()
-        self._message_reaction_count_manager = MessageReactionCountManager()
-        self._inline_query_manager = InlineQueryManager()
-        self._chosen_inline_result_manager = ChosenInlineResultManager()
-        self._callback_query_manager = CallbackQueryManager()
-        self._shipping_query_manager = ShippingQueryManager()
-        self._pre_checkout_query_manager = PrecheckoutQueryManager()
-        self._poll_manager = PollManager()
-        self._poll_answer_manager = PollAnswerManager()
-        self._my_chat_member_manager = MyChatMemberManager()
-        self._chat_member_manager = ChatMemberManager()
-        self._chat_join_request_manager = ChatJoinRequestManager()
-        self._chat_boost_manager = ChatBoostManager()
-        self._removed_chat_boost_manager = RemovedChatBoostManager()
+        self._message_manager = UpdateManager(MESSAGE_MANAGER, Message)
+        self._edited_message_manager = UpdateManager(EDITED_MESSAGE_MANAGER, Message)
+        self._channel_post_manager = UpdateManager(CHANNEL_POST_MANAGER, Message)
+        self._edited_channel_post_manager = UpdateManager(EDITED_CHANNEL_POST_MANAGER, Message)
+        self._message_reaction_manager = UpdateManager(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
+        self._message_reaction_count_manager = UpdateManager(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
+        self._inline_query_manager = UpdateManager(INLINE_QUERY_MANAGER, InlineQuery)
+        self._chosen_inline_result_manager = UpdateManager(CHOSEN_INLINE_RESULT_MANAGER, ChosenInlineResult)
+        self._callback_query_manager = UpdateManager(CALLBACK_QUERY_MANAGER, CallbackQuery)
+        self._shipping_query_manager = UpdateManager(SHIPPING_QUERY_MANAGER, ShippingQuery)
+        self._pre_checkout_query_manager = UpdateManager(PRE_CHECKOUT_QUERY_MANAGER, PreCheckoutQuery)
+        self._poll_manager = UpdateManager(POLL_MANAGER, Poll)
+        self._poll_answer_manager = UpdateManager(POLL_ANSWER_MANAGER, PollAnswer)
+        self._my_chat_member_manager = UpdateManager(MY_CHAT_MEMBER_MANAGER, ChatMemberUpdated)
+        self._chat_member_manager = UpdateManager(CHAT_MEMBER_MANAGER, ChatMemberUpdated)
+        self._chat_join_request_manager = UpdateManager(CHAT_JOIN_REQUEST_MANAGER, ChatJoinRequest)
+        self._chat_boost_manager = UpdateManager(CHAT_BOOST_MANAGER, ChatBoostUpdated)
+        self._removed_chat_boost_manager = UpdateManager(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
 
     @property
     def me(self) -> Optional[User]:
@@ -224,7 +225,7 @@ class Client(TelegramApi):
         return wrap
 
     @property
-    def message_manager(self) -> MessageManager:
+    def message_manager(self) -> UpdateManager:
         '''
         Usage:
 
@@ -254,7 +255,7 @@ class Client(TelegramApi):
         return self._message_manager
 
     @property
-    def edited_message_manager(self) -> EditedMessageManager:
+    def edited_message_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -269,7 +270,7 @@ class Client(TelegramApi):
         return self._edited_message_manager
 
     @property
-    def channel_post_manager(self) -> ChannelPostManager:
+    def channel_post_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -284,7 +285,7 @@ class Client(TelegramApi):
         return self._channel_post_manager
 
     @property
-    def edited_channel_post_manager(self) -> EditedChannelPostManager:
+    def edited_channel_post_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -299,7 +300,7 @@ class Client(TelegramApi):
         return self._edited_channel_post_manager
 
     @property
-    def message_reaction_manager(self) -> MessageReactionManager:
+    def message_reaction_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -314,7 +315,7 @@ class Client(TelegramApi):
         return self._message_reaction_manager
 
     @property
-    def message_reaction_count_manager(self) -> MessageReactionCountManager:
+    def message_reaction_count_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -329,7 +330,7 @@ class Client(TelegramApi):
         return self._message_reaction_count_manager
 
     @property
-    def inline_query_manager(self) -> InlineQueryManager:
+    def inline_query_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -344,7 +345,7 @@ class Client(TelegramApi):
         return self._inline_query_manager
 
     @property
-    def chosen_inline_result_manager(self) -> ChosenInlineResultManager:
+    def chosen_inline_result_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -359,7 +360,7 @@ class Client(TelegramApi):
         return self._chosen_inline_result_manager
 
     @property
-    def callback_query_manager(self) -> CallbackQueryManager:
+    def callback_query_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -374,7 +375,7 @@ class Client(TelegramApi):
         return self._callback_query_manager
 
     @property
-    def shipping_query_manager(self) -> ShippingQueryManager:
+    def shipping_query_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -389,7 +390,7 @@ class Client(TelegramApi):
         return self._shipping_query_manager
 
     @property
-    def pre_checkout_query_manager(self) -> PrecheckoutQueryManager:
+    def pre_checkout_query_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -404,7 +405,7 @@ class Client(TelegramApi):
         return self._pre_checkout_query_manager
 
     @property
-    def poll_manager(self) -> PollManager:
+    def poll_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -419,7 +420,7 @@ class Client(TelegramApi):
         return self._poll_manager
 
     @property
-    def poll_answer_manager(self) -> PollAnswerManager:
+    def poll_answer_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -434,7 +435,7 @@ class Client(TelegramApi):
         return self._poll_answer_manager
 
     @property
-    def my_chat_member_manager(self) -> MyChatMemberManager:
+    def my_chat_member_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -449,7 +450,7 @@ class Client(TelegramApi):
         return self._my_chat_member_manager
 
     @property
-    def chat_member_manager(self) -> ChatMemberManager:
+    def chat_member_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -464,7 +465,7 @@ class Client(TelegramApi):
         return self._chat_member_manager
 
     @property
-    def chat_join_request_manager(self) -> ChatJoinRequestManager:
+    def chat_join_request_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -479,7 +480,7 @@ class Client(TelegramApi):
         return self._chat_join_request_manager
 
     @property
-    def chat_boost_manager(self) -> ChatBoostManager:
+    def chat_boost_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
@@ -494,7 +495,7 @@ class Client(TelegramApi):
         return self._chat_boost_manager
 
     @property
-    def removed_chat_boost_manager(self) -> RemovedChatBoostManager:
+    def removed_chat_boost_manager(self) -> UpdateManager:
         '''
         For the usage, see to the :obj:`~tglib.Client.message_manager` reference.
 
