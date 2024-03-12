@@ -289,8 +289,12 @@ class Client(TelegramApi):
     @property
     def shipping_query_manager(self) -> UpdateManager:
         '''
-        .. automethod:: tglib.update_manager.UpdateManager::add_rule
-            :no-index:
+        .. method:: add_rule(checker, coroutine, /)
+
+            :param checker: A function that takes only one argument to filter an incoming :obj:`~tglib.types.ShippingQuery` :obj:`~tglib.types.Update`.
+            :type checker: :obj:`Callable[[ShippingQuery], Any]`
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~tglib.types.ShippingQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~tglib.types.ShippingQuery`.
+            :type coroutine: :obj:`Callable[[ShippingQuery], Awaitable]`
         '''
         return self._shipping_query_manager
 
