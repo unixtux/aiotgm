@@ -106,8 +106,98 @@ class Client(TelegramApi):
 
     # 18 UpdateManagers
 
+    def manage_message(self, checker: Callable[[Message], Any] = lambda message: ..., /):
+        def wrap(coroutine: Callable[[Message], Awaitable]):
+            self.message_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: ..., /):
+        def wrap(coroutine: Callable[[Message], Awaitable]):
+            self.edited_message_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: ..., /):
+        def wrap(coroutine: Callable[[Message], Awaitable]):
+            self.channel_post_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: ..., /):
+        def wrap(coroutine: Callable[[Message], Awaitable]):
+            self.edited_channel_post_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
+        def wrap(coroutine: Callable[[MessageReactionUpdated], Awaitable]):
+            self.message_reaction_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: ..., /):
+        def wrap(coroutine: Callable[[MessageReactionCountUpdated], Awaitable]):
+            self.message_reaction_count_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: ..., /):
+        def wrap(coroutine: Callable[[InlineQuery], Awaitable]):
+            self.inline_query_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: ..., /):
+        def wrap(coroutine: Callable[[ChosenInlineResult], Awaitable]):
+            self.chosen_inline_result_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
+        def wrap(coroutine: Callable[[CallbackQuery], Awaitable]):
+            self.callback_query_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: ..., /):
+        def wrap(coroutine: Callable[[ShippingQuery], Awaitable]):
+            self.shipping_query_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
+        def wrap(coroutine: Callable[[PreCheckoutQuery], Awaitable]):
+            self.pre_checkout_query_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
+        def wrap(coroutine: Callable[[Poll], Awaitable]):
+            self.poll_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
+        def wrap(coroutine: Callable[[PollAnswer], Awaitable]):
+            self.poll_answer_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
+        def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
+            self.my_chat_member_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
+        def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
+            self.chat_member_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
+        def wrap(coroutine: Callable[[ChatJoinRequest], Awaitable]):
+            self.chat_join_request_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
+        def wrap(coroutine: Callable[[ChatBoostUpdated], Awaitable]):
+            self.chat_boost_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
+        def wrap(coroutine: Callable[[ChatBoostRemoved], Awaitable]):
+            self.removed_chat_boost_manager.add_rule(checker, coroutine)
+        return wrap
+
     @property
-    def message_manager(self) -> UpdateManager:
+    def message_manager(self) -> UpdateManager[Message]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -119,16 +209,8 @@ class Client(TelegramApi):
         '''
         return self._message_manager
 
-    def manage_message(self, checker: Callable[[Message], Any] = lambda message: ..., /):
-        '''
-        Use this decorator to manage a message :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[Message], Awaitable]):
-            self.message_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def edited_message_manager(self) -> UpdateManager:
+    def edited_message_manager(self) -> UpdateManager[Message]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -140,16 +222,8 @@ class Client(TelegramApi):
         '''
         return self._edited_message_manager
 
-    def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: ..., /):
-        '''
-        Use this decorator to manage an edited_message :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[Message], Awaitable]):
-            self.edited_message_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def channel_post_manager(self) -> UpdateManager:
+    def channel_post_manager(self) -> UpdateManager[Message]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -161,16 +235,8 @@ class Client(TelegramApi):
         '''
         return self._channel_post_manager
 
-    def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: ..., /):
-        '''
-        Use this decorator to manage a channel_post :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[Message], Awaitable]):
-            self.channel_post_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def edited_channel_post_manager(self) -> UpdateManager:
+    def edited_channel_post_manager(self) -> UpdateManager[Message]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -182,16 +248,8 @@ class Client(TelegramApi):
         '''
         return self._edited_channel_post_manager
 
-    def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: ..., /):
-        '''
-        Use this decorator to manage an edited_channel_post :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[Message], Awaitable]):
-            self.edited_channel_post_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def message_reaction_manager(self) -> UpdateManager:
+    def message_reaction_manager(self) -> UpdateManager[MessageReactionUpdated]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -203,16 +261,8 @@ class Client(TelegramApi):
         '''
         return self._message_reaction_manager
 
-    def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
-        '''
-        Use this decorator to manage a message_reaction :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[MessageReactionUpdated], Awaitable]):
-            self.message_reaction_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def message_reaction_count_manager(self) -> UpdateManager:
+    def message_reaction_count_manager(self) -> UpdateManager[MessageReactionCountUpdated]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -224,16 +274,8 @@ class Client(TelegramApi):
         '''
         return self._message_reaction_count_manager
 
-    def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: ..., /):
-        '''
-        Use this decorator to manage a message_reaction_count :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[MessageReactionCountUpdated], Awaitable]):
-            self.message_reaction_count_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def inline_query_manager(self) -> UpdateManager:
+    def inline_query_manager(self) -> UpdateManager[InlineQuery]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -245,16 +287,8 @@ class Client(TelegramApi):
         '''
         return self._inline_query_manager
 
-    def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: ..., /):
-        '''
-        Use this decorator to manage an inline_query :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[InlineQuery], Awaitable]):
-            self.inline_query_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def chosen_inline_result_manager(self) -> UpdateManager:
+    def chosen_inline_result_manager(self) -> UpdateManager[ChosenInlineResult]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -266,16 +300,8 @@ class Client(TelegramApi):
         '''
         return self._chosen_inline_result_manager
 
-    def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: ..., /):
-        '''
-        Use this decorator to manage a chosen_inline_result :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[ChosenInlineResult], Awaitable]):
-            self.chosen_inline_result_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def callback_query_manager(self) -> UpdateManager:
+    def callback_query_manager(self) -> UpdateManager[CallbackQuery]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -287,16 +313,8 @@ class Client(TelegramApi):
         '''
         return self._callback_query_manager
 
-    def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
-        '''
-        Use this decorator to manage a callback_query :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[CallbackQuery], Awaitable]):
-            self.callback_query_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def shipping_query_manager(self) -> UpdateManager:
+    def shipping_query_manager(self) -> UpdateManager[ShippingQuery]:
         '''
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
@@ -308,109 +326,37 @@ class Client(TelegramApi):
         '''
         return self._shipping_query_manager
 
-    def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: ..., /):
-        '''
-        Use this decorator to manage a shipping_query :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[ShippingQuery], Awaitable]):
-            self.shipping_query_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def pre_checkout_query_manager(self) -> UpdateManager:
+    def pre_checkout_query_manager(self) -> UpdateManager[PreCheckoutQuery]:
         return self._pre_checkout_query_manager
 
-    def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
-        '''
-        Use this decorator to manage a pre_checkout_query :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[PreCheckoutQuery], Awaitable]):
-            self.pre_checkout_query_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def poll_manager(self) -> UpdateManager:
+    def poll_manager(self) -> UpdateManager[Poll]:
         return self._poll_manager
 
-    def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
-        '''
-        Use this decorator to manage a poll :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[Poll], Awaitable]):
-            self.poll_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def poll_answer_manager(self) -> UpdateManager:
+    def poll_answer_manager(self) -> UpdateManager[PollAnswer]:
         return self._poll_answer_manager
 
-    def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
-        '''
-        Use this decorator to manage a poll_answer :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[PollAnswer], Awaitable]):
-            self.poll_answer_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def my_chat_member_manager(self) -> UpdateManager:
+    def my_chat_member_manager(self) -> UpdateManager[ChatMemberUpdated]:
         return self._my_chat_member_manager
 
-    def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
-        '''
-        Use this decorator to manage a my_chat_member :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
-            self.my_chat_member_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def chat_member_manager(self) -> UpdateManager:
+    def chat_member_manager(self) -> UpdateManager[ChatMemberUpdated]:
         return self._chat_member_manager
 
-    def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
-        '''
-        Use this decorator to manage a chat_member :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
-            self.chat_member_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def chat_join_request_manager(self) -> UpdateManager:
+    def chat_join_request_manager(self) -> UpdateManager[ChatJoinRequest]:
         return self._chat_join_request_manager
 
-    def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
-        '''
-        Use this decorator to manage a chat_join_request :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[ChatJoinRequest], Awaitable]):
-            self.chat_join_request_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def chat_boost_manager(self) -> UpdateManager:
+    def chat_boost_manager(self) -> UpdateManager[ChatBoostUpdated]:
         return self._chat_boost_manager
 
-    def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
-        '''
-        Use this decorator to manage a chat_boost :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[ChatBoostUpdated], Awaitable]):
-            self.chat_boost_manager.add_rule(checker, coroutine)
-        return wrap
-
     @property
-    def removed_chat_boost_manager(self) -> UpdateManager:
+    def removed_chat_boost_manager(self) -> UpdateManager[ChatBoostRemoved]:
         return self._removed_chat_boost_manager
-
-    def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
-        '''
-        Use this decorator to manage a removed_chat_boost :obj:`~tglib.types.Update`.
-        '''
-        def wrap(coroutine: Callable[[ChatBoostRemoved], Awaitable]):
-            self.removed_chat_boost_manager.add_rule(checker, coroutine)
-        return wrap
 
 
     # Processing new updates
