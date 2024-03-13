@@ -12,8 +12,8 @@ from typing import (
     Optional,
     Literal
 )
-from asynctg.types import *
-from asynctg.types import (
+from aiotele.types import *
+from aiotele.types import (
     TelegramType,
     ChatMember,
     MessageOrigin,
@@ -22,7 +22,7 @@ from asynctg.types import (
     InputMessageContent,
     MaybeInaccessibleMessage
 )
-from asynctg.constants import *
+from aiotele.constants import *
 
 TYPES = {
     ChatBoostAdded: {
@@ -5003,7 +5003,7 @@ TYPES = {
 
 from inspect import isclass
 
-from asynctg.logger import get_logger
+from aiotele.logger import get_logger
 logger = get_logger('TypesChecker')
 
 logger.setLevel(20)

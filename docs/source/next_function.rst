@@ -2,6 +2,6 @@
 *NextFunction*
 ==============
 
-.. autoclass:: asynctg.NextFunction
+.. autoclass:: aiotele.NextFunction
     :members:
     :undoc-members:

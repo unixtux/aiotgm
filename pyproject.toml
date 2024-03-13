@@ -3,8 +3,8 @@ requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "asynctg"
-version = "1.0.6"
+name = "aiotele"
+version = "1.0.0"
 requires-python = ">= 3.8"
 license = {file = "LICENSE"}
 readme = "README.md"
@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/unixtux/asynctg"
+Repository = "https://github.com/unixtux/aiotele"
 
 [tool.setuptools]
-packages = ["asynctg"]
+packages = ["aiotele"]

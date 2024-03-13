@@ -10,13 +10,13 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../../'))
 
-import asynctg
+import aiotele
 from datetime import datetime as dtm
 
 author = 'unixtux'
 year = dtm.now().year
-release = asynctg.VERSION
-project = asynctg.__name__
+release = aiotele.VERSION
+project = aiotele.__name__
 copyright = f'{year}, {author}'
 
 # -- General configuration ---------------------------------------------------
