@@ -1528,6 +1528,25 @@ class Client(TelegramApi):
         return await super().delete_my_commands(params)
 
 
+    async def delete_sticker_from_set(
+        self,
+        sticker: str
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#deletestickerfromset
+
+        Use this method to delete a sticker from a set created by the bot. Returns :obj:`True` on success.
+
+        :param sticker: File identifier of the sticker.
+        :type sticker: :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'sticker': sticker
+        }
+        return await super().delete_sticker_from_set(params)
+
+
 
 
     async def get_updates(
@@ -3304,20 +3323,6 @@ class Client(TelegramApi):
             'position': position
         }
         return await super().set_sticker_position_in_set(params)
-
-
-    async def delete_sticker_from_set(
-        self,
-        sticker: str
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#deletestickerfromset
-        Use this method to delete a sticker from a set created by the bot. Returns True on success.
-        '''
-        params = {
-            'sticker': sticker
-        }
-        return await super().delete_sticker_from_set(params)
 
 
     async def set_sticker_emoji_list(

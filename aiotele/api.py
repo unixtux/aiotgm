@@ -353,39 +353,39 @@ class TelegramApi:
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    async def add_sticker_to_set(self, params: dict):
+    async def add_sticker_to_set(self, params: Dict):
         method = 'addStickerToSet'
         return await self._request(method, params)
 
-    async def answer_callback_query(self, params: dict):
+    async def answer_callback_query(self, params: Dict):
         method = 'answerCallbackQuery'
         return await self._request(method, params)
 
-    async def answer_inline_query(self, params: dict):
+    async def answer_inline_query(self, params: Dict):
         method = 'answerInlineQuery'
         return await self._request(method, params)
 
-    async def answer_pre_checkout_query(self, params: dict):
+    async def answer_pre_checkout_query(self, params: Dict):
         method = 'answerPreCheckoutQuery'
         return await self._request(method, params)
 
-    async def answer_shipping_query(self, params: dict):
+    async def answer_shipping_query(self, params: Dict):
         method = 'answerShippingQuery'
         return await self._request(method, params)
 
-    async def answer_web_app_query(self, params: dict):
+    async def answer_web_app_query(self, params: Dict):
         method = 'answerWebAppQuery'
         return await self._request(method, params)
 
-    async def approve_chat_join_request(self, params: dict):
+    async def approve_chat_join_request(self, params: Dict):
         method = 'approveChatJoinRequest'
         return await self._request(method, params)
 
-    async def ban_chat_member(self, params: dict):
+    async def ban_chat_member(self, params: Dict):
         method = 'banChatMember'
         return await self._request(method, params)
 
-    async def ban_chat_sender_chat(self, params: dict):
+    async def ban_chat_sender_chat(self, params: Dict):
         method = 'banChatSenderChat'
         return await self._request(method, params)
 
@@ -393,68 +393,72 @@ class TelegramApi:
         method = 'close'
         return await self._request(method)
 
-    async def close_forum_topic(self, params: dict):
+    async def close_forum_topic(self, params: Dict):
         method = 'closeForumTopic'
         return await self._request(method, params)
 
-    async def close_general_forum_topic(self, params: dict):
+    async def close_general_forum_topic(self, params: Dict):
         method = 'closeGeneralForumTopic'
         return await self._request(method, params)
 
-    async def copy_message(self, params: dict):
+    async def copy_message(self, params: Dict):
         method = 'copyMessage'
         return await self._request(method, params)
 
-    async def copy_messages(self, params: dict):
+    async def copy_messages(self, params: Dict):
         method = 'copyMessages'
         return await self._request(method, params)
 
-    async def create_chat_invite_link(self, params: dict):
+    async def create_chat_invite_link(self, params: Dict):
         method = 'createChatInviteLink'
         return await self._request(method, params)
 
-    async def create_forum_topic(self, params: dict):
+    async def create_forum_topic(self, params: Dict):
         method = 'createForumTopic'
         return await self._request(method, params)
 
-    async def create_invoice_link(self, params: dict):
+    async def create_invoice_link(self, params: Dict):
         method = 'createInvoiceLink'
         return await self._request(method, params)
 
-    async def create_new_sticker_set(self, params: dict):
+    async def create_new_sticker_set(self, params: Dict):
         method = 'createNewStickerSet'
         return await self._request(method, params)
 
-    async def decline_chat_join_request(self, params: dict):
+    async def decline_chat_join_request(self, params: Dict):
         method = 'declineChatJoinRequest'
         return await self._request(method, params)
 
-    async def delete_chat_photo(self, params: dict):
+    async def delete_chat_photo(self, params: Dict):
         method = 'deleteChatPhoto'
         return await self._request(method, params)
 
-    async def delete_chat_sticker_set(self, params: dict):
+    async def delete_chat_sticker_set(self, params: Dict):
         method = 'deleteChatStickerSet'
         return await self._request(method, params)
 
-    async def delete_forum_topic(self, params: dict):
+    async def delete_forum_topic(self, params: Dict):
         method = 'deleteForumTopic'
         return await self._request(method, params)
 
-    async def delete_message(self, params: dict):
+    async def delete_message(self, params: Dict):
         method = 'deleteMessage'
         return await self._request(method, params)
 
-    async def delete_messages(self, params: dict):
+    async def delete_messages(self, params: Dict):
         method = 'deleteMessages'
         return await self._request(method, params)
 
-    async def delete_my_commands(self, params: dict):
+    async def delete_my_commands(self, params: Dict):
         method = 'deleteMyCommands'
         return await self._request(method, params)
 
+    async def delete_sticker_from_set(self, params: Dict):
+        method = 'deleteStickerFromSet'
+        return await self._request(method, params)
 
-    async def get_updates(self, params: dict, **kwargs):
+
+    async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
 
@@ -462,7 +466,7 @@ class TelegramApi:
         method = 'getMe'
         return await self._request(method, **kwargs)
 
-    async def send_message(self, params: dict):
+    async def send_message(self, params: Dict):
         method = 'sendMessage'
         return await self._request(method, params)
 
@@ -470,50 +474,50 @@ class TelegramApi:
         method = 'logOut'
         return await self._request(method)
 
-    async def forward_message(self, params: dict):
+    async def forward_message(self, params: Dict):
         method = 'forwardMessage'
         return await self._request(method, params)
 
-    async def forward_messages(self, params: dict):
+    async def forward_messages(self, params: Dict):
         method = 'forwardMessages'
         return await self._request(method, params)
 
-    async def send_photo(self, params: dict):
+    async def send_photo(self, params: Dict):
         method = 'sendPhoto'
         files = _get_files(params, 'photo')
         return await self._request(method, params, files)
 
-    async def send_audio(self, params: dict):
+    async def send_audio(self, params: Dict):
         method = 'sendAudio'
         files = _get_files(params, 'audio', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_document(self, params: dict):
+    async def send_document(self, params: Dict):
         method = 'sendDocument'
         files = _get_files(params, 'document', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_video(self, params: dict):
+    async def send_video(self, params: Dict):
         method = 'sendVideo'
         files = _get_files(params, 'video', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_animation(self, params: dict):
+    async def send_animation(self, params: Dict):
         method = 'sendAnimation'
         files = _get_files(params, 'animation', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_voice(self, params: dict):
+    async def send_voice(self, params: Dict):
         method = 'sendVoice'
         files = _get_files(params, 'voice')
         return await self._request(method, params, files)
 
-    async def send_video_note(self, params: dict):
+    async def send_video_note(self, params: Dict):
         method = 'sendVideoNote'
         files = _get_files(params, 'video_note', 'thumbnail')
         return await self._request(method, params, files)
 
-    async def send_media_group(self, params: dict):
+    async def send_media_group(self, params: Dict):
         method = 'sendMediaGroup'
         files = _get_input_media_files(
             params,
@@ -522,124 +526,124 @@ class TelegramApi:
         )
         return await self._request(method, params, files)
 
-    async def send_location(self, params: dict):
+    async def send_location(self, params: Dict):
         method = 'sendLocation'
         return await self._request(method, params)
 
-    async def send_venue(self, params: dict):
+    async def send_venue(self, params: Dict):
         method = 'sendVenue'
         return await self._request(method, params)
 
-    async def send_contact(self, params: dict):
+    async def send_contact(self, params: Dict):
         method = 'sendContact'
         return await self._request(method, params)
 
-    async def send_poll(self, params: dict):
+    async def send_poll(self, params: Dict):
         method = 'sendPoll'
         return await self._request(method, params)
 
-    async def send_dice(self, params: dict):
+    async def send_dice(self, params: Dict):
         method = 'sendDice'
         return await self._request(method, params)
 
-    async def send_chat_action(self, params: dict):
+    async def send_chat_action(self, params: Dict):
         method = 'sendChatAction'
         return await self._request(method, params)
 
-    async def set_message_reaction(self, params: dict):
+    async def set_message_reaction(self, params: Dict):
         method = 'setMessageReaction'
         return await self._request(method, params)
 
-    async def get_user_profile_photos(self, params: dict):
+    async def get_user_profile_photos(self, params: Dict):
         method = 'getUserProfilePhotos'
         return await self._request(method, params)
 
-    async def get_file(self, params: dict):
+    async def get_file(self, params: Dict):
         method = 'getFile'
         return await self._request(method, params)
 
-    async def unban_chat_member(self, params: dict):
+    async def unban_chat_member(self, params: Dict):
         method = 'unbanChatMember'
         return await self._request(method, params)
 
-    async def restrict_chat_member(self, params: dict):
+    async def restrict_chat_member(self, params: Dict):
         method = 'restrictChatMember'
         return await self._request(method, params)
 
-    async def promote_chat_member(self, params: dict):
+    async def promote_chat_member(self, params: Dict):
         method = 'promoteChatMember'
         return await self._request(method, params)
 
-    async def set_chat_administrator_custom_title(self, params: dict):
+    async def set_chat_administrator_custom_title(self, params: Dict):
         method = 'setChatAdministratorCustomTitle'
         return await self._request(method, params)
 
-    async def unban_chat_sender_chat(self, params: dict):
+    async def unban_chat_sender_chat(self, params: Dict):
         method = 'unbanChatSenderChat'
         return await self._request(method, params)
 
-    async def set_chat_permissions(self, params: dict):
+    async def set_chat_permissions(self, params: Dict):
         method = 'setChatPermissions'
         return await self._request(method, params)
 
-    async def export_chat_invite_link(self, params: dict):
+    async def export_chat_invite_link(self, params: Dict):
         method = 'exportChatInviteLink'
         return await self._request(method, params)
 
-    async def edit_chat_invite_link(self, params: dict):
+    async def edit_chat_invite_link(self, params: Dict):
         method = 'editChatInviteLink'
         return await self._request(method, params)
 
-    async def revoke_chat_invite_link(self, params: dict):
+    async def revoke_chat_invite_link(self, params: Dict):
         method = 'revokeChatInviteLink'
         return await self._request(method, params)
 
-    async def set_chat_photo(self, params: dict):
+    async def set_chat_photo(self, params: Dict):
         method = 'setChatPhoto'
         files = _get_files(params, 'photo')
         return await self._request(method, params, files)
 
-    async def set_chat_title(self, params: dict):
+    async def set_chat_title(self, params: Dict):
         method = 'setChatTitle'
         return await self._request(method, params)
 
-    async def set_chat_description(self, params: dict):
+    async def set_chat_description(self, params: Dict):
         method = 'setChatDescription'
         return await self._request(method, params)
 
-    async def pin_chat_message(self, params: dict):
+    async def pin_chat_message(self, params: Dict):
         method = 'pinChatMessage'
         return await self._request(method, params)
 
-    async def unpin_chat_message(self, params: dict):
+    async def unpin_chat_message(self, params: Dict):
         method = 'unpinChatMessage'
         return await self._request(method, params)
 
-    async def unpin_all_chat_messages(self, params: dict):
+    async def unpin_all_chat_messages(self, params: Dict):
         method = 'unpinAllChatMessages'
         return await self._request(method, params)
 
-    async def leave_chat(self, params: dict):
+    async def leave_chat(self, params: Dict):
         method = 'leaveChat'
         return await self._request(method, params)
 
-    async def get_chat(self, params: dict):
+    async def get_chat(self, params: Dict):
         method = 'getChat'
         return await self._request(method, params)
 
-    async def get_chat_administrators(self, params: dict):
+    async def get_chat_administrators(self, params: Dict):
         method = 'getChatAdministrators'
         return await self._request(method, params)
 
-    async def get_chat_member_count(self, params: dict):
+    async def get_chat_member_count(self, params: Dict):
         method = 'getChatMemberCount'
         return await self._request(method, params)
 
-    async def get_chat_member(self, params: dict):
+    async def get_chat_member(self, params: Dict):
         method = 'getChatMember'
         return await self._request(method, params)
 
-    async def set_chat_sticker_set(self, params: dict):
+    async def set_chat_sticker_set(self, params: Dict):
         method = 'setChatStickerSet'
         return await self._request(method, params)
 
@@ -647,190 +651,186 @@ class TelegramApi:
         method = 'getForumTopicIconStickers'
         return await self._request(method)
 
-    async def edit_forum_topic(self, params: dict):
+    async def edit_forum_topic(self, params: Dict):
         method = 'editForumTopic'
         return await self._request(method, params)
 
-    async def reopen_forum_topic(self, params: dict):
+    async def reopen_forum_topic(self, params: Dict):
         method = 'reopenForumTopic'
         return await self._request(method, params)
 
-    async def unpin_all_forum_topic_messages(self, params: dict):
+    async def unpin_all_forum_topic_messages(self, params: Dict):
         method = 'unpinAllForumTopicMessages'
         return await self._request(method, params)
 
-    async def edit_general_forum_topic(self, params: dict):
+    async def edit_general_forum_topic(self, params: Dict):
         method = 'editGeneralForumTopic'
         return await self._request(method, params)
 
-    async def reopen_general_forum_topic(self, params: dict):
+    async def reopen_general_forum_topic(self, params: Dict):
         method = 'reopenGeneralForumTopic'
         return await self._request(method, params)
 
-    async def hide_general_forum_topic(self, params: dict):
+    async def hide_general_forum_topic(self, params: Dict):
         method = 'hideGeneralForumTopic'
         return await self._request(method, params)
 
-    async def unhide_general_forum_topic(self, params: dict):
+    async def unhide_general_forum_topic(self, params: Dict):
         method = 'unhideGeneralForumTopic'
         return await self._request(method, params)
 
-    async def unpin_all_general_forum_topic_messages(self, params: dict):
+    async def unpin_all_general_forum_topic_messages(self, params: Dict):
         method = 'unpinAllGeneralForumTopicMessages'
         return await self._request(method, params)
 
-    async def get_user_chat_boosts(self, params: dict):
+    async def get_user_chat_boosts(self, params: Dict):
         method = 'getUserChatBoosts'
         return await self._request(method, params)
 
-    async def set_my_commands(self, params: dict):
+    async def set_my_commands(self, params: Dict):
         method = 'setMyCommands'
         return await self._request(method, params)
 
-    async def get_my_commands(self, params: dict):
+    async def get_my_commands(self, params: Dict):
         method = 'getMyCommands'
         return await self._request(method, params)
 
-    async def set_my_name(self, params: dict):
+    async def set_my_name(self, params: Dict):
         method = 'setMyName'
         return await self._request(method, params)
 
-    async def get_my_name(self, params: dict):
+    async def get_my_name(self, params: Dict):
         method = 'getMyName'
         return await self._request(method, params)
 
-    async def set_my_description(self, params: dict):
+    async def set_my_description(self, params: Dict):
         method = 'setMyDescription'
         return await self._request(method, params)
 
-    async def get_my_description(self, params: dict):
+    async def get_my_description(self, params: Dict):
         method = 'getMyDescription'
         return await self._request(method, params)
 
-    async def set_my_short_description(self, params: dict):
+    async def set_my_short_description(self, params: Dict):
         method = 'setMyShortDescription'
         return await self._request(method, params)
 
-    async def get_my_short_description(self, params: dict):
+    async def get_my_short_description(self, params: Dict):
         method = 'getMyShortDescription'
         return await self._request(method, params)
 
-    async def set_chat_menu_button(self, params: dict):
+    async def set_chat_menu_button(self, params: Dict):
         method = 'setChatMenuButton'
         return await self._request(method, params)
 
-    async def get_chat_menu_button(self, params: dict):
+    async def get_chat_menu_button(self, params: Dict):
         method = 'getChatMenuButton'
         return await self._request(method, params)
 
-    async def set_my_default_administrator_rights(self, params: dict):
+    async def set_my_default_administrator_rights(self, params: Dict):
         method = 'setMyDefaultAdministratorRights'
         return await self._request(method, params)
 
-    async def get_my_default_administrator_rights(self, params: dict):
+    async def get_my_default_administrator_rights(self, params: Dict):
         method = 'getMyDefaultAdministratorRights'
         return await self._request(method, params)
 
-    async def edit_message_text(self, params: dict):
+    async def edit_message_text(self, params: Dict):
         method = 'editMessageText'
         return await self._request(method, params)
 
-    async def edit_message_caption(self, params: dict):
+    async def edit_message_caption(self, params: Dict):
         method = 'editMessageCaption'
         return await self._request(method, params)
 
-    async def edit_message_media(self, params: dict):
+    async def edit_message_media(self, params: Dict):
         method = 'editMessageMedia'
         files = _get_input_media_files(params, 'media', types_check=InputMedia)
         return await self._request(method, params, files)
 
-    async def edit_message_live_location(self, params: dict):
+    async def edit_message_live_location(self, params: Dict):
         method = 'editMessageLiveLocation'
         return await self._request(method, params)
 
-    async def stop_message_live_location(self, params: dict):
+    async def stop_message_live_location(self, params: Dict):
         method = 'stopMessageLiveLocation'
         return await self._request(method, params)
 
-    async def edit_message_reply_markup(self, params: dict):
+    async def edit_message_reply_markup(self, params: Dict):
         method = 'editMessageReplyMarkup'
         return await self._request(method, params)
 
-    async def stop_poll(self, params: dict):
+    async def stop_poll(self, params: Dict):
         method = 'stopPoll'
         return await self._request(method, params)
 
-    async def send_sticker(self, params: dict):
+    async def send_sticker(self, params: Dict):
         method = 'sendSticker'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
 
-    async def get_sticker_set(self, params: dict):
+    async def get_sticker_set(self, params: Dict):
         method = 'getStickerSet'
         return await self._request(method, params)
 
-    async def get_custom_emoji_stickers(self, params: dict):
+    async def get_custom_emoji_stickers(self, params: Dict):
         method = 'getCustomEmojiStickers'
         return await self._request(method, params)
 
-    async def upload_sticker_file(self, params: dict):
+    async def upload_sticker_file(self, params: Dict):
         method = 'uploadStickerFile'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
 
-    async def set_sticker_position_in_set(self, params: dict):
+    async def set_sticker_position_in_set(self, params: Dict):
         method = 'setStickerPositionInSet'
         return await self._request(method, params)
 
-    async def delete_sticker_from_set(self, params: dict):
-        method = 'deleteStickerFromSet'
-        return await self._request(method, params)
-
-    async def set_sticker_emoji_list(self, params: dict):
+    async def set_sticker_emoji_list(self, params: Dict):
         method = 'setStickerEmojiList'
         return await self._request(method, params)
 
-    async def set_sticker_keywords(self, params: dict):
+    async def set_sticker_keywords(self, params: Dict):
         method = 'setStickerKeywords'
         return await self._request(method, params)
 
-    async def set_sticker_mask_position(self, params: dict):
+    async def set_sticker_mask_position(self, params: Dict):
         method = 'setStickerMaskPosition'
         return await self._request(method, params)
 
-    async def set_sticker_set_title(self, params: dict):
+    async def set_sticker_set_title(self, params: Dict):
         method = 'setStickerSetTitle'
         return await self._request(method, params)
 
-    async def set_sticker_set_thumbnail(self, params: dict):
+    async def set_sticker_set_thumbnail(self, params: Dict):
         method = 'setStickerSetThumbnail'
         files = _get_files(params, 'thumbnail')
         return await self._request(method, params, files)
 
-    async def set_custom_emoji_sticker_set_thumbnail(self, params: dict):
+    async def set_custom_emoji_sticker_set_thumbnail(self, params: Dict):
         method = 'setCustomEmojiStickerSetThumbnail'
         return await self._request(method, params)
 
-    async def delete_sticker_set(self, params: dict):
+    async def delete_sticker_set(self, params: Dict):
         method = 'deleteStickerSet'
         return await self._request(method, params)
 
-    async def send_invoice(self, params: dict):
+    async def send_invoice(self, params: Dict):
         method = 'sendInvoice'
         return await self._request(method, params)
 
-    async def set_passport_data_errors(self, params: dict):
+    async def set_passport_data_errors(self, params: Dict):
         method = 'setPassportDataErrors'
         return await self._request(method, params)
 
-    async def send_game(self, params: dict):
+    async def send_game(self, params: Dict):
         method = 'sendGame'
         return await self._request(method, params)
 
-    async def set_game_score(self, params: dict):
+    async def set_game_score(self, params: Dict):
         method = 'setGameScore'
         return await self._request(method, params)
 
-    async def get_game_high_scores(self, params: dict):
+    async def get_game_high_scores(self, params: Dict):
         method = 'getGameHighScores'
         return await self._request(method, params)
