@@ -18,12 +18,12 @@ You require a good python knowledge with the [asyncio module](https://docs.pytho
 
 * #### Installation
 ```powershell
-$ pip install tglib
+$ pip install aiotele
 ```
 
 * #### Keep it updated
 ```powershell
-$ pip install -U tglib
+$ pip install -U aiotele
 ```
 
 #
@@ -54,15 +54,15 @@ markup.row_width = 4
 
 * #### Usage
 ```python
-#!/bin/python3
+#!/bin/env python3
 
-from tglib import (
+from aiotele import (
     Client,
     NextManager,
     TelegramError
 )
 # Import all the types.
-from tglib.types import *
+from aiotele.types import *
 
 # Create a bot instance.
 bot = Client('<your_token>')
