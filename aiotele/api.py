@@ -443,6 +443,14 @@ class TelegramApi:
         method = 'deleteForumTopic'
         return await self._request(method, params)
 
+    async def delete_message(self, params: dict):
+        method = 'deleteMessage'
+        return await self._request(method, params)
+
+    async def delete_messages(self, params: dict):
+        method = 'deleteMessages'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -752,14 +760,6 @@ class TelegramApi:
 
     async def stop_poll(self, params: dict):
         method = 'stopPoll'
-        return await self._request(method, params)
-
-    async def delete_message(self, params: dict):
-        method = 'deleteMessage'
-        return await self._request(method, params)
-
-    async def delete_messages(self, params: dict):
-        method = 'deleteMessages'
         return await self._request(method, params)
 
     async def send_sticker(self, params: dict):

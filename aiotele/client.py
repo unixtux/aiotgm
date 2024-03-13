@@ -1448,6 +1448,64 @@ class Client(TelegramApi):
         return await super().delete_forum_topic(params)
 
 
+    async def delete_message(
+        self,
+        chat_id: Union[int, str],
+        message_id: int
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#deletemessage
+
+        Use this method to delete a message, including service messages, with the following limitations:
+
+        - A message can only be deleted if it was sent less than 48 hours ago.
+        - Service messages about a supergroup, channel, or forum topic creation can't be deleted.
+        - A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.
+        - Bots can delete outgoing messages in private chats, groups, and supergroups.
+        - Bots can delete incoming messages in private chats.
+        - Bots granted *can_post_messages* permissions can delete outgoing messages in channels.
+        - If the bot is an administrator of a group, it can delete any message there.
+        - If the bot has *can_delete_messages* permission in a supergroup or a channel, it can delete any message there.
+
+        Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param message_id: Identifier of the message to delete.
+        :type message_id: :obj:`int`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_id': message_id
+        }
+        return await super().delete_message(params)
+
+
+    async def delete_messages(
+        self,
+        chat_id: Union[int, str],
+        message_ids: list[int]
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#deletemessages
+
+        Use this method to delete multiple messages simultaneously. If some of the
+        specified messages can't be found, they are skipped. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param message_ids: A JSON-serialized list of 1-100 identifiers of messages to delete. See :meth:`~aiotele.Client.delete_message` for limitations on which messages can be deleted.
+        :type message_ids: :obj:`list` of :obj:`int`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_ids': message_ids
+        }
+        return await super().delete_messages(params)
+
+
 
 
     async def get_updates(
@@ -3143,48 +3201,6 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().stop_poll(params)
         return Poll._dese(result)
-
-
-    async def delete_message(
-        self,
-        chat_id: Union[int, str],
-        message_id: int
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#deletemessage
-        Use this method to delete a message, including service messages, with the following limitations:
-        - A message can only be deleted if it was sent less than 48 hours ago.
-        - Service messages about a supergroup, channel, or forum topic creation can't be deleted.
-        - A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.
-        - Bots can delete outgoing messages in private chats, groups, and supergroups.
-        - Bots can delete incoming messages in private chats.
-        - Bots granted can_post_messages permissions can delete outgoing messages in channels.
-        - If the bot is an administrator of a group, it can delete any message there.
-        - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
-        Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'message_id': message_id
-        }
-        return await super().delete_message(params)
-
-
-    async def delete_messages(
-        self,
-        chat_id: Union[int, str],
-        message_ids: list[int]
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#deletemessages
-        Use this method to delete multiple messages simultaneously. If some of the
-        specified messages can't be found, they are skipped. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'message_ids': message_ids
-        }
-        return await super().delete_messages(params)
 
 
     async def send_sticker(
