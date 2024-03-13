@@ -1,7 +1,7 @@
 [![pypi](https://img.shields.io/badge/pypi-aiotele-blue)](https://pypi.org/project/aiotele/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1) [![Documentation Status](https://readthedocs.org/projects/aiotele/badge/?version=latest)](https://aiotele.readthedocs.io/?badge=latest)
 
 #
-S
+
 <h3 align="center">Asynchronous python implementation of the Telegram Bot API <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
 
 #

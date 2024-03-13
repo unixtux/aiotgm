@@ -7,7 +7,7 @@ __all__ = (
 )
 from . import VERSION
 from .logger import get_logger
-logger = get_logger('asynctg ' + VERSION)
+logger = get_logger('aiotele ' + VERSION)
 del VERSION, get_logger
 
 import re
