@@ -439,6 +439,10 @@ class TelegramApi:
         method = 'deleteChatStickerSet'
         return await self._request(method, params)
 
+    async def delete_forum_topic(self, params: dict):
+        method = 'deleteForumTopic'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -639,10 +643,6 @@ class TelegramApi:
 
     async def reopen_forum_topic(self, params: dict):
         method = 'reopenForumTopic'
-        return await self._request(method, params)
-
-    async def delete_forum_topic(self, params: dict):
-        method = 'deleteForumTopic'
         return await self._request(method, params)
 
     async def unpin_all_forum_topic_messages(self, params: dict):
