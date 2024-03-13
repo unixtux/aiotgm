@@ -18,13 +18,14 @@ You require a good python knowledge with the [asyncio module](https://docs.pytho
 
 * #### Installation
 
-To install the module you must use the pip manager from the shell.
+Install the module using [pip](https://pypi.org/project/aiotele/).
 
 ```powershell
 $ pip install aiotele
 ```
 
-* #### Keep it updated
+Update the module regurarly with the following command.
+
 ```powershell
 $ pip install -U aiotele
 ```
