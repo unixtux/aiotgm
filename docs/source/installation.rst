@@ -21,6 +21,26 @@ Usage
 ~~~~~
 
 Using the method :meth:`~aiotele.Client.long_polling` you manage every incoming :obj:`~aiotele.types.Update`.
+There are 18 decorator method to manage updates, they are:
+
+    - :meth:`~aiotele.Client.manage_message`
+    - :meth:`~aiotele.Client.manage_edited_message`
+    - :meth:`~aiotele.Client.manage_channel_post`
+    - :meth:`~aiotele.Client.manage_edited_channel_post`
+    - :meth:`~aiotele.Client.manage_message_reaction`
+    - :meth:`~aiotele.Client.manage_message_reaction_count`
+    - :meth:`~aiotele.Client.manage_inline_query`
+    - :meth:`~aiotele.Client.manage_chosen_inline_result`
+    - :meth:`~aiotele.Client.manage_callback_query`
+    - :meth:`~aiotele.Client.manage_shipping_query`
+    - :meth:`~aiotele.Client.manage_pre_checkout_query`
+    - :meth:`~aiotele.Client.manage_poll`
+    - :meth:`~aiotele.Client.manage_poll_answer`
+    - :meth:`~aiotele.Client.manage_my_chat_member`
+    - :meth:`~aiotele.Client.manage_chat_member`
+    - :meth:`~aiotele.Client.manage_chat_join_request`
+    - :meth:`~aiotele.Client.manage_chat_boost`
+    - :meth:`~aiotele.Client.manage_removed_chat_boost`
 
 .. code-block:: python3
 
