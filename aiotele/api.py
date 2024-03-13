@@ -1,9 +1,7 @@
 #!/bin/env python3
 
-__all__ = (
-    'TelegramApi',
-    'TelegramError',
-)
+__all__ = ()
+
 from .client import logger
 import os
 import re

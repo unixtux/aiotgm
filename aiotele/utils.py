@@ -1,9 +1,5 @@
 #!/bin/env python3
 
-__all__ = (
-    'escape_markdown',
-)
-
 MARKDOWN_ESCAPES = {
     '_': '\_',
     '*': '\*',
