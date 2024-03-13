@@ -15,7 +15,6 @@ Dependencies
 * `aiohttp <https://github.com/aio-libs/aiohttp>`_
 * Optional `ujson <https://github.com/ultrajson/ultrajson>`_ & `certifi <https://github.com/certifi/python-certifi>`_
 
-
 Installation
 ------------
 
