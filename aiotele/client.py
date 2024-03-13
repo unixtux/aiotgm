@@ -1556,8 +1556,8 @@ class Client(TelegramApi):
 
         Use this method to delete a sticker set that was created by the bot. Returns :obj:`True` on success.
 
-        :param sticker: Sticker set name.
-        :type sticker: :obj:`str`
+        :param name: Sticker set name.
+        :type name: :obj:`str`
         :rtype: :obj:`True`
         '''
         params = {
