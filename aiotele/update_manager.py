@@ -149,14 +149,14 @@ def _is_next_function(obj, /) -> bool:
 class NextFunction:
     '''
     You can return the instance of this class in a wrapped
-    coroutine, to pass the :obj:`~asynctg.types.Update` to the next one.
+    coroutine, to pass the :obj:`~aiotele.types.Update` to the next one.
 
     .. code-block:: python3
 
         # myscript.py
 
         import asyncio
-        from asynctg import Client, NextFunction
+        from aiotele import Client, NextFunction
 
         bot = Client('<your_api_token>')
 
@@ -182,7 +182,7 @@ class NextFunction:
         # Listen for updates...
         asyncio.run(bot.long_polling())
 
-    The following is the ouput in the shell when the bot receives a *message* :obj:`~asynctg.types.Update`.
+    The following is the ouput in the shell when the bot receives a *message* :obj:`~aiotele.types.Update`.
 
     .. code-block:: bash
 
@@ -190,7 +190,7 @@ class NextFunction:
         I am foo!
         I am bar!
 
-    As you can see, *foo()* returns a :obj:`~asynctg.NextFunction` object, so the :obj:`~asynctg.types.Update` is passed to *bar()*.
+    As you can see, *foo()* returns a :obj:`~aiotele.NextFunction` object, so the :obj:`~aiotele.types.Update` is passed to *bar()*.
     '''
 
 
