@@ -1506,6 +1506,29 @@ class Client(TelegramApi):
         return await super().delete_messages(params)
 
 
+    async def delete_my_commands(
+        self,
+        scope: Optional[BotCommandScope] = None,
+        language_code: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#deletemycommands
+
+        Use this method to delete the list of the bot's commands for the given scope and user language.
+        After deletion, `higher level commands <https://core.telegram.org/bots/api#determining-list-of-commands>`_ will be shown to affected users. Returns :obj:`True` on success.
+
+        :param scope: A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to :obj:`~aiotele.types.BotCommandScopeDefault`.
+        :type scope: :obj:`~aiotele.types.BotCommandScope`, optional
+        :param language_code: A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands.
+        :type language_code: :obj:`str`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {}
+        if scope is not None: params['scope'] = scope
+        if language_code is not None: params['language_code'] = language_code
+        return await super().delete_my_commands(params)
+
+
 
 
     async def get_updates(
@@ -2834,23 +2857,6 @@ class Client(TelegramApi):
         if scope is not None: params['scope'] = scope
         if language_code is not None: params['language_code'] = language_code
         return await super().set_my_commands(params)
-
-
-    async def delete_my_commands(
-        self,
-        scope: Optional[BotCommandScope] = None,
-        language_code: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#deletemycommands
-        Use this method to delete the list of the bot's commands for
-        the given scope and user language. After deletion, higher level
-        commands will be shown to affected users. Returns True on success.
-        '''
-        params = {}
-        if scope is not None: params['scope'] = scope
-        if language_code is not None: params['language_code'] = language_code
-        return await super().delete_my_commands(params)
 
 
     async def get_my_commands(

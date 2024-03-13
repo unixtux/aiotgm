@@ -451,6 +451,10 @@ class TelegramApi:
         method = 'deleteMessages'
         return await self._request(method, params)
 
+    async def delete_my_commands(self, params: dict):
+        method = 'deleteMyCommands'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -683,10 +687,6 @@ class TelegramApi:
 
     async def set_my_commands(self, params: dict):
         method = 'setMyCommands'
-        return await self._request(method, params)
-
-    async def delete_my_commands(self, params: dict):
-        method = 'deleteMyCommands'
         return await self._request(method, params)
 
     async def get_my_commands(self, params: dict):
