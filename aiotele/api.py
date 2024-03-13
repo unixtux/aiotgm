@@ -457,6 +457,10 @@ class TelegramApi:
         method = 'deleteStickerFromSet'
         return await self._request(method, params)
 
+    async def delete_sticker_set(self, params: Dict):
+        method = 'deleteStickerSet'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -809,10 +813,6 @@ class TelegramApi:
 
     async def set_custom_emoji_sticker_set_thumbnail(self, params: Dict):
         method = 'setCustomEmojiStickerSetThumbnail'
-        return await self._request(method, params)
-
-    async def delete_sticker_set(self, params: Dict):
-        method = 'deleteStickerSet'
         return await self._request(method, params)
 
     async def send_invoice(self, params: Dict):

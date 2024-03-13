@@ -1547,6 +1547,25 @@ class Client(TelegramApi):
         return await super().delete_sticker_from_set(params)
 
 
+    async def delete_sticker_set(
+        self,
+        name: str
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#deletestickerset
+
+        Use this method to delete a sticker set that was created by the bot. Returns :obj:`True` on success.
+
+        :param sticker: Sticker set name.
+        :type sticker: :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'name': name
+        }
+        return await super().delete_sticker_set(params)
+
+
 
 
     async def get_updates(
@@ -3425,20 +3444,6 @@ class Client(TelegramApi):
         }
         if custom_emoji_id is not None: params['custom_emoji_id'] = custom_emoji_id
         return await super().set_custom_emoji_sticker_set_thumbnail(params)
-
-
-    async def delete_sticker_set(
-        self,
-        name: str
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#deletestickerset
-        Use this method to delete a sticker set that was created by the bot. Returns True on success.
-        '''
-        params = {
-            'name': name
-        }
-        return await super().delete_sticker_set(params)
 
 
     async def send_invoice(
