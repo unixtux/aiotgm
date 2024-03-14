@@ -1680,6 +1680,39 @@ class Client(TelegramApi):
         return ChatInviteLink._dese(result)
 
 
+    async def edit_forum_topic(
+        self,
+        chat_id: Union[int, str],
+        message_thread_id: int,
+        name: Optional[str] = None,
+        icon_custom_emoji_id: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#editforumtopic
+
+        Use this method to edit name and icon of a topic in a forum supergroup chat. The bot
+        must be an administrator in the chat for this to work and must have *can_manage_topics*
+        administrator rights, unless it is the creator of the topic. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread of the forum topic.
+        :type message_thread_id: :obj:`int`
+        :param name: New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept.
+        :type name: :obj:`str`, optional
+        :param icon_custom_emoji_id: New unique identifier of the custom emoji shown as the topic icon. Use :meth:`~aiotele.Client.get_forum_topic_icon_stickers` to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept.
+        :type icon_custom_emoji_id: :obj:`str`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_thread_id': message_thread_id
+        }
+        if name is not None: params['name'] = name
+        if icon_custom_emoji_id is not None: params['icon_custom_emoji_id'] = icon_custom_emoji_id
+        return await super().edit_forum_topic(params)
+
+
 
 
     async def get_updates(
@@ -2804,28 +2837,6 @@ class Client(TelegramApi):
         '''
         result = await super().get_forum_topic_icon_stickers()
         return [Sticker._dese(sticker) for sticker in result]
-
-
-    async def edit_forum_topic(
-        self,
-        chat_id: Union[int, str],
-        message_thread_id: int,
-        name: Optional[str] = None,
-        icon_custom_emoji_id: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#editforumtopic
-        Use this method to edit name and icon of a topic in a forum supergroup chat. The bot
-        must be an administrator in the chat for this to work and must have can_manage_topics
-        administrator rights, unless it is the creator of the topic. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'message_thread_id': message_thread_id
-        }
-        if name is not None: params['name'] = name
-        if icon_custom_emoji_id is not None: params['icon_custom_emoji_id'] = icon_custom_emoji_id
-        return await super().edit_forum_topic(params)
 
 
     async def reopen_forum_topic(
