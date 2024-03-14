@@ -2155,6 +2155,26 @@ class Client(TelegramApi):
         return await super().get_chat_member_count(params)
 
 
+    async def get_chat_menu_button(
+        self,
+        chat_id: Optional[int] = None
+    ) -> MenuButton:
+        '''
+        https://core.telegram.org/bots/api#getchatmenubutton
+
+        Use this method to get the current value of the bot's menu button in a private
+        chat, or the default menu button. Returns :obj:`~aiotgm.types.MenuButton` on success.
+
+        :param chat_id: Unique identifier for the target private chat. If not specified, default bot's menu button will be returned.
+        :type chat_id: :obj:`int`, optional
+        :rtype: :obj:`~aiotgm.types.MenuButton`
+        '''
+        params = {}
+        if chat_id is not None: params['chat_id'] = chat_id
+        result = await super().get_chat_menu_button(params)
+        return _dese_menu_button(result)
+
+
 
 
     async def get_updates(
@@ -3406,21 +3426,6 @@ class Client(TelegramApi):
         if chat_id is not None: params['chat_id'] = chat_id
         if menu_button is not None: params['menu_button'] = menu_button
         return await super().set_chat_menu_button(params)
-
-
-    async def get_chat_menu_button(
-        self,
-        chat_id: Optional[int] = None
-    ) -> MenuButton:
-        '''
-        https://core.telegram.org/bots/api#getchatmenubutton
-        Use this method to get the current value of the bot's menu button in a
-        private chat, or the default menu button. Returns MenuButton on success.
-        '''
-        params = {}
-        if chat_id is not None: params['chat_id'] = chat_id
-        result = await super().get_chat_menu_button(params)
-        return _dese_menu_button(result)
 
 
     async def set_my_default_administrator_rights(

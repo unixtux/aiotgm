@@ -9,7 +9,6 @@ import time
 import asyncio
 from typing import (
     Any,
-    Dict,
     Union,
     Literal,
     Optional,
@@ -126,7 +125,7 @@ async def _parse_json(response: ClientResponse, deep_debug: bool, /):
         raise TelegramError(result['error_code'], result['description'])
 
 
-FilesDict = Dict[str, Dict[Literal['content'], bytes] | Dict[Literal['file_name'], str | None]]
+FilesDict = dict[str, dict[Literal['content'], bytes] | dict[Literal['file_name'], str | None]]
 
 def _get_files(
     params: dict,
@@ -522,6 +521,10 @@ class TelegramApi:
         method = 'getChatMemberCount'
         return await self._request(method, params)
 
+    async def get_chat_menu_button(self, params: dict):
+        method = 'getChatMenuButton'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -746,10 +749,6 @@ class TelegramApi:
 
     async def set_chat_menu_button(self, params: dict):
         method = 'setChatMenuButton'
-        return await self._request(method, params)
-
-    async def get_chat_menu_button(self, params: dict):
-        method = 'getChatMenuButton'
         return await self._request(method, params)
 
     async def set_my_default_administrator_rights(self, params: dict):
