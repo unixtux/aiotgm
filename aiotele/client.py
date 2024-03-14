@@ -1909,6 +1909,56 @@ class Client(TelegramApi):
         return Message._dese(result) if result is not True else True
 
 
+    async def edit_message_text(
+        self,
+        text: str,
+        chat_id: Optional[Union[int, str]] = None,
+        message_id: Optional[int] = None,
+        inline_message_id: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        entities: Optional[list[MessageEntity]] = None,
+        link_preview_options: Optional[LinkPreviewOptions] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None
+    ) -> Union[Message, Literal[True]]:
+        '''
+        https://core.telegram.org/bots/api#editmessagetext
+
+        Use this method to edit text and `game <https://core.telegram.org/bots/api#games>`_ messages.
+        On success, if the edited message is not an inline message, the edited :obj:`~aiotele.types.Message` is returned, otherwise :obj:`True` is returned.
+
+        :param text: New text of the message, 1-4096 characters after entities parsing.
+        :type text: :obj:`str`
+        :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`, optional
+        :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
+        :type message_id: :obj:`int`, optional
+        :param inline_message_id: Required if *chat_id* and *message_id* are not specified. Identifier of the inline message.
+        :type inline_message_id: :obj:`str`, optional
+        :param parse_mode: Mode for parsing entities in the message text. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        :type parse_mode: :obj:`str`, optional
+        :param entities: A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse_mode*.
+        :type entities: :obj:`list` of :obj:`~aiotele.types.MessageEntity`, optional
+        :param link_preview_options: Link preview generation options for the message.
+        :type link_preview_options: :obj:`~aiotele.types.LinkPreviewOptions`, optional
+        :param reply_markup: A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
+        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotele.types.Message` or :obj:`True`
+        '''
+        params = {
+            'text': text
+        }
+        if chat_id is not None: params['chat_id'] = chat_id
+        if message_id is not None: params['message_id'] = message_id
+        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
+        if parse_mode is not None: params['parse_mode'] = parse_mode
+        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
+        if entities is not None: params['entities'] = entities
+        if link_preview_options is not None: params['link_preview_options'] = link_preview_options
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().edit_message_text(params)
+        return Message._dese(result) if result is not True else True
+
+
 
 
     async def get_updates(
@@ -3340,37 +3390,6 @@ class Client(TelegramApi):
         if for_channels is not None: params['for_channels'] = for_channels
         result = await super().get_my_default_administrator_rights(params)
         return ChatAdministratorRights._dese(result)
-
-
-    async def edit_message_text(
-        self,
-        text: str,
-        chat_id: Optional[Union[int, str]] = None,
-        message_id: Optional[int] = None,
-        inline_message_id: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        entities: Optional[list[MessageEntity]] = None,
-        link_preview_options: Optional[LinkPreviewOptions] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None
-    ) -> Union[Message, Literal[True]]:
-        '''
-        https://core.telegram.org/bots/api#editmessagetext
-        Use this method to edit text and game messages. On success, if the edited message
-        is not an inline message, the edited Message is returned, otherwise True is returned.
-        '''
-        params = {
-            'text': text
-        }
-        if chat_id is not None: params['chat_id'] = chat_id
-        if message_id is not None: params['message_id'] = message_id
-        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
-        if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
-        if entities is not None: params['entities'] = entities
-        if link_preview_options is not None: params['link_preview_options'] = link_preview_options
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().edit_message_text(params)
-        return Message._dese(result) if result is not True else True
 
 
     async def stop_message_live_location(

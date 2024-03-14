@@ -490,6 +490,10 @@ class TelegramApi:
         method = 'editMessageReplyMarkup'
         return await self._request(method, params)
 
+    async def edit_message_text(self, params: Dict):
+        method = 'editMessageText'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -754,10 +758,6 @@ class TelegramApi:
 
     async def get_my_default_administrator_rights(self, params: Dict):
         method = 'getMyDefaultAdministratorRights'
-        return await self._request(method, params)
-
-    async def edit_message_text(self, params: Dict):
-        method = 'editMessageText'
         return await self._request(method, params)
 
     async def stop_message_live_location(self, params: Dict):
