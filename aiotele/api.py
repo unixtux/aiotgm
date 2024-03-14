@@ -469,6 +469,10 @@ class TelegramApi:
         method = 'editForumTopic'
         return await self._request(method, params)
 
+    async def edit_general_forum_topic(self, params: Dict):
+        method = 'editGeneralForumTopic'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -665,10 +669,6 @@ class TelegramApi:
 
     async def unpin_all_forum_topic_messages(self, params: Dict):
         method = 'unpinAllForumTopicMessages'
-        return await self._request(method, params)
-
-    async def edit_general_forum_topic(self, params: Dict):
-        method = 'editGeneralForumTopic'
         return await self._request(method, params)
 
     async def reopen_general_forum_topic(self, params: Dict):
