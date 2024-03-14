@@ -1738,6 +1738,51 @@ class Client(TelegramApi):
         return await super().edit_general_forum_topic(params)
 
 
+    async def edit_message_caption(
+        self,
+        chat_id: Optional[Union[int, str]] = None,
+        message_id: Optional[int] = None,
+        inline_message_id: Optional[str] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None
+    ) -> Union[Message, Literal[True]]:
+        '''
+        https://core.telegram.org/bots/api#editmessagecaption
+
+        Use this method to edit captions of messages. On success, if the edited message is
+        not an inline message, the edited :obj:`~aiotele.types.Message` is returned, otherwise :obj:`True` is returned.
+
+        :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`, optional
+        :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
+        :type message_id: :obj:`int`, optional
+        :param inline_message_id: Required if *chat_id* and *message_id* are not specified. Identifier of the inline message.
+        :type inline_message_id: :obj:`str`, optional
+        :param caption: New caption of the message, 0-1024 characters after entities parsing.
+        :type caption: :obj:`str`, optional
+        :param parse_mode: Mode for parsing entities in the message caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        :type parse_mode: :obj:`str`, optional
+        :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+        :type caption_entities: :obj:`list` of :obj:`~aiotele.types.MessageEntity`, optional
+        :param reply_markup: A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
+        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotele.types.Message` or :obj:`True`
+        '''
+        params = {}
+        if chat_id is not None: params['chat_id'] = chat_id
+        if message_id is not None: params['message_id'] = message_id
+        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
+        if caption is not None: params['caption'] = caption
+        if parse_mode is not None: params['parse_mode'] = parse_mode
+        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
+        if caption_entities is not None: params['caption_entities'] = caption_entities
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().edit_message_caption(params)
+        return Message._dese(result) if result is not True else True
+
+
 
 
     async def get_updates(
@@ -3199,34 +3244,6 @@ class Client(TelegramApi):
         if link_preview_options is not None: params['link_preview_options'] = link_preview_options
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_text(params)
-        return Message._dese(result) if result is not True else True
-
-
-    async def edit_message_caption(
-        self,
-        chat_id: Optional[Union[int, str]] = None,
-        message_id: Optional[int] = None,
-        inline_message_id: Optional[str] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None
-    ) -> Union[Message, Literal[True]]:
-        '''
-        https://core.telegram.org/bots/api#editmessagecaption
-        Use this method to edit captions of messages. On success, if the edited message is
-        not an inline message, the edited Message is returned, otherwise True is returned.
-        '''
-        params = {}
-        if chat_id is not None: params['chat_id'] = chat_id
-        if message_id is not None: params['message_id'] = message_id
-        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
-        if caption is not None: params['caption'] = caption
-        if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
-        if caption_entities is not None: params['caption_entities'] = caption_entities
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().edit_message_caption(params)
         return Message._dese(result) if result is not True else True
 
 

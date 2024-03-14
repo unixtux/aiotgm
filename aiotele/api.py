@@ -473,6 +473,10 @@ class TelegramApi:
         method = 'editGeneralForumTopic'
         return await self._request(method, params)
 
+    async def edit_message_caption(self, params: Dict):
+        method = 'editMessageCaption'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -741,10 +745,6 @@ class TelegramApi:
 
     async def edit_message_text(self, params: Dict):
         method = 'editMessageText'
-        return await self._request(method, params)
-
-    async def edit_message_caption(self, params: Dict):
-        method = 'editMessageCaption'
         return await self._request(method, params)
 
     async def edit_message_media(self, params: Dict):
