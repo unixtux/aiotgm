@@ -2175,6 +2175,27 @@ class Client(TelegramApi):
         return _dese_menu_button(result)
 
 
+    async def get_custom_emoji_stickers(
+        self,
+        custom_emoji_ids: list[str]
+    ) -> list[Sticker]:
+        '''
+        https://core.telegram.org/bots/api#getcustomemojistickers
+
+        Use this method to get information about custom emoji stickers by their
+        identifiers. Returns an Array of :obj:`~aiotgm.types.Sticker` objects.
+
+        :param custom_emoji_ids: A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
+        :type custom_emoji_ids: :obj:`list` of :obj:`str`
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.Sticker`
+        '''
+        params = {
+            'custom_emoji_ids': custom_emoji_ids
+        }
+        result = await super().get_custom_emoji_stickers(params)
+        return [Sticker._dese(sticker) for sticker in result]
+
+
 
 
     async def get_updates(
@@ -3543,22 +3564,6 @@ class Client(TelegramApi):
         }
         result = await super().get_sticker_set(params)
         return StickerSet._dese(result)
-
-
-    async def get_custom_emoji_stickers(
-        self,
-        custom_emoji_ids: list[str]
-    ) -> list[Sticker]:
-        '''
-        https://core.telegram.org/bots/api#getcustomemojistickers
-        Use this method to get information about custom emoji stickers
-        by their identifiers. Returns an Array of Sticker objects.
-        '''
-        params = {
-            'custom_emoji_ids': custom_emoji_ids
-        }
-        result = await super().get_custom_emoji_stickers(params)
-        return [Sticker._dese(sticker) for sticker in result]
 
 
     async def upload_sticker_file(

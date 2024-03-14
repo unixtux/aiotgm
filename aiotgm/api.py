@@ -525,6 +525,10 @@ class TelegramApi:
         method = 'getChatMenuButton'
         return await self._request(method, params)
 
+    async def get_custom_emoji_stickers(self, params: dict):
+        method = 'getCustomEmojiStickers'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -774,10 +778,6 @@ class TelegramApi:
 
     async def get_sticker_set(self, params: dict):
         method = 'getStickerSet'
-        return await self._request(method, params)
-
-    async def get_custom_emoji_stickers(self, params: dict):
-        method = 'getCustomEmojiStickers'
         return await self._request(method, params)
 
     async def upload_sticker_file(self, params: dict):
