@@ -486,6 +486,10 @@ class TelegramApi:
         files = _get_input_media_files(params, 'media', types_check=InputMedia)
         return await self._request(method, params, files)
 
+    async def edit_message_reply_markup(self, params: Dict):
+        method = 'editMessageReplyMarkup'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -758,10 +762,6 @@ class TelegramApi:
 
     async def stop_message_live_location(self, params: Dict):
         method = 'stopMessageLiveLocation'
-        return await self._request(method, params)
-
-    async def edit_message_reply_markup(self, params: Dict):
-        method = 'editMessageReplyMarkup'
         return await self._request(method, params)
 
     async def stop_poll(self, params: Dict):
