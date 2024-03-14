@@ -2111,6 +2111,31 @@ class Client(TelegramApi):
         return [_dese_chat_member(chat_member) for chat_member in result]
 
 
+    async def get_chat_member(
+        self,
+        chat_id: Union[int, str],
+        user_id: int
+    ) -> ChatMember:
+        '''
+        https://core.telegram.org/bots/api#getchatmember
+
+        Use this method to get information about a member of a chat. The method is only guaranteed to work for other
+        users if the bot is an administrator in the chat. Returns a :obj:`~aiotgm.types.ChatMember` object on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :rtype: :obj:`~aiotgm.types.ChatMember`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+        result = await super().get_chat_member(params)
+        return _dese_chat_member(result)
+
+
 
 
     async def get_updates(
@@ -3087,24 +3112,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().get_chat_member_count(params)
-
-
-    async def get_chat_member(
-        self,
-        chat_id: Union[int, str],
-        user_id: int
-    ) -> ChatMember:
-        '''
-        https://core.telegram.org/bots/api#getchatmember
-        Use this method to get information about a member of a chat. The method is only guaranteed to work
-        for other users if the bot is an administrator in the chat. Returns a ChatMember object on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id
-        }
-        result = await super().get_chat_member(params)
-        return _dese_chat_member(result)
 
 
     async def set_chat_sticker_set(

@@ -514,6 +514,10 @@ class TelegramApi:
         method = 'getChatAdministrators'
         return await self._request(method, params)
 
+    async def get_chat_member(self, params: dict):
+        method = 'getChatMember'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -670,10 +674,6 @@ class TelegramApi:
 
     async def get_chat_member_count(self, params: dict):
         method = 'getChatMemberCount'
-        return await self._request(method, params)
-
-    async def get_chat_member(self, params: dict):
-        method = 'getChatMember'
         return await self._request(method, params)
 
     async def set_chat_sticker_set(self, params: dict):
