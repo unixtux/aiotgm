@@ -30,7 +30,5 @@ Update the module regurarly with the following command.
 $ pip install -U aiotele
 ```
 
-#
-
 #### Documentation
 Here it is the [official documentation](https://aiotele.readthedocs.io/).
