@@ -1783,6 +1783,60 @@ class Client(TelegramApi):
         return Message._dese(result) if result is not True else True
 
 
+    async def edit_message_live_location(
+        self,
+        latitude: float,
+        longitude: float,
+        chat_id: Optional[Union[int, str]] = None,
+        message_id: Optional[int] = None,
+        inline_message_id: Optional[str] = None,
+        horizontal_accuracy: Optional[float] = None,
+        heading: Optional[int] = None,
+        proximity_alert_radius: Optional[int] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None
+    ) -> Union[Message, Literal[True]]:
+        '''
+        https://core.telegram.org/bots/api#editmessagelivelocation
+
+        Use this method to edit live location messages. A location can be edited until its *live_period* expires or editing
+        is explicitly disabled by a call to :meth:`~aiotele.Client.stop_message_live_location`. On success, if the edited
+        message is not an inline message, the edited :obj:`~aiotele.types.Message` is returned, otherwise :obj:`True` is returned.
+
+        :param latitude: Latitude of new location.
+        :type latitude: :obj:`float`
+        :param longitude: Longitude of new location.
+        :type longitude: :obj:`float`
+        :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`, optional
+        :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
+        :type message_id: :obj:`int`, optional
+        :param inline_message_id: Required if *chat_id* and *message_id* are not specified. Identifier of the inline message.
+        :type inline_message_id: :obj:`str`, optional
+        :param horizontal_accuracy: The radius of uncertainty for the location, measured in meters; 0-1500.
+        :type horizontal_accuracy: :obj:`float`, optional
+        :param heading: Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
+        :type heading: :obj:`int`, optional
+        :param proximity_alert_radius: The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
+        :type proximity_alert_radius: :obj:`int`, optional
+        :param reply_markup: A JSON-serialized object for a new `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
+        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotele.types.Message` or :obj:`True`
+        '''
+        params = {
+            'latitude': latitude,
+            'longitude': longitude
+        }
+        if chat_id is not None: params['chat_id'] = chat_id
+        if message_id is not None: params['message_id'] = message_id
+        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
+        if horizontal_accuracy is not None: params['horizontal_accuracy'] = horizontal_accuracy
+        if heading is not None: params['heading'] = heading
+        if proximity_alert_radius is not None: params['proximity_alert_radius'] = proximity_alert_radius
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().edit_message_live_location(params)
+        return Message._dese(result) if result is not True else True
+
+
 
 
     async def get_updates(
@@ -3271,39 +3325,6 @@ class Client(TelegramApi):
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_media(params)
-        return Message._dese(result) if result is not True else True
-
-
-    async def edit_message_live_location(
-        self,
-        latitude: float,
-        longitude: float,
-        chat_id: Optional[Union[int, str]] = None,
-        message_id: Optional[int] = None,
-        inline_message_id: Optional[str] = None,
-        horizontal_accuracy: Optional[float] = None,
-        heading: Optional[int] = None,
-        proximity_alert_radius: Optional[int] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None
-    ) -> Union[Message, Literal[True]]:
-        '''
-        https://core.telegram.org/bots/api#editmessagelivelocation
-        Use this method to edit live location messages. A location can be edited until its live_period
-        expires or editing is explicitly disabled by a call to stopMessageLiveLocation. On success, if the
-        edited message is not an inline message, the edited Message is returned, otherwise True is returned.
-        '''
-        params = {
-            'latitude': latitude,
-            'longitude': longitude
-        }
-        if chat_id is not None: params['chat_id'] = chat_id
-        if message_id is not None: params['message_id'] = message_id
-        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
-        if horizontal_accuracy is not None: params['horizontal_accuracy'] = horizontal_accuracy
-        if heading is not None: params['heading'] = heading
-        if proximity_alert_radius is not None: params['proximity_alert_radius'] = proximity_alert_radius
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().edit_message_live_location(params)
         return Message._dese(result) if result is not True else True
 
 
