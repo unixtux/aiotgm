@@ -33,4 +33,4 @@ $ pip install -U aiotele
 #
 
 #### Documentation
-Here it is the [official documentation](aiotele.readthedocs.io)
+Here it is the [official documentation](https://aiotele.readthedocs.io/).
