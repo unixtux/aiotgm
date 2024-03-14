@@ -2373,6 +2373,21 @@ class ReplyKeyboardMarkup(TelegramType):
 
     This object represents a custom keyboard with reply
     options (see Introduction to bots for details and examples).
+
+    Usage:
+
+    .. code-block:: python3
+
+        markup = ReplyKeyboardMarkup()
+        markup.add(KeyboardButton('x'), KeyboardButton('y'))
+
+        # All the buttons added with this method will be in
+        # the same row, you can change the row width after the
+        # object initialization using the property setter 'row_width'.
+
+        markup.row_width = 4
+
+        # The keyboard will be rearranged with 4 buttons each row.
     '''
     def __init__(
         self,
@@ -2484,6 +2499,24 @@ class InlineKeyboardMarkup(TelegramType):
     https://core.telegram.org/bots/api#inlinekeyboardmarkup
 
     This object represents an inline keyboard that appears right next to the message it belongs to.
+
+    Usage:
+
+    .. code-block:: python3
+
+        markup = InlineKeyboardMarkup()
+        markup.add(
+            InlineKeyboardButton('x', callback_data='x'),
+            InlineKeyboardButton('y', callback_data='y')
+        )
+        # All the buttons added with this method will be in
+        # the same row, you can change the row width after the
+        # object initialization using the property setter 'row_width'.
+
+        markup.row_width = 4
+
+        # The keyboard will be rearranged with 4 buttons each row.
+
     '''
     @classmethod
     @_parse_result

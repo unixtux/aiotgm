@@ -32,24 +32,5 @@ $ pip install -U aiotele
 
 #
 
-* #### Reply Markups
-**InlineKeyboardMarkup** and **ReplyKeyboardMarkup** have the method "**add**", so you can create new buttons after the object has been initialized.
-
-```python
-markup = ReplyKeyboardMarkup()
-markup.add(KeyboardButton('x'), KeyboardButton('y'))
-
-# All the buttons added with this method will be in
-# the same row, you can change the row width after the
-# object initialization using the property setter 'row_width'.
-
-markup.row_width = 4
-
-# The keyboard will be rearranged with 4 buttons each row.
-```
-
-#
-
-* #### Notes
-
-> Webhook has not been implemented yet.
+#### Documentation
+Here it is the [official documentation](aiotele.readthedocs.io)

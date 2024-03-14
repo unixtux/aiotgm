@@ -8,6 +8,8 @@ E.g. *sendMessage* becomes *send_message*.
 
 They are all *asynchronous*, so you must use them in `await <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ expression.
 
+Note: Webhook has not been implemented yet.
+
 ---------------------------
 
 .. autoclass:: aiotele.Client
