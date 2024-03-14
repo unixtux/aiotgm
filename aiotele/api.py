@@ -494,6 +494,10 @@ class TelegramApi:
         method = 'editMessageText'
         return await self._request(method, params)
 
+    async def export_chat_invite_link(self, params: Dict):
+        method = 'exportChatInviteLink'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -621,10 +625,6 @@ class TelegramApi:
 
     async def set_chat_permissions(self, params: Dict):
         method = 'setChatPermissions'
-        return await self._request(method, params)
-
-    async def export_chat_invite_link(self, params: Dict):
-        method = 'exportChatInviteLink'
         return await self._request(method, params)
 
     async def revoke_chat_invite_link(self, params: Dict):
