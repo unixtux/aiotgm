@@ -2090,6 +2090,27 @@ class Client(TelegramApi):
         return Chat._dese(result)
 
 
+    async def get_chat_administrators(
+        self,
+        chat_id: Union[int, str]
+    ) -> list[ChatMember]:
+        '''
+        https://core.telegram.org/bots/api#getchatadministrators
+
+        Use this method to get a list of administrators in a chat, which aren't bots.
+        Returns an Array of :obj:`~aiotele.types.ChatMember` objects.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`list` of :obj:`~aiotele.types.ChatMember`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        result = await super().get_chat_administrators(params)
+        return [_dese_chat_member(chat_member) for chat_member in result]
+
+
 
 
     async def get_updates(
@@ -3052,21 +3073,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().leave_chat(params)
-
-
-    async def get_chat_administrators(
-        self,
-        chat_id: Union[int, str]
-    ) -> list[ChatMember]:
-        '''
-        https://core.telegram.org/bots/api#getchatadministrators
-        Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of ChatMember objects.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        result = await super().get_chat_administrators(params)
-        return [_dese_chat_member(chat_member) for chat_member in result]
 
 
     async def get_chat_member_count(
