@@ -1984,6 +1984,91 @@ class Client(TelegramApi):
         return await super().export_chat_invite_link(params)
 
 
+    async def forward_message(
+        self,
+        chat_id: Union[int, str],
+        from_chat_id: Union[int, str],
+        message_id: int,
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None
+    ) -> Message:
+        '''
+        https://core.telegram.org/bots/api#forwardmessage
+
+        Use this method to forward messages of any kind. Service messages and messages with
+        protected content can't be forwarded. On success, the sent :obj:`~aiotele.types.Message` is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param from_chat_id: Unique identifier for the chat where the original message was sent (or channel username in the format ``@channelusername``).
+        :type from_chat_id: :obj:`int` or :obj:`str`
+        :param message_id: Message identifier in the chat specified in *from_chat_id*.
+        :type message_id: :obj:`int`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the forwarded message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :rtype: :obj:`~aiotele.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'from_chat_id': from_chat_id,
+            'message_id': message_id
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        result = await super().forward_message(params)
+        return Message._dese(result)
+
+
+    async def forward_messages(
+        self,
+        chat_id: Union[int, str],
+        from_chat_id: Union[int, str],
+        message_ids: list[int],
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None
+    ) -> list[MessageId]:
+        '''
+        https://core.telegram.org/bots/api#forwardmessages
+
+        Use this method to forward multiple messages of any kind. If some of the specified messages can't be found
+        or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album
+        grouping is kept for forwarded messages. On success, an array of :obj:`~aiotele.types.MessageId` of the sent messages is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param from_chat_id: Unique identifier for the chat where the original messages were sent (or channel username in the format ``@channelusername``).
+        :type from_chat_id: :obj:`int` or :obj:`str`
+        :param message_ids: A JSON-serialized list of 1-100 identifiers of messages in the chat *from_chat_id* to forward. The identifiers must be specified in a strictly increasing order.
+        :type message_ids: :obj:`list` of :obj:`int`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param disable_notification: Sends the messages `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the forwarded messages from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :rtype: :obj:`list` of :obj:`~aiotele.types.MessageId`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'from_chat_id': from_chat_id,
+            'message_ids': message_ids
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        result = await super().forward_messages(params)
+        return [MessageId._dese(mid) for mid in result]
+
+
 
 
     async def get_updates(
@@ -2060,61 +2145,6 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_message(params)
         return Message._dese(result)
-
-
-    async def forward_message(
-        self,
-        chat_id: Union[int, str],
-        from_chat_id: Union[int, str],
-        message_id: int,
-        message_thread_id: Optional[int] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None
-    ) -> Message:
-        '''
-        https://core.telegram.org/bots/api#forwardmessage
-        Use this method to forward messages of any kind. Service messages
-        can't be forwarded. On success, the sent Message is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'from_chat_id': from_chat_id,
-            'message_id': message_id
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        result = await super().forward_message(params)
-        return Message._dese(result)
-
-
-    async def forward_messages(
-        self,
-        chat_id: Union[int, str],
-        from_chat_id: Union[int, str],
-        message_ids: list[int],
-        message_thread_id: Optional[int] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None
-    ) -> list[MessageId]:
-        '''
-        https://core.telegram.org/bots/api#forwardmessages
-        Use this method to forward multiple messages of any kind. If some of the specified messages can't be found
-        or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album
-        grouping is kept for forwarded messages. On success, an array of MessageId of the sent messages is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'from_chat_id': from_chat_id,
-            'message_ids': message_ids
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        result = await super().forward_messages(params)
-        return [MessageId._dese(mid) for mid in result]
 
 
     async def send_photo(

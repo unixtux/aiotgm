@@ -498,6 +498,14 @@ class TelegramApi:
         method = 'exportChatInviteLink'
         return await self._request(method, params)
 
+    async def forward_message(self, params: Dict):
+        method = 'forwardMessage'
+        return await self._request(method, params)
+
+    async def forward_messages(self, params: Dict):
+        method = 'forwardMessages'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -514,14 +522,6 @@ class TelegramApi:
     async def log_out(self):
         method = 'logOut'
         return await self._request(method)
-
-    async def forward_message(self, params: Dict):
-        method = 'forwardMessage'
-        return await self._request(method, params)
-
-    async def forward_messages(self, params: Dict):
-        method = 'forwardMessages'
-        return await self._request(method, params)
 
     async def send_photo(self, params: Dict):
         method = 'sendPhoto'
