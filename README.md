@@ -14,6 +14,8 @@ You require a good python knowledge with the [asyncio module](https://docs.pytho
   * [aiohttp](https://github.com/aio-libs/aiohttp)
   * Optional [ujson](https://github.com/ultrajson/ultrajson) & [certifi](https://github.com/certifi/python-certifi)
 
+#
+
 * #### Installation
 
 Install the module using [pip](https://pypi.org/project/aiotele/) from your shell.
@@ -27,6 +29,8 @@ Update the module regurarly with the following command.
 ```powershell
 $ pip install -U aiotele
 ```
+
+#
 
 * #### Documentation
 Here it is the [official documentation](https://aiotele.readthedocs.io/).
