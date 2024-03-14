@@ -16,12 +16,12 @@ LOGGER_LEVEL = DEBUG
 
 import re
 import json
-import aiotele.types
-from aiotele.logger import get_logger
+import aiotgm.types
+from aiotgm.logger import get_logger
 logger = get_logger('TypeChecker')
 logger.setLevel(LOGGER_LEVEL)
 
-with open('../aiotele/types.py') as r:
+with open('../aiotgm/types.py') as r:
     LINES = r.readlines()
 
 TYPES: dict[str, dict | Any] = {}
@@ -535,12 +535,12 @@ NOT_IN_TYPES = []
 TYPES_WITH_DESE = []
 TYPES_WITHOUT_DESE = []
 
-for type in aiotele.types.__all__:
+for type in aiotgm.types.__all__:
     if type not in TYPES:
         NOT_IN_TYPES.append(type)
 
 for type in TYPES:
-    if type not in aiotele.types.__all__:
+    if type not in aiotgm.types.__all__:
         NOT_IN_ALL.append(type)
 
     if TYPES[type]['link'] is None:
@@ -551,7 +551,7 @@ for type in TYPES:
     else:
         TYPES_WITHOUT_DESE.append(type)
 
-logger.info('Length of __all__ is: %s', len(aiotele.types.__all__))
+logger.info('Length of __all__ is: %s', len(aiotgm.types.__all__))
 logger.info('Length of types is: %s', len(TYPES))
 logger.info('TelegramTypes are: %s', len(TG_TYPES))
 logger.info('Missing types are: %s', len(NOT_IN_ALL) or len(NOT_IN_TYPES))
@@ -585,8 +585,8 @@ from typing import (
     Optional,
     Literal
 )
-from aiotele.types import *
-from aiotele.types import (
+from aiotgm.types import *
+from aiotgm.types import (
     TelegramType,
     ChatMember,
     MessageOrigin,
@@ -595,7 +595,7 @@ from aiotele.types import (
     InputMessageContent,
     MaybeInaccessibleMessage
 )
-from aiotele.constants import *
+from aiotgm.constants import *
 
 TYPES = '''
 
@@ -611,7 +611,7 @@ f += '''
 
 from inspect import isclass
 
-from aiotele.logger import get_logger
+from aiotgm.logger import get_logger
 logger = get_logger('TypesChecker')
 
 logger.setLevel(20)

@@ -2,7 +2,7 @@
 *Exceptions*
 ============
 
-.. autoexception:: aiotele.TelegramError
+.. autoexception:: aiotgm.TelegramError
     :members:
     :undoc-members:
     :show-inheritance:

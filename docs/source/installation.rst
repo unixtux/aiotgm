@@ -18,32 +18,32 @@ Dependencies
 Installation
 ------------
 
-Install the module using `pip <https://pypi.org/project/aiotele/>`_ from your shell.
+Install the module using `pip <https://pypi.org/project/aiotgm/>`_ from your shell.
 
 .. code-block:: bash
 
-    $ pip install aiotele
+    $ pip install aiotgm
 
 Update the module regurarly with the following command.
 
 .. code-block:: bash
 
-    $ pip install -U aiotele
+    $ pip install -U aiotgm
 
 Usage
 -----
 
-Using the method :meth:`~aiotele.Client.long_polling` you manage every incoming :obj:`~aiotele.types.Update`.
+Using the method :meth:`~aiotgm.Client.long_polling` you manage every incoming :obj:`~aiotgm.types.Update`.
 
 .. code-block:: python3
 
     #!/bin/env python3
 
     import asyncio
-    import aiotele
-    from aiotele.types import Message, CallbackQuery
+    import aiotgm
+    from aiotgm.types import Message, CallbackQuery
 
-    bot = aiotele.Client('<your_api_token>')
+    bot = aiotgm.Client('<your_api_token>')
 
     @bot.manage_message()
     async def foo(msg: Message):
@@ -57,21 +57,21 @@ Using the method :meth:`~aiotele.Client.long_polling` you manage every incoming 
 
 There are 18 decorator method to manage differrent updates:
 
-* :meth:`~aiotele.Client.manage_message`
-* :meth:`~aiotele.Client.manage_edited_message`
-* :meth:`~aiotele.Client.manage_channel_post`
-* :meth:`~aiotele.Client.manage_edited_channel_post`
-* :meth:`~aiotele.Client.manage_message_reaction`
-* :meth:`~aiotele.Client.manage_message_reaction_count`
-* :meth:`~aiotele.Client.manage_inline_query`
-* :meth:`~aiotele.Client.manage_chosen_inline_result`
-* :meth:`~aiotele.Client.manage_callback_query`
-* :meth:`~aiotele.Client.manage_shipping_query`
-* :meth:`~aiotele.Client.manage_pre_checkout_query`
-* :meth:`~aiotele.Client.manage_poll`
-* :meth:`~aiotele.Client.manage_poll_answer`
-* :meth:`~aiotele.Client.manage_my_chat_member`
-* :meth:`~aiotele.Client.manage_chat_member`
-* :meth:`~aiotele.Client.manage_chat_join_request`
-* :meth:`~aiotele.Client.manage_chat_boost`
-* :meth:`~aiotele.Client.manage_removed_chat_boost`
+* :meth:`~aiotgm.Client.manage_message`
+* :meth:`~aiotgm.Client.manage_edited_message`
+* :meth:`~aiotgm.Client.manage_channel_post`
+* :meth:`~aiotgm.Client.manage_edited_channel_post`
+* :meth:`~aiotgm.Client.manage_message_reaction`
+* :meth:`~aiotgm.Client.manage_message_reaction_count`
+* :meth:`~aiotgm.Client.manage_inline_query`
+* :meth:`~aiotgm.Client.manage_chosen_inline_result`
+* :meth:`~aiotgm.Client.manage_callback_query`
+* :meth:`~aiotgm.Client.manage_shipping_query`
+* :meth:`~aiotgm.Client.manage_pre_checkout_query`
+* :meth:`~aiotgm.Client.manage_poll`
+* :meth:`~aiotgm.Client.manage_poll_answer`
+* :meth:`~aiotgm.Client.manage_my_chat_member`
+* :meth:`~aiotgm.Client.manage_chat_member`
+* :meth:`~aiotgm.Client.manage_chat_join_request`
+* :meth:`~aiotgm.Client.manage_chat_boost`
+* :meth:`~aiotgm.Client.manage_removed_chat_boost`

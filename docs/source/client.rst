@@ -2,7 +2,7 @@
 *Client Reference*
 ==================
 
-This page refers to the :obj:`~aiotele.Client` and all its methods, which are the same described in the
+This page refers to the :obj:`~aiotgm.Client` and all its methods, which are the same described in the
 `official documentation <https://core.telegram.org/bots/api#available-methods>`_, changed from camelCase to snake_case.
 E.g. *sendMessage* becomes *send_message*.
 
@@ -12,6 +12,6 @@ Note: Webhook has not been implemented yet.
 
 ---------------------------
 
-.. autoclass:: aiotele.Client
+.. autoclass:: aiotgm.Client
     :members:
     :undoc-members:

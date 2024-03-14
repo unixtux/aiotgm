@@ -4,7 +4,7 @@ __all__ = ()
 
 from . import VERSION
 from .logger import get_logger
-logger = get_logger('aiotele ' + VERSION)
+logger = get_logger('aiotgm ' + VERSION)
 del VERSION, get_logger
 
 import re
@@ -138,7 +138,7 @@ class Client(TelegramApi):
 
     def manage_message(self, checker: Callable[[Message], Any] = lambda message: ..., /):
         '''
-        :param checker:  A function that takes only one argument to check an incoming *message* :obj:`~aiotele.types.Update`.
+        :param checker:  A function that takes only one argument to check an incoming *message* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
@@ -147,7 +147,7 @@ class Client(TelegramApi):
 
     def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *edited_message* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *edited_message* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
@@ -156,7 +156,7 @@ class Client(TelegramApi):
 
     def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *channel_post* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *channel_post* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
@@ -165,7 +165,7 @@ class Client(TelegramApi):
 
     def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *edited_channel_post* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *edited_channel_post* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
@@ -174,7 +174,7 @@ class Client(TelegramApi):
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[MessageReactionUpdated], Awaitable]):
@@ -183,7 +183,7 @@ class Client(TelegramApi):
 
     def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *message_reaction_count* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *message_reaction_count* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[MessageReactionCountUpdated], Awaitable]):
@@ -192,7 +192,7 @@ class Client(TelegramApi):
 
     def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *inline_query* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *inline_query* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[InlineQuery], Any]`
         '''
         def wrap(coroutine: Callable[[InlineQuery], Awaitable]):
@@ -201,7 +201,7 @@ class Client(TelegramApi):
 
     def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *chosen_inline_result* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *chosen_inline_result* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
         '''
         def wrap(coroutine: Callable[[ChosenInlineResult], Awaitable]):
@@ -210,7 +210,7 @@ class Client(TelegramApi):
 
     def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *callback_query* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *callback_query* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[CallbackQuery], Any]`
         '''
         def wrap(coroutine: Callable[[CallbackQuery], Awaitable]):
@@ -219,7 +219,7 @@ class Client(TelegramApi):
 
     def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *shipping_query* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *shipping_query* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ShippingQuery], Any]`
         '''
         def wrap(coroutine: Callable[[ShippingQuery], Awaitable]):
@@ -228,7 +228,7 @@ class Client(TelegramApi):
 
     def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *pre_checkout_query* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *pre_checkout_query* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[PreCheckoutQuery], Any]`
         '''
         def wrap(coroutine: Callable[[PreCheckoutQuery], Awaitable]):
@@ -237,7 +237,7 @@ class Client(TelegramApi):
 
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *poll* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *poll* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Poll], Any]`
         '''
         def wrap(coroutine: Callable[[Poll], Awaitable]):
@@ -246,7 +246,7 @@ class Client(TelegramApi):
 
     def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *poll_answer* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *poll_answer* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[PollAnswer], Any]`
         '''
         def wrap(coroutine: Callable[[PollAnswer], Awaitable]):
@@ -255,7 +255,7 @@ class Client(TelegramApi):
 
     def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *my_chat_member* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *my_chat_member* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
@@ -264,7 +264,7 @@ class Client(TelegramApi):
 
     def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *chat_member* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *chat_member* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
@@ -273,7 +273,7 @@ class Client(TelegramApi):
 
     def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *chat_join_request* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *chat_join_request* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatJoinRequest], Any]`
         '''
         def wrap(coroutine: Callable[[ChatJoinRequest], Awaitable]):
@@ -282,7 +282,7 @@ class Client(TelegramApi):
 
     def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *chat_boost* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *chat_boost* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatBoostUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatBoostUpdated], Awaitable]):
@@ -291,7 +291,7 @@ class Client(TelegramApi):
 
     def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
         '''
-        :param checker: A function that takes only one argument to check an incoming *removed_chat_boost* :obj:`~aiotele.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *removed_chat_boost* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatBoostRemoved], Any]`
         '''
         def wrap(coroutine: Callable[[ChatBoostRemoved], Awaitable]):
@@ -305,8 +305,8 @@ class Client(TelegramApi):
 
         .. code-block:: python3
 
-            from aiotele import Client
-            from aiotele.types import Message
+            from aiotgm import Client
+            from aiotgm.types import Message
 
             bot = Client('<your_api_token>')
 
@@ -321,9 +321,9 @@ class Client(TelegramApi):
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *message* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *message* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._message_manager
@@ -331,14 +331,14 @@ class Client(TelegramApi):
     @property
     def edited_message_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *edited_message* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *edited_message* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._edited_message_manager
@@ -346,14 +346,14 @@ class Client(TelegramApi):
     @property
     def channel_post_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *channel_post* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *channel_post* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._channel_post_manager
@@ -361,14 +361,14 @@ class Client(TelegramApi):
     @property
     def edited_channel_post_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *edited_channel_post* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *edited_channel_post* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.Message`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
             :type coroutine: :obj:`Callable[[Message], Awaitable]`
         '''
         return self._edited_channel_post_manager
@@ -376,14 +376,14 @@ class Client(TelegramApi):
     @property
     def message_reaction_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.MessageReactionUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.MessageReactionUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.MessageReactionUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.MessageReactionUpdated`.
             :type coroutine: :obj:`Callable[[MessageReactionUpdated], Awaitable]`
         '''
         return self._message_reaction_manager
@@ -391,14 +391,14 @@ class Client(TelegramApi):
     @property
     def message_reaction_count_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *message_reaction_count* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *message_reaction_count* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.MessageReactionCountUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.MessageReactionCountUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.MessageReactionCountUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.MessageReactionCountUpdated`.
             :type coroutine: :obj:`Callable[[MessageReactionCountUpdated], Awaitable]`
         '''
         return self._message_reaction_count_manager
@@ -406,14 +406,14 @@ class Client(TelegramApi):
     @property
     def inline_query_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *inline_query* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *inline_query* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[InlineQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.InlineQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.InlineQuery`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.InlineQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.InlineQuery`.
             :type coroutine: :obj:`Callable[[InlineQuery], Awaitable]`
         '''
         return self._inline_query_manager
@@ -421,14 +421,14 @@ class Client(TelegramApi):
     @property
     def chosen_inline_result_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *chosen_inline_result* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *chosen_inline_result* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.ChosenInlineResult` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.ChosenInlineResult`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChosenInlineResult` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChosenInlineResult`.
             :type coroutine: :obj:`Callable[[ChosenInlineResult], Awaitable]`
         '''
         return self._chosen_inline_result_manager
@@ -436,14 +436,14 @@ class Client(TelegramApi):
     @property
     def callback_query_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *callback_query* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *callback_query* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[CallbackQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.CallbackQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.CallbackQuery`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.CallbackQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.CallbackQuery`.
             :type coroutine: :obj:`Callable[[CallbackQuery], Awaitable]`
         '''
         return self._callback_query_manager
@@ -451,14 +451,14 @@ class Client(TelegramApi):
     @property
     def shipping_query_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *shipping_query* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *shipping_query* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[ShippingQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.ShippingQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.ShippingQuery`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ShippingQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ShippingQuery`.
             :type coroutine: :obj:`Callable[[ShippingQuery], Awaitable]`
         '''
         return self._shipping_query_manager
@@ -466,14 +466,14 @@ class Client(TelegramApi):
     @property
     def pre_checkout_query_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *pre_checkout_query* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *pre_checkout_query* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[PreCheckoutQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.PreCheckoutQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.PreCheckoutQuery`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.PreCheckoutQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.PreCheckoutQuery`.
             :type coroutine: :obj:`Callable[[PreCheckoutQuery], Awaitable]`
         '''
         return self._pre_checkout_query_manager
@@ -481,14 +481,14 @@ class Client(TelegramApi):
     @property
     def poll_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *poll* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *poll* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[Poll], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.Poll` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.Poll`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Poll` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Poll`.
             :type coroutine: :obj:`Callable[[Poll], Awaitable]`
         '''
         return self._poll_manager
@@ -496,14 +496,14 @@ class Client(TelegramApi):
     @property
     def poll_answer_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *poll_answer* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *poll_answer* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[PollAnswer], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.PollAnswer` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.PollAnswer`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.PollAnswer` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.PollAnswer`.
             :type coroutine: :obj:`Callable[[PollAnswer], Awaitable]`
         '''
         return self._poll_answer_manager
@@ -511,14 +511,14 @@ class Client(TelegramApi):
     @property
     def my_chat_member_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *my_chat_member* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *my_chat_member* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.ChatMemberUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatMemberUpdated`.
             :type coroutine: :obj:`Callable[[ChatMemberUpdated], Awaitable]`
         '''
         return self._my_chat_member_manager
@@ -526,14 +526,14 @@ class Client(TelegramApi):
     @property
     def chat_member_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *chat_member* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *chat_member* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.ChatMemberUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatMemberUpdated`.
             :type coroutine: :obj:`Callable[[ChatMemberUpdated], Awaitable]`
         '''
         return self._chat_member_manager
@@ -541,14 +541,14 @@ class Client(TelegramApi):
     @property
     def chat_join_request_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *chat_join_request* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *chat_join_request* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[ChatJoinRequest], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.ChatJoinRequest` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.ChatJoinRequest`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatJoinRequest` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatJoinRequest`.
             :type coroutine: :obj:`Callable[[ChatJoinRequest], Awaitable]`
         '''
         return self._chat_join_request_manager
@@ -556,14 +556,14 @@ class Client(TelegramApi):
     @property
     def chat_boost_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *chat_boost* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *chat_boost* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[ChatBoostUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.ChatBoostUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.ChatBoostUpdated`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatBoostUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatBoostUpdated`.
             :type coroutine: :obj:`Callable[[ChatBoostUpdated], Awaitable]`
         '''
         return self._chat_boost_manager
@@ -571,14 +571,14 @@ class Client(TelegramApi):
     @property
     def removed_chat_boost_manager(self) -> UpdateManager:
         '''
-        For the usage, see to the :obj:`~aiotele.Client.message_manager` reference.
+        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
 
         .. method:: add_rule(checker, coroutine, /)
             :no-index:
 
-            :param checker: A function that takes only one argument to check an incoming *removed_chat_boost* :obj:`~aiotele.types.Update`.
+            :param checker: A function that takes only one argument to check an incoming *removed_chat_boost* :obj:`~aiotgm.types.Update`.
             :type checker: :obj:`Callable[[ChatBoostRemoved], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotele.types.ChatBoostRemoved` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotele.types.ChatBoostRemoved`.
+            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatBoostRemoved` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatBoostRemoved`.
             :type coroutine: :obj:`Callable[[ChatBoostRemoved], Awaitable]`
         '''
         return self._removed_chat_boost_manager
@@ -780,7 +780,7 @@ class Client(TelegramApi):
         :param name: Sticker set name.
         :type name: :obj:`str`
         :param sticker: A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set isn't changed.
-        :type sticker: :obj:`~aiotele.types.InputSticker`
+        :type sticker: :obj:`~aiotgm.types.InputSticker`
         :rtype: :obj:`True`
         '''
         params = {
@@ -817,7 +817,7 @@ class Client(TelegramApi):
         :type text: :obj:`str`, optional
         :param show_alert: If :obj:`True`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to :obj:`False`.
         :type show_alert: :obj:`bool`, optional
-        :param url: URL that will be opened by the user's client. If you have created a :obj:`~aiotele.types.Game` and accepted the conditions via `@BotFather <https://t.me/botfather>`_, specify the URL that opens your game - note that this will only work if the query comes from a :obj:`callback_game <aiotele.types.InlineKeyboardButton>` button. Otherwise, you may use links like ``t.me/your_bot?start=XXXX`` that open your bot with a parameter.
+        :param url: URL that will be opened by the user's client. If you have created a :obj:`~aiotgm.types.Game` and accepted the conditions via `@BotFather <https://t.me/botfather>`_, specify the URL that opens your game - note that this will only work if the query comes from a :obj:`callback_game <aiotgm.types.InlineKeyboardButton>` button. Otherwise, you may use links like ``t.me/your_bot?start=XXXX`` that open your bot with a parameter.
         :type url: :obj:`str`, optional
         :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to :obj:`0`.
         :type cache_time: :obj:`int`, optional
@@ -851,7 +851,7 @@ class Client(TelegramApi):
         :param inline_query_id: Unique identifier for the answered query.
         :type inline_query_id: :obj:`str`
         :param results: A JSON-serialized array of results for the inline query.
-        :type results: :obj:`list` of :obj:`~aiotele.types.InlineQueryResult`
+        :type results: :obj:`list` of :obj:`~aiotgm.types.InlineQueryResult`
         :param cache_time: The maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to :obj:`300`.
         :type cache_time: :obj:`int`, optional
         :param is_personal: Pass :obj:`True` if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query.
@@ -859,7 +859,7 @@ class Client(TelegramApi):
         :param next_offset: Pass the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination. Offset length can't exceed 64 bytes.
         :type next_offset: :obj:`str`, optional
         :param button: A JSON-serialized object describing a button to be shown above inline query results.
-        :type button: :obj:`~aiotele.types.InlineQueryResultsButton`, optional
+        :type button: :obj:`~aiotgm.types.InlineQueryResultsButton`, optional
         :rtype: :obj:`True`
         '''
         params = {
@@ -883,7 +883,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#answerprecheckoutquery
 
         Once the user has confirmed their payment and shipping details, the Bot API sends the
-        final confirmation in the form of an :obj:`~aiotele.types.Update` with the field *pre_checkout_query*. Use this
+        final confirmation in the form of an :obj:`~aiotgm.types.Update` with the field *pre_checkout_query*. Use this
         method to respond to such pre-checkout queries. On success, :obj:`True` is returned. **Note**: The
         Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
 
@@ -914,7 +914,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#answershippingquery
 
         If you sent an invoice requesting a shipping address and the parameter *is_flexible*
-        was specified, the Bot API will send an :obj:`~aiotele.types.Update` with a *shipping_query* field to the
+        was specified, the Bot API will send an :obj:`~aiotgm.types.Update` with a *shipping_query* field to the
         bot. Use this method to reply to shipping queries. On success, :obj:`True` is returned.
 
         :param shipping_query_id: Unique identifier for the query to be answered.
@@ -922,7 +922,7 @@ class Client(TelegramApi):
         :param ok: Pass :obj:`True` if delivery to the specified address is possible and :obj:`False` if there are any problems (for example, if delivery to the specified address is not possible).
         :type ok: :obj:`bool`
         :param shipping_options: Required if *ok* is :obj:`True`. A JSON-serialized array of available shipping options.
-        :type shipping_options: :obj:`list` of :obj:`~aiotele.types.ShippingOption`, optional
+        :type shipping_options: :obj:`list` of :obj:`~aiotgm.types.ShippingOption`, optional
         :param error_message: Required if *ok* is :obj:`False`. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable"). Telegram will display this message to the user.
         :type error_message: :obj:`str`, optional
         :rtype: :obj:`True`
@@ -946,13 +946,13 @@ class Client(TelegramApi):
 
         Use this method to set the result of an interaction with a
         `Web App <https://core.telegram.org/bots/webapps>`_ and send a corresponding message on behalf of
-        the user to the chat from which the query originated. On success, a :obj:`~aiotele.types.SentWebAppMessage` object is returned.
+        the user to the chat from which the query originated. On success, a :obj:`~aiotgm.types.SentWebAppMessage` object is returned.
 
         :param web_app_query_id: Unique identifier for the query to be answered.
         :type web_app_query_id: :obj:`str`
         :param result: A JSON-serialized object describing the message to be sent.
-        :type result: :obj:`~aiotele.types.InlineQueryResult`
-        :rtype: :obj:`~aiotele.types.SentWebAppMessage`
+        :type result: :obj:`~aiotgm.types.InlineQueryResult`
+        :rtype: :obj:`~aiotgm.types.SentWebAppMessage`
         '''
         params = {
             'web_app_query_id': web_app_query_id,
@@ -998,7 +998,7 @@ class Client(TelegramApi):
 
         Use this method to ban a user in a group, a supergroup or a channel. In the case of
         supergroups and channels, the user will not be able to return to the chat on their own using
-        invite links, etc., unless :meth:`unbanned <aiotele.Client.unban_chat_member>` first. The bot must be an administrator
+        invite links, etc., unless :meth:`unbanned <aiotgm.Client.unban_chat_member>` first. The bot must be an administrator
         in the chat for this to work and must have the appropriate administrator rights. Returns :obj:`True` on success.
 
         :param chat_id: Unique identifier for the target group or username of the target supergroup or channel (in the format ``@channelusername``).
@@ -1029,7 +1029,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#banchatsenderchat
 
         Use this method to ban a channel chat in a supergroup or a channel. Until the chat
-        is :meth:`unbanned <aiotele.Client.unban_chat_sender_chat>`, the owner of the banned chat won't be able to
+        is :meth:`unbanned <aiotgm.Client.unban_chat_sender_chat>`, the owner of the banned chat won't be able to
         send messages on behalf of **any of their channels**. The bot must be an administrator in the supergroup or
         channel for this to work and must have the appropriate administrator rights. Returns :obj:`True` on success.
 
@@ -1123,8 +1123,8 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#copymessage
 
         Use this method to copy messages of any kind. Service messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied.
-        A quiz :obj:`poll <aiotele.types.Poll>` can be copied only if the value of the field *correct_option_id* is known to the bot. The method is analogous to the method
-        :meth:`~aiotele.Client.forward_message`, but the copied message doesn't have a link to the original message. Returns the :obj:`~aiotele.types.MessageId` of the sent message on success.
+        A quiz :obj:`poll <aiotgm.types.Poll>` can be copied only if the value of the field *correct_option_id* is known to the bot. The method is analogous to the method
+        :meth:`~aiotgm.Client.forward_message`, but the copied message doesn't have a link to the original message. Returns the :obj:`~aiotgm.types.MessageId` of the sent message on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1139,16 +1139,16 @@ class Client(TelegramApi):
         :param parse_mode: Mode for parsing entities in the new caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
         :type parse_mode: :obj:`str`, optional
         :param caption_entities: A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of *parse_mode*.
-        :type caption_entities: :obj:`list` of :obj:`~aiotele.types.MessageEntity`, optional
+        :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
         :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
         :type disable_notification: :obj:`bool`, optional
         :param protect_content: Protects the contents of the sent message from forwarding and saving.
         :type protect_content: :obj:`bool`, optional
         :param reply_parameters: Description of the message to reply to.
-        :type reply_parameters: :obj:`~aiotele.types.ReplyParameters`, optional
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup` or :obj:`~aiotele.types.ReplyKeyboardMarkup` or :obj:`~aiotele.types.ReplyKeyboardRemove` or :obj:`~aiotele.types.ForceReply`, optional
-        :rtype: :obj:`~aiotele.types.MessageId`
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :rtype: :obj:`~aiotgm.types.MessageId`
         '''
         params = {
             'chat_id': chat_id,
@@ -1183,9 +1183,9 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#copymessages
 
         Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped. Service
-        messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz :obj:`poll <aiotele.types.Poll>` can be copied only if the value
-        of the field *correct_option_id* is known to the bot. The method is analogous to the method :meth:`~aiotele.Client.forward_messages`, but the copied messages don't have
-        a link to the original message. Album grouping is kept for copied messages. On success, an array of :obj:`~aiotele.types.MessageId` of the sent messages is returned.
+        messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied. A quiz :obj:`poll <aiotgm.types.Poll>` can be copied only if the value
+        of the field *correct_option_id* is known to the bot. The method is analogous to the method :meth:`~aiotgm.Client.forward_messages`, but the copied messages don't have
+        a link to the original message. Album grouping is kept for copied messages. On success, an array of :obj:`~aiotgm.types.MessageId` of the sent messages is returned.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1201,7 +1201,7 @@ class Client(TelegramApi):
         :type protect_content: :obj:`bool`, optional
         :param remove_caption: Pass :obj:`True` to copy the messages without their captions.
         :type remove_caption: :obj:`bool`, optional
-        :rtype: :obj:`list` of :obj:`~aiotele.types.MessageId`
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.MessageId`
         '''
         params = {
             'chat_id': chat_id,
@@ -1230,7 +1230,7 @@ class Client(TelegramApi):
 
         Use this method to create an additional invite link for a chat. The bot must be an administrator
         in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the
-        method :meth:`~aiotele.Client.revoke_chat_invite_link`. Returns the new invite link as :obj:`~aiotele.types.ChatInviteLink` object.
+        method :meth:`~aiotgm.Client.revoke_chat_invite_link`. Returns the new invite link as :obj:`~aiotgm.types.ChatInviteLink` object.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1242,7 +1242,7 @@ class Client(TelegramApi):
         :type member_limit: :obj:`int`, optional
         :param creates_join_request: :obj:`True`, if users joining the chat via the link need to be approved by chat administrators. If :obj:`True`, *member_limit* can't be specified.
         :type creates_join_request: :obj:`bool`, optional
-        :rtype: :obj:`~aiotele.types.ChatInviteLink`
+        :rtype: :obj:`~aiotgm.types.ChatInviteLink`
         '''
         params = {
             'chat_id': chat_id
@@ -1267,7 +1267,7 @@ class Client(TelegramApi):
 
         Use this method to create a topic in a forum supergroup chat. The bot must be an
         administrator in the chat for this to work and must have the *can_manage_topics* administrator
-        rights. Returns information about the created topic as a :obj:`~aiotele.types.ForumTopic` object.
+        rights. Returns information about the created topic as a :obj:`~aiotgm.types.ForumTopic` object.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1275,9 +1275,9 @@ class Client(TelegramApi):
         :type name: :obj:`str`
         :param icon_color: Color of the topic icon in RGB format. Currently, must be one of 7322096 (0x6FB9F0), 16766590 (0xFFD67E), 13338331 (0xCB86DB), 9367192 (0x8EEE98), 16749490 (0xFF93B2), or 16478047 (0xFB6F5F).
         :type icon_color: :obj:`int`, optional
-        :param icon_custom_emoji_id: Unique identifier of the custom emoji shown as the topic icon. Use :meth:`~aiotele.Client.get_forum_topic_icon_stickers` to get all allowed custom emoji identifiers.
+        :param icon_custom_emoji_id: Unique identifier of the custom emoji shown as the topic icon. Use :meth:`~aiotgm.Client.get_forum_topic_icon_stickers` to get all allowed custom emoji identifiers.
         :type icon_custom_emoji_id: :obj:`str`, optional
-        :rtype: :obj:`~aiotele.types.ForumTopic`
+        :rtype: :obj:`~aiotgm.types.ForumTopic`
         '''
         params = {
             'chat_id': chat_id,
@@ -1328,7 +1328,7 @@ class Client(TelegramApi):
         :param currency: Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_.
         :type currency: :obj:`str`
         :param prices: Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.).
-        :type prices: :obj:`list` of :obj:`~aiotele.types.LabeledPrice`
+        :type prices: :obj:`list` of :obj:`~aiotgm.types.LabeledPrice`
         :param max_tip_amount: The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of ``US$ 1.45`` pass ``max_tip_amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to :obj:`0`.
         :type max_tip_amount: :obj:`int`, optional
         :param suggested_tip_amounts: A JSON-serialized array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.
@@ -1407,7 +1407,7 @@ class Client(TelegramApi):
         :param title: Sticker set title, 1-64 characters.
         :type title: :obj:`str`
         :param stickers: A JSON-serialized list of 1-50 initial stickers to be added to the sticker set.
-        :type stickers: :obj:`list` of :obj:`~aiotele.types.InputSticker`
+        :type stickers: :obj:`list` of :obj:`~aiotgm.types.InputSticker`
         :param sticker_format: Format of stickers in the set, must be one of “static”, “animated”, “video”.
         :type sticker_format: :obj:`str`
         :param sticker_type: Type of stickers in the set, pass “regular”, “mask”, or “custom_emoji”. By default, a regular sticker set is created.
@@ -1482,7 +1482,7 @@ class Client(TelegramApi):
 
         Use this method to delete a group sticker set from a supergroup. The bot must be an administrator in the chat
         for this to work and must have the appropriate administrator rights. Use the field *can_set_sticker_set* optionally
-        returned in :meth:`~aiotele.Client.get_chat` requests to check if the bot can use this method. Returns :obj:`True` on success.
+        returned in :meth:`~aiotgm.Client.get_chat` requests to check if the bot can use this method. Returns :obj:`True` on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1566,7 +1566,7 @@ class Client(TelegramApi):
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
-        :param message_ids: A JSON-serialized list of 1-100 identifiers of messages to delete. See :meth:`~aiotele.Client.delete_message` for limitations on which messages can be deleted.
+        :param message_ids: A JSON-serialized list of 1-100 identifiers of messages to delete. See :meth:`~aiotgm.Client.delete_message` for limitations on which messages can be deleted.
         :type message_ids: :obj:`list` of :obj:`int`
         :rtype: :obj:`True`
         '''
@@ -1588,8 +1588,8 @@ class Client(TelegramApi):
         Use this method to delete the list of the bot's commands for the given scope and user language.
         After deletion, `higher level commands <https://core.telegram.org/bots/api#determining-list-of-commands>`_ will be shown to affected users. Returns :obj:`True` on success.
 
-        :param scope: A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to :obj:`~aiotele.types.BotCommandScopeDefault`.
-        :type scope: :obj:`~aiotele.types.BotCommandScope`, optional
+        :param scope: A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to :obj:`~aiotgm.types.BotCommandScopeDefault`.
+        :type scope: :obj:`~aiotgm.types.BotCommandScope`, optional
         :param language_code: A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands.
         :type language_code: :obj:`str`, optional
         :rtype: :obj:`True`
@@ -1652,7 +1652,7 @@ class Client(TelegramApi):
 
         Use this method to edit a non-primary invite link created by the bot. The bot
         must be an administrator in the chat for this to work and must have the appropriate
-        administrator rights. Returns the edited invite link as a :obj:`~aiotele.types.ChatInviteLink` object.
+        administrator rights. Returns the edited invite link as a :obj:`~aiotgm.types.ChatInviteLink` object.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1666,7 +1666,7 @@ class Client(TelegramApi):
         :type member_limit: :obj:`int`, optional
         :param creates_join_request: :obj:`True`, if users joining the chat via the link need to be approved by chat administrators. If :obj:`True`, *member_limit* can't be specified.
         :type creates_join_request: :obj:`bool`, optional
-        :rtype: :obj:`~aiotele.types.ChatInviteLink`
+        :rtype: :obj:`~aiotgm.types.ChatInviteLink`
         '''
         params = {
             'chat_id': chat_id,
@@ -1700,7 +1700,7 @@ class Client(TelegramApi):
         :type message_thread_id: :obj:`int`
         :param name: New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept.
         :type name: :obj:`str`, optional
-        :param icon_custom_emoji_id: New unique identifier of the custom emoji shown as the topic icon. Use :meth:`~aiotele.Client.get_forum_topic_icon_stickers` to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept.
+        :param icon_custom_emoji_id: New unique identifier of the custom emoji shown as the topic icon. Use :meth:`~aiotgm.Client.get_forum_topic_icon_stickers` to get all allowed custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept.
         :type icon_custom_emoji_id: :obj:`str`, optional
         :rtype: :obj:`True`
         '''
@@ -1752,7 +1752,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#editmessagecaption
 
         Use this method to edit captions of messages. On success, if the edited message is
-        not an inline message, the edited :obj:`~aiotele.types.Message` is returned, otherwise :obj:`True` is returned.
+        not an inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
 
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
@@ -1765,10 +1765,10 @@ class Client(TelegramApi):
         :param parse_mode: Mode for parsing entities in the message caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
         :type parse_mode: :obj:`str`, optional
         :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
-        :type caption_entities: :obj:`list` of :obj:`~aiotele.types.MessageEntity`, optional
+        :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
         :param reply_markup: A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
-        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup`, optional
-        :rtype: :obj:`~aiotele.types.Message` or :obj:`True`
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
         '''
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
@@ -1799,8 +1799,8 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#editmessagelivelocation
 
         Use this method to edit live location messages. A location can be edited until its *live_period* expires or editing
-        is explicitly disabled by a call to :meth:`~aiotele.Client.stop_message_live_location`. On success, if the edited
-        message is not an inline message, the edited :obj:`~aiotele.types.Message` is returned, otherwise :obj:`True` is returned.
+        is explicitly disabled by a call to :meth:`~aiotgm.Client.stop_message_live_location`. On success, if the edited
+        message is not an inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
 
         :param latitude: Latitude of new location.
         :type latitude: :obj:`float`
@@ -1819,8 +1819,8 @@ class Client(TelegramApi):
         :param proximity_alert_radius: The maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
         :type proximity_alert_radius: :obj:`int`, optional
         :param reply_markup: A JSON-serialized object for a new `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
-        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup`, optional
-        :rtype: :obj:`~aiotele.types.Message` or :obj:`True`
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
         '''
         params = {
             'latitude': latitude,
@@ -1852,10 +1852,10 @@ class Client(TelegramApi):
         of a message album, then it can be edited only to an audio for audio albums, only to a document for
         document albums and to a photo or a video otherwise. When an inline message is edited, a new file
         can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited
-        message is not an inline message, the edited :obj:`~aiotele.types.Message` is returned, otherwise :obj:`True` is returned.
+        message is not an inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
 
         :param media: A JSON-serialized object for a new media content of the message.
-        :type media: :obj:`~aiotele.types.InputMedia`
+        :type media: :obj:`~aiotgm.types.InputMedia`
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
         :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
@@ -1863,8 +1863,8 @@ class Client(TelegramApi):
         :param inline_message_id: Required if *chat_id* and *message_id* are not specified. Identifier of the inline message.
         :type inline_message_id: :obj:`str`, optional
         :param reply_markup: A JSON-serialized object for a new `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
-        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup`, optional
-        :rtype: :obj:`~aiotele.types.Message` or :obj:`True`
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
         '''
         params = {
             'media': media
@@ -1888,7 +1888,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#editmessagereplymarkup
 
         Use this method to edit only the reply markup of messages. On success, if the edited message is not an
-        inline message, the edited :obj:`~aiotele.types.Message` is returned, otherwise :obj:`True` is returned.
+        inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
 
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
@@ -1897,8 +1897,8 @@ class Client(TelegramApi):
         :param inline_message_id: Required if *chat_id* and *message_id* are not specified. Identifier of the inline message.
         :type inline_message_id: :obj:`str`, optional
         :param reply_markup: A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
-        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup`, optional
-        :rtype: :obj:`~aiotele.types.Message` or :obj:`True`
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
         '''
         params = {}
         if chat_id is not None: params['chat_id'] = chat_id
@@ -1924,7 +1924,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#editmessagetext
 
         Use this method to edit text and `game <https://core.telegram.org/bots/api#games>`_ messages.
-        On success, if the edited message is not an inline message, the edited :obj:`~aiotele.types.Message` is returned, otherwise :obj:`True` is returned.
+        On success, if the edited message is not an inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
 
         :param text: New text of the message, 1-4096 characters after entities parsing.
         :type text: :obj:`str`
@@ -1937,12 +1937,12 @@ class Client(TelegramApi):
         :param parse_mode: Mode for parsing entities in the message text. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
         :type parse_mode: :obj:`str`, optional
         :param entities: A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse_mode*.
-        :type entities: :obj:`list` of :obj:`~aiotele.types.MessageEntity`, optional
+        :type entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
         :param link_preview_options: Link preview generation options for the message.
-        :type link_preview_options: :obj:`~aiotele.types.LinkPreviewOptions`, optional
+        :type link_preview_options: :obj:`~aiotgm.types.LinkPreviewOptions`, optional
         :param reply_markup: A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
-        :type reply_markup: :obj:`~aiotele.types.InlineKeyboardMarkup`, optional
-        :rtype: :obj:`~aiotele.types.Message` or :obj:`True`
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
         '''
         params = {
             'text': text
@@ -1971,8 +1971,8 @@ class Client(TelegramApi):
         have the appropriate administrator rights. Returns the new invite link as :obj:`String` on success.
 
             Note: Each administrator in a chat generates their own invite links. Bots can't use invite links generated by other administrators. If you want
-            your bot to work with invite links, it will need to generate its own link using :meth:`~aiotele.Client.export_chat_invite_link` or by calling the
-            :meth:`~aiotele.Client.get_chat` method. If your bot needs to generate a new primary invite link replacing its previous one, use :meth:`~aiotele.Client.export_chat_invite_link` again.
+            your bot to work with invite links, it will need to generate its own link using :meth:`~aiotgm.Client.export_chat_invite_link` or by calling the
+            :meth:`~aiotgm.Client.get_chat` method. If your bot needs to generate a new primary invite link replacing its previous one, use :meth:`~aiotgm.Client.export_chat_invite_link` again.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -1997,7 +1997,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#forwardmessage
 
         Use this method to forward messages of any kind. Service messages and messages with
-        protected content can't be forwarded. On success, the sent :obj:`~aiotele.types.Message` is returned.
+        protected content can't be forwarded. On success, the sent :obj:`~aiotgm.types.Message` is returned.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -2011,7 +2011,7 @@ class Client(TelegramApi):
         :type disable_notification: :obj:`bool`, optional
         :param protect_content: Protects the contents of the forwarded message from forwarding and saving.
         :type protect_content: :obj:`bool`, optional
-        :rtype: :obj:`~aiotele.types.Message`
+        :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
             'chat_id': chat_id,
@@ -2040,7 +2040,7 @@ class Client(TelegramApi):
 
         Use this method to forward multiple messages of any kind. If some of the specified messages can't be found
         or forwarded, they are skipped. Service messages and messages with protected content can't be forwarded. Album
-        grouping is kept for forwarded messages. On success, an array of :obj:`~aiotele.types.MessageId` of the sent messages is returned.
+        grouping is kept for forwarded messages. On success, an array of :obj:`~aiotgm.types.MessageId` of the sent messages is returned.
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
@@ -2054,7 +2054,7 @@ class Client(TelegramApi):
         :type disable_notification: :obj:`bool`, optional
         :param protect_content: Protects the contents of the forwarded messages from forwarding and saving.
         :type protect_content: :obj:`bool`, optional
-        :rtype: :obj:`list` of :obj:`~aiotele.types.MessageId`
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.MessageId`
         '''
         params = {
             'chat_id': chat_id,
@@ -2077,11 +2077,11 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#getchat
 
         Use this method to get up to date information about the chat.
-        Returns a :obj:`~aiotele.types.Chat` object on success.
+        Returns a :obj:`~aiotgm.types.Chat` object on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
-        :rtype: :obj:`~aiotele.types.Chat`
+        :rtype: :obj:`~aiotgm.types.Chat`
         '''
         params = {
             'chat_id': chat_id
@@ -2098,11 +2098,11 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#getchatadministrators
 
         Use this method to get a list of administrators in a chat, which aren't bots.
-        Returns an Array of :obj:`~aiotele.types.ChatMember` objects.
+        Returns an Array of :obj:`~aiotgm.types.ChatMember` objects.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
-        :rtype: :obj:`list` of :obj:`~aiotele.types.ChatMember`
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.ChatMember`
         '''
         params = {
             'chat_id': chat_id

@@ -6,7 +6,7 @@ if __name__ != '__main__':
 
 import sys
 sys.path.append('../')
-from aiotele.update_manager import _func_ok
+from aiotgm.update_manager import _func_ok
 
 print('\n- Testing checker and function of the update_managers, they must take 1 argument and they cannot be generators.\n')
 

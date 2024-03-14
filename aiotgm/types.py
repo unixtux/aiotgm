@@ -3328,7 +3328,7 @@ If a menu button other than MenuButtonDefault is set for a private chat, then it
 Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
 '''
 
-def _dese_menu_button(res: Optional[dict], /) -> Optional[MenuButton]: # used in aiotele.__init__
+def _dese_menu_button(res: Optional[dict], /) -> Optional[MenuButton]: # used in aiotgm.__init__
     '''
     Function to deserialize MenuButton.
     '''

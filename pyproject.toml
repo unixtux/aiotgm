@@ -3,8 +3,8 @@ requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "aiotele"
-version = "0.0.0"
+name = "aiotgm"
+version = "0.0.1"
 requires-python = ">= 3.8"
 license = {file = "LICENSE"}
 readme = "README.md"
@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/unixtux/aiotele"
+Repository = "https://github.com/unixtux/aiotgm"
 
 [tool.setuptools]
-packages = ["aiotele"]
+packages = ["aiotgm"]

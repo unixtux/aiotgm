@@ -1,4 +1,4 @@
-[![pypi](https://img.shields.io/badge/pypi-aiotele-blue)](https://pypi.org/project/aiotele/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1) [![Documentation Status](https://readthedocs.org/projects/aiotele/badge/?version=latest)](https://aiotele.readthedocs.io/?badge=latest)
+[![pypi](https://img.shields.io/badge/pypi-aiotgm-blue)](https://pypi.org/project/aiotgm/) [![tele](https://img.shields.io/badge/telegram-@unixtux-blue)](https://t.me/geko1) [![Documentation Status](https://readthedocs.org/projects/aiotgm/badge/?version=latest)](https://aiotgm.readthedocs.io/?badge=latest)
 
 <h3 align="center">Asynchronous python implementation of the Telegram Bot API <a href="https://core.telegram.org/bots/api#february-16-2024">7.1</a></h3>
 
@@ -18,19 +18,19 @@ You require a good python knowledge with the [asyncio module](https://docs.pytho
 
 * #### Installation
 
-Install the module using [pip](https://pypi.org/project/aiotele/) from your shell.
+Install the module using [pip](https://pypi.org/project/aiotgm/) from your shell.
 
 ```powershell
-$ pip install aiotele
+$ pip install aiotgm
 ```
 
 Update the module regurarly with the following command.
 
 ```powershell
-$ pip install -U aiotele
+$ pip install -U aiotgm
 ```
 
 #
 
 * #### Documentation
-Here it is the [official documentation](https://aiotele.readthedocs.io/).
+Here it is the [official documentation](https://aiotgm.readthedocs.io/).
