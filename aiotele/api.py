@@ -461,6 +461,10 @@ class TelegramApi:
         method = 'deleteStickerSet'
         return await self._request(method, params)
 
+    async def edit_chat_invite_link(self, params: Dict):
+        method = 'editChatInviteLink'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -592,10 +596,6 @@ class TelegramApi:
 
     async def export_chat_invite_link(self, params: Dict):
         method = 'exportChatInviteLink'
-        return await self._request(method, params)
-
-    async def edit_chat_invite_link(self, params: Dict):
-        method = 'editChatInviteLink'
         return await self._request(method, params)
 
     async def revoke_chat_invite_link(self, params: Dict):
