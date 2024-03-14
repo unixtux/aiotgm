@@ -2069,6 +2069,27 @@ class Client(TelegramApi):
         return [MessageId._dese(mid) for mid in result]
 
 
+    async def get_chat(
+        self,
+        chat_id: Union[int, str]
+    ) -> Chat:
+        '''
+        https://core.telegram.org/bots/api#getchat
+
+        Use this method to get up to date information about the chat.
+        Returns a :obj:`~aiotele.types.Chat` object on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`~aiotele.types.Chat`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        result = await super().get_chat(params)
+        return Chat._dese(result)
+
+
 
 
     async def get_updates(
@@ -3031,22 +3052,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().leave_chat(params)
-
-
-    async def get_chat(
-        self,
-        chat_id: Union[int, str]
-    ) -> Chat:
-        '''
-        https://core.telegram.org/bots/api#getchat
-        Use this method to get up to date information about the chat (current name of the user for one-on-one
-        conversations, current username of a user, group or channel, etc.). Returns a Chat object on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        result = await super().get_chat(params)
-        return Chat._dese(result)
 
 
     async def get_chat_administrators(

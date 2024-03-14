@@ -506,6 +506,10 @@ class TelegramApi:
         method = 'forwardMessages'
         return await self._request(method, params)
 
+    async def get_chat(self, params: Dict):
+        method = 'getChat'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: Dict, **kwargs):
         method = 'getUpdates'
@@ -658,10 +662,6 @@ class TelegramApi:
 
     async def leave_chat(self, params: Dict):
         method = 'leaveChat'
-        return await self._request(method, params)
-
-    async def get_chat(self, params: Dict):
-        method = 'getChat'
         return await self._request(method, params)
 
     async def get_chat_administrators(self, params: Dict):
