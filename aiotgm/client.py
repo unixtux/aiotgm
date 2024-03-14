@@ -2136,6 +2136,25 @@ class Client(TelegramApi):
         return _dese_chat_member(result)
 
 
+    async def get_chat_member_count(
+        self,
+        chat_id: Union[int, str]
+    ) -> int:
+        '''
+        https://core.telegram.org/bots/api#getchatmembercount
+
+        Use this method to get the number of members in a chat. Returns :obj:`Int` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`int`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        return await super().get_chat_member_count(params)
+
+
 
 
     async def get_updates(
@@ -3098,20 +3117,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().leave_chat(params)
-
-
-    async def get_chat_member_count(
-        self,
-        chat_id: Union[int, str]
-    ) -> int:
-        '''
-        https://core.telegram.org/bots/api#getchatmembercount
-        Use this method to get the number of members in a chat. Returns Int on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        return await super().get_chat_member_count(params)
 
 
     async def set_chat_sticker_set(
