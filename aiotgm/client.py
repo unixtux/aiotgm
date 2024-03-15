@@ -309,7 +309,7 @@ class Client(TelegramApi):
                 ' got {}.'.format(timeout.__class__.__name__)
             )
         params = {'timeout': timeout}
-        self._user = User._dese(await super().get_me(keep_alive=True))
+        await self.get_me()
         logger.info('Welcome @{}.'.format(self.user.username))
         logger.info('long polling has been started.')
         bad_gateway = re.compile(r'bad.*gateway', re.IGNORECASE)
