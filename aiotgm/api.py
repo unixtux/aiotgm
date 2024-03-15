@@ -529,6 +529,10 @@ class TelegramApi:
         method = 'getCustomEmojiStickers'
         return await self._request(method, params)
 
+    async def get_file(self, params: dict):
+        method = 'getFile'
+        return await self._request(method, params)
+
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -620,10 +624,6 @@ class TelegramApi:
 
     async def get_user_profile_photos(self, params: dict):
         method = 'getUserProfilePhotos'
-        return await self._request(method, params)
-
-    async def get_file(self, params: dict):
-        method = 'getFile'
         return await self._request(method, params)
 
     async def unban_chat_member(self, params: dict):
