@@ -1938,6 +1938,19 @@ class Client(TelegramApi):
         return File._dese(result)
 
 
+    async def get_forum_topic_icon_stickers(self) -> list[Sticker]:
+        '''
+        https://core.telegram.org/bots/api#getforumtopiciconstickers
+
+        Use this method to get custom emoji stickers, which can be used as a forum topic icon by
+        any user. Requires no parameters. Returns an Array of :obj:`~aiotgm.types.Sticker` objects.
+
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.Sticker`
+        '''
+        result = await super().get_forum_topic_icon_stickers()
+        return [Sticker._dese(sticker) for sticker in result]
+
+
 
 
     async def get_updates(
@@ -2901,16 +2914,6 @@ class Client(TelegramApi):
             'sticker_set_name': sticker_set_name
         }
         return await super().set_chat_sticker_set(params)
-
-
-    async def get_forum_topic_icon_stickers(self) -> list[Sticker]:
-        '''
-        https://core.telegram.org/bots/api#getforumtopiciconstickers
-        Use this method to get custom emoji stickers, which can be used as a forum topic
-        icon by any user. Requires no parameters. Returns an Array of Sticker objects.
-        '''
-        result = await super().get_forum_topic_icon_stickers()
-        return [Sticker._dese(sticker) for sticker in result]
 
 
     async def reopen_forum_topic(
