@@ -28,3 +28,8 @@ def escape_markdown(text: str) -> str:
             f' be str, got {text.__class__.__name__}'
         )
     return text.translate(str.maketrans(MARKDOWN_ESCAPES))
+
+async def sleep_until_next_hour():
+    from datetime import datetime as dtm
+    now = dtm.now()
+    return 3600 - (now.minute * 60 + now.second)

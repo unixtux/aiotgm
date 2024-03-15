@@ -83,7 +83,7 @@ class Client(TelegramApi):
 
         self._offset = None
 
-        self._me = None
+        self._user = None
         self.parse_mode = parse_mode
         self.protect_content = protect_content
 
@@ -107,8 +107,8 @@ class Client(TelegramApi):
         self._removed_chat_boost_manager = UpdateManager(REMOVED_CHAT_BOOST_MANAGER, ChatBoostRemoved)
 
     @property
-    def me(self) -> Optional[User]:
-        return self._me
+    def user(self) -> Optional[User]:
+        return self._user
 
     @property
     def parse_mode(self) -> Optional[str]:
@@ -142,7 +142,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
-            self.message_manager.add_rule(checker, coroutine)
+            self._message_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_edited_message(self, checker: Callable[[Message], Any] = lambda edited_message: ..., /):
@@ -151,7 +151,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
-            self.edited_message_manager.add_rule(checker, coroutine)
+            self._edited_message_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_channel_post(self, checker: Callable[[Message], Any] = lambda channel_post: ..., /):
@@ -160,7 +160,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
-            self.channel_post_manager.add_rule(checker, coroutine)
+            self._channel_post_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_edited_channel_post(self, checker: Callable[[Message], Any] = lambda edited_channel_post: ..., /):
@@ -169,7 +169,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
-            self.edited_channel_post_manager.add_rule(checker, coroutine)
+            self._edited_channel_post_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
@@ -178,7 +178,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[MessageReactionUpdated], Awaitable]):
-            self.message_reaction_manager.add_rule(checker, coroutine)
+            self._message_reaction_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_message_reaction_count(self, checker: Callable[[MessageReactionCountUpdated], Any] = lambda message_reaction_count: ..., /):
@@ -187,7 +187,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[MessageReactionCountUpdated], Awaitable]):
-            self.message_reaction_count_manager.add_rule(checker, coroutine)
+            self._message_reaction_count_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_inline_query(self, checker: Callable[[InlineQuery], Any] = lambda inline_query: ..., /):
@@ -196,7 +196,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[InlineQuery], Any]`
         '''
         def wrap(coroutine: Callable[[InlineQuery], Awaitable]):
-            self.inline_query_manager.add_rule(checker, coroutine)
+            self._inline_query_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_chosen_inline_result(self, checker: Callable[[ChosenInlineResult], Any] = lambda chosen_inline_result: ..., /):
@@ -205,7 +205,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
         '''
         def wrap(coroutine: Callable[[ChosenInlineResult], Awaitable]):
-            self.chosen_inline_result_manager.add_rule(checker, coroutine)
+            self._chosen_inline_result_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_callback_query(self, checker: Callable[[CallbackQuery], Any] = lambda callback_query: ..., /):
@@ -214,7 +214,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[CallbackQuery], Any]`
         '''
         def wrap(coroutine: Callable[[CallbackQuery], Awaitable]):
-            self.callback_query_manager.add_rule(checker, coroutine)
+            self._callback_query_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_shipping_query(self, checker: Callable[[ShippingQuery], Any] = lambda shipping_query: ..., /):
@@ -223,7 +223,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[ShippingQuery], Any]`
         '''
         def wrap(coroutine: Callable[[ShippingQuery], Awaitable]):
-            self.shipping_query_manager.add_rule(checker, coroutine)
+            self._shipping_query_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_pre_checkout_query(self, checker: Callable[[PreCheckoutQuery], Any] = lambda pre_checkout_query: ..., /):
@@ -232,7 +232,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[PreCheckoutQuery], Any]`
         '''
         def wrap(coroutine: Callable[[PreCheckoutQuery], Awaitable]):
-            self.pre_checkout_query_manager.add_rule(checker, coroutine)
+            self._pre_checkout_query_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
@@ -241,7 +241,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[Poll], Any]`
         '''
         def wrap(coroutine: Callable[[Poll], Awaitable]):
-            self.poll_manager.add_rule(checker, coroutine)
+            self._poll_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_poll_answer(self, checker: Callable[[PollAnswer], Any] = lambda poll_answer: ..., /):
@@ -250,7 +250,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[PollAnswer], Any]`
         '''
         def wrap(coroutine: Callable[[PollAnswer], Awaitable]):
-            self.poll_answer_manager.add_rule(checker, coroutine)
+            self._poll_answer_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_my_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda my_chat_member: ..., /):
@@ -259,7 +259,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
-            self.my_chat_member_manager.add_rule(checker, coroutine)
+            self._my_chat_member_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_chat_member(self, checker: Callable[[ChatMemberUpdated], Any] = lambda chat_member: ..., /):
@@ -268,7 +268,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
-            self.chat_member_manager.add_rule(checker, coroutine)
+            self._chat_member_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_chat_join_request(self, checker: Callable[[ChatJoinRequest], Any] = lambda chat_join_request: ..., /):
@@ -277,7 +277,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[ChatJoinRequest], Any]`
         '''
         def wrap(coroutine: Callable[[ChatJoinRequest], Awaitable]):
-            self.chat_join_request_manager.add_rule(checker, coroutine)
+            self._chat_join_request_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_chat_boost(self, checker: Callable[[ChatBoostUpdated], Any] = lambda chat_boost: ..., /):
@@ -286,7 +286,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[ChatBoostUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatBoostUpdated], Awaitable]):
-            self.chat_boost_manager.add_rule(checker, coroutine)
+            self._chat_boost_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_removed_chat_boost(self, checker: Callable[[ChatBoostRemoved], Any] = lambda removed_chat_boost: ..., /):
@@ -295,293 +295,8 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[ChatBoostRemoved], Any]`
         '''
         def wrap(coroutine: Callable[[ChatBoostRemoved], Awaitable]):
-            self.removed_chat_boost_manager.add_rule(checker, coroutine)
+            self._removed_chat_boost_manager.add_rule(checker, coroutine)
         return wrap
-
-    @property
-    def message_manager(self) -> UpdateManager:
-        '''
-        Usage:
-
-        .. code-block:: python3
-
-            from aiotgm import Client
-            from aiotgm.types import Message
-
-            bot = Client('<your_api_token>')
-
-            def is_start(msg: Message)
-                return msg.text == '/start'
-
-            async def foo(msg: Message):
-                await bot.send_message(msg.chat.id, 'welcome')
-                
-            bot.message_manager.add_rule(is_start, foo)
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *message* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
-            :type coroutine: :obj:`Callable[[Message], Awaitable]`
-        '''
-        return self._message_manager
-
-    @property
-    def edited_message_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *edited_message* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
-            :type coroutine: :obj:`Callable[[Message], Awaitable]`
-        '''
-        return self._edited_message_manager
-
-    @property
-    def channel_post_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *channel_post* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
-            :type coroutine: :obj:`Callable[[Message], Awaitable]`
-        '''
-        return self._channel_post_manager
-
-    @property
-    def edited_channel_post_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *edited_channel_post* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[Message], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Message` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
-            :type coroutine: :obj:`Callable[[Message], Awaitable]`
-        '''
-        return self._edited_channel_post_manager
-
-    @property
-    def message_reaction_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.MessageReactionUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.MessageReactionUpdated`.
-            :type coroutine: :obj:`Callable[[MessageReactionUpdated], Awaitable]`
-        '''
-        return self._message_reaction_manager
-
-    @property
-    def message_reaction_count_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *message_reaction_count* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.MessageReactionCountUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.MessageReactionCountUpdated`.
-            :type coroutine: :obj:`Callable[[MessageReactionCountUpdated], Awaitable]`
-        '''
-        return self._message_reaction_count_manager
-
-    @property
-    def inline_query_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *inline_query* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[InlineQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.InlineQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.InlineQuery`.
-            :type coroutine: :obj:`Callable[[InlineQuery], Awaitable]`
-        '''
-        return self._inline_query_manager
-
-    @property
-    def chosen_inline_result_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *chosen_inline_result* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChosenInlineResult` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChosenInlineResult`.
-            :type coroutine: :obj:`Callable[[ChosenInlineResult], Awaitable]`
-        '''
-        return self._chosen_inline_result_manager
-
-    @property
-    def callback_query_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *callback_query* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[CallbackQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.CallbackQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.CallbackQuery`.
-            :type coroutine: :obj:`Callable[[CallbackQuery], Awaitable]`
-        '''
-        return self._callback_query_manager
-
-    @property
-    def shipping_query_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *shipping_query* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[ShippingQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ShippingQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ShippingQuery`.
-            :type coroutine: :obj:`Callable[[ShippingQuery], Awaitable]`
-        '''
-        return self._shipping_query_manager
-
-    @property
-    def pre_checkout_query_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *pre_checkout_query* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[PreCheckoutQuery], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.PreCheckoutQuery` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.PreCheckoutQuery`.
-            :type coroutine: :obj:`Callable[[PreCheckoutQuery], Awaitable]`
-        '''
-        return self._pre_checkout_query_manager
-
-    @property
-    def poll_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *poll* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[Poll], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.Poll` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.Poll`.
-            :type coroutine: :obj:`Callable[[Poll], Awaitable]`
-        '''
-        return self._poll_manager
-
-    @property
-    def poll_answer_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *poll_answer* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[PollAnswer], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.PollAnswer` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.PollAnswer`.
-            :type coroutine: :obj:`Callable[[PollAnswer], Awaitable]`
-        '''
-        return self._poll_answer_manager
-
-    @property
-    def my_chat_member_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *my_chat_member* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatMemberUpdated`.
-            :type coroutine: :obj:`Callable[[ChatMemberUpdated], Awaitable]`
-        '''
-        return self._my_chat_member_manager
-
-    @property
-    def chat_member_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *chat_member* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatMemberUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatMemberUpdated`.
-            :type coroutine: :obj:`Callable[[ChatMemberUpdated], Awaitable]`
-        '''
-        return self._chat_member_manager
-
-    @property
-    def chat_join_request_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *chat_join_request* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[ChatJoinRequest], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatJoinRequest` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatJoinRequest`.
-            :type coroutine: :obj:`Callable[[ChatJoinRequest], Awaitable]`
-        '''
-        return self._chat_join_request_manager
-
-    @property
-    def chat_boost_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *chat_boost* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[ChatBoostUpdated], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatBoostUpdated` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatBoostUpdated`.
-            :type coroutine: :obj:`Callable[[ChatBoostUpdated], Awaitable]`
-        '''
-        return self._chat_boost_manager
-
-    @property
-    def removed_chat_boost_manager(self) -> UpdateManager:
-        '''
-        For the usage, see to the :obj:`~aiotgm.Client.message_manager` reference.
-
-        .. method:: add_rule(checker, coroutine, /)
-            :no-index:
-
-            :param checker: A function that takes only one argument to check an incoming *removed_chat_boost* :obj:`~aiotgm.types.Update`.
-            :type checker: :obj:`Callable[[ChatBoostRemoved], Any]`
-            :param coroutine: A `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_ that will be `awaited <https://docs.python.org/3/library/asyncio-task.html#awaitables>`_ if the :obj:`~aiotgm.types.ChatBoostRemoved` passes the check. It must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatBoostRemoved`.
-            :type coroutine: :obj:`Callable[[ChatBoostRemoved], Awaitable]`
-        '''
-        return self._removed_chat_boost_manager
 
 
     # Processing new updates
@@ -594,9 +309,8 @@ class Client(TelegramApi):
                 ' got {}.'.format(timeout.__class__.__name__)
             )
         params = {'timeout': timeout}
-        me = await super().get_me(keep_alive=True)
-        self._me = User._dese(me)
-        logger.info('Welcome @{}.'.format(self.me.username))
+        bot = await super().get_me(keep_alive=True)
+        logger.info('Welcome @{}.'.format(self.user.username))
         logger.info('long polling has been started.')
         bad_gateway = re.compile(r'bad.*gateway', re.IGNORECASE)
         while True:
@@ -609,7 +323,7 @@ class Client(TelegramApi):
                     max_retries=float('inf'),
                     keep_alive=True
                 )
-                updates: list[Update] = [Update._dese(update) for update in result]
+                updates = [Update._dese(update) for update in result]
 
             except TelegramError as exc:
                 if bad_gateway.search(exc.description):
@@ -635,126 +349,126 @@ class Client(TelegramApi):
 
         if update.message:
             obj: Message = update.message
-            for rule in self.message_manager:
+            for rule in self._message_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.edited_message:
             obj: Message = update.edited_message
-            for rule in self.edited_message_manager:
+            for rule in self._edited_message_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.channel_post:
             obj: Message = update.channel_post
-            for rule in self.channel_post_manager:
+            for rule in self._channel_post_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.edited_channel_post:
             obj: Message = update.edited_channel_post
-            for rule in self.edited_channel_post_manager:
+            for rule in self._edited_channel_post_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.message_reaction:
             obj: MessageReactionUpdated = update.message_reaction
-            for rule in self.message_reaction_manager:
+            for rule in self._message_reaction_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.message_reaction_count:
             obj: MessageReactionCountUpdated = update.message_reaction_count
-            for rule in self.message_reaction_count_manager:
+            for rule in self._message_reaction_count_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.inline_query:
             obj: InlineQuery = update.inline_query
-            for rule in self.inline_query_manager:
+            for rule in self._inline_query_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.chosen_inline_result:
             obj: ChosenInlineResult = update.chosen_inline_result
-            for rule in self.chosen_inline_result_manager:
+            for rule in self._chosen_inline_result_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.callback_query:
             obj: CallbackQuery = update.callback_query
-            for rule in self.callback_query_manager:
+            for rule in self._callback_query_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.shipping_query:
             obj: ShippingQuery = update.shipping_query
-            for rule in self.shipping_query_manager:
+            for rule in self._shipping_query_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.pre_checkout_query:
             obj: PreCheckoutQuery = update.pre_checkout_query
-            for rule in self.pre_checkout_query_manager:
+            for rule in self._pre_checkout_query_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.poll:
             obj: Poll = update.poll
-            for rule in self.poll_manager:
+            for rule in self._poll_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.poll_answer:
             obj: PollAnswer = update.poll_answer
-            for rule in self.poll_answer_manager:
+            for rule in self._poll_answer_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.my_chat_member:
             obj: ChatMemberUpdated = update.my_chat_member
-            for rule in self.my_chat_member_manager:
+            for rule in self._my_chat_member_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.chat_member:
             obj: ChatMemberUpdated = update.chat_member
-            for rule in self.chat_member_manager:
+            for rule in self._chat_member_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.chat_join_request:
             obj: ChatJoinRequest = update.chat_join_request
-            for rule in self.chat_join_request_manager:
+            for rule in self._chat_join_request_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.chat_boost:
             obj: ChatBoostUpdated = update.chat_boost
-            for rule in self.chat_boost_manager:
+            for rule in self._chat_boost_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
 
         elif update.removed_chat_boost:
             obj: ChatBoostRemoved = update.removed_chat_boost
-            for rule in self.removed_chat_boost_manager:
+            for rule in self._removed_chat_boost_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return
@@ -2224,8 +1938,11 @@ class Client(TelegramApi):
         A simple method for testing your bot's authentication token. Requires
         no parameters. Returns basic information about the bot in form of a User object.
         '''
+        if isinstance(self.user, User):
+            return self.user
         result = await super().get_me()
-        return  User._dese(result)
+        self._user = User._dese(result)
+        return self.user
 
 
     async def log_out(self) -> Literal[True]:
