@@ -545,6 +545,10 @@ class TelegramApi:
         method = 'getMe'
         return await self._request(method)
 
+    async def get_my_commands(self, params: dict):
+        method = 'getMyCommands'
+        return await self._request(method, params)
+
 
 
     async def get_updates(self, params: dict, **kwargs):
@@ -726,10 +730,6 @@ class TelegramApi:
 
     async def set_my_commands(self, params: dict):
         method = 'setMyCommands'
-        return await self._request(method, params)
-
-    async def get_my_commands(self, params: dict):
-        method = 'getMyCommands'
         return await self._request(method, params)
 
     async def set_my_name(self, params: dict):

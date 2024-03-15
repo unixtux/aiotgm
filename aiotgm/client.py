@@ -2003,6 +2003,30 @@ class Client(TelegramApi):
         return self.user
 
 
+    async def get_my_commands(
+        self,
+        scope: Optional[BotCommandScope] = None,
+        language_code: Optional[str] = None
+    ) -> list[BotCommand]:
+        '''
+        https://core.telegram.org/bots/api#getmycommands
+
+        Use this method to get the current list of the bot's commands for the given scope and user language.
+        Returns an Array of :obj:`~aiotgm.types.BotCommand` objects. If commands aren't set, an empty list is returned.
+
+        :param scope: 
+        :type scope: :obj:`~aiotgm.types.BotCommandScope`, optional
+        :param language_code: 
+        :type language_code: :obj:`str`, optional
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.BotCommand`
+        '''
+        params = {}
+        if scope is not None: params['scope'] = scope
+        if language_code is not None: params['language_code'] = language_code
+        result = await super().get_my_commands(params)
+        return [BotCommand._dese(bot_command) for bot_command in result]
+
+
 
 
     async def get_updates(
@@ -3090,23 +3114,6 @@ class Client(TelegramApi):
         if scope is not None: params['scope'] = scope
         if language_code is not None: params['language_code'] = language_code
         return await super().set_my_commands(params)
-
-
-    async def get_my_commands(
-        self,
-        scope: Optional[BotCommandScope] = None,
-        language_code: Optional[str] = None
-    ) -> list[BotCommand]:
-        '''
-        https://core.telegram.org/bots/api#getmycommands
-        Use this method to get the current list of the bot's commands for the given scope and user
-        language. Returns an Array of BotCommand objects. If commands aren't set, an empty list is returned.
-        '''
-        params = {}
-        if scope is not None: params['scope'] = scope
-        if language_code is not None: params['language_code'] = language_code
-        result = await super().get_my_commands(params)
-        return [BotCommand._dese(bot_command) for bot_command in result]
 
 
     async def set_my_name(
