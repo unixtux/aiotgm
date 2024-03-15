@@ -1951,6 +1951,40 @@ class Client(TelegramApi):
         return [Sticker._dese(sticker) for sticker in result]
 
 
+    async def get_game_high_scores(
+        self,
+        user_id: int,
+        chat_id: Optional[int] = None,
+        message_id: Optional[int] = None,
+        inline_message_id: Optional[str] = None
+    ) -> list[GameHighScore]:
+        '''
+        https://core.telegram.org/bots/api#getgamehighscores
+
+        Use this method to get data for high score tables. Will return the score of the specified user and
+        several of their neighbors in a game. Returns an Array of :obj:`~aiotgm.types.GameHighScore` objects.
+
+            This method will currently return scores for the target user, plus two of their closest neighbors on each side.
+            Will also return the top three users if the user and their neighbors are not among them. Please note that this behavior is subject to change.
+
+        :param user_id: Target user id.
+        :type user_id: :obj:`int`
+        :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat.
+        :type chat_id: :obj:`int`, optional
+        :param message_id: Required if *inline_message_id* is not specified. Identifier of the sent message.
+        :type message_id: :obj:`int`, optional
+        :param inline_message_id: Required if *chat_id* and *message_id* are not specified. Identifier of the inline message.
+        :type inline_message_id: :obj:`str`, optional
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.GameHighScore`
+        '''
+        params = {
+            'user_id': user_id
+        }
+        if chat_id is not None: params['chat_id'] = chat_id
+        if message_id is not None: params['message_id'] = message_id
+        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
+        result = await super().get_game_high_scores(params)
+        return [GameHighScore._dese(score) for score in result]
 
 
     async def get_updates(
@@ -3576,25 +3610,3 @@ class Client(TelegramApi):
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         result = await super().set_game_score(params)
         return Message._dese(result) if result is not True else True
-
-
-    async def get_game_high_scores(
-        self,
-        user_id: int,
-        chat_id: Optional[int] = None,
-        message_id: Optional[int] = None,
-        inline_message_id: Optional[str] = None
-    ) -> list[GameHighScore]:
-        '''
-        https://core.telegram.org/bots/api#getgamehighscores
-        Use this method to get data for high score tables. Will return the score of the specified
-        user and several of their neighbors in a game. Returns an Array of GameHighScore objects.
-        '''
-        params = {
-            'user_id': user_id
-        }
-        if chat_id is not None: params['chat_id'] = chat_id
-        if message_id is not None: params['message_id'] = message_id
-        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
-        result = await super().get_game_high_scores(params)
-        return [GameHighScore._dese(score) for score in result]

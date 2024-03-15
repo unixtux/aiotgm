@@ -537,6 +537,9 @@ class TelegramApi:
         method = 'getForumTopicIconStickers'
         return await self._request(method)
 
+    async def get_game_high_scores(self, params: dict):
+        method = 'getGameHighScores'
+        return await self._request(method, params)
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -828,8 +831,4 @@ class TelegramApi:
 
     async def set_game_score(self, params: dict):
         method = 'setGameScore'
-        return await self._request(method, params)
-
-    async def get_game_high_scores(self, params: dict):
-        method = 'getGameHighScores'
         return await self._request(method, params)
