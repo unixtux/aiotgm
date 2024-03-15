@@ -1,5 +1,10 @@
 #!/bin/env python3
 
+__all__ = (
+    'escape_markdown',
+    'seconds_until_next_hour',
+)
+
 MARKDOWN_ESCAPES = {
     '_': '\_',
     '*': '\*',
