@@ -29,7 +29,7 @@ def escape_markdown(text: str) -> str:
         )
     return text.translate(str.maketrans(MARKDOWN_ESCAPES))
 
-async def sleep_until_next_hour():
+def seconds_until_next_hour() -> float:
     from datetime import datetime as dtm
     now = dtm.now()
     return 3600 - (now.minute * 60 + now.second)
