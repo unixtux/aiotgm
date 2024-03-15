@@ -533,6 +533,10 @@ class TelegramApi:
         method = 'getFile'
         return await self._request(method, params)
 
+    async def get_forum_topic_icon_stickers(self):
+        method = 'getForumTopicIconStickers'
+        return await self._request(method)
+
 
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
@@ -686,10 +690,6 @@ class TelegramApi:
     async def set_chat_sticker_set(self, params: dict):
         method = 'setChatStickerSet'
         return await self._request(method, params)
-
-    async def get_forum_topic_icon_stickers(self):
-        method = 'getForumTopicIconStickers'
-        return await self._request(method)
 
     async def reopen_forum_topic(self, params: dict):
         method = 'reopenForumTopic'
