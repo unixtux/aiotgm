@@ -541,6 +541,8 @@ class TelegramApi:
         method = 'getGameHighScores'
         return await self._request(method, params)
 
+
+
     async def get_updates(self, params: dict, **kwargs):
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
