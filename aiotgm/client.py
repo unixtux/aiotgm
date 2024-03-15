@@ -1987,6 +1987,8 @@ class Client(TelegramApi):
         return [GameHighScore._dese(score) for score in result]
 
 
+
+
     async def get_updates(
         self,
         offset: Optional[int] = None,
