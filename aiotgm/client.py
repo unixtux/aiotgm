@@ -1987,6 +1987,22 @@ class Client(TelegramApi):
         return [GameHighScore._dese(score) for score in result]
 
 
+    async def get_me(self) -> User:
+        '''
+        https://core.telegram.org/bots/api#getme
+
+        A simple method for testing your bot's authentication token. Requires no parameters.
+        Returns basic information about the bot in form of a :obj:`~aiotgm.types.User` object.
+
+        :rtype: :obj:`~aiotgm.types.User`
+        '''
+        if isinstance(self.user, User):
+            return self.user
+        result = await super().get_me()
+        self._user = User._dese(result)
+        return self.user
+
+
 
 
     async def get_updates(
@@ -2007,19 +2023,6 @@ class Client(TelegramApi):
         if allowed_updates is not None: params['allowed_updates'] = allowed_updates
         result = await super().get_updates(params)
         return [Update._dese(update) for update in result]
-
-
-    async def get_me(self) -> User:
-        '''
-        https://core.telegram.org/bots/api#getme
-        A simple method for testing your bot's authentication token. Requires
-        no parameters. Returns basic information about the bot in form of a User object.
-        '''
-        if isinstance(self.user, User):
-            return self.user
-        result = await super().get_me()
-        self._user = User._dese(result)
-        return self.user
 
 
     async def log_out(self) -> Literal[True]:
