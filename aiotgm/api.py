@@ -581,6 +581,10 @@ class TelegramApi:
         method = 'getUserProfilePhotos'
         return await self._request(method, params)
 
+    async def hide_general_forum_topic(self, params: dict):
+        method = 'hideGeneralForumTopic'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -734,10 +738,6 @@ class TelegramApi:
 
     async def reopen_general_forum_topic(self, params: dict):
         method = 'reopenGeneralForumTopic'
-        return await self._request(method, params)
-
-    async def hide_general_forum_topic(self, params: dict):
-        method = 'hideGeneralForumTopic'
         return await self._request(method, params)
 
     async def unhide_general_forum_topic(self, params: dict):
