@@ -2170,6 +2170,32 @@ class Client(TelegramApi):
         return [Update._dese(update) for update in result]
 
 
+    async def get_user_chat_boosts(
+        self,
+        chat_id: Union[int, str],
+        user_id: int
+    ) -> UserChatBoosts:
+        '''
+        https://core.telegram.org/bots/api#getuserchatboosts
+
+        Use this method to get the list of boosts added to a chat by a user. Requires
+        administrator rights in the chat. Returns a :obj:`~aiotgm.types.UserChatBoosts` object.
+
+        :param chat_id: Unique identifier for the chat or username of the channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :rtype: :obj:`~aiotgm.types.UserChatBoosts`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+        result = await super().get_user_chat_boosts(params)
+        return UserChatBoosts._dese(result)
+
+
+
 
 
     async def send_message(
@@ -3200,24 +3226,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().unpin_all_general_forum_topic_messages(params)
-
-
-    async def get_user_chat_boosts(
-        self,
-        chat_id: Union[int, str],
-        user_id: int
-    ) -> UserChatBoosts:
-        '''
-        https://core.telegram.org/bots/api#getuserchatboosts
-        Use this method to get the list of boosts added to a chat by a user.
-        Requires administrator rights in the chat. Returns a UserChatBoosts object.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id
-        }
-        result = await super().get_user_chat_boosts(params)
-        return UserChatBoosts._dese(result)
 
 
     async def set_my_commands(

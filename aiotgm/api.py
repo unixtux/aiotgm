@@ -573,6 +573,10 @@ class TelegramApi:
         method = 'getUpdates'
         return await self._request(method, params, **kwargs)
 
+    async def get_user_chat_boosts(self, params: dict):
+        method = 'getUserChatBoosts'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -742,10 +746,6 @@ class TelegramApi:
 
     async def unpin_all_general_forum_topic_messages(self, params: dict):
         method = 'unpinAllGeneralForumTopicMessages'
-        return await self._request(method, params)
-
-    async def get_user_chat_boosts(self, params: dict):
-        method = 'getUserChatBoosts'
         return await self._request(method, params)
 
     async def set_my_commands(self, params: dict):
