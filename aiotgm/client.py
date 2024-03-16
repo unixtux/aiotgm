@@ -2245,6 +2245,26 @@ class Client(TelegramApi):
         return await super().hide_general_forum_topic(params)
 
 
+    async def leave_chat(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#leavechat
+
+        Use this method for your bot to leave a group, supergroup or channel.
+        Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        return await super().leave_chat(params)
+
+
 
 
 
@@ -3125,20 +3145,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().unpin_all_chat_messages(params)
-
-
-    async def leave_chat(
-        self,
-        chat_id: Union[int, str]
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#leavechat
-        Use this method for your bot to leave a group, supergroup or channel. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        return await super().leave_chat(params)
 
 
     async def set_chat_sticker_set(

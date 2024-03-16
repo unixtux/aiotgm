@@ -585,6 +585,10 @@ class TelegramApi:
         method = 'hideGeneralForumTopic'
         return await self._request(method, params)
 
+    async def leave_chat(self, params: dict):
+        method = 'leaveChat'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -718,10 +722,6 @@ class TelegramApi:
 
     async def unpin_all_chat_messages(self, params: dict):
         method = 'unpinAllChatMessages'
-        return await self._request(method, params)
-
-    async def leave_chat(self, params: dict):
-        method = 'leaveChat'
         return await self._request(method, params)
 
     async def set_chat_sticker_set(self, params: dict):
