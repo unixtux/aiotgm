@@ -589,15 +589,15 @@ class TelegramApi:
         method = 'leaveChat'
         return await self._request(method, params)
 
+    async def log_out(self):
+        method = 'logOut'
+        return await self._request(method)
+
 
 
     async def send_message(self, params: dict):
         method = 'sendMessage'
         return await self._request(method, params)
-
-    async def log_out(self):
-        method = 'logOut'
-        return await self._request(method)
 
     async def send_photo(self, params: dict):
         method = 'sendPhoto'

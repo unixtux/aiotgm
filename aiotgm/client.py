@@ -2265,6 +2265,20 @@ class Client(TelegramApi):
         return await super().leave_chat(params)
 
 
+    async def log_out(self) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#logout
+
+        Use this method to log out from the cloud Bot API server before launching the bot locally.
+        You **must** log out the bot before running it locally, otherwise there is no guarantee that the
+        bot will receive updates. After a successful call, you can immediately log in on a local server, but will
+        not be able to log in back to the cloud Bot API server for 10 minutes. Returns :obj:`True` on success. Requires no parameters.
+
+        :rtype: :obj:`True`
+        '''
+        return await super().log_out()
+
+
 
 
 
@@ -2301,17 +2315,6 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_message(params)
         return Message._dese(result)
-
-
-    async def log_out(self) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#logout
-        Use this method to log out from the cloud Bot API server before launching the bot locally.
-        You must log out the bot before running it locally, otherwise there is no guarantee that the
-        bot will receive updates. After a successful call, you can immediately log in on a local server, but will
-        not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
-        '''
-        return await super().log_out()
 
 
     async def send_photo(
