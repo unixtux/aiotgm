@@ -2107,6 +2107,27 @@ class Client(TelegramApi):
         return BotShortDescription._dese(result)
 
 
+    async def get_sticker_set(
+        self,
+        name: str
+    ) -> StickerSet:
+        '''
+        https://core.telegram.org/bots/api#getstickerset
+
+        Use this method to get a sticker set.
+        On success, a :obj:`~aiotgm.types.StickerSet` object is returned.
+
+        :param name: Name of the sticker set.
+        :type name: :obj:`str`
+        :rtype: :obj:`~aiotgm.types.StickerSet`
+        '''
+        params = {
+            'name': name
+        }
+        result = await super().get_sticker_set(params)
+        return StickerSet._dese(result)
+
+
 
 
     async def get_updates(
@@ -3345,21 +3366,6 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_sticker(params)
         return Message._dese(result)
-
-
-    async def get_sticker_set(
-        self,
-        name: str
-    ) -> StickerSet:
-        '''
-        https://core.telegram.org/bots/api#getstickerset
-        Use this method to get a sticker set. On success, a StickerSet object is returned.
-        '''
-        params = {
-            'name': name
-        }
-        result = await super().get_sticker_set(params)
-        return StickerSet._dese(result)
 
 
     async def upload_sticker_file(

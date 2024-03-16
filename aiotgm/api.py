@@ -565,6 +565,10 @@ class TelegramApi:
         method = 'getMyShortDescription'
         return await self._request(method, params)
 
+    async def get_sticker_set(self, params: dict):
+        method = 'getStickerSet'
+        return await self._request(method, params)
+
 
 
     async def get_updates(self, params: dict, **kwargs):
@@ -780,10 +784,6 @@ class TelegramApi:
         method = 'sendSticker'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
-
-    async def get_sticker_set(self, params: dict):
-        method = 'getStickerSet'
-        return await self._request(method, params)
 
     async def upload_sticker_file(self, params: dict):
         method = 'uploadStickerFile'
