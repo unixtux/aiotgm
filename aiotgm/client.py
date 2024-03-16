@@ -531,7 +531,10 @@ class Client(TelegramApi):
         :type text: :obj:`str`, optional
         :param show_alert: If :obj:`True`, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to :obj:`False`.
         :type show_alert: :obj:`bool`, optional
-        :param url: URL that will be opened by the user's client. If you have created a :obj:`~aiotgm.types.Game` and accepted the conditions via `@BotFather <https://t.me/botfather>`_, specify the URL that opens your game - note that this will only work if the query comes from a :obj:`callback_game <aiotgm.types.InlineKeyboardButton>` button. Otherwise, you may use links like ``t.me/your_bot?start=XXXX`` that open your bot with a parameter.
+        :param url:
+            URL that will be opened by the user's client. If you have created a :obj:`~aiotgm.types.Game` and accepted the conditions via `@BotFather <https://t.me/botfather>`_, specify the URL that opens your game - note that this will only work if the query comes from a :obj:`callback_game <aiotgm.types.InlineKeyboardButton>` button.
+
+            Otherwise, you may use links like ``t.me/your_bot?start=XXXX`` that open your bot with a parameter.
         :type url: :obj:`str`, optional
         :param cache_time: The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to :obj:`0`.
         :type cache_time: :obj:`int`, optional
@@ -2128,8 +2131,6 @@ class Client(TelegramApi):
         return StickerSet._dese(result)
 
 
-
-
     async def get_updates(
         self,
         offset: Optional[int] = None,
@@ -2139,7 +2140,26 @@ class Client(TelegramApi):
     ) -> list[Update]:
         '''
         https://core.telegram.org/bots/api#getupdates
-        Use this method to receive incoming updates using long polling. Returns an Array of Update objects.
+
+        Use this method to receive incoming updates using long polling (`wiki <https://en.wikipedia.org/wiki/Push_technology#Long_polling>`_).
+        Returns an Array of :obj:`~aiotgm.types.Update` objects.
+
+            | **Notes**
+            | **1.** This method will not work if an outgoing webhook is set up.
+            | **2.** In order to avoid getting duplicate updates, recalculate *offset* after each server response.
+
+        :param offset: Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as :meth:`~aiotgm.Client.get_updates` is called with an *offset* higher than its *update_id*. The negative offset can be specified to retrieve updates starting from -*offset* update from the end of the updates queue. All previous updates will be forgotten.
+        :type offset: :obj:`int`, optional
+        :param limit: Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to :obj:`100`.
+        :type limit: :obj:`int`, optional
+        :param timeout: Timeout in seconds for long polling. Defaults to :obj:`0`, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.
+        :type timeout: :obj:`int`, optional
+        :param allowed_updates:
+            A JSON-serialized list of the update types you want your bot to receive. For example, specify ``["message", "edited_channel_post", "callback_query"]`` to only receive updates of these types. See :obj:`~aiotgm.types.Update` for a complete list of available update types. Specify an empty list to receive all update types except *chat_member*, *message_reaction*, and *message_reaction_count* (default). If not specified, the previous setting will be used.
+
+            Please note that this parameter doesn't affect updates created before the call to the :meth:`~aiotgm.Client.get_updates`, so unwanted updates may be received for a short period of time.
+        :type allowed_updates: :obj:`list` of :obj:`str`, optional
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.Update`
         '''
         params = {}
         if offset is not None: params['offset'] = offset
@@ -2150,15 +2170,6 @@ class Client(TelegramApi):
         return [Update._dese(update) for update in result]
 
 
-    async def log_out(self) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#logout
-        Use this method to log out from the cloud Bot API server before launching the bot locally.
-        You must log out the bot before running it locally, otherwise there is no guarantee that the
-        bot will receive updates. After a successful call, you can immediately log in on a local server, but will
-        not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
-        '''
-        return await super().log_out()
 
 
     async def send_message(
@@ -2194,6 +2205,17 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_message(params)
         return Message._dese(result)
+
+
+    async def log_out(self) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#logout
+        Use this method to log out from the cloud Bot API server before launching the bot locally.
+        You must log out the bot before running it locally, otherwise there is no guarantee that the
+        bot will receive updates. After a successful call, you can immediately log in on a local server, but will
+        not be able to log in back to the cloud Bot API server for 10 minutes. Returns True on success. Requires no parameters.
+        '''
+        return await super().log_out()
 
 
     async def send_photo(
