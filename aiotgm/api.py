@@ -577,6 +577,10 @@ class TelegramApi:
         method = 'getUserChatBoosts'
         return await self._request(method, params)
 
+    async def get_user_profile_photos(self, params: dict):
+        method = 'getUserProfilePhotos'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -657,10 +661,6 @@ class TelegramApi:
 
     async def set_message_reaction(self, params: dict):
         method = 'setMessageReaction'
-        return await self._request(method, params)
-
-    async def get_user_profile_photos(self, params: dict):
-        method = 'getUserProfilePhotos'
         return await self._request(method, params)
 
     async def unban_chat_member(self, params: dict):

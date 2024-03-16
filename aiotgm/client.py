@@ -2195,6 +2195,35 @@ class Client(TelegramApi):
         return UserChatBoosts._dese(result)
 
 
+    async def get_user_profile_photos(
+        self,
+        user_id: int,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None
+    ) -> UserProfilePhotos:
+        '''
+        https://core.telegram.org/bots/api#getuserprofilephotos
+
+        Use this method to get a list of profile pictures for a user.
+        Returns a :obj:`~aiotgm.types.UserProfilePhotos` object.
+
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :param offset: Sequential number of the first photo to be returned. By default, all photos are returned.
+        :type offset: :obj:`int`, optional
+        :param limit: Limits the number of photos to be retrieved. Values between 1-100 are accepted. Defaults to :obj:`100`.
+        :type limit: :obj:`int`, optional
+        :rtype: :obj:`~aiotgm.types.UserProfilePhotos`
+        '''
+        params = {
+            'user_id': user_id
+        }
+        if offset is not None: params['offset'] = offset
+        if limit is not None: params['limit'] = limit
+        result = await super().get_user_profile_photos(params)
+        return UserProfilePhotos._dese(result)
+
+
 
 
 
@@ -2798,25 +2827,6 @@ class Client(TelegramApi):
         if reaction is not None: params['reaction'] = reaction
         if is_big is not None: params['is_big'] = is_big
         return await super().set_message_reaction(params)
-
-
-    async def get_user_profile_photos(
-        self,
-        user_id: int,
-        offset: Optional[int] = None,
-        limit: Optional[int] = None
-    ) -> UserProfilePhotos:
-        '''
-        https://core.telegram.org/bots/api#getuserprofilephotos
-        Use this method to get a list of profile pictures for a user. Returns a UserProfilePhotos object.
-        '''
-        params = {
-            'user_id': user_id
-        }
-        if offset is not None: params['offset'] = offset
-        if limit is not None: params['limit'] = limit
-        result = await super().get_user_profile_photos(params)
-        return UserProfilePhotos._dese(result)
 
 
     async def unban_chat_member(
