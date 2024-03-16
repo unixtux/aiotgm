@@ -2087,6 +2087,26 @@ class Client(TelegramApi):
         return BotName._dese(result)
 
 
+    async def get_my_short_description(
+        self,
+        language_code: Optional[str] = None
+    ) -> BotShortDescription:
+        '''
+        https://core.telegram.org/bots/api#getmyshortdescription
+
+        Use this method to get the current bot short description for the given
+        user language. Returns :obj:`~aiotgm.types.BotShortDescription` on success.
+
+        :param language_code: A two-letter ISO 639-1 language code or an empty string.
+        :type language_code: :obj:`str`, optional
+        :rtype: :obj:`~aiotgm.types.BotShortDescription`
+        '''
+        params = {}
+        if language_code is not None: params['language_code'] = language_code
+        result = await super().get_my_short_description(params)
+        return BotShortDescription._dese(result)
+
+
 
 
     async def get_updates(
@@ -3221,21 +3241,6 @@ class Client(TelegramApi):
         if short_description is not None: params['short_description'] = short_description
         if language_code is not None: params['language_code'] = language_code
         return await super().set_my_short_description(params)
-
-
-    async def get_my_short_description(
-        self,
-        language_code: Optional[str] = None
-    ) -> BotShortDescription:
-        '''
-        https://core.telegram.org/bots/api#getmyshortdescription
-        Use this method to get the current bot short description for
-        the given user language. Returns BotShortDescription on success.
-        '''
-        params = {}
-        if language_code is not None: params['language_code'] = language_code
-        result = await super().get_my_short_description(params)
-        return BotShortDescription._dese(result)
 
 
     async def set_chat_menu_button(
