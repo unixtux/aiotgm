@@ -2067,6 +2067,26 @@ class Client(TelegramApi):
         return BotDescription._dese(result)
 
 
+    async def get_my_name(
+        self,
+        language_code: Optional[str] = None
+    ) -> BotName:
+        '''
+        https://core.telegram.org/bots/api#getmyname
+
+        Use this method to get the current bot name for the given user language.
+        Returns :obj:`~aiotgm.types.BotName` on success.
+
+        :param language_code: A two-letter ISO 639-1 language code or an empty string.
+        :type language_code: :obj:`str`, optional
+        :rtype: :obj:`~aiotgm.types.BotName`
+        '''
+        params = {}
+        if language_code is not None: params['language_code'] = language_code
+        result = await super().get_my_name(params)
+        return BotName._dese(result)
+
+
 
 
     async def get_updates(
@@ -3169,20 +3189,6 @@ class Client(TelegramApi):
         if name is not None: params['name'] = name
         if language_code is not None: params['language_code'] = language_code
         return await super().set_my_name(params)
-
-
-    async def get_my_name(
-        self,
-        language_code: Optional[str] = None
-    ) -> BotName:
-        '''
-        https://core.telegram.org/bots/api#getmyname
-        Use this method to get the current bot name for the given user language. Returns BotName on success.
-        '''
-        params = {}
-        if language_code is not None: params['language_code'] = language_code
-        result = await super().get_my_name(params)
-        return BotName._dese(result)
 
 
     async def set_my_description(
