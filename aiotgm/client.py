@@ -2027,6 +2027,26 @@ class Client(TelegramApi):
         return [BotCommand._dese(bot_command) for bot_command in result]
 
 
+    async def get_my_default_administrator_rights(
+        self,
+        for_channels: Optional[bool] = None
+    ) -> ChatAdministratorRights:
+        '''
+        https://core.telegram.org/bots/api#getmydefaultadministratorrights
+
+        Use this method to get the current default administrator rights of the bot.
+        Returns :obj:`~aiotgm.types.ChatAdministratorRights` on success.
+
+        :param for_channels: Pass :obj:`True` to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned.
+        :type for_channels: :obj:`bool`, optional
+        :rtype: :obj:`~aiotgm.types.ChatAdministratorRights`
+        '''
+        params = {}
+        if for_channels is not None: params['for_channels'] = for_channels
+        result = await super().get_my_default_administrator_rights(params)
+        return ChatAdministratorRights._dese(result)
+
+
 
 
     async def get_updates(
@@ -3238,20 +3258,6 @@ class Client(TelegramApi):
         if rights is not None: params['rights'] = rights
         if for_channels is not None: params['for_channels'] = for_channels
         return await super().set_my_default_administrator_rights(params)
-
-
-    async def get_my_default_administrator_rights(
-        self,
-        for_channels: Optional[bool] = None
-    ) -> ChatAdministratorRights:
-        '''
-        https://core.telegram.org/bots/api#getmydefaultadministratorrights
-        Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
-        '''
-        params = {}
-        if for_channels is not None: params['for_channels'] = for_channels
-        result = await super().get_my_default_administrator_rights(params)
-        return ChatAdministratorRights._dese(result)
 
 
     async def stop_message_live_location(

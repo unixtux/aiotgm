@@ -549,6 +549,10 @@ class TelegramApi:
         method = 'getMyCommands'
         return await self._request(method, params)
 
+    async def get_my_default_administrator_rights(self, params: dict):
+        method = 'getMyDefaultAdministratorRights'
+        return await self._request(method, params)
+
 
 
     async def get_updates(self, params: dict, **kwargs):
@@ -762,10 +766,6 @@ class TelegramApi:
 
     async def set_my_default_administrator_rights(self, params: dict):
         method = 'setMyDefaultAdministratorRights'
-        return await self._request(method, params)
-
-    async def get_my_default_administrator_rights(self, params: dict):
-        method = 'getMyDefaultAdministratorRights'
         return await self._request(method, params)
 
     async def stop_message_live_location(self, params: dict):
