@@ -303,6 +303,7 @@ class Client(TelegramApi):
 
     async def long_polling(
         self,
+        *,
         timeout: int = 45,
         limit: Optional[int] = None,
         allowed_updates: Optional[list[str]] = None
