@@ -329,7 +329,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param timeout: Timeout in seconds for long polling. Should be higher than 30, short polling should be used for testing purposes only.
+        :param timeout: Timeout in seconds for `long polling <https://en.wikipedia.org/wiki/Push_technology#Long_polling>`_. Should be higher than 30, short polling should be used for testing purposes only.
         :type timeout: :obj:`int`
         :param limit: Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to :obj:`100`.
         :type limit: :obj:`int`, optional
