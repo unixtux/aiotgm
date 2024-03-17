@@ -1,6 +1,6 @@
 #!/bin/env python3
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 VERSION = __version__
 
 __all__ = (
