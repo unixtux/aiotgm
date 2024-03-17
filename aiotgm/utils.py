@@ -2,7 +2,7 @@
 
 __all__ = (
     'escape_markdown',
-    'seconds_until_next_hour',
+    'seconds_to_next_hour',
 )
 
 MARKDOWN_ESCAPES = {
@@ -29,7 +29,7 @@ MARKDOWN_ESCAPES = {
 def escape_markdown(text) -> str:
     return str(text).translate(str.maketrans(MARKDOWN_ESCAPES))
 
-def seconds_until_next_hour() -> float:
+def seconds_to_next_hour() -> float:
     from datetime import datetime
     now = datetime.now()
     return 3600 - (now.minute * 60 + now.second)
