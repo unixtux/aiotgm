@@ -147,6 +147,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import Message
 
             bot = aiotgm.Client('<your_api_token>')
@@ -154,6 +155,8 @@ class Client(TelegramApi):
             @bot.manage_message(lambda message: message.chat.id == xyz)
             async def foo(message: Message):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker:  A function that takes only one argument to check an incoming *message* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Message], Any]`
@@ -173,6 +176,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import Message
 
             bot = aiotgm.Client('<your_api_token>')
@@ -180,6 +184,8 @@ class Client(TelegramApi):
             @bot.manage_edited_message(lambda edited_message: edited_message.chat.id == xyz)
             async def foo(edited_message: Message):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *edited_message* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Message], Any]`
@@ -199,6 +205,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import Message
 
             bot = aiotgm.Client('<your_api_token>')
@@ -206,6 +213,8 @@ class Client(TelegramApi):
             @bot.manage_channel_post(lambda channel_post: channel_post.chat.id == xyz)
             async def foo(channel_post: Message):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *channel_post* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Message], Any]`
@@ -225,6 +234,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import Message
 
             bot = aiotgm.Client('<your_api_token>')
@@ -232,6 +242,8 @@ class Client(TelegramApi):
             @bot.manage_edited_channel_post(lambda edited_channel_post: edited_channel_post.chat.id == xyz)
             async def foo(edited_channel_post: Message):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *edited_channel_post* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Message], Any]`
@@ -251,6 +263,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import MessageReactionUpdated
 
             bot = aiotgm.Client('<your_api_token>')
@@ -258,6 +271,8 @@ class Client(TelegramApi):
             @bot.manage_message_reaction(lambda message_reaction: message_reaction.chat.id == xyz)
             async def foo(message_reaction: MessageReactionUpdated):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
@@ -277,6 +292,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import MessageReactionCountUpdated
 
             bot = aiotgm.Client('<your_api_token>')
@@ -284,6 +300,8 @@ class Client(TelegramApi):
             @bot.manage_message_reaction_count(lambda message_reaction_count: message_reaction_count.chat.id == xyz)
             async def foo(message_reaction_count: MessageReactionCountUpdated):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *message_reaction_count* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
@@ -303,6 +321,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import InlineQuery
 
             bot = aiotgm.Client('<your_api_token>')
@@ -310,6 +329,8 @@ class Client(TelegramApi):
             @bot.manage_inline_query(lambda inline_query: inline_query.from_user.id == xyz)
             async def foo(inline_query: InlineQuery):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *inline_query* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[InlineQuery], Any]`
@@ -329,6 +350,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import ChosenInlineResult
 
             bot = aiotgm.Client('<your_api_token>')
@@ -336,6 +358,8 @@ class Client(TelegramApi):
             @bot.manage_chosen_inline_result(lambda chosen_inline_result: chosen_inline_result.from_user.id == xyz)
             async def foo(chosen_inline_result: ChosenInlineResult):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *chosen_inline_result* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
@@ -355,6 +379,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import CallbackQuery
 
             bot = aiotgm.Client('<your_api_token>')
@@ -362,6 +387,8 @@ class Client(TelegramApi):
             @bot.manage_callback_query(lambda callback_query: callback_query.from_user.id == xyz)
             async def foo(callback_query: CallbackQuery):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *callback_query* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[CallbackQuery], Any]`
@@ -381,6 +408,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import ShippingQuery
 
             bot = aiotgm.Client('<your_api_token>')
@@ -388,6 +416,8 @@ class Client(TelegramApi):
             @bot.manage_shipping_query(lambda shipping_query: shipping_query.from_user.id == xyz)
             async def foo(shipping_query: ShippingQuery):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *shipping_query* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ShippingQuery], Any]`
@@ -407,6 +437,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import PreCheckoutQuery
 
             bot = aiotgm.Client('<your_api_token>')
@@ -414,6 +445,8 @@ class Client(TelegramApi):
             @bot.manage_pre_checkout_query(lambda pre_checkout_query: pre_checkout_query.from_user.id == xyz)
             async def foo(pre_checkout_query: PreCheckoutQuery):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *pre_checkout_query* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[PreCheckoutQuery], Any]`
@@ -433,6 +466,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import Poll
 
             bot = aiotgm.Client('<your_api_token>')
@@ -440,6 +474,8 @@ class Client(TelegramApi):
             @bot.manage_poll(lambda poll: poll.id == xyz)
             async def foo(poll: Poll):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *poll* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[Poll], Any]`
@@ -459,6 +495,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import PollAnswer
 
             bot = aiotgm.Client('<your_api_token>')
@@ -466,6 +503,8 @@ class Client(TelegramApi):
             @bot.manage_poll_answer(lambda poll_answer: poll_answer.poll_id == xyz)
             async def foo(poll_answer: PollAnswer):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *poll_answer* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[PollAnswer], Any]`
@@ -485,6 +524,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import ChatMemberUpdated
 
             bot = aiotgm.Client('<your_api_token>')
@@ -492,6 +532,8 @@ class Client(TelegramApi):
             @bot.manage_my_chat_member(lambda my_chat_member: my_chat_member.chat.id == xyz)
             async def foo(my_chat_member: ChatMemberUpdated):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *my_chat_member* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
@@ -511,6 +553,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import ChatMemberUpdated
 
             bot = aiotgm.Client('<your_api_token>')
@@ -518,6 +561,8 @@ class Client(TelegramApi):
             @bot.manage_chat_member(lambda chat_member: chat_member.chat.id == xyz)
             async def foo(chat_member: ChatMemberUpdated):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *chat_member* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
@@ -537,6 +582,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import ChatJoinRequest
 
             bot = aiotgm.Client('<your_api_token>')
@@ -544,6 +590,8 @@ class Client(TelegramApi):
             @bot.manage_chat_join_request(lambda chat_join_request: chat_join_request.chat.id == xyz)
             async def foo(chat_join_request: ChatJoinRequest):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *chat_join_request* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatJoinRequest], Any]`
@@ -563,6 +611,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import ChatBoostUpdated
 
             bot = aiotgm.Client('<your_api_token>')
@@ -570,6 +619,8 @@ class Client(TelegramApi):
             @bot.manage_chat_boost(lambda chat_boost: chat_boost.chat.id == xyz)
             async def foo(chat_boost: ChatBoostUpdated):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *chat_boost* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatBoostUpdated], Any]`
@@ -589,6 +640,7 @@ class Client(TelegramApi):
         .. code-block:: python3
 
             import aiotgm
+            import asyncio
             from aiotgm.types import ChatBoostRemoved
 
             bot = aiotgm.Client('<your_api_token>')
@@ -596,6 +648,8 @@ class Client(TelegramApi):
             @bot.manage_removed_chat_boost(lambda removed_chat_boost: removed_chat_boost.chat.id == xyz)
             async def foo(removed_chat_boost: ChatBoostRemoved):
                 ...
+
+            asyncio.run(bot.long_polling())
 
         :param checker: A function that takes only one argument to check an incoming *removed_chat_boost* :obj:`~aiotgm.types.Update`.
         :type checker: :obj:`Callable[[ChatBoostRemoved], Any]`
