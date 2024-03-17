@@ -43,11 +43,11 @@ Use the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aiot
 
     bot = aiotgm.Client('<your_api_token>')
 
-    @bot.manage_message()
+    @bot.manage_message(lambda msg: msg.text == '/start')
     async def foo(msg: Message):
         await bot.send_message(msg.chat.id, 'hello')
 
-    @bot.manage_callback_query()
+    @bot.manage_callback_query(lambda call: call.data == 'say_hello')
     async def foo(call: CallbackQuery):
         await bot.answer_callback_query(call.id, 'hello')
 

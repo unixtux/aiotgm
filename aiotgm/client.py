@@ -319,12 +319,13 @@ class Client(TelegramApi):
 
             import aiotgm
             import asyncio
+            from aiotgm.types import Message
 
             bot = aiotgm.Client('<your_api_token>')
 
-            @bot.manage_message(lambda msg: msg.text == '/start')
-            async def foo(msg):
-                ...
+            @bot.manage_message()
+            async def foo(msg: Message):
+                await bot.send_message(msg.chat.id, 'hello')
 
             asyncio.run(bot.long_polling())
 
