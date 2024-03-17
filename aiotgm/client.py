@@ -301,14 +301,50 @@ class Client(TelegramApi):
 
     # Processing new updates
 
-    async def long_polling(self, timeout: int = 45):
+    async def long_polling(
+        self,
+        timeout: int = 45,
+        limit: Optional[int] = None,
+        allowed_updates: Optional[list[str]] = None
+    ):
+        '''
+        Using this method with the `asyncio <https://docs.python.org/3/library/asyncio.html>`_
+        module, you receive :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server
+        and manage them using decorators method like :meth:`~aiotgm.Client.manage_message`.
 
+        Usage:
+
+        .. code-block:: python3
+
+            import aiotgm
+            import asyncio
+
+            bot = aiotgm.Client('<your_api_token>')
+
+            @bot.manage_message(lambda msg: msg.text == '/start')
+            async def foo(msg):
+                ...
+
+            asyncio.run(bot.long_polling())
+
+        :param timeout: Timeout in seconds for long polling. Should be higher than 30, short polling should be used for testing purposes only.
+        :type timeout: :obj:`int`
+        :param limit: Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to :obj:`100`.
+        :type limit: :obj:`int`, optional
+        :param allowed_updates:
+            A JSON-serialized list of the update types you want your bot to receive. For example, specify ``["message", "edited_channel_post", "callback_query"]`` to only receive updates of these types. See :obj:`~aiotgm.types.Update` for a complete list of available update types. Specify an empty list to receive all update types except *chat_member*, *message_reaction*, and *message_reaction_count* (default). If not specified, the previous setting will be used.
+
+            Please note that this parameter doesn't affect updates created before the call to the :meth:`~aiotgm.Client.get_updates`, so unwanted updates may be received for a short period of time.
+        :type allowed_updates: :obj:`list` of :obj:`str`, optional
+        '''
         if not type(timeout) in (int, float):
             raise TypeError(
                 'long polling timeout must be int or float,'
                 ' got {}.'.format(timeout.__class__.__name__)
             )
         params = {'timeout': timeout}
+        if limit is not None: params['limit'] = limit
+        if allowed_updates is not None: params['allowed_updates'] = allowed_updates
         await self.get_me()
         logger.info('Welcome @{}.'.format(self.user.username))
         logger.info('long polling has been started.')

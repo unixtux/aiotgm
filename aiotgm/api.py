@@ -106,7 +106,7 @@ class TelegramError(Exception):
     '''
     def __init__(self, error_code: int, description: str):
         self.error_code = error_code
-        self.description = description
+        self.description = str(description)
 
     def __str__(self) -> str:
         return '[Errno {}] {}'.format(self.error_code, self.description)

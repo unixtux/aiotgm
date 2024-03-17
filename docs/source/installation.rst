@@ -33,14 +33,12 @@ Update the module regurarly with the following command.
 Usage
 -----
 
-Using the method :meth:`~aiotgm.Client.long_polling` you manage every incoming :obj:`~aiotgm.types.Update`.
+Using the method :meth:`~aiotgm.Client.long_polling` you manage :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server.
 
 .. code-block:: python3
 
-    #!/bin/env python3
-
-    import asyncio
     import aiotgm
+    import asyncio
     from aiotgm.types import Message, CallbackQuery
 
     bot = aiotgm.Client('<your_api_token>')
