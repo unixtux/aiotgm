@@ -1,6 +1,6 @@
-=================
-*Available Types*
-=================
+===============
+Available Types
+===============
 
 All the names of the types are exactly the same described in the `offical documentation <https://core.telegram.org/bots/api#available-types>`_.
 

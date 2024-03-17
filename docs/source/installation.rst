@@ -1,22 +1,22 @@
-=============
-*Get Started*
-=============
+===========
+Get Started
+===========
 
-Prerequisites
--------------
+*Prerequisites*
+---------------
 
 You require a good python knowledge with the `asyncio module <https://docs.python.org/3/library/asyncio.html>`_
 and a Telegram Bot API token, you can get it via `@BotFather <https://t.me/botfather>`_.
 
-Dependencies
-------------
+*Dependencies*
+--------------
 
 * Python >= 3.8
 * `aiohttp <https://github.com/aio-libs/aiohttp>`_
 * Optional `ujson <https://github.com/ultrajson/ultrajson>`_ & `certifi <https://github.com/certifi/python-certifi>`_
 
-Installation
-------------
+*Installation*
+--------------
 
 Install the module using `pip <https://pypi.org/project/aiotgm/>`_ from your shell.
 
@@ -30,8 +30,8 @@ Update the module regurarly with the following command.
 
     $ pip install -U aiotgm
 
-Usage
------
+*Usage*
+-------
 
 Use the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server.
 

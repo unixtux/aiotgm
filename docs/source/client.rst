@@ -1,6 +1,6 @@
-==================
-*Client Reference*
-==================
+================
+Client Reference
+================
 
 This page refers to the :obj:`~aiotgm.Client` and all its methods, which are the same described in the
 `official documentation <https://core.telegram.org/bots/api#available-methods>`_, changed from camelCase to snake_case.

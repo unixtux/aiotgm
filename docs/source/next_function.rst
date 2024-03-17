@@ -1,6 +1,6 @@
-==============
-*NextFunction*
-==============
+============
+NextFunction
+============
 
 .. autoclass:: aiotgm.NextFunction
     :members:

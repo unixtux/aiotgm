@@ -1,6 +1,6 @@
-============
-*Exceptions*
-============
+==========
+Exceptions
+==========
 
 .. autoexception:: aiotgm.TelegramError
     :members:
