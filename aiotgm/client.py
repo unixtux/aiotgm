@@ -309,8 +309,8 @@ class Client(TelegramApi):
         allowed_updates: Optional[list[str]] = None
     ):
         '''
-        Using this method with the `asyncio <https://docs.python.org/3/library/asyncio.html>`_
-        module, you receive :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server
+        Use this method with the `asyncio <https://docs.python.org/3/library/asyncio.html>`_
+        module, to receive :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server
         and manage them using decorators method like :meth:`~aiotgm.Client.manage_message`.
 
         Usage:

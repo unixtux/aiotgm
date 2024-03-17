@@ -33,7 +33,7 @@ Update the module regurarly with the following command.
 Usage
 -----
 
-Using the method :meth:`~aiotgm.Client.long_polling` you manage :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server.
+Use the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server.
 
 .. code-block:: python3
 
@@ -53,7 +53,7 @@ Using the method :meth:`~aiotgm.Client.long_polling` you manage :obj:`updates <a
 
     asyncio.run(bot.long_polling())
 
-There are 18 decorator method to manage differrent updates:
+There are 18 decorator method to manage differrent :obj:`updates <aiotgm.types.Update>`:
 
 * :meth:`~aiotgm.Client.manage_message`
 * :meth:`~aiotgm.Client.manage_edited_message`
