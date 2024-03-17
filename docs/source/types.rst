@@ -11,10 +11,10 @@ All the names of the types are exactly the same described in the `offical docume
 
 .. code-block:: python3
 
-    from aiotgm import Client
+    import aiotgm
     from aiotgm.types import Message
 
-    bot = Client('<yor_api_token>')
+    bot = aiotgm.Client('<yor_api_token>')
 
     @bot.manage_message()
     async def foo(msg: Message):
