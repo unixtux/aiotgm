@@ -2791,6 +2791,31 @@ class Client(TelegramApi):
         return await super().promote_chat_member(params)
 
 
+    async def reopen_forum_topic(
+        self,
+        chat_id: Union[int, str],
+        message_thread_id: int
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#reopenforumtopic
+
+        Use this method to reopen a closed topic in a forum supergroup chat. The bot must
+        be an administrator in the chat for this to work and must have the *can_manage_topics*
+        administrator rights, unless it is the creator of the topic. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread of the forum topic.
+        :type message_thread_id: :obj:`int`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_thread_id': message_thread_id
+        }
+        return await super().reopen_forum_topic(params)
+
+
 
 
 
@@ -3610,24 +3635,6 @@ class Client(TelegramApi):
             'sticker_set_name': sticker_set_name
         }
         return await super().set_chat_sticker_set(params)
-
-
-    async def reopen_forum_topic(
-        self,
-        chat_id: Union[int, str],
-        message_thread_id: int
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#reopenforumtopic
-        Use this method to reopen a closed topic in a forum supergroup chat. The bot must
-        be an administrator in the chat for this to work and must have the can_manage_topics
-        administrator rights, unless it is the creator of the topic. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'message_thread_id': message_thread_id
-        }
-        return await super().reopen_forum_topic(params)
 
 
     async def unpin_all_forum_topic_messages(

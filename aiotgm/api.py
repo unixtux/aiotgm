@@ -601,6 +601,10 @@ class TelegramApi:
         method = 'promoteChatMember'
         return await self._request(method, params)
 
+    async def reopen_forum_topic(self, params: dict):
+        method = 'reopenForumTopic'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -726,10 +730,6 @@ class TelegramApi:
 
     async def set_chat_sticker_set(self, params: dict):
         method = 'setChatStickerSet'
-        return await self._request(method, params)
-
-    async def reopen_forum_topic(self, params: dict):
-        method = 'reopenForumTopic'
         return await self._request(method, params)
 
     async def unpin_all_forum_topic_messages(self, params: dict):
