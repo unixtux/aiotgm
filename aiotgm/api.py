@@ -617,6 +617,11 @@ class TelegramApi:
         method = 'revokeChatInviteLink'
         return await self._request(method, params)
 
+    async def send_animation(self, params: dict):
+        method = 'sendAnimation'
+        files = _get_files(params, 'animation', 'thumbnail')
+        return await self._request(method, params, files)
+
 
 
     async def upload_sticker_file(self, params: dict):
@@ -646,11 +651,6 @@ class TelegramApi:
     async def send_video(self, params: dict):
         method = 'sendVideo'
         files = _get_files(params, 'video', 'thumbnail')
-        return await self._request(method, params, files)
-
-    async def send_animation(self, params: dict):
-        method = 'sendAnimation'
-        files = _get_files(params, 'animation', 'thumbnail')
         return await self._request(method, params, files)
 
     async def send_voice(self, params: dict):
