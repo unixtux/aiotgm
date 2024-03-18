@@ -593,6 +593,10 @@ class TelegramApi:
         method = 'logOut'
         return await self._request(method)
 
+    async def pin_chat_message(self, params: dict):
+        method = 'pinChatMessage'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -710,10 +714,6 @@ class TelegramApi:
 
     async def set_chat_description(self, params: dict):
         method = 'setChatDescription'
-        return await self._request(method, params)
-
-    async def pin_chat_message(self, params: dict):
-        method = 'pinChatMessage'
         return await self._request(method, params)
 
     async def unpin_chat_message(self, params: dict):

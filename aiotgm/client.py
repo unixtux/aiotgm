@@ -2677,6 +2677,35 @@ class Client(TelegramApi):
         return await super().log_out()
 
 
+    async def pin_chat_message(
+        self,
+        chat_id: Union[int, str],
+        message_id: int,
+        disable_notification: Optional[bool] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#pinchatmessage
+
+        Use this method to add a message to the list of pinned messages in a chat. If the chat is not a
+        private chat, the bot must be an administrator in the chat for this to work and must have the *can_pin_messages*
+        administrator right in a supergroup or *can_edit_messages* administrator right in a channel. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param message_id: Identifier of a message to pin.
+        :type message_id: :obj:`int`
+        :param disable_notification: Pass :obj:`True` if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
+        :type disable_notification: :obj:`bool`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_id': message_id
+        }
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        return await super().pin_chat_message(params)
+
+
 
 
 
@@ -3492,26 +3521,6 @@ class Client(TelegramApi):
         }
         if description is not None: params['description'] = description
         return await super().set_chat_description(params)
-
-
-    async def pin_chat_message(
-        self,
-        chat_id: Union[int, str],
-        message_id: int,
-        disable_notification: Optional[bool] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#pinchatmessage
-        Use this method to add a message to the list of pinned messages in a chat. If the chat is not a
-        private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages'
-        administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'message_id': message_id
-        }
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        return await super().pin_chat_message(params)
 
 
     async def unpin_chat_message(
