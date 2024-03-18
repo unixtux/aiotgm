@@ -605,6 +605,10 @@ class TelegramApi:
         method = 'reopenForumTopic'
         return await self._request(method, params)
 
+    async def reopen_general_forum_topic(self, params: dict):
+        method = 'reopenGeneralForumTopic'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -734,10 +738,6 @@ class TelegramApi:
 
     async def unpin_all_forum_topic_messages(self, params: dict):
         method = 'unpinAllForumTopicMessages'
-        return await self._request(method, params)
-
-    async def reopen_general_forum_topic(self, params: dict):
-        method = 'reopenGeneralForumTopic'
         return await self._request(method, params)
 
     async def unhide_general_forum_topic(self, params: dict):

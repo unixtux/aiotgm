@@ -2816,6 +2816,27 @@ class Client(TelegramApi):
         return await super().reopen_forum_topic(params)
 
 
+    async def reopen_general_forum_topic(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#reopengeneralforumtopic
+
+        Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be
+        an administrator in the chat for this to work and must have the *can_manage_topics* administrator
+        rights. The topic will be automatically unhidden if it was hidden. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        return await super().reopen_general_forum_topic(params)
+
+
 
 
 
@@ -3653,22 +3674,6 @@ class Client(TelegramApi):
             'message_thread_id': message_thread_id
         }
         return await super().unpin_all_forum_topic_messages(params)
-
-
-    async def reopen_general_forum_topic(
-        self,
-        chat_id: Union[int, str]
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#reopengeneralforumtopic
-        Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be
-        an administrator in the chat for this to work and must have the can_manage_topics administrator
-        rights. The topic will be automatically unhidden if it was hidden. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        return await super().reopen_general_forum_topic(params)
 
 
     async def unhide_general_forum_topic(
