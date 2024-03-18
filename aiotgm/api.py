@@ -609,6 +609,10 @@ class TelegramApi:
         method = 'reopenGeneralForumTopic'
         return await self._request(method, params)
 
+    async def restrict_chat_member(self, params: dict):
+        method = 'restrictChatMember'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -689,10 +693,6 @@ class TelegramApi:
 
     async def unban_chat_member(self, params: dict):
         method = 'unbanChatMember'
-        return await self._request(method, params)
-
-    async def restrict_chat_member(self, params: dict):
-        method = 'restrictChatMember'
         return await self._request(method, params)
 
     async def set_chat_administrator_custom_title(self, params: dict):

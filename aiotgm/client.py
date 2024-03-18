@@ -2837,6 +2837,43 @@ class Client(TelegramApi):
         return await super().reopen_general_forum_topic(params)
 
 
+    async def restrict_chat_member(
+        self,
+        chat_id: Union[int, str],
+        user_id: int,
+        permissions: ChatPermissions,
+        use_independent_chat_permissions: Optional[bool] = None,
+        until_date: Optional[int] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#restrictchatmember
+
+        Use this method to restrict a user in a supergroup. The bot must be an administrator in
+        the supergroup for this to work and must have the appropriate administrator rights. Pass
+        :obj:`True` for all permissions to lift restrictions from a user. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :param permissions: A JSON-serialized object for new user permissions.
+        :type permissions: :obj:`~aiotgm.types.ChatPermissions`
+        :param use_independent_chat_permissions: Pass :obj:`True` if chat permissions are set independently. Otherwise, the *can_send_other_messages* and *can_add_web_page_previews* permissions will imply the *can_send_messages*, *can_send_audios*, *can_send_documents*, *can_send_photos*, *can_send_videos*, *can_send_video_notes*, and *can_send_voice_notes* permissions; the *can_send_polls* permission will imply the *can_send_messages* permission.
+        :type use_independent_chat_permissions: :obj:`bool`, optional
+        :param until_date: Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever.
+        :type until_date: :obj:`int`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id,
+            'permissions': permissions
+        }
+        if use_independent_chat_permissions is not None: params['use_independent_chat_permissions'] = use_independent_chat_permissions
+        if until_date is not None: params['until_date'] = until_date
+        return await super().restrict_chat_member(params)
+
+
 
 
 
@@ -3451,30 +3488,6 @@ class Client(TelegramApi):
         }
         if only_if_banned is not None: params['only_if_banned'] = only_if_banned
         return await super().unban_chat_member(params)
-
-
-    async def restrict_chat_member(
-        self,
-        chat_id: Union[int, str],
-        user_id: int,
-        permissions: ChatPermissions,
-        use_independent_chat_permissions: Optional[bool] = None,
-        until_date: Optional[int] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#restrictchatmember
-        Use this method to restrict a user in a supergroup. The bot must be an administrator in
-        the supergroup for this to work and must have the appropriate administrator rights.
-        Pass True for all permissions to lift restrictions from a user. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id,
-            'permissions': permissions
-        }
-        if use_independent_chat_permissions is not None: params['use_independent_chat_permissions'] = use_independent_chat_permissions
-        if until_date is not None: params['until_date'] = until_date
-        return await super().restrict_chat_member(params)
 
 
     async def set_chat_administrator_custom_title(
