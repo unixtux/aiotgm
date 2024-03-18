@@ -2903,6 +2903,26 @@ class Client(TelegramApi):
 
 
 
+    async def upload_sticker_file(
+        self,
+        user_id: int,
+        sticker: InputFile,
+        sticker_format: str
+    ) -> File:
+        '''
+        https://core.telegram.org/bots/api#uploadstickerfile
+        Use this method to upload a file with a sticker for later use in the createNewStickerSet and
+        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
+        '''
+        params = {
+            'user_id': user_id,
+            'sticker': sticker,
+            'sticker_format': sticker_format
+        }
+        result = await super().upload_sticker_file(params)
+        return File._dese(result)
+
+
     async def send_message(
         self,
         chat_id: Union[int, str],
@@ -3896,26 +3916,6 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_sticker(params)
         return Message._dese(result)
-
-
-    async def upload_sticker_file(
-        self,
-        user_id: int,
-        sticker: InputFile,
-        sticker_format: str
-    ) -> File:
-        '''
-        https://core.telegram.org/bots/api#uploadstickerfile
-        Use this method to upload a file with a sticker for later use in the createNewStickerSet and
-        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
-        '''
-        params = {
-            'user_id': user_id,
-            'sticker': sticker,
-            'sticker_format': sticker_format
-        }
-        result = await super().upload_sticker_file(params)
-        return File._dese(result)
 
 
     async def set_sticker_position_in_set(
