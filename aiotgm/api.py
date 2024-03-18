@@ -597,6 +597,10 @@ class TelegramApi:
         method = 'pinChatMessage'
         return await self._request(method, params)
 
+    async def promote_chat_member(self, params: dict):
+        method = 'promoteChatMember'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -681,10 +685,6 @@ class TelegramApi:
 
     async def restrict_chat_member(self, params: dict):
         method = 'restrictChatMember'
-        return await self._request(method, params)
-
-    async def promote_chat_member(self, params: dict):
-        method = 'promoteChatMember'
         return await self._request(method, params)
 
     async def set_chat_administrator_custom_title(self, params: dict):

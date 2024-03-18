@@ -2706,6 +2706,91 @@ class Client(TelegramApi):
         return await super().pin_chat_message(params)
 
 
+    async def promote_chat_member(
+        self,
+        chat_id: Union[int, str],
+        user_id: int,
+        is_anonymous: Optional[bool] = None,
+        can_manage_chat: Optional[bool] = None,
+        can_delete_messages: Optional[bool] = None,
+        can_manage_video_chats: Optional[bool] = None,
+        can_restrict_members: Optional[bool] = None,
+        can_promote_members: Optional[bool] = None,
+        can_change_info: Optional[bool] = None,
+        can_invite_users: Optional[bool] = None,
+        can_post_stories: Optional[bool] = None,
+        can_edit_stories: Optional[bool] = None,
+        can_delete_stories: Optional[bool] = None,
+        can_post_messages: Optional[bool] = None,
+        can_edit_messages: Optional[bool] = None,
+        can_pin_messages: Optional[bool] = None,
+        can_manage_topics: Optional[bool] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#promotechatmember
+
+        Use this method to promote or demote a user in a supergroup or a channel. The bot must be
+        an administrator in the chat for this to work and must have the appropriate administrator
+        rights. Pass :obj:`False` for all boolean parameters to demote a user. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :param is_anonymous: Pass :obj:`True` if the administrator's presence in the chat is hidden.
+        :type is_anonymous: :obj:`bool`, optional
+        :param can_manage_chat: Pass :obj:`True` if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
+        :type can_manage_chat: :obj:`bool`, optional
+        :param can_delete_messages: Pass :obj:`True` if the administrator can delete messages of other users.
+        :type can_delete_messages: :obj:`bool`, optional
+        :param can_manage_video_chats: Pass :obj:`True` if the administrator can manage video chats.
+        :type can_manage_video_chats: :obj:`bool`, optional
+        :param can_restrict_members: Pass :obj:`True` if the administrator can restrict, ban or unban chat members, or access supergroup statistics.
+        :type can_restrict_members: :obj:`bool`, optional
+        :param can_promote_members: Pass :obj:`True` if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by him).
+        :type can_promote_members: :obj:`bool`, optional
+        :param can_change_info: Pass :obj:`True` if the administrator can change chat title, photo and other settings.
+        :type can_change_info: :obj:`bool`, optional
+        :param can_invite_users: Pass :obj:`True` if the administrator can invite new users to the chat.
+        :type can_invite_users: :obj:`bool`, optional
+        :param can_post_stories: Pass :obj:`True` if the administrator can post stories to the chat.
+        :type can_post_stories: :obj:`bool`, optional
+        :param can_edit_stories: Pass :obj:`True` if the administrator can edit stories posted by other users.
+        :type can_edit_stories: :obj:`bool`, optional
+        :param can_delete_stories: Pass :obj:`True` if the administrator can delete stories posted by other users.
+        :type can_delete_stories: :obj:`bool`, optional
+        :param can_post_messages: Pass :obj:`True` if the administrator can post messages in the channel, or access channel statistics; for channels only.
+        :type can_post_messages: :obj:`bool`, optional
+        :param can_edit_messages: Pass :obj:`True` if the administrator can edit messages of other users and can pin messages; for channels only.
+        :type can_edit_messages: :obj:`bool`, optional
+        :param can_pin_messages: Pass :obj:`True` if the administrator can pin messages; for supergroups only.
+        :type can_pin_messages: :obj:`bool`, optional
+        :param can_manage_topics: Pass :obj:`True` if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only.
+        :type can_manage_topics: :obj:`bool`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+        if is_anonymous is not None: params['is_anonymous'] = is_anonymous
+        if can_manage_chat is not None: params['can_manage_chat'] = can_manage_chat
+        if can_delete_messages is not None: params['can_delete_messages'] = can_delete_messages
+        if can_manage_video_chats is not None: params['can_manage_video_chats'] = can_manage_video_chats
+        if can_restrict_members is not None: params['can_restrict_members'] = can_restrict_members
+        if can_promote_members is not None: params['can_promote_members'] = can_promote_members
+        if can_change_info is not None: params['can_change_info'] = can_change_info
+        if can_invite_users is not None: params['can_invite_users'] = can_invite_users
+        if can_post_stories is not None: params['can_post_stories'] = can_post_stories
+        if can_edit_stories is not None: params['can_edit_stories'] = can_edit_stories
+        if can_delete_stories is not None: params['can_delete_stories'] = can_delete_stories
+        if can_post_messages is not None: params['can_post_messages'] = can_post_messages
+        if can_edit_messages is not None: params['can_edit_messages'] = can_edit_messages
+        if can_pin_messages is not None: params['can_pin_messages'] = can_pin_messages
+        if can_manage_topics is not None: params['can_manage_topics'] = can_manage_topics
+        return await super().promote_chat_member(params)
+
+
 
 
 
@@ -3344,54 +3429,6 @@ class Client(TelegramApi):
         if use_independent_chat_permissions is not None: params['use_independent_chat_permissions'] = use_independent_chat_permissions
         if until_date is not None: params['until_date'] = until_date
         return await super().restrict_chat_member(params)
-
-
-    async def promote_chat_member(
-        self,
-        chat_id: Union[int, str],
-        user_id: int,
-        is_anonymous: Optional[bool] = None,
-        can_manage_chat: Optional[bool] = None,
-        can_delete_messages: Optional[bool] = None,
-        can_manage_video_chats: Optional[bool] = None,
-        can_restrict_members: Optional[bool] = None,
-        can_promote_members: Optional[bool] = None,
-        can_change_info: Optional[bool] = None,
-        can_invite_users: Optional[bool] = None,
-        can_post_messages: Optional[bool] = None,
-        can_edit_messages: Optional[bool] = None,
-        can_pin_messages: Optional[bool] = None,
-        can_post_stories: Optional[bool] = None,
-        can_edit_stories: Optional[bool] = None,
-        can_delete_stories: Optional[bool] = None,
-        can_manage_topics: Optional[bool] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#promotechatmember
-        Use this method to promote or demote a user in a supergroup or a channel. The bot must be
-        an administrator in the chat for this to work and must have the appropriate administrator
-        rights. Pass False for all boolean parameters to demote a user. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id
-        }
-        if is_anonymous is not None: params['is_anonymous'] = is_anonymous
-        if can_manage_chat is not None: params['can_manage_chat'] = can_manage_chat
-        if can_delete_messages is not None: params['can_delete_messages'] = can_delete_messages
-        if can_manage_video_chats is not None: params['can_manage_video_chats'] = can_manage_video_chats
-        if can_restrict_members is not None: params['can_restrict_members'] = can_restrict_members
-        if can_promote_members is not None: params['can_promote_members'] = can_promote_members
-        if can_change_info is not None: params['can_change_info'] = can_change_info
-        if can_invite_users is not None: params['can_invite_users'] = can_invite_users
-        if can_post_messages is not None: params['can_post_messages'] = can_post_messages
-        if can_edit_messages is not None: params['can_edit_messages'] = can_edit_messages
-        if can_pin_messages is not None: params['can_pin_messages'] = can_pin_messages
-        if can_post_stories is not None: params['can_post_stories'] = can_post_stories
-        if can_edit_stories is not None: params['can_edit_stories'] = can_edit_stories
-        if can_delete_stories is not None: params['can_delete_stories'] = can_delete_stories
-        if can_manage_topics is not None: params['can_manage_topics'] = can_manage_topics
-        return await super().promote_chat_member(params)
 
 
     async def set_chat_administrator_custom_title(
