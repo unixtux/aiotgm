@@ -613,6 +613,10 @@ class TelegramApi:
         method = 'restrictChatMember'
         return await self._request(method, params)
 
+    async def revoke_chat_invite_link(self, params: dict):
+        method = 'revokeChatInviteLink'
+        return await self._request(method, params)
+
 
 
     async def send_message(self, params: dict):
@@ -705,10 +709,6 @@ class TelegramApi:
 
     async def set_chat_permissions(self, params: dict):
         method = 'setChatPermissions'
-        return await self._request(method, params)
-
-    async def revoke_chat_invite_link(self, params: dict):
-        method = 'revokeChatInviteLink'
         return await self._request(method, params)
 
     async def set_chat_photo(self, params: dict):

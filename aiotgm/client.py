@@ -2874,6 +2874,32 @@ class Client(TelegramApi):
         return await super().restrict_chat_member(params)
 
 
+    async def revoke_chat_invite_link(
+        self,
+        chat_id: Union[int, str],
+        invite_link: str
+    ) -> ChatInviteLink:
+        '''
+        https://core.telegram.org/bots/api#revokechatinvitelink
+
+        Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new
+        link is automatically generated. The bot must be an administrator in the chat for this to work and must have
+        the appropriate administrator rights. Returns the revoked invite link as :obj:`~aiotgm.types.ChatInviteLink` object.
+
+        :param chat_id: Unique identifier of the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param invite_link: The invite link to revoke.
+        :type invite_link: :obj:`str`
+        :rtype: :obj:`~aiotgm.types.ChatInviteLink`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'invite_link': invite_link
+        }
+        result = await super().revoke_chat_invite_link(params)
+        return ChatInviteLink._dese(result)
+
+
 
 
 
@@ -3544,25 +3570,6 @@ class Client(TelegramApi):
         }
         if use_independent_chat_permissions is not None: params['use_independent_chat_permissions'] = use_independent_chat_permissions
         return await super().set_chat_permissions(params)
-
-
-    async def revoke_chat_invite_link(
-        self,
-        chat_id: Union[int, str],
-        invite_link: str
-    ) -> ChatInviteLink:
-        '''
-        https://core.telegram.org/bots/api#revokechatinvitelink
-        Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new
-        link is automatically generated. The bot must be an administrator in the chat for this to work and must
-        have the appropriate administrator rights. Returns the revoked invite link as ChatInviteLink object.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'invite_link': invite_link
-        }
-        result = await super().revoke_chat_invite_link(params)
-        return ChatInviteLink._dese(result)
 
 
     async def set_chat_photo(
