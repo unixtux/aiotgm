@@ -158,7 +158,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker:  A function that takes only one argument to check an incoming *message* :obj:`~aiotgm.types.Update`.
+        :param checker:  A function that takes only one argument to check an incoming *message* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
@@ -187,7 +187,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *edited_message* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *edited_message* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
@@ -216,7 +216,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *channel_post* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *channel_post* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
@@ -245,7 +245,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *edited_channel_post* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *edited_channel_post* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
@@ -274,7 +274,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[MessageReactionUpdated], Awaitable]):
@@ -303,7 +303,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *message_reaction_count* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *message_reaction_count* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[MessageReactionCountUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[MessageReactionCountUpdated], Awaitable]):
@@ -332,7 +332,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *inline_query* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *inline_query* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[InlineQuery], Any]`
         '''
         def wrap(coroutine: Callable[[InlineQuery], Awaitable]):
@@ -361,7 +361,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *chosen_inline_result* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *chosen_inline_result* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[ChosenInlineResult], Any]`
         '''
         def wrap(coroutine: Callable[[ChosenInlineResult], Awaitable]):
@@ -390,7 +390,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *callback_query* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *callback_query* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[CallbackQuery], Any]`
         '''
         def wrap(coroutine: Callable[[CallbackQuery], Awaitable]):
@@ -419,7 +419,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *shipping_query* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *shipping_query* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[ShippingQuery], Any]`
         '''
         def wrap(coroutine: Callable[[ShippingQuery], Awaitable]):
@@ -448,7 +448,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *pre_checkout_query* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *pre_checkout_query* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[PreCheckoutQuery], Any]`
         '''
         def wrap(coroutine: Callable[[PreCheckoutQuery], Awaitable]):
@@ -477,7 +477,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *poll* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *poll* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[Poll], Any]`
         '''
         def wrap(coroutine: Callable[[Poll], Awaitable]):
@@ -506,7 +506,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *poll_answer* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *poll_answer* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[PollAnswer], Any]`
         '''
         def wrap(coroutine: Callable[[PollAnswer], Awaitable]):
@@ -535,7 +535,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *my_chat_member* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *my_chat_member* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
@@ -564,7 +564,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *chat_member* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *chat_member* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[ChatMemberUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatMemberUpdated], Awaitable]):
@@ -593,7 +593,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *chat_join_request* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *chat_join_request* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[ChatJoinRequest], Any]`
         '''
         def wrap(coroutine: Callable[[ChatJoinRequest], Awaitable]):
@@ -622,7 +622,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *chat_boost* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *chat_boost* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[ChatBoostUpdated], Any]`
         '''
         def wrap(coroutine: Callable[[ChatBoostUpdated], Awaitable]):
@@ -651,7 +651,7 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *removed_chat_boost* :obj:`~aiotgm.types.Update`.
+        :param checker: A function that takes only one argument to check an incoming *removed_chat_boost* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[ChatBoostRemoved], Any]`
         '''
         def wrap(coroutine: Callable[[ChatBoostRemoved], Awaitable]):
