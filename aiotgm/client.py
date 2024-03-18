@@ -2980,6 +2980,83 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
+    async def send_audio(
+        self,
+        chat_id: Union[int, str],
+        audio: Union[InputFile, str],
+        message_thread_id: Optional[int] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        duration: Optional[int] = None,
+        performer: Optional[str] = None,
+        title: Optional[str] = None,
+        thumbnail: Optional[Union[InputFile, str]] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
+        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+    ) -> Message:
+        '''
+        https://core.telegram.org/bots/api#sendaudio
+
+        Use this method to send audio files, if you want Telegram clients to display them in the music
+        player. Your audio must be in the .MP3 or .M4A format. On success, the sent :obj:`~aiotgm.types.Message`
+        is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the
+        future. For sending voice messages, use the :meth:`~aiotgm.Client.send_voice` method instead.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param audio: Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+        :type audio: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param caption: Audio caption, 0-1024 characters after entities parsing.
+        :type caption: :obj:`str`, optional
+        :param parse_mode: Mode for parsing entities in the audio caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        :type parse_mode: :obj:`str`, optional
+        :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+        :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param duration: Duration of the audio in seconds.
+        :type duration: :obj:`int`, optional
+        :param performer: Performer.
+        :type performer: :obj:`str`, optional
+        :param title: Track name.
+        :type title: :obj:`str`, optional
+        :param thumbnail: Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+        :type thumbnail: :obj:`~aiotgm.types.InputFile` or :obj:`str`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :rtype: :obj:`~aiotgm.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'audio': audio
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if caption is not None: params['caption'] = caption
+        if parse_mode is not None: params['parse_mode'] = parse_mode
+        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
+        if caption_entities is not None: params['caption_entities'] = caption_entities
+        if duration is not None: params['duration'] = duration
+        if performer is not None: params['performer'] = performer
+        if title is not None: params['title'] = title
+        if thumbnail is not None: params['thumbnail'] = thumbnail
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().send_audio(params)
+        return Message._dese(result)
+
+
 
 
 
@@ -3072,52 +3149,6 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_photo(params)
-        return Message._dese(result)
-
-
-    async def send_audio(
-        self,
-        chat_id: Union[int, str],
-        audio: Union[InputFile, str],
-        message_thread_id: Optional[int] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        duration: Optional[int] = None,
-        performer: Optional[str] = None,
-        title: Optional[str] = None,
-        thumbnail: Optional[Union[InputFile, str]] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
-    ) -> Message:
-        '''
-        https://core.telegram.org/bots/api#sendaudio
-        Use this method to send audio files, if you want Telegram clients to display them in the music
-        player. Your audio must be in the .MP3 or .M4A format. On success, the sent Message is returned.
-        Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
-        For sending voice messages, use the sendVoice method instead.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'audio': audio
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if caption is not None: params['caption'] = caption
-        if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
-        if caption_entities is not None: params['caption_entities'] = caption_entities
-        if duration is not None: params['duration'] = duration
-        if performer is not None: params['performer'] = performer
-        if title is not None: params['title'] = title
-        if thumbnail is not None: params['thumbnail'] = thumbnail
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().send_audio(params)
         return Message._dese(result)
 
 
