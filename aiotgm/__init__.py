@@ -11,6 +11,6 @@ __all__ = (
 from .client import (
     logger,
     Client,
-    NextFunction,
     TelegramError,
 )
+from .update_manager import NextFunction
