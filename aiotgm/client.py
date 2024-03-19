@@ -3265,6 +3265,52 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
+    async def send_game(
+        self,
+        chat_id: int,
+        game_short_name: str,
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None
+    ) -> Message:
+        '''
+        https://core.telegram.org/bots/api#sendgame
+
+        Use this method to send a game.
+        On success, the sent :obj:`~aiotgm.types.Message` is returned.
+
+        :param chat_id: Unique identifier for the target chat.
+        :type chat_id: :obj:`int`
+        :param game_short_name: Short name of the game, serves as the unique identifier for the game. Set up your games via `@BotFather <https://t.me/botfather>`_.
+        :type game_short_name: :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :param reply_markup: A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_. If empty, one 'Play game_title' button will be shown. If not empty, the first button must launch the game.
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotgm.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'game_short_name': game_short_name
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().send_game(params)
+        return Message._dese(result)
+
+
 
 
 
@@ -4273,34 +4319,6 @@ class Client(TelegramApi):
             'errors': errors
         }
         return await super().set_passport_data_errors(params)
-
-
-    async def send_game(
-        self,
-        chat_id: int,
-        game_short_name: str,
-        message_thread_id: Optional[int] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None
-    ) -> Message:
-        '''
-        https://core.telegram.org/bots/api#sendgame
-        Use this method to send a game. On success, the sent Message is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'game_short_name': game_short_name
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().send_game(params)
-        return Message._dese(result)
 
 
     async def set_game_score(

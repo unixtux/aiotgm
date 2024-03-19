@@ -644,6 +644,10 @@ class TelegramApi:
         files = _get_files(params, 'document', 'thumbnail')
         return await self._request(method, params, files)
 
+    async def send_game(self, params: dict):
+        method = 'sendGame'
+        return await self._request(method, params)
+
 
 
 
@@ -826,10 +830,6 @@ class TelegramApi:
 
     async def set_passport_data_errors(self, params: dict):
         method = 'setPassportDataErrors'
-        return await self._request(method, params)
-
-    async def send_game(self, params: dict):
-        method = 'sendGame'
         return await self._request(method, params)
 
     async def set_game_score(self, params: dict):
