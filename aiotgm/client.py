@@ -3093,6 +3093,64 @@ class Client(TelegramApi):
         return await super().send_chat_action(params)
 
 
+    async def send_contact(
+        self,
+        chat_id: Union[int, str],
+        phone_number: str,
+        first_name: str,
+        message_thread_id: Optional[int] = None,
+        last_name: Optional[str] = None,
+        vcard: Optional[str] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
+        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+    ) -> Message:
+        '''
+        https://core.telegram.org/bots/api#sendcontact
+
+        Use this method to send phone contacts.
+        On success, the sent :obj:`~aiotgm.types.Message` is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param phone_number: Contact's phone number.
+        :type phone_number: :obj:`str`
+        :param first_name: Contact's first name.
+        :type first_name: :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param last_name: Contact's last name.
+        :type last_name: :obj:`str`, optional
+        :param vcard: Additional data about the contact in the form of a `vCard <https://en.wikipedia.org/wiki/VCard>`_, 0-2048 bytes.
+        :type vcard: :obj:`str`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :rtype: :obj:`~aiotgm.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'phone_number': phone_number,
+            'first_name': first_name
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if last_name is not None: params['last_name'] = last_name
+        if vcard is not None: params['vcard'] = vcard
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().send_contact(params)
+        return Message._dese(result)
+
+
 
 
 
@@ -3457,40 +3515,6 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_venue(params)
-        return Message._dese(result)
-
-
-    async def send_contact(
-        self,
-        chat_id: Union[int, str],
-        phone_number: str,
-        first_name: str,
-        message_thread_id: Optional[int] = None,
-        last_name: Optional[str] = None,
-        vcard: Optional[str] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
-    ) -> Message:
-        '''
-        https://core.telegram.org/bots/api#sendcontact
-        Use this method to send phone contacts. On success, the sent Message is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'phone_number': phone_number,
-            'first_name': first_name
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if last_name is not None: params['last_name'] = last_name
-        if vcard is not None: params['vcard'] = vcard
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().send_contact(params)
         return Message._dese(result)
 
 

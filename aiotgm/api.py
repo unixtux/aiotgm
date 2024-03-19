@@ -631,6 +631,10 @@ class TelegramApi:
         method = 'sendChatAction'
         return await self._request(method, params)
 
+    async def send_contact(self, params: dict):
+        method = 'sendContact'
+        return await self._request(method, params)
+
 
 
 
@@ -683,10 +687,6 @@ class TelegramApi:
 
     async def send_venue(self, params: dict):
         method = 'sendVenue'
-        return await self._request(method, params)
-
-    async def send_contact(self, params: dict):
-        method = 'sendContact'
         return await self._request(method, params)
 
     async def send_poll(self, params: dict):
