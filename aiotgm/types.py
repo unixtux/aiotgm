@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 __all__ = (
-    'REPLY_MARKUP_TYPES', # Union of all the reply markups
+    #'REPLY_MARKUP_TYPES', # Union of all the reply markups
     'Animation',
     'Audio',
     'BotCommand',

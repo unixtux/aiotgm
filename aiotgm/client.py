@@ -15,6 +15,7 @@ from .api import (
 )
 from .types import *
 from .types import (
+    REPLY_MARKUP_TYPES,
     _dese_chat_member,
     _dese_menu_button,
 )
@@ -27,7 +28,6 @@ from typing import (
     Awaitable,
 )
 from .update_manager import (
-    NextFunction,
     UpdateManager,
     _run_coroutine,
     _is_next_function,
