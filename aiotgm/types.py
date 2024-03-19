@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 __all__ = (
+    'REPLY_MARKUP_TYPES', # Union of all the reply markups
     'Animation',
     'Audio',
     'BotCommand',
@@ -2615,6 +2616,8 @@ class ForceReply(TelegramType):
         self.force_reply = force_reply
         self.input_field_placeholder = input_field_placeholder
         self.selective = selective
+
+REPLY_MARKUP_TYPES = Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]
 
 
 class ChatInviteLink(TelegramType):

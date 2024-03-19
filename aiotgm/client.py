@@ -1232,7 +1232,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> MessageId:
         '''
         https://core.telegram.org/bots/api#copymessage
@@ -2916,7 +2916,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendanimation
@@ -2995,7 +2995,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendaudio
@@ -3104,7 +3104,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendcontact
@@ -3159,7 +3159,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#senddice
@@ -3231,7 +3231,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendmessage
@@ -3267,7 +3267,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendphoto
@@ -3305,7 +3305,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#senddocument
@@ -3349,7 +3349,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendvideo
@@ -3393,7 +3393,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendvoice
@@ -3432,7 +3432,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendvideonote
@@ -3497,7 +3497,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendlocation
@@ -3537,7 +3537,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendvenue
@@ -3583,7 +3583,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendpoll
@@ -4018,7 +4018,7 @@ class Client(TelegramApi):
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]] = None
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendsticker
