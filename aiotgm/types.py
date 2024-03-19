@@ -2412,7 +2412,11 @@ class ReplyKeyboardMarkup(TelegramType):
 
     @property
     def row_width(self) -> int:
-        return len(self.keyboard)
+        row_width = 0
+        for nested in self.keyboard:
+            if len(nested) > row_width:
+                row_width = len(nested)
+        return row_width
 
     @row_width.setter
     def row_width(self, value: int) -> None:
@@ -2538,7 +2542,11 @@ class InlineKeyboardMarkup(TelegramType):
 
     @property
     def row_width(self) -> int:
-        return len(self.inline_keyboard)
+        row_width = 0
+        for nested in self.inline_keyboard:
+            if len(nested) > row_width:
+                row_width = len(nested)
+        return row_width
 
     @row_width.setter
     def row_width(self, value: int) -> None:
