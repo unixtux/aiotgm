@@ -648,6 +648,10 @@ class TelegramApi:
         method = 'sendGame'
         return await self._request(method, params)
 
+    async def send_invoice(self, params: dict):
+        method = 'sendInvoice'
+        return await self._request(method, params)
+
 
 
 
@@ -822,10 +826,6 @@ class TelegramApi:
 
     async def set_custom_emoji_sticker_set_thumbnail(self, params: dict):
         method = 'setCustomEmojiStickerSetThumbnail'
-        return await self._request(method, params)
-
-    async def send_invoice(self, params: dict):
-        method = 'sendInvoice'
         return await self._request(method, params)
 
     async def set_passport_data_errors(self, params: dict):
