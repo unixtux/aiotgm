@@ -627,6 +627,11 @@ class TelegramApi:
         files = _get_files(params, 'audio', 'thumbnail')
         return await self._request(method, params, files)
 
+    async def send_chat_action(self, params: dict):
+        method = 'sendChatAction'
+        return await self._request(method, params)
+
+
 
 
     async def upload_sticker_file(self, params: dict):
@@ -690,10 +695,6 @@ class TelegramApi:
 
     async def send_dice(self, params: dict):
         method = 'sendDice'
-        return await self._request(method, params)
-
-    async def send_chat_action(self, params: dict):
-        method = 'sendChatAction'
         return await self._request(method, params)
 
     async def set_message_reaction(self, params: dict):
