@@ -652,6 +652,10 @@ class TelegramApi:
         method = 'sendInvoice'
         return await self._request(method, params)
 
+    async def send_location(self, params: dict):
+        method = 'sendLocation'
+        return await self._request(method, params)
+
 
 
 
@@ -692,10 +696,6 @@ class TelegramApi:
             types_check=Union[InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument]
         )
         return await self._request(method, params, files)
-
-    async def send_location(self, params: dict):
-        method = 'sendLocation'
-        return await self._request(method, params)
 
     async def send_venue(self, params: dict):
         method = 'sendVenue'
