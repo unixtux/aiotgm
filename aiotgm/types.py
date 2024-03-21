@@ -2392,7 +2392,7 @@ class ReplyKeyboardMarkup(TelegramType):
         self.input_field_placeholder = input_field_placeholder
         self.selective = selective
 
-    def add(self, *buttons: Union[KeyboardButton, str]):
+    def add(self, *buttons: Union[KeyboardButton, str]) -> Self:
         '''
         Usage:
 
