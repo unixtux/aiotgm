@@ -2380,15 +2380,18 @@ class ReplyKeyboardMarkup(TelegramType):
     .. code-block:: python3
 
         markup = ReplyKeyboardMarkup()
-        markup.add(KeyboardButton('x'), KeyboardButton('y'))
-
+        markup.add(
+            KeyboardButton('x'),
+            KeyboardButton('y'),
+            KeyboardButton('z')
+        )
         # All the buttons added with this method will be in
         # the same row, you can change the row width after the
         # object initialization using the property setter 'row_width'.
 
-        markup.row_width = 4
+        markup.row_width = 2
 
-        # The keyboard will be rearranged with 4 buttons each row.
+        # The keyboard will be rearranged with 2 buttons for each row.
     '''
     def __init__(
         self,
@@ -2512,15 +2515,16 @@ class InlineKeyboardMarkup(TelegramType):
         markup = InlineKeyboardMarkup()
         markup.add(
             InlineKeyboardButton('x', callback_data='x'),
-            InlineKeyboardButton('y', callback_data='y')
+            InlineKeyboardButton('y', callback_data='y'),
+            InlineKeyboardButton('z', callback_data='z')
         )
         # All the buttons added with this method will be in
         # the same row, you can change the row width after the
         # object initialization using the property setter 'row_width'.
 
-        markup.row_width = 4
+        markup.row_width = 2
 
-        # The keyboard will be rearranged with 4 buttons each row.
+        # The keyboard will be rearranged with 2 buttons for each row.
 
     '''
     @classmethod
