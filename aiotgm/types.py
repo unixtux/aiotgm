@@ -2408,7 +2408,7 @@ class ReplyKeyboardMarkup(TelegramType):
             # the same row, you can change the row width after the
             # object initialization using the property setter 'row_width'.
 
-        :param buttons: :obj:`KeyboardButtons <aiotgm.types.KeyboardButton>` to add to a new row of the *keyboard*. You can pass a :obj:`String` instead of a :obj:`~aiotgm.types.KeyboardButton` object.
+        :param buttons: :obj:`KeyboardButtons <aiotgm.types.KeyboardButton>` to add to a new row of the *keyboard*. For simple text buttons, you can pass a :obj:`String` instead of a :obj:`~aiotgm.types.KeyboardButton` object to specify the button text.
         :type buttons: :obj:`~aiotgm.types.KeyboardButton` or :obj:`str`
         :rtype: :obj:`~aiotgm.types.ReplyKeyboardMarkup`
         '''
