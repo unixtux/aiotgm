@@ -665,6 +665,10 @@ class TelegramApi:
         )
         return await self._request(method, params, files)
 
+    async def send_message(self, params: dict):
+        method = 'sendMessage'
+        return await self._request(method, params)
+
 
 
 
@@ -672,10 +676,6 @@ class TelegramApi:
         method = 'uploadStickerFile'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
-
-    async def send_message(self, params: dict):
-        method = 'sendMessage'
-        return await self._request(method, params)
 
     async def send_photo(self, params: dict):
         method = 'sendPhoto'
