@@ -3503,6 +3503,49 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
+    async def send_media_group(
+        self,
+        chat_id: Union[int, str],
+        media: list[Union[InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo]],
+        message_thread_id: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None
+    ) -> list[Message]:
+        '''
+        https://core.telegram.org/bots/api#sendmediagroup
+
+        Use this method to send a group of photos, videos, documents or audios as an album.
+        Documents and audio files can be only grouped in an album with messages of the same type.
+        On success, an array of :obj:`Messages <aiotgm.types.Message>` that were sent is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param media: A JSON-serialized array describing messages to be sent, must include 2-10 items.
+        :type media: :obj:`list` of :obj:`~aiotgm.types.InputMediaAudio`, :obj:`~aiotgm.types.InputMediaDocument`, :obj:`~aiotgm.types.InputMediaPhoto` and :obj:`~aiotgm.types.InputMediaVideo`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param disable_notification: Sends messages `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent messages from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :rtype: :obj:`list` of :obj:`~aiotgm.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'media': media
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        result = await super().send_media_group(params)
+        return [Message._dese(message) for message in result]
+
+
 
 
 
@@ -3721,34 +3764,6 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_video_note(params)
         return Message._dese(result)
-
-
-    async def send_media_group(
-        self,
-        chat_id: Union[int, str],
-        media: list[Union[InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument]],
-        message_thread_id: Optional[int] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        reply_parameters: Optional[ReplyParameters] = None
-    ) -> list[Message]:
-        '''
-        https://core.telegram.org/bots/api#sendmediagroup
-        Use this method to send a group of photos, videos, documents or audios as
-        an album. Documents and audio files can be only grouped in an album with messages
-        of the same type. On success, an array of Messages that were sent is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'media': media
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
-        result = await super().send_media_group(params)
-        return [Message._dese(message) for message in result]
 
 
     async def send_venue(

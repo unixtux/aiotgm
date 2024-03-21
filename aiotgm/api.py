@@ -656,6 +656,15 @@ class TelegramApi:
         method = 'sendLocation'
         return await self._request(method, params)
 
+    async def send_media_group(self, params: dict):
+        method = 'sendMediaGroup'
+        files = _get_input_media_files(
+            params,
+            'media',
+            types_check=Union[InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo]
+        )
+        return await self._request(method, params, files)
+
 
 
 
@@ -686,15 +695,6 @@ class TelegramApi:
     async def send_video_note(self, params: dict):
         method = 'sendVideoNote'
         files = _get_files(params, 'video_note', 'thumbnail')
-        return await self._request(method, params, files)
-
-    async def send_media_group(self, params: dict):
-        method = 'sendMediaGroup'
-        files = _get_input_media_files(
-            params,
-            'media',
-            types_check=Union[InputMediaPhoto, InputMediaAudio, InputMediaVideo, InputMediaDocument]
-        )
         return await self._request(method, params, files)
 
     async def send_venue(self, params: dict):
