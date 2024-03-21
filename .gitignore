@@ -1,6 +1,7 @@
-dist/
-.venv/
-.vscode/
-*egg-info/
-docs/build/
-__pycache__/
+dist
+.venv
+.vscode
+nohup.out
+*egg-info
+docs/build
+__pycache__
