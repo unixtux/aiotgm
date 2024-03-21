@@ -2409,7 +2409,7 @@ class ReplyKeyboardMarkup(TelegramType):
             # object initialization using the property setter 'row_width'.
 
         :param buttons: :obj:`KeyboardButtons <aiotgm.types.KeyboardButton>` to add to a new row of the *keyboard*. For simple text buttons, you can pass a :obj:`String` instead of a :obj:`~aiotgm.types.KeyboardButton` object to specify the button text.
-        :type buttons: :obj:`~aiotgm.types.KeyboardButton` or :obj:`str`
+        :type buttons: \*\ :obj:`~aiotgm.types.KeyboardButton` or \*\ :obj:`str`
         :rtype: :obj:`~aiotgm.types.ReplyKeyboardMarkup`
         '''
         self.keyboard.append(buttons)
@@ -2548,7 +2548,7 @@ class InlineKeyboardMarkup(TelegramType):
             # object initialization using the property setter 'row_width'.
 
         :param buttons: :obj:`InlineKeyboardButtons <aiotgm.types.InlineKeyboardButton>` to add to a new row of the *inline_keyboard*.
-        :type buttons: :obj:`~aiotgm.types.InlineKeyboardButton`
+        :type buttons: \*\ :obj:`~aiotgm.types.InlineKeyboardButton`
         :rtype: :obj:`~aiotgm.types.InlineKeyboardMarkup`
         '''
         self.inline_keyboard.append(buttons)
