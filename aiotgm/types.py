@@ -188,6 +188,7 @@ __all__ = (
 )
 import os
 from typing import (
+    Self,
     Union,
     Literal,
     Optional,
@@ -2374,24 +2375,6 @@ class ReplyKeyboardMarkup(TelegramType):
 
     This object represents a custom keyboard with reply
     options (see Introduction to bots for details and examples).
-
-    Usage:
-
-    .. code-block:: python3
-
-        markup = ReplyKeyboardMarkup()
-        markup.add(
-            KeyboardButton('x'),
-            KeyboardButton('y'),
-            KeyboardButton('z')
-        )
-        # All the buttons added with this method will be in
-        # the same row, you can change the row width after the
-        # object initialization using the property setter 'row_width'.
-
-        markup.row_width = 2
-
-        # The keyboard will be rearranged with 2 buttons for each row.
     '''
     def __init__(
         self,
@@ -2409,12 +2392,39 @@ class ReplyKeyboardMarkup(TelegramType):
         self.input_field_placeholder = input_field_placeholder
         self.selective = selective
 
-    def add(self, *buttons: KeyboardButton):
+    def add(self, *buttons: Union[KeyboardButton, str]):
+        '''
+        Usage:
+
+        .. code-block:: python3
+
+            markup = ReplyKeyboardMarkup()
+            markup.add(
+                KeyboardButton('x'),
+                KeyboardButton('y'),
+                KeyboardButton('z')
+            )
+            # All the buttons added with this method will be in
+            # the same row, you can change the row width after the
+            # object initialization using the property setter 'row_width'.
+
+        :param buttons: :obj:`KeyboardButtons <aiotgm.types.KeyboardButton>` to add to a new row of the *keyboard*. You can pass a :obj:`String` instead of a :obj:`~aiotgm.types.KeyboardButton` object.
+        :type buttons: :obj:`~aiotgm.types.KeyboardButton` or :obj:`str`
+        :rtype: :obj:`~aiotgm.types.ReplyKeyboardMarkup`
+        '''
         self.keyboard.append(buttons)
         return self
 
     @property
     def row_width(self) -> int:
+        '''
+        Usage:
+
+        .. code-block:: python3
+
+            markup.row_width = 2
+            # The keyboard will be rearranged with 2 buttons for each row.
+        '''
         row_width = 0
         for nested in self.keyboard:
             if len(nested) > row_width:
@@ -2507,25 +2517,6 @@ class InlineKeyboardMarkup(TelegramType):
     https://core.telegram.org/bots/api#inlinekeyboardmarkup
 
     This object represents an inline keyboard that appears right next to the message it belongs to.
-
-    Usage:
-
-    .. code-block:: python3
-
-        markup = InlineKeyboardMarkup()
-        markup.add(
-            InlineKeyboardButton('x', callback_data='x'),
-            InlineKeyboardButton('y', callback_data='y'),
-            InlineKeyboardButton('z', callback_data='z')
-        )
-        # All the buttons added with this method will be in
-        # the same row, you can change the row width after the
-        # object initialization using the property setter 'row_width'.
-
-        markup.row_width = 2
-
-        # The keyboard will be rearranged with 2 buttons for each row.
-
     '''
     @classmethod
     @_parse_result
@@ -2540,12 +2531,39 @@ class InlineKeyboardMarkup(TelegramType):
     ):
         self.inline_keyboard = inline_keyboard or []
 
-    def add(self, *buttons: InlineKeyboardButton):
+    def add(self, *buttons: InlineKeyboardButton) -> Self:
+        '''
+        Usage:
+
+        .. code-block:: python3
+
+            markup = InlineKeyboardMarkup()
+            markup.add(
+                InlineKeyboardButton('x', callback_data='x'),
+                InlineKeyboardButton('y', callback_data='y'),
+                InlineKeyboardButton('z', callback_data='z')
+            )
+            # All the buttons added with this method will be in
+            # the same row, you can change the row width after the
+            # object initialization using the property setter 'row_width'.
+
+        :param buttons: :obj:`InlineKeyboardButtons <aiotgm.types.InlineKeyboardButton>` to add to a new row of the *inline_keyboard*.
+        :type buttons: :obj:`~aiotgm.types.InlineKeyboardButton`
+        :rtype: :obj:`~aiotgm.types.InlineKeyboardMarkup`
+        '''
         self.inline_keyboard.append(buttons)
         return self
 
     @property
     def row_width(self) -> int:
+        '''
+        Usage:
+
+        .. code-block:: python3
+
+            markup.row_width = 2
+            # The inline_keyboard will be rearranged with 2 buttons for each row.
+        '''
         row_width = 0
         for nested in self.inline_keyboard:
             if len(nested) > row_width:
