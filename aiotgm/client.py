@@ -112,7 +112,17 @@ class Client(TelegramApi):
 
     @property
     def parse_mode(self) -> Optional[str]:
-        '''Default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overwritten in the methods).'''
+        '''
+        Default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overwritten in the methods).
+
+        Usage:
+
+        .. code-block:: python3
+
+            import aiotgm
+
+            bot = aiotgm.Client('<your_api_token>', parse_mode='MarkdownV2')
+        '''
         return self._parse_mode
 
     @parse_mode.setter
@@ -126,7 +136,17 @@ class Client(TelegramApi):
 
     @property
     def protect_content(self) -> Optional[bool]:
-        '''Default protect content option (it can be overwritten in the methods).'''
+        '''
+        Default protect content option (it can be overwritten in the methods).
+
+        Usage:
+
+        .. code-block:: python3
+
+            import aiotgm
+
+            bot = aiotgm.Client('<your_api_token>', protect_content=True)
+        '''
         return self._protect_content
 
     @protect_content.setter
