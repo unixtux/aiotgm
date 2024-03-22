@@ -678,6 +678,11 @@ class TelegramApi:
         method = 'sendPoll'
         return await self._request(method, params)
 
+    async def send_sticker(self, params: dict):
+        method = 'sendSticker'
+        files = _get_files(params, 'sticker')
+        return await self._request(method, params, files)
+
 
 
 
@@ -793,11 +798,6 @@ class TelegramApi:
     async def stop_poll(self, params: dict):
         method = 'stopPoll'
         return await self._request(method, params)
-
-    async def send_sticker(self, params: dict):
-        method = 'sendSticker'
-        files = _get_files(params, 'sticker')
-        return await self._request(method, params, files)
 
     async def set_sticker_position_in_set(self, params: dict):
         method = 'setStickerPositionInSet'
