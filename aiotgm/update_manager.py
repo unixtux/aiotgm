@@ -10,7 +10,7 @@ from typing import (
     Callable,
     Awaitable,
 )
-from .client import logger
+from . import logger
 
 MESSAGE_MANAGER = 'message_manager'
 EDITED_MESSAGE_MANAGER = 'edited_message_manager'

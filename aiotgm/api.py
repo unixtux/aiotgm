@@ -2,7 +2,7 @@
 
 __all__ = ()
 
-from .client import logger
+from . import logger
 import os
 import re
 import time
