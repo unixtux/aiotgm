@@ -9,9 +9,9 @@ import logging
 def get_logger(name: str, /) -> logging.Logger:
     '''
     Function to get a preformatted Logger instance.
-    If the Logger already exists, level won't be set.
+    If the Logger already exists, level won't
+    be set, otherwise it is logging.INFO.
     '''
-
     if name in logging.Logger.manager.loggerDict:
         return logging.getLogger(name)
     else:

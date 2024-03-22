@@ -8,6 +8,7 @@ from .api import (
     TelegramApi,
     TelegramError,
 )
+from . import logger
 from .types import *
 from .types import (
     REPLY_MARKUP_TYPES,
