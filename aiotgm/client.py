@@ -2,11 +2,6 @@
 
 __all__ = ()
 
-from . import VERSION
-from .logger import get_logger
-logger = get_logger('aiotgm ' + VERSION)
-del VERSION, get_logger
-
 import re
 import asyncio
 from .api import (
