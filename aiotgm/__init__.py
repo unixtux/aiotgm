@@ -1,15 +1,19 @@
 #!/bin/env python3
 
-__version__ = '0.1.3'
-VERSION = __version__
-
 __all__ = (
     'Client',
     'NextFunction',
     'TelegramError',
 )
+
+__version__ = '0.1.4'
+VERSION = __version__
+
+from .logger import get_logger
+logger = get_logger('aiotgm ' + VERSION)
+del get_logger
+
 from .client import (
-    logger,
     Client,
     TelegramError,
 )
