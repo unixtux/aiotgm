@@ -725,7 +725,7 @@ class Client(TelegramApi):
         if allowed_updates is not None: params['allowed_updates'] = allowed_updates
         await self.get_me()
         logger.info('Welcome @{}.'.format(self.user.username))
-        logger.info('long polling has been started.\n')
+        logger.info('long polling has been started.')
         bad_gateway = re.compile(r'bad.*gateway', re.IGNORECASE)
         while True:
             try:

@@ -112,19 +112,6 @@ class TelegramError(Exception):
         return '[Errno {}] {}'.format(self.error_code, self.description)
 
 
-async def _parse_json(response: ClientResponse, deep_debug: bool, /):
-
-    result = await response.json(loads=json.loads)
-
-    if deep_debug:
-        logger.debug(result)
-
-    if result['ok'] is True:
-        return result['result']
-    else:
-        raise TelegramError(result['error_code'], result['description'])
-
-
 FilesDict = dict[str, dict[Literal['content'], bytes] | dict[Literal['file_name'], str | None]]
 
 def _get_files(
@@ -293,6 +280,19 @@ class TelegramApi:
         return self.session
 
 
+    async def _parse_json(self, response: ClientResponse, /):
+
+        result = await response.json(loads=json.loads)
+
+        if self._deep_debug:
+            logger.debug(result)
+
+        if result['ok'] is True:
+            return result['result']
+        else:
+            raise TelegramError(result['error_code'], result['description'])
+
+
     async def _request(
         self,
         method: str,
@@ -328,10 +328,10 @@ class TelegramApi:
                     **self._headers_and_proxy
                 ) as response:
 
-                    result = await _parse_json(response, self._deep_debug)
+                    result = await self._parse_json(response)
                     if current_try != 1 and self._debug:
                         logger.debug(
-                            f'Method {method!r} succeeded'
+                            f'Request {method!r} succeeded'
                             f' after {current_try} retries.'
                         )
                     return result
