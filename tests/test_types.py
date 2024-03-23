@@ -5003,7 +5003,7 @@ TYPES = {
 
 from inspect import isclass
 
-from aiotgm.logger import get_logger
+from aiotgm._logging import get_logger
 logger = get_logger('TypesChecker')
 
 logger.setLevel(20)

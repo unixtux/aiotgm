@@ -17,7 +17,7 @@ LOGGER_LEVEL = DEBUG
 import re
 import json
 import aiotgm.types
-from aiotgm.logger import get_logger
+from aiotgm._logging import get_logger
 logger = get_logger('TypeChecker')
 logger.setLevel(LOGGER_LEVEL)
 
