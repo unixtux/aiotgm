@@ -307,7 +307,7 @@ class TelegramApi:
                 params[key] = _serialize(params[key])
 
         if self._debug:
-            logger.debug(f'method: {method!r}, params: {params}, files: {files}.\n')
+            logger.debug(f'Request method: {method!r}.\n')
 
         current_try = 0
 
@@ -339,7 +339,7 @@ class TelegramApi:
             except (ClientError, TimeoutError) as exc:
                 if self._debug:
                     logger.debug(
-                        f'{exc.__class__.__name__} occurred in {method!r},'
+                        f'{exc.__class__.__name__} in {method!r},'
                         f' current try: {current_try}/{max_retries}.'
                     )
                 await asyncio.sleep(3 - (time.time() - start_time))
