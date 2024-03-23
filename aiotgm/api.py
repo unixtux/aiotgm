@@ -117,7 +117,7 @@ async def _parse_json(response: ClientResponse, deep_debug: bool, /):
     result = await response.json(loads=json.loads)
 
     if deep_debug:
-        logger.debug(str(result) + '\n')
+        logger.debug(result)
 
     if result['ok'] is True:
         return result['result']
@@ -273,7 +273,7 @@ class TelegramApi:
             'proxy': proxy,
             'headers': HEADERS
         }
-        logger.debug(str(self._headers_and_proxy) + '\n')
+        logger.debug(self._headers_and_proxy)
 
     @property
     def session(self) -> Optional[ClientSession]:
@@ -288,7 +288,7 @@ class TelegramApi:
                 json_serialize=json.dumps,
                 connector=TCPConnector(ssl=SSL_CONTEXT)
             )
-            logger.debug('New session initialized.\n')
+            logger.debug('New session initialized.')
 
         return self.session
 
@@ -307,7 +307,7 @@ class TelegramApi:
                 params[key] = _serialize(params[key])
 
         if self._debug:
-            logger.debug(f'Request method: {method!r}.\n')
+            logger.debug(f'Request: {method!r}.')
 
         current_try = 0
 
@@ -358,7 +358,7 @@ class TelegramApi:
                         await self.session.close()
                         logger.debug(
                             'Session closed because there are'
-                            ' no more open connections in the pool.\n'
+                            ' no more open connections in the pool.'
                         )
         else:
             raise TimeoutError(f'Connection lost in method {method!r}.')
