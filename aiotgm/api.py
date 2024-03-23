@@ -117,7 +117,7 @@ async def _parse_json(response: ClientResponse, deep_debug: bool, /):
     result = await response.json(loads=json.loads)
 
     if deep_debug:
-        logger.debug(result)
+        logger.debug(str(result) + '\n')
 
     if result['ok'] is True:
         return result['result']
@@ -258,19 +258,22 @@ class TelegramApi:
             raise TypeError(
                 f"'proxy' must be str or None, got {proxy.__class__.__name__}."
             )
+        self._debug = debug
+        self._deep_debug = deep_debug
+
         if debug:
             logger.setLevel(10)
         elif deep_debug:
+            self._debug = deep_debug
             logger.setLevel(10)
 
-        self.deep_debug = deep_debug
         self._token = token
         self._session = None
         self._headers_and_proxy = {
             'proxy': proxy,
             'headers': HEADERS
         }
-        logger.debug(self._headers_and_proxy)
+        logger.debug(str(self._headers_and_proxy) + '\n')
 
     @property
     def session(self) -> Optional[ClientSession]:
@@ -285,7 +288,7 @@ class TelegramApi:
                 json_serialize=json.dumps,
                 connector=TCPConnector(ssl=SSL_CONTEXT)
             )
-            logger.debug('New session initialized.')
+            logger.debug('New session initialized.\n')
 
         return self.session
 
@@ -303,8 +306,8 @@ class TelegramApi:
             for key in params:
                 params[key] = _serialize(params[key])
 
-        if self.deep_debug:
-            logger.debug(f'method: {method!r}, params: {params}, files: {files}.')
+        if self._debug:
+            logger.debug(f'method: {method!r}, params: {params}, files: {files}.\n')
 
         current_try = 0
 
@@ -325,9 +328,20 @@ class TelegramApi:
                     **self._headers_and_proxy
                 ) as response:
 
-                    return await _parse_json(response, self.deep_debug)
+                    result = await _parse_json(response, self._deep_debug)
+                    if current_try != 1 and self._debug:
+                        logger.debug(
+                            f'Method {method!r} succeeded'
+                            f' after {current_try} retries.'
+                        )
+                    return result
 
             except (ClientError, TimeoutError) as exc:
+                if self._debug:
+                    logger.debug(
+                        f'{exc.__class__.__name__} occurred in {method!r},'
+                        f' current try: {current_try}/{max_retries}.'
+                    )
                 await asyncio.sleep(3 - (time.time() - start_time))
 
             except BaseException as exc:
@@ -344,7 +358,7 @@ class TelegramApi:
                         await self.session.close()
                         logger.debug(
                             'Session closed because there are'
-                            ' no more open connections in the pool.'
+                            ' no more open connections in the pool.\n'
                         )
         else:
             raise TimeoutError(f'Connection lost in method {method!r}.')
