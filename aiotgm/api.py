@@ -711,17 +711,17 @@ class TelegramApi:
         files = _get_files(params, 'video_note', 'thumbnail')
         return await self._request(method, params, files)
 
+    async def send_voice(self, params: dict):
+        method = 'sendVoice'
+        files = _get_files(params, 'voice')
+        return await self._request(method, params, files)
+
 
 
 
     async def upload_sticker_file(self, params: dict):
         method = 'uploadStickerFile'
         files = _get_files(params, 'sticker')
-        return await self._request(method, params, files)
-
-    async def send_voice(self, params: dict):
-        method = 'sendVoice'
-        files = _get_files(params, 'voice')
         return await self._request(method, params, files)
 
     async def set_message_reaction(self, params: dict):

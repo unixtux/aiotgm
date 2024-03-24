@@ -4042,6 +4042,72 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
+    async def send_voice(
+        self,
+        chat_id: Union[int, str],
+        voice: Union[InputFile, str],
+        message_thread_id: Optional[int] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        duration: Optional[int] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
+    ) -> Message:
+        '''
+        https://core.telegram.org/bots/api#sendvoice
+
+        Use this method to send audio files, if you want Telegram clients to display the file as
+        a playable voice message. For this to work, your audio must be in an .OGG file encoded with
+        OPUS (other formats may be sent as :obj:`~aiotgm.types.Audio` or :obj:`~aiotgm.types.Document`).
+        On success, the sent :obj:`~aiotgm.types.Message` is returned. Bots can currently send voice
+        messages of up to 50 MB in size, this limit may be changed in the future.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param voice: Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+        :type voice: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param caption: Voice message caption, 0-1024 characters after entities parsing.
+        :type caption: :obj:`str`, optional
+        :param parse_mode: Mode for parsing entities in the voice message caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        :type parse_mode: :obj:`str`, optional
+        :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+        :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param duration: Duration of the voice message in seconds.
+        :type duration: :obj:`int`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :rtype: :obj:`~aiotgm.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'voice': voice
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if caption is not None: params['caption'] = caption
+        if parse_mode is not None: params['parse_mode'] = parse_mode
+        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
+        if caption_entities is not None: params['caption_entities'] = caption_entities
+        if duration is not None: params['duration'] = duration
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().send_voice(params)
+        return Message._dese(result)
+
+
 
 
 
@@ -4065,46 +4131,6 @@ class Client(TelegramApi):
         }
         result = await super().upload_sticker_file(params)
         return File._dese(result)
-
-
-    async def send_voice(
-        self,
-        chat_id: Union[int, str],
-        voice: Union[InputFile, str],
-        message_thread_id: Optional[int] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        duration: Optional[int] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
-    ) -> Message:
-        '''
-        https://core.telegram.org/bots/api#sendvoice
-        Use this method to send audio files, if you want Telegram clients to display the file as
-        a playable voice message. For this to work, your audio must be in an .OGG file encoded with
-        OPUS (other formats may be sent as Audio or Document). On success, the sent Message is returned.
-        Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'voice': voice
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if caption is not None: params['caption'] = caption
-        if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
-        if caption_entities is not None: params['caption_entities'] = caption_entities
-        if duration is not None: params['duration'] = duration
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().send_voice(params)
-        return Message._dese(result)
 
 
     async def set_message_reaction(
