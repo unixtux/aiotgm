@@ -3983,6 +3983,65 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
+    async def send_video_note(
+        self,
+        chat_id: Union[int, str],
+        video_note: Union[InputFile, str],
+        message_thread_id: Optional[int] = None,
+        duration: Optional[int] = None,
+        length: Optional[int] = None,
+        thumbnail: Optional[Union[InputFile, str]] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
+    ) -> Message:
+        '''
+        https://core.telegram.org/bots/api#sendvideonote
+
+        As of `v.4.0 <https://telegram.org/blog/video-messages-and-telescope>`_,
+        Telegram clients support rounded square MPEG4 videos of up to 1 minute long. Use this
+        method to send video messages. On success, the sent :obj:`~aiotgm.types.Message` is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param video_note: Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_. Sending video notes by a URL is currently unsupported.
+        :type video_note: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param duration: Duration of sent video in seconds.
+        :type duration: :obj:`int`, optional
+        :param length: Video width and height, i.e. diameter of the video message.
+        :type length: :obj:`int`, optional
+        :param thumbnail: Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+        :type thumbnail: :obj:`~aiotgm.types.InputFile` or :obj:`str`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :rtype: :obj:`~aiotgm.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'video_note': video_note
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if duration is not None: params['duration'] = duration
+        if length is not None: params['length'] = length
+        if thumbnail is not None: params['thumbnail'] = thumbnail
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().send_video_note(params)
+        return Message._dese(result)
+
+
 
 
 
@@ -4045,41 +4104,6 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_voice(params)
-        return Message._dese(result)
-
-
-    async def send_video_note(
-        self,
-        chat_id: Union[int, str],
-        video_note: Union[InputFile, str],
-        message_thread_id: Optional[int] = None,
-        duration: Optional[int] = None,
-        length: Optional[int] = None,
-        thumbnail: Optional[Union[InputFile, str]] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
-    ) -> Message:
-        '''
-        https://core.telegram.org/bots/api#sendvideonote
-        As of v.4.0, Telegram clients support rounded square MPEG4 videos of up to 1 minute
-        long. Use this method to send video messages. On success, the sent Message is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'video_note': video_note
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if duration is not None: params['duration'] = duration
-        if length is not None: params['length'] = length
-        if thumbnail is not None: params['thumbnail'] = thumbnail
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().send_video_note(params)
         return Message._dese(result)
 
 
