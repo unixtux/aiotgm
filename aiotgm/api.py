@@ -724,6 +724,10 @@ class TelegramApi:
         method = 'setChatDescription'
         return await self._request(method, params)
 
+    async def set_chat_menu_button(self, params: dict):
+        method = 'setChatMenuButton'
+        return await self._request(method, params)
+
 
 
 
@@ -795,10 +799,6 @@ class TelegramApi:
 
     async def set_my_short_description(self, params: dict):
         method = 'setMyShortDescription'
-        return await self._request(method, params)
-
-    async def set_chat_menu_button(self, params: dict):
-        method = 'setChatMenuButton'
         return await self._request(method, params)
 
     async def set_my_default_administrator_rights(self, params: dict):

@@ -4161,6 +4161,29 @@ class Client(TelegramApi):
         return await super().set_chat_description(params)
 
 
+    async def set_chat_menu_button(
+        self,
+        chat_id: Optional[int] = None,
+        menu_button: Optional[MenuButton] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setchatmenubutton
+
+        Use this method to change the bot's menu button in a private
+        chat, or the default menu button. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target private chat. If not specified, default bot's menu button will be changed.
+        :type chat_id: :obj:`int`, optional
+        :param menu_button: A JSON-serialized object for the bot's new menu button. Defaults to :obj:`~aiotgm.types.MenuButtonDefault`.
+        :type menu_button: :obj:`~aiotgm.types.MenuButton`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {}
+        if chat_id is not None: params['chat_id'] = chat_id
+        if menu_button is not None: params['menu_button'] = menu_button
+        return await super().set_chat_menu_button(params)
+
+
 
 
 
@@ -4469,22 +4492,6 @@ class Client(TelegramApi):
         if short_description is not None: params['short_description'] = short_description
         if language_code is not None: params['language_code'] = language_code
         return await super().set_my_short_description(params)
-
-
-    async def set_chat_menu_button(
-        self,
-        chat_id: Optional[int] = None,
-        menu_button: Optional[MenuButton] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setchatmenubutton
-        Use this method to change the bot's menu button in a private
-        chat, or the default menu button. Returns True on success.
-        '''
-        params = {}
-        if chat_id is not None: params['chat_id'] = chat_id
-        if menu_button is not None: params['menu_button'] = menu_button
-        return await super().set_chat_menu_button(params)
 
 
     async def set_my_default_administrator_rights(
