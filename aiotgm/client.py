@@ -3824,6 +3824,80 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
+    async def send_venue(
+        self,
+        chat_id: Union[int, str],
+        latitude: float,
+        longitude: float,
+        title: str,
+        address: str,
+        message_thread_id: Optional[int] = None,
+        foursquare_id: Optional[str] = None,
+        foursquare_type: Optional[str] = None,
+        google_place_id: Optional[str] = None,
+        google_place_type: Optional[str] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
+    ) -> Message:
+        '''
+        https://core.telegram.org/bots/api#sendvenue
+
+        Use this method to send information about a venue.
+        On success, the sent :obj:`~aiotgm.types.Message` is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param latitude: Latitude of the venue.
+        :type latitude: :obj:`float`
+        :param longitude: Longitude of the venue.
+        :type longitude: :obj:`float`
+        :param title: Name of the venue.
+        :type title: :obj:`str`
+        :param address: Address of the venue.
+        :type address: :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param foursquare_id: Foursquare identifier of the venue.
+        :type foursquare_id: :obj:`str`, optional
+        :param foursquare_type: Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+        :type foursquare_type: :obj:`str`, optional
+        :param google_place_id: Google Places identifier of the venue.
+        :type google_place_id: :obj:`str`, optional
+        :param google_place_type: Google Places type of the venue. (See `supported types <https://developers.google.com/places/web-service/supported_types>`_.)
+        :type google_place_type: :obj:`str`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :rtype: :obj:`~aiotgm.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'latitude': latitude,
+            'longitude': longitude,
+            'title': title,
+            'address': address
+        }
+        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if foursquare_id is not None: params['foursquare_id'] = foursquare_id
+        if foursquare_type is not None: params['foursquare_type'] = foursquare_type
+        if google_place_id is not None: params['google_place_id'] = google_place_id
+        if google_place_type is not None: params['google_place_type'] = google_place_type
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().send_venue(params)
+        return Message._dese(result)
+
+
 
 
 
@@ -3970,48 +4044,6 @@ class Client(TelegramApi):
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_video_note(params)
-        return Message._dese(result)
-
-
-    async def send_venue(
-        self,
-        chat_id: Union[int, str],
-        latitude: float,
-        longitude: float,
-        title: str,
-        address: str,
-        message_thread_id: Optional[int] = None,
-        foursquare_id: Optional[str] = None,
-        foursquare_type: Optional[str] = None,
-        google_place_id: Optional[str] = None,
-        google_place_type: Optional[str] = None,
-        disable_notification: Optional[bool] = None,
-        protect_content: Optional[bool] = None,
-        reply_parameters: Optional[ReplyParameters] = None,
-        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
-    ) -> Message:
-        '''
-        https://core.telegram.org/bots/api#sendvenue
-        Use this method to send information about a venue. On success, the sent Message is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'latitude': latitude,
-            'longitude': longitude,
-            'title': title,
-            'address': address
-        }
-        if message_thread_id is not None: params['message_thread_id'] = message_thread_id
-        if foursquare_id is not None: params['foursquare_id'] = foursquare_id
-        if foursquare_type is not None: params['foursquare_type'] = foursquare_type
-        if google_place_id is not None: params['google_place_id'] = google_place_id
-        if google_place_type is not None: params['google_place_type'] = google_place_type
-        if disable_notification is not None: params['disable_notification'] = disable_notification
-        if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
-        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().send_venue(params)
         return Message._dese(result)
 
 
