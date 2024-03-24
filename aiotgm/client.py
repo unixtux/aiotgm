@@ -3898,31 +3898,6 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
-
-
-
-
-    async def upload_sticker_file(
-        self,
-        user_id: int,
-        sticker: InputFile,
-        sticker_format: str
-    ) -> File:
-        '''
-        https://core.telegram.org/bots/api#uploadstickerfile
-
-        Use this method to upload a file with a sticker for later use in the createNewStickerSet and
-        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
-        '''
-        params = {
-            'user_id': user_id,
-            'sticker': sticker,
-            'sticker_format': sticker_format
-        }
-        result = await super().upload_sticker_file(params)
-        return File._dese(result)
-
-
     async def send_video(
         self,
         chat_id: Union[int, str],
@@ -3944,9 +3919,45 @@ class Client(TelegramApi):
     ) -> Message:
         '''
         https://core.telegram.org/bots/api#sendvideo
-        Use this method to send video files, Telegram clients support
-        MPEG4 videos (other formats may be sent as Document). On success, the sent Message is returned.
-        Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+
+        Use this method to send video files, Telegram clients support MPEG4 videos
+        (other formats may be sent as :obj:`~aiotgm.types.Document`). On success,
+        the sent :obj:`~aiotgm.types.Message` is returned. Bots can currently send
+        video files of up to 50 MB in size, this limit may be changed in the future.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param video: Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+        :type video: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
+        :type message_thread_id: :obj:`int`, optional
+        :param duration: Duration of sent video in seconds.
+        :type duration: :obj:`int`, optional
+        :param width: Video width.
+        :type width: :obj:`int`, optional
+        :param height: Video height.
+        :type height: :obj:`int`, optional
+        :param thumbnail: Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+        :type thumbnail: :obj:`~aiotgm.types.InputFile` or :obj:`str`, optional
+        :param caption: Video caption (may also be used when resending videos by *file_id*), 0-1024 characters after entities parsing.
+        :type caption: :obj:`str`, optional
+        :param parse_mode: Mode for parsing entities in the video caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        :type parse_mode: :obj:`str`, optional
+        :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+        :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param has_spoiler: Pass :obj:`True` if the video needs to be covered with a spoiler animation.
+        :type has_spoiler: :obj:`bool`, optional
+        :param supports_streaming: Pass :obj:`True` if the uploaded video is suitable for streaming.
+        :type supports_streaming: :obj:`bool`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
             'chat_id': chat_id,
@@ -3970,6 +3981,31 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_video(params)
         return Message._dese(result)
+
+
+
+
+
+
+    async def upload_sticker_file(
+        self,
+        user_id: int,
+        sticker: InputFile,
+        sticker_format: str
+    ) -> File:
+        '''
+        https://core.telegram.org/bots/api#uploadstickerfile
+
+        Use this method to upload a file with a sticker for later use in the createNewStickerSet and
+        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
+        '''
+        params = {
+            'user_id': user_id,
+            'sticker': sticker,
+            'sticker_format': sticker_format
+        }
+        result = await super().upload_sticker_file(params)
+        return File._dese(result)
 
 
     async def send_voice(
