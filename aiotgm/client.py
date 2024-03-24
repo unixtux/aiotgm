@@ -4108,6 +4108,34 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
+    async def set_chat_administrator_custom_title(
+        self,
+        chat_id: Union[int, str],
+        user_id: int,
+        custom_title: str
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setchatadministratorcustomtitle
+
+        Use this method to set a custom title for an administrator
+        in a supergroup promoted by the bot. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :param custom_title: New custom title for the administrator; 0-16 characters, emoji are not allowed.
+        :type custom_title: :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id,
+            'custom_title': custom_title
+        }
+        return await super().set_chat_administrator_custom_title(params)
+
+
 
 
 
@@ -4175,25 +4203,6 @@ class Client(TelegramApi):
         }
         if only_if_banned is not None: params['only_if_banned'] = only_if_banned
         return await super().unban_chat_member(params)
-
-
-    async def set_chat_administrator_custom_title(
-        self,
-        chat_id: Union[int, str],
-        user_id: int,
-        custom_title: str
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setchatadministratorcustomtitle
-        Use this method to set a custom title for an administrator
-        in a supergroup promoted by the bot. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id,
-            'custom_title': custom_title
-        }
-        return await super().set_chat_administrator_custom_title(params)
 
 
     async def unban_chat_sender_chat(
