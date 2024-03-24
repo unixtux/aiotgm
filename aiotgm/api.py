@@ -728,6 +728,10 @@ class TelegramApi:
         method = 'setChatMenuButton'
         return await self._request(method, params)
 
+    async def set_chat_permissions(self, params: dict):
+        method = 'setChatPermissions'
+        return await self._request(method, params)
+
 
 
 
@@ -746,10 +750,6 @@ class TelegramApi:
 
     async def unban_chat_sender_chat(self, params: dict):
         method = 'unbanChatSenderChat'
-        return await self._request(method, params)
-
-    async def set_chat_permissions(self, params: dict):
-        method = 'setChatPermissions'
         return await self._request(method, params)
 
     async def set_chat_photo(self, params: dict):

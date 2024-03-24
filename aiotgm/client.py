@@ -4184,6 +4184,35 @@ class Client(TelegramApi):
         return await super().set_chat_menu_button(params)
 
 
+    async def set_chat_permissions(
+        self,
+        chat_id: Union[int, str],
+        permissions: ChatPermissions,
+        use_independent_chat_permissions: Optional[bool] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setchatpermissions
+
+        Use this method to set default chat permissions for all members. The bot
+        must be an administrator in the group or a supergroup for this to work and must
+        have the *can_restrict_members* administrator rights. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param permissions: A JSON-serialized object for new default chat permissions.
+        :type permissions: :obj:`~aiotgm.types.ChatPermissions`
+        :param use_independent_chat_permissions: Pass :obj:`True` if chat permissions are set independently. Otherwise, the *can_send_other_messages* and *can_add_web_page_previews* permissions will imply the *can_send_messages*, *can_send_audios*, *can_send_documents*, *can_send_photos*, *can_send_videos*, *can_send_video_notes*, and *can_send_voice_notes* permissions; the *can_send_polls* permission will imply the *can_send_messages* permission.
+        :type use_independent_chat_permissions: :obj:`bool`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'permissions': permissions
+        }
+        if use_independent_chat_permissions is not None: params['use_independent_chat_permissions'] = use_independent_chat_permissions
+        return await super().set_chat_permissions(params)
+
+
 
 
 
@@ -4268,26 +4297,6 @@ class Client(TelegramApi):
             'sender_chat_id': sender_chat_id
         }
         return await super().unban_chat_sender_chat(params)
-
-
-    async def set_chat_permissions(
-        self,
-        chat_id: Union[int, str],
-        permissions: ChatPermissions,
-        use_independent_chat_permissions: Optional[bool] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setchatpermissions
-        Use this method to set default chat permissions for all members. The bot
-        must be an administrator in the group or a supergroup for this to work and
-        must have the can_restrict_members administrator rights. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'permissions': permissions
-        }
-        if use_independent_chat_permissions is not None: params['use_independent_chat_permissions'] = use_independent_chat_permissions
-        return await super().set_chat_permissions(params)
 
 
     async def set_chat_photo(
