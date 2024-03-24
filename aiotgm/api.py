@@ -720,6 +720,10 @@ class TelegramApi:
         method = 'setChatAdministratorCustomTitle'
         return await self._request(method, params)
 
+    async def set_chat_description(self, params: dict):
+        method = 'setChatDescription'
+        return await self._request(method, params)
+
 
 
 
@@ -751,10 +755,6 @@ class TelegramApi:
 
     async def set_chat_title(self, params: dict):
         method = 'setChatTitle'
-        return await self._request(method, params)
-
-    async def set_chat_description(self, params: dict):
-        method = 'setChatDescription'
         return await self._request(method, params)
 
     async def unpin_chat_message(self, params: dict):

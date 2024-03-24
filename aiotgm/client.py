@@ -4136,6 +4136,31 @@ class Client(TelegramApi):
         return await super().set_chat_administrator_custom_title(params)
 
 
+    async def set_chat_description(
+        self,
+        chat_id: Union[int, str],
+        description: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setchatdescription
+
+        Use this method to change the description of a group, a supergroup or a
+        channel. The bot must be an administrator in the chat for this to work and
+        must have the appropriate administrator rights. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param description: New chat description, 0-255 characters.
+        :type description: :obj:`str`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        if description is not None: params['description'] = description
+        return await super().set_chat_description(params)
+
+
 
 
 
@@ -4276,24 +4301,6 @@ class Client(TelegramApi):
             'title': title
         }
         return await super().set_chat_title(params)
-
-
-    async def set_chat_description(
-        self,
-        chat_id: Union[int, str],
-        description: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setchatdescription
-        Use this method to change the description of a group, a supergroup or a
-        channel. The bot must be an administrator in the chat for this to work and
-        must have the appropriate administrator rights. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        if description is not None: params['description'] = description
-        return await super().set_chat_description(params)
 
 
     async def unpin_chat_message(
