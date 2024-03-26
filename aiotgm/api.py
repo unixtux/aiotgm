@@ -773,6 +773,13 @@ class TelegramApi:
         method = 'setMyName'
         return await self._request(method, params)
 
+    async def set_my_short_description(self, params: dict):
+        method = 'setMyShortDescription'
+        return await self._request(method, params)
+
+
+
+
 
 
     async def upload_sticker_file(self, params: dict):
@@ -806,10 +813,6 @@ class TelegramApi:
 
     async def unpin_all_general_forum_topic_messages(self, params: dict):
         method = 'unpinAllGeneralForumTopicMessages'
-        return await self._request(method, params)
-
-    async def set_my_short_description(self, params: dict):
-        method = 'setMyShortDescription'
         return await self._request(method, params)
 
     async def stop_message_live_location(self, params: dict):

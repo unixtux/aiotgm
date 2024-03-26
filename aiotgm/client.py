@@ -4492,6 +4492,29 @@ class Client(TelegramApi):
         return await super().set_my_name(params)
 
 
+    async def set_my_short_description(
+        self,
+        short_description: Optional[str] = None,
+        language_code: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setmyshortdescription
+
+        Use this method to change the bot's short description, which is shown on the bot's profile
+        page and is sent together with the link when users share the bot. Returns :obj:`True` on success.
+
+        :param short_description: New short description for the bot; 0-120 characters. Pass an empty string to remove the dedicated short description for the given language.
+        :type short_description: :obj:`str`, optional
+        :param language_code: A two-letter ISO 639-1 language code. If empty, the short description will be applied to all users for whose language there is no dedicated short description.
+        :type language_code: :obj:`str`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {}
+        if short_description is not None: params['short_description'] = short_description
+        if language_code is not None: params['language_code'] = language_code
+        return await super().set_my_short_description(params)
+
+
 
 
 
@@ -4638,22 +4661,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().unpin_all_general_forum_topic_messages(params)
-
-
-    async def set_my_short_description(
-        self,
-        short_description: Optional[str] = None,
-        language_code: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setmyshortdescription
-        Use this method to change the bot's short description, which is shown on the bot's profile
-        page and is sent together with the link when users share the bot. Returns True on success.
-        '''
-        params = {}
-        if short_description is not None: params['short_description'] = short_description
-        if language_code is not None: params['language_code'] = language_code
-        return await super().set_my_short_description(params)
 
 
     async def stop_message_live_location(
