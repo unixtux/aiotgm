@@ -104,6 +104,8 @@ class Client(TelegramApi):
 
     @property
     def user(self) -> Optional[User]:
+        if not isinstance(self._user, User):
+            self. _user = asyncio.run(self.get_me())
         return self._user
 
     @property
@@ -679,8 +681,8 @@ class Client(TelegramApi):
 
     async def long_polling(
         self,
-        *,
         timeout: int = 45,
+        *,
         limit: Optional[int] = None,
         allowed_updates: Optional[list[str]] = None
     ):
@@ -723,7 +725,6 @@ class Client(TelegramApi):
         params = {'timeout': timeout}
         if limit is not None: params['limit'] = limit
         if allowed_updates is not None: params['allowed_updates'] = allowed_updates
-        await self.get_me()
         logger.info('Welcome @{}.'.format(self.user.username))
         logger.info('long polling has been started.')
         bad_gateway = re.compile(r'bad.*gateway', re.IGNORECASE)
@@ -2413,11 +2414,8 @@ class Client(TelegramApi):
 
         :rtype: :obj:`~aiotgm.types.User`
         '''
-        if isinstance(self.user, User):
-            return self.user
         result = await super().get_me()
-        self._user = User._dese(result)
-        return self.user
+        return User._dese(result)
 
 
     async def get_my_commands(
