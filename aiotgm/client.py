@@ -4568,6 +4568,31 @@ class Client(TelegramApi):
         return await super().set_sticker_emoji_list(params)
 
 
+    async def set_sticker_keywords(
+        self,
+        sticker: str,
+        keywords: Optional[list[str]] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setstickerkeywords
+
+        Use this method to change search keywords assigned to a regular or custom emoji sticker.
+        The sticker must belong to a sticker set created by the bot. Returns :obj:`True` on success.
+
+        :param sticker: File identifier of the sticker.
+        :type sticker: :obj:`str`
+        :param keywords: A JSON-serialized list of 0-20 search keywords for the sticker with total length of up to 64 characters.
+        :type keywords: :obj:`list` of :obj:`str`, optional
+
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'sticker': sticker
+        }
+        if keywords is not None: params['keywords'] = keywords
+        return await super().set_sticker_keywords(params)
+
+
 
 
 
@@ -4770,23 +4795,6 @@ class Client(TelegramApi):
             'position': position
         }
         return await super().set_sticker_position_in_set(params)
-
-
-    async def set_sticker_keywords(
-        self,
-        sticker: str,
-        keywords: Optional[list[str]] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setstickerkeywords
-        Use this method to change search keywords assigned to a regular or custom emoji sticker.
-        The sticker must belong to a sticker set created by the bot. Returns True on success.
-        '''
-        params = {
-            'sticker': sticker
-        }
-        if keywords is not None: params['keywords'] = keywords
-        return await super().set_sticker_keywords(params)
 
 
     async def set_sticker_mask_position(
