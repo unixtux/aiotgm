@@ -737,6 +737,10 @@ class TelegramApi:
         files = _get_files(params, 'photo')
         return await self._request(method, params, files)
 
+    async def set_chat_sticker_set(self, params: dict):
+        method = 'setChatStickerSet'
+        return await self._request(method, params)
+
 
 
 
@@ -767,10 +771,6 @@ class TelegramApi:
 
     async def unpin_all_chat_messages(self, params: dict):
         method = 'unpinAllChatMessages'
-        return await self._request(method, params)
-
-    async def set_chat_sticker_set(self, params: dict):
-        method = 'setChatStickerSet'
         return await self._request(method, params)
 
     async def unpin_all_forum_topic_messages(self, params: dict):
