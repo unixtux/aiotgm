@@ -4470,6 +4470,28 @@ class Client(TelegramApi):
         return await super().set_my_description(params)
 
 
+    async def set_my_name(
+        self,
+        name: Optional[str] = None,
+        language_code: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setmyname
+
+        Use this method to change the bot's name. Returns :obj:`True` on success.
+
+        :param name: New bot name; 0-64 characters. Pass an empty string to remove the dedicated name for the given language.
+        :type name: :obj:`str`, optional
+        :param language_code: A two-letter ISO 639-1 language code. If empty, the name will be shown to all users for whose language there is no dedicated name.
+        :type language_code: :obj:`str`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {}
+        if name is not None: params['name'] = name
+        if language_code is not None: params['language_code'] = language_code
+        return await super().set_my_name(params)
+
+
 
 
 
@@ -4616,21 +4638,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().unpin_all_general_forum_topic_messages(params)
-
-
-    async def set_my_name(
-        self,
-        name: Optional[str] = None,
-        language_code: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setmyname
-        Use this method to change the bot's name. Returns True on success.
-        '''
-        params = {}
-        if name is not None: params['name'] = name
-        if language_code is not None: params['language_code'] = language_code
-        return await super().set_my_name(params)
 
 
     async def set_my_short_description(
