@@ -4394,6 +4394,35 @@ class Client(TelegramApi):
         return await super().set_message_reaction(params)
 
 
+    async def set_my_commands(
+        self,
+        commands: list[BotCommand],
+        scope: Optional[BotCommandScope] = None,
+        language_code: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setmycommands
+
+        Use this method to change the list of the bot's commands.
+        See `this manual <https://core.telegram.org/bots/features#commands>`_ 
+        for more details about bot commands. Returns :obj:`True` on success.
+
+        :param commands: A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
+        :type commands: :obj:`list` of :obj:`~aiotgm.types.BotCommand`
+        :param scope: A JSON-serialized object, describing scope of users for which the commands are relevant. Defaults to :obj:`~aiotgm.types.BotCommandScopeDefault`.
+        :type scope: :obj:`~aiotgm.types.BotCommandScope`, optional
+        :param language_code: A two-letter ISO 639-1 language code. If empty, commands will be applied to all users from the given scope, for whose language there are no dedicated commands.
+        :type language_code: :obj:`str`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'commands': commands
+        }
+        if scope is not None: params['scope'] = scope
+        if language_code is not None: params['language_code'] = language_code
+        return await super().set_my_commands(params)
+
+
 
 
     async def upload_sticker_file(
@@ -4538,25 +4567,6 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().unpin_all_general_forum_topic_messages(params)
-
-
-    async def set_my_commands(
-        self,
-        commands: list[BotCommand],
-        scope: Optional[BotCommandScope] = None,
-        language_code: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setmycommands
-        Use this method to change the list of the bot's commands. See this
-        manual for more details about bot commands. Returns True on success.
-        '''
-        params = {
-            'commands': commands
-        }
-        if scope is not None: params['scope'] = scope
-        if language_code is not None: params['language_code'] = language_code
-        return await super().set_my_commands(params)
 
 
     async def set_my_name(
