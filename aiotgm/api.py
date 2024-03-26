@@ -741,6 +741,10 @@ class TelegramApi:
         method = 'setChatStickerSet'
         return await self._request(method, params)
 
+    async def set_chat_title(self, params: dict):
+        method = 'setChatTitle'
+        return await self._request(method, params)
+
 
 
 
@@ -759,10 +763,6 @@ class TelegramApi:
 
     async def unban_chat_sender_chat(self, params: dict):
         method = 'unbanChatSenderChat'
-        return await self._request(method, params)
-
-    async def set_chat_title(self, params: dict):
-        method = 'setChatTitle'
         return await self._request(method, params)
 
     async def unpin_chat_message(self, params: dict):
