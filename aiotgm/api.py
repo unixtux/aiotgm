@@ -765,6 +765,10 @@ class TelegramApi:
         method = 'setMyDefaultAdministratorRights'
         return await self._request(method, params)
 
+    async def set_my_description(self, params: dict):
+        method = 'setMyDescription'
+        return await self._request(method, params)
+
 
 
     async def upload_sticker_file(self, params: dict):
@@ -802,10 +806,6 @@ class TelegramApi:
 
     async def set_my_name(self, params: dict):
         method = 'setMyName'
-        return await self._request(method, params)
-
-    async def set_my_description(self, params: dict):
-        method = 'setMyDescription'
         return await self._request(method, params)
 
     async def set_my_short_description(self, params: dict):
