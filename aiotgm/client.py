@@ -4423,6 +4423,32 @@ class Client(TelegramApi):
         return await super().set_my_commands(params)
 
 
+    async def set_my_default_administrator_rights(
+        self,
+        rights: Optional[ChatAdministratorRights] = None,
+        for_channels: Optional[bool] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setmydefaultadministratorrights
+
+        Use this method to change the default administrator rights requested by the bot when
+        it's added as an administrator to groups or channels. These rights will be suggested to
+        users, but they are free to modify the list before adding the bot. Returns :obj:`True` on success.
+
+        :param rights: A JSON-serialized object describing new default administrator rights. If not specified, the default administrator rights will be cleared.
+        :type rights: :obj:`~aiotgm.types.ChatAdministratorRights`, optional
+        :param for_channels: Pass :obj:`True` to change the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be changed.
+        :type for_channels: :obj:`bool`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {}
+        if rights is not None: params['rights'] = rights
+        if for_channels is not None: params['for_channels'] = for_channels
+        return await super().set_my_default_administrator_rights(params)
+
+
+
+
 
 
     async def upload_sticker_file(
@@ -4614,23 +4640,6 @@ class Client(TelegramApi):
         if short_description is not None: params['short_description'] = short_description
         if language_code is not None: params['language_code'] = language_code
         return await super().set_my_short_description(params)
-
-
-    async def set_my_default_administrator_rights(
-        self,
-        rights: Optional[ChatAdministratorRights] = None,
-        for_channels: Optional[bool] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setmydefaultadministratorrights
-        Use this method to change the default administrator rights requested by the bot when
-        it's added as an administrator to groups or channels. These rights will be suggested to
-        users, but they are free to modify the list before adding the bot. Returns True on success.
-        '''
-        params = {}
-        if rights is not None: params['rights'] = rights
-        if for_channels is not None: params['for_channels'] = for_channels
-        return await super().set_my_default_administrator_rights(params)
 
 
     async def stop_message_live_location(
