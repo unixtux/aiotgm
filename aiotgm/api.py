@@ -753,16 +753,16 @@ class TelegramApi:
         method = 'setGameScore'
         return await self._request(method, params)
 
+    async def set_message_reaction(self, params: dict):
+        method = 'setMessageReaction'
+        return await self._request(method, params)
+
 
 
     async def upload_sticker_file(self, params: dict):
         method = 'uploadStickerFile'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
-
-    async def set_message_reaction(self, params: dict):
-        method = 'setMessageReaction'
-        return await self._request(method, params)
 
     async def unban_chat_member(self, params: dict):
         method = 'unbanChatMember'
