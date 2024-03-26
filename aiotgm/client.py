@@ -4314,6 +4314,51 @@ class Client(TelegramApi):
         return await super().set_custom_emoji_sticker_set_thumbnail(params)
 
 
+    async def set_game_score(
+        self,
+        user_id: int,
+        score: int,
+        force: Optional[bool] = None,
+        disable_edit_message: Optional[bool] = None,
+        chat_id: Optional[int] = None,
+        message_id: Optional[int] = None,
+        inline_message_id: Optional[str] = None
+    ) -> Union[Message, Literal[True]]:
+        '''
+        https://core.telegram.org/bots/api#setgamescore
+
+        Use this method to set the score of the specified user in a game message.
+        On success, if the message is not an inline message, the :obj:`~aiotgm.types.Message`
+        is returned, otherwise :obj:`True` is returned. Returns an error, if the new score
+        is not greater than the user's current score in the chat and *force* is :obj:`False`.
+
+        :param user_id: User identifier.
+        :type user_id: :obj:`int`
+        :param score: New score, must be non-negative.
+        :type score: :obj:`int`
+        :param force: Pass :obj:`True` if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters.
+        :type force: :obj:`bool`, optional
+        :param disable_edit_message: Pass :obj:`True` if the game message should not be automatically edited to include the current scoreboard.
+        :type disable_edit_message: :obj:`bool`, optional
+        :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat.
+        :type chat_id: :obj:`int`, optional
+        :param message_id: Required if *inline_message_id* is not specified. Identifier of the sent message.
+        :type message_id: :obj:`int`, optional
+        :param inline_message_id: Required if *chat_id* and *message_id* are not specified. Identifier of the inline message.
+        :type inline_message_id: :obj:`str`, optional
+        :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
+        '''
+        params = {
+            'user_id': user_id,
+            'score': score
+        }
+        if force is not None: params['force'] = force
+        if disable_edit_message is not None: params['disable_edit_message'] = disable_edit_message
+        if chat_id is not None: params['chat_id'] = chat_id
+        if message_id is not None: params['message_id'] = message_id
+        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
+        result = await super().set_game_score(params)
+        return Message._dese(result) if result is not True else True
 
 
 
@@ -4728,32 +4773,3 @@ class Client(TelegramApi):
             'errors': errors
         }
         return await super().set_passport_data_errors(params)
-
-
-    async def set_game_score(
-        self,
-        user_id: int,
-        score: int,
-        force: Optional[bool] = None,
-        disable_edit_message: Optional[bool] = None,
-        chat_id: Optional[int] = None,
-        message_id: Optional[int] = None,
-        inline_message_id: Optional[str] = None
-    ) -> Union[Message, Literal[True]]:
-        '''
-        https://core.telegram.org/bots/api#setgamescore
-        Use this method to set the score of the specified user in a game message. On success, if the
-        message is not an inline message, the Message is returned, otherwise True is returned. Returns an
-        error, if the new score is not greater than the user's current score in the chat and force is False.
-        '''
-        params = {
-            'user_id': user_id,
-            'score': score
-        }
-        if force is not None: params['force'] = force
-        if disable_edit_message is not None: params['disable_edit_message'] = disable_edit_message
-        if chat_id is not None: params['chat_id'] = chat_id
-        if message_id is not None: params['message_id'] = message_id
-        if inline_message_id is not None: params['inline_message_id'] = inline_message_id
-        result = await super().set_game_score(params)
-        return Message._dese(result) if result is not True else True

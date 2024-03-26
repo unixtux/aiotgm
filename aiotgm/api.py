@@ -749,6 +749,9 @@ class TelegramApi:
         method = 'setCustomEmojiStickerSetThumbnail'
         return await self._request(method, params)
 
+    async def set_game_score(self, params: dict):
+        method = 'setGameScore'
+        return await self._request(method, params)
 
 
 
@@ -844,8 +847,4 @@ class TelegramApi:
 
     async def set_passport_data_errors(self, params: dict):
         method = 'setPassportDataErrors'
-        return await self._request(method, params)
-
-    async def set_game_score(self, params: dict):
-        method = 'setGameScore'
         return await self._request(method, params)
