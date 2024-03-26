@@ -4544,6 +4544,30 @@ class Client(TelegramApi):
         return await super().set_passport_data_errors(params)
 
 
+    async def set_sticker_emoji_list(
+        self,
+        sticker: str,
+        emoji_list: list[str]
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setstickeremojilist
+
+        Use this method to change the list of emoji assigned to a regular or custom emoji sticker.
+        The sticker must belong to a sticker set created by the bot. Returns :obj:`True` on success.
+
+        :param sticker: File identifier of the sticker.
+        :type sticker: :obj:`str`
+        :param emoji_list: A JSON-serialized list of 1-20 emoji associated with the sticker.
+        :type emoji_list: :obj:`list` of :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'sticker': sticker,
+            'emoji_list': emoji_list
+        }
+        return await super().set_sticker_emoji_list(params)
+
+
 
 
 
@@ -4746,23 +4770,6 @@ class Client(TelegramApi):
             'position': position
         }
         return await super().set_sticker_position_in_set(params)
-
-
-    async def set_sticker_emoji_list(
-        self,
-        sticker: str,
-        emoji_list: list[str]
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setstickeremojilist
-        Use this method to change the list of emoji assigned to a regular or custom emoji sticker.
-        The sticker must belong to a sticker set created by the bot. Returns True on success.
-        '''
-        params = {
-            'sticker': sticker,
-            'emoji_list': emoji_list
-        }
-        return await super().set_sticker_emoji_list(params)
 
 
     async def set_sticker_keywords(

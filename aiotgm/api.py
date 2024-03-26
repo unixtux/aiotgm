@@ -781,6 +781,10 @@ class TelegramApi:
         method = 'setPassportDataErrors'
         return await self._request(method, params)
 
+    async def set_sticker_emoji_list(self, params: dict):
+        method = 'setStickerEmojiList'
+        return await self._request(method, params)
+
 
 
 
@@ -828,10 +832,6 @@ class TelegramApi:
 
     async def set_sticker_position_in_set(self, params: dict):
         method = 'setStickerPositionInSet'
-        return await self._request(method, params)
-
-    async def set_sticker_emoji_list(self, params: dict):
-        method = 'setStickerEmojiList'
         return await self._request(method, params)
 
     async def set_sticker_keywords(self, params: dict):
