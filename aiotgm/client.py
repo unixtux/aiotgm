@@ -4213,6 +4213,31 @@ class Client(TelegramApi):
         return await super().set_chat_permissions(params)
 
 
+    async def set_chat_photo(
+        self,
+        chat_id: Union[int, str],
+        photo: InputFile
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setchatphoto
+
+        Use this method to set a new profile photo for the chat. Photos can't be changed
+        for private chats. The bot must be an administrator in the chat for this to work
+        and must have the appropriate administrator rights. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param photo: New chat photo, uploaded using multipart/form-data.
+        :type photo: :obj:`~aiotgm.types.InputFile`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'photo': photo
+        }
+        return await super().set_chat_photo(params)
+
+
 
 
 
@@ -4297,24 +4322,6 @@ class Client(TelegramApi):
             'sender_chat_id': sender_chat_id
         }
         return await super().unban_chat_sender_chat(params)
-
-
-    async def set_chat_photo(
-        self,
-        chat_id: Union[int, str],
-        photo: InputFile
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setchatphoto
-        Use this method to set a new profile photo for the chat. Photos can't be changed
-        for private chats. The bot must be an administrator in the chat for this to work
-        and must have the appropriate administrator rights. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'photo': photo
-        }
-        return await super().set_chat_photo(params)
 
 
     async def set_chat_title(

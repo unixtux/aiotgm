@@ -732,6 +732,11 @@ class TelegramApi:
         method = 'setChatPermissions'
         return await self._request(method, params)
 
+    async def set_chat_photo(self, params: dict):
+        method = 'setChatPhoto'
+        files = _get_files(params, 'photo')
+        return await self._request(method, params, files)
+
 
 
 
@@ -751,11 +756,6 @@ class TelegramApi:
     async def unban_chat_sender_chat(self, params: dict):
         method = 'unbanChatSenderChat'
         return await self._request(method, params)
-
-    async def set_chat_photo(self, params: dict):
-        method = 'setChatPhoto'
-        files = _get_files(params, 'photo')
-        return await self._request(method, params, files)
 
     async def set_chat_title(self, params: dict):
         method = 'setChatTitle'
