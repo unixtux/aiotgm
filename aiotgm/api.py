@@ -745,6 +745,10 @@ class TelegramApi:
         method = 'setChatTitle'
         return await self._request(method, params)
 
+    async def set_custom_emoji_sticker_set_thumbnail(self, params: dict):
+        method = 'setCustomEmojiStickerSetThumbnail'
+        return await self._request(method, params)
+
 
 
 
@@ -837,10 +841,6 @@ class TelegramApi:
         method = 'setStickerSetThumbnail'
         files = _get_files(params, 'thumbnail')
         return await self._request(method, params, files)
-
-    async def set_custom_emoji_sticker_set_thumbnail(self, params: dict):
-        method = 'setCustomEmojiStickerSetThumbnail'
-        return await self._request(method, params)
 
     async def set_passport_data_errors(self, params: dict):
         method = 'setPassportDataErrors'

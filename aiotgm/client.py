@@ -4290,6 +4290,30 @@ class Client(TelegramApi):
         return await super().set_chat_title(params)
 
 
+    async def set_custom_emoji_sticker_set_thumbnail(
+        self,
+        name: str,
+        custom_emoji_id: Optional[str] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setcustomemojistickersetthumbnail
+
+        Use this method to set the thumbnail of a custom emoji sticker set.
+        Returns :obj:`True` on success.
+
+        :param name: Sticker set name.
+        :type name: :obj:`str`
+        :param custom_emoji_id: Custom emoji identifier of a sticker from the sticker set; pass an empty string to drop the thumbnail and use the first sticker as the thumbnail.
+        :type custom_emoji_id: :obj:`str`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'name': name
+        }
+        if custom_emoji_id is not None: params['custom_emoji_id'] = custom_emoji_id
+        return await super().set_custom_emoji_sticker_set_thumbnail(params)
+
+
 
 
 
@@ -4683,22 +4707,6 @@ class Client(TelegramApi):
         }
         if thumbnail is not None: params['thumbnail'] = thumbnail
         return await super().set_sticker_set_thumbnail(params)
-
-
-    async def set_custom_emoji_sticker_set_thumbnail(
-        self,
-        name: str,
-        custom_emoji_id: Optional[str] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setcustomemojistickersetthumbnail
-        Use this method to set the thumbnail of a custom emoji sticker set. Returns True on success.
-        '''
-        params = {
-            'name': name
-        }
-        if custom_emoji_id is not None: params['custom_emoji_id'] = custom_emoji_id
-        return await super().set_custom_emoji_sticker_set_thumbnail(params)
 
 
     async def set_passport_data_errors(
