@@ -4593,6 +4593,30 @@ class Client(TelegramApi):
         return await super().set_sticker_keywords(params)
 
 
+    async def set_sticker_mask_position(
+        self,
+        sticker: str,
+        mask_position: Optional[MaskPosition] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setstickermaskposition
+
+        Use this method to change the :obj:`mask position <aiotgm.types.MaskPosition>` of a mask sticker.
+        The sticker must belong to a sticker set that was created by the bot. Returns :obj:`True` on success.
+
+        :param sticker: File identifier of the sticker.
+        :type sticker: :obj:`str`
+        :param mask_position: A JSON-serialized object with the position where the mask should be placed on faces. Omit the parameter to remove the mask position.
+        :type mask_position: :obj:`~aiotgm.types.MaskPosition`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'sticker': sticker
+        }
+        if mask_position is not None: params['mask_position'] = mask_position
+        return await super().set_sticker_mask_position(params)
+
+
 
 
 
@@ -4795,23 +4819,6 @@ class Client(TelegramApi):
             'position': position
         }
         return await super().set_sticker_position_in_set(params)
-
-
-    async def set_sticker_mask_position(
-        self,
-        sticker: str,
-        mask_position: Optional[MaskPosition] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setstickermaskposition
-        Use this method to change the mask position of a mask sticker. The sticker
-        must belong to a sticker set that was created by the bot. Returns True on success.
-        '''
-        params = {
-            'sticker': sticker
-        }
-        if mask_position is not None: params['mask_position'] = mask_position
-        return await super().set_sticker_mask_position(params)
 
 
     async def set_sticker_set_title(
