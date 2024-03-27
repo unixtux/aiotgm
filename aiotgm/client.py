@@ -4832,6 +4832,28 @@ class Client(TelegramApi):
         return await super().unhide_general_forum_topic(params)
 
 
+    async def unpin_all_chat_messages(
+        self,
+        chat_id: Union[int, str]
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#unpinallchatmessages
+
+        Use this method to clear the list of pinned messages in a chat.
+        If the chat is not a private chat, the bot must be an administrator in
+        the chat for this to work and must have the 'can_pin_messages' administrator right in
+        a supergroup or 'can_edit_messages' administrator right in a channel. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        return await super().unpin_all_chat_messages(params)
+
+
 
 
 
@@ -4872,22 +4894,6 @@ class Client(TelegramApi):
         }
         if message_id is not None: params['message_id'] = message_id
         return await super().unpin_chat_message(params)
-
-
-    async def unpin_all_chat_messages(
-        self,
-        chat_id: Union[int, str]
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#unpinallchatmessages
-        Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the
-        bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator
-        right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        return await super().unpin_all_chat_messages(params)
 
 
     async def unpin_all_forum_topic_messages(

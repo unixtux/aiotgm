@@ -826,6 +826,10 @@ class TelegramApi:
         method = 'unhideGeneralForumTopic'
         return await self._request(method, params)
 
+    async def unpin_all_chat_messages(self, params: dict):
+        method = 'unpinAllChatMessages'
+        return await self._request(method, params)
+
 
 
 
@@ -837,10 +841,6 @@ class TelegramApi:
 
     async def unpin_chat_message(self, params: dict):
         method = 'unpinChatMessage'
-        return await self._request(method, params)
-
-    async def unpin_all_chat_messages(self, params: dict):
-        method = 'unpinAllChatMessages'
         return await self._request(method, params)
 
     async def unpin_all_forum_topic_messages(self, params: dict):
