@@ -741,7 +741,7 @@ class Client(TelegramApi):
 
             except TelegramError as exc:
                 if bad_gateway.search(exc.description):
-                    logger.info('{} in long polling.'.format(exc))
+                    logger.info('{!r} occurred in long polling.'.format(exc))
                     await asyncio.sleep(2)
                 else:
                     await self.session.close()
