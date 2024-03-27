@@ -1,35 +1,24 @@
 #!/bin/env python3
 
-with open('../aiotgm/client.py') as r:
-    lines = r.readlines()
+if __name__ == '__main__':
+    import re
 
-import re
+    with open('../aiotgm/client.py') as r:
+        lines = r.readlines()
 
-ln = 0
+    is_not_none = re.compile(r"if\s*(.*?)\s*is\s*not\s*None\s*:\s*params\[\s*'(.*?)'\s*\]\s*=\s*(.*)\n*")
 
-def get_params(methods: str, match: str) -> dict[str, str]:
-    global ln
-    matched_empty_dict = re.match(r'\s*params\s*=\s*\{\s*\}\s*\n', lines[ln])
-    matched_dict = re.match(r'\s*params\s*=\s*\{\s*\n', lines[ln])
-    if matched_empty_dict:
-        print(match)
-    if matched_dict:
-        print(match)
-    else:
-        raise Exception(match, lines[ln])
-
-
-def main():
-    global ln
-    methods = {}
+    errors = []
+    correct = []
     for line in lines:
-        mached_method = re.match(r'\s{4}async\s*def\s*([^_]\w*)', line)
-        if mached_method:
-            match = mached_method.group(1)
-            if match in ('long_polling', ' _process_update'):
-                continue
-            methods[match] = {'params': None, 'return': None}
-            get_params(methods, match)
-        ln += 1
+        match_is_none = is_not_none.search(line)
+        if match_is_none:
+            group = match_is_none.group(1, 2, 3)
+            if not (group[0].replace('self.', '') == group[1] == group[2].replace('self.', '')):
+                errors.append((group[0], group[1], group[2]))
+            else:
+                correct.append((group[0], group[1], group[2]))
 
-main()
+    print('errors are:', errors)
+    print('len() of correct is:', len(correct))
+
