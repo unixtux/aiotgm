@@ -4641,6 +4641,33 @@ class Client(TelegramApi):
         return await super().set_sticker_position_in_set(params)
 
 
+    async def set_sticker_set_thumbnail(
+        self,
+        name: str,
+        user_id: int,
+        thumbnail: Optional[Union[InputFile, str]] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setstickersetthumbnail
+
+        Use this method to set the thumbnail of a regular or mask sticker set. The format of the
+        thumbnail file must match the format of the stickers in the set. Returns :obj:`True` on success.
+
+        :param name: Sticker set name.
+        :type name: :obj:`str`
+        :param user_id: User identifier of the sticker set owner.
+        :type user_id: :obj:`int`
+        :param thumbnail: A **.WEBP** or **.PNG** image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a **.TGS** animation with a thumbnail up to 32 kilobytes in size (see https://core.telegram.org/stickers#animated-sticker-requirements for animated sticker technical requirements), or a **WEBM** video with the thumbnail up to 32 kilobytes in size; see https://core.telegram.org/stickers#video-sticker-requirements for video sticker technical requirements. Pass a *file_id* as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_. Animated and video sticker set thumbnails can't be uploaded via HTTP URL. If omitted, then the thumbnail is dropped and the first sticker is used as the thumbnail.
+        :type thumbnail: :obj:`~aiotgm.types.InputFile` or :obj:`str`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'name': name,
+            'user_id': user_id
+        }
+        if thumbnail is not None: params['thumbnail'] = thumbnail
+        return await super().set_sticker_set_thumbnail(params)
+
 
 
 
@@ -4844,23 +4871,5 @@ class Client(TelegramApi):
         }
         return await super().set_sticker_set_title(params)
 
-
-    async def set_sticker_set_thumbnail(
-        self,
-        name: str,
-        user_id: int,
-        thumbnail: Optional[Union[InputFile, str]] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setstickersetthumbnail
-        Use this method to set the thumbnail of a regular or mask sticker set. The format of the
-        thumbnail file must match the format of the stickers in the set. Returns True on success.
-        '''
-        params = {
-            'name': name,
-            'user_id': user_id
-        }
-        if thumbnail is not None: params['thumbnail'] = thumbnail
-        return await super().set_sticker_set_thumbnail(params)
 
 

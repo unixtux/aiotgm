@@ -797,6 +797,11 @@ class TelegramApi:
         method = 'setStickerPositionInSet'
         return await self._request(method, params)
 
+    async def set_sticker_set_thumbnail(self, params: dict):
+        method = 'setStickerSetThumbnail'
+        files = _get_files(params, 'thumbnail')
+        return await self._request(method, params, files)
+
 
 
 
@@ -846,7 +851,3 @@ class TelegramApi:
         method = 'setStickerSetTitle'
         return await self._request(method, params)
 
-    async def set_sticker_set_thumbnail(self, params: dict):
-        method = 'setStickerSetThumbnail'
-        files = _get_files(params, 'thumbnail')
-        return await self._request(method, params, files)
