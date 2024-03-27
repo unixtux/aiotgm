@@ -4725,6 +4725,35 @@ class Client(TelegramApi):
         return Message._dese(result) if result is not True else True
 
 
+    async def stop_poll(
+        self,
+        chat_id: Union[int, str],
+        message_id: int,
+        reply_markup: Optional[InlineKeyboardMarkup] = None
+    ) -> Poll:
+        '''
+        https://core.telegram.org/bots/api#stoppoll
+
+        Use this method to stop a poll which was sent by the bot.
+        On success, the stopped :obj:`~aiotgm.types.Poll` is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param message_id: Identifier of the original message with the poll.
+        :type message_id: :obj:`int`
+        :param reply_markup: A JSON-serialized object for a new `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
+        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+        :rtype: :obj:`~aiotgm.types.Poll`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'message_id': message_id
+        }
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().stop_poll(params)
+        return Poll._dese(result)
+
+
 
 
 
@@ -4870,24 +4899,5 @@ class Client(TelegramApi):
             'chat_id': chat_id
         }
         return await super().unpin_all_general_forum_topic_messages(params)
-
-
-    async def stop_poll(
-        self,
-        chat_id: Union[int, str],
-        message_id: int,
-        reply_markup: Optional[InlineKeyboardMarkup] = None
-    ) -> Poll:
-        '''
-        https://core.telegram.org/bots/api#stoppoll
-        Use this method to stop a poll which was sent by the bot. On success, the stopped Poll is returned.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'message_id': message_id
-        }
-        if reply_markup is not None: params['reply_markup'] = reply_markup
-        result = await super().stop_poll(params)
-        return Poll._dese(result)
 
 
