@@ -4935,8 +4935,17 @@ class Client(TelegramApi):
         '''
         https://core.telegram.org/bots/api#uploadstickerfile
 
-        Use this method to upload a file with a sticker for later use in the createNewStickerSet and
-        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
+        Use this method to upload a file with a sticker for later use in the
+        :meth:`~aiotgm.Client.create_new_sticker_set` and :meth:`~aiotgm.Client.add_sticker_to_set` methods
+        (the file can be used multiple times). Returns the uploaded :obj:`~aiotgm.types.File` on success.
+
+        :param user_id: User identifier of sticker file owner.
+        :type user_id: :obj:`int`
+        :param sticker: A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format. See https://core.telegram.org/stickers for technical requirements. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+        :type sticker: :obj:`~aiotgm.types.InputFile`
+        :param sticker_format: Format of the sticker, must be one of “static”, “animated”, “video”.
+        :type sticker_format: :obj:`str`
+        :rtype: :obj:`~aiotgm.types.File`
         '''
         params = {
             'user_id': user_id,
