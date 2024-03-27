@@ -53,7 +53,7 @@ Use the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aiot
 
     asyncio.run(bot.long_polling())
 
-There are 18 decorator method to manage differrent :obj:`updates <aiotgm.types.Update>`:
+There are 18 decorator methods to manage differrent :obj:`updates <aiotgm.types.Update>`:
 
 * :meth:`~aiotgm.Client.manage_message`
 * :meth:`~aiotgm.Client.manage_edited_message`
