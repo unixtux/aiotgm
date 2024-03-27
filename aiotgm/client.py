@@ -4754,6 +4754,38 @@ class Client(TelegramApi):
         return Poll._dese(result)
 
 
+    async def unban_chat_member(
+        self,
+        chat_id: Union[int, str],
+        user_id: int,
+        only_if_banned: Optional[bool] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#unbanchatmember
+
+        Use this method to unban a previously banned user in a supergroup or channel.
+        The user will **not** return to the group or channel automatically, but will be able to
+        join via link, etc. The bot must be an administrator for this to work. By default, this
+        method guarantees that after the call the user is not a member of the chat, but will be able
+        to join it. So if the user is a member of the chat they will also be **removed** from the chat.
+        If you don't want this, use the parameter *only_if_banned*. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target group or username of the target supergroup or channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param user_id: Unique identifier of the target user.
+        :type user_id: :obj:`int`
+        :param only_if_banned: Do nothing if the user is not banned.
+        :type only_if_banned: :obj:`bool`, optional
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'user_id': user_id
+        }
+        if only_if_banned is not None: params['only_if_banned'] = only_if_banned
+        return await super().unban_chat_member(params)
+
+
 
 
 
@@ -4776,28 +4808,6 @@ class Client(TelegramApi):
         }
         result = await super().upload_sticker_file(params)
         return File._dese(result)
-
-
-    async def unban_chat_member(
-        self,
-        chat_id: Union[int, str],
-        user_id: int,
-        only_if_banned: Optional[bool] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#unbanchatmember
-        Use this method to unban a previously banned user in a supergroup or channel. The user will not return
-        to the group or channel automatically, but will be able to join via link, etc. The bot must be an administrator
-        for this to work. By default, this method guarantees that after the call the user is not a member of the chat,
-        but will be able to join it. So if the user is a member of the chat they will also be removed from the chat.
-        If you don't want this, use the parameter only_if_banned. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id,
-            'user_id': user_id
-        }
-        if only_if_banned is not None: params['only_if_banned'] = only_if_banned
-        return await super().unban_chat_member(params)
 
 
     async def unban_chat_sender_chat(
