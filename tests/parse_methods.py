@@ -9,7 +9,7 @@ if __name__ == '__main__':
     is_not_none = re.compile(r"if\s*(.*?)\s*is\s*not\s*None\s*:\s*params\[\s*'(.*?)'\s*\]\s*=\s*(.*)\n*")
 
     errors = []
-    correct = []
+    corrects = []
     for line in lines:
         match_is_none = is_not_none.search(line)
         if match_is_none:
@@ -17,8 +17,8 @@ if __name__ == '__main__':
             if not (group[0].replace('self.', '') == group[1] == group[2].replace('self.', '')):
                 errors.append((group[0], group[1], group[2]))
             else:
-                correct.append((group[0], group[1], group[2]))
+                corrects.append((group[0], group[1], group[2]))
 
     print('errors are:', errors)
-    print('len() of correct is:', len(correct))
+    print('len() of correct is:', corrects, len(corrects))
 
