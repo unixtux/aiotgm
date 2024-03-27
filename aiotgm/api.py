@@ -806,6 +806,10 @@ class TelegramApi:
         method = 'setStickerSetTitle'
         return await self._request(method, params)
 
+    async def stop_message_live_location(self, params: dict):
+        method = 'stopMessageLiveLocation'
+        return await self._request(method, params)
+
 
 
 
@@ -841,10 +845,6 @@ class TelegramApi:
 
     async def unpin_all_general_forum_topic_messages(self, params: dict):
         method = 'unpinAllGeneralForumTopicMessages'
-        return await self._request(method, params)
-
-    async def stop_message_live_location(self, params: dict):
-        method = 'stopMessageLiveLocation'
         return await self._request(method, params)
 
     async def stop_poll(self, params: dict):
