@@ -4669,6 +4669,29 @@ class Client(TelegramApi):
         return await super().set_sticker_set_thumbnail(params)
 
 
+    async def set_sticker_set_title(
+        self,
+        name: str,
+        title: str
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setstickersettitle
+
+        Use this method to set the title of a created sticker set. Returns :obj:`True` on success.
+
+        :param name: Sticker set name.
+        :type name: :obj:`str`
+        :param title: Sticker set title, 1-64 characters.
+        :type title: :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'name': name,
+            'title': title
+        }
+        return await super().set_sticker_set_title(params)
+
+
 
 
 
@@ -4854,22 +4877,5 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().stop_poll(params)
         return Poll._dese(result)
-
-
-    async def set_sticker_set_title(
-        self,
-        name: str,
-        title: str
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setstickersettitle
-        Use this method to set the title of a created sticker set. Returns True on success.
-        '''
-        params = {
-            'name': name,
-            'title': title
-        }
-        return await super().set_sticker_set_title(params)
-
 
 
