@@ -793,6 +793,10 @@ class TelegramApi:
         method = 'setStickerMaskPosition'
         return await self._request(method, params)
 
+    async def set_sticker_position_in_set(self, params: dict):
+        method = 'setStickerPositionInSet'
+        return await self._request(method, params)
+
 
 
 
@@ -836,10 +840,6 @@ class TelegramApi:
 
     async def stop_poll(self, params: dict):
         method = 'stopPoll'
-        return await self._request(method, params)
-
-    async def set_sticker_position_in_set(self, params: dict):
-        method = 'setStickerPositionInSet'
         return await self._request(method, params)
 
     async def set_sticker_set_title(self, params: dict):

@@ -4617,6 +4617,30 @@ class Client(TelegramApi):
         return await super().set_sticker_mask_position(params)
 
 
+    async def set_sticker_position_in_set(
+        self,
+        sticker: str,
+        position: int
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#setstickerpositioninset
+
+        Use this method to move a sticker in a set created by the bot to a specific position.
+        Returns :obj:`True` on success.
+
+        :param sticker: File identifier of the sticker.
+        :type sticker: :obj:`str`
+        :param position: New sticker position in the set, zero-based.
+        :type position: :obj:`int`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'sticker': sticker,
+            'position': position
+        }
+        return await super().set_sticker_position_in_set(params)
+
+
 
 
 
@@ -4803,22 +4827,6 @@ class Client(TelegramApi):
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().stop_poll(params)
         return Poll._dese(result)
-
-
-    async def set_sticker_position_in_set(
-        self,
-        sticker: str,
-        position: int
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#setstickerpositioninset
-        Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success.
-        '''
-        params = {
-            'sticker': sticker,
-            'position': position
-        }
-        return await super().set_sticker_position_in_set(params)
 
 
     async def set_sticker_set_title(
