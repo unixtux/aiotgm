@@ -4854,48 +4854,6 @@ class Client(TelegramApi):
         return await super().unpin_all_chat_messages(params)
 
 
-
-
-
-    async def upload_sticker_file(
-        self,
-        user_id: int,
-        sticker: InputFile,
-        sticker_format: str
-    ) -> File:
-        '''
-        https://core.telegram.org/bots/api#uploadstickerfile
-
-        Use this method to upload a file with a sticker for later use in the createNewStickerSet and
-        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
-        '''
-        params = {
-            'user_id': user_id,
-            'sticker': sticker,
-            'sticker_format': sticker_format
-        }
-        result = await super().upload_sticker_file(params)
-        return File._dese(result)
-
-
-    async def unpin_chat_message(
-        self,
-        chat_id: Union[int, str],
-        message_id: Optional[int] = None
-    ) -> Literal[True]:
-        '''
-        https://core.telegram.org/bots/api#unpinchatmessage
-        Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a
-        private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages'
-        administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
-        '''
-        params = {
-            'chat_id': chat_id
-        }
-        if message_id is not None: params['message_id'] = message_id
-        return await super().unpin_chat_message(params)
-
-
     async def unpin_all_forum_topic_messages(
         self,
         chat_id: Union[int, str],
@@ -4903,6 +4861,7 @@ class Client(TelegramApi):
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#unpinallforumtopicmessages
+
         Use this method to clear the list of pinned messages in a forum topic.
         The bot must be an administrator in the chat for this to work and must have the
         can_pin_messages administrator right in the supergroup. Returns True on success.
@@ -4930,3 +4889,40 @@ class Client(TelegramApi):
         return await super().unpin_all_general_forum_topic_messages(params)
 
 
+    async def unpin_chat_message(
+        self,
+        chat_id: Union[int, str],
+        message_id: Optional[int] = None
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#unpinchatmessage
+        Use this method to remove a message from the list of pinned messages in a chat. If the chat is not a
+        private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages'
+        administrator right in a supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+        '''
+        params = {
+            'chat_id': chat_id
+        }
+        if message_id is not None: params['message_id'] = message_id
+        return await super().unpin_chat_message(params)
+
+
+    async def upload_sticker_file(
+        self,
+        user_id: int,
+        sticker: InputFile,
+        sticker_format: str
+    ) -> File:
+        '''
+        https://core.telegram.org/bots/api#uploadstickerfile
+
+        Use this method to upload a file with a sticker for later use in the createNewStickerSet and
+        addStickerToSet methods (the file can be used multiple times). Returns the uploaded File on success.
+        '''
+        params = {
+            'user_id': user_id,
+            'sticker': sticker,
+            'sticker_format': sticker_format
+        }
+        result = await super().upload_sticker_file(params)
+        return File._dese(result)

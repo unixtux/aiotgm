@@ -830,19 +830,6 @@ class TelegramApi:
         method = 'unpinAllChatMessages'
         return await self._request(method, params)
 
-
-
-
-
-    async def upload_sticker_file(self, params: dict):
-        method = 'uploadStickerFile'
-        files = _get_files(params, 'sticker')
-        return await self._request(method, params, files)
-
-    async def unpin_chat_message(self, params: dict):
-        method = 'unpinChatMessage'
-        return await self._request(method, params)
-
     async def unpin_all_forum_topic_messages(self, params: dict):
         method = 'unpinAllForumTopicMessages'
         return await self._request(method, params)
@@ -851,3 +838,11 @@ class TelegramApi:
         method = 'unpinAllGeneralForumTopicMessages'
         return await self._request(method, params)
 
+    async def unpin_chat_message(self, params: dict):
+        method = 'unpinChatMessage'
+        return await self._request(method, params)
+
+    async def upload_sticker_file(self, params: dict):
+        method = 'uploadStickerFile'
+        files = _get_files(params, 'sticker')
+        return await self._request(method, params, files)
