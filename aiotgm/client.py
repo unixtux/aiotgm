@@ -4885,9 +4885,14 @@ class Client(TelegramApi):
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#unpinallgeneralforumtopicmessages
+
         Use this method to clear the list of pinned messages in a General forum topic.
         The bot must be an administrator in the chat for this to work and must have the
-        can_pin_messages administrator right in the supergroup. Returns True on success.
+        *can_pin_messages* administrator right in the supergroup. Returns :obj:`True` on success.
+
+        :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :rtype: :obj:`True`
         '''
         params = {
             'chat_id': chat_id
