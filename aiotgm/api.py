@@ -818,6 +818,10 @@ class TelegramApi:
         method = 'unbanChatMember'
         return await self._request(method, params)
 
+    async def unban_chat_sender_chat(self, params: dict):
+        method = 'unbanChatSenderChat'
+        return await self._request(method, params)
+
 
 
 
@@ -826,10 +830,6 @@ class TelegramApi:
         method = 'uploadStickerFile'
         files = _get_files(params, 'sticker')
         return await self._request(method, params, files)
-
-    async def unban_chat_sender_chat(self, params: dict):
-        method = 'unbanChatSenderChat'
-        return await self._request(method, params)
 
     async def unpin_chat_message(self, params: dict):
         method = 'unpinChatMessage'
