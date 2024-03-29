@@ -659,9 +659,9 @@ class CallbackQuery(TelegramType):
         obj = {}
         obj['id'] = res.get('id')
         obj['from_user'] = User._dese(res.get('from_user'))
+        obj['chat_instance'] = res.get('chat_instance')
         obj['message'] = _dese_maybe_inaccessible_message(res.get('message'))
         obj['inline_message_id'] = res.get('inline_message_id')
-        obj['chat_instance'] = res.get('chat_instance')
         obj['data'] = res.get('data')
         obj['game_short_name'] = res.get('game_short_name')
         return cls(**obj)
@@ -1201,6 +1201,35 @@ def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]
             f' type ChatBoostSource. Invalid source: {source!r}.'
         )
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+class ChatBoostUpdated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostupdated
+
+    This object represents a boost added to a chat or changed.
+
+    :param chat: Chat which was boosted.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param boost: Information about the chat boost.
+    :type boost: :obj:`~aiotgm.types.ChatBoost`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['boost'] = ChatBoost._dese(res.get('boost'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        boost: ChatBoost
+    ):
+        self.chat = chat
+        self.boost = boost
+
 
 
 
@@ -6194,29 +6223,6 @@ class UserChatBoosts(TelegramType):
         boosts: list[ChatBoost]
     ):
         self.boosts = boosts
-
-
-class ChatBoostUpdated(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatboostupdated
-
-    This object represents a boost added to a chat or changed.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['boost'] = ChatBoost._dese(res.get('boost'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        boost: ChatBoost
-    ):
-        self.chat = chat
-        self.boost = boost
 
 
 class Update(TelegramType):
