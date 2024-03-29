@@ -14,6 +14,7 @@ ChatMemberLeft: 'status' is not in __init__() and 'status' default value is: DEF
 ChatMemberMember: 'status' is not in __init__() and 'status' default value is: DEFAULT_CHAT_MEMBER_MEMBER
 ChatMemberOwner: 'status' is not in __init__() and 'status' default value is: DEFAULT_CHAT_MEMBER_OWNER
 ChatMemberRestricted: 'status' is not in __init__() and 'status' default value is: DEFAULT_CHAT_MEMBER_RESTRICTED
+ForceReply: 'force_reply: Literal[True]' is not in __init__() and 'force_reply: Literal[True]' default value is: True
 InputFile: Not found InputFile.file_name and Not found InputFile.hide_name
 Message: 'text' default value is: text or str() # If not text, it's str() instead of None
 ReactionTypeEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_EMOJI

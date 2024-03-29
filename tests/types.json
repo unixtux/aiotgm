@@ -986,6 +986,228 @@
             }
         }
     },
+    "Document": {
+        "link": "https://core.telegram.org/bots/api#document",
+        "has_dese": true,
+        "kwargs": {
+            "file_id": {
+                "type_hint": "str"
+            },
+            "file_unique_id": {
+                "type_hint": "str"
+            },
+            "thumbnail": {
+                "type_hint": "Optional[PhotoSize]",
+                "default": null
+            },
+            "file_name": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "mime_type": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "file_size": {
+                "type_hint": "Optional[int]",
+                "default": null
+            }
+        }
+    },
+    "EncryptedCredentials": {
+        "link": "https://core.telegram.org/bots/api#encryptedcredentials",
+        "has_dese": true,
+        "kwargs": {
+            "data": {
+                "type_hint": "str"
+            },
+            "hash": {
+                "type_hint": "str"
+            },
+            "secret": {
+                "type_hint": "str"
+            }
+        }
+    },
+    "EncryptedPassportElement": {
+        "link": "https://core.telegram.org/bots/api#encryptedpassportelement",
+        "has_dese": true,
+        "kwargs": {
+            "type": {
+                "type_hint": "str"
+            },
+            "hash": {
+                "type_hint": "str"
+            },
+            "data": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "phone_number": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "email": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "files": {
+                "type_hint": "Optional[list[PassportFile]]",
+                "default": null
+            },
+            "front_side": {
+                "type_hint": "Optional[PassportFile]",
+                "default": null
+            },
+            "reverse_side": {
+                "type_hint": "Optional[PassportFile]",
+                "default": null
+            },
+            "selfie": {
+                "type_hint": "Optional[PassportFile]",
+                "default": null
+            },
+            "translation": {
+                "type_hint": "Optional[list[PassportFile]]",
+                "default": null
+            }
+        }
+    },
+    "ExternalReplyInfo": {
+        "link": "https://core.telegram.org/bots/api#externalreplyinfo",
+        "has_dese": true,
+        "kwargs": {
+            "origin": {
+                "type_hint": "MessageOrigin"
+            },
+            "chat": {
+                "type_hint": "Optional[Chat]",
+                "default": null
+            },
+            "message_id": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "link_preview_options": {
+                "type_hint": "Optional[LinkPreviewOptions]",
+                "default": null
+            },
+            "animation": {
+                "type_hint": "Optional[Animation]",
+                "default": null
+            },
+            "audio": {
+                "type_hint": "Optional[Audio]",
+                "default": null
+            },
+            "document": {
+                "type_hint": "Optional[Document]",
+                "default": null
+            },
+            "photo": {
+                "type_hint": "Optional[list[PhotoSize]]",
+                "default": null
+            },
+            "sticker": {
+                "type_hint": "Optional[Sticker]",
+                "default": null
+            },
+            "story": {
+                "type_hint": "Optional[Story]",
+                "default": null
+            },
+            "video": {
+                "type_hint": "Optional[Video]",
+                "default": null
+            },
+            "video_note": {
+                "type_hint": "Optional[VideoNote]",
+                "default": null
+            },
+            "voice": {
+                "type_hint": "Optional[Voice]",
+                "default": null
+            },
+            "has_media_spoiler": {
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
+            },
+            "contact": {
+                "type_hint": "Optional[Contact]",
+                "default": null
+            },
+            "dice": {
+                "type_hint": "Optional[Dice]",
+                "default": null
+            },
+            "game": {
+                "type_hint": "Optional[Game]",
+                "default": null
+            },
+            "giveaway": {
+                "type_hint": "Optional[Giveaway]",
+                "default": null
+            },
+            "giveaway_winners": {
+                "type_hint": "Optional[GiveawayWinners]",
+                "default": null
+            },
+            "invoice": {
+                "type_hint": "Optional[Invoice]",
+                "default": null
+            },
+            "location": {
+                "type_hint": "Optional[Location]",
+                "default": null
+            },
+            "poll": {
+                "type_hint": "Optional[Poll]",
+                "default": null
+            },
+            "venue": {
+                "type_hint": "Optional[Venue]",
+                "default": null
+            }
+        }
+    },
+    "File": {
+        "link": "https://core.telegram.org/bots/api#file",
+        "has_dese": true,
+        "kwargs": {
+            "file_id": {
+                "type_hint": "str"
+            },
+            "file_unique_id": {
+                "type_hint": "str"
+            },
+            "file_size": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "file_path": {
+                "type_hint": "Optional[str]",
+                "default": null
+            }
+        }
+    },
+    "ForceReply": {
+        "link": "https://core.telegram.org/bots/api#forcereply",
+        "has_dese": false,
+        "warnings": [
+            "'force_reply: Literal[True]' is not in __init__()",
+            "'force_reply: Literal[True]' default value is: True"
+        ],
+        "kwargs": {
+            "input_field_placeholder": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "selective": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            }
+        }
+    },
     "SwitchInlineQueryChosenChat": {
         "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
         "has_dese": true,
@@ -1696,34 +1918,6 @@
             }
         }
     },
-    "Document": {
-        "link": "https://core.telegram.org/bots/api#document",
-        "has_dese": true,
-        "kwargs": {
-            "file_id": {
-                "type_hint": "str"
-            },
-            "file_unique_id": {
-                "type_hint": "str"
-            },
-            "thumbnail": {
-                "type_hint": "Optional[PhotoSize]",
-                "default": null
-            },
-            "file_name": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "mime_type": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "file_size": {
-                "type_hint": "Optional[int]",
-                "default": null
-            }
-        }
-    },
     "Story": {
         "link": "https://core.telegram.org/bots/api#story",
         "has_dese": true,
@@ -2095,26 +2289,6 @@
             }
         }
     },
-    "File": {
-        "link": "https://core.telegram.org/bots/api#file",
-        "has_dese": true,
-        "kwargs": {
-            "file_id": {
-                "type_hint": "str"
-            },
-            "file_unique_id": {
-                "type_hint": "str"
-            },
-            "file_size": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "file_path": {
-                "type_hint": "Optional[str]",
-                "default": null
-            }
-        }
-    },
     "WebAppInfo": {
         "link": "https://core.telegram.org/bots/api#webappinfo",
         "has_dese": true,
@@ -2325,24 +2499,6 @@
         "kwargs": {
             "inline_keyboard": {
                 "type_hint": "Optional[list[list[InlineKeyboardButton]]]",
-                "default": null
-            }
-        }
-    },
-    "ForceReply": {
-        "link": "https://core.telegram.org/bots/api#forcereply",
-        "has_dese": false,
-        "kwargs": {
-            "force_reply": {
-                "type_hint": "Literal[True]",
-                "default": true
-            },
-            "input_field_placeholder": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "selective": {
-                "type_hint": "Optional[bool]",
                 "default": null
             }
         }
@@ -4072,65 +4228,6 @@
             }
         }
     },
-    "EncryptedPassportElement": {
-        "link": "https://core.telegram.org/bots/api#encryptedpassportelement",
-        "has_dese": true,
-        "kwargs": {
-            "type": {
-                "type_hint": "str"
-            },
-            "hash": {
-                "type_hint": "str"
-            },
-            "data": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "phone_number": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "email": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "files": {
-                "type_hint": "Optional[list[PassportFile]]",
-                "default": null
-            },
-            "front_side": {
-                "type_hint": "Optional[PassportFile]",
-                "default": null
-            },
-            "reverse_side": {
-                "type_hint": "Optional[PassportFile]",
-                "default": null
-            },
-            "selfie": {
-                "type_hint": "Optional[PassportFile]",
-                "default": null
-            },
-            "translation": {
-                "type_hint": "Optional[list[PassportFile]]",
-                "default": null
-            }
-        }
-    },
-    "EncryptedCredentials": {
-        "link": "https://core.telegram.org/bots/api#encryptedcredentials",
-        "has_dese": true,
-        "kwargs": {
-            "data": {
-                "type_hint": "str"
-            },
-            "hash": {
-                "type_hint": "str"
-            },
-            "secret": {
-                "type_hint": "str"
-            }
-        }
-    },
     "PassportData": {
         "link": "https://core.telegram.org/bots/api#passportdata",
         "has_dese": true,
@@ -4532,103 +4629,6 @@
             },
             "author_signature": {
                 "type_hint": "Optional[str]",
-                "default": null
-            }
-        }
-    },
-    "ExternalReplyInfo": {
-        "link": "https://core.telegram.org/bots/api#externalreplyinfo",
-        "has_dese": true,
-        "kwargs": {
-            "origin": {
-                "type_hint": "MessageOrigin"
-            },
-            "chat": {
-                "type_hint": "Optional[Chat]",
-                "default": null
-            },
-            "message_id": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "link_preview_options": {
-                "type_hint": "Optional[LinkPreviewOptions]",
-                "default": null
-            },
-            "animation": {
-                "type_hint": "Optional[Animation]",
-                "default": null
-            },
-            "audio": {
-                "type_hint": "Optional[Audio]",
-                "default": null
-            },
-            "document": {
-                "type_hint": "Optional[Document]",
-                "default": null
-            },
-            "photo": {
-                "type_hint": "Optional[list[PhotoSize]]",
-                "default": null
-            },
-            "sticker": {
-                "type_hint": "Optional[Sticker]",
-                "default": null
-            },
-            "story": {
-                "type_hint": "Optional[Story]",
-                "default": null
-            },
-            "video": {
-                "type_hint": "Optional[Video]",
-                "default": null
-            },
-            "video_note": {
-                "type_hint": "Optional[VideoNote]",
-                "default": null
-            },
-            "voice": {
-                "type_hint": "Optional[Voice]",
-                "default": null
-            },
-            "has_media_spoiler": {
-                "type_hint": "Optional[Literal[True]]",
-                "default": null
-            },
-            "contact": {
-                "type_hint": "Optional[Contact]",
-                "default": null
-            },
-            "dice": {
-                "type_hint": "Optional[Dice]",
-                "default": null
-            },
-            "game": {
-                "type_hint": "Optional[Game]",
-                "default": null
-            },
-            "giveaway": {
-                "type_hint": "Optional[Giveaway]",
-                "default": null
-            },
-            "giveaway_winners": {
-                "type_hint": "Optional[GiveawayWinners]",
-                "default": null
-            },
-            "invoice": {
-                "type_hint": "Optional[Invoice]",
-                "default": null
-            },
-            "location": {
-                "type_hint": "Optional[Location]",
-                "default": null
-            },
-            "poll": {
-                "type_hint": "Optional[Poll]",
-                "default": null
-            },
-            "venue": {
-                "type_hint": "Optional[Venue]",
                 "default": null
             }
         }
