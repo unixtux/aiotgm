@@ -2164,6 +2164,74 @@ class EncryptedCredentials(TelegramType):
         self.secret = secret
 
 
+class EncryptedPassportElement(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#encryptedpassportelement
+
+    Describes documents or other Telegram Passport elements shared with the bot by the user.
+
+    :param type: Element type. One of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”, “phone_number”, “email”.
+    :type type: :obj:`str`
+    :param hash: Base64-encoded element hash for using in :obj:`~aiotgm.types.PassportElementErrorUnspecified`.
+    :type hash: :obj:`str`
+    :param data: Base64-encoded encrypted Telegram Passport element data provided by the user; available only for “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport” and “address” types. Can be decrypted and verified using the accompanying :obj:`~aiotgm.types.EncryptedCredentials`.
+    :type data: :obj:`str`, optional
+    :param phone_number: User's verified phone number; available only for “phone_number” type.
+    :type phone_number: :obj:`str`, optional
+    :param email: User's verified email address; available only for “email” type.
+    :type email: :obj:`str`, optional
+    :param files: Array of encrypted files with documents provided by the user; available only for “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying :obj:`~aiotgm.types.EncryptedCredentials`.
+    :type files: :obj:`list` of :obj:`~aiotgm.types.PassportFile`, optional
+    :param front_side: Encrypted file with the front side of the document, provided by the user; available only for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying :obj:`~aiotgm.types.EncryptedCredentials`.
+    :type front_side: :obj:`~aiotgm.types.PassportFile`, optional
+    :param reverse_side: Encrypted file with the reverse side of the document, provided by the user; available only for “driver_license” and “identity_card”. The file can be decrypted and verified using the accompanying :obj:`~aiotgm.types.EncryptedCredentials`.
+    :type reverse_side: :obj:`~aiotgm.types.PassportFile`, optional
+    :param selfie: Encrypted file with the selfie of the user holding a document, provided by the user; available if requested for “passport”, “driver_license”, “identity_card” and “internal_passport”. The file can be decrypted and verified using the accompanying :obj:`~aiotgm.types.EncryptedCredentials`.
+    :type selfie: :obj:`~aiotgm.types.PassportFile`, optional
+    :param translation: Array of encrypted files with translated versions of documents provided by the user; available if requested for “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration” and “temporary_registration” types. Files can be decrypted and verified using the accompanying :obj:`~aiotgm.types.EncryptedCredentials`.
+    :type translation: :obj:`list` of :obj:`~aiotgm.types.PassportFile`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['type'] = res.get('type')
+        obj['hash'] = res.get('hash')
+        obj['data'] = res.get('data')
+        obj['phone_number'] = res.get('phone_number')
+        obj['email'] = res.get('email')
+        obj['files'] = [PassportFile._dese(kwargs) for kwargs in res.get('files')] if 'files' in res else None
+        obj['front_side'] = PassportFile._dese(res.get('front_side'))
+        obj['reverse_side'] = PassportFile._dese(res.get('reverse_side'))
+        obj['selfie'] = PassportFile._dese(res.get('selfie'))
+        obj['translation'] = [PassportFile._dese(kwargs) for kwargs in res.get('translation')] if 'translation' in res else None
+        return cls(**obj)
+
+    def __init__(
+        self,
+        type: str,
+        hash: str,
+        data: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        email: Optional[str] = None,
+        files: Optional[list[PassportFile]] = None,
+        front_side: Optional[PassportFile] = None,
+        reverse_side: Optional[PassportFile] = None,
+        selfie: Optional[PassportFile] = None,
+        translation: Optional[list[PassportFile]] = None
+    ):
+        self.type = type
+        self.hash = hash
+        self.data = data
+        self.phone_number = phone_number
+        self.email = email
+        self.files = files
+        self.front_side = front_side
+        self.reverse_side = reverse_side
+        self.selfie = selfie
+        self.translation = translation
+
+
 
 
 
@@ -5678,53 +5746,6 @@ class PassportFile(TelegramType):
         self.file_unique_id = file_unique_id
         self.file_size = file_size
         self.file_date = file_date
-
-
-class EncryptedPassportElement(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#encryptedpassportelement
-
-    Describes documents or other Telegram Passport elements shared with the bot by the user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['type'] = res.get('type')
-        obj['hash'] = res.get('hash')
-        obj['data'] = res.get('data')
-        obj['phone_number'] = res.get('phone_number')
-        obj['email'] = res.get('email')
-        obj['files'] = [PassportFile._dese(kwargs) for kwargs in res.get('files')] if 'files' in res else None
-        obj['front_side'] = PassportFile._dese(res.get('front_side'))
-        obj['reverse_side'] = PassportFile._dese(res.get('reverse_side'))
-        obj['selfie'] = PassportFile._dese(res.get('selfie'))
-        obj['translation'] = [PassportFile._dese(kwargs) for kwargs in res.get('translation')] if 'translation' in res else None
-        return cls(**obj)
-
-    def __init__(
-        self,
-        type: str,
-        hash: str,
-        data: Optional[str] = None,
-        phone_number: Optional[str] = None,
-        email: Optional[str] = None,
-        files: Optional[list[PassportFile]] = None,
-        front_side: Optional[PassportFile] = None,
-        reverse_side: Optional[PassportFile] = None,
-        selfie: Optional[PassportFile] = None,
-        translation: Optional[list[PassportFile]] = None
-    ):
-        self.type = type
-        self.hash = hash
-        self.data = data
-        self.phone_number = phone_number
-        self.email = email
-        self.files = files
-        self.front_side = front_side
-        self.reverse_side = reverse_side
-        self.selfie = selfie
-        self.translation = translation
 
 
 class PassportData(TelegramType):
