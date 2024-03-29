@@ -1931,6 +1931,35 @@ class ChatPhoto(TelegramType):
         self.big_file_unique_id = big_file_unique_id
 
 
+class ChatShared(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatshared
+
+    This object contains information about the chat whose identifier was shared
+    with the bot using a :obj:`~aiotgm.types.KeyboardButtonRequestChat` button.
+
+    :param request_id: Identifier of the request.
+    :type request_id: :obj:`int`
+    :param chat_id: Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means.
+    :type chat_id: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['request_id'] = res.get('request_id')
+        obj['chat_id'] = res.get('chat_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        request_id: int,
+        chat_id: int
+    ):
+        self.request_id = request_id
+        self.chat_id = chat_id
+
+
 
 
 
@@ -3353,30 +3382,6 @@ class UsersShared(TelegramType):
     ):
         self.request_id = request_id
         self.user_ids = user_ids
-
-
-class ChatShared(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatshared
-
-    This object contains information about the chat whose identifier
-    was shared with the bot using a KeyboardButtonRequestChat button.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['request_id'] = res.get('request_id')
-        obj['chat_id'] = res.get('chat_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        request_id: int,
-        chat_id: int
-    ):
-        self.request_id = request_id
-        self.chat_id = chat_id
 
 
 class WriteAccessAllowed(TelegramType):
