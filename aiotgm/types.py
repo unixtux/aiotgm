@@ -1019,17 +1019,14 @@ class ChatBoost(TelegramType):
         self.source = source
 
 
-
-
-
-
-
-
 class ChatBoostAdded(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatboostadded
 
     This object represents a service message about a user boosting a chat.
+
+    :param boost_count: Number of boosts added by the user.
+    :type boost_count: :obj:`int`
     '''
     @classmethod
     @_parse_result
@@ -1043,6 +1040,12 @@ class ChatBoostAdded(TelegramType):
         boost_count: int
     ):
         self.boost_count = boost_count
+
+
+
+
+
+
 
 
 class ChatPermissions(TelegramType):
