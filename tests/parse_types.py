@@ -24,7 +24,7 @@ logger.setLevel(LOGGER_LEVEL)
 with open('../aiotgm/types.py') as r:
     LINES = r.readlines()
 
-TYPES: dict[str, dict | Any] = {}
+TYPES: dict[str, dict[str, dict[str, dict | Any] | Any] | Any] = {}
 TG_TYPES = []
 
 LINE_N = 0
@@ -298,48 +298,31 @@ def get_init_kwargs(type: str) -> dict[str, Any]:
         raise_err(298)
 
 
-def get_self_kwargs(__type: str) -> dict[str, Any]:
+def get_self_kwargs(type: str) -> dict[str, Any]:
     global LINE_N
 
     if not re.match(r"\s*\)\s*:\s*\n|\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n", LINES[LINE_N]):
-        raise_err(381)
+        raise_err(305)
 
-    self_kwargs = {}
-    LINE_N += 1
+    self_kwargs = {'warnings': []}
+    LINE_N += 1 # added new line now, because we didn't do before.
 
     while LINE_N != len(LINES):
 
         if re.match(r'\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
             return self_kwargs
 
-        new_attribute_type_hint = re.match(r"\s*self\s*\.\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
-        new_attribute =         re.match(r"\s*self\s*\.\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
+        new_attribute = re.match(r"\s*self\s*\.\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
 
-        if not (new_attribute_type_hint or new_attribute):
-            raise_err(396, LINE_N, LINES[LINE_N])
+        if new_attribute:
+            match = new_attribute.group(1, 2)
+            (arg, default_value) = match[0], match[1]
+            if arg not in TYPES[type]['kwargs']:
+                self_kwargs['warnings'].append(f'{arg!r} is not in __init__()')
+            if arg != default_value:
+                self_kwargs['warnings'].append(f'{arg!r} default value is: {default_value}')
         else:
-            if new_attribute_type_hint:
-                match = new_attribute_type_hint.group(1, 2, 3)
-                (arg, type_hint, default_value) = match[0], match[1], match[2]
-                warnings = []
-                if arg not in TYPES[__type]['kwargs']:
-                    warnings.append('not in __init__()')
-                else:
-                    raise_err(370, LINES[LINE_N])
-
-            elif new_attribute:
-                match = new_attribute.group(1, 2)
-                (arg, default_value) = match[0], match[1]
-                warnings = []
-                if arg not in TYPES[__type]['kwargs']:
-                    warnings.append('not in __init__()')
-                if arg != default_value:
-                    warnings.append(f'default value is: {default_value}')
-                self_kwargs[arg] = {}
-                self_kwargs[arg]['warnings'] = warnings
-
-            else:
-                raise_err(385, LINES[LINE_N])
+            raise_err(325, LINES[LINE_N])
 
         LINE_N += 1
     else:
@@ -363,9 +346,11 @@ while LINE_N != len(LINES):
         TYPES[type] = {
             'link': api_link,
             'has_dese': False,
+            'kwargs': {},
             'dese_kwargs': {},
             'init_kwargs': {},
-            'self_kwargs': {}
+            'self_kwargs': {},
+            'warnings': None
         }
 
     if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
@@ -382,9 +367,26 @@ while LINE_N != len(LINES):
 
     if re.match(r'\s*def\s*__init__\s*\(', LINES[LINE_N]):
 
-        # Not add a line to check
-        # def __init__(self): ...
-        TYPES[type]['init_kwargs'] = get_init_kwargs(type)
+        # Don't add a line here it will
+        # be added in the next function
+        init_kwargs = get_init_kwargs(type)
+        TYPES[type]['init_kwargs'] = init_kwargs
+        if TYPES[type]['has_dese']:
+            dese_kwargs = TYPES[type]['dese_kwargs']
+            for arg in init_kwargs:
+                if arg not in dese_kwargs:
+                    raise_err(377)
+            for arg in dese_kwargs:
+                if arg not in init_kwargs:
+                    raise_err(380)
+
+        TYPES[type]['kwargs'] = init_kwargs
+        del TYPES[type]['dese_kwargs']
+        del TYPES[type]['init_kwargs']
+
+        self_kwargs = get_self_kwargs(type)
+        if self_kwargs['warnings']:
+            TYPES[type]['warnings'] = self_kwargs['warnings']
 
     LINE_N += 1 if LINE_N != len(LINES) else 0
 
@@ -399,6 +401,7 @@ for type in aiotgm.types.__all__:
         NOT_IN_TYPES.append(type)
 
 for type in TYPES:
+
     if type not in aiotgm.types.__all__:
         NOT_IN_ALL.append(type)
 
