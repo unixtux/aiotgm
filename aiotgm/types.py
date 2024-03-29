@@ -587,6 +587,29 @@ class BotName(TelegramType):
         self.name = name
 
 
+class BotShortDescription(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botshortdescription
+
+    This object represents the bot's short description.
+
+    :param short_description: The bot's short description.
+    :type short_description: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['short_description'] = res.get('short_description')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        short_description: str
+    ):
+        self.short_description = short_description
+
+
 
 
 
@@ -3359,26 +3382,6 @@ class ForumTopic(TelegramType):
         self.name = name
         self.icon_color = icon_color
         self.icon_custom_emoji_id = icon_custom_emoji_id
-
-
-class BotShortDescription(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botshortdescription
-
-    This object represents the bot's short description.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['short_description'] = res.get('short_description')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        short_description: str
-    ):
-        self.short_description = short_description
 
 
 # MenuButton: 3 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
