@@ -388,6 +388,158 @@ class BotCommand(TelegramType):
         self.description = description
 
 
+# BotCommandScope: 7 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+class BotCommandScopeAllChatAdministrators(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
+
+    Represents the :obj:`scope <aiotgm.types.BotCommandScope>` of bot commands, covering all group and supergroup chat administrators.
+    '''
+    def __init__(self):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS
+
+
+class BotCommandScopeAllGroupChats(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botcommandscopeallgroupchats
+
+    Represents the :obj:`scope <aiotgm.types.BotCommandScope>` of bot commands, covering all group and supergroup chats.
+    '''
+    def __init__(self):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS
+
+
+class BotCommandScopeAllPrivateChats(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botcommandscopeallprivatechats
+
+    Represents the :obj:`scope <aiotgm.types.BotCommandScope>` of bot commands, covering all private chats.
+    '''
+    def __init__(self):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS
+
+
+class BotCommandScopeChat(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botcommandscopechat
+
+    Represents the :obj:`scope <aiotgm.types.BotCommandScope>` of bot commands, covering a specific chat.
+
+    :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+    :type chat_id: :obj:`int` or :obj:`str`
+    '''
+    def __init__(
+        self,
+        chat_id: Union[int, str]
+    ):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT
+        self.chat_id = chat_id
+
+
+class BotCommandScopeChatAdministrators(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botcommandscopechatadministrators
+
+    Represents the :obj:`scope <aiotgm.types.BotCommandScope>` of bot commands, covering all administrators of a specific group or supergroup chat.
+
+    :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+    :type chat_id: :obj:`int` or :obj:`str`
+    '''
+    def __init__(
+        self,
+        chat_id: Union[int, str]
+    ):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS
+        self.chat_id = chat_id
+
+
+class BotCommandScopeChatMember(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botcommandscopechatmember
+
+    Represents the :obj:`scope <aiotgm.types.BotCommandScope>` of bot commands, covering a specific member of a group or supergroup chat.
+
+    :param chat_id: Unique identifier for the target chat or username of the target supergroup (in the format ``@supergroupusername``).
+    :type chat_id: :obj:`int` or :obj:`str`
+    :param user_id: Unique identifier of the target user.
+    :type user_id: :obj:`int`
+    '''
+    def __init__(
+        self,
+        chat_id: Union[int, str],
+        user_id: int
+    ):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER
+        self.chat_id = chat_id
+        self.user_id = user_id
+
+
+class BotCommandScopeDefault(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botcommandscopedefault
+
+    Represents the default :obj:`scope <aiotgm.types.BotCommandScope>` of bot commands. Default commands are used if no commands
+    with a `narrower scope <https://core.telegram.org/bots/api#determining-list-of-commands>`_ are specified for the user.
+    '''
+    def __init__(self):
+        self.type = DEFAULT_BOT_COMMAND_SCOPE_DEFAULT
+
+
+BotCommandScope = Union[
+    BotCommandScopeDefault,
+    BotCommandScopeAllPrivateChats,
+    BotCommandScopeAllGroupChats,
+    BotCommandScopeAllChatAdministrators,
+    BotCommandScopeChat,
+    BotCommandScopeChatAdministrators,
+    BotCommandScopeChatMember
+]
+'''
+https://core.telegram.org/bots/api#botcommandscope
+
+This object represents the scope to which bot commands are applied.
+Currently, the following 7 scopes are supported:
+
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators`
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators`
+- :obj:`~aiotgm.types.BotCommandScopeChatMember`
+
+**Determining list of commands**
+
+The following algorithm is used to determine the list of commands for a particular user viewing the bot menu. The first list of commands which is set is returned:
+
+**Commands in the chat with the bot**
+
+- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
+- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+
+**Commands in group and supergroup chats**
+
+- :obj:`~aiotgm.types.BotCommandScopeChatMember` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChatMember`
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` + language_code (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` + language_code (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
+- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+
+'''
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 
@@ -3161,147 +3313,6 @@ class ForumTopic(TelegramType):
         self.icon_color = icon_color
         self.icon_custom_emoji_id = icon_custom_emoji_id
 
-
-# BotCommandScope: 7 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-class BotCommandScopeDefault(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommandscopedefault
-
-    Represents the default scope of bot commands.\n
-    Default commands are used if no commands with a narrower scope are specified for the user.
-    '''
-    def __init__(self):
-        self.type = DEFAULT_BOT_COMMAND_SCOPE_DEFAULT
-
-
-class BotCommandScopeAllPrivateChats(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommandscopeallprivatechats
-
-    Represents the scope of bot commands, covering all private chats.
-    '''
-    def __init__(self):
-        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS
-
-
-class BotCommandScopeAllGroupChats(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommandscopeallgroupchats
-
-    Represents the scope of bot commands, covering all group and supergroup chats.
-    '''
-    def __init__(self):
-        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS
-
-
-class BotCommandScopeAllChatAdministrators(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
-
-    Represents the scope of bot commands, covering all group and supergroup chat administrators.
-    '''
-    def __init__(self):
-        self.type = DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS
-
-
-class BotCommandScopeChat(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommandscopechat
-
-    Represents the scope of bot commands, covering a specific chat.
-    '''
-    def __init__(
-        self,
-        chat_id: Union[int, str]
-    ):
-        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT
-        self.chat_id = chat_id
-
-
-class BotCommandScopeChatAdministrators(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommandscopechatadministrators
-
-    Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
-    '''
-    def __init__(
-        self,
-        chat_id: Union[int, str]
-    ):
-        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS
-        self.chat_id = chat_id
-
-
-class BotCommandScopeChatMember(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommandscopechatmember
-
-    Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
-    '''
-    def __init__(
-        self,
-        chat_id: Union[int, str],
-        user_id: int
-    ):
-        self.type = DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER
-        self.chat_id = chat_id
-        self.user_id = user_id
-
-
-BotCommandScope = Union[
-    BotCommandScopeDefault,
-    BotCommandScopeAllPrivateChats,
-    BotCommandScopeAllGroupChats,
-    BotCommandScopeAllChatAdministrators,
-    BotCommandScopeChat,
-    BotCommandScopeChatAdministrators,
-    BotCommandScopeChatMember
-]
-'''
-https://core.telegram.org/bots/api#botcommandscope
-
-This object represents the scope to which bot commands are applied.
-Currently, the following 7 scopes are supported:
-
-- :obj:`~aiotgm.types.BotCommandScopeDefault`
-- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
-- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
-- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators`
-- :obj:`~aiotgm.types.BotCommandScopeChat`
-- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators`
-- :obj:`~aiotgm.types.BotCommandScopeChatMember`
-
-**Determining list of commands**
-
-The following algorithm is used to determine the list of commands for a particular user viewing the bot menu. The first list of commands which is set is returned:
-
-**Commands in the chat with the bot**
-
-- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeChat`
-- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
-- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeDefault`
-
-**Commands in group and supergroup chats**
-
-- :obj:`~aiotgm.types.BotCommandScopeChatMember` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeChatMember`
-- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` + language_code (administrators only)
-- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` (administrators only)
-- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeChat`
-- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` + language_code (administrators only)
-- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` (administrators only)
-- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
-- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeDefault`
-
-'''
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 class BotName(TelegramType):
     '''
