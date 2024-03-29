@@ -2057,10 +2057,10 @@ class Dice(TelegramType):
 
     This object represents an animated emoji that displays a random value.
 
-    :param : 
-    :type : 
-    :param : 
-    :type : 
+    :param emoji: Emoji on which the dice throw animation is based.
+    :type emoji: :obj:`str`
+    :param value: Value of the dice, 1-6 for “🎲”, “🎯” and “🎳” base emoji, 1-5 for “🏀” and “⚽” base emoji, 1-64 for “🎰” base emoji.
+    :type value: :obj:`int`
     '''
     @classmethod
     @_parse_result
