@@ -36,6 +36,45 @@
             }
         }
     },
+    "Audio": {
+        "link": "https://core.telegram.org/bots/api#audio",
+        "has_dese": true,
+        "kwargs": {
+            "file_id": {
+                "type_hint": "str"
+            },
+            "file_unique_id": {
+                "type_hint": "str"
+            },
+            "duration": {
+                "type_hint": "int"
+            },
+            "performer": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "title": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "file_name": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "mime_type": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "file_size": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "thumbnail": {
+                "type_hint": "Optional[PhotoSize]",
+                "default": null
+            }
+        }
+    },
     "ChatBoostAdded": {
         "link": "https://core.telegram.org/bots/api#chatboostadded",
         "has_dese": true,
@@ -1069,45 +1108,6 @@
             },
             "file_size": {
                 "type_hint": "Optional[int]",
-                "default": null
-            }
-        }
-    },
-    "Audio": {
-        "link": "https://core.telegram.org/bots/api#audio",
-        "has_dese": true,
-        "kwargs": {
-            "file_id": {
-                "type_hint": "str"
-            },
-            "file_unique_id": {
-                "type_hint": "str"
-            },
-            "duration": {
-                "type_hint": "int"
-            },
-            "performer": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "title": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "file_name": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "mime_type": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "file_size": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "thumbnail": {
-                "type_hint": "Optional[PhotoSize]",
                 "default": null
             }
         }
