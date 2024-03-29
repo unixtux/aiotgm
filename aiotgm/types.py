@@ -2942,7 +2942,14 @@ class ForceReply(TelegramType):
         self.selective = selective
 
 REPLY_MARKUP_TYPES = Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]
+'''
+One of the following reply markups:
 
+- :obj:`~aiotgm.types.InlineKeyboardMarkup`
+- :obj:`~aiotgm.types.ReplyKeyboardMarkup`
+- :obj:`~aiotgm.types.ReplyKeyboardRemove`
+- :obj:`~aiotgm.types.ForceReply`
+'''
 
 class ChatInviteLink(TelegramType):
     '''

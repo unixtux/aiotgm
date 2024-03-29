@@ -1278,7 +1278,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.MessageId`
         '''
         params = {
@@ -2970,7 +2970,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3048,7 +3048,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3147,7 +3147,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3196,7 +3196,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3258,7 +3258,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3497,7 +3497,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3600,7 +3600,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3662,7 +3662,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3746,7 +3746,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3806,7 +3806,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3874,7 +3874,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -3956,7 +3956,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -4022,7 +4022,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
@@ -4086,7 +4086,7 @@ class Client(TelegramApi):
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
-        :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardMarkup` or :obj:`~aiotgm.types.ReplyKeyboardRemove` or :obj:`~aiotgm.types.ForceReply`, optional
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
         :rtype: :obj:`~aiotgm.types.Message`
         '''
         params = {
