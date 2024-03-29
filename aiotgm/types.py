@@ -685,6 +685,209 @@ class CallbackQuery(TelegramType):
         self.game_short_name = game_short_name
 
 
+class Chat(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chat
+
+    This object represents a chat.
+
+    :param id: Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
+    :type id: :obj:`int`
+    :param type: Type of chat, can be either “private”, “group”, “supergroup” or “channel”.
+    :type type: :obj:`str`
+    :param title: Title, for supergroups, channels and group chats.
+    :type title: :obj:`str`, optional
+    :param username: Username, for private chats, supergroups and channels if available.
+    :type username: :obj:`str`, optional
+    :param first_name: First name of the other party in a private chat.
+    :type first_name: :obj:`str`, optional
+    :param last_name: Last name of the other party in a private chat.
+    :type last_name: :obj:`str`, optional
+    :param is_forum: :obj:`True`, if the supergroup chat is a forum (has `topics <https://telegram.org/blog/topics-in-groups-collectible-usernames#topics-in-groups>`_ enabled).
+    :type is_forum: :obj:`True`, optional
+    :param photo: Chat photo. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type photo: :obj:`~aiotgm.types.ChatPhoto`, optional
+    :param active_usernames: If non-empty, the list of all `active chat usernames <https://telegram.org/blog/topics-in-groups-collectible-usernames#collectible-usernames>`_; for private chats, supergroups and channels. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type active_usernames: :obj:`list` of :obj:`str`, optional
+    :param available_reactions: List of available reactions allowed in the chat. If omitted, then all :obj:`emoji reactions <aiotgm.types.ReactionTypeEmoji>` are allowed. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type available_reactions: :obj:`list` of :obj:`~aiotgm.types.ReactionType`, optional
+    :param accent_color_id: Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See `accent colors <https://core.telegram.org/bots/api#accent-colors>`_ for more details. Returned only in :meth:`~aiotgm.Client.get_chat`. Always returned in :meth:`~aiotgm.Client.get_chat`.
+    :type accent_color_id: :obj:`int`, optional
+    :param background_custom_emoji_id: Custom emoji identifier of emoji chosen by the chat for the reply header and link preview background. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type background_custom_emoji_id: :obj:`str`, optional
+    :param profile_accent_color_id: Identifier of the accent color for the chat's profile background. See `profile accent colors <https://core.telegram.org/bots/api#profile-accent-colors>`_ for more details. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type profile_accent_color_id: :obj:`int`, optional
+    :param profile_background_custom_emoji_id: Custom emoji identifier of the emoji chosen by the chat for its profile background. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type profile_background_custom_emoji_id: :obj:`str`, optional
+    :param emoji_status_custom_emoji_id: Custom emoji identifier of the emoji status of the chat or the other party in a private chat. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type emoji_status_custom_emoji_id: :obj:`str`, optional
+    :param emoji_status_expiration_date: Expiration date of the emoji status of the chat or the other party in a private chat, in Unix time, if any. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type emoji_status_expiration_date: :obj:`int`, optional
+    :param bio: Bio of the other party in a private chat. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type bio: :obj:`str`, optional
+    :param has_private_forwards: :obj:`True`, if privacy settings of the other party in the private chat allows to use ``tg://user?id=<user_id>`` links only in chats with the user. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type has_private_forwards: :obj:`True`, optional
+    :param has_restricted_voice_and_video_messages: :obj:`True`, if the privacy settings of the other party restrict sending voice and video note messages in the private chat. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type has_restricted_voice_and_video_messages: :obj:`True`, optional
+    :param join_to_send_messages: :obj:`True`, if users need to join the supergroup before they can send messages. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type join_to_send_messages: :obj:`True`, optional
+    :param join_by_request: :obj:`True`, if all users directly joining the supergroup need to be approved by supergroup administrators. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type join_by_request: :obj:`True`, optional
+    :param description: Description, for groups, supergroups and channel chats. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type description: :obj:`str`, optional
+    :param invite_link: Primary invite link, for groups, supergroups and channel chats. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type invite_link: :obj:`str`, optional
+    :param pinned_message: The most recent pinned message (by sending date). Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type pinned_message: :obj:`~aiotgm.types.Message`, optional
+    :param permissions: Default chat member permissions, for groups and supergroups. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type permissions: :obj:`~aiotgm.types.ChatPermissions`, optional
+    :param slow_mode_delay: For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type slow_mode_delay: :obj:`int`, optional
+    :param unrestrict_boost_count: For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type unrestrict_boost_count: :obj:`int`, optional
+    :param message_auto_delete_time: The time after which all messages sent to the chat will be automatically deleted; in seconds. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type message_auto_delete_time: :obj:`int`, optional
+    :param has_aggressive_anti_spam_enabled: :obj:`True`, if aggressive anti-spam checks are enabled in the supergroup. The field is only available to chat administrators. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type has_aggressive_anti_spam_enabled: :obj:`True`, optional
+    :param has_hidden_members: :obj:`True`, if non-administrators can only get the list of bots and administrators in the chat. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type has_hidden_members: :obj:`True`, optional
+    :param has_protected_content: :obj:`True`, if messages from the chat can't be forwarded to other chats. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type has_protected_content: :obj:`True`, optional
+    :param has_visible_history: :obj:`True`, if new chat members will have access to old messages; available only to chat administrators. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type has_visible_history: :obj:`True`, optional
+    :param sticker_set_name: For supergroups, name of group sticker set. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type sticker_set_name: :obj:`str`, optional
+    :param can_set_sticker_set: :obj:`True`, if the bot can change the group sticker set. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type can_set_sticker_set: :obj:`True`, optional
+    :param custom_emoji_sticker_set_name: For supergroups, the name of the group's custom emoji sticker set. Custom emoji from this set can be used by all users and bots in the group. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type custom_emoji_sticker_set_name: :obj:`str`, optional
+    :param linked_chat_id: Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type linked_chat_id: :obj:`int`, optional
+    :param location: For supergroups, the location to which the supergroup is connected. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type location: :obj:`~aiotgm.types.ChatLocation`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['type'] = res.get('type')
+        obj['title'] = res.get('title')
+        obj['username'] = res.get('username')
+        obj['first_name'] = res.get('first_name')
+        obj['last_name'] = res.get('last_name')
+        obj['is_forum'] = res.get('is_forum')
+        obj['photo'] = ChatPhoto._dese(res.get('photo'))
+        obj['active_usernames'] = res.get('active_usernames')
+        obj['available_reactions'] = [_dese_reaction_type(kwargs) for kwargs in res.get('available_reactions')] if 'available_reactions' in res else None
+        obj['accent_color_id'] = res.get('accent_color_id')
+        obj['background_custom_emoji_id'] = res.get('background_custom_emoji_id')
+        obj['profile_accent_color_id'] = res.get('profile_accent_color_id')
+        obj['profile_background_custom_emoji_id'] = res.get('profile_background_custom_emoji_id')
+        obj['emoji_status_custom_emoji_id'] = res.get('emoji_status_custom_emoji_id')
+        obj['emoji_status_expiration_date'] = res.get('emoji_status_expiration_date')
+        obj['bio'] = res.get('bio')
+        obj['has_private_forwards'] = res.get('has_private_forwards')
+        obj['has_restricted_voice_and_video_messages'] = res.get('has_restricted_voice_and_video_messages')
+        obj['join_to_send_messages'] = res.get('join_to_send_messages')
+        obj['join_by_request'] = res.get('join_by_request')
+        obj['description'] = res.get('description')
+        obj['invite_link'] = res.get('invite_link')
+        obj['pinned_message'] = Message._dese(res.get('pinned_message'))
+        obj['permissions'] = ChatPermissions._dese(res.get('permissions'))
+        obj['slow_mode_delay'] = res.get('slow_mode_delay')
+        obj['unrestrict_boost_count'] = res.get('unrestrict_boost_count')
+        obj['message_auto_delete_time'] = res.get('message_auto_delete_time')
+        obj['has_aggressive_anti_spam_enabled'] = res.get('has_aggressive_anti_spam_enabled')
+        obj['has_hidden_members'] = res.get('has_hidden_members')
+        obj['has_protected_content'] = res.get('has_protected_content')
+        obj['has_visible_history'] = res.get('has_visible_history')
+        obj['sticker_set_name'] = res.get('sticker_set_name')
+        obj['can_set_sticker_set'] = res.get('can_set_sticker_set')
+        obj['custom_emoji_sticker_set_name'] = res.get('custom_emoji_sticker_set_name')
+        obj['linked_chat_id'] = res.get('linked_chat_id')
+        obj['location'] = ChatLocation._dese(res.get('location'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: int,
+        type: str,
+        title: Optional[str] = None,
+        username: Optional[str] = None,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
+        is_forum: Optional[Literal[True]] = None,
+        photo: Optional[ChatPhoto] = None,
+        active_usernames: Optional[list[str]] = None,
+        available_reactions: Optional[list[ReactionType]] = None,
+        accent_color_id: Optional[int] = None,
+        background_custom_emoji_id: Optional[str] = None,
+        profile_accent_color_id: Optional[int] = None,
+        profile_background_custom_emoji_id: Optional[str] = None,
+        emoji_status_custom_emoji_id: Optional[str] = None,
+        emoji_status_expiration_date: Optional[int] = None,
+        bio: Optional[str] = None,
+        has_private_forwards: Optional[Literal[True]] = None,
+        has_restricted_voice_and_video_messages: Optional[Literal[True]] = None,
+        join_to_send_messages: Optional[Literal[True]] = None,
+        join_by_request: Optional[Literal[True]] = None,
+        description: Optional[str] = None,
+        invite_link: Optional[str] = None,
+        pinned_message: Optional[Message] = None,
+        permissions: Optional[ChatPermissions] = None,
+        slow_mode_delay: Optional[int] = None,
+        unrestrict_boost_count: Optional[int] = None,
+        message_auto_delete_time: Optional[int] = None,
+        has_aggressive_anti_spam_enabled: Optional[Literal[True]] = None,
+        has_hidden_members: Optional[Literal[True]] = None,
+        has_protected_content: Optional[Literal[True]] = None,
+        has_visible_history: Optional[Literal[True]] = None,
+        sticker_set_name: Optional[str] = None,
+        can_set_sticker_set: Optional[Literal[True]] = None,
+        custom_emoji_sticker_set_name: Optional[str] = None,
+        linked_chat_id: Optional[int] = None,
+        location: Optional[ChatLocation] = None
+    ):
+        self.id = id
+        self.type = type
+        self.title = title
+        self.username = username
+        self.first_name = first_name
+        self.last_name = last_name
+        self.is_forum = is_forum
+        self.photo = photo
+        self.active_usernames = active_usernames
+        self.available_reactions = available_reactions
+        self.accent_color_id = accent_color_id
+        self.background_custom_emoji_id = background_custom_emoji_id
+        self.profile_accent_color_id = profile_accent_color_id
+        self.profile_background_custom_emoji_id = profile_background_custom_emoji_id
+        self.emoji_status_custom_emoji_id = emoji_status_custom_emoji_id
+        self.emoji_status_expiration_date = emoji_status_expiration_date
+        self.bio = bio
+        self.has_private_forwards = has_private_forwards
+        self.has_restricted_voice_and_video_messages = has_restricted_voice_and_video_messages
+        self.join_to_send_messages = join_to_send_messages
+        self.join_by_request = join_by_request
+        self.description = description
+        self.invite_link = invite_link
+        self.pinned_message = pinned_message
+        self.permissions = permissions
+        self.slow_mode_delay = slow_mode_delay
+        self.unrestrict_boost_count = unrestrict_boost_count
+        self.message_auto_delete_time = message_auto_delete_time
+        self.has_aggressive_anti_spam_enabled = has_aggressive_anti_spam_enabled
+        self.has_hidden_members = has_hidden_members
+        self.has_protected_content = has_protected_content
+        self.has_visible_history = has_visible_history
+        self.sticker_set_name = sticker_set_name
+        self.can_set_sticker_set = can_set_sticker_set
+        self.custom_emoji_sticker_set_name = custom_emoji_sticker_set_name
+        self.linked_chat_id = linked_chat_id
+        self.location = location
+
+
 
 
 
@@ -1576,134 +1779,6 @@ def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
         )
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class Chat(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chat
-
-    This object represents a chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['id'] = res.get('id')
-        obj['type'] = res.get('type')
-        obj['title'] = res.get('title')
-        obj['username'] = res.get('username')
-        obj['first_name'] = res.get('first_name')
-        obj['last_name'] = res.get('last_name')
-        obj['is_forum'] = res.get('is_forum')
-        obj['photo'] = ChatPhoto._dese(res.get('photo'))
-        obj['active_usernames'] = res.get('active_usernames')
-        obj['available_reactions'] = [_dese_reaction_type(kwargs) for kwargs in res.get('available_reactions')] if 'available_reactions' in res else None
-        obj['accent_color_id'] = res.get('accent_color_id')
-        obj['background_custom_emoji_id'] = res.get('background_custom_emoji_id')
-        obj['profile_accent_color_id'] = res.get('profile_accent_color_id')
-        obj['profile_background_custom_emoji_id'] = res.get('profile_background_custom_emoji_id')
-        obj['emoji_status_custom_emoji_id'] = res.get('emoji_status_custom_emoji_id')
-        obj['emoji_status_expiration_date'] = res.get('emoji_status_expiration_date')
-        obj['bio'] = res.get('bio')
-        obj['has_private_forwards'] = res.get('has_private_forwards')
-        obj['has_restricted_voice_and_video_messages'] = res.get('has_restricted_voice_and_video_messages')
-        obj['join_to_send_messages'] = res.get('join_to_send_messages')
-        obj['join_by_request'] = res.get('join_by_request')
-        obj['description'] = res.get('description')
-        obj['invite_link'] = res.get('invite_link')
-        obj['pinned_message'] = Message._dese(res.get('pinned_message'))
-        obj['permissions'] = ChatPermissions._dese(res.get('permissions'))
-        obj['slow_mode_delay'] = res.get('slow_mode_delay')
-        obj['unrestrict_boost_count'] = res.get('unrestrict_boost_count')
-        obj['message_auto_delete_time'] = res.get('message_auto_delete_time')
-        obj['has_aggressive_anti_spam_enabled'] = res.get('has_aggressive_anti_spam_enabled')
-        obj['has_hidden_members'] = res.get('has_hidden_members')
-        obj['has_protected_content'] = res.get('has_protected_content')
-        obj['has_visible_history'] = res.get('has_visible_history')
-        obj['sticker_set_name'] = res.get('sticker_set_name')
-        obj['can_set_sticker_set'] = res.get('can_set_sticker_set')
-        obj['custom_emoji_sticker_set_name'] = res.get('custom_emoji_sticker_set_name')
-        obj['linked_chat_id'] = res.get('linked_chat_id')
-        obj['location'] = ChatLocation._dese(res.get('location'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        id: int,
-        type: str,
-        title: Optional[str] = None,
-        username: Optional[str] = None,
-        first_name: Optional[str] = None,
-        last_name: Optional[str] = None,
-        is_forum: Optional[Literal[True]] = None,
-        photo: Optional[ChatPhoto] = None,
-        active_usernames: Optional[list[str]] = None,
-        available_reactions: Optional[list[ReactionType]] = None,
-        accent_color_id: Optional[int] = None,
-        background_custom_emoji_id: Optional[str] = None,
-        profile_accent_color_id: Optional[int] = None,
-        profile_background_custom_emoji_id: Optional[str] = None,
-        emoji_status_custom_emoji_id: Optional[str] = None,
-        emoji_status_expiration_date: Optional[int] = None,
-        bio: Optional[str] = None,
-        has_private_forwards: Optional[Literal[True]] = None,
-        has_restricted_voice_and_video_messages: Optional[Literal[True]] = None,
-        join_to_send_messages: Optional[Literal[True]] = None,
-        join_by_request: Optional[Literal[True]] = None,
-        description: Optional[str] = None,
-        invite_link: Optional[str] = None,
-        pinned_message: Optional[Message] = None,
-        permissions: Optional[ChatPermissions] = None,
-        slow_mode_delay: Optional[int] = None,
-        unrestrict_boost_count: Optional[int] = None,
-        message_auto_delete_time: Optional[int] = None,
-        has_aggressive_anti_spam_enabled: Optional[Literal[True]] = None,
-        has_hidden_members: Optional[Literal[True]] = None,
-        has_protected_content: Optional[Literal[True]] = None,
-        has_visible_history: Optional[Literal[True]] = None,
-        sticker_set_name: Optional[str] = None,
-        can_set_sticker_set: Optional[Literal[True]] = None,
-        custom_emoji_sticker_set_name: Optional[str] = None,
-        linked_chat_id: Optional[int] = None,
-        location: Optional[ChatLocation] = None
-    ):
-        self.id = id
-        self.type = type
-        self.title = title
-        self.username = username
-        self.first_name = first_name
-        self.last_name = last_name
-        self.is_forum = is_forum
-        self.photo = photo
-        self.active_usernames = active_usernames
-        self.available_reactions = available_reactions
-        self.accent_color_id = accent_color_id
-        self.background_custom_emoji_id = background_custom_emoji_id
-        self.profile_accent_color_id = profile_accent_color_id
-        self.profile_background_custom_emoji_id = profile_background_custom_emoji_id
-        self.emoji_status_custom_emoji_id = emoji_status_custom_emoji_id
-        self.emoji_status_expiration_date = emoji_status_expiration_date
-        self.bio = bio
-        self.has_private_forwards = has_private_forwards
-        self.has_restricted_voice_and_video_messages = has_restricted_voice_and_video_messages
-        self.join_to_send_messages = join_to_send_messages
-        self.join_by_request = join_by_request
-        self.description = description
-        self.invite_link = invite_link
-        self.pinned_message = pinned_message
-        self.permissions = permissions
-        self.slow_mode_delay = slow_mode_delay
-        self.unrestrict_boost_count = unrestrict_boost_count
-        self.message_auto_delete_time = message_auto_delete_time
-        self.has_aggressive_anti_spam_enabled = has_aggressive_anti_spam_enabled
-        self.has_hidden_members = has_hidden_members
-        self.has_protected_content = has_protected_content
-        self.has_visible_history = has_visible_history
-        self.sticker_set_name = sticker_set_name
-        self.can_set_sticker_set = can_set_sticker_set
-        self.custom_emoji_sticker_set_name = custom_emoji_sticker_set_name
-        self.linked_chat_id = linked_chat_id
-        self.location = location
 
 
 class MessageReactionUpdated(TelegramType):
