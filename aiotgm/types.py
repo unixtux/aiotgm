@@ -2366,6 +2366,49 @@ class ExternalReplyInfo(TelegramType):
         self.venue = venue
 
 
+class File(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#file
+
+    This object represents a file ready to be downloaded. The file can be
+    downloaded via the link ``https://api.telegram.org/file/bot<token>/<file_path>``.
+    It is guaranteed that the link will be valid for at least 1 hour. When the link
+    expires, a new one can be requested by calling :meth:`~aiotgm.Client.get_file`.
+
+        The maximum file size to download is 20 MB
+
+    :param file_id: Identifier for this file, which can be used to download or reuse the file.
+    :type file_id: :obj:`str`
+    :param file_unique_id: Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type file_unique_id: :obj:`str`
+    :param file_size: File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
+    :type file_size: :obj:`int`, optional
+    :param file_path: File path. Use ``https://api.telegram.org/file/bot<token>/<file_path>`` to get the file.
+    :type file_path: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['file_id'] = res.get('file_id')
+        obj['file_unique_id'] = res.get('file_unique_id')
+        obj['file_size'] = res.get('file_size')
+        obj['file_path'] = res.get('file_path')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        file_id: str,
+        file_unique_id: str,
+        file_size: Optional[int] = None,
+        file_path: Optional[str] = None
+    ):
+        self.file_id = file_id
+        self.file_unique_id = file_unique_id
+        self.file_size = file_size
+        self.file_path = file_path
+
+
 
 
 
@@ -3826,38 +3869,6 @@ class UserProfilePhotos(TelegramType):
     ):
         self.total_count = total_count
         self.photos = photos
-
-
-class File(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#file
-
-    This object represents a file ready to be downloaded.\n
-    The file can be downloaded via the link https://api.telegram.org/file/bot<token>/<file_path>.\n
-    It is guaranteed that the link will be valid for at least 1 hour.\n
-    When the link expires, a new one can be requested by calling getFile.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['file_id'] = res.get('file_id')
-        obj['file_unique_id'] = res.get('file_unique_id')
-        obj['file_size'] = res.get('file_size')
-        obj['file_path'] = res.get('file_path')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        file_id: str,
-        file_unique_id: str,
-        file_size: Optional[int] = None,
-        file_path: Optional[str] = None
-    ):
-        self.file_id = file_id
-        self.file_unique_id = file_unique_id
-        self.file_size = file_size
-        self.file_path = file_path
 
 
 class WebAppInfo(TelegramType):
