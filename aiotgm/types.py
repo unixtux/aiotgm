@@ -1342,6 +1342,34 @@ class ChatJoinRequest(TelegramType):
         self.invite_link = invite_link
 
 
+class ChatLocation(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatlocation
+
+    Represents a location to which a chat is connected.
+
+    :param location: The location to which the supergroup is connected. Can't be a live location.
+    :type location: :obj:`~aiotgm.types.Location`
+    :param address: Location address; 1-64 characters, as defined by the chat owner.
+    :type address: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['location'] = Location._dese(res.get('location'))
+        obj['address'] = res.get('address')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        location: Location,
+        address: str
+    ):
+        self.location = location
+        self.address = address
+
+
 
 
 
@@ -2050,29 +2078,6 @@ class Location(TelegramType):
         self.live_period = live_period
         self.heading = heading
         self.proximity_alert_radius = proximity_alert_radius
-
-
-class ChatLocation(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatlocation
-
-    Represents a location to which a chat is connected.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['location'] = Location._dese(res.get('location'))
-        obj['address'] = res.get('address')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        location: Location,
-        address: str
-    ):
-        self.location = location
-        self.address = address
 
 
 # ReactionType: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~
