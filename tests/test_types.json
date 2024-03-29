@@ -616,6 +616,260 @@
             }
         }
     },
+    "ChatJoinRequest": {
+        "link": "https://core.telegram.org/bots/api#chatjoinrequest",
+        "has_dese": true,
+        "kwargs": {
+            "chat": {
+                "type_hint": "Chat"
+            },
+            "from_user": {
+                "type_hint": "User"
+            },
+            "user_chat_id": {
+                "type_hint": "int"
+            },
+            "date": {
+                "type_hint": "int"
+            },
+            "bio": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "invite_link": {
+                "type_hint": "Optional[ChatInviteLink]",
+                "default": null
+            }
+        }
+    },
+    "ChatLocation": {
+        "link": "https://core.telegram.org/bots/api#chatlocation",
+        "has_dese": true,
+        "kwargs": {
+            "location": {
+                "type_hint": "Location"
+            },
+            "address": {
+                "type_hint": "str"
+            }
+        }
+    },
+    "ChatMemberAdministrator": {
+        "link": "https://core.telegram.org/bots/api#chatmemberadministrator",
+        "has_dese": true,
+        "kwargs": {
+            "user": {
+                "type_hint": "User"
+            },
+            "can_be_edited": {
+                "type_hint": "bool"
+            },
+            "is_anonymous": {
+                "type_hint": "bool"
+            },
+            "can_manage_chat": {
+                "type_hint": "bool"
+            },
+            "can_delete_messages": {
+                "type_hint": "bool"
+            },
+            "can_manage_video_chats": {
+                "type_hint": "bool"
+            },
+            "can_restrict_members": {
+                "type_hint": "bool"
+            },
+            "can_promote_members": {
+                "type_hint": "bool"
+            },
+            "can_change_info": {
+                "type_hint": "bool"
+            },
+            "can_invite_users": {
+                "type_hint": "bool"
+            },
+            "can_post_stories": {
+                "type_hint": "bool"
+            },
+            "can_edit_stories": {
+                "type_hint": "bool"
+            },
+            "can_delete_stories": {
+                "type_hint": "bool"
+            },
+            "can_post_messages": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
+            "can_edit_messages": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
+            "can_pin_messages": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
+            "can_manage_topics": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
+            "custom_title": {
+                "type_hint": "Optional[str]",
+                "default": null
+            }
+        },
+        "warnings": {
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
+                ]
+            }
+        }
+    },
+    "ChatMemberBanned": {
+        "link": "https://core.telegram.org/bots/api#chatmemberbanned",
+        "has_dese": true,
+        "kwargs": {
+            "user": {
+                "type_hint": "User"
+            },
+            "until_date": {
+                "type_hint": "int"
+            }
+        },
+        "warnings": {
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_BANNED"
+                ]
+            }
+        }
+    },
+    "ChatMemberLeft": {
+        "link": "https://core.telegram.org/bots/api#chatmemberleft",
+        "has_dese": true,
+        "kwargs": {
+            "user": {
+                "type_hint": "User"
+            }
+        },
+        "warnings": {
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_LEFT"
+                ]
+            }
+        }
+    },
+    "ChatMemberMember": {
+        "link": "https://core.telegram.org/bots/api#chatmembermember",
+        "has_dese": true,
+        "kwargs": {
+            "user": {
+                "type_hint": "User"
+            }
+        },
+        "warnings": {
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_MEMBER"
+                ]
+            }
+        }
+    },
+    "ChatMemberOwner": {
+        "link": "https://core.telegram.org/bots/api#chatmemberowner",
+        "has_dese": true,
+        "kwargs": {
+            "user": {
+                "type_hint": "User"
+            },
+            "is_anonymous": {
+                "type_hint": "bool"
+            },
+            "custom_title": {
+                "type_hint": "Optional[str]",
+                "default": null
+            }
+        },
+        "warnings": {
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_OWNER"
+                ]
+            }
+        }
+    },
+    "ChatMemberRestricted": {
+        "link": "https://core.telegram.org/bots/api#chatmemberrestricted",
+        "has_dese": true,
+        "kwargs": {
+            "user": {
+                "type_hint": "User"
+            },
+            "is_member": {
+                "type_hint": "bool"
+            },
+            "can_send_messages": {
+                "type_hint": "bool"
+            },
+            "can_send_audios": {
+                "type_hint": "bool"
+            },
+            "can_send_documents": {
+                "type_hint": "bool"
+            },
+            "can_send_photos": {
+                "type_hint": "bool"
+            },
+            "can_send_videos": {
+                "type_hint": "bool"
+            },
+            "can_send_video_notes": {
+                "type_hint": "bool"
+            },
+            "can_send_voice_notes": {
+                "type_hint": "bool"
+            },
+            "can_send_polls": {
+                "type_hint": "bool"
+            },
+            "can_send_other_messages": {
+                "type_hint": "bool"
+            },
+            "can_add_web_page_previews": {
+                "type_hint": "bool"
+            },
+            "can_change_info": {
+                "type_hint": "bool"
+            },
+            "can_invite_users": {
+                "type_hint": "bool"
+            },
+            "can_pin_messages": {
+                "type_hint": "bool"
+            },
+            "can_manage_topics": {
+                "type_hint": "bool"
+            },
+            "until_date": {
+                "type_hint": "int"
+            }
+        },
+        "warnings": {
+            "status": {
+                "warnings": [
+                    "not in __init__()",
+                    "default value is: DEFAULT_CHAT_MEMBER_RESTRICTED"
+                ]
+            }
+        }
+    },
     "ChatPermissions": {
         "link": "https://core.telegram.org/bots/api#chatpermissions",
         "has_dese": true,
@@ -928,8 +1182,7 @@
                 "type_hint": "int"
             },
             "date": {
-                "type_hint": "int",
-                "default": "0"
+                "type_hint": "int"
             }
         }
     },
@@ -1290,18 +1543,6 @@
             "proximity_alert_radius": {
                 "type_hint": "Optional[int]",
                 "default": null
-            }
-        }
-    },
-    "ChatLocation": {
-        "link": "https://core.telegram.org/bots/api#chatlocation",
-        "has_dese": true,
-        "kwargs": {
-            "location": {
-                "type_hint": "Location"
-            },
-            "address": {
-                "type_hint": "str"
             }
         }
     },
@@ -2046,15 +2287,6 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "warnings": {
-            "remove_keyboard": {
-                "type_hint": "Literal[True]",
-                "warnings": [
-                    "not in __init__()",
-                    "default value is: True"
-                ]
-            }
         }
     },
     "InlineKeyboardButton": {
@@ -2133,225 +2365,6 @@
             }
         }
     },
-    "ChatMemberOwner": {
-        "link": "https://core.telegram.org/bots/api#chatmemberowner",
-        "has_dese": true,
-        "kwargs": {
-            "user": {
-                "type_hint": "User"
-            },
-            "is_anonymous": {
-                "type_hint": "bool"
-            },
-            "custom_title": {
-                "type_hint": "Optional[str]",
-                "default": null
-            }
-        },
-        "warnings": {
-            "status": {
-                "warnings": [
-                    "not in __init__()",
-                    "default value is: DEFAULT_CHAT_MEMBER_OWNER"
-                ]
-            }
-        }
-    },
-    "ChatMemberAdministrator": {
-        "link": "https://core.telegram.org/bots/api#chatmemberadministrator",
-        "has_dese": true,
-        "kwargs": {
-            "user": {
-                "type_hint": "User"
-            },
-            "can_be_edited": {
-                "type_hint": "bool"
-            },
-            "is_anonymous": {
-                "type_hint": "bool"
-            },
-            "can_manage_chat": {
-                "type_hint": "bool"
-            },
-            "can_delete_messages": {
-                "type_hint": "bool"
-            },
-            "can_manage_video_chats": {
-                "type_hint": "bool"
-            },
-            "can_restrict_members": {
-                "type_hint": "bool"
-            },
-            "can_promote_members": {
-                "type_hint": "bool"
-            },
-            "can_change_info": {
-                "type_hint": "bool"
-            },
-            "can_invite_users": {
-                "type_hint": "bool"
-            },
-            "can_post_messages": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            },
-            "can_edit_messages": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            },
-            "can_pin_messages": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            },
-            "can_post_stories": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            },
-            "can_edit_stories": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            },
-            "can_delete_stories": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            },
-            "can_manage_topics": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            },
-            "custom_title": {
-                "type_hint": "Optional[str]",
-                "default": null
-            }
-        },
-        "warnings": {
-            "status": {
-                "warnings": [
-                    "not in __init__()",
-                    "default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
-                ]
-            }
-        }
-    },
-    "ChatMemberMember": {
-        "link": "https://core.telegram.org/bots/api#chatmembermember",
-        "has_dese": true,
-        "kwargs": {
-            "user": {
-                "type_hint": "User"
-            }
-        },
-        "warnings": {
-            "status": {
-                "warnings": [
-                    "not in __init__()",
-                    "default value is: DEFAULT_CHAT_MEMBER_MEMBER"
-                ]
-            }
-        }
-    },
-    "ChatMemberRestricted": {
-        "link": "https://core.telegram.org/bots/api#chatmemberrestricted",
-        "has_dese": true,
-        "kwargs": {
-            "user": {
-                "type_hint": "User"
-            },
-            "is_member": {
-                "type_hint": "bool"
-            },
-            "can_send_messages": {
-                "type_hint": "bool"
-            },
-            "can_send_audios": {
-                "type_hint": "bool"
-            },
-            "can_send_documents": {
-                "type_hint": "bool"
-            },
-            "can_send_photos": {
-                "type_hint": "bool"
-            },
-            "can_send_videos": {
-                "type_hint": "bool"
-            },
-            "can_send_video_notes": {
-                "type_hint": "bool"
-            },
-            "can_send_voice_notes": {
-                "type_hint": "bool"
-            },
-            "can_send_polls": {
-                "type_hint": "bool"
-            },
-            "can_send_other_messages": {
-                "type_hint": "bool"
-            },
-            "can_add_web_page_previews": {
-                "type_hint": "bool"
-            },
-            "can_change_info": {
-                "type_hint": "bool"
-            },
-            "can_invite_users": {
-                "type_hint": "bool"
-            },
-            "can_pin_messages": {
-                "type_hint": "bool"
-            },
-            "can_manage_topics": {
-                "type_hint": "bool"
-            },
-            "until_date": {
-                "type_hint": "int"
-            }
-        },
-        "warnings": {
-            "status": {
-                "warnings": [
-                    "not in __init__()",
-                    "default value is: DEFAULT_CHAT_MEMBER_RESTRICTED"
-                ]
-            }
-        }
-    },
-    "ChatMemberLeft": {
-        "link": "https://core.telegram.org/bots/api#chatmemberleft",
-        "has_dese": true,
-        "kwargs": {
-            "user": {
-                "type_hint": "User"
-            }
-        },
-        "warnings": {
-            "status": {
-                "warnings": [
-                    "not in __init__()",
-                    "default value is: DEFAULT_CHAT_MEMBER_LEFT"
-                ]
-            }
-        }
-    },
-    "ChatMemberBanned": {
-        "link": "https://core.telegram.org/bots/api#chatmemberbanned",
-        "has_dese": true,
-        "kwargs": {
-            "user": {
-                "type_hint": "User"
-            },
-            "until_date": {
-                "type_hint": "int"
-            }
-        },
-        "warnings": {
-            "status": {
-                "warnings": [
-                    "not in __init__()",
-                    "default value is: DEFAULT_CHAT_MEMBER_BANNED"
-                ]
-            }
-        }
-    },
     "ChatMemberUpdated": {
         "link": "https://core.telegram.org/bots/api#chatmemberupdated",
         "has_dese": true,
@@ -2377,32 +2390,6 @@
             },
             "via_chat_folder_invite_link": {
                 "type_hint": "Optional[bool]",
-                "default": null
-            }
-        }
-    },
-    "ChatJoinRequest": {
-        "link": "https://core.telegram.org/bots/api#chatjoinrequest",
-        "has_dese": true,
-        "kwargs": {
-            "chat": {
-                "type_hint": "Chat"
-            },
-            "from_user": {
-                "type_hint": "User"
-            },
-            "user_chat_id": {
-                "type_hint": "int"
-            },
-            "date": {
-                "type_hint": "int"
-            },
-            "bio": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "invite_link": {
-                "type_hint": "Optional[ChatInviteLink]",
                 "default": null
             }
         }

@@ -8,20 +8,19 @@ BotCommandScopeDefault.type: not in __init__() & default value is: DEFAULT_BOT_C
 ChatBoostSourceGiftCode.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE
 ChatBoostSourceGiveaway.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY
 ChatBoostSourcePremium.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM
+ChatMemberAdministrator.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR
+ChatMemberBanned.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_BANNED
+ChatMemberLeft.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_LEFT
+ChatMemberMember.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_MEMBER
+ChatMemberOwner.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_OWNER
+ChatMemberRestricted.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_RESTRICTED
 InputFile.file_name: no match self.file_name = ...
 InputFile.hide_name: no match self.hide_name = ...
 Message.text: default value is: text or str() # If not text, it's str() instead of None
 ReactionTypeEmoji.type: not in __init__() & default value is: DEFAULT_REACTION_TYPE_EMOJI
 ReactionTypeCustomEmoji.type: not in __init__() & default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
 ReplyKeyboardMarkup.keyboard: default value is: keyboard or []
-ReplyKeyboardRemove.remove_keyboard: not in __init__() & default value is: True
 InlineKeyboardMarkup.inline_keyboard: default value is: inline_keyboard or []
-ChatMemberOwner.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_OWNER
-ChatMemberAdministrator.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR
-ChatMemberMember.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_MEMBER
-ChatMemberRestricted.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_RESTRICTED
-ChatMemberLeft.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_LEFT
-ChatMemberBanned.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_BANNED
 MenuButtonCommands.type: not in __init__() & default value is: DEFAULT_MENU_BUTTON_COMMANDS
 MenuButtonWebApp.type: not in __init__() & default value is: DEFAULT_MENU_BUTTON_WEB_APP
 MenuButtonDefault.type: not in __init__() & default value is: DEFAULT_MENU_BUTTON_DEFAULT

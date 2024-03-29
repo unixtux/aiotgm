@@ -281,8 +281,6 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
         match_multiline_hint =     re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
         match_hint_default =       re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
         match_hint_no_default =    re.match(r"\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
-        match_no_hint_default =    re.match(r"\s*(.*?)\s*=\s*(.*?)\s*,*\n", LINES[LINE_N])
-        match_no_hint_no_default = re.match(r"\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
 
         if match_multiline_hint:
             match = match_multiline_hint.group(1, 2)
@@ -332,37 +330,6 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             init_kwargs[arg] = {'type_hint': type_hint}
             TYPES_CHECKER.add(26)
 
-        elif match_no_hint_default:
-            match = match_no_hint_default.group(1, 2)
-            (arg, default_value) = match[0], match[1]
-            if default_value in JSON_LITERALS:
-                TYPES_CHECKER.add(27)
-                default_value = JSON_LITERALS[default_value]
-            else:
-                TYPES_CHECKER.add(28)
-                default_value = parse_number(default_value)
-            type_hint = None
-            if TYPES[__type]['has_dese']:
-                dese_hint = TYPES[__type]['dese_kwargs'][arg]
-                if dese_hint is not None:
-                    TYPES_CHECKER.add(29)
-                    type_hint = dese_hint
-            result = {'default': default_value} if type_hint is None else {'type_hint': type_hint, 'default': default_value}
-            init_kwargs[arg] = result
-            TYPES_CHECKER.add(30)
-
-        elif match_no_hint_no_default:
-            arg = match_no_hint_no_default.group(1)
-            type_hint = None
-            if TYPES[__type]['has_dese']:
-                dese_hint = TYPES[__type]['dese_kwargs'][arg]
-                if dese_hint is not None:
-                    TYPES_CHECKER.add(31)
-                    type_hint = dese_hint
-            result = None if type_hint is None else {'type_hint': type_hint}
-            init_kwargs[arg] = result
-            TYPES_CHECKER.add(32)
-
         else:
             raise_err(370, LINE_N, LINES[LINE_N])
 
@@ -383,7 +350,7 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
     while LINE_N != len(LINES):
 
         if re.match(r'\n$|\s*\.\.\.\s*\n', LINES[LINE_N]):
-            TYPES_CHECKER.add(33)
+            TYPES_CHECKER.add(27)
             return self_kwargs
 
         new_attribute_type_hint = re.match(r"\s*self\s*\.\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*\n", LINES[LINE_N])
@@ -397,43 +364,13 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                 (arg, type_hint, default_value) = match[0], match[1], match[2]
                 warnings = []
                 if arg not in TYPES[__type]['kwargs']:
-                    TYPES_CHECKER.add(34)
+                    TYPES_CHECKER.add(28)
                     warnings.append('not in __init__()')
                 else:
-                    TYPES_CHECKER.add(35)
-                    check_arg = TYPES[__type]['kwargs'][arg]
-                    if check_arg is not None:
-                        if 'type_hint' in check_arg:
-                            TYPES_CHECKER.add(36)
-                            __type_hint = type_hint
-                            if OPTIONAL.match(type_hint):
-                                if TYPES[type]['kwargs'][arg]['default'] is not None:
-                                    raise_err(414, arg, LINES[LINE_N], LINE_N)
-                                if not OPTIONAL.match(check_arg['type_hint']):
-                                    __type_hint = OPTIONAL.match(type_hint).group(1)
-                            if check_arg['type_hint'] != __type_hint:
-                                raise_err(418, check_arg, type_hint)
-                            else:
-                                TYPES_CHECKER.add(37)
-                                default = 'not found' if 'default' not in TYPES[__type]['kwargs'][arg] else TYPES[__type]['kwargs'][arg]['default']
-                                update = {'type_hint': type_hint} if default == 'not found' else {'type_hint': type_hint, 'default': default}
-                                TYPES[__type]['kwargs'][arg] = update
-                        else:
-                            TYPES_CHECKER.add(38)
-                            default = 'not found' if 'default' not in TYPES[__type]['kwargs'][arg] else TYPES[__type]['kwargs'][arg]['default']
-                            update = {'type_hint': type_hint} if default == 'not found' else {'type_hint': type_hint, 'default': default}
-                            TYPES[__type]['kwargs'][arg] = update
-                    else:
-                        TYPES_CHECKER.add(39)
-                        TYPES[__type]['kwargs'][arg] = {'type_hint': type_hint}
-
-                self_kwargs[arg] = {}
-                if arg != default_value:
-                    warnings.append(f'default value is: {default_value}')
-                self_kwargs[arg] = {'type_hint': type_hint, 'warnings': warnings}
+                    raise_err(370, LINES[LINE_N])
 
             elif new_attribute:
-                TYPES_CHECKER.add(40)
+                TYPES_CHECKER.add(29)
                 match = new_attribute.group(1, 2)
                 (arg, default_value) = match[0], match[1]
                 warnings = []
@@ -443,6 +380,9 @@ def get_self_kwargs(__type: str) -> dict[str, Any]:
                     warnings.append(f'default value is: {default_value}')
                 self_kwargs[arg] = {}
                 self_kwargs[arg]['warnings'] = warnings
+
+            else:
+                raise_err(385, LINES[LINE_N])
 
         LINE_N += 1
     else:
@@ -454,7 +394,7 @@ while LINE_N != len(LINES):
     class_matched = re.match(r'class\s*(.*?)\s*\(\s*(.*?)\s*\)\s*:', LINES[LINE_N])
 
     if class_matched:
-        TYPES_CHECKER.add(41)
+        TYPES_CHECKER.add(30)
         match = class_matched.group(1, 2)
 
         type = match[0]
@@ -473,7 +413,7 @@ while LINE_N != len(LINES):
 
     if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
 
-        TYPES_CHECKER.add(42)
+        TYPES_CHECKER.add(31)
 
         if not re.match(r'\s*@_parse_result\s*\n', LINES[LINE_N - 1]):
             raise_err(482, LINE_N - 1, LINES[LINE_N - 1])
@@ -487,7 +427,7 @@ while LINE_N != len(LINES):
 
     if re.match(r'\s*def\s*__init__\s*\(', LINES[LINE_N]):
 
-        TYPES_CHECKER.add(43)
+        TYPES_CHECKER.add(32)
         # Not add a line to check
         # def __init__(self): ...
         init_kwargs = get_init_kwargs(type)
@@ -503,22 +443,22 @@ while LINE_N != len(LINES):
         self_kwargs = get_self_kwargs(type)
         for arg in TYPES[type]['kwargs']:
             if arg not in self_kwargs:
-                TYPES_CHECKER.add(44)
+                TYPES_CHECKER.add(33)
                 TYPES[type]['kwargs'][arg].update({'warnings': [f'no match self.{arg} = ...']})
 
         for arg in self_kwargs.copy():
             warnings = self_kwargs[arg]['warnings']
             if warnings:
-                TYPES_CHECKER.add(45)
+                TYPES_CHECKER.add(34)
                 if arg in TYPES[type]['kwargs']:
-                    TYPES_CHECKER.add(46)
+                    TYPES_CHECKER.add(35)
                     assert len(warnings) == 1
                     if 'warnings' in TYPES[type]['kwargs'][arg]:
                         TYPES[type]['kwargs'][arg]['warnings'].append(warnings[0])
                     else:
                         TYPES[type]['kwargs'][arg].update({'warnings': warnings})
                 else:
-                    TYPES_CHECKER.add(47)
+                    TYPES_CHECKER.add(36)
                     if 'warnings' in TYPES[type]:
                         TYPES[type]['warnings'].update({arg: self_kwargs[arg]})
                     else:
@@ -560,7 +500,7 @@ logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
 logger.info('Types without _dese(): %s\n', len(TYPES_WITHOUT_DESE))
 #"""
 
-for n in range(1, 48):
+for n in range(1, 37):
     if n not in TYPES_CHECKER.tasks:
         logger.warning(f'task {n} has not been not executed.\n')
 
