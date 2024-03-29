@@ -981,6 +981,44 @@ class ChatAdministratorRights(TelegramType):
         self.can_manage_topics = can_manage_topics
 
 
+class ChatBoost(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboost
+
+    This object contains information about a chat boost.
+
+    :param boost_id: Unique identifier of the boost.
+    :type boost_id: :obj:`str`
+    :param add_date: Point in time (Unix timestamp) when the chat was boosted.
+    :type add_date: :obj:`int`
+    :param expiration_date: Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged.
+    :type expiration_date: :obj:`int`
+    :param source: Source of the added boost.
+    :type source: :obj:`~aiotgm.types.ChatBoostSource`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['boost_id'] = res.get('boost_id')
+        obj['add_date'] = res.get('add_date')
+        obj['expiration_date'] = res.get('expiration_date')
+        obj['source'] = _dese_chat_boost_source(res.get('source'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        boost_id: str,
+        add_date: int,
+        expiration_date: int,
+        source: ChatBoostSource
+    ):
+        self.boost_id = boost_id
+        self.add_date = add_date
+        self.expiration_date = expiration_date
+        self.source = source
+
+
 
 
 
@@ -6084,35 +6122,6 @@ def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]
         )
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class ChatBoost(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatboost
-
-    This object contains information about a chat boost.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['boost_id'] = res.get('boost_id')
-        obj['add_date'] = res.get('add_date')
-        obj['expiration_date'] = res.get('expiration_date')
-        obj['source'] = _dese_chat_boost_source(res.get('source'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        boost_id: str,
-        add_date: int,
-        expiration_date: int,
-        source: ChatBoostSource
-    ):
-        self.boost_id = boost_id
-        self.add_date = add_date
-        self.expiration_date = expiration_date
-        self.source = source
 
 
 class UserChatBoosts(TelegramType):
