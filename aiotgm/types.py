@@ -234,6 +234,69 @@ def _parse_result(_dese):
     return wrap
 
 
+class Animation(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#animation
+
+    This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
+
+    :param file_id: Identifier for this file, which can be used to download or reuse the file.
+    :type file_id: :obj:`str`
+    :param file_unique_id: Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type file_unique_id: :obj:`str`
+    :param width: Video width as defined by sender.
+    :type width: :obj:`int`
+    :param height: Video height as defined by sender.
+    :type height: :obj:`int`
+    :param duration: Duration of the video in seconds as defined by sender.
+    :type duration: :obj:`int`
+    :param thumbnail: Animation thumbnail as defined by sender.
+    :type thumbnail: :obj:`~aiotgm.types.PhotoSize`, optional
+    :param file_name: Original animation filename as defined by sender.
+    :type file_name: :obj:`str`, optional
+    :param mime_type: MIME type of the file as defined by sender.
+    :type mime_type: :obj:`str`, optional
+    :param file_size: File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
+    :type file_size: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['file_id'] = res.get('file_id')
+        obj['file_unique_id'] = res.get('file_unique_id')
+        obj['width'] = res.get('width')
+        obj['height'] = res.get('height')
+        obj['duration'] = res.get('duration')
+        obj['thumbnail'] = PhotoSize._dese(res.get('thumbnail'))
+        obj['file_name'] = res.get('file_name')
+        obj['mime_type'] = res.get('mime_type')
+        obj['file_size'] = res.get('file_size')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        file_id: str,
+        file_unique_id: str,
+        width: int,
+        height: int,
+        duration: int,
+        thumbnail: Optional[PhotoSize] = None,
+        file_name: Optional[str] = None,
+        mime_type: Optional[str] = None,
+        file_size: Optional[int] = None
+    ):
+        self.file_id = file_id
+        self.file_unique_id = file_unique_id
+        self.width = width
+        self.height = height
+        self.duration = duration
+        self.thumbnail = thumbnail
+        self.file_name = file_name
+        self.mime_type = mime_type
+        self.file_size = file_size
+
+
 class ChatBoostAdded(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatboostadded
@@ -1404,50 +1467,6 @@ class PhotoSize(TelegramType):
         self.file_unique_id = file_unique_id
         self.width = width
         self.height = height
-        self.file_size = file_size
-
-
-class Animation(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#animation
-
-    This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['file_id'] = res.get('file_id')
-        obj['file_unique_id'] = res.get('file_unique_id')
-        obj['width'] = res.get('width')
-        obj['height'] = res.get('height')
-        obj['duration'] = res.get('duration')
-        obj['thumbnail'] = PhotoSize._dese(res.get('thumbnail'))
-        obj['file_name'] = res.get('file_name')
-        obj['mime_type'] = res.get('mime_type')
-        obj['file_size'] = res.get('file_size')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        file_id: str,
-        file_unique_id: str,
-        width: int,
-        height: int,
-        duration: int,
-        thumbnail: Optional[PhotoSize] = None,
-        file_name: Optional[str] = None,
-        mime_type: Optional[str] = None,
-        file_size: Optional[int] = None
-    ):
-        self.file_id = file_id
-        self.file_unique_id = file_unique_id
-        self.width = width
-        self.height = height
-        self.duration = duration
-        self.thumbnail = thumbnail
-        self.file_name = file_name
-        self.mime_type = mime_type
         self.file_size = file_size
 
 
