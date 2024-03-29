@@ -1960,6 +1960,54 @@ class ChatShared(TelegramType):
         self.chat_id = chat_id
 
 
+class ChosenInlineResult(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#choseninlineresult
+
+    Represents a :obj:`result <aiotgm.types.InlineQueryResult>` of an
+    inline query that was chosen by the user and sent to their chat partner.
+
+    **Note**: It is necessary to enable
+    `inline feedback <https://core.telegram.org/bots/inline#collecting-feedback>`_ via
+    `@BotFather <https://t.me/botfather>`_ in order to receive these objects in updates.
+
+    :param result_id: The unique identifier for the result that was chosen.
+    :type result_id: :obj:`str`
+    :param from_user: The user that chose the result.
+    :type from_user: :obj:`~aiotgm.types.User`
+    :param query: The query that was used to obtain the result.
+    :type query: :obj:`str`
+    :param location: Sender location, only for bots that require user location.
+    :type location: :obj:`~aiotgm.types.Location`, optional
+    :param inline_message_id: Identifier of the sent inline message. Available only if there is an :obj:`inline keyboard <aiotgm.types.InlineKeyboardMarkup>` attached to the message. Will be also received in :obj:`callback queries <aiotgm.types.CallbackQuery>` and can be used to `edit <https://core.telegram.org/bots/api#updating-messages>`_ the message.
+    :type inline_message_id: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['result_id'] = res.get('result_id')
+        obj['from_user'] = User._dese(res.get('from_user'))
+        obj['query'] = res.get('query')
+        obj['location'] = Location._dese(res.get('location'))
+        obj['inline_message_id'] = res.get('inline_message_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        result_id: str,
+        from_user: User,
+        query: str,
+        location: Optional[Location] = None,
+        inline_message_id: Optional[str] = None
+    ):
+        self.result_id = result_id
+        self.from_user = from_user
+        self.query = query
+        self.location = location
+        self.inline_message_id = inline_message_id
+
+
 
 
 
@@ -5296,38 +5344,6 @@ Telegram clients currently support results of the following 20 types:
 '''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class ChosenInlineResult(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#choseninlineresult
-
-    Represents a result of an inline query that was chosen by the user and sent to their chat partner.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['result_id'] = res.get('result_id')
-        obj['from_user'] = User._dese(res.get('from_user'))
-        obj['location'] = Location._dese(res.get('location'))
-        obj['inline_message_id'] = res.get('inline_message_id')
-        obj['query'] = res.get('query')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        result_id: str,
-        from_user: User,
-        query: str,
-        location: Optional[Location] = None,
-        inline_message_id: Optional[str] = None
-    ):
-        self.result_id = result_id
-        self.from_user = from_user
-        self.query = query
-        self.location = location
-        self.inline_message_id = inline_message_id
 
 
 class SentWebAppMessage(TelegramType):
