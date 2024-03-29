@@ -2008,6 +2008,77 @@ class ChosenInlineResult(TelegramType):
         self.inline_message_id = inline_message_id
 
 
+class Contact(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#contact
+
+    This object represents a phone contact.
+
+    :param phone_number: Contact's phone number.
+    :type phone_number: :obj:`str`
+    :param first_name: Contact's first name.
+    :type first_name: :obj:`str`
+    :param last_name: Contact's last name.
+    :type last_name: :obj:`str`, optional
+    :param user_id: Contact's user identifier in Telegram. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
+    :type user_id: :obj:`int`, optional
+    :param vcard: Additional data about the contact in the form of a `vCard <https://en.wikipedia.org/wiki/VCard>`_.
+    :type vcard: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['phone_number'] = res.get('phone_number')
+        obj['first_name'] = res.get('first_name')
+        obj['last_name'] = res.get('last_name')
+        obj['user_id'] = res.get('user_id')
+        obj['vcard'] = res.get('vcard')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        phone_number: str,
+        first_name: str,
+        last_name: Optional[str] = None,
+        user_id: Optional[int] = None,
+        vcard: Optional[str] = None
+    ):
+        self.phone_number = phone_number
+        self.first_name = first_name
+        self.last_name = last_name
+        self.user_id = user_id
+        self.vcard = vcard
+
+
+class Dice(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#dice
+
+    This object represents an animated emoji that displays a random value.
+
+    :param : 
+    :type : 
+    :param : 
+    :type : 
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['emoji'] = res.get('emoji')
+        obj['value'] = res.get('value')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        emoji: str,
+        value: int
+    ):
+        self.emoji = emoji
+        self.value = value
+
+
 
 
 
@@ -3018,61 +3089,6 @@ class Voice(TelegramType):
         self.duration = duration
         self.mime_type = mime_type
         self.file_size = file_size
-
-
-class Contact(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#contact
-
-    This object represents a phone contact.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['phone_number'] = res.get('phone_number')
-        obj['first_name'] = res.get('first_name')
-        obj['last_name'] = res.get('last_name')
-        obj['user_id'] = res.get('user_id')
-        obj['vcard'] = res.get('vcard')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        phone_number: str,
-        first_name: str,
-        last_name: Optional[str] = None,
-        user_id: Optional[int] = None,
-        vcard: Optional[str] = None
-    ):
-        self.phone_number = phone_number
-        self.first_name = first_name
-        self.last_name = last_name
-        self.user_id = user_id
-        self.vcard = vcard
-
-
-class Dice(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#dice
-
-    This object represents an animated emoji that displays a random value.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['emoji'] = res.get('emoji')
-        obj['value'] = res.get('value')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        emoji: str,
-        value: int
-    ):
-        self.emoji = emoji
-        self.value = value
 
 
 class PollOption(TelegramType):
