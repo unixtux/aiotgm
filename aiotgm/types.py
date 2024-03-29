@@ -1805,18 +1805,40 @@ class ChatMemberUpdated(TelegramType):
         self.via_chat_folder_invite_link = via_chat_folder_invite_link
 
 
-
-
-
-
-
-
-
 class ChatPermissions(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatpermissions
 
     Describes actions that a non-administrator user is allowed to take in a chat.
+
+    :param can_send_messages: :obj:`True`, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues.
+    :type can_send_messages: :obj:`bool`, optional
+    :param can_send_audios: :obj:`True`, if the user is allowed to send audios.
+    :type can_send_audios: :obj:`bool`, optional
+    :param can_send_documents: :obj:`True`, if the user is allowed to send documents.
+    :type can_send_documents: :obj:`bool`, optional
+    :param can_send_photos: :obj:`True`, if the user is allowed to send photos.
+    :type can_send_photos: :obj:`bool`, optional
+    :param can_send_videos: :obj:`True`, if the user is allowed to send videos.
+    :type can_send_videos: :obj:`bool`, optional
+    :param can_send_video_notes: :obj:`True`, if the user is allowed to send video notes.
+    :type can_send_video_notes: :obj:`bool`, optional
+    :param can_send_voice_notes: :obj:`True`, if the user is allowed to send voice notes.
+    :type can_send_voice_notes: :obj:`bool`, optional
+    :param can_send_polls: :obj:`True`, if the user is allowed to send polls.
+    :type can_send_polls: :obj:`bool`, optional
+    :param can_send_other_messages: :obj:`True`, if the user is allowed to send animations, games, stickers and use inline bots.
+    :type can_send_other_messages: :obj:`bool`, optional
+    :param can_add_web_page_previews: :obj:`True`, if the user is allowed to add web page previews to their messages.
+    :type can_add_web_page_previews: :obj:`bool`, optional
+    :param can_change_info: :obj:`True`, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups.
+    :type can_change_info: :obj:`bool`, optional
+    :param can_invite_users: :obj:`True`, if the user is allowed to invite new users to the chat.
+    :type can_invite_users: :obj:`bool`, optional
+    :param can_pin_messages: :obj:`True`, if the user is allowed to pin messages. Ignored in public supergroups.
+    :type can_pin_messages: :obj:`bool`, optional
+    :param can_manage_topics: :obj:`True`, if the user is allowed to create forum topics. If omitted defaults to the value of *can_pin_messages*.
+    :type can_manage_topics: :obj:`bool`, optional
     '''
     @classmethod
     @_parse_result
@@ -1869,6 +1891,13 @@ class ChatPermissions(TelegramType):
         self.can_invite_users = can_invite_users
         self.can_pin_messages = can_pin_messages
         self.can_manage_topics = can_manage_topics
+
+
+
+
+
+
+
 
 
 class SwitchInlineQueryChosenChat(TelegramType):
