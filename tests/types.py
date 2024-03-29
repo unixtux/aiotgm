@@ -4750,12 +4750,12 @@ TYPES = {
     }
 }
 
-warnings = ''
+warnings = []
 
 for type in TYPES:
     if 'warnings' in TYPES[type]:
-        warnings += f'{type.__name__}: ' + ' and '.join(TYPES[type]['warnings']) + '\n'
+        warnings.append(f'{type.__name__}: ' + ' and '.join(TYPES[type]['warnings']))
 
 with open('warnings.txt', 'w') as w:
-    w.write(warnings)
-    logger.info("Warnings written in 'warnings.txt'.")
+    w.write('\n'.join(warnings))
+    logger.info(f"{len(warnings)} warnings written in 'warnings.txt'.")
