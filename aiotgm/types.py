@@ -1231,6 +1231,69 @@ class ChatBoostUpdated(TelegramType):
         self.boost = boost
 
 
+class ChatInviteLink(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatinvitelink
+
+    Represents an invite link for a chat.
+
+    :param invite_link: The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with “…”.
+    :type invite_link: :obj:`str`
+    :param creator: Creator of the link.
+    :type creator: :obj:`~aiotgm.types.User`
+    :param creates_join_request: :obj:`True`, if users joining the chat via the link need to be approved by chat administrators.
+    :type creates_join_request: :obj:`bool`
+    :param is_primary: :obj:`True`, if the link is primary.
+    :type is_primary: :obj:`bool`
+    :param is_revoked: :obj:`True`, if the link is revoked.
+    :type is_revoked: :obj:`bool`
+    :param name: Invite link name.
+    :type name: :obj:`str`, optional
+    :param expire_date: Point in time (Unix timestamp) when the link will expire or has been expired.
+    :type expire_date: :obj:`int`, optional
+    :param member_limit: The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999.
+    :type member_limit: :obj:`int`, optional
+    :param pending_join_request_count: Number of pending join requests created using this link.
+    :type pending_join_request_count: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['invite_link'] = res.get('invite_link')
+        obj['creator'] = User._dese(res.get('creator'))
+        obj['creates_join_request'] = res.get('creates_join_request')
+        obj['is_primary'] = res.get('is_primary')
+        obj['is_revoked'] = res.get('is_revoked')
+        obj['name'] = res.get('name')
+        obj['expire_date'] = res.get('expire_date')
+        obj['member_limit'] = res.get('member_limit')
+        obj['pending_join_request_count'] = res.get('pending_join_request_count')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        invite_link: str,
+        creator: User,
+        creates_join_request: bool,
+        is_primary: bool,
+        is_revoked: bool,
+        name: Optional[str] = None,
+        expire_date: Optional[int] = None,
+        member_limit: Optional[int] = None,
+        pending_join_request_count: Optional[int] = None
+    ):
+        self.invite_link = invite_link
+        self.creator = creator
+        self.creates_join_request = creates_join_request
+        self.is_primary = is_primary
+        self.is_revoked = is_revoked
+        self.name = name
+        self.expire_date = expire_date
+        self.member_limit = member_limit
+        self.pending_join_request_count = pending_join_request_count
+
+
 
 
 
@@ -3305,50 +3368,6 @@ One of the following reply markups:
 - :obj:`~aiotgm.types.ReplyKeyboardRemove`
 - :obj:`~aiotgm.types.ForceReply`
 '''
-
-class ChatInviteLink(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatinvitelink
-
-    Represents an invite link for a chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['invite_link'] = res.get('invite_link')
-        obj['creator'] = User._dese(res.get('creator'))
-        obj['creates_join_request'] = res.get('creates_join_request')
-        obj['is_primary'] = res.get('is_primary')
-        obj['is_revoked'] = res.get('is_revoked')
-        obj['name'] = res.get('name')
-        obj['expire_date'] = res.get('expire_date')
-        obj['member_limit'] = res.get('member_limit')
-        obj['pending_join_request_count'] = res.get('pending_join_request_count')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        invite_link: str,
-        creator: User,
-        creates_join_request: bool,
-        is_primary: bool,
-        is_revoked: bool,
-        name: Optional[str] = None,
-        expire_date: Optional[int] = None,
-        member_limit: Optional[int] = None,
-        pending_join_request_count: Optional[int] = None
-    ):
-        self.invite_link = invite_link
-        self.creator = creator
-        self.creates_join_request = creates_join_request
-        self.is_primary = is_primary
-        self.is_revoked = is_revoked
-        self.name = name
-        self.expire_date = expire_date
-        self.member_limit = member_limit
-        self.pending_join_request_count = pending_join_request_count
-
 
 # ChatMember: 6 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

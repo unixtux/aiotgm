@@ -1,3 +1,13 @@
+BotCommandScopeAllChatAdministrators.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS
+BotCommandScopeAllGroupChats.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS
+BotCommandScopeAllPrivateChats.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS
+BotCommandScopeChat.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT
+BotCommandScopeChatAdministrators.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS
+BotCommandScopeChatMember.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER
+BotCommandScopeDefault.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_DEFAULT
+ChatBoostSourceGiftCode.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE
+ChatBoostSourceGiveaway.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY
+ChatBoostSourcePremium.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM
 InputFile.file_name: no match self.file_name = ...
 InputFile.hide_name: no match self.hide_name = ...
 Message.text: default value is: text or str() # If not text, it's str() instead of None
@@ -12,13 +22,6 @@ ChatMemberMember.status: not in __init__() & default value is: DEFAULT_CHAT_MEMB
 ChatMemberRestricted.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_RESTRICTED
 ChatMemberLeft.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_LEFT
 ChatMemberBanned.status: not in __init__() & default value is: DEFAULT_CHAT_MEMBER_BANNED
-BotCommandScopeDefault.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_DEFAULT
-BotCommandScopeAllPrivateChats.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS
-BotCommandScopeAllGroupChats.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS
-BotCommandScopeAllChatAdministrators.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS
-BotCommandScopeChat.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT
-BotCommandScopeChatAdministrators.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS
-BotCommandScopeChatMember.type: not in __init__() & default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER
 MenuButtonCommands.type: not in __init__() & default value is: DEFAULT_MENU_BUTTON_COMMANDS
 MenuButtonWebApp.type: not in __init__() & default value is: DEFAULT_MENU_BUTTON_WEB_APP
 MenuButtonDefault.type: not in __init__() & default value is: DEFAULT_MENU_BUTTON_DEFAULT
@@ -60,6 +63,3 @@ MessageOriginUser.type: not in __init__() & default value is: DEFAULT_MESSAGE_OR
 MessageOriginHiddenUser.type: not in __init__() & default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER
 MessageOriginChat.type: not in __init__() & default value is: DEFAULT_MESSAGE_ORIGIN_CHAT
 MessageOriginChannel.type: not in __init__() & default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL
-ChatBoostSourcePremium.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM
-ChatBoostSourceGiftCode.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE
-ChatBoostSourceGiveaway.source: not in __init__() & default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY
