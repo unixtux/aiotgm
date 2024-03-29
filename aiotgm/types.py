@@ -1752,6 +1752,59 @@ def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+class ChatMemberUpdated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatmemberupdated
+
+    This object represents changes in the status of a chat member.
+
+    :param chat: Chat the user belongs to.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param from_user: Performer of the action, which resulted in the change.
+    :type from_user: :obj:`~aiotgm.types.User`
+    :param date: Date the change was done in Unix time.
+    :type date: :obj:`int`
+    :param old_chat_member: Previous information about the chat member.
+    :type old_chat_member: :obj:`~aiotgm.types.ChatMember`
+    :param new_chat_member: New information about the chat member.
+    :type new_chat_member: :obj:`~aiotgm.types.ChatMember`
+    :param invite_link: Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
+    :type invite_link: :obj:`~aiotgm.types.ChatInviteLink`, optional
+    :param via_chat_folder_invite_link: :obj:`True`, if the user joined the chat via a chat folder invite link.
+    :type via_chat_folder_invite_link: :obj:`bool`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['from_user'] = User._dese(res.get('from_user'))
+        obj['date'] = res.get('date')
+        obj['old_chat_member'] = _dese_chat_member(res.get('old_chat_member'))
+        obj['new_chat_member'] = _dese_chat_member(res.get('new_chat_member'))
+        obj['invite_link'] = ChatInviteLink._dese(res.get('invite_link'))
+        obj['via_chat_folder_invite_link'] = res.get('via_chat_folder_invite_link')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        from_user: User,
+        date: int,
+        old_chat_member: ChatMember,
+        new_chat_member: ChatMember,
+        invite_link: Optional[ChatInviteLink] = None,
+        via_chat_folder_invite_link: Optional[bool] = None
+    ):
+        self.chat = chat
+        self.from_user = from_user
+        self.date = date
+        self.old_chat_member = old_chat_member
+        self.new_chat_member = new_chat_member
+        self.invite_link = invite_link
+        self.via_chat_folder_invite_link = via_chat_folder_invite_link
+
+
 
 
 
@@ -3803,44 +3856,6 @@ One of the following reply markups:
 - :obj:`~aiotgm.types.ReplyKeyboardRemove`
 - :obj:`~aiotgm.types.ForceReply`
 '''
-
-class ChatMemberUpdated(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatmemberupdated
-
-    This object represents changes in the status of a chat member.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['from_user'] = User._dese(res.get('from_user'))
-        obj['date'] = res.get('date')
-        obj['old_chat_member'] = _dese_chat_member(res.get('old_chat_member'))
-        obj['new_chat_member'] = _dese_chat_member(res.get('new_chat_member'))
-        obj['invite_link'] = ChatInviteLink._dese(res.get('invite_link'))
-        obj['via_chat_folder_invite_link'] = res.get('via_chat_folder_invite_link')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        from_user: User,
-        date: int,
-        old_chat_member: ChatMember,
-        new_chat_member: ChatMember,
-        invite_link: Optional[ChatInviteLink] = None,
-        via_chat_folder_invite_link: Optional[bool] = None
-    ):
-        self.chat = chat
-        self.from_user = from_user
-        self.date = date
-        self.old_chat_member = old_chat_member
-        self.new_chat_member = new_chat_member
-        self.invite_link = invite_link
-        self.via_chat_folder_invite_link = via_chat_folder_invite_link
-
 
 class ForumTopic(TelegramType):
     '''
