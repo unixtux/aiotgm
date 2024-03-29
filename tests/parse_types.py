@@ -24,7 +24,7 @@ logger.setLevel(LOGGER_LEVEL)
 with open('../aiotgm/types.py') as r:
     LINES = r.readlines()
 
-TYPES: dict[str, dict[str, dict[str, dict | Any] | Any] | Any] = {}
+TYPES: dict[str, dict[str, dict[str, dict | Any] | Any | list] | Any] = {}
 TG_TYPES = []
 
 LINE_N = 0
@@ -304,7 +304,7 @@ def get_self_kwargs(type: str) -> dict[str, Any]:
     if not re.match(r"\s*\)\s*:\s*\n|\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n", LINES[LINE_N]):
         raise_err(305)
 
-    self_kwargs = {'warnings': []}
+    self_kwargs = {'args': [], 'warnings': []}
     LINE_N += 1 # added new line now, because we didn't do before.
 
     while LINE_N != len(LINES):
@@ -321,6 +321,7 @@ def get_self_kwargs(type: str) -> dict[str, Any]:
                 self_kwargs['warnings'].append(f'{arg!r} is not in __init__()')
             if arg != default_value:
                 self_kwargs['warnings'].append(f'{arg!r} default value is: {default_value}')
+            self_kwargs['args'].append(arg)
         else:
             raise_err(325, LINES[LINE_N])
 
@@ -346,11 +347,10 @@ while LINE_N != len(LINES):
         TYPES[type] = {
             'link': api_link,
             'has_dese': False,
+            'warnings': [],
             'kwargs': {},
             'dese_kwargs': {},
-            'init_kwargs': {},
-            'self_kwargs': {},
-            'warnings': None
+            'init_kwargs': {}
         }
 
     if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
@@ -385,8 +385,15 @@ while LINE_N != len(LINES):
         del TYPES[type]['init_kwargs']
 
         self_kwargs = get_self_kwargs(type)
+        TYPES[type]['self_kwargs'] = self_kwargs
         if self_kwargs['warnings']:
             TYPES[type]['warnings'] = self_kwargs['warnings']
+
+        for arg in init_kwargs:
+            if arg not in self_kwargs['args']:
+                TYPES[type]['warnings'].append(f'Not found {type}.{arg}')
+
+        del TYPES[type]['self_kwargs']
 
     LINE_N += 1 if LINE_N != len(LINES) else 0
 
@@ -401,6 +408,9 @@ for type in aiotgm.types.__all__:
         NOT_IN_TYPES.append(type)
 
 for type in TYPES:
+
+    if not TYPES[type]['warnings']:
+        TYPES[type].pop('warnings')
 
     if type not in aiotgm.types.__all__:
         NOT_IN_ALL.append(type)
@@ -467,8 +477,15 @@ for line in lines:
 
 f += '''
 
-warnings = []
-logger.info('Program finished.')
+warnings = ''
+
+for type in TYPES:
+    if 'warnings' in TYPES[type]:
+        warnings += f'{type.__name__}: ' + ' and '.join(TYPES[type]['warnings']) + '\\n'
+
+with open('warnings.txt', 'w') as w:
+    w.write(warnings)
+    logger.info("Warnings written in 'warnings.txt'.")
 '''
 
 with open('types.py', 'w') as w:

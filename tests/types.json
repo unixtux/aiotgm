@@ -34,9 +34,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Audio": {
         "link": "https://core.telegram.org/bots/api#audio",
@@ -75,9 +73,7 @@
                 "type_hint": "Optional[PhotoSize]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "BotCommand": {
         "link": "https://core.telegram.org/bots/api#botcommand",
@@ -89,71 +85,68 @@
             "description": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "BotCommandScopeAllChatAdministrators": {
         "link": "https://core.telegram.org/bots/api#botcommandscopeallchatadministrators",
         "has_dese": false,
-        "kwargs": {},
-        "self_kwargs": {},
         "warnings": [
             "'type' is not in __init__()",
             "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS"
-        ]
+        ],
+        "kwargs": {}
     },
     "BotCommandScopeAllGroupChats": {
         "link": "https://core.telegram.org/bots/api#botcommandscopeallgroupchats",
         "has_dese": false,
-        "kwargs": {},
-        "self_kwargs": {},
         "warnings": [
             "'type' is not in __init__()",
             "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS"
-        ]
+        ],
+        "kwargs": {}
     },
     "BotCommandScopeAllPrivateChats": {
         "link": "https://core.telegram.org/bots/api#botcommandscopeallprivatechats",
         "has_dese": false,
-        "kwargs": {},
-        "self_kwargs": {},
         "warnings": [
             "'type' is not in __init__()",
             "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS"
-        ]
+        ],
+        "kwargs": {}
     },
     "BotCommandScopeChat": {
         "link": "https://core.telegram.org/bots/api#botcommandscopechat",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT"
+        ],
         "kwargs": {
             "chat_id": {
                 "type_hint": "Union[int, str]"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT"
-        ]
+        }
     },
     "BotCommandScopeChatAdministrators": {
         "link": "https://core.telegram.org/bots/api#botcommandscopechatadministrators",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
+        ],
         "kwargs": {
             "chat_id": {
                 "type_hint": "Union[int, str]"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS"
-        ]
+        }
     },
     "BotCommandScopeChatMember": {
         "link": "https://core.telegram.org/bots/api#botcommandscopechatmember",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
+        ],
         "kwargs": {
             "chat_id": {
                 "type_hint": "Union[int, str]"
@@ -161,22 +154,16 @@
             "user_id": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER"
-        ]
+        }
     },
     "BotCommandScopeDefault": {
         "link": "https://core.telegram.org/bots/api#botcommandscopedefault",
         "has_dese": false,
-        "kwargs": {},
-        "self_kwargs": {},
         "warnings": [
             "'type' is not in __init__()",
             "'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_DEFAULT"
-        ]
+        ],
+        "kwargs": {}
     },
     "BotDescription": {
         "link": "https://core.telegram.org/bots/api#botdescription",
@@ -185,9 +172,7 @@
             "description": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "BotName": {
         "link": "https://core.telegram.org/bots/api#botname",
@@ -196,9 +181,7 @@
             "name": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "BotShortDescription": {
         "link": "https://core.telegram.org/bots/api#botshortdescription",
@@ -207,16 +190,12 @@
             "short_description": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "CallbackGame": {
         "link": "https://core.telegram.org/bots/api#callbackgame",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
-        "warnings": null
+        "kwargs": {}
     },
     "CallbackQuery": {
         "link": "https://core.telegram.org/bots/api#callbackquery",
@@ -247,9 +226,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Chat": {
         "link": "https://core.telegram.org/bots/api#chat",
@@ -401,9 +378,7 @@
                 "type_hint": "Optional[ChatLocation]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatAdministratorRights": {
         "link": "https://core.telegram.org/bots/api#chatadministratorrights",
@@ -458,9 +433,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatBoost": {
         "link": "https://core.telegram.org/bots/api#chatboost",
@@ -478,9 +451,7 @@
             "source": {
                 "type_hint": "ChatBoostSource"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatBoostAdded": {
         "link": "https://core.telegram.org/bots/api#chatboostadded",
@@ -489,9 +460,7 @@
             "boost_count": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatBoostRemoved": {
         "link": "https://core.telegram.org/bots/api#chatboostremoved",
@@ -509,27 +478,28 @@
             "source": {
                 "type_hint": "ChatBoostSource"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatBoostSourceGiftCode": {
         "link": "https://core.telegram.org/bots/api#chatboostsourcegiftcode",
         "has_dese": true,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
+        ],
         "kwargs": {
             "user": {
                 "type_hint": "User"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE"
-        ]
+        }
     },
     "ChatBoostSourceGiveaway": {
         "link": "https://core.telegram.org/bots/api#chatboostsourcegiveaway",
         "has_dese": true,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
+        ],
         "kwargs": {
             "giveaway_message_id": {
                 "type_hint": "int"
@@ -542,26 +512,20 @@
                 "type_hint": "Optional[Literal[True]]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY"
-        ]
+        }
     },
     "ChatBoostSourcePremium": {
         "link": "https://core.telegram.org/bots/api#chatboostsourcepremium",
         "has_dese": true,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
+        ],
         "kwargs": {
             "user": {
                 "type_hint": "User"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM"
-        ]
+        }
     },
     "ChatBoostUpdated": {
         "link": "https://core.telegram.org/bots/api#chatboostupdated",
@@ -573,9 +537,7 @@
             "boost": {
                 "type_hint": "ChatBoost"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatInviteLink": {
         "link": "https://core.telegram.org/bots/api#chatinvitelink",
@@ -612,9 +574,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatJoinRequest": {
         "link": "https://core.telegram.org/bots/api#chatjoinrequest",
@@ -640,9 +600,7 @@
                 "type_hint": "Optional[ChatInviteLink]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatLocation": {
         "link": "https://core.telegram.org/bots/api#chatlocation",
@@ -654,13 +612,15 @@
             "address": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatMemberAdministrator": {
         "link": "https://core.telegram.org/bots/api#chatmemberadministrator",
         "has_dese": true,
+        "warnings": [
+            "'status' is not in __init__()",
+            "'status' default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
+        ],
         "kwargs": {
             "user": {
                 "type_hint": "User"
@@ -721,16 +681,15 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'status' is not in __init__()",
-            "'status' default value is: DEFAULT_CHAT_MEMBER_ADMINISTRATOR"
-        ]
+        }
     },
     "ChatMemberBanned": {
         "link": "https://core.telegram.org/bots/api#chatmemberbanned",
         "has_dese": true,
+        "warnings": [
+            "'status' is not in __init__()",
+            "'status' default value is: DEFAULT_CHAT_MEMBER_BANNED"
+        ],
         "kwargs": {
             "user": {
                 "type_hint": "User"
@@ -738,44 +697,41 @@
             "until_date": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'status' is not in __init__()",
-            "'status' default value is: DEFAULT_CHAT_MEMBER_BANNED"
-        ]
+        }
     },
     "ChatMemberLeft": {
         "link": "https://core.telegram.org/bots/api#chatmemberleft",
         "has_dese": true,
+        "warnings": [
+            "'status' is not in __init__()",
+            "'status' default value is: DEFAULT_CHAT_MEMBER_LEFT"
+        ],
         "kwargs": {
             "user": {
                 "type_hint": "User"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'status' is not in __init__()",
-            "'status' default value is: DEFAULT_CHAT_MEMBER_LEFT"
-        ]
+        }
     },
     "ChatMemberMember": {
         "link": "https://core.telegram.org/bots/api#chatmembermember",
         "has_dese": true,
+        "warnings": [
+            "'status' is not in __init__()",
+            "'status' default value is: DEFAULT_CHAT_MEMBER_MEMBER"
+        ],
         "kwargs": {
             "user": {
                 "type_hint": "User"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'status' is not in __init__()",
-            "'status' default value is: DEFAULT_CHAT_MEMBER_MEMBER"
-        ]
+        }
     },
     "ChatMemberOwner": {
         "link": "https://core.telegram.org/bots/api#chatmemberowner",
         "has_dese": true,
+        "warnings": [
+            "'status' is not in __init__()",
+            "'status' default value is: DEFAULT_CHAT_MEMBER_OWNER"
+        ],
         "kwargs": {
             "user": {
                 "type_hint": "User"
@@ -787,16 +743,15 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'status' is not in __init__()",
-            "'status' default value is: DEFAULT_CHAT_MEMBER_OWNER"
-        ]
+        }
     },
     "ChatMemberRestricted": {
         "link": "https://core.telegram.org/bots/api#chatmemberrestricted",
         "has_dese": true,
+        "warnings": [
+            "'status' is not in __init__()",
+            "'status' default value is: DEFAULT_CHAT_MEMBER_RESTRICTED"
+        ],
         "kwargs": {
             "user": {
                 "type_hint": "User"
@@ -849,12 +804,7 @@
             "until_date": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'status' is not in __init__()",
-            "'status' default value is: DEFAULT_CHAT_MEMBER_RESTRICTED"
-        ]
+        }
     },
     "ChatPermissions": {
         "link": "https://core.telegram.org/bots/api#chatpermissions",
@@ -916,9 +866,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "SwitchInlineQueryChosenChat": {
         "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
@@ -944,13 +892,15 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InputFile": {
         "link": "https://core.telegram.org/bots/api#inputfile",
         "has_dese": false,
+        "warnings": [
+            "Not found InputFile.file_name",
+            "Not found InputFile.hide_name"
+        ],
         "kwargs": {
             "path": {
                 "type_hint": "str"
@@ -963,9 +913,7 @@
                 "type_hint": "bool",
                 "default": false
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "LoginUrl": {
         "link": "https://core.telegram.org/bots/api#loginurl",
@@ -986,9 +934,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "LabeledPrice": {
         "link": "https://core.telegram.org/bots/api#labeledprice",
@@ -1000,9 +946,7 @@
             "amount": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "LinkPreviewOptions": {
         "link": "https://core.telegram.org/bots/api#linkpreviewoptions",
@@ -1028,9 +972,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "User": {
         "link": "https://core.telegram.org/bots/api#user",
@@ -1077,9 +1019,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "MessageEntity": {
         "link": "https://core.telegram.org/bots/api#messageentity",
@@ -1110,9 +1050,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "TextQuote": {
         "link": "https://core.telegram.org/bots/api#textquote",
@@ -1132,9 +1070,7 @@
                 "type_hint": "Optional[Literal[True]]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ReplyParameters": {
         "link": "https://core.telegram.org/bots/api#replyparameters",
@@ -1167,9 +1103,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InaccessibleMessage": {
         "link": "https://core.telegram.org/bots/api#inaccessiblemessage",
@@ -1184,13 +1118,14 @@
             "date": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Message": {
         "link": "https://core.telegram.org/bots/api#message",
         "has_dese": true,
+        "warnings": [
+            "'text' default value is: text or str() # If not text, it's str() instead of None"
+        ],
         "kwargs": {
             "message_id": {
                 "type_hint": "int"
@@ -1497,11 +1432,7 @@
                 "type_hint": "Optional[InlineKeyboardMarkup]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'text' default value is: text or str() # If not text, it's str() instead of None"
-        ]
+        }
     },
     "ChatPhoto": {
         "link": "https://core.telegram.org/bots/api#chatphoto",
@@ -1519,9 +1450,7 @@
             "big_file_unique_id": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Location": {
         "link": "https://core.telegram.org/bots/api#location",
@@ -1549,37 +1478,33 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ReactionTypeEmoji": {
         "link": "https://core.telegram.org/bots/api#reactiontypeemoji",
         "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_REACTION_TYPE_EMOJI"
+        ],
         "kwargs": {
             "emoji": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_REACTION_TYPE_EMOJI"
-        ]
+        }
     },
     "ReactionTypeCustomEmoji": {
         "link": "https://core.telegram.org/bots/api#reactiontypecustomemoji",
         "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
+        ],
         "kwargs": {
             "custom_emoji_id": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
-        ]
+        }
     },
     "MessageReactionUpdated": {
         "link": "https://core.telegram.org/bots/api#messagereactionupdated",
@@ -1608,9 +1533,7 @@
                 "type_hint": "Optional[Chat]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ReactionCount": {
         "link": "https://core.telegram.org/bots/api#reactioncount",
@@ -1622,9 +1545,7 @@
             "total_count": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "MessageReactionCountUpdated": {
         "link": "https://core.telegram.org/bots/api#messagereactioncountupdated",
@@ -1642,9 +1563,7 @@
             "reactions": {
                 "type_hint": "list[ReactionCount]"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "MessageId": {
         "link": "https://core.telegram.org/bots/api#messageid",
@@ -1653,9 +1572,7 @@
             "message_id": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "PhotoSize": {
         "link": "https://core.telegram.org/bots/api#photosize",
@@ -1677,9 +1594,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Document": {
         "link": "https://core.telegram.org/bots/api#document",
@@ -1707,9 +1622,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Story": {
         "link": "https://core.telegram.org/bots/api#story",
@@ -1721,9 +1634,7 @@
             "id": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Video": {
         "link": "https://core.telegram.org/bots/api#video",
@@ -1760,9 +1671,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "VideoNote": {
         "link": "https://core.telegram.org/bots/api#videonote",
@@ -1788,9 +1697,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Voice": {
         "link": "https://core.telegram.org/bots/api#voice",
@@ -1813,9 +1720,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Contact": {
         "link": "https://core.telegram.org/bots/api#contact",
@@ -1839,9 +1744,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Dice": {
         "link": "https://core.telegram.org/bots/api#dice",
@@ -1853,9 +1756,7 @@
             "value": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "PollOption": {
         "link": "https://core.telegram.org/bots/api#polloption",
@@ -1867,9 +1768,7 @@
             "voter_count": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "PollAnswer": {
         "link": "https://core.telegram.org/bots/api#pollanswer",
@@ -1889,9 +1788,7 @@
                 "type_hint": "Optional[User]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Poll": {
         "link": "https://core.telegram.org/bots/api#poll",
@@ -1941,9 +1838,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Venue": {
         "link": "https://core.telegram.org/bots/api#venue",
@@ -1974,9 +1869,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "WebAppData": {
         "link": "https://core.telegram.org/bots/api#webappdata",
@@ -1988,9 +1881,7 @@
             "button_text": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ProximityAlertTriggered": {
         "link": "https://core.telegram.org/bots/api#proximityalerttriggered",
@@ -2005,9 +1896,7 @@
             "distance": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "MessageAutoDeleteTimerChanged": {
         "link": "https://core.telegram.org/bots/api#messageautodeletetimerchanged",
@@ -2016,9 +1905,7 @@
             "message_auto_delete_time": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ForumTopicCreated": {
         "link": "https://core.telegram.org/bots/api#forumtopiccreated",
@@ -2034,16 +1921,12 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ForumTopicClosed": {
         "link": "https://core.telegram.org/bots/api#forumtopicclosed",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
-        "warnings": null
+        "kwargs": {}
     },
     "ForumTopicEdited": {
         "link": "https://core.telegram.org/bots/api#forumtopicedited",
@@ -2057,30 +1940,22 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ForumTopicReopened": {
         "link": "https://core.telegram.org/bots/api#forumtopicreopened",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
-        "warnings": null
+        "kwargs": {}
     },
     "GeneralForumTopicHidden": {
         "link": "https://core.telegram.org/bots/api#generalforumtopichidden",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
-        "warnings": null
+        "kwargs": {}
     },
     "GeneralForumTopicUnhidden": {
         "link": "https://core.telegram.org/bots/api#generalforumtopicunhidden",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
-        "warnings": null
+        "kwargs": {}
     },
     "UsersShared": {
         "link": "https://core.telegram.org/bots/api#usersshared",
@@ -2092,9 +1967,7 @@
             "user_ids": {
                 "type_hint": "list[int]"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatShared": {
         "link": "https://core.telegram.org/bots/api#chatshared",
@@ -2106,9 +1979,7 @@
             "chat_id": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "WriteAccessAllowed": {
         "link": "https://core.telegram.org/bots/api#writeaccessallowed",
@@ -2126,9 +1997,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "VideoChatScheduled": {
         "link": "https://core.telegram.org/bots/api#videochatscheduled",
@@ -2137,16 +2006,12 @@
             "start_date": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "VideoChatStarted": {
         "link": "https://core.telegram.org/bots/api#videochatstarted",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
-        "warnings": null
+        "kwargs": {}
     },
     "VideoChatEnded": {
         "link": "https://core.telegram.org/bots/api#videochatended",
@@ -2155,9 +2020,7 @@
             "duration": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "VideoChatParticipantsInvited": {
         "link": "https://core.telegram.org/bots/api#videochatparticipantsinvited",
@@ -2166,9 +2029,7 @@
             "users": {
                 "type_hint": "list[User]"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "UserProfilePhotos": {
         "link": "https://core.telegram.org/bots/api#userprofilephotos",
@@ -2180,9 +2041,7 @@
             "photos": {
                 "type_hint": "list[list[PhotoSize]]"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "File": {
         "link": "https://core.telegram.org/bots/api#file",
@@ -2202,9 +2061,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "WebAppInfo": {
         "link": "https://core.telegram.org/bots/api#webappinfo",
@@ -2213,9 +2070,7 @@
             "url": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "KeyboardButtonRequestUsers": {
         "link": "https://core.telegram.org/bots/api#keyboardbuttonrequestusers",
@@ -2236,9 +2091,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "KeyboardButtonRequestChat": {
         "link": "https://core.telegram.org/bots/api#keyboardbuttonrequestchat",
@@ -2274,9 +2127,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "KeyboardButtonPollType": {
         "link": "https://core.telegram.org/bots/api#keyboardbuttonpolltype",
@@ -2286,9 +2137,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "KeyboardButton": {
         "link": "https://core.telegram.org/bots/api#keyboardbutton",
@@ -2321,13 +2170,14 @@
                 "type_hint": "Optional[WebAppInfo]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ReplyKeyboardMarkup": {
         "link": "https://core.telegram.org/bots/api#replykeyboardmarkup",
         "has_dese": false,
+        "warnings": [
+            "'keyboard' default value is: keyboard or []"
+        ],
         "kwargs": {
             "keyboard": {
                 "type_hint": "Optional[list[list[KeyboardButton]]]",
@@ -2353,26 +2203,21 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'keyboard' default value is: keyboard or []"
-        ]
+        }
     },
     "ReplyKeyboardRemove": {
         "link": "https://core.telegram.org/bots/api#replykeyboardremove",
         "has_dese": false,
+        "warnings": [
+            "'remove_keyboard: Literal[True]' is not in __init__()",
+            "'remove_keyboard: Literal[True]' default value is: True"
+        ],
         "kwargs": {
             "selective": {
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'remove_keyboard: Literal[True]' is not in __init__()",
-            "'remove_keyboard: Literal[True]' default value is: True"
-        ]
+        }
     },
     "InlineKeyboardButton": {
         "link": "https://core.telegram.org/bots/api#inlinekeyboardbutton",
@@ -2417,23 +2262,20 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InlineKeyboardMarkup": {
         "link": "https://core.telegram.org/bots/api#inlinekeyboardmarkup",
         "has_dese": true,
+        "warnings": [
+            "'inline_keyboard' default value is: inline_keyboard or []"
+        ],
         "kwargs": {
             "inline_keyboard": {
                 "type_hint": "Optional[list[list[InlineKeyboardButton]]]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'inline_keyboard' default value is: inline_keyboard or []"
-        ]
+        }
     },
     "ForceReply": {
         "link": "https://core.telegram.org/bots/api#forcereply",
@@ -2451,9 +2293,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ChatMemberUpdated": {
         "link": "https://core.telegram.org/bots/api#chatmemberupdated",
@@ -2482,9 +2322,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ForumTopic": {
         "link": "https://core.telegram.org/bots/api#forumtopic",
@@ -2503,23 +2341,24 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "MenuButtonCommands": {
         "link": "https://core.telegram.org/bots/api#menubuttoncommands",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
         "warnings": [
             "'type' is not in __init__()",
             "'type' default value is: DEFAULT_MENU_BUTTON_COMMANDS"
-        ]
+        ],
+        "kwargs": {}
     },
     "MenuButtonWebApp": {
         "link": "https://core.telegram.org/bots/api#menubuttonwebapp",
         "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP"
+        ],
         "kwargs": {
             "text": {
                 "type_hint": "str"
@@ -2527,22 +2366,16 @@
             "web_app": {
                 "type_hint": "WebAppInfo"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP"
-        ]
+        }
     },
     "MenuButtonDefault": {
         "link": "https://core.telegram.org/bots/api#menubuttondefault",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
         "warnings": [
             "'type' is not in __init__()",
             "'type' default value is: DEFAULT_MENU_BUTTON_DEFAULT"
-        ]
+        ],
+        "kwargs": {}
     },
     "ResponseParameters": {
         "link": "https://core.telegram.org/bots/api#responseparameters",
@@ -2556,13 +2389,15 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InputMediaPhoto": {
         "link": "https://core.telegram.org/bots/api#inputmediaphoto",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_PHOTO"
+        ],
         "kwargs": {
             "media": {
                 "type_hint": "str"
@@ -2583,16 +2418,15 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_PHOTO"
-        ]
+        }
     },
     "InputMediaVideo": {
         "link": "https://core.telegram.org/bots/api#inputmediavideo",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_VIDEO"
+        ],
         "kwargs": {
             "media": {
                 "type_hint": "str"
@@ -2633,16 +2467,15 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_VIDEO"
-        ]
+        }
     },
     "InputMediaAnimation": {
         "link": "https://core.telegram.org/bots/api#inputmediaanimation",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_ANIMATION"
+        ],
         "kwargs": {
             "media": {
                 "type_hint": "str"
@@ -2679,16 +2512,15 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_ANIMATION"
-        ]
+        }
     },
     "InputMediaAudio": {
         "link": "https://core.telegram.org/bots/api#inputmediaaudio",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_AUDIO"
+        ],
         "kwargs": {
             "media": {
                 "type_hint": "str"
@@ -2721,16 +2553,15 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_AUDIO"
-        ]
+        }
     },
     "InputMediaDocument": {
         "link": "https://core.telegram.org/bots/api#inputmediadocument",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT"
+        ],
         "kwargs": {
             "media": {
                 "type_hint": "str"
@@ -2755,12 +2586,7 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT"
-        ]
+        }
     },
     "MaskPosition": {
         "link": "https://core.telegram.org/bots/api#maskposition",
@@ -2778,9 +2604,7 @@
             "scale": {
                 "type_hint": "float"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Sticker": {
         "link": "https://core.telegram.org/bots/api#sticker",
@@ -2839,9 +2663,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "StickerSet": {
         "link": "https://core.telegram.org/bots/api#stickerset",
@@ -2869,9 +2691,7 @@
                 "type_hint": "Optional[PhotoSize]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InputSticker": {
         "link": "https://core.telegram.org/bots/api#inputsticker",
@@ -2891,9 +2711,7 @@
                 "type_hint": "Optional[list[str]]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InlineQuery": {
         "link": "https://core.telegram.org/bots/api#inlinequery",
@@ -2919,9 +2737,7 @@
                 "type_hint": "Optional[Location]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InlineQueryResultsButton": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultsbutton",
@@ -2938,9 +2754,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InputTextMessageContent": {
         "link": "https://core.telegram.org/bots/api#inputtextmessagecontent",
@@ -2961,9 +2775,7 @@
                 "type_hint": "Optional[LinkPreviewOptions]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InputLocationMessageContent": {
         "link": "https://core.telegram.org/bots/api#inputlocationmessagecontent",
@@ -2991,9 +2803,7 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InputVenueMessageContent": {
         "link": "https://core.telegram.org/bots/api#inputvenuemessagecontent",
@@ -3027,9 +2837,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InputContactMessageContent": {
         "link": "https://core.telegram.org/bots/api#inputcontactmessagecontent",
@@ -3049,9 +2857,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InputInvoiceMessageContent": {
         "link": "https://core.telegram.org/bots/api#inputinvoicemessagecontent",
@@ -3131,13 +2937,15 @@
                 "type_hint": "Optional[bool]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "InlineQueryResultArticle": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultarticle",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3176,16 +2984,15 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
-        ]
+        }
     },
     "InlineQueryResultPhoto": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultphoto",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3232,16 +3039,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO"
-        ]
+        }
     },
     "InlineQueryResultGif": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultgif",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GIF"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3292,16 +3098,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GIF"
-        ]
+        }
     },
     "InlineQueryResultMpeg4Gif": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3352,16 +3157,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
-        ]
+        }
     },
     "InlineQueryResultVideo": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultvideo",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3414,16 +3218,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO"
-        ]
+        }
     },
     "InlineQueryResultAudio": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultaudio",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3462,16 +3265,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO"
-        ]
+        }
     },
     "InlineQueryResultVoice": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultvoice",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3506,16 +3308,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE"
-        ]
+        }
     },
     "InlineQueryResultDocument": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultdocument",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3565,16 +3366,15 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
-        ]
+        }
     },
     "InlineQueryResultLocation": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultlocation",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3624,16 +3424,15 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION"
-        ]
+        }
     },
     "InlineQueryResultVenue": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultvenue",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VENUE"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3686,16 +3485,15 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VENUE"
-        ]
+        }
     },
     "InlineQueryResultContact": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcontact",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3734,16 +3532,15 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT"
-        ]
+        }
     },
     "InlineQueryResultGame": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultgame",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GAME"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3755,16 +3552,15 @@
                 "type_hint": "Optional[InlineKeyboardMarkup]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GAME"
-        ]
+        }
     },
     "InlineQueryResultCachedPhoto": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedphoto",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3800,16 +3596,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
-        ]
+        }
     },
     "InlineQueryResultCachedGif": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedgif",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3841,16 +3636,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
-        ]
+        }
     },
     "InlineQueryResultCachedMpeg4Gif": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3882,16 +3676,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
-        ]
+        }
     },
     "InlineQueryResultCachedSticker": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedsticker",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3907,16 +3700,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
-        ]
+        }
     },
     "InlineQueryResultCachedDocument": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcacheddocument",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3951,16 +3743,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
-        ]
+        }
     },
     "InlineQueryResultCachedVideo": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvideo",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -3995,16 +3786,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
-        ]
+        }
     },
     "InlineQueryResultCachedVoice": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvoice",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -4035,16 +3825,15 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
-        ]
+        }
     },
     "InlineQueryResultCachedAudio": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedaudio",
         "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
+        ],
         "kwargs": {
             "id": {
                 "type_hint": "str"
@@ -4072,12 +3861,7 @@
                 "type_hint": "Optional[InputMessageContent]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
-        ]
+        }
     },
     "ChosenInlineResult": {
         "link": "https://core.telegram.org/bots/api#choseninlineresult",
@@ -4100,9 +3884,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "SentWebAppMessage": {
         "link": "https://core.telegram.org/bots/api#sentwebappmessage",
@@ -4112,9 +3894,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Invoice": {
         "link": "https://core.telegram.org/bots/api#invoice",
@@ -4135,9 +3915,7 @@
             "total_amount": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ShippingAddress": {
         "link": "https://core.telegram.org/bots/api#shippingaddress",
@@ -4161,9 +3939,7 @@
             "post_code": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "OrderInfo": {
         "link": "https://core.telegram.org/bots/api#orderinfo",
@@ -4185,9 +3961,7 @@
                 "type_hint": "Optional[ShippingAddress]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ShippingOption": {
         "link": "https://core.telegram.org/bots/api#shippingoption",
@@ -4202,9 +3976,7 @@
             "prices": {
                 "type_hint": "list[LabeledPrice]"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "SuccessfulPayment": {
         "link": "https://core.telegram.org/bots/api#successfulpayment",
@@ -4233,9 +4005,7 @@
                 "type_hint": "Optional[OrderInfo]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "ShippingQuery": {
         "link": "https://core.telegram.org/bots/api#shippingquery",
@@ -4253,9 +4023,7 @@
             "shipping_address": {
                 "type_hint": "ShippingAddress"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "PreCheckoutQuery": {
         "link": "https://core.telegram.org/bots/api#precheckoutquery",
@@ -4284,9 +4052,7 @@
                 "type_hint": "Optional[OrderInfo]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "PassportFile": {
         "link": "https://core.telegram.org/bots/api#passportfile",
@@ -4304,9 +4070,7 @@
             "file_date": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "EncryptedPassportElement": {
         "link": "https://core.telegram.org/bots/api#encryptedpassportelement",
@@ -4350,9 +4114,7 @@
                 "type_hint": "Optional[list[PassportFile]]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "EncryptedCredentials": {
         "link": "https://core.telegram.org/bots/api#encryptedcredentials",
@@ -4367,9 +4129,7 @@
             "secret": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "PassportData": {
         "link": "https://core.telegram.org/bots/api#passportdata",
@@ -4381,13 +4141,15 @@
             "credentials": {
                 "type_hint": "EncryptedCredentials"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "PassportElementErrorDataField": {
         "link": "https://core.telegram.org/bots/api#passportelementerrordatafield",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "Literal['personal_details', 'passport', 'driver_license', 'identity_card', 'internal_passport', 'address']"
@@ -4401,16 +4163,15 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD"
-        ]
+        }
     },
     "PassportElementErrorFrontSide": {
         "link": "https://core.telegram.org/bots/api#passportelementerrorfrontside",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "Literal['passport', 'driver_license', 'identity_card', 'internal_passport']"
@@ -4421,16 +4182,15 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE"
-        ]
+        }
     },
     "PassportElementErrorReverseSide": {
         "link": "https://core.telegram.org/bots/api#passportelementerrorreverseside",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "Literal['driver_license', 'identity_card']"
@@ -4441,16 +4201,15 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE"
-        ]
+        }
     },
     "PassportElementErrorSelfie": {
         "link": "https://core.telegram.org/bots/api#passportelementerrorselfie",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "Literal['passport', 'driver_license', 'identity_card', 'internal_passport']"
@@ -4461,16 +4220,15 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE"
-        ]
+        }
     },
     "PassportElementErrorFile": {
         "link": "https://core.telegram.org/bots/api#passportelementerrorfile",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "Literal['utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration']"
@@ -4481,16 +4239,15 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILE"
-        ]
+        }
     },
     "PassportElementErrorFiles": {
         "link": "https://core.telegram.org/bots/api#passportelementerrorfiles",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "Literal['utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration']"
@@ -4501,16 +4258,15 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILES"
-        ]
+        }
     },
     "PassportElementErrorTranslationFile": {
         "link": "https://core.telegram.org/bots/api#passportelementerrortranslationfile",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "Literal['passport', 'driver_license', 'identity_card', 'internal_passport', 'utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration']"
@@ -4521,16 +4277,15 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE"
-        ]
+        }
     },
     "PassportElementErrorTranslationFiles": {
         "link": "https://core.telegram.org/bots/api#passportelementerrortranslationfiles",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "Literal['passport', 'driver_license', 'identity_card', 'internal_passport', 'utility_bill', 'bank_statement', 'rental_agreement', 'passport_registration', 'temporary_registration']"
@@ -4541,16 +4296,15 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES"
-        ]
+        }
     },
     "PassportElementErrorUnspecified": {
         "link": "https://core.telegram.org/bots/api#passportelementerrorunspecified",
         "has_dese": false,
+        "warnings": [
+            "'source' is not in __init__()",
+            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
+        ],
         "kwargs": {
             "type": {
                 "type_hint": "str"
@@ -4561,12 +4315,7 @@
             "message": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'source' is not in __init__()",
-            "'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED"
-        ]
+        }
     },
     "Game": {
         "link": "https://core.telegram.org/bots/api#game",
@@ -4593,9 +4342,7 @@
                 "type_hint": "Optional[Animation]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "GameHighScore": {
         "link": "https://core.telegram.org/bots/api#gamehighscore",
@@ -4610,16 +4357,12 @@
             "score": {
                 "type_hint": "int"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "GiveawayCreated": {
         "link": "https://core.telegram.org/bots/api#giveawaycreated",
         "has_dese": true,
-        "kwargs": {},
-        "self_kwargs": {},
-        "warnings": null
+        "kwargs": {}
     },
     "GiveawayWinners": {
         "link": "https://core.telegram.org/bots/api#giveawaywinners",
@@ -4664,9 +4407,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "GiveawayCompleted": {
         "link": "https://core.telegram.org/bots/api#giveawaycompleted",
@@ -4683,9 +4424,7 @@
                 "type_hint": "Optional[Message]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Giveaway": {
         "link": "https://core.telegram.org/bots/api#giveaway",
@@ -4720,13 +4459,15 @@
                 "type_hint": "Optional[int]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "MessageOriginUser": {
         "link": "https://core.telegram.org/bots/api#messageoriginuser",
         "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_USER"
+        ],
         "kwargs": {
             "date": {
                 "type_hint": "int"
@@ -4734,16 +4475,15 @@
             "sender_user": {
                 "type_hint": "User"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_USER"
-        ]
+        }
     },
     "MessageOriginHiddenUser": {
         "link": "https://core.telegram.org/bots/api#messageoriginhiddenuser",
         "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
+        ],
         "kwargs": {
             "date": {
                 "type_hint": "int"
@@ -4751,16 +4491,15 @@
             "sender_user_name": {
                 "type_hint": "str"
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
-        ]
+        }
     },
     "MessageOriginChat": {
         "link": "https://core.telegram.org/bots/api#messageoriginchat",
         "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHAT"
+        ],
         "kwargs": {
             "date": {
                 "type_hint": "int"
@@ -4772,16 +4511,15 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHAT"
-        ]
+        }
     },
     "MessageOriginChannel": {
         "link": "https://core.telegram.org/bots/api#messageoriginchannel",
         "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL"
+        ],
         "kwargs": {
             "date": {
                 "type_hint": "int"
@@ -4796,12 +4534,7 @@
                 "type_hint": "Optional[str]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL"
-        ]
+        }
     },
     "ExternalReplyInfo": {
         "link": "https://core.telegram.org/bots/api#externalreplyinfo",
@@ -4898,9 +4631,7 @@
                 "type_hint": "Optional[Venue]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "UserChatBoosts": {
         "link": "https://core.telegram.org/bots/api#userchatboosts",
@@ -4909,9 +4640,7 @@
             "boosts": {
                 "type_hint": "list[ChatBoost]"
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     },
     "Update": {
         "link": "https://core.telegram.org/bots/api#update",
@@ -4992,8 +4721,6 @@
                 "type_hint": "Optional[ChatBoostRemoved]",
                 "default": null
             }
-        },
-        "self_kwargs": {},
-        "warnings": null
+        }
     }
 }
