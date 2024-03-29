@@ -1370,6 +1370,388 @@ class ChatLocation(TelegramType):
         self.address = address
 
 
+# ChatMember: 6 SUBCLASSES ~~~~~~~~~~~~~~~~~
+
+class ChatMemberAdministrator(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatmemberadministrator
+
+    Represents a :obj:`chat member <aiotgm.types.ChatMember>` that has some additional privileges.
+
+    :param user: Information about the user.
+    :type user: :obj:`~aiotgm.types.User`
+    :param can_be_edited: :obj:`True`, if the bot is allowed to edit administrator privileges of that user.
+    :type can_be_edited: :obj:`bool`
+    :param is_anonymous: :obj:`True`, if the user's presence in the chat is hidden.
+    :type is_anonymous: :obj:`bool`
+    :param can_manage_chat: :obj:`True`, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
+    :type can_manage_chat: :obj:`bool`
+    :param can_delete_messages: :obj:`True`, if the administrator can delete messages of other users.
+    :type can_delete_messages: :obj:`bool`
+    :param can_manage_video_chats: :obj:`True`, if the administrator can manage video chats.
+    :type can_manage_video_chats: :obj:`bool`
+    :param can_restrict_members: :obj:`True`, if the administrator can restrict, ban or unban chat members, or access supergroup statistics.
+    :type can_restrict_members: :obj:`bool`
+    :param can_promote_members: :obj:`True`, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user).
+    :type can_promote_members: :obj:`bool`
+    :param can_change_info: :obj:`True`, if the user is allowed to change the chat title, photo and other settings.
+    :type can_change_info: :obj:`bool`
+    :param can_invite_users: :obj:`True`, if the user is allowed to invite new users to the chat.
+    :type can_invite_users: :obj:`bool`
+    :param can_post_stories: :obj:`True`, if the administrator can post stories to the chat.
+    :type can_post_stories: :obj:`bool`
+    :param can_edit_stories: :obj:`True`, if the administrator can edit stories posted by other users.
+    :type can_edit_stories: :obj:`bool`
+    :param can_delete_stories: :obj:`True`, if the administrator can delete stories posted by other users.
+    :type can_delete_stories: :obj:`bool`
+    :param can_post_messages: :obj:`True`, if the administrator can post messages in the channel, or access channel statistics; for channels only.
+    :type can_post_messages: :obj:`bool`, optional
+    :param can_edit_messages: :obj:`True`, if the administrator can edit messages of other users and can pin messages; for channels only.
+    :type can_edit_messages: :obj:`bool`, optional
+    :param can_pin_messages: :obj:`True`, if the user is allowed to pin messages; for groups and supergroups only.
+    :type can_pin_messages: :obj:`bool`, optional
+    :param can_manage_topics: :obj:`True`, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only.
+    :type can_manage_topics: :obj:`bool`, optional
+    :param custom_title: Custom title for this user.
+    :type custom_title: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        obj['can_be_edited'] = res.get('can_be_edited')
+        obj['is_anonymous'] = res.get('is_anonymous')
+        obj['can_manage_chat'] = res.get('can_manage_chat')
+        obj['can_delete_messages'] = res.get('can_delete_messages')
+        obj['can_manage_video_chats'] = res.get('can_manage_video_chats')
+        obj['can_restrict_members'] = res.get('can_restrict_members')
+        obj['can_promote_members'] = res.get('can_promote_members')
+        obj['can_change_info'] = res.get('can_change_info')
+        obj['can_invite_users'] = res.get('can_invite_users')
+        obj['can_post_stories'] = res.get('can_post_stories')
+        obj['can_edit_stories'] = res.get('can_edit_stories')
+        obj['can_delete_stories'] = res.get('can_delete_stories')
+        obj['can_post_messages'] = res.get('can_post_messages')
+        obj['can_edit_messages'] = res.get('can_edit_messages')
+        obj['can_pin_messages'] = res.get('can_pin_messages')
+        obj['can_manage_topics'] = res.get('can_manage_topics')
+        obj['custom_title'] = res.get('custom_title')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User,
+        can_be_edited: bool,
+        is_anonymous: bool,
+        can_manage_chat: bool,
+        can_delete_messages: bool,
+        can_manage_video_chats: bool,
+        can_restrict_members: bool,
+        can_promote_members: bool,
+        can_change_info: bool,
+        can_invite_users: bool,
+        can_post_stories: bool,
+        can_edit_stories: bool,
+        can_delete_stories: bool,
+        can_post_messages: Optional[bool] = None,
+        can_edit_messages: Optional[bool] = None,
+        can_pin_messages: Optional[bool] = None,
+        can_manage_topics: Optional[bool] = None,
+        custom_title: Optional[str] = None
+    ):
+        self.status = DEFAULT_CHAT_MEMBER_ADMINISTRATOR
+        self.user = user
+        self.can_be_edited = can_be_edited
+        self.is_anonymous = is_anonymous
+        self.can_manage_chat = can_manage_chat
+        self.can_delete_messages = can_delete_messages
+        self.can_manage_video_chats = can_manage_video_chats
+        self.can_restrict_members = can_restrict_members
+        self.can_promote_members = can_promote_members
+        self.can_change_info = can_change_info
+        self.can_invite_users = can_invite_users
+        self.can_post_stories = can_post_stories
+        self.can_edit_stories = can_edit_stories
+        self.can_delete_stories = can_delete_stories
+        self.can_post_messages = can_post_messages
+        self.can_edit_messages = can_edit_messages
+        self.can_pin_messages = can_pin_messages
+        self.can_manage_topics = can_manage_topics
+        self.custom_title = custom_title
+
+
+class ChatMemberBanned(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatmemberbanned
+
+    Represents a :obj:`chat member <aiotgm.types.ChatMember>` that was banned in the chat and can't return to the chat or view chat messages.
+
+    :param user: Information about the user.
+    :type user: :obj:`~aiotgm.types.User`
+    :param until_date: Date when restrictions will be lifted for this user; Unix time. If 0, then the user is banned forever.
+    :type until_date: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        obj['until_date'] = res.get('until_date')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User,
+        until_date: int
+    ):
+        self.status = DEFAULT_CHAT_MEMBER_BANNED
+        self.user = user
+        self.until_date = until_date
+
+
+class ChatMemberLeft(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatmemberleft
+
+    Represents a :obj:`chat member <aiotgm.types.ChatMember>` that isn't currently a member of the chat, but may join it themselves.
+
+    :param user: Information about the user.
+    :type user: :obj:`~aiotgm.types.User`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User
+    ):
+        self.status = DEFAULT_CHAT_MEMBER_LEFT
+        self.user = user
+
+
+class ChatMemberMember(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatmembermember
+
+    Represents a :obj:`chat member <aiotgm.types.ChatMember>` that has no additional privileges or restrictions.
+
+    :param user: Information about the user.
+    :type user: :obj:`~aiotgm.types.User`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User
+    ):
+        self.status = DEFAULT_CHAT_MEMBER_MEMBER
+        self.user = user
+
+
+class ChatMemberOwner(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatmemberowner
+
+    Represents a :obj:`chat member <aiotgm.types.ChatMember>` that owns the chat and has all administrator privileges.
+
+    :param user: Information about the user.
+    :type user: :obj:`~aiotgm.types.User`
+    :param is_anonymous: :obj:`True`, if the user's presence in the chat is hidden.
+    :type is_anonymous: :obj:`bool`
+    :param custom_title: Custom title for this user.
+    :type custom_title: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        obj['is_anonymous'] = res.get('is_anonymous')
+        obj['custom_title'] = res.get('custom_title')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User,
+        is_anonymous: bool,
+        custom_title: Optional[str] = None
+    ):
+        self.status = DEFAULT_CHAT_MEMBER_OWNER
+        self.user = user
+        self.is_anonymous = is_anonymous
+        self.custom_title = custom_title
+
+
+class ChatMemberRestricted(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatmemberrestricted
+
+    Represents a :obj:`chat member <aiotgm.types.ChatMember>` that is under certain restrictions in the chat. Supergroups only.
+
+    :param user: Information about the user.
+    :type user: :obj:`~aiotgm.types.User`
+    :param is_member: :obj:`True`, if the user is a member of the chat at the moment of the request.
+    :type is_member: :obj:`bool`
+    :param can_send_messages: :obj:`True`, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues.
+    :type can_send_messages: :obj:`bool`
+    :param can_send_audios: :obj:`True`, if the user is allowed to send audios.
+    :type can_send_audios: :obj:`bool`
+    :param can_send_documents: :obj:`True`, if the user is allowed to send documents.
+    :type can_send_documents: :obj:`bool`
+    :param can_send_photos: :obj:`True`, if the user is allowed to send photos.
+    :type can_send_photos: :obj:`bool`
+    :param can_send_videos: :obj:`True`, if the user is allowed to send videos.
+    :type can_send_videos: :obj:`bool`
+    :param can_send_video_notes: :obj:`True`, if the user is allowed to send video notes.
+    :type can_send_video_notes: :obj:`bool`
+    :param can_send_voice_notes: :obj:`True`, if the user is allowed to send voice notes.
+    :type can_send_voice_notes: :obj:`bool`
+    :param can_send_polls: :obj:`True`, if the user is allowed to send polls.
+    :type can_send_polls: :obj:`bool`
+    :param can_send_other_messages: :obj:`True`, if the user is allowed to send animations, games, stickers and use inline bots.
+    :type can_send_other_messages: :obj:`bool`
+    :param can_add_web_page_previews: :obj:`True`, if the user is allowed to add web page previews to their messages.
+    :type can_add_web_page_previews: :obj:`bool`
+    :param can_change_info: :obj:`True`, if the user is allowed to change the chat title, photo and other settings.
+    :type can_change_info: :obj:`bool`
+    :param can_invite_users: :obj:`True`, if the user is allowed to invite new users to the chat.
+    :type can_invite_users: :obj:`bool`
+    :param can_pin_messages: :obj:`True`, if the user is allowed to pin messages.
+    :type can_pin_messages: :obj:`bool`
+    :param can_manage_topics: :obj:`True`, if the user is allowed to create forum topics.
+    :type can_manage_topics: :obj:`bool`
+    :param until_date: Date when restrictions will be lifted for this user; Unix time. If 0, then the user is restricted forever.
+    :type until_date: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        obj['is_member'] = res.get('is_member')
+        obj['can_send_messages'] = res.get('can_send_messages')
+        obj['can_send_audios'] = res.get('can_send_audios')
+        obj['can_send_documents'] = res.get('can_send_documents')
+        obj['can_send_photos'] = res.get('can_send_photos')
+        obj['can_send_videos'] = res.get('can_send_videos')
+        obj['can_send_video_notes'] = res.get('can_send_video_notes')
+        obj['can_send_voice_notes'] = res.get('can_send_voice_notes')
+        obj['can_send_polls'] = res.get('can_send_polls')
+        obj['can_send_other_messages'] = res.get('can_send_other_messages')
+        obj['can_add_web_page_previews'] = res.get('can_add_web_page_previews')
+        obj['can_change_info'] = res.get('can_change_info')
+        obj['can_invite_users'] = res.get('can_invite_users')
+        obj['can_pin_messages'] = res.get('can_pin_messages')
+        obj['can_manage_topics'] = res.get('can_manage_topics')
+        obj['until_date'] = res.get('until_date')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User,
+        is_member: bool,
+        can_send_messages: bool,
+        can_send_audios: bool,
+        can_send_documents: bool,
+        can_send_photos: bool,
+        can_send_videos: bool,
+        can_send_video_notes: bool,
+        can_send_voice_notes: bool,
+        can_send_polls: bool,
+        can_send_other_messages: bool,
+        can_add_web_page_previews: bool,
+        can_change_info: bool,
+        can_invite_users: bool,
+        can_pin_messages: bool,
+        can_manage_topics: bool,
+        until_date: int
+    ):
+        self.status = DEFAULT_CHAT_MEMBER_RESTRICTED
+        self.user = user
+        self.is_member = is_member
+        self.can_send_messages = can_send_messages
+        self.can_send_audios = can_send_audios
+        self.can_send_documents = can_send_documents
+        self.can_send_photos = can_send_photos
+        self.can_send_videos = can_send_videos
+        self.can_send_video_notes = can_send_video_notes
+        self.can_send_voice_notes = can_send_voice_notes
+        self.can_send_polls = can_send_polls
+        self.can_send_other_messages = can_send_other_messages
+        self.can_add_web_page_previews = can_add_web_page_previews
+        self.can_change_info = can_change_info
+        self.can_invite_users = can_invite_users
+        self.can_pin_messages = can_pin_messages
+        self.can_manage_topics = can_manage_topics
+        self.until_date = until_date
+
+
+ChatMember = Union[
+    ChatMemberOwner,
+    ChatMemberAdministrator,
+    ChatMemberMember,
+    ChatMemberRestricted,
+    ChatMemberLeft,
+    ChatMemberBanned
+]
+'''
+https://core.telegram.org/bots/api#chatmember
+
+This object contains information about one member of a chat.
+Currently, the following 6 types of chat members are supported:
+
+- :obj:`~aiotgm.types.ChatMemberOwner`
+- :obj:`~aiotgm.types.ChatMemberAdministrator`
+- :obj:`~aiotgm.types.ChatMemberMember`
+- :obj:`~aiotgm.types.ChatMemberRestricted`
+- :obj:`~aiotgm.types.ChatMemberLeft`
+- :obj:`~aiotgm.types.ChatMemberBanned`
+'''
+
+def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
+    '''
+    Function to deserialize ChatMember.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)        
+
+    status = obj.pop('status')
+
+    if status == DEFAULT_CHAT_MEMBER_OWNER:
+        return ChatMemberOwner._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
+        return ChatMemberAdministrator._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_MEMBER:
+        return ChatMemberMember._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
+        return ChatMemberRestricted._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_LEFT:
+        return ChatMemberLeft._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_BANNED:
+        return ChatMemberBanned._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type ChatMember. Invalid status: {status!r}.'
+        )
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 
 
@@ -1734,7 +2116,7 @@ class InaccessibleMessage(TelegramType):
         self,
         chat: Chat,
         message_id: int,
-        date: int = 0
+        date: int
     ):
         self.chat = chat
         self.message_id = message_id
@@ -3421,300 +3803,6 @@ One of the following reply markups:
 - :obj:`~aiotgm.types.ReplyKeyboardRemove`
 - :obj:`~aiotgm.types.ForceReply`
 '''
-
-# ChatMember: 6 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-class ChatMemberOwner(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatmemberowner
-
-    Represents a chat member that owns the chat and has all administrator privileges.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user'] = User._dese(res.get('user'))
-        obj['is_anonymous'] = res.get('is_anonymous')
-        obj['custom_title'] = res.get('custom_title')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user: User,
-        is_anonymous: bool,
-        custom_title: Optional[str] = None
-    ):
-        self.status = DEFAULT_CHAT_MEMBER_OWNER
-        self.user = user
-        self.is_anonymous = is_anonymous
-        self.custom_title = custom_title
-
-
-class ChatMemberAdministrator(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatmemberadministrator
-
-    Represents a chat member that has some additional privileges.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user'] = User._dese(res.get('user'))
-        obj['can_be_edited'] = res.get('can_be_edited')
-        obj['is_anonymous'] = res.get('is_anonymous')
-        obj['can_manage_chat'] = res.get('can_manage_chat')
-        obj['can_delete_messages'] = res.get('can_delete_messages')
-        obj['can_manage_video_chats'] = res.get('can_manage_video_chats')
-        obj['can_restrict_members'] = res.get('can_restrict_members')
-        obj['can_promote_members'] = res.get('can_promote_members')
-        obj['can_change_info'] = res.get('can_change_info')
-        obj['can_invite_users'] = res.get('can_invite_users')
-        obj['can_post_messages'] = res.get('can_post_messages')
-        obj['can_edit_messages'] = res.get('can_edit_messages')
-        obj['can_pin_messages'] = res.get('can_pin_messages')
-        obj['can_post_stories'] = res.get('can_post_stories')
-        obj['can_edit_stories'] = res.get('can_edit_stories')
-        obj['can_delete_stories'] = res.get('can_delete_stories')
-        obj['can_manage_topics'] = res.get('can_manage_topics')
-        obj['custom_title'] = res.get('custom_title')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user: User,
-        can_be_edited: bool,
-        is_anonymous: bool,
-        can_manage_chat: bool,
-        can_delete_messages: bool,
-        can_manage_video_chats: bool,
-        can_restrict_members: bool,
-        can_promote_members: bool,
-        can_change_info: bool,
-        can_invite_users: bool,
-        can_post_messages: Optional[bool] = None,
-        can_edit_messages: Optional[bool] = None,
-        can_pin_messages: Optional[bool] = None,
-        can_post_stories: Optional[bool] = None,
-        can_edit_stories: Optional[bool] = None,
-        can_delete_stories: Optional[bool] = None,
-        can_manage_topics: Optional[bool] = None,
-        custom_title: Optional[str] = None
-    ):
-        self.status = DEFAULT_CHAT_MEMBER_ADMINISTRATOR
-        self.user = user
-        self.can_be_edited = can_be_edited
-        self.is_anonymous = is_anonymous
-        self.can_manage_chat = can_manage_chat
-        self.can_delete_messages = can_delete_messages
-        self.can_manage_video_chats = can_manage_video_chats
-        self.can_restrict_members = can_restrict_members
-        self.can_promote_members = can_promote_members
-        self.can_change_info = can_change_info
-        self.can_invite_users = can_invite_users
-        self.can_post_messages = can_post_messages
-        self.can_edit_messages = can_edit_messages
-        self.can_pin_messages = can_pin_messages
-        self.can_post_stories = can_post_stories
-        self.can_edit_stories = can_edit_stories
-        self.can_delete_stories = can_delete_stories
-        self.can_manage_topics = can_manage_topics
-        self.custom_title = custom_title
-
-
-class ChatMemberMember(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatmembermember
-
-    Represents a chat member that has no additional privileges or restrictions.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user'] = User._dese(res.get('user'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user: User
-    ):
-        self.status = DEFAULT_CHAT_MEMBER_MEMBER
-        self.user = user
-
-
-class ChatMemberRestricted(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatmemberrestricted
-
-    Represents a chat member that is under certain restrictions in the chat. Supergroups only.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user'] = User._dese(res.get('user'))
-        obj['is_member'] = res.get('is_member')
-        obj['can_send_messages'] = res.get('can_send_messages')
-        obj['can_send_audios'] = res.get('can_send_audios')
-        obj['can_send_documents'] = res.get('can_send_documents')
-        obj['can_send_photos'] = res.get('can_send_photos')
-        obj['can_send_videos'] = res.get('can_send_videos')
-        obj['can_send_video_notes'] = res.get('can_send_video_notes')
-        obj['can_send_voice_notes'] = res.get('can_send_voice_notes')
-        obj['can_send_polls'] = res.get('can_send_polls')
-        obj['can_send_other_messages'] = res.get('can_send_other_messages')
-        obj['can_add_web_page_previews'] = res.get('can_add_web_page_previews')
-        obj['can_change_info'] = res.get('can_change_info')
-        obj['can_invite_users'] = res.get('can_invite_users')
-        obj['can_pin_messages'] = res.get('can_pin_messages')
-        obj['can_manage_topics'] = res.get('can_manage_topics')
-        obj['until_date'] = res.get('until_date')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user: User,
-        is_member: bool,
-        can_send_messages: bool,
-        can_send_audios: bool,
-        can_send_documents: bool,
-        can_send_photos: bool,
-        can_send_videos: bool,
-        can_send_video_notes: bool,
-        can_send_voice_notes: bool,
-        can_send_polls: bool,
-        can_send_other_messages: bool,
-        can_add_web_page_previews: bool,
-        can_change_info: bool,
-        can_invite_users: bool,
-        can_pin_messages: bool,
-        can_manage_topics: bool,
-        until_date: int
-    ):
-        self.status = DEFAULT_CHAT_MEMBER_RESTRICTED
-        self.user = user
-        self.is_member = is_member
-        self.can_send_messages = can_send_messages
-        self.can_send_audios = can_send_audios
-        self.can_send_documents = can_send_documents
-        self.can_send_photos = can_send_photos
-        self.can_send_videos = can_send_videos
-        self.can_send_video_notes = can_send_video_notes
-        self.can_send_voice_notes = can_send_voice_notes
-        self.can_send_polls = can_send_polls
-        self.can_send_other_messages = can_send_other_messages
-        self.can_add_web_page_previews = can_add_web_page_previews
-        self.can_change_info = can_change_info
-        self.can_invite_users = can_invite_users
-        self.can_pin_messages = can_pin_messages
-        self.can_manage_topics = can_manage_topics
-        self.until_date = until_date
-
-
-class ChatMemberLeft(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatmemberleft
-
-    Represents a chat member that isn't currently a member of the chat, but may join it themselves.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user'] = User._dese(res.get('user'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user: User
-    ):
-        self.status = DEFAULT_CHAT_MEMBER_LEFT
-        self.user = user
-
-
-class ChatMemberBanned(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatmemberbanned
-
-    Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user'] = User._dese(res.get('user'))
-        obj['until_date'] = res.get('until_date')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user: User,
-        until_date: int
-    ):
-        self.status = DEFAULT_CHAT_MEMBER_BANNED
-        self.user = user
-        self.until_date = until_date
-
-
-ChatMember = Union[
-    ChatMemberOwner,
-    ChatMemberAdministrator,
-    ChatMemberMember,
-    ChatMemberRestricted,
-    ChatMemberLeft,
-    ChatMemberBanned
-]
-'''
-https://core.telegram.org/bots/api#chatmember
-
-This object contains information about one member of a chat.
-
-Currently, the following 6 types of chat members are supported:
-
-- ChatMemberOwner
-- ChatMemberAdministrator
-- ChatMemberMember
-- ChatMemberRestricted
-- ChatMemberLeft
-- ChatMemberBanned
-'''
-
-def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
-    '''
-    Function to deserialize ChatMember.
-    '''
-    if res is None: return None
-    obj = _check_dict(res)        
-
-    status = obj.pop('status')
-
-    if status == DEFAULT_CHAT_MEMBER_OWNER:
-        return ChatMemberOwner._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
-        return ChatMemberAdministrator._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_MEMBER:
-        return ChatMemberMember._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
-        return ChatMemberRestricted._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_LEFT:
-        return ChatMemberLeft._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_BANNED:
-        return ChatMemberBanned._dese(obj, check_dict=False)
-    else:
-        raise ValueError(
-            'An error occurred during the deserialization'
-            f' of the type ChatMember. Invalid status: {status!r}.'
-        )
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 class ChatMemberUpdated(TelegramType):
     '''
