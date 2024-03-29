@@ -1042,6 +1042,44 @@ class ChatBoostAdded(TelegramType):
         self.boost_count = boost_count
 
 
+class ChatBoostRemoved(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostremoved
+
+    This object represents a boost removed from a chat.
+
+    :param chat: Chat which was boosted.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param boost_id: Unique identifier of the boost.
+    :type boost_id: :obj:`str`
+    :param remove_date: Point in time (Unix timestamp) when the boost was removed.
+    :type remove_date: :obj:`int`
+    :param source: Source of the removed boost.
+    :type source: :obj:`~aiotgm.types.ChatBoostSource`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['boost_id'] = res.get('boost_id')
+        obj['remove_date'] = res.get('remove_date')
+        obj['source'] = _dese_chat_boost_source(res.get('source'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        boost_id: str,
+        remove_date: int,
+        source: ChatBoostSource
+    ):
+        self.chat = chat
+        self.boost_id = boost_id
+        self.remove_date = remove_date
+        self.source = source
+
+
 
 
 
@@ -6168,35 +6206,6 @@ class ChatBoostUpdated(TelegramType):
     ):
         self.chat = chat
         self.boost = boost
-
-
-class ChatBoostRemoved(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatboostremoved
-
-    This object represents a boost removed from a chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['boost_id'] = res.get('boost_id')
-        obj['remove_date'] = res.get('remove_date')
-        obj['source'] = _dese_chat_boost_source(res.get('source'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        boost_id: str,
-        remove_date: int,
-        source: ChatBoostSource
-    ):
-        self.chat = chat
-        self.boost_id = boost_id
-        self.remove_date = remove_date
-        self.source = source
 
 
 class Update(TelegramType):
