@@ -1294,6 +1294,54 @@ class ChatInviteLink(TelegramType):
         self.pending_join_request_count = pending_join_request_count
 
 
+class ChatJoinRequest(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatjoinrequest
+
+    Represents a join request sent to a chat.
+
+    :param chat: Chat to which the request was sent.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param from_user: User that sent the join request.
+    :type from_user: :obj:`~aiotgm.types.User`
+    :param user_chat_id: Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot can use this identifier for 5 minutes to send messages until the join request is processed, assuming no other administrator contacted the user.
+    :type user_chat_id: :obj:`int`
+    :param date: Date the request was sent in Unix time.
+    :type date: :obj:`int`
+    :param bio: Bio of the user.
+    :type bio: :obj:`str`, optional
+    :param invite_link: Chat invite link that was used by the user to send the join request.
+    :type invite_link: :obj:`~aiotgm.types.ChatInviteLink`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['from_user'] = User._dese(res.get('from_user'))
+        obj['user_chat_id'] = res.get('user_chat_id')
+        obj['date'] = res.get('date')
+        obj['bio'] = res.get('bio')
+        obj['invite_link'] = ChatInviteLink._dese(res.get('invite_link'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        from_user: User,
+        user_chat_id: int,
+        date: int,
+        bio: Optional[str] = None,
+        invite_link: Optional[ChatInviteLink] = None
+    ):
+        self.chat = chat
+        self.from_user = from_user
+        self.user_chat_id = user_chat_id
+        self.date = date
+        self.bio = bio
+        self.invite_link = invite_link
+
+
 
 
 
@@ -3699,41 +3747,6 @@ class ChatMemberUpdated(TelegramType):
         self.new_chat_member = new_chat_member
         self.invite_link = invite_link
         self.via_chat_folder_invite_link = via_chat_folder_invite_link
-
-
-class ChatJoinRequest(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatjoinrequest
-
-    Represents a join request sent to a chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['from_user'] = User._dese(res.get('from_user'))
-        obj['user_chat_id'] = res.get('user_chat_id')
-        obj['date'] = res.get('date')
-        obj['bio'] = res.get('bio')
-        obj['invite_link'] = ChatInviteLink._dese(res.get('invite_link'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        from_user: User,
-        user_chat_id: int,
-        date: int,
-        bio: Optional[str] = None,
-        invite_link: Optional[ChatInviteLink] = None
-    ):
-        self.chat = chat
-        self.from_user = from_user
-        self.user_chat_id = user_chat_id
-        self.date = date
-        self.bio = bio
-        self.invite_link = invite_link
 
 
 class ForumTopic(TelegramType):
