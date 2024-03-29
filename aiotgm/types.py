@@ -3262,20 +3262,46 @@ BotCommandScope = Union[
 https://core.telegram.org/bots/api#botcommandscope
 
 This object represents the scope to which bot commands are applied.
-
 Currently, the following 7 scopes are supported:
 
-- BotCommandScopeDefault
-- BotCommandScopeAllPrivateChats
-- BotCommandScopeAllGroupChats
-- BotCommandScopeAllChatAdministrators
-- BotCommandScopeChat
-- BotCommandScopeChatAdministrators
-- BotCommandScopeChatMember
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators`
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators`
+- :obj:`~aiotgm.types.BotCommandScopeChatMember`
+
+**Determining list of commands**
+
+The following algorithm is used to determine the list of commands for a particular user viewing the bot menu. The first list of commands which is set is returned:
+
+**Commands in the chat with the bot**
+
+- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
+- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+
+**Commands in group and supergroup chats**
+
+- :obj:`~aiotgm.types.BotCommandScopeChatMember` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChatMember`
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` + language_code (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` + language_code (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
+- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+
 '''
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 class BotName(TelegramType):
     '''
