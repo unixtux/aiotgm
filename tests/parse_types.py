@@ -554,7 +554,8 @@ for type in TYPES:
 logger.info('Length of __all__ is: %s', len(aiotgm.types.__all__))
 logger.info('Length of types is: %s', len(TYPES))
 logger.info('TelegramTypes are: %s', len(TG_TYPES))
-logger.info('Missing types are: %s', len(NOT_IN_ALL) or len(NOT_IN_TYPES))
+logger.info('Not in __all__: ' + str(NOT_IN_ALL))
+logger.info('Not in types: ' + str(NOT_IN_TYPES))
 logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
 logger.info('Types without _dese(): %s\n', len(TYPES_WITHOUT_DESE))
 #"""
