@@ -484,7 +484,7 @@ for type in TYPES:
         warnings.append(f'{type.__name__}: ' + ' and '.join(TYPES[type]['warnings']))
 
 with open('warnings.txt', 'w') as w:
-    w.write('\n'.join(warnings))
+    w.write('\\n'.join(warnings))
     logger.info(f"{len(warnings)} warnings written in 'warnings.txt'.")
 '''
 
