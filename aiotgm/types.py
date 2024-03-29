@@ -1893,6 +1893,44 @@ class ChatPermissions(TelegramType):
         self.can_manage_topics = can_manage_topics
 
 
+class ChatPhoto(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatphoto
+
+    This object represents a chat photo.
+
+    :param small_file_id: File identifier of small (160x160) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed.
+    :type small_file_id: :obj:`str`
+    :param small_file_unique_id: Unique file identifier of small (160x160) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type small_file_unique_id: :obj:`str`
+    :param big_file_id: File identifier of big (640x640) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed.
+    :type big_file_id: :obj:`str`
+    :param big_file_unique_id: Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type big_file_unique_id: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['small_file_id'] = res.get('small_file_id')
+        obj['small_file_unique_id'] = res.get('small_file_unique_id')
+        obj['big_file_id'] = res.get('big_file_id')
+        obj['big_file_unique_id'] = res.get('big_file_unique_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        small_file_id: str,
+        small_file_unique_id: str,
+        big_file_id: str,
+        big_file_unique_id: str
+    ):
+        self.small_file_id = small_file_id
+        self.small_file_unique_id = small_file_unique_id
+        self.big_file_id = big_file_id
+        self.big_file_unique_id = big_file_unique_id
+
+
 
 
 
@@ -2478,35 +2516,6 @@ def _dese_maybe_inaccessible_message(res: Optional[dict], /) -> Optional[MaybeIn
         return Message._dese(obj, check_dict=False)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class ChatPhoto(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatphoto
-
-    This object represents a chat photo.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['small_file_id'] = res.get('small_file_id')
-        obj['small_file_unique_id'] = res.get('small_file_unique_id')
-        obj['big_file_id'] = res.get('big_file_id')
-        obj['big_file_unique_id'] = res.get('big_file_unique_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        small_file_id: str,
-        small_file_unique_id: str,
-        big_file_id: str,
-        big_file_unique_id: str
-    ):
-        self.small_file_id = small_file_id
-        self.small_file_unique_id = small_file_unique_id
-        self.big_file_id = big_file_id
-        self.big_file_unique_id = big_file_unique_id
 
 
 class Location(TelegramType):
