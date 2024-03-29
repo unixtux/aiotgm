@@ -626,6 +626,65 @@ class CallbackGame(TelegramType):
         ...
 
 
+class CallbackQuery(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#callbackquery
+
+    This object represents an incoming callback query from a callback button in an
+    `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
+    If the button that originated the query was attached to a message sent by the bot,
+    the field message will be present. If the button was attached to a message sent via
+    the bot (in `inline mode <https://core.telegram.org/bots/api#inline-mode>`_),
+    the field *inline_message_id* will be present.
+    Exactly one of the fields *data* or *game_short_name* will be present.
+
+    :param id: Unique identifier for this query.
+    :type id: :obj:`str`
+    :param from_user: Sender.
+    :type from_user: :obj:`~aiotgm.types.User`
+    :param chat_instance: Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in `games <https://core.telegram.org/bots/api#games>`_.
+    :type chat_instance: :obj:`str`
+    :param message: Message sent by the bot with the callback button that originated the query.
+    :type message: :obj:`~aiotgm.types.MaybeInaccessibleMessage`, optional
+    :param inline_message_id: Identifier of the message sent via the bot in inline mode, that originated the query.
+    :type inline_message_id: :obj:`str`, optional
+    :param data: Data associated with the callback button. Be aware that the message originated the query can contain no callback buttons with this data.
+    :type data: :obj:`str`, optional
+    :param game_short_name: Short name of a `Game <https://core.telegram.org/bots/api#games>`_ to be returned, serves as the unique identifier for the game.
+    :type game_short_name: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['from_user'] = User._dese(res.get('from_user'))
+        obj['message'] = _dese_maybe_inaccessible_message(res.get('message'))
+        obj['inline_message_id'] = res.get('inline_message_id')
+        obj['chat_instance'] = res.get('chat_instance')
+        obj['data'] = res.get('data')
+        obj['game_short_name'] = res.get('game_short_name')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: str,
+        from_user: User,
+        chat_instance: str,
+        message: Optional[MaybeInaccessibleMessage] = None,
+        inline_message_id: Optional[str] = None,
+        data: Optional[str] = None,
+        game_short_name: Optional[str] = None
+    ):
+        self.id = id
+        self.from_user = from_user
+        self.chat_instance = chat_instance
+        self.message = message
+        self.inline_message_id = inline_message_id
+        self.data = data
+        self.game_short_name = game_short_name
+
+
 
 
 
@@ -2880,47 +2939,6 @@ class InlineKeyboardMarkup(TelegramType):
             keyboard.append(nested)
 
         self.inline_keyboard = keyboard
-
-
-class CallbackQuery(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#callbackquery
-
-    This object represents an incoming callback query from a callback button in an inline keyboard.\n
-    If the button that originated the query was attached to a message sent by the bot, the field message will be present.\n
-    If the button was attached to a message sent via the bot (in inline mode), the field inline_message_id will be present.\n
-    Exactly one of the fields data or game_short_name will be present.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['id'] = res.get('id')
-        obj['from_user'] = User._dese(res.get('from_user'))
-        obj['message'] = _dese_maybe_inaccessible_message(res.get('message'))
-        obj['inline_message_id'] = res.get('inline_message_id')
-        obj['chat_instance'] = res.get('chat_instance')
-        obj['data'] = res.get('data')
-        obj['game_short_name'] = res.get('game_short_name')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        id: str,
-        from_user: User,
-        chat_instance: str,
-        message: Optional[MaybeInaccessibleMessage] = None,
-        inline_message_id: Optional[str] = None,
-        data: Optional[str] = None,
-        game_short_name: Optional[str] = None
-    ):
-        self.id = id
-        self.from_user = from_user
-        self.chat_instance = chat_instance
-        self.message = message
-        self.inline_message_id = inline_message_id
-        self.data = data
-        self.game_short_name = game_short_name
 
 
 class ForceReply(TelegramType):
