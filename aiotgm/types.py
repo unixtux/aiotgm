@@ -888,6 +888,99 @@ class Chat(TelegramType):
         self.location = location
 
 
+class ChatAdministratorRights(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatadministratorrights
+
+    Represents the rights of an administrator in a chat.
+
+    :param is_anonymous: :obj:`True`, if the user's presence in the chat is hidden.
+    :type is_anonymous: :obj:`bool`
+    :param can_manage_chat: :obj:`True`, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages and ignore slow mode. Implied by any other administrator privilege.
+    :type can_manage_chat: :obj:`bool`
+    :param can_delete_messages: :obj:`True`, if the administrator can delete messages of other users.
+    :type can_delete_messages: :obj:`bool`
+    :param can_manage_video_chats: :obj:`True`, if the administrator can manage video chats.
+    :type can_manage_video_chats: :obj:`bool`
+    :param can_restrict_members: :obj:`True`, if the administrator can restrict, ban or unban chat members, or access supergroup statistics.
+    :type can_restrict_members: :obj:`bool`
+    :param can_promote_members: :obj:`True`, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user).
+    :type can_promote_members: :obj:`bool`
+    :param can_change_info: :obj:`True`, if the user is allowed to change the chat title, photo and other settings.
+    :type can_change_info: :obj:`bool`
+    :param can_invite_users: :obj:`True`, if the user is allowed to invite new users to the chat.
+    :type can_invite_users: :obj:`bool`
+    :param can_post_stories: :obj:`True`, if the administrator can post stories to the chat.
+    :type can_post_stories: :obj:`bool`
+    :param can_edit_stories: :obj:`True`, if the administrator can edit stories posted by other users.
+    :type can_edit_stories: :obj:`bool`
+    :param can_delete_stories: :obj:`True`, if the administrator can delete stories posted by other users.
+    :type can_delete_stories: :obj:`bool`
+    :param can_post_messages: :obj:`True`, if the administrator can post messages in the channel, or access channel statistics; for channels only.
+    :type can_post_messages: :obj:`bool`, optional
+    :param can_edit_messages: :obj:`True`, if the administrator can edit messages of other users and can pin messages; for channels only.
+    :type can_edit_messages: :obj:`bool`, optional
+    :param can_pin_messages: :obj:`True`, if the user is allowed to pin messages; for groups and supergroups only.
+    :type can_pin_messages: :obj:`bool`, optional
+    :param can_manage_topics: :obj:`True`, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only.
+    :type can_manage_topics: :obj:`bool`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['is_anonymous'] = res.get('is_anonymous')
+        obj['can_manage_chat'] = res.get('can_manage_chat')
+        obj['can_delete_messages'] = res.get('can_delete_messages')
+        obj['can_manage_video_chats'] = res.get('can_manage_video_chats')
+        obj['can_restrict_members'] = res.get('can_restrict_members')
+        obj['can_promote_members'] = res.get('can_promote_members')
+        obj['can_change_info'] = res.get('can_change_info')
+        obj['can_invite_users'] = res.get('can_invite_users')
+        obj['can_post_stories'] = res.get('can_post_stories')
+        obj['can_edit_stories'] = res.get('can_edit_stories')
+        obj['can_delete_stories'] = res.get('can_delete_stories')
+        obj['can_post_messages'] = res.get('can_post_messages')
+        obj['can_edit_messages'] = res.get('can_edit_messages')
+        obj['can_pin_messages'] = res.get('can_pin_messages')
+        obj['can_manage_topics'] = res.get('can_manage_topics')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        is_anonymous: bool,
+        can_manage_chat: bool,
+        can_delete_messages: bool,
+        can_manage_video_chats: bool,
+        can_restrict_members: bool,
+        can_promote_members: bool,
+        can_change_info: bool,
+        can_invite_users: bool,
+        can_post_stories: bool,
+        can_edit_stories: bool,
+        can_delete_stories: bool,
+        can_post_messages: Optional[bool] = None,
+        can_edit_messages: Optional[bool] = None,
+        can_pin_messages: Optional[bool] = None,
+        can_manage_topics: Optional[bool] = None
+    ):
+        self.is_anonymous = is_anonymous
+        self.can_manage_chat = can_manage_chat
+        self.can_delete_messages = can_delete_messages
+        self.can_manage_video_chats = can_manage_video_chats
+        self.can_restrict_members = can_restrict_members
+        self.can_promote_members = can_promote_members
+        self.can_change_info = can_change_info
+        self.can_invite_users = can_invite_users
+        self.can_post_stories = can_post_stories
+        self.can_edit_stories = can_edit_stories
+        self.can_delete_stories = can_delete_stories
+        self.can_post_messages = can_post_messages
+        self.can_edit_messages = can_edit_messages
+        self.can_pin_messages = can_pin_messages
+        self.can_manage_topics = can_manage_topics
+
+
 
 
 
@@ -970,68 +1063,6 @@ class ChatPermissions(TelegramType):
         self.can_change_info = can_change_info
         self.can_invite_users = can_invite_users
         self.can_pin_messages = can_pin_messages
-        self.can_manage_topics = can_manage_topics
-
-
-class ChatAdministratorRights(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatadministratorrights
-
-    Represents the rights of an administrator in a chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['is_anonymous'] = res.get('is_anonymous')
-        obj['can_manage_chat'] = res.get('can_manage_chat')
-        obj['can_delete_messages'] = res.get('can_delete_messages')
-        obj['can_manage_video_chats'] = res.get('can_manage_video_chats')
-        obj['can_restrict_members'] = res.get('can_restrict_members')
-        obj['can_promote_members'] = res.get('can_promote_members')
-        obj['can_change_info'] = res.get('can_change_info')
-        obj['can_invite_users'] = res.get('can_invite_users')
-        obj['can_post_messages'] = res.get('can_post_messages')
-        obj['can_edit_messages'] = res.get('can_edit_messages')
-        obj['can_pin_messages'] = res.get('can_pin_messages')
-        obj['can_post_stories'] = res.get('can_post_stories')
-        obj['can_edit_stories'] = res.get('can_edit_stories')
-        obj['can_delete_stories'] = res.get('can_delete_stories')
-        obj['can_manage_topics'] = res.get('can_manage_topics')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        is_anonymous: bool,
-        can_manage_chat: bool,
-        can_delete_messages: bool,
-        can_manage_video_chats: bool,
-        can_restrict_members: bool,
-        can_promote_members: bool,
-        can_change_info: bool,
-        can_invite_users: bool,
-        can_post_messages: Optional[bool] = None,
-        can_edit_messages: Optional[bool] = None,
-        can_pin_messages: Optional[bool] = None,
-        can_post_stories: Optional[bool] = None,
-        can_edit_stories: Optional[bool] = None,
-        can_delete_stories: Optional[bool] = None,
-        can_manage_topics: Optional[bool] = None
-    ):
-        self.is_anonymous = is_anonymous
-        self.can_manage_chat = can_manage_chat
-        self.can_delete_messages = can_delete_messages
-        self.can_manage_video_chats = can_manage_video_chats
-        self.can_restrict_members = can_restrict_members
-        self.can_promote_members = can_promote_members
-        self.can_change_info = can_change_info
-        self.can_invite_users = can_invite_users
-        self.can_post_messages = can_post_messages
-        self.can_edit_messages = can_edit_messages
-        self.can_pin_messages = can_pin_messages
-        self.can_post_stories = can_post_stories
-        self.can_edit_stories = can_edit_stories
-        self.can_delete_stories = can_delete_stories
         self.can_manage_topics = can_manage_topics
 
 
