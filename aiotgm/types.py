@@ -610,6 +610,22 @@ class BotShortDescription(TelegramType):
         self.short_description = short_description
 
 
+class CallbackGame(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#callbackgame
+
+    A placeholder, currently holds no information. Use `BotFather <https://t.me/botfather>`_ to set up your game.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        ...
+
+
 
 
 
@@ -788,22 +804,6 @@ class SwitchInlineQueryChosenChat(TelegramType):
         self.allow_bot_chats = allow_bot_chats
         self.allow_group_chats = allow_group_chats
         self.allow_channel_chats = allow_channel_chats
-
-
-class CallbackGame(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#callbackgame
-
-    A placeholder, currently holds no information. Use BotFather to set up your game.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        ...
 
 
 class InputFile(TelegramType):
