@@ -223,19 +223,19 @@ def get_dese_kwargs(__type: str) -> dict[str, Any]:
 
         LINE_N += 1
     else:
-        raise_err(220)
+        raise_err(226)
 
 
-def get_init_kwargs(__type: str) -> dict[str, Any]:
-    self_found = False
+def get_init_kwargs(type: str) -> dict[str, Any]:
     global LINE_N
     init_kwargs = {}
+    self_found = False
+    if re.match(r'\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n', LINES[LINE_N]):
+        return init_kwargs
+
     while LINE_N != len(LINES):
 
-        if re.match(r'\s*def\s*__init__\s*\(\s*self\s*\)\s*:\s*\n', LINES[LINE_N]):
-            return init_kwargs
-
-        elif re.match(r'\s*def\s*__init__\s*\(\s*\n', LINES[LINE_N]):
+        if re.match(r'\s*def\s*__init__\s*\(\s*\n', LINES[LINE_N]):
             LINE_N += 1
             continue
 
@@ -245,63 +245,57 @@ def get_init_kwargs(__type: str) -> dict[str, Any]:
             continue
 
         elif re.match(r'\s*\)\s*:\s*\n', LINES[LINE_N]):
-            if self_found:
-                return init_kwargs
-            else:
-                raise_err(282, f'self argument not found in {__type}.__init__()', LINE_N, LINES[LINE_N])
+            if not self_found:
+                raise_err(249, f'self argument not found in {type}.__init__()', LINE_N, LINES[LINE_N])
+            return init_kwargs
 
-        match_multiline_hint =     re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
-        match_hint_default =       re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
-        match_hint_no_default =    re.match(r"\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
+        match_multiline_hint =  re.match(r"\s*(.*?)\s*:\s*(.*?\[[^\]]*)\s*\n", LINES[LINE_N])
+        match_hint_default =    re.match(r'\s*(.*?)\s*:\s*(.*?)\s*=\s*(.*?)\s*,*\s*\n', LINES[LINE_N])
+        match_hint_no_default = re.match(r"\s*(.*?)\s*:\s*(.*?)\s*,*\s*\n", LINES[LINE_N])
 
         if match_multiline_hint:
             match = match_multiline_hint.group(1, 2)
             (arg, start_hint) = match[0], match[1]
-            multi_line_hint = get_multiline_hint(__type, arg, start_hint)
+            multi_line_hint = get_multiline_hint(type, arg, start_hint)
             type_hint = multi_line_hint['type_hint']
-            if TYPES[__type]['has_dese']:
-                dese_hint = TYPES[__type]['dese_kwargs'][arg]
+            if TYPES[type]['has_dese']:
+                dese_hint = TYPES[type]['dese_kwargs'][arg]
                 if dese_hint is not None:
                     if dese_hint != type_hint:
-                        raise_err(300, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
+                        raise_err(265, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
             init_kwargs[arg] = multi_line_hint
 
         elif match_hint_default:
             match = match_hint_default.group(1, 2, 3)
             (arg, type_hint) = match[0], match[1]
             default_value = JSON_LITERALS[match[2]] if match[2] in JSON_LITERALS else match[2]
-            if TYPES[__type]['has_dese']:
-                dese_hint = TYPES[__type]['dese_kwargs'][arg]
+            if TYPES[type]['has_dese']:
+                dese_hint = TYPES[type]['dese_kwargs'][arg]
                 if dese_hint is not None:
-                    if OPTIONAL.match(type_hint):
-                        if default_value is not None:
-                            raise_err(313, __type, arg, 'should be None by default', LINE_N, LINES[LINE_N])
-                        if not OPTIONAL.match(dese_hint):
-                            __type_hint = OPTIONAL.match(type_hint).group(1)
-                        else:
-                            __type_hint = type_hint
-                    else:
-                        __type_hint = type_hint
-                    if dese_hint != __type_hint:
-                        raise_err(322, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
+                    if OPTIONAL.match(type_hint) and not OPTIONAL.match(dese_hint):
+                        type_hint_checker = OPTIONAL.match(type_hint).group(1)
+                    elif OPTIONAL.match(dese_hint):
+                        type_hint_checker = type_hint
+                    if dese_hint != type_hint_checker:
+                        raise_err(280, f'{dese_hint!r} != {type_hint!r}', LINE_N, LINES[LINE_N])
             init_kwargs[arg] = {'type_hint': type_hint, 'default': default_value}
 
         elif match_hint_no_default:
             match = match_hint_no_default.group(1, 2)
             (arg, type_hint) = match[0], match[1]
-            if TYPES[__type]['has_dese']:
-                dese_hint = TYPES[__type]['dese_kwargs'][arg]
+            if TYPES[type]['has_dese']:
+                dese_hint = TYPES[type]['dese_kwargs'][arg]
                 if dese_hint is not None:
                     if dese_hint != type_hint:
-                        raise_err(334, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
+                        raise_err(290, f'{dese_hint} != {type_hint}', LINE_N, LINES[LINE_N])
             init_kwargs[arg] = {'type_hint': type_hint}
 
         else:
-            raise_err(370, LINE_N, LINES[LINE_N])
+            raise_err(294, LINE_N, LINES[LINE_N])
 
         LINE_N += 1
     else:
-        raise_err(374)
+        raise_err(298)
 
 
 def get_self_kwargs(__type: str) -> dict[str, Any]:
@@ -362,6 +356,9 @@ while LINE_N != len(LINES):
         type = match[0]
         inheritance = match[1]
 
+        if inheritance == 'TelegramType':
+            TG_TYPES.append(type)
+
         api_link = check_link(type)
         TYPES[type] = {
             'link': api_link,
@@ -370,8 +367,6 @@ while LINE_N != len(LINES):
             'init_kwargs': {},
             'self_kwargs': {}
         }
-        if inheritance == 'TelegramType':
-            TG_TYPES.append(type)
 
     if re.match(r'\s*def\s*_dese\s*\(', LINES[LINE_N]):
 
@@ -389,7 +384,7 @@ while LINE_N != len(LINES):
 
         # Not add a line to check
         # def __init__(self): ...
-        init_kwargs = get_init_kwargs(type)
+        TYPES[type]['init_kwargs'] = get_init_kwargs(type)
 
     LINE_N += 1 if LINE_N != len(LINES) else 0
 
@@ -416,12 +411,12 @@ for type in TYPES:
         TYPES_WITHOUT_DESE.append(type)
 
 logger.info('Length of __all__ is: %s', len(aiotgm.types.__all__))
-logger.info('Length of types is: %s', len(TYPES))
+logger.info('Length of TYPES is: %s', len(TYPES))
 logger.info('TelegramTypes are: %s', len(TG_TYPES))
-logger.info('Not in __all__: %s', NOT_IN_ALL)
-logger.info('Not in types: are: %s . %s', len(NOT_IN_TYPES), NOT_IN_TYPES)
 logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
-logger.info('Types without _dese(): %s\n', len(TYPES_WITHOUT_DESE))
+logger.info('Types without _dese(): %s', len(TYPES_WITHOUT_DESE))
+logger.info('Not in __all__ are: %s. %s', len(NOT_IN_ALL), NOT_IN_ALL)
+logger.info('Not in TYPES are: %s. %s\n', len(NOT_IN_TYPES), NOT_IN_TYPES)
 #"""
 
 with open('types.json', 'w') as w:
@@ -435,14 +430,10 @@ f = '''\
 #!/bin/env python3
 
 if __name__ != '__main__':
-    import os
-    raise OSError(f'{os.path.basename(__file__)} must be launched from __main__')
+    raise OSError("__name__ is not '__main__'")
 
-import logging
-logger = logging.getLogger(__name__)
-handler = logging.StreamHandler()
-logger.addHandler(handler)
-logger.setLevel(20)
+from aiotgm._logging import get_logger
+logger = get_logger(__name__)
 
 from typing import (
     Union,
