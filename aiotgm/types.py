@@ -2232,6 +2232,140 @@ class EncryptedPassportElement(TelegramType):
         self.translation = translation
 
 
+class ExternalReplyInfo(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#externalreplyinfo
+
+    This object contains information about a message that is
+    being replied to, which may come from another chat or forum topic.
+
+    :param origin: Origin of the message replied to by the given message.
+    :type origin: :obj:`~aiotgm.types.MessageOrigin`
+    :param chat: Chat the original message belongs to. Available only if the chat is a supergroup or a channel.
+    :type chat: :obj:`~aiotgm.types.Chat`, optional
+    :param message_id: Unique message identifier inside the original chat. Available only if the original chat is a supergroup or a channel.
+    :type message_id: :obj:`int`, optional
+    :param link_preview_options: Options used for link preview generation for the original message, if it is a text message.
+    :type link_preview_options: :obj:`~aiotgm.types.LinkPreviewOptions`, optional
+    :param animation: Message is an animation, information about the animation.
+    :type animation: :obj:`~aiotgm.types.Animation`, optional
+    :param audio: Message is an audio file, information about the file.
+    :type audio: :obj:`~aiotgm.types.Audio`, optional
+    :param document: Message is a general file, information about the file.
+    :type document: :obj:`~aiotgm.types.Document`, optional
+    :param photo: Message is a photo, available sizes of the photo.
+    :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
+    :param sticker: Message is a sticker, information about the sticker.
+    :type sticker: :obj:`~aiotgm.types.Sticker`, optional
+    :param story: Message is a forwarded story.
+    :type story: :obj:`~aiotgm.types.Story`, optional
+    :param video: Message is a video, information about the video.
+    :type video: :obj:`~aiotgm.types.Video`, optional
+    :param video_note: Message is a `video note <https://telegram.org/blog/video-messages-and-telescope>`_, information about the video message.
+    :type video_note: :obj:`~aiotgm.types.VideoNote`, optional
+    :param voice: Message is a voice message, information about the file.
+    :type voice: :obj:`~aiotgm.types.Voice`, optional
+    :param has_media_spoiler: :obj:`True`, if the message media is covered by a spoiler animation.
+    :type has_media_spoiler: :obj:`True`, optional
+    :param contact: Message is a shared contact, information about the contact.
+    :type contact: :obj:`~aiotgm.types.Contact`, optional
+    :param dice: Message is a dice with random value.
+    :type dice: :obj:`~aiotgm.types.Dice`, optional
+    :param game: Message is a game, information about the game. `More about games » <https://core.telegram.org/bots/api#games>`_.
+    :type game: :obj:`~aiotgm.types.Game`, optional
+    :param giveaway: Message is a scheduled giveaway, information about the giveaway.
+    :type giveaway: :obj:`~aiotgm.types.Giveaway`, optional
+    :param giveaway_winners: A giveaway with public winners was completed.
+    :type giveaway_winners: :obj:`~aiotgm.types.GiveawayWinners`, optional
+    :param invoice: Message is an invoice for a `payment <https://core.telegram.org/bots/api#payments>`_, information about the invoice. `More about payments » <https://core.telegram.org/bots/api#payments>`_.
+    :type invoice: :obj:`~aiotgm.types.Invoice`, optional
+    :param location: Message is a shared location, information about the location.
+    :type location: :obj:`~aiotgm.types.Location`, optional
+    :param poll: Message is a native poll, information about the poll.
+    :type poll: :obj:`~aiotgm.types.Poll`, optional
+    :param venue: Message is a venue, information about the venue.
+    :type venue: :obj:`~aiotgm.types.Venue`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['origin'] = _dese_message_origin(res.get('origin'))
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['message_id'] = res.get('message_id')
+        obj['link_preview_options'] = LinkPreviewOptions._dese(res.get('link_preview_options'))
+        obj['animation'] = Animation._dese(res.get('animation'))
+        obj['audio'] = Audio._dese(res.get('audio'))
+        obj['document'] = Document._dese(res.get('document'))
+        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')] if 'photo' in res else None
+        obj['sticker'] = Sticker._dese(res.get('sticker'))
+        obj['story'] = Story._dese(res.get('story'))
+        obj['video'] = Video._dese(res.get('video'))
+        obj['video_note'] = VideoNote._dese(res.get('video_note'))
+        obj['voice'] = Voice._dese(res.get('voice'))
+        obj['has_media_spoiler'] = res.get('has_media_spoiler')
+        obj['contact'] = Contact._dese(res.get('contact'))
+        obj['dice'] = Dice._dese(res.get('dice'))
+        obj['game'] = Game._dese(res.get('game'))
+        obj['giveaway'] = Giveaway._dese(res.get('giveaway'))
+        obj['giveaway_winners'] = GiveawayWinners._dese(res.get('giveaway_winners'))
+        obj['invoice'] = Invoice._dese(res.get('invoice'))
+        obj['location'] = Location._dese(res.get('location'))
+        obj['poll'] = Poll._dese(res.get('poll'))
+        obj['venue'] = Venue._dese(res.get('venue'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        origin: MessageOrigin,
+        chat: Optional[Chat] = None,
+        message_id: Optional[int] = None,
+        link_preview_options: Optional[LinkPreviewOptions] = None,
+        animation: Optional[Animation] = None,
+        audio: Optional[Audio] = None,
+        document: Optional[Document] = None,
+        photo: Optional[list[PhotoSize]] = None,
+        sticker: Optional[Sticker] = None,
+        story: Optional[Story] = None,
+        video: Optional[Video] = None,
+        video_note: Optional[VideoNote] = None,
+        voice: Optional[Voice] = None,
+        has_media_spoiler: Optional[Literal[True]] = None,
+        contact: Optional[Contact] = None,
+        dice: Optional[Dice] = None,
+        game: Optional[Game] = None,
+        giveaway: Optional[Giveaway] = None,
+        giveaway_winners: Optional[GiveawayWinners] = None,
+        invoice: Optional[Invoice] = None,
+        location: Optional[Location] = None,
+        poll: Optional[Poll] = None,
+        venue: Optional[Venue] = None
+    ):
+        self.origin = origin
+        self.chat = chat
+        self.message_id = message_id
+        self.link_preview_options = link_preview_options
+        self.animation = animation
+        self.audio = audio
+        self.document = document
+        self.photo = photo
+        self.sticker = sticker
+        self.story = story
+        self.video = video
+        self.video_note = video_note
+        self.voice = voice
+        self.has_media_spoiler = has_media_spoiler
+        self.contact = contact
+        self.dice = dice
+        self.game = game
+        self.giveaway = giveaway
+        self.giveaway_winners = giveaway_winners
+        self.invoice = invoice
+        self.location = location
+        self.poll = poll
+        self.venue = venue
+
+
 
 
 
@@ -6376,92 +6510,6 @@ def _dese_message_origin(res: Optional[dict], /) -> Optional[MessageOrigin]:
         )
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class ExternalReplyInfo(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#externalreplyinfo
-
-    This object contains information about a message that is being replied to, which may come from another chat or forum topic.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['origin'] = _dese_message_origin(res.get('origin'))
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['message_id'] = res.get('message_id')
-        obj['link_preview_options'] = LinkPreviewOptions._dese(res.get('link_preview_options'))
-        obj['animation'] = Animation._dese(res.get('animation'))
-        obj['audio'] = Audio._dese(res.get('audio'))
-        obj['document'] = Document._dese(res.get('document'))
-        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')] if 'photo' in res else None
-        obj['sticker'] = Sticker._dese(res.get('sticker'))
-        obj['story'] = Story._dese(res.get('story'))
-        obj['video'] = Video._dese(res.get('video'))
-        obj['video_note'] = VideoNote._dese(res.get('video_note'))
-        obj['voice'] = Voice._dese(res.get('voice'))
-        obj['has_media_spoiler'] = res.get('has_media_spoiler')
-        obj['contact'] = Contact._dese(res.get('contact'))
-        obj['dice'] = Dice._dese(res.get('dice'))
-        obj['game'] = Game._dese(res.get('game'))
-        obj['giveaway'] = Giveaway._dese(res.get('giveaway'))
-        obj['giveaway_winners'] = GiveawayWinners._dese(res.get('giveaway_winners'))
-        obj['invoice'] = Invoice._dese(res.get('invoice'))
-        obj['location'] = Location._dese(res.get('location'))
-        obj['poll'] = Poll._dese(res.get('poll'))
-        obj['venue'] = Venue._dese(res.get('venue'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        origin: MessageOrigin,
-        chat: Optional[Chat] = None,
-        message_id: Optional[int] = None,
-        link_preview_options: Optional[LinkPreviewOptions] = None,
-        animation: Optional[Animation] = None,
-        audio: Optional[Audio] = None,
-        document: Optional[Document] = None,
-        photo: Optional[list[PhotoSize]] = None,
-        sticker: Optional[Sticker] = None,
-        story: Optional[Story] = None,
-        video: Optional[Video] = None,
-        video_note: Optional[VideoNote] = None,
-        voice: Optional[Voice] = None,
-        has_media_spoiler: Optional[Literal[True]] = None,
-        contact: Optional[Contact] = None,
-        dice: Optional[Dice] = None,
-        game: Optional[Game] = None,
-        giveaway: Optional[Giveaway] = None,
-        giveaway_winners: Optional[GiveawayWinners] = None,
-        invoice: Optional[Invoice] = None,
-        location: Optional[Location] = None,
-        poll: Optional[Poll] = None,
-        venue: Optional[Venue] = None
-    ):
-        self.origin = origin
-        self.chat = chat
-        self.message_id = message_id
-        self.link_preview_options = link_preview_options
-        self.animation = animation
-        self.audio = audio
-        self.document = document
-        self.photo = photo
-        self.sticker = sticker
-        self.story = story
-        self.video = video
-        self.video_note = video_note
-        self.voice = voice
-        self.has_media_spoiler = has_media_spoiler
-        self.contact = contact
-        self.dice = dice
-        self.game = game
-        self.giveaway = giveaway
-        self.giveaway_winners = giveaway_winners
-        self.invoice = invoice
-        self.location = location
-        self.poll = poll
-        self.venue = venue
 
 
 class UserChatBoosts(TelegramType):
