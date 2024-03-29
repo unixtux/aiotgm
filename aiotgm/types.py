@@ -360,6 +360,34 @@ class Audio(TelegramType):
         self.thumbnail = thumbnail
 
 
+class BotCommand(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botcommand
+
+    This object represents a bot command.
+
+    :param command: Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
+    :type command: :obj:`str`
+    :param description: Description of the command; 1-256 characters.
+    :type description: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['command'] = res.get('command')
+        obj['description'] = res.get('description')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        command: str,
+        description: str
+    ):
+        self.command = command
+        self.description = description
+
+
 
 
 
@@ -3132,29 +3160,6 @@ class ForumTopic(TelegramType):
         self.name = name
         self.icon_color = icon_color
         self.icon_custom_emoji_id = icon_custom_emoji_id
-
-
-class BotCommand(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botcommand
-
-    This object represents a bot command.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['command'] = res.get('command')
-        obj['description'] = res.get('description')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        command: str,
-        description: str
-    ):
-        self.command = command
-        self.description = description
 
 
 # BotCommandScope: 7 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
