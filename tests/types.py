@@ -831,6 +831,35 @@ TYPES = {
             }
         }
     },
+    ChatMemberUpdated: {
+        "link": "https://core.telegram.org/bots/api#chatmemberupdated",
+        "has_dese": True,
+        "kwargs": {
+            "chat": {
+                "type_hint": Chat
+            },
+            "from_user": {
+                "type_hint": User
+            },
+            "date": {
+                "type_hint": int
+            },
+            "old_chat_member": {
+                "type_hint": ChatMember
+            },
+            "new_chat_member": {
+                "type_hint": ChatMember
+            },
+            "invite_link": {
+                "type_hint": Optional[ChatInviteLink],
+                "default": None
+            },
+            "via_chat_folder_invite_link": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
     ChatPermissions: {
         "link": "https://core.telegram.org/bots/api#chatpermissions",
         "has_dese": True,
@@ -890,6 +919,95 @@ TYPES = {
             "can_manage_topics": {
                 "type_hint": Optional[bool],
                 "default": None
+            }
+        }
+    },
+    ChatPhoto: {
+        "link": "https://core.telegram.org/bots/api#chatphoto",
+        "has_dese": True,
+        "kwargs": {
+            "small_file_id": {
+                "type_hint": str
+            },
+            "small_file_unique_id": {
+                "type_hint": str
+            },
+            "big_file_id": {
+                "type_hint": str
+            },
+            "big_file_unique_id": {
+                "type_hint": str
+            }
+        }
+    },
+    ChatShared: {
+        "link": "https://core.telegram.org/bots/api#chatshared",
+        "has_dese": True,
+        "kwargs": {
+            "request_id": {
+                "type_hint": int
+            },
+            "chat_id": {
+                "type_hint": int
+            }
+        }
+    },
+    ChosenInlineResult: {
+        "link": "https://core.telegram.org/bots/api#choseninlineresult",
+        "has_dese": True,
+        "kwargs": {
+            "result_id": {
+                "type_hint": str
+            },
+            "from_user": {
+                "type_hint": User
+            },
+            "query": {
+                "type_hint": str
+            },
+            "location": {
+                "type_hint": Optional[Location],
+                "default": None
+            },
+            "inline_message_id": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    Contact: {
+        "link": "https://core.telegram.org/bots/api#contact",
+        "has_dese": True,
+        "kwargs": {
+            "phone_number": {
+                "type_hint": str
+            },
+            "first_name": {
+                "type_hint": str
+            },
+            "last_name": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "user_id": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "vcard": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    Dice: {
+        "link": "https://core.telegram.org/bots/api#dice",
+        "has_dese": True,
+        "kwargs": {
+            "emoji": {
+                "type_hint": str
+            },
+            "value": {
+                "type_hint": int
             }
         }
     },
@@ -1459,24 +1577,6 @@ TYPES = {
             }
         }
     },
-    ChatPhoto: {
-        "link": "https://core.telegram.org/bots/api#chatphoto",
-        "has_dese": True,
-        "kwargs": {
-            "small_file_id": {
-                "type_hint": str
-            },
-            "small_file_unique_id": {
-                "type_hint": str
-            },
-            "big_file_id": {
-                "type_hint": str
-            },
-            "big_file_unique_id": {
-                "type_hint": str
-            }
-        }
-    },
     Location: {
         "link": "https://core.telegram.org/bots/api#location",
         "has_dese": True,
@@ -1747,42 +1847,6 @@ TYPES = {
             }
         }
     },
-    Contact: {
-        "link": "https://core.telegram.org/bots/api#contact",
-        "has_dese": True,
-        "kwargs": {
-            "phone_number": {
-                "type_hint": str
-            },
-            "first_name": {
-                "type_hint": str
-            },
-            "last_name": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "user_id": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "vcard": {
-                "type_hint": Optional[str],
-                "default": None
-            }
-        }
-    },
-    Dice: {
-        "link": "https://core.telegram.org/bots/api#dice",
-        "has_dese": True,
-        "kwargs": {
-            "emoji": {
-                "type_hint": str
-            },
-            "value": {
-                "type_hint": int
-            }
-        }
-    },
     PollOption: {
         "link": "https://core.telegram.org/bots/api#polloption",
         "has_dese": True,
@@ -1991,18 +2055,6 @@ TYPES = {
             },
             "user_ids": {
                 "type_hint": list[int]
-            }
-        }
-    },
-    ChatShared: {
-        "link": "https://core.telegram.org/bots/api#chatshared",
-        "has_dese": True,
-        "kwargs": {
-            "request_id": {
-                "type_hint": int
-            },
-            "chat_id": {
-                "type_hint": int
             }
         }
     },
@@ -2315,35 +2367,6 @@ TYPES = {
                 "default": None
             },
             "selective": {
-                "type_hint": Optional[bool],
-                "default": None
-            }
-        }
-    },
-    ChatMemberUpdated: {
-        "link": "https://core.telegram.org/bots/api#chatmemberupdated",
-        "has_dese": True,
-        "kwargs": {
-            "chat": {
-                "type_hint": Chat
-            },
-            "from_user": {
-                "type_hint": User
-            },
-            "date": {
-                "type_hint": int
-            },
-            "old_chat_member": {
-                "type_hint": ChatMember
-            },
-            "new_chat_member": {
-                "type_hint": ChatMember
-            },
-            "invite_link": {
-                "type_hint": Optional[ChatInviteLink],
-                "default": None
-            },
-            "via_chat_folder_invite_link": {
                 "type_hint": Optional[bool],
                 "default": None
             }
@@ -3884,29 +3907,6 @@ TYPES = {
             },
             "input_message_content": {
                 "type_hint": Optional[InputMessageContent],
-                "default": None
-            }
-        }
-    },
-    ChosenInlineResult: {
-        "link": "https://core.telegram.org/bots/api#choseninlineresult",
-        "has_dese": True,
-        "kwargs": {
-            "result_id": {
-                "type_hint": str
-            },
-            "from_user": {
-                "type_hint": User
-            },
-            "query": {
-                "type_hint": str
-            },
-            "location": {
-                "type_hint": Optional[Location],
-                "default": None
-            },
-            "inline_message_id": {
-                "type_hint": Optional[str],
                 "default": None
             }
         }
