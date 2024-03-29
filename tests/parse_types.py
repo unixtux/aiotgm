@@ -424,11 +424,11 @@ logger.info('Types with _dese(): %s', len(TYPES_WITH_DESE))
 logger.info('Types without _dese(): %s\n', len(TYPES_WITHOUT_DESE))
 #"""
 
-with open('test_types.json', 'w') as w:
+with open('types.json', 'w') as w:
     w.write(json.dumps(TYPES, indent = 4))
-    logger.info('test_types.json has been written.')
+    logger.info('types.json has been written.')
 
-with open('test_types.json', 'r') as r:
+with open('types.json', 'r') as r:
     lines = r.readlines()
 
 f = '''\
@@ -477,6 +477,6 @@ warnings = []
 logger.info('Program finished.')
 '''
 
-with open('test_types.py', 'w') as w:
+with open('types.py', 'w') as w:
     w.write(f)
-    logger.info('test_types.py has been written.')
+    logger.info('types.py has been written.')
