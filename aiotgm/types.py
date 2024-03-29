@@ -1080,6 +1080,129 @@ class ChatBoostRemoved(TelegramType):
         self.source = source
 
 
+# ChatBoostSource: 3 SUBCLASSES ~~~~~~~~~~~~
+
+class ChatBoostSourceGiftCode(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostsourcegiftcode
+
+    The boost was obtained by the creation of Telegram Premium gift codes to boost a chat. Each such
+    code boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+
+    :param user: User for which the gift code was created.
+    :type user: :obj:`~aiotgm.types.User`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User
+    ):
+        self.source = DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE
+        self.user = user
+
+
+class ChatBoostSourceGiveaway(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostsourcegiveaway
+
+    The boost was obtained by the creation of a Telegram Premium giveaway. This boosts
+    the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+
+    :param giveaway_message_id: Identifier of a message in the chat with the giveaway; the message could have been deleted already. May be 0 if the message isn't sent yet.
+    :type giveaway_message_id: :obj:`int`
+    :param user: User that won the prize in the giveaway if any.
+    :type user: :obj:`~aiotgm.types.User`, optional
+    :param is_unclaimed: :obj:`True`, if the giveaway was completed, but there was no user to win the prize.
+    :type is_unclaimed: :obj:`True`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['giveaway_message_id'] = res.get('giveaway_message_id')
+        obj['user'] = User._dese(res.get('user'))
+        obj['is_unclaimed'] = res.get('is_unclaimed')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        giveaway_message_id: int,
+        user: Optional[User] = None,
+        is_unclaimed: Optional[Literal[True]] = None
+    ):
+        self.source = DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY
+        self.giveaway_message_id = giveaway_message_id
+        self.user = user
+        self.is_unclaimed = is_unclaimed
+
+
+class ChatBoostSourcePremium(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatboostsourcepremium
+
+    The boost was obtained by subscribing to Telegram Premium or
+    by gifting a Telegram Premium subscription to another user.
+
+    :param user: User that boosted the chat.
+    :type user: :obj:`~aiotgm.types.User`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User
+    ):
+        self.source = DEFAULT_CHAT_BOOST_SOURCE_PREMIUM
+        self.user = user
+
+
+ChatBoostSource = Union[ChatBoostSourcePremium, ChatBoostSourceGiftCode, ChatBoostSourceGiveaway]
+'''
+https://core.telegram.org/bots/api#chatboostsource
+
+This object describes the source of a chat boost. It can be one of:
+
+- :obj:`~aiotgm.types.ChatBoostSourcePremium`
+- :obj:`~aiotgm.types.ChatBoostSourceGiftCode`
+- :obj:`~aiotgm.types.ChatBoostSourceGiveaway`
+'''
+
+def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]:
+    '''
+    Function to deserialize ChatBoostSource.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    source = obj.pop('source')
+
+    if source == DEFAULT_CHAT_BOOST_SOURCE_PREMIUM:
+        return ChatBoostSourcePremium._dese(obj, check_dict=False)
+
+    elif source == DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE:
+        return ChatBoostSourceGiftCode._dese(obj, check_dict=False)
+
+    elif source == DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY:
+        return ChatBoostSourceGiveaway._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization of the'
+            f' type ChatBoostSource. Invalid source: {source!r}.'
+        )
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 
 
@@ -6051,118 +6174,6 @@ class ExternalReplyInfo(TelegramType):
         self.location = location
         self.poll = poll
         self.venue = venue
-
-
-# ChatBoostSource: 3 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-class ChatBoostSourcePremium(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatboostsourcepremium
-
-    The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram Premium subscription to another user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user'] = User._dese(res.get('user'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user: User
-    ):
-        self.source = DEFAULT_CHAT_BOOST_SOURCE_PREMIUM
-        self.user = user
-
-
-class ChatBoostSourceGiftCode(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatboostsourcegiftcode
-
-    The boost was obtained by the creation of Telegram Premium gift codes to boost a chat.\n
-    Each such code boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user'] = User._dese(res.get('user'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user: User
-    ):
-        self.source = DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE
-        self.user = user
-
-
-class ChatBoostSourceGiveaway(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#chatboostsourcegiveaway
-
-    The boost was obtained by the creation of a Telegram Premium giveaway.\n
-    This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['giveaway_message_id'] = res.get('giveaway_message_id')
-        obj['user'] = User._dese(res.get('user'))
-        obj['is_unclaimed'] = res.get('is_unclaimed')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        giveaway_message_id: int,
-        user: Optional[User] = None,
-        is_unclaimed: Optional[Literal[True]] = None
-    ):
-        self.source = DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY
-        self.giveaway_message_id = giveaway_message_id
-        self.user = user
-        self.is_unclaimed = is_unclaimed
-
-
-ChatBoostSource = Union[ChatBoostSourcePremium, ChatBoostSourceGiftCode, ChatBoostSourceGiveaway]
-'''
-https://core.telegram.org/bots/api#chatboostsource
-
-This object describes the source of a chat boost.
-
-It can be one of:
-
-- ChatBoostSourcePremium
-- ChatBoostSourceGiftCode
-- ChatBoostSourceGiveaway
-'''
-
-def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]:
-    '''
-    Function to deserialize ChatBoostSource.
-    '''
-    if res is None: return None
-    obj = _check_dict(res)
-
-    source = obj.pop('source')
-
-    if source == DEFAULT_CHAT_BOOST_SOURCE_PREMIUM:
-        return ChatBoostSourcePremium._dese(obj, check_dict=False)
-
-    elif source == DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE:
-        return ChatBoostSourceGiftCode._dese(obj, check_dict=False)
-
-    elif source == DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY:
-        return ChatBoostSourceGiveaway._dese(obj, check_dict=False)
-    else:
-        raise ValueError(
-            'An error occurred during the deserialization of the'
-            f' type ChatBoostSource. Invalid source: {source!r}.'
-        )
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class UserChatBoosts(TelegramType):
