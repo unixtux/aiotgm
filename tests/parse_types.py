@@ -434,7 +434,7 @@ logger.info('Not in TYPES are: %s. %s\n', len(NOT_IN_TYPES), NOT_IN_TYPES)
 
 with open('types.json', 'w') as w:
     w.write(json.dumps(TYPES, indent = 4))
-    logger.info('types.json has been written.')
+    logger.info("'types.json' has been written.")
 
 with open('types.json', 'r') as r:
     lines = r.readlines()
@@ -490,4 +490,4 @@ with open('warnings.txt', 'w') as w:
 
 with open('types.py', 'w') as w:
     w.write(f)
-    logger.info('types.py has been written.')
+    logger.info("'types.py' has been written.")
