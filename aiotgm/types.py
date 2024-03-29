@@ -564,6 +564,29 @@ class BotDescription(TelegramType):
         self.description = description
 
 
+class BotName(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botname
+
+    This object represents the bot's name.
+
+    :param name: The bot's name.
+    :type name: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['name'] = res.get('name')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        name: str
+    ):
+        self.name = name
+
+
 
 
 
@@ -3336,26 +3359,6 @@ class ForumTopic(TelegramType):
         self.name = name
         self.icon_color = icon_color
         self.icon_custom_emoji_id = icon_custom_emoji_id
-
-
-class BotName(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botname
-
-    This object represents the bot's name.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['name'] = res.get('name')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        name: str
-    ):
-        self.name = name
 
 
 class BotShortDescription(TelegramType):
