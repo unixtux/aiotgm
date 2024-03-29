@@ -2128,6 +2128,42 @@ class Document(TelegramType):
         self.file_size = file_size
 
 
+class EncryptedCredentials(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#encryptedcredentials
+
+    Describes data required for decrypting and
+    authenticating :obj:`~aiotgm.types.EncryptedPassportElement`. See the
+    `Telegram Passport Documentation <https://core.telegram.org/passport#receiving-information>`_
+    for a complete description of the data decryption and authentication processes.
+
+    :param data: Base64-encoded encrypted JSON-serialized data with unique user's payload, data hashes and secrets required for :obj:`~aiotgm.types.EncryptedPassportElement` decryption and authentication.
+    :type data: :obj:`str`
+    :param hash: Base64-encoded data hash for data authentication.
+    :type hash: :obj:`str`
+    :param secret: Base64-encoded secret, encrypted with the bot's public RSA key, required for data decryption.
+    :type secret: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['data'] = res.get('data')
+        obj['hash'] = res.get('hash')
+        obj['secret'] = res.get('secret')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        data: str,
+        hash: str,
+        secret: str
+    ):
+        self.data = data
+        self.hash = hash
+        self.secret = secret
+
+
 
 
 
@@ -5689,33 +5725,6 @@ class EncryptedPassportElement(TelegramType):
         self.reverse_side = reverse_side
         self.selfie = selfie
         self.translation = translation
-
-
-class EncryptedCredentials(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#encryptedcredentials
-
-    Describes data required for decrypting and authenticating EncryptedPassportElement.\n
-    See the Telegram Passport Documentation for a complete description of the data decryption and authentication processes.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['data'] = res.get('data')
-        obj['hash'] = res.get('hash')
-        obj['secret'] = res.get('secret')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        data: str,
-        hash: str,
-        secret: str
-    ):
-        self.data = data
-        self.hash = hash
-        self.secret = secret
 
 
 class PassportData(TelegramType):
