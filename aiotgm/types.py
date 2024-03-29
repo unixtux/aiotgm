@@ -541,6 +541,30 @@ The following algorithm is used to determine the list of commands for a particul
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+class BotDescription(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#botdescription
+
+    This object represents the bot's description.
+
+    :param description: The bot's description.
+    :type description: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['description'] = res.get('description')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        description: str
+    ):
+        self.description = description
+
+
+
 
 
 
@@ -3332,26 +3356,6 @@ class BotName(TelegramType):
         name: str
     ):
         self.name = name
-
-
-class BotDescription(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#botdescription
-
-    This object represents the bot's description.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['description'] = res.get('description')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        description: str
-    ):
-        self.description = description
 
 
 class BotShortDescription(TelegramType):
