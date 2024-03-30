@@ -2422,8 +2422,8 @@ class ForceReply(TelegramType):
         (only receives commands, replies to its messages and mentions).
         There could be two ways to create a new poll:
 
-            - Explain the user how to send a command with parameters (e.g. /newpoll question answer1 answer2). May be appealing for hardcore users but lacks modern day polish.
-            - Guide the user through a step-by-step process. 'Please send me your question', 'Cool, now let's add the first answer option', 'Great. Keep adding answer options, then send /done when you're ready'.
+        - Explain the user how to send a command with parameters (e.g. /newpoll question answer1 answer2). May be appealing for hardcore users but lacks modern day polish.
+        - Guide the user through a step-by-step process. 'Please send me your question', 'Cool, now let's add the first answer option', 'Great. Keep adding answer options, then send /done when you're ready'.
 
         The last option is definitely more attractive. And if you
         use :obj:`~aiotgm.types.ForceReply` in your bot's questions,
