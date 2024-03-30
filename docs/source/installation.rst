@@ -52,10 +52,10 @@ Use the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aiot
         await bot.answer_callback_query(call.id, 'hello')
 
     if __name__ == '__main__':
-    try:
-        asyncio.run(bot.long_polling())
-    except KeyboardInterrupt:
-        ...
+        try:
+            asyncio.run(bot.long_polling())
+        except KeyboardInterrupt:
+            ...
 
 There are 18 decorator methods to manage differrent :obj:`updates <aiotgm.types.Update>`:
 
