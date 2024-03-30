@@ -1208,6 +1208,117 @@
             }
         }
     },
+    "ForumTopic": {
+        "link": "https://core.telegram.org/bots/api#forumtopic",
+        "has_dese": true,
+        "kwargs": {
+            "message_thread_id": {
+                "type_hint": "int"
+            },
+            "name": {
+                "type_hint": "str"
+            },
+            "icon_color": {
+                "type_hint": "int"
+            },
+            "icon_custom_emoji_id": {
+                "type_hint": "Optional[str]",
+                "default": null
+            }
+        }
+    },
+    "ForumTopicClosed": {
+        "link": "https://core.telegram.org/bots/api#forumtopicclosed",
+        "has_dese": true,
+        "kwargs": {}
+    },
+    "ForumTopicCreated": {
+        "link": "https://core.telegram.org/bots/api#forumtopiccreated",
+        "has_dese": true,
+        "kwargs": {
+            "name": {
+                "type_hint": "str"
+            },
+            "icon_color": {
+                "type_hint": "int"
+            },
+            "icon_custom_emoji_id": {
+                "type_hint": "Optional[str]",
+                "default": null
+            }
+        }
+    },
+    "ForumTopicEdited": {
+        "link": "https://core.telegram.org/bots/api#forumtopicedited",
+        "has_dese": true,
+        "kwargs": {
+            "name": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "icon_custom_emoji_id": {
+                "type_hint": "Optional[str]",
+                "default": null
+            }
+        }
+    },
+    "ForumTopicReopened": {
+        "link": "https://core.telegram.org/bots/api#forumtopicreopened",
+        "has_dese": true,
+        "kwargs": {}
+    },
+    "Game": {
+        "link": "https://core.telegram.org/bots/api#game",
+        "has_dese": true,
+        "kwargs": {
+            "title": {
+                "type_hint": "str"
+            },
+            "description": {
+                "type_hint": "str"
+            },
+            "photo": {
+                "type_hint": "list[PhotoSize]"
+            },
+            "text": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "text_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "animation": {
+                "type_hint": "Optional[Animation]",
+                "default": null
+            }
+        }
+    },
+    "GameHighScore": {
+        "link": "https://core.telegram.org/bots/api#gamehighscore",
+        "has_dese": true,
+        "kwargs": {
+            "position": {
+                "type_hint": "int"
+            },
+            "user": {
+                "type_hint": "User"
+            },
+            "score": {
+                "type_hint": "int"
+            }
+        }
+    },
+    "GeneralForumTopicHidden": {
+        "link": "https://core.telegram.org/bots/api#generalforumtopichidden",
+        "has_dese": true,
+        "kwargs": {}
+    },
+    "GeneralForumTopicUnhidden": {
+        "link": "https://core.telegram.org/bots/api#generalforumtopicunhidden",
+        "has_dese": true,
+        "kwargs": {}
+    },
     "SwitchInlineQueryChosenChat": {
         "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
         "has_dese": true,
@@ -2165,56 +2276,6 @@
             }
         }
     },
-    "ForumTopicCreated": {
-        "link": "https://core.telegram.org/bots/api#forumtopiccreated",
-        "has_dese": true,
-        "kwargs": {
-            "name": {
-                "type_hint": "str"
-            },
-            "icon_color": {
-                "type_hint": "int"
-            },
-            "icon_custom_emoji_id": {
-                "type_hint": "Optional[str]",
-                "default": null
-            }
-        }
-    },
-    "ForumTopicClosed": {
-        "link": "https://core.telegram.org/bots/api#forumtopicclosed",
-        "has_dese": true,
-        "kwargs": {}
-    },
-    "ForumTopicEdited": {
-        "link": "https://core.telegram.org/bots/api#forumtopicedited",
-        "has_dese": true,
-        "kwargs": {
-            "name": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "icon_custom_emoji_id": {
-                "type_hint": "Optional[str]",
-                "default": null
-            }
-        }
-    },
-    "ForumTopicReopened": {
-        "link": "https://core.telegram.org/bots/api#forumtopicreopened",
-        "has_dese": true,
-        "kwargs": {}
-    },
-    "GeneralForumTopicHidden": {
-        "link": "https://core.telegram.org/bots/api#generalforumtopichidden",
-        "has_dese": true,
-        "kwargs": {}
-    },
-    "GeneralForumTopicUnhidden": {
-        "link": "https://core.telegram.org/bots/api#generalforumtopicunhidden",
-        "has_dese": true,
-        "kwargs": {}
-    },
     "UsersShared": {
         "link": "https://core.telegram.org/bots/api#usersshared",
         "has_dese": true,
@@ -2499,25 +2560,6 @@
         "kwargs": {
             "inline_keyboard": {
                 "type_hint": "Optional[list[list[InlineKeyboardButton]]]",
-                "default": null
-            }
-        }
-    },
-    "ForumTopic": {
-        "link": "https://core.telegram.org/bots/api#forumtopic",
-        "has_dese": true,
-        "kwargs": {
-            "message_thread_id": {
-                "type_hint": "int"
-            },
-            "name": {
-                "type_hint": "str"
-            },
-            "icon_color": {
-                "type_hint": "int"
-            },
-            "icon_custom_emoji_id": {
-                "type_hint": "Optional[str]",
                 "default": null
             }
         }
@@ -4411,48 +4453,6 @@
             },
             "message": {
                 "type_hint": "str"
-            }
-        }
-    },
-    "Game": {
-        "link": "https://core.telegram.org/bots/api#game",
-        "has_dese": true,
-        "kwargs": {
-            "title": {
-                "type_hint": "str"
-            },
-            "description": {
-                "type_hint": "str"
-            },
-            "photo": {
-                "type_hint": "list[PhotoSize]"
-            },
-            "text": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "text_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "animation": {
-                "type_hint": "Optional[Animation]",
-                "default": null
-            }
-        }
-    },
-    "GameHighScore": {
-        "link": "https://core.telegram.org/bots/api#gamehighscore",
-        "has_dese": true,
-        "kwargs": {
-            "position": {
-                "type_hint": "int"
-            },
-            "user": {
-                "type_hint": "User"
-            },
-            "score": {
-                "type_hint": "int"
             }
         }
     },
