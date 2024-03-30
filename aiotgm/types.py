@@ -2723,6 +2723,39 @@ class GiveawayWinners(TelegramType):
         self.prize_description = prize_description
 
 
+class InaccessibleMessage(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inaccessiblemessage
+
+    This object describes a message that was deleted or is otherwise inaccessible to the bot.
+
+    :param chat: Chat the message belonged to.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param message_id: Unique message identifier inside the chat.
+    :type message_id: :obj:`int`
+    :param date: Always 0. The field can be used to differentiate regular and inaccessible messages.
+    :type date: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['message_id'] = res.get('message_id')
+        obj['date'] = res.get('date')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        message_id: int,
+        date: int
+    ):
+        self.chat = chat
+        self.message_id = message_id
+        self.date = date
+
+
 
 
 
@@ -3008,32 +3041,6 @@ class ReplyParameters(TelegramType):
 
 
 # MaybeInaccessibleMessage: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~
-
-class InaccessibleMessage(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inaccessiblemessage
-
-    This object describes a message that was deleted or is otherwise inaccessible to the bot.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['message_id'] = res.get('message_id')
-        obj['date'] = res.get('date')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        message_id: int,
-        date: int
-    ):
-        self.chat = chat
-        self.message_id = message_id
-        self.date = date
-
 
 class Message(TelegramType):
     '''
