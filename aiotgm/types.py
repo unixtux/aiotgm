@@ -2650,6 +2650,79 @@ class GiveawayCreated(TelegramType):
         ...
 
 
+class GiveawayWinners(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#giveawaywinners
+
+    This object represents a message about the completion of a giveaway with public winners.
+
+    :param chat: The chat that created the giveaway.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param giveaway_message_id: Identifier of the message with the giveaway in the chat.
+    :type giveaway_message_id: :obj:`int`
+    :param winners_selection_date: Point in time (Unix timestamp) when winners of the giveaway were selected.
+    :type winners_selection_date: :obj:`int`
+    :param winner_count: Total number of winners in the giveaway.
+    :type winner_count: :obj:`int`
+    :param winners: List of up to 100 winners of the giveaway.
+    :type winners: :obj:`list` of :obj:`~aiotgm.types.User`
+    :param additional_chat_count: The number of other chats the user had to join in order to be eligible for the giveaway.
+    :type additional_chat_count: :obj:`int`, optional
+    :param premium_subscription_month_count: The number of months the Telegram Premium subscription won from the giveaway will be active for.
+    :type premium_subscription_month_count: :obj:`int`, optional
+    :param unclaimed_prize_count: Number of undistributed prizes.
+    :type unclaimed_prize_count: :obj:`int`, optional
+    :param only_new_members: :obj:`True`, if only users who had joined the chats after the giveaway started were eligible to win.
+    :type only_new_members: :obj:`True`, optional
+    :param was_refunded: :obj:`True`, if the giveaway was canceled because the payment for it was refunded.
+    :type was_refunded: :obj:`True`, optional
+    :param prize_description: Description of additional giveaway prize.
+    :type prize_description: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['giveaway_message_id'] = res.get('giveaway_message_id')
+        obj['winners_selection_date'] = res.get('winners_selection_date')
+        obj['winner_count'] = res.get('winner_count')
+        obj['winners'] = [User._dese(kwargs) for kwargs in res.get('winners')]
+        obj['additional_chat_count'] = res.get('additional_chat_count')
+        obj['premium_subscription_month_count'] = res.get('premium_subscription_month_count')
+        obj['unclaimed_prize_count'] = res.get('unclaimed_prize_count')
+        obj['only_new_members'] = res.get('only_new_members')
+        obj['was_refunded'] = res.get('was_refunded')
+        obj['prize_description'] = res.get('prize_description')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        giveaway_message_id: int,
+        winners_selection_date: int,
+        winner_count: int,
+        winners: list[User],
+        additional_chat_count: Optional[int] = None,
+        premium_subscription_month_count: Optional[int] = None,
+        unclaimed_prize_count: Optional[int] = None,
+        only_new_members: Optional[Literal[True]] = None,
+        was_refunded: Optional[Literal[True]] = None,
+        prize_description: Optional[str] = None
+    ):
+        self.chat = chat
+        self.giveaway_message_id = giveaway_message_id
+        self.winners_selection_date = winners_selection_date
+        self.winner_count = winner_count
+        self.winners = winners
+        self.additional_chat_count = additional_chat_count
+        self.premium_subscription_month_count = premium_subscription_month_count
+        self.unclaimed_prize_count = unclaimed_prize_count
+        self.only_new_members = only_new_members
+        self.was_refunded = was_refunded
+        self.prize_description = prize_description
+
+
 
 
 
@@ -6248,56 +6321,6 @@ It should be one of:
 '''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class GiveawayWinners(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#giveawaywinners
-
-    This object represents a message about the completion of a giveaway with public winners.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['giveaway_message_id'] = res.get('giveaway_message_id')
-        obj['winners_selection_date'] = res.get('winners_selection_date')
-        obj['winner_count'] = res.get('winner_count')
-        obj['winners'] = [User._dese(kwargs) for kwargs in res.get('winners')]
-        obj['additional_chat_count'] = res.get('additional_chat_count')
-        obj['premium_subscription_month_count'] = res.get('premium_subscription_month_count')
-        obj['unclaimed_prize_count'] = res.get('unclaimed_prize_count')
-        obj['only_new_members'] = res.get('only_new_members')
-        obj['was_refunded'] = res.get('was_refunded')
-        obj['prize_description'] = res.get('prize_description')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        giveaway_message_id: int,
-        winners_selection_date: int,
-        winner_count: int,
-        winners: list[User],
-        additional_chat_count: Optional[int] = None,
-        premium_subscription_month_count: Optional[int] = None,
-        unclaimed_prize_count: Optional[int] = None,
-        only_new_members: Optional[Literal[True]] = None,
-        was_refunded: Optional[Literal[True]] = None,
-        prize_description: Optional[str] = None
-    ):
-        self.chat = chat
-        self.giveaway_message_id = giveaway_message_id
-        self.winners_selection_date = winners_selection_date
-        self.winner_count = winner_count
-        self.winners = winners
-        self.additional_chat_count = additional_chat_count
-        self.premium_subscription_month_count = premium_subscription_month_count
-        self.unclaimed_prize_count = unclaimed_prize_count
-        self.only_new_members = only_new_members
-        self.was_refunded = was_refunded
-        self.prize_description = prize_description
 
 
 # MessageOrigin: 4 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~
