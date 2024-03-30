@@ -3071,6 +3071,49 @@ class InlineQueryResultAudio(TelegramType):
         self.input_message_content = input_message_content
 
 
+class InlineQueryResultCachedAudio(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
+
+    Represents a link to an MP3 audio file stored on the Telegram servers.
+    By default, this audio file will be sent by the user. Alternatively, you can use
+    *input_message_content* to send a message with the specified content instead of the audio.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param audio_file_id: A valid file identifier for the audio file.
+    :type audio_file_id: :obj:`str`
+    :param caption: Caption, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the audio caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the audio.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    '''
+    def __init__(
+        self,
+        id: str,
+        audio_file_id: str,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO
+        self.id = id
+        self.audio_file_id = audio_file_id
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
 
 
 
@@ -5782,34 +5825,6 @@ class InlineQueryResultCachedVoice(TelegramType):
         self.id = id
         self.voice_file_id = voice_file_id
         self.title = title
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-
-
-class InlineQueryResultCachedAudio(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultcachedaudio
-
-    Represents a link to an MP3 audio file stored on the Telegram servers.\n
-    By default, this audio file will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
-    '''
-    def __init__(
-        self,
-        id: str,
-        audio_file_id: str,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO
-        self.id = id
-        self.audio_file_id = audio_file_id
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
