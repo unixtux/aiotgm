@@ -2538,6 +2538,11 @@ class ForumTopicEdited(TelegramType):
     https://core.telegram.org/bots/api#forumtopicedited
 
     This object represents a service message about an edited forum topic.
+
+    :param name: New name of the topic, if it was edited.
+    :type name: :obj:`str`, optional
+    :param icon_custom_emoji_id: New identifier of the custom emoji shown as the topic icon, if it was edited; an empty string if the icon was removed.
+    :type icon_custom_emoji_id: :obj:`str`, optional
     '''
     @classmethod
     @_parse_result
