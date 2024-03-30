@@ -157,6 +157,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *message* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.Message` update.
 
         Usage:
 
@@ -186,6 +187,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *edited_message* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.Message` update.
 
         Usage:
 
@@ -215,6 +217,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *channel_post* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.Message` update.
 
         Usage:
 
@@ -244,6 +247,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *edited_channel_post* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.Message`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.Message` update.
 
         Usage:
 
@@ -273,6 +277,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *message_reaction* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.MessageReactionUpdated`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.MessageReactionUpdated` update.
 
         Usage:
 
@@ -302,6 +307,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *message_reaction_count* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.MessageReactionCountUpdated`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.MessageReactionCountUpdated` update.
 
         Usage:
 
@@ -331,6 +337,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *inline_query* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.InlineQuery`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.InlineQuery` update.
 
         Usage:
 
@@ -360,6 +367,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *chosen_inline_result* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChosenInlineResult`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.ChosenInlineResult` update.
 
         Usage:
 
@@ -389,6 +397,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *callback_query* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.CallbackQuery`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.CallbackQuery` update.
 
         Usage:
 
@@ -418,6 +427,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *shipping_query* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.ShippingQuery`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.ShippingQuery` update.
 
         Usage:
 
@@ -447,6 +457,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *pre_checkout_query* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.PreCheckoutQuery`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.PreCheckoutQuery` update.
 
         Usage:
 
@@ -476,6 +487,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *poll* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.Poll`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.Poll` update.
 
         Usage:
 
@@ -505,6 +517,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *poll_answer* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.PollAnswer`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.PollAnswer` update.
 
         Usage:
 
@@ -534,6 +547,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *my_chat_member* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatMemberUpdated`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.ChatMemberUpdated` update.
 
         Usage:
 
@@ -563,6 +577,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *chat_member* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatMemberUpdated`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.ChatMemberUpdated` update.
 
         Usage:
 
@@ -592,6 +607,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *chat_join_request* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatJoinRequest`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.ChatJoinRequest` update.
 
         Usage:
 
@@ -621,6 +637,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *chat_boost* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatBoostUpdated`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.ChatBoostUpdated` update.
 
         Usage:
 
@@ -650,6 +667,7 @@ class Client(TelegramApi):
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
         inside this decorator to manage an incoming *removed_chat_boost* :obj:`~aiotgm.types.Update`.
         The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.ChatBoostRemoved`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.ChatBoostRemoved` update.
 
         Usage:
 
