@@ -2508,6 +2508,40 @@ class GameHighScore(TelegramType):
         self.score = score
 
 
+class GeneralForumTopicHidden(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#generalforumtopichidden
+
+    This object represents a service message about General forum
+    topic hidden in the chat. Currently holds no information.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        ...
+
+
+class GeneralForumTopicUnhidden(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#generalforumtopicunhidden
+
+    This object represents a service message about General forum
+    topic unhidden in the chat. Currently holds no information.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        ...
+
+
 
 
 
@@ -3699,40 +3733,6 @@ class MessageAutoDeleteTimerChanged(TelegramType):
         message_auto_delete_time: int
     ):
         self.message_auto_delete_time = message_auto_delete_time
-
-
-class GeneralForumTopicHidden(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#generalforumtopichidden
-
-    This object represents a service message about General forum
-    topic hidden in the chat. Currently holds no information.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        ...
-
-
-class GeneralForumTopicUnhidden(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#generalforumtopicunhidden
-
-    This object represents a service message about General forum
-    topic unhidden in the chat. Currently holds no information.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        ...
 
 
 class UsersShared(TelegramType):
