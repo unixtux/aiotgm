@@ -2578,6 +2578,56 @@ class ForumTopicReopened(TelegramType):
         ...
 
 
+class Game(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#game
+
+    This object represents a game.
+    Use BotFather to create and edit games,
+    their short names will act as unique identifiers.
+
+    :param title: Title of the game.
+    :type title: :obj:`str`
+    :param description: Description of the game.
+    :type description: :obj:`str`
+    :param photo: Photo that will be displayed in the game message in chats.
+    :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`
+    :param text: Brief description of the game or high scores included in the game message. Can be automatically edited to include current high scores for the game when the bot calls :meth:`~aiotgm.Client.set_game_score`, or manually edited using :meth:`~aiotgm.Client.edit_message_text`. 0-4096 characters.
+    :type text: :obj:`str`, optional
+    :param text_entities: Special entities that appear in *text*, such as usernames, URLs, bot commands, etc.
+    :type text_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param animation: Animation that will be displayed in the game message in chats. Upload via `BotFather <https://t.me/botfather>`_.
+    :type animation: :obj:`~aiotgm.types.Animation`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['title'] = res.get('title')
+        obj['description'] = res.get('description')
+        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')]
+        obj['text'] = res.get('text')
+        obj['text_entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('text_entities')] if 'text_entities' in res else None
+        obj['animation'] = Animation._dese(res.get('animation'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        title: str,
+        description: str,
+        photo: list[PhotoSize],
+        text: Optional[str] = None,
+        text_entities: Optional[list[MessageEntity]] = None,
+        animation: Optional[Animation] = None
+    ):
+        self.title = title
+        self.description = description
+        self.photo = photo
+        self.text = text
+        self.text_entities = text_entities
+        self.animation = animation
+
+
 
 
 
@@ -6209,42 +6259,6 @@ It should be one of:
 '''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class Game(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#game
-
-    This object represents a game.\n
-    Use BotFather to create and edit games, their short names will act as unique identifiers.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['title'] = res.get('title')
-        obj['description'] = res.get('description')
-        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')]
-        obj['text'] = res.get('text')
-        obj['text_entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('text_entities')] if 'text_entities' in res else None
-        obj['animation'] = Animation._dese(res.get('animation'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        title: str,
-        description: str,
-        photo: list[PhotoSize],
-        text: Optional[str] = None,
-        text_entities: Optional[list[MessageEntity]] = None,
-        animation: Optional[Animation] = None
-    ):
-        self.title = title
-        self.description = description
-        self.photo = photo
-        self.text = text
-        self.text_entities = text_entities
-        self.animation = animation
 
 
 class GameHighScore(TelegramType):
