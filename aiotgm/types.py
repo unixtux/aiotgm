@@ -2483,6 +2483,23 @@ class ForumTopic(TelegramType):
         self.icon_custom_emoji_id = icon_custom_emoji_id
 
 
+class ForumTopicClosed(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#forumtopicclosed
+
+    This object represents a service message about a forum
+    topic closed in the chat. Currently holds no information.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        ...
+
+
 
 
 
@@ -3699,23 +3716,6 @@ class ForumTopicCreated(TelegramType):
         self.name = name
         self.icon_color = icon_color
         self.icon_custom_emoji_id = icon_custom_emoji_id
-
-
-class ForumTopicClosed(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#forumtopicclosed
-
-    This object represents a service message about a forum
-    topic closed in the chat. Currently holds no information.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        ...
 
 
 class ForumTopicEdited(TelegramType):
