@@ -2500,6 +2500,72 @@ class ForumTopicClosed(TelegramType):
         ...
 
 
+class ForumTopicCreated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#forumtopiccreated
+
+    This object represents a service message about a new forum topic created in the chat.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['name'] = res.get('name')
+        obj['icon_color'] = res.get('icon_color')
+        obj['icon_custom_emoji_id'] = res.get('icon_custom_emoji_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        name: str,
+        icon_color: int,
+        icon_custom_emoji_id: Optional[str] = None
+    ):
+        self.name = name
+        self.icon_color = icon_color
+        self.icon_custom_emoji_id = icon_custom_emoji_id
+
+
+class ForumTopicEdited(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#forumtopicedited
+
+    This object represents a service message about an edited forum topic.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['name'] = res.get('name')
+        obj['icon_custom_emoji_id'] = res.get('icon_custom_emoji_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        icon_custom_emoji_id: Optional[str] = None
+    ):
+        self.name = name
+        self.icon_custom_emoji_id = icon_custom_emoji_id
+
+
+class ForumTopicReopened(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#forumtopicreopened
+
+    This object represents a service message about a forum
+    topic reopened in the chat. Currently holds no information.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        ...
+
+
 
 
 
@@ -3690,72 +3756,6 @@ class MessageAutoDeleteTimerChanged(TelegramType):
         message_auto_delete_time: int
     ):
         self.message_auto_delete_time = message_auto_delete_time
-
-
-class ForumTopicCreated(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#forumtopiccreated
-
-    This object represents a service message about a new forum topic created in the chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['name'] = res.get('name')
-        obj['icon_color'] = res.get('icon_color')
-        obj['icon_custom_emoji_id'] = res.get('icon_custom_emoji_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        name: str,
-        icon_color: int,
-        icon_custom_emoji_id: Optional[str] = None
-    ):
-        self.name = name
-        self.icon_color = icon_color
-        self.icon_custom_emoji_id = icon_custom_emoji_id
-
-
-class ForumTopicEdited(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#forumtopicedited
-
-    This object represents a service message about an edited forum topic.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['name'] = res.get('name')
-        obj['icon_custom_emoji_id'] = res.get('icon_custom_emoji_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        name: Optional[str] = None,
-        icon_custom_emoji_id: Optional[str] = None
-    ):
-        self.name = name
-        self.icon_custom_emoji_id = icon_custom_emoji_id
-
-
-class ForumTopicReopened(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#forumtopicreopened
-
-    This object represents a service message about a forum
-    topic reopened in the chat. Currently holds no information.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        ...
 
 
 class GeneralForumTopicHidden(TelegramType):
