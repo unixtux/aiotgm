@@ -2962,6 +2962,59 @@ class InlineQuery(TelegramType):
         self.location = location
 
 
+class InlineQueryResultArticle(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultarticle
+
+    Represents a link to an article or web page.
+
+    :param id: Unique identifier for this result, 1-64 Bytes.
+    :type id: :obj:`str`
+    :param title: Title of the result.
+    :type title: :obj:`str`
+    :param input_message_content: Content of the message to be sent.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param url: URL of the result.
+    :type url: :obj:`str`, optional
+    :param hide_url: Pass :obj:`True` if you don't want the URL to be shown in the message.
+    :type hide_url: :obj:`bool`, optional
+    :param description: Short description of the result.
+    :type description: :obj:`str`, optional
+    :param thumbnail_url: Url of the thumbnail for the result.
+    :type thumbnail_url: :obj:`str`, optional
+    :param thumbnail_width: Thumbnail width.
+    :type thumbnail_width: :obj:`int`, optional
+    :param thumbnail_height: Thumbnail height.
+    :type thumbnail_height: :obj:`int`, optional
+    '''
+    def __init__(
+        self,
+        id: str,
+        title: str,
+        input_message_content: InputMessageContent,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        url: Optional[str] = None,
+        hide_url: Optional[bool] = None,
+        description: Optional[str] = None,
+        thumbnail_url: Optional[str] = None,
+        thumbnail_width: Optional[int] = None,
+        thumbnail_height: Optional[int] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_ARTICLE
+        self.id = id
+        self.title = title
+        self.input_message_content = input_message_content
+        self.reply_markup = reply_markup
+        self.url = url
+        self.hide_url = hide_url
+        self.description = description
+        self.thumbnail_url = thumbnail_url
+        self.thumbnail_width = thumbnail_width
+        self.thumbnail_height = thumbnail_height
+
+
 
 
 
@@ -5109,40 +5162,6 @@ Telegram clients currently support the following 5 types:
 '''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-# InlineQueryResult: 20 SUBCLASSES
-
-class InlineQueryResultArticle(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultarticle
-
-    Represents a link to an article or web page.
-    '''
-    def __init__(
-        self,
-        id: str,
-        title: str,
-        input_message_content: InputMessageContent,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        url: Optional[str] = None,
-        hide_url: Optional[bool] = None,
-        description: Optional[str] = None,
-        thumbnail_url: Optional[str] = None,
-        thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_ARTICLE
-        self.id = id
-        self.title = title
-        self.input_message_content = input_message_content
-        self.reply_markup = reply_markup
-        self.url = url
-        self.hide_url = hide_url
-        self.description = description
-        self.thumbnail_url = thumbnail_url
-        self.thumbnail_width = thumbnail_width
-        self.thumbnail_height = thumbnail_height
 
 
 class InlineQueryResultPhoto(TelegramType):
