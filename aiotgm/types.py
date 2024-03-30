@@ -2913,6 +2913,55 @@ class InlineKeyboardMarkup(TelegramType):
         self.inline_keyboard = keyboard
 
 
+class InlineQuery(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequery
+
+    This object represents an incoming inline query. When the user sends
+    an empty query, your bot could return some default or trending results.
+
+    :param id: Unique identifier for this query.
+    :type id: :obj:`str`
+    :param from_user: Sender.
+    :type from_user: :obj:`~aiotgm.types.User`
+    :param query: Text of the query (up to 256 characters).
+    :type query: :obj:`str`
+    :param offset: Offset of the results to be returned, can be controlled by the bot.
+    :type offset: :obj:`str`
+    :param chat_type: Type of the chat from which the inline query was sent. Can be either “sender” for a private chat with the inline query sender, “private”, “group”, “supergroup”, or “channel”. The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat.
+    :type chat_type: :obj:`str`, optional
+    :param location: Sender location, only for bots that request user location.
+    :type location: :obj:`~aiotgm.types.Location`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['from_user'] = User._dese(res.get('from_user'))
+        obj['query'] = res.get('query')
+        obj['offset'] = res.get('offset')
+        obj['chat_type'] = res.get('chat_type')
+        obj['location'] = Location._dese(res.get('location'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: str,
+        from_user: User,
+        query: str,
+        offset: str,
+        chat_type: Optional[str] = None,
+        location: Optional[Location] = None
+    ):
+        self.id = id
+        self.from_user = from_user
+        self.query = query
+        self.offset = offset
+        self.chat_type = chat_type
+        self.location = location
+
+
 
 
 
@@ -4877,42 +4926,6 @@ class InputSticker(TelegramType):
         self.emoji_list = emoji_list
         self.mask_position = mask_position
         self.keywords = keywords
-
-
-class InlineQuery(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequery
-
-    This object represents an incoming inline query.\n
-    When the user sends an empty query, your bot could return some default or trending results.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['id'] = res.get('id')
-        obj['from_user'] = User._dese(res.get('from_user'))
-        obj['query'] = res.get('query')
-        obj['offset'] = res.get('offset')
-        obj['chat_type'] = res.get('chat_type')
-        obj['location'] = Location._dese(res.get('location'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        id: str,
-        from_user: User,
-        query: str,
-        offset: str,
-        chat_type: Optional[str] = None,
-        location: Optional[Location] = None
-    ):
-        self.id = id
-        self.from_user = from_user
-        self.query = query
-        self.offset = offset
-        self.chat_type = chat_type
-        self.location = location
 
 
 class InlineQueryResultsButton(TelegramType):
