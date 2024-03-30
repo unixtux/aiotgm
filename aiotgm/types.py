@@ -2475,6 +2475,39 @@ class Game(TelegramType):
         self.animation = animation
 
 
+class GameHighScore(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#gamehighscore
+
+    This object represents one row of the high scores table for a game.
+
+    :param position: Position in high score table for the game.
+    :type position: :obj:`int`
+    :param user: User.
+    :type user: :obj:`~aiotgm.types.User`
+    :param score: Score.
+    :type score: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['position'] = res.get('position')
+        obj['user'] = User._dese(res.get('user'))
+        obj['score'] = res.get('score')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        position: int,
+        user: User,
+        score: int
+    ):
+        self.position = position
+        self.user = user
+        self.score = score
+
+
 
 
 
@@ -6107,32 +6140,6 @@ It should be one of:
 '''
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class GameHighScore(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#gamehighscore
-
-    This object represents one row of the high scores table for a game.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['position'] = res.get('position')
-        obj['user'] = User._dese(res.get('user'))
-        obj['score'] = res.get('score')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        position: int,
-        user: User,
-        score: int
-    ):
-        self.position = position
-        self.user = user
-        self.score = score
 
 
 class GiveawayCreated(TelegramType):
