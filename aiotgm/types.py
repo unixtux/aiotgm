@@ -2542,6 +2542,64 @@ class GeneralForumTopicUnhidden(TelegramType):
         ...
 
 
+class Giveaway(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#giveaway
+
+    This object represents a message about a scheduled giveaway.
+
+    :param chats: The list of chats which the user must join to participate in the giveaway.
+    :type chats: :obj:`list` of :obj:`~aiotgm.types.Chat`
+    :param winners_selection_date: Point in time (Unix timestamp) when winners of the giveaway will be selected.
+    :type winners_selection_date: :obj:`int`
+    :param winner_count: The number of users which are supposed to be selected as winners of the giveaway.
+    :type winner_count: :obj:`int`
+    :param only_new_members: :obj:`True`, if only users who join the chats after the giveaway started should be eligible to win.
+    :type only_new_members: :obj:`True`, optional
+    :param has_public_winners: :obj:`True`, if the list of giveaway winners will be visible to everyone
+    :type has_public_winners: :obj:`True`, optional
+    :param prize_description: Description of additional giveaway prize.
+    :type prize_description: :obj:`str`, optional
+    :param country_codes: A list of two-letter `ISO 3166-1 alpha-2 <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_ country codes indicating the countries from which eligible users for the giveaway must come. If empty, then all users can participate in the giveaway. Users with a phone number that was bought on Fragment can always participate in giveaways.
+    :type country_codes: :obj:`list` of :obj:`str`, optional
+    :param premium_subscription_month_count: The number of months the Telegram Premium subscription won from the giveaway will be active for.
+    :type premium_subscription_month_count: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chats'] = [Chat._dese(kwargs) for kwargs in res.get('chats')]
+        obj['winners_selection_date'] = res.get('winners_selection_date')
+        obj['winner_count'] = res.get('winner_count')
+        obj['only_new_members'] = res.get('only_new_members')
+        obj['has_public_winners'] = res.get('has_public_winners')
+        obj['prize_description'] = res.get('prize_description')
+        obj['country_codes'] = res.get('country_codes')
+        obj['premium_subscription_month_count'] = res.get('premium_subscription_month_count')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chats: list[Chat],
+        winners_selection_date: int,
+        winner_count: int,
+        only_new_members: Optional[Literal[True]] = None,
+        has_public_winners: Optional[Literal[True]] = None,
+        prize_description: Optional[str] = None,
+        country_codes: Optional[list[str]] = None,
+        premium_subscription_month_count: Optional[int] = None
+    ):
+        self.chats = chats
+        self.winners_selection_date = winners_selection_date
+        self.winner_count = winner_count
+        self.only_new_members = only_new_members
+        self.has_public_winners = has_public_winners
+        self.prize_description = prize_description
+        self.country_codes = country_codes
+        self.premium_subscription_month_count = premium_subscription_month_count
+
+
 
 
 
@@ -6232,47 +6290,6 @@ class GiveawayCompleted(TelegramType):
         self.winner_count = winner_count
         self.unclaimed_prize_count = unclaimed_prize_count
         self.giveaway_message = giveaway_message
-
-
-class Giveaway(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#giveaway
-
-    This object represents a message about a scheduled giveaway.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chats'] = [Chat._dese(kwargs) for kwargs in res.get('chats')]
-        obj['winners_selection_date'] = res.get('winners_selection_date')
-        obj['winner_count'] = res.get('winner_count')
-        obj['only_new_members'] = res.get('only_new_members')
-        obj['has_public_winners'] = res.get('has_public_winners')
-        obj['prize_description'] = res.get('prize_description')
-        obj['country_codes'] = res.get('country_codes')
-        obj['premium_subscription_month_count'] = res.get('premium_subscription_month_count')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chats: list[Chat],
-        winners_selection_date: int,
-        winner_count: int,
-        only_new_members: Optional[Literal[True]] = None,
-        has_public_winners: Optional[Literal[True]] = None,
-        prize_description: Optional[str] = None,
-        country_codes: Optional[list[str]] = None,
-        premium_subscription_month_count: Optional[int] = None
-    ):
-        self.chats = chats
-        self.winners_selection_date = winners_selection_date
-        self.winner_count = winner_count
-        self.only_new_members = only_new_members
-        self.has_public_winners = has_public_winners
-        self.prize_description = prize_description
-        self.country_codes = country_codes
-        self.premium_subscription_month_count = premium_subscription_month_count
 
 
 # MessageOrigin: 4 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~
