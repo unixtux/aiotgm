@@ -2445,6 +2445,44 @@ class ForceReply(TelegramType):
         self.selective = selective
 
 
+class ForumTopic(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#forumtopic
+
+    This object represents a forum topic.
+
+    :param message_thread_id: Unique identifier of the forum topic.
+    :type message_thread_id: :obj:`int`
+    :param name: Name of the topic.
+    :type name: :obj:`str`
+    :param icon_color: Color of the topic icon in RGB format.
+    :type icon_color: :obj:`int`
+    :param icon_custom_emoji_id: Unique identifier of the custom emoji shown as the topic icon.
+    :type icon_custom_emoji_id: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['message_thread_id'] = res.get('message_thread_id')
+        obj['name'] = res.get('name')
+        obj['icon_color'] = res.get('icon_color')
+        obj['icon_custom_emoji_id'] = res.get('icon_custom_emoji_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        message_thread_id: int,
+        name: str,
+        icon_color: int,
+        icon_custom_emoji_id: Optional[str] = None
+    ):
+        self.message_thread_id = message_thread_id
+        self.name = name
+        self.icon_color = icon_color
+        self.icon_custom_emoji_id = icon_custom_emoji_id
+
+
 
 
 
@@ -4243,35 +4281,6 @@ One of the following reply markups:
 - :obj:`~aiotgm.types.ReplyKeyboardRemove`
 - :obj:`~aiotgm.types.ForceReply`
 '''
-
-class ForumTopic(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#forumtopic
-
-    This object represents a forum topic.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['message_thread_id'] = res.get('message_thread_id')
-        obj['name'] = res.get('name')
-        obj['icon_color'] = res.get('icon_color')
-        obj['icon_custom_emoji_id'] = res.get('icon_custom_emoji_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        message_thread_id: int,
-        name: str,
-        icon_color: int,
-        icon_custom_emoji_id: Optional[str] = None
-    ):
-        self.message_thread_id = message_thread_id
-        self.name = name
-        self.icon_color = icon_color
-        self.icon_custom_emoji_id = icon_custom_emoji_id
-
 
 # MenuButton: 3 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
