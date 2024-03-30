@@ -3015,6 +3015,62 @@ class InlineQueryResultArticle(TelegramType):
         self.thumbnail_height = thumbnail_height
 
 
+class InlineQueryResultAudio(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultaudio
+
+    Represents a link to an MP3 audio file.
+    By default, this audio file will be sent by the user.
+    Alternatively, you can use *input_message_content* to send
+    a message with the specified content instead of the audio.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param audio_url: A valid URL for the audio file.
+    :type audio_url: :obj:`str`
+    :param title: Title.
+    :type title: :obj:`str`
+    :param caption: Caption, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the audio caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param performer: Performer.
+    :type performer: :obj:`str`, optional
+    :param audio_duration: Audio duration in seconds.
+    :type audio_duration: :obj:`int`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the audio.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    '''
+    def __init__(
+        self,
+        id: str,
+        audio_url: str,
+        title: str,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        performer: Optional[str] = None,
+        audio_duration: Optional[int] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_AUDIO
+        self.id = id
+        self.audio_url = audio_url
+        self.title = title
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.performer = performer
+        self.audio_duration = audio_duration
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
 
 
 
@@ -5318,39 +5374,6 @@ class InlineQueryResultVideo(TelegramType):
         self.video_height = video_height
         self.video_duration = video_duration
         self.description = description
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-
-
-class InlineQueryResultAudio(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultaudio
-
-    Represents a link to an MP3 audio file. By default, this audio file will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the audio.
-    '''
-    def __init__(
-        self,
-        id: str,
-        audio_url: str,
-        title: str,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        performer: Optional[str] = None,
-        audio_duration: Optional[int] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_AUDIO
-        self.id = id
-        self.audio_url = audio_url
-        self.title = title
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.performer = performer
-        self.audio_duration = audio_duration
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
