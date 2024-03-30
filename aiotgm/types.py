@@ -388,8 +388,6 @@ class BotCommand(TelegramType):
         self.description = description
 
 
-# BotCommandScope: 7 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~
-
 class BotCommandScopeAllChatAdministrators(TelegramType):
     '''
     https://core.telegram.org/bots/api#botcommandscopeallchatadministrators
@@ -484,61 +482,6 @@ class BotCommandScopeDefault(TelegramType):
     '''
     def __init__(self):
         self.type = DEFAULT_BOT_COMMAND_SCOPE_DEFAULT
-
-
-BotCommandScope = Union[
-    BotCommandScopeDefault,
-    BotCommandScopeAllPrivateChats,
-    BotCommandScopeAllGroupChats,
-    BotCommandScopeAllChatAdministrators,
-    BotCommandScopeChat,
-    BotCommandScopeChatAdministrators,
-    BotCommandScopeChatMember
-]
-'''
-https://core.telegram.org/bots/api#botcommandscope
-
-This object represents the scope to which bot commands are applied.
-Currently, the following 7 scopes are supported:
-
-- :obj:`~aiotgm.types.BotCommandScopeDefault`
-- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
-- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
-- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators`
-- :obj:`~aiotgm.types.BotCommandScopeChat`
-- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators`
-- :obj:`~aiotgm.types.BotCommandScopeChatMember`
-
-**Determining list of commands**
-
-The following algorithm is used to determine the list of commands for a particular user viewing the bot menu. The first list of commands which is set is returned:
-
-**Commands in the chat with the bot**
-
-- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeChat`
-- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
-- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeDefault`
-
-**Commands in group and supergroup chats**
-
-- :obj:`~aiotgm.types.BotCommandScopeChatMember` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeChatMember`
-- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` + language_code (administrators only)
-- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` (administrators only)
-- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeChat`
-- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` + language_code (administrators only)
-- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` (administrators only)
-- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
-- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
-- :obj:`~aiotgm.types.BotCommandScopeDefault`
-
-'''
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class BotDescription(TelegramType):
@@ -1080,8 +1023,6 @@ class ChatBoostRemoved(TelegramType):
         self.source = source
 
 
-# ChatBoostSource: 3 SUBCLASSES ~~~~~~~~~~~~
-
 class ChatBoostSourceGiftCode(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatboostsourcegiftcode
@@ -1165,42 +1106,6 @@ class ChatBoostSourcePremium(TelegramType):
     ):
         self.source = DEFAULT_CHAT_BOOST_SOURCE_PREMIUM
         self.user = user
-
-
-ChatBoostSource = Union[ChatBoostSourcePremium, ChatBoostSourceGiftCode, ChatBoostSourceGiveaway]
-'''
-https://core.telegram.org/bots/api#chatboostsource
-
-This object describes the source of a chat boost. It can be one of:
-
-- :obj:`~aiotgm.types.ChatBoostSourcePremium`
-- :obj:`~aiotgm.types.ChatBoostSourceGiftCode`
-- :obj:`~aiotgm.types.ChatBoostSourceGiveaway`
-'''
-
-def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]:
-    '''
-    Function to deserialize ChatBoostSource.
-    '''
-    if res is None: return None
-    obj = _check_dict(res)
-
-    source = obj.pop('source')
-
-    if source == DEFAULT_CHAT_BOOST_SOURCE_PREMIUM:
-        return ChatBoostSourcePremium._dese(obj, check_dict=False)
-
-    elif source == DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE:
-        return ChatBoostSourceGiftCode._dese(obj, check_dict=False)
-
-    elif source == DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY:
-        return ChatBoostSourceGiveaway._dese(obj, check_dict=False)
-    else:
-        raise ValueError(
-            'An error occurred during the deserialization of the'
-            f' type ChatBoostSource. Invalid source: {source!r}.'
-        )
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChatBoostUpdated(TelegramType):
@@ -1369,8 +1274,6 @@ class ChatLocation(TelegramType):
         self.location = location
         self.address = address
 
-
-# ChatMember: 6 SUBCLASSES ~~~~~~~~~~~~~~~~~
 
 class ChatMemberAdministrator(TelegramType):
     '''
@@ -1694,62 +1597,6 @@ class ChatMemberRestricted(TelegramType):
         self.can_pin_messages = can_pin_messages
         self.can_manage_topics = can_manage_topics
         self.until_date = until_date
-
-
-ChatMember = Union[
-    ChatMemberOwner,
-    ChatMemberAdministrator,
-    ChatMemberMember,
-    ChatMemberRestricted,
-    ChatMemberLeft,
-    ChatMemberBanned
-]
-'''
-https://core.telegram.org/bots/api#chatmember
-
-This object contains information about one member of a chat.
-Currently, the following 6 types of chat members are supported:
-
-- :obj:`~aiotgm.types.ChatMemberOwner`
-- :obj:`~aiotgm.types.ChatMemberAdministrator`
-- :obj:`~aiotgm.types.ChatMemberMember`
-- :obj:`~aiotgm.types.ChatMemberRestricted`
-- :obj:`~aiotgm.types.ChatMemberLeft`
-- :obj:`~aiotgm.types.ChatMemberBanned`
-'''
-
-def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
-    '''
-    Function to deserialize ChatMember.
-    '''
-    if res is None: return None
-    obj = _check_dict(res)        
-
-    status = obj.pop('status')
-
-    if status == DEFAULT_CHAT_MEMBER_OWNER:
-        return ChatMemberOwner._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
-        return ChatMemberAdministrator._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_MEMBER:
-        return ChatMemberMember._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
-        return ChatMemberRestricted._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_LEFT:
-        return ChatMemberLeft._dese(obj, check_dict=False)
-
-    elif status == DEFAULT_CHAT_MEMBER_BANNED:
-        return ChatMemberBanned._dese(obj, check_dict=False)
-    else:
-        raise ValueError(
-            'An error occurred during the deserialization'
-            f' of the type ChatMember. Invalid status: {status!r}.'
-        )
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ChatMemberUpdated(TelegramType):
@@ -2626,6 +2473,7 @@ class Game(TelegramType):
         self.text = text
         self.text_entities = text_entities
         self.animation = animation
+
 
 
 
@@ -6668,3 +6516,150 @@ class Update(TelegramType):
         self.chat_join_request = chat_join_request
         self.chat_boost = chat_boost
         self.removed_chat_boost = removed_chat_boost
+
+
+BotCommandScope = Union[
+    BotCommandScopeDefault,
+    BotCommandScopeAllPrivateChats,
+    BotCommandScopeAllGroupChats,
+    BotCommandScopeAllChatAdministrators,
+    BotCommandScopeChat,
+    BotCommandScopeChatAdministrators,
+    BotCommandScopeChatMember
+]
+'''
+https://core.telegram.org/bots/api#botcommandscope
+
+This object represents the scope to which bot commands are applied.
+Currently, the following 7 scopes are supported:
+
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators`
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators`
+- :obj:`~aiotgm.types.BotCommandScopeChatMember`
+
+**Determining list of commands**
+
+The following algorithm is used to determine the list of commands for a particular user viewing the bot menu. The first list of commands which is set is returned:
+
+**Commands in the chat with the bot**
+
+- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeAllPrivateChats`
+- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+
+**Commands in group and supergroup chats**
+
+- :obj:`~aiotgm.types.BotCommandScopeChatMember` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChatMember`
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` + language_code (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeChatAdministrators` (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeChat` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeChat`
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` + language_code (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeAllChatAdministrators` (administrators only)
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeAllGroupChats`
+- :obj:`~aiotgm.types.BotCommandScopeDefault` + language_code
+- :obj:`~aiotgm.types.BotCommandScopeDefault`
+
+'''
+
+
+ChatBoostSource = Union[ChatBoostSourcePremium, ChatBoostSourceGiftCode, ChatBoostSourceGiveaway]
+'''
+https://core.telegram.org/bots/api#chatboostsource
+
+This object describes the source of a chat boost. It can be one of:
+
+- :obj:`~aiotgm.types.ChatBoostSourcePremium`
+- :obj:`~aiotgm.types.ChatBoostSourceGiftCode`
+- :obj:`~aiotgm.types.ChatBoostSourceGiveaway`
+'''
+
+
+def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]:
+    '''
+    Function to deserialize ChatBoostSource.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    source = obj.pop('source')
+
+    if source == DEFAULT_CHAT_BOOST_SOURCE_PREMIUM:
+        return ChatBoostSourcePremium._dese(obj, check_dict=False)
+
+    elif source == DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE:
+        return ChatBoostSourceGiftCode._dese(obj, check_dict=False)
+
+    elif source == DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY:
+        return ChatBoostSourceGiveaway._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization of the'
+            f' type ChatBoostSource. Invalid source: {source!r}.'
+        )
+
+
+ChatMember = Union[
+    ChatMemberOwner,
+    ChatMemberAdministrator,
+    ChatMemberMember,
+    ChatMemberRestricted,
+    ChatMemberLeft,
+    ChatMemberBanned
+]
+'''
+https://core.telegram.org/bots/api#chatmember
+
+This object contains information about one member of a chat.
+Currently, the following 6 types of chat members are supported:
+
+- :obj:`~aiotgm.types.ChatMemberOwner`
+- :obj:`~aiotgm.types.ChatMemberAdministrator`
+- :obj:`~aiotgm.types.ChatMemberMember`
+- :obj:`~aiotgm.types.ChatMemberRestricted`
+- :obj:`~aiotgm.types.ChatMemberLeft`
+- :obj:`~aiotgm.types.ChatMemberBanned`
+'''
+
+def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
+    '''
+    Function to deserialize ChatMember.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)        
+
+    status = obj.pop('status')
+
+    if status == DEFAULT_CHAT_MEMBER_OWNER:
+        return ChatMemberOwner._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_ADMINISTRATOR:
+        return ChatMemberAdministrator._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_MEMBER:
+        return ChatMemberMember._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_RESTRICTED:
+        return ChatMemberRestricted._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_LEFT:
+        return ChatMemberLeft._dese(obj, check_dict=False)
+
+    elif status == DEFAULT_CHAT_MEMBER_BANNED:
+        return ChatMemberBanned._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type ChatMember. Invalid status: {status!r}.'
+        )
+
+
