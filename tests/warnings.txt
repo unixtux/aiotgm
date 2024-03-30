@@ -15,13 +15,17 @@ ChatMemberMember: 'status' is not in __init__() and 'status' default value is: D
 ChatMemberOwner: 'status' is not in __init__() and 'status' default value is: DEFAULT_CHAT_MEMBER_OWNER
 ChatMemberRestricted: 'status' is not in __init__() and 'status' default value is: DEFAULT_CHAT_MEMBER_RESTRICTED
 ForceReply: 'force_reply: Literal[True]' is not in __init__() and 'force_reply: Literal[True]' default value is: True
+InlineKeyboardMarkup: 'inline_keyboard' default value is: inline_keyboard or []
+InlineQueryResultArticle: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE
+InlineQueryResultAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO
+InlineQueryResultCachedAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO
+InlineQueryResultCachedDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT
 InputFile: Not found InputFile.file_name and Not found InputFile.hide_name
 Message: 'text' default value is: text or str() # If not text, it's str() instead of None
 ReactionTypeEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_EMOJI
 ReactionTypeCustomEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
 ReplyKeyboardMarkup: 'keyboard' default value is: keyboard or []
 ReplyKeyboardRemove: 'remove_keyboard: Literal[True]' is not in __init__() and 'remove_keyboard: Literal[True]' default value is: True
-InlineKeyboardMarkup: 'inline_keyboard' default value is: inline_keyboard or []
 MenuButtonCommands: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_COMMANDS
 MenuButtonWebApp: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP
 MenuButtonDefault: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_DEFAULT
@@ -30,12 +34,10 @@ InputMediaVideo: 'type' is not in __init__() and 'type' default value is: DEFAUL
 InputMediaAnimation: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_ANIMATION
 InputMediaAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_AUDIO
 InputMediaDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT
-InlineQueryResultArticle: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE
 InlineQueryResultPhoto: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO
 InlineQueryResultGif: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GIF
 InlineQueryResultMpeg4Gif: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF
 InlineQueryResultVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO
-InlineQueryResultAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO
 InlineQueryResultVoice: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE
 InlineQueryResultDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT
 InlineQueryResultLocation: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION
@@ -46,10 +48,8 @@ InlineQueryResultCachedPhoto: 'type' is not in __init__() and 'type' default val
 InlineQueryResultCachedGif: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF
 InlineQueryResultCachedMpeg4Gif: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF
 InlineQueryResultCachedSticker: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER
-InlineQueryResultCachedDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT
 InlineQueryResultCachedVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO
 InlineQueryResultCachedVoice: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE
-InlineQueryResultCachedAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO
 PassportElementErrorDataField: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD
 PassportElementErrorFrontSide: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE
 PassportElementErrorReverseSide: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE

@@ -1319,6 +1319,380 @@
         "has_dese": true,
         "kwargs": {}
     },
+    "Giveaway": {
+        "link": "https://core.telegram.org/bots/api#giveaway",
+        "has_dese": true,
+        "kwargs": {
+            "chats": {
+                "type_hint": "list[Chat]"
+            },
+            "winners_selection_date": {
+                "type_hint": "int"
+            },
+            "winner_count": {
+                "type_hint": "int"
+            },
+            "only_new_members": {
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
+            },
+            "has_public_winners": {
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
+            },
+            "prize_description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "country_codes": {
+                "type_hint": "Optional[list[str]]",
+                "default": null
+            },
+            "premium_subscription_month_count": {
+                "type_hint": "Optional[int]",
+                "default": null
+            }
+        }
+    },
+    "GiveawayCompleted": {
+        "link": "https://core.telegram.org/bots/api#giveawaycompleted",
+        "has_dese": true,
+        "kwargs": {
+            "winner_count": {
+                "type_hint": "int"
+            },
+            "unclaimed_prize_count": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "giveaway_message": {
+                "type_hint": "Optional[Message]",
+                "default": null
+            }
+        }
+    },
+    "GiveawayCreated": {
+        "link": "https://core.telegram.org/bots/api#giveawaycreated",
+        "has_dese": true,
+        "kwargs": {}
+    },
+    "GiveawayWinners": {
+        "link": "https://core.telegram.org/bots/api#giveawaywinners",
+        "has_dese": true,
+        "kwargs": {
+            "chat": {
+                "type_hint": "Chat"
+            },
+            "giveaway_message_id": {
+                "type_hint": "int"
+            },
+            "winners_selection_date": {
+                "type_hint": "int"
+            },
+            "winner_count": {
+                "type_hint": "int"
+            },
+            "winners": {
+                "type_hint": "list[User]"
+            },
+            "additional_chat_count": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "premium_subscription_month_count": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "unclaimed_prize_count": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "only_new_members": {
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
+            },
+            "was_refunded": {
+                "type_hint": "Optional[Literal[True]]",
+                "default": null
+            },
+            "prize_description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            }
+        }
+    },
+    "InaccessibleMessage": {
+        "link": "https://core.telegram.org/bots/api#inaccessiblemessage",
+        "has_dese": true,
+        "kwargs": {
+            "chat": {
+                "type_hint": "Chat"
+            },
+            "message_id": {
+                "type_hint": "int"
+            },
+            "date": {
+                "type_hint": "int"
+            }
+        }
+    },
+    "InlineKeyboardButton": {
+        "link": "https://core.telegram.org/bots/api#inlinekeyboardbutton",
+        "has_dese": true,
+        "kwargs": {
+            "text": {
+                "type_hint": "str"
+            },
+            "url": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "callback_data": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "web_app": {
+                "type_hint": "Optional[WebAppInfo]",
+                "default": null
+            },
+            "login_url": {
+                "type_hint": "Optional[LoginUrl]",
+                "default": null
+            },
+            "switch_inline_query": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "switch_inline_query_current_chat": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "switch_inline_query_chosen_chat": {
+                "type_hint": "Optional[SwitchInlineQueryChosenChat]",
+                "default": null
+            },
+            "callback_game": {
+                "type_hint": "Optional[CallbackGame]",
+                "default": null
+            },
+            "pay": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            }
+        }
+    },
+    "InlineKeyboardMarkup": {
+        "link": "https://core.telegram.org/bots/api#inlinekeyboardmarkup",
+        "has_dese": true,
+        "warnings": [
+            "'inline_keyboard' default value is: inline_keyboard or []"
+        ],
+        "kwargs": {
+            "inline_keyboard": {
+                "type_hint": "Optional[list[list[InlineKeyboardButton]]]",
+                "default": null
+            }
+        }
+    },
+    "InlineQuery": {
+        "link": "https://core.telegram.org/bots/api#inlinequery",
+        "has_dese": true,
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "from_user": {
+                "type_hint": "User"
+            },
+            "query": {
+                "type_hint": "str"
+            },
+            "offset": {
+                "type_hint": "str"
+            },
+            "chat_type": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "location": {
+                "type_hint": "Optional[Location]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultArticle": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultarticle",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "input_message_content": {
+                "type_hint": "InputMessageContent"
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "url": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "hide_url": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
+            "description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "thumbnail_url": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "thumbnail_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "thumbnail_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultAudio": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultaudio",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "audio_url": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "performer": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "audio_duration": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultCachedAudio": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedaudio",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "audio_file_id": {
+                "type_hint": "str"
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultCachedDocument": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcacheddocument",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "document_file_id": {
+                "type_hint": "str"
+            },
+            "description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
     "SwitchInlineQueryChosenChat": {
         "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
         "has_dese": true,
@@ -1553,21 +1927,6 @@
             "quote_position": {
                 "type_hint": "Optional[int]",
                 "default": null
-            }
-        }
-    },
-    "InaccessibleMessage": {
-        "link": "https://core.telegram.org/bots/api#inaccessiblemessage",
-        "has_dese": true,
-        "kwargs": {
-            "chat": {
-                "type_hint": "Chat"
-            },
-            "message_id": {
-                "type_hint": "int"
-            },
-            "date": {
-                "type_hint": "int"
             }
         }
     },
@@ -2506,64 +2865,6 @@
             }
         }
     },
-    "InlineKeyboardButton": {
-        "link": "https://core.telegram.org/bots/api#inlinekeyboardbutton",
-        "has_dese": true,
-        "kwargs": {
-            "text": {
-                "type_hint": "str"
-            },
-            "url": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "callback_data": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "web_app": {
-                "type_hint": "Optional[WebAppInfo]",
-                "default": null
-            },
-            "login_url": {
-                "type_hint": "Optional[LoginUrl]",
-                "default": null
-            },
-            "switch_inline_query": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "switch_inline_query_current_chat": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "switch_inline_query_chosen_chat": {
-                "type_hint": "Optional[SwitchInlineQueryChosenChat]",
-                "default": null
-            },
-            "callback_game": {
-                "type_hint": "Optional[CallbackGame]",
-                "default": null
-            },
-            "pay": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            }
-        }
-    },
-    "InlineKeyboardMarkup": {
-        "link": "https://core.telegram.org/bots/api#inlinekeyboardmarkup",
-        "has_dese": true,
-        "warnings": [
-            "'inline_keyboard' default value is: inline_keyboard or []"
-        ],
-        "kwargs": {
-            "inline_keyboard": {
-                "type_hint": "Optional[list[list[InlineKeyboardButton]]]",
-                "default": null
-            }
-        }
-    },
     "MenuButtonCommands": {
         "link": "https://core.telegram.org/bots/api#menubuttoncommands",
         "has_dese": true,
@@ -2934,32 +3235,6 @@
             }
         }
     },
-    "InlineQuery": {
-        "link": "https://core.telegram.org/bots/api#inlinequery",
-        "has_dese": true,
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "from_user": {
-                "type_hint": "User"
-            },
-            "query": {
-                "type_hint": "str"
-            },
-            "offset": {
-                "type_hint": "str"
-            },
-            "chat_type": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "location": {
-                "type_hint": "Optional[Location]",
-                "default": null
-            }
-        }
-    },
     "InlineQueryResultsButton": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultsbutton",
         "has_dese": false,
@@ -3156,53 +3431,6 @@
             },
             "is_flexible": {
                 "type_hint": "Optional[bool]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultArticle": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultarticle",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_ARTICLE"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "input_message_content": {
-                "type_hint": "InputMessageContent"
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "url": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "hide_url": {
-                "type_hint": "Optional[bool]",
-                "default": null
-            },
-            "description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "thumbnail_url": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "thumbnail_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "thumbnail_height": {
-                "type_hint": "Optional[int]",
                 "default": null
             }
         }
@@ -3429,53 +3657,6 @@
             },
             "description": {
                 "type_hint": "Optional[str]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultAudio": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultaudio",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "audio_url": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "performer": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "audio_duration": {
-                "type_hint": "Optional[int]",
                 "default": null
             },
             "reply_markup": {
@@ -3923,49 +4104,6 @@
             }
         }
     },
-    "InlineQueryResultCachedDocument": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcacheddocument",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "document_file_id": {
-                "type_hint": "str"
-            },
-            "description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
     "InlineQueryResultCachedVideo": {
         "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvideo",
         "has_dese": false,
@@ -4024,42 +4162,6 @@
                 "type_hint": "str"
             },
             "title": {
-                "type_hint": "str"
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultCachedAudio": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedaudio",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "audio_file_id": {
                 "type_hint": "str"
             },
             "caption": {
@@ -4453,108 +4555,6 @@
             },
             "message": {
                 "type_hint": "str"
-            }
-        }
-    },
-    "GiveawayCreated": {
-        "link": "https://core.telegram.org/bots/api#giveawaycreated",
-        "has_dese": true,
-        "kwargs": {}
-    },
-    "GiveawayWinners": {
-        "link": "https://core.telegram.org/bots/api#giveawaywinners",
-        "has_dese": true,
-        "kwargs": {
-            "chat": {
-                "type_hint": "Chat"
-            },
-            "giveaway_message_id": {
-                "type_hint": "int"
-            },
-            "winners_selection_date": {
-                "type_hint": "int"
-            },
-            "winner_count": {
-                "type_hint": "int"
-            },
-            "winners": {
-                "type_hint": "list[User]"
-            },
-            "additional_chat_count": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "premium_subscription_month_count": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "unclaimed_prize_count": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "only_new_members": {
-                "type_hint": "Optional[Literal[True]]",
-                "default": null
-            },
-            "was_refunded": {
-                "type_hint": "Optional[Literal[True]]",
-                "default": null
-            },
-            "prize_description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            }
-        }
-    },
-    "GiveawayCompleted": {
-        "link": "https://core.telegram.org/bots/api#giveawaycompleted",
-        "has_dese": true,
-        "kwargs": {
-            "winner_count": {
-                "type_hint": "int"
-            },
-            "unclaimed_prize_count": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "giveaway_message": {
-                "type_hint": "Optional[Message]",
-                "default": null
-            }
-        }
-    },
-    "Giveaway": {
-        "link": "https://core.telegram.org/bots/api#giveaway",
-        "has_dese": true,
-        "kwargs": {
-            "chats": {
-                "type_hint": "list[Chat]"
-            },
-            "winners_selection_date": {
-                "type_hint": "int"
-            },
-            "winner_count": {
-                "type_hint": "int"
-            },
-            "only_new_members": {
-                "type_hint": "Optional[Literal[True]]",
-                "default": null
-            },
-            "has_public_winners": {
-                "type_hint": "Optional[Literal[True]]",
-                "default": null
-            },
-            "prize_description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "country_codes": {
-                "type_hint": "Optional[list[str]]",
-                "default": null
-            },
-            "premium_subscription_month_count": {
-                "type_hint": "Optional[int]",
-                "default": null
             }
         }
     },
