@@ -2600,6 +2600,56 @@ class Giveaway(TelegramType):
         self.premium_subscription_month_count = premium_subscription_month_count
 
 
+class GiveawayCompleted(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#giveawaycompleted
+
+    This object represents a service message about the completion of a giveaway without public winners.
+
+    :param winner_count: Number of winners in the giveaway.
+    :type winner_count: :obj:`int`
+    :param unclaimed_prize_count: Number of undistributed prizes.
+    :type unclaimed_prize_count: :obj:`int`, optional
+    :param giveaway_message: Message with the giveaway that was completed, if it wasn't deleted.
+    :type giveaway_message: :obj:`~aiotgm.types.Message`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['winner_count'] = res.get('winner_count')
+        obj['unclaimed_prize_count'] = res.get('unclaimed_prize_count')
+        obj['giveaway_message'] = Message._dese(res.get('giveaway_message'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        winner_count: int,
+        unclaimed_prize_count: Optional[int] = None,
+        giveaway_message: Optional[Message] = None
+    ):
+        self.winner_count = winner_count
+        self.unclaimed_prize_count = unclaimed_prize_count
+        self.giveaway_message = giveaway_message
+
+
+class GiveawayCreated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#giveawaycreated
+
+    This object represents a service message about the creation
+    of a scheduled giveaway. Currently holds no information.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        ...
+
+
 
 
 
@@ -6200,22 +6250,6 @@ It should be one of:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-class GiveawayCreated(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#giveawaycreated
-
-    This object represents a service message about the creation of a scheduled giveaway. Currently holds no information.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        ...
-
-
 class GiveawayWinners(TelegramType):
     '''
     https://core.telegram.org/bots/api#giveawaywinners
@@ -6264,32 +6298,6 @@ class GiveawayWinners(TelegramType):
         self.only_new_members = only_new_members
         self.was_refunded = was_refunded
         self.prize_description = prize_description
-
-
-class GiveawayCompleted(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#giveawaycompleted
-
-    This object represents a service message about the completion of a giveaway without public winners.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['winner_count'] = res.get('winner_count')
-        obj['unclaimed_prize_count'] = res.get('unclaimed_prize_count')
-        obj['giveaway_message'] = Message._dese(res.get('giveaway_message'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        winner_count: int,
-        unclaimed_prize_count: Optional[int] = None,
-        giveaway_message: Optional[Message] = None
-    ):
-        self.winner_count = winner_count
-        self.unclaimed_prize_count = unclaimed_prize_count
-        self.giveaway_message = giveaway_message
 
 
 # MessageOrigin: 4 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~
