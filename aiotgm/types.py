@@ -2505,6 +2505,13 @@ class ForumTopicCreated(TelegramType):
     https://core.telegram.org/bots/api#forumtopiccreated
 
     This object represents a service message about a new forum topic created in the chat.
+
+    :param name: Name of the topic.
+    :type name: :obj:`str`
+    :param icon_color: Color of the topic icon in RGB format.
+    :type icon_color: :obj:`int`
+    :param icon_custom_emoji_id: Unique identifier of the custom emoji shown as the topic icon.
+    :type icon_custom_emoji_id: :obj:`str`, optional
     '''
     @classmethod
     @_parse_result
