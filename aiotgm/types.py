@@ -2756,6 +2756,84 @@ class InaccessibleMessage(TelegramType):
         self.date = date
 
 
+class InlineKeyboardButton(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinekeyboardbutton
+
+    This object represents one button of an inline keyboard.
+    You **must** use exactly one of the optional fields.
+
+    :param text: Label text on the button.
+    :type text: :obj:`str`
+    :param url: HTTP or tg:// URL to be opened when the button is pressed. Links ``tg://user?id=<user_id>`` can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings.
+    :type url: :obj:`str`, optional
+    :param callback_data: Data to be sent in a :obj:`callback query <aiotgm.types.CallbackQuery>` to the bot when button is pressed, 1-64 bytes.
+    :type callback_data: :obj:`str`, optional
+    :param web_app: Description of the `Web App <https://core.telegram.org/bots/webapps>`_ that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method :meth:`~aiotgm.Client.answer_web_app_query`. Available only in private chats between a user and the bot.
+    :type web_app: :obj:`~aiotgm.types.WebAppInfo`, optional
+    :param login_url: An HTTPS URL used to automatically authorize the user. Can be used as a replacement for the `Telegram Login Widget <https://core.telegram.org/widgets/login>`_.
+    :type login_url: :obj:`~aiotgm.types.LoginUrl`, optional
+    :param switch_inline_query: If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted.
+    :type switch_inline_query: :obj:`str`, optional
+    :param switch_inline_query_current_chat:
+        If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted.
+
+        This offers a quick way for the user to open your bot in inline mode in the same chat - good for selecting something from multiple options.
+    :type switch_inline_query_current_chat: :obj:`str`, optional
+    :param switch_inline_query_chosen_chat: If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field.
+    :type switch_inline_query_chosen_chat: :obj:`~aiotgm.types.SwitchInlineQueryChosenChat`, optional
+    :param callback_game:
+        Description of the game that will be launched when the user presses the button.
+
+        **NOTE**: This type of button **must** always be the first button in the first row.
+    :type callback_game: :obj:`~aiotgm.types.CallbackGame`, optional
+    :param pay:
+        Specify :obj:`True`, to send a `Pay button <https://core.telegram.org/bots/api#payments>`_.
+
+        **NOTE**: This type of button **must** always be the first button in the first row and can only be used in invoice messages.
+    :type pay: :obj:`bool`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['text'] = res.get('text')
+        obj['url'] = res.get('url')
+        obj['callback_data'] = res.get('callback_data')
+        obj['web_app'] = WebAppInfo._dese(res.get('web_app'))
+        obj['login_url'] = LoginUrl._dese(res.get('login_url'))
+        obj['switch_inline_query'] = res.get('switch_inline_query')
+        obj['switch_inline_query_current_chat'] = res.get('switch_inline_query_current_chat')
+        obj['switch_inline_query_chosen_chat'] = SwitchInlineQueryChosenChat._dese(res.get('switch_inline_query_chosen_chat'))
+        obj['callback_game'] = CallbackGame._dese(res.get('callback_game'))
+        obj['pay'] = res.get('pay')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        text: str,
+        url: Optional[str] = None,
+        callback_data: Optional[str] = None,
+        web_app: Optional[WebAppInfo] = None, 
+        login_url: Optional[LoginUrl] = None,
+        switch_inline_query: Optional[str] = None,
+        switch_inline_query_current_chat: Optional[str] = None,
+        switch_inline_query_chosen_chat: Optional[SwitchInlineQueryChosenChat] = None,
+        callback_game: Optional[CallbackGame] = None,
+        pay: Optional[bool] = None
+    ):
+        self.text = text
+        self.url = url
+        self.callback_data = callback_data
+        self.web_app = web_app
+        self.login_url = login_url
+        self.switch_inline_query = switch_inline_query
+        self.switch_inline_query_current_chat = switch_inline_query_current_chat
+        self.switch_inline_query_chosen_chat = switch_inline_query_chosen_chat
+        self.callback_game = callback_game
+        self.pay = pay
+
+
 
 
 
@@ -4278,53 +4356,6 @@ class ReplyKeyboardRemove(TelegramType):
     ):
         self.remove_keyboard: Literal[True] = True
         self.selective = selective
-
-
-class InlineKeyboardButton(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinekeyboardbutton
-
-    This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['text'] = res.get('text')
-        obj['url'] = res.get('url')
-        obj['callback_data'] = res.get('callback_data')
-        obj['web_app'] = WebAppInfo._dese(res.get('web_app'))
-        obj['login_url'] = LoginUrl._dese(res.get('login_url'))
-        obj['switch_inline_query'] = res.get('switch_inline_query')
-        obj['switch_inline_query_current_chat'] = res.get('switch_inline_query_current_chat')
-        obj['switch_inline_query_chosen_chat'] = SwitchInlineQueryChosenChat._dese(res.get('switch_inline_query_chosen_chat'))
-        obj['callback_game'] = CallbackGame._dese(res.get('callback_game'))
-        obj['pay'] = res.get('pay')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        text: str,
-        url: Optional[str] = None,
-        callback_data: Optional[str] = None,
-        web_app: Optional[WebAppInfo] = None, 
-        login_url: Optional[LoginUrl] = None,
-        switch_inline_query: Optional[str] = None,
-        switch_inline_query_current_chat: Optional[str] = None,
-        switch_inline_query_chosen_chat: Optional[SwitchInlineQueryChosenChat] = None,
-        callback_game: Optional[CallbackGame] = None,
-        pay: Optional[bool] = None
-    ):
-        self.text = text
-        self.url = url
-        self.callback_data = callback_data
-        self.web_app = web_app
-        self.login_url = login_url
-        self.switch_inline_query = switch_inline_query
-        self.switch_inline_query_current_chat = switch_inline_query_current_chat
-        self.switch_inline_query_chosen_chat = switch_inline_query_chosen_chat
-        self.callback_game = callback_game
-        self.pay = pay
 
 
 class InlineKeyboardMarkup(TelegramType):
