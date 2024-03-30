@@ -5775,60 +5775,6 @@ class InlineQueryResultCachedAudio(TelegramType):
         self.input_message_content = input_message_content
 
 
-InlineQueryResult = Union[
-    InlineQueryResultArticle,
-    InlineQueryResultPhoto,
-    InlineQueryResultGif,
-    InlineQueryResultMpeg4Gif,
-    InlineQueryResultVideo,
-    InlineQueryResultAudio,
-    InlineQueryResultVoice,
-    InlineQueryResultDocument,
-    InlineQueryResultLocation,
-    InlineQueryResultVenue,
-    InlineQueryResultContact,
-    InlineQueryResultGame,
-    InlineQueryResultCachedPhoto,
-    InlineQueryResultCachedGif,
-    InlineQueryResultCachedMpeg4Gif,
-    InlineQueryResultCachedSticker,
-    InlineQueryResultCachedDocument,
-    InlineQueryResultCachedVideo,
-    InlineQueryResultCachedVoice,
-    InlineQueryResultCachedAudio
-]
-'''
-https://core.telegram.org/bots/api#inlinequeryresult
-
-This object represents one result of an inline query.
-
-Telegram clients currently support results of the following 20 types:
-
-- InlineQueryResultCachedAudio
-- InlineQueryResultCachedDocument
-- InlineQueryResultCachedGif
-- InlineQueryResultCachedMpeg4Gif
-- InlineQueryResultCachedPhoto
-- InlineQueryResultCachedSticker
-- InlineQueryResultCachedVideo
-- InlineQueryResultCachedVoice
-- InlineQueryResultArticle
-- InlineQueryResultAudio
-- InlineQueryResultContact
-- InlineQueryResultGame
-- InlineQueryResultDocument
-- InlineQueryResultGif
-- InlineQueryResultLocation
-- InlineQueryResultMpeg4Gif
-- InlineQueryResultPhoto
-- InlineQueryResultVenue
-- InlineQueryResultVideo
-- InlineQueryResultVoice
-'''
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 class SentWebAppMessage(TelegramType):
     '''
     https://core.telegram.org/bots/api#sentwebappmessage
@@ -6770,5 +6716,59 @@ def _dese_chat_member(res: Optional[dict], /) -> Optional[ChatMember]:
             'An error occurred during the deserialization'
             f' of the type ChatMember. Invalid status: {status!r}.'
         )
+
+
+InlineQueryResult = Union[
+    InlineQueryResultCachedAudio,
+    InlineQueryResultCachedDocument,
+    InlineQueryResultCachedGif,
+    InlineQueryResultCachedMpeg4Gif,
+    InlineQueryResultCachedPhoto,
+    InlineQueryResultCachedSticker,
+    InlineQueryResultCachedVideo,
+    InlineQueryResultCachedVoice,
+    InlineQueryResultArticle,
+    InlineQueryResultAudio,
+    InlineQueryResultContact,
+    InlineQueryResultGame,
+    InlineQueryResultDocument,
+    InlineQueryResultGif,
+    InlineQueryResultLocation,
+    InlineQueryResultMpeg4Gif,
+    InlineQueryResultPhoto,
+    InlineQueryResultVenue,
+    InlineQueryResultVideo,
+    InlineQueryResultVoice,
+]
+'''
+https://core.telegram.org/bots/api#inlinequeryresult
+
+This object represents one result of an inline query.
+Telegram clients currently support results of the following 20 types:
+
+- :obj:`~aiotgm.types.InlineQueryResultCachedAudio`
+- :obj:`~aiotgm.types.InlineQueryResultCachedDocument`
+- :obj:`~aiotgm.types.InlineQueryResultCachedGif`
+- :obj:`~aiotgm.types.InlineQueryResultCachedMpeg4Gif`
+- :obj:`~aiotgm.types.InlineQueryResultCachedPhoto`
+- :obj:`~aiotgm.types.InlineQueryResultCachedSticker`
+- :obj:`~aiotgm.types.InlineQueryResultCachedVideo`
+- :obj:`~aiotgm.types.InlineQueryResultCachedVoice`
+- :obj:`~aiotgm.types.InlineQueryResultArticle`
+- :obj:`~aiotgm.types.InlineQueryResultAudio`
+- :obj:`~aiotgm.types.InlineQueryResultContact`
+- :obj:`~aiotgm.types.InlineQueryResultGame`
+- :obj:`~aiotgm.types.InlineQueryResultDocument`
+- :obj:`~aiotgm.types.InlineQueryResultGif`
+- :obj:`~aiotgm.types.InlineQueryResultLocation`
+- :obj:`~aiotgm.types.InlineQueryResultMpeg4Gif`
+- :obj:`~aiotgm.types.InlineQueryResultPhoto`
+- :obj:`~aiotgm.types.InlineQueryResultVenue`
+- :obj:`~aiotgm.types.InlineQueryResultVideo`
+- :obj:`~aiotgm.types.InlineQueryResultVoice`
+
+**Note**: All URLs passed in inline query results will be
+available to end users and therefore must be assumed to be **public**.
+'''
 
 
