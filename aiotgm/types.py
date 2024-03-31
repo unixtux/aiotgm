@@ -3262,6 +3262,58 @@ class InlineQueryResultCachedMpeg4Gif(TelegramType):
         self.input_message_content = input_message_content
 
 
+class InlineQueryResultCachedPhoto(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultcachedphoto
+
+    Represents a link to a photo stored on the Telegram servers.
+    By default, this photo will be sent by the user with an optional caption.
+    Alternatively, you can use *input_message_content* to send a message with
+    the specified content instead of the photo.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param photo_file_id: A valid file identifier of the photo.
+    :type photo_file_id: :obj:`str`
+    :param title: Title for the result.
+    :type title: :obj:`str`, optional
+    :param description: Short description of the result.
+    :type description: :obj:`str`, optional
+    :param caption: Caption of the photo to be sent, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the photo caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the photo.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    '''
+    def __init__(
+        self,
+        id: str,
+        photo_file_id: str,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO
+        self.id = id
+        self.photo_file_id = photo_file_id
+        self.title = title
+        self.description = description
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
 
 
 
@@ -5770,38 +5822,6 @@ class InlineQueryResultGame(TelegramType):
         self.id = id
         self.game_short_name = game_short_name
         self.reply_markup = reply_markup
-
-
-class InlineQueryResultCachedPhoto(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultcachedphoto
-
-    Represents a link to a photo stored on the Telegram servers.\n
-    By default, this photo will be sent by the user with an optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
-    '''
-    def __init__(
-        self,
-        id: str,
-        photo_file_id: str,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO
-        self.id = id
-        self.photo_file_id = photo_file_id
-        self.title = title
-        self.description = description
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
 
 
 class InlineQueryResultCachedSticker(TelegramType):
