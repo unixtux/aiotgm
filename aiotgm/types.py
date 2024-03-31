@@ -3166,6 +3166,54 @@ class InlineQueryResultCachedDocument(TelegramType):
         self.input_message_content = input_message_content
 
 
+class InlineQueryResultCachedGif(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultcachedgif
+
+    Represents a link to an animated GIF file stored on the Telegram servers.
+    By default, this animated GIF file will be sent by the user with an optional
+    caption. Alternatively, you can use *input_message_content* to send a message
+    with specified content instead of the animation.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param gif_file_id: A valid file identifier for the GIF file.
+    :type gif_file_id: :obj:`str`
+    :param title: Title for the result.
+    :type title: :obj:`str`, optional
+    :param caption: Caption of the GIF file to be sent, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the GIF animation.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    '''
+    def __init__(
+        self,
+        id: str,
+        gif_file_id: str,
+        title: Optional[str] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF
+        self.id = id
+        self.gif_file_id = gif_file_id
+        self.title = title
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
 
 
 
@@ -5701,36 +5749,6 @@ class InlineQueryResultCachedPhoto(TelegramType):
         self.photo_file_id = photo_file_id
         self.title = title
         self.description = description
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-
-
-class InlineQueryResultCachedGif(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultcachedgif
-
-    Represents a link to an animated GIF file stored on the Telegram servers.\n
-    By default, this animated GIF file will be sent by the user with an optional caption.\n
-    Alternatively, you can use input_message_content to send a message with specified content instead of the animation.
-    '''
-    def __init__(
-        self,
-        id: str,
-        gif_file_id: str,
-        title: Optional[str] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF
-        self.id = id
-        self.gif_file_id = gif_file_id
-        self.title = title
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
