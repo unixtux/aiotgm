@@ -1718,6 +1718,86 @@ TYPES = {
             }
         }
     },
+    InlineQueryResultCachedGif: {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedgif",
+        "has_dese": False,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": str
+            },
+            "gif_file_id": {
+                "type_hint": str
+            },
+            "title": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "parse_mode": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption_entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "reply_markup": {
+                "type_hint": Optional[InlineKeyboardMarkup],
+                "default": None
+            },
+            "input_message_content": {
+                "type_hint": Optional[InputMessageContent],
+                "default": None
+            }
+        }
+    },
+    InlineQueryResultCachedMpeg4Gif: {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif",
+        "has_dese": False,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": str
+            },
+            "mpeg4_file_id": {
+                "type_hint": str
+            },
+            "title": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "parse_mode": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption_entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "reply_markup": {
+                "type_hint": Optional[InlineKeyboardMarkup],
+                "default": None
+            },
+            "input_message_content": {
+                "type_hint": Optional[InputMessageContent],
+                "default": None
+            }
+        }
+    },
     SwitchInlineQueryChosenChat: {
         "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
         "has_dese": True,
@@ -4000,86 +4080,6 @@ TYPES = {
                 "default": None
             },
             "description": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption_entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "reply_markup": {
-                "type_hint": Optional[InlineKeyboardMarkup],
-                "default": None
-            },
-            "input_message_content": {
-                "type_hint": Optional[InputMessageContent],
-                "default": None
-            }
-        }
-    },
-    InlineQueryResultCachedGif: {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedgif",
-        "has_dese": False,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": str
-            },
-            "gif_file_id": {
-                "type_hint": str
-            },
-            "title": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption_entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "reply_markup": {
-                "type_hint": Optional[InlineKeyboardMarkup],
-                "default": None
-            },
-            "input_message_content": {
-                "type_hint": Optional[InputMessageContent],
-                "default": None
-            }
-        }
-    },
-    InlineQueryResultCachedMpeg4Gif: {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedmpeg4gif",
-        "has_dese": False,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": str
-            },
-            "mpeg4_file_id": {
-                "type_hint": str
-            },
-            "title": {
                 "type_hint": Optional[str],
                 "default": None
             },

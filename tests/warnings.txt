@@ -20,6 +20,8 @@ InlineQueryResultArticle: 'type' is not in __init__() and 'type' default value i
 InlineQueryResultAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_AUDIO
 InlineQueryResultCachedAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_AUDIO
 InlineQueryResultCachedDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_DOCUMENT
+InlineQueryResultCachedGif: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF
+InlineQueryResultCachedMpeg4Gif: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF
 InputFile: Not found InputFile.file_name and Not found InputFile.hide_name
 Message: 'text' default value is: text or str() # If not text, it's str() instead of None
 ReactionTypeEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_EMOJI
@@ -45,8 +47,6 @@ InlineQueryResultVenue: 'type' is not in __init__() and 'type' default value is:
 InlineQueryResultContact: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT
 InlineQueryResultGame: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GAME
 InlineQueryResultCachedPhoto: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO
-InlineQueryResultCachedGif: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_GIF
-InlineQueryResultCachedMpeg4Gif: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_MPEG4_GIF
 InlineQueryResultCachedSticker: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER
 InlineQueryResultCachedVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO
 InlineQueryResultCachedVoice: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE
