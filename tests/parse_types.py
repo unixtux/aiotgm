@@ -340,6 +340,9 @@ while LINE_N != len(LINES):
         type = match[0]
         inheritance = match[1]
 
+        if type in [TYPES]:
+            raise_err(344, type, 'is already in TYPES.')
+
         if inheritance == 'TelegramType':
             TG_TYPES.append(type)
 
