@@ -3314,6 +3314,37 @@ class InlineQueryResultCachedPhoto(TelegramType):
         self.input_message_content = input_message_content
 
 
+class InlineQueryResultCachedSticker(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultcachedsticker
+
+    Represents a link to a sticker stored on the Telegram servers. By default, this sticker
+    will be sent by the user. Alternatively, you can use *input_message_content* to send a
+    message with the specified content instead of the sticker.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param sticker_file_id: A valid file identifier of the sticker.
+    :type sticker_file_id: :obj:`str`
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the sticker.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    '''
+    def __init__(
+        self,
+        id: str,
+        sticker_file_id: str,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER
+        self.id = id
+        self.sticker_file_id = sticker_file_id
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
 
 
 
@@ -5822,28 +5853,6 @@ class InlineQueryResultGame(TelegramType):
         self.id = id
         self.game_short_name = game_short_name
         self.reply_markup = reply_markup
-
-
-class InlineQueryResultCachedSticker(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultcachedsticker
-
-    Represents a link to a sticker stored on the Telegram servers.\n
-    By default, this sticker will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the sticker.
-    '''
-    def __init__(
-        self,
-        id: str,
-        sticker_file_id: str,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER
-        self.id = id
-        self.sticker_file_id = sticker_file_id
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
 
 
 class InlineQueryResultCachedVideo(TelegramType):
