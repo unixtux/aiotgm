@@ -192,6 +192,49 @@
             }
         }
     },
+    "BusinessConnection": {
+        "link": "https://core.telegram.org/bots/api#businessconnection",
+        "has_dese": true,
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "user": {
+                "type_hint": "User"
+            },
+            "user_chat_id": {
+                "type_hint": "int"
+            },
+            "date": {
+                "type_hint": "int"
+            },
+            "can_reply": {
+                "type_hint": "bool"
+            },
+            "is_enabled": {
+                "type_hint": "bool"
+            }
+        }
+    },
+    "BusinessMessagesDeleted": {
+        "link": "https://core.telegram.org/bots/api#businessmessagesdeleted",
+        "has_dese": true,
+        "warnings": [
+            "'message_ids' default value is: chat",
+            "Not found BusinessMessagesDeleted.chat"
+        ],
+        "kwargs": {
+            "business_connection_id": {
+                "type_hint": "str"
+            },
+            "chat": {
+                "type_hint": "Chat"
+            },
+            "message_ids": {
+                "type_hint": "list[int]"
+            }
+        }
+    },
     "CallbackGame": {
         "link": "https://core.telegram.org/bots/api#callbackgame",
         "has_dese": true,
@@ -1761,6 +1804,677 @@
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultCachedPhoto": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedphoto",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "photo_file_id": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultCachedSticker": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedsticker",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "sticker_file_id": {
+                "type_hint": "str"
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultCachedVideo": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvideo",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "video_file_id": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultCachedVoice": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvoice",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "voice_file_id": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultContact": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultcontact",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "phone_number": {
+                "type_hint": "str"
+            },
+            "first_name": {
+                "type_hint": "str"
+            },
+            "last_name": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "vcard": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            },
+            "thumbnail_url": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "thumbnail_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "thumbnail_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultDocument": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultdocument",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "document_url": {
+                "type_hint": "str"
+            },
+            "mime_type": {
+                "type_hint": "str"
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            },
+            "thumbnail_url": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "thumbnail_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "thumbnail_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultGame": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultgame",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GAME"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "game_short_name": {
+                "type_hint": "str"
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultGif": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultgif",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GIF"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "gif_url": {
+                "type_hint": "str"
+            },
+            "thumbnail_url": {
+                "type_hint": "str"
+            },
+            "gif_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "gif_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "gif_duration": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "thumbnail_mime_type": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "title": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultLocation": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultlocation",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "latitude": {
+                "type_hint": "float"
+            },
+            "longitude": {
+                "type_hint": "float"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "horizontal_accuracy": {
+                "type_hint": "Optional[float]",
+                "default": null
+            },
+            "live_period": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "heading": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "proximity_alert_radius": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            },
+            "thumbnail_url": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "thumbnail_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "thumbnail_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultMpeg4Gif": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "mpeg4_url": {
+                "type_hint": "str"
+            },
+            "thumbnail_url": {
+                "type_hint": "str"
+            },
+            "mpeg4_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "mpeg4_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "mpeg4_duration": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "thumbnail_mime_type": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "title": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultPhoto": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultphoto",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "photo_url": {
+                "type_hint": "str"
+            },
+            "thumbnail_url": {
+                "type_hint": "str"
+            },
+            "photo_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "photo_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "title": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultVenue": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultvenue",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VENUE"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "latitude": {
+                "type_hint": "float"
+            },
+            "longitude": {
+                "type_hint": "float"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "address": {
+                "type_hint": "str"
+            },
+            "foursquare_id": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "foursquare_type": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "google_place_id": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "google_place_type": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            },
+            "thumbnail_url": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "thumbnail_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "thumbnail_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultVideo": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultvideo",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "video_url": {
+                "type_hint": "str"
+            },
+            "mime_type": {
+                "type_hint": "str"
+            },
+            "thumbnail_url": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "video_width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "video_height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "video_duration": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "description": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "reply_markup": {
+                "type_hint": "Optional[InlineKeyboardMarkup]",
+                "default": null
+            },
+            "input_message_content": {
+                "type_hint": "Optional[InputMessageContent]",
+                "default": null
+            }
+        }
+    },
+    "InlineQueryResultVoice": {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultvoice",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE"
+        ],
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "voice_url": {
+                "type_hint": "str"
+            },
+            "title": {
+                "type_hint": "str"
+            },
+            "caption": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "parse_mode": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "caption_entities": {
+                "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "voice_duration": {
+                "type_hint": "Optional[int]",
                 "default": null
             },
             "reply_markup": {
@@ -3515,677 +4229,6 @@
             }
         }
     },
-    "InlineQueryResultPhoto": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultphoto",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_PHOTO"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "photo_url": {
-                "type_hint": "str"
-            },
-            "thumbnail_url": {
-                "type_hint": "str"
-            },
-            "photo_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "photo_height": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "title": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultGif": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultgif",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GIF"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "gif_url": {
-                "type_hint": "str"
-            },
-            "thumbnail_url": {
-                "type_hint": "str"
-            },
-            "gif_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "gif_height": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "gif_duration": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "thumbnail_mime_type": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "title": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultMpeg4Gif": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "mpeg4_url": {
-                "type_hint": "str"
-            },
-            "thumbnail_url": {
-                "type_hint": "str"
-            },
-            "mpeg4_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "mpeg4_height": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "mpeg4_duration": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "thumbnail_mime_type": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "title": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultVideo": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultvideo",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "video_url": {
-                "type_hint": "str"
-            },
-            "mime_type": {
-                "type_hint": "str"
-            },
-            "thumbnail_url": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "video_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "video_height": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "video_duration": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultVoice": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultvoice",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "voice_url": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "voice_duration": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultDocument": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultdocument",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_DOCUMENT"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "document_url": {
-                "type_hint": "str"
-            },
-            "mime_type": {
-                "type_hint": "str"
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            },
-            "thumbnail_url": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "thumbnail_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "thumbnail_height": {
-                "type_hint": "Optional[int]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultLocation": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultlocation",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_LOCATION"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "latitude": {
-                "type_hint": "float"
-            },
-            "longitude": {
-                "type_hint": "float"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "horizontal_accuracy": {
-                "type_hint": "Optional[float]",
-                "default": null
-            },
-            "live_period": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "heading": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "proximity_alert_radius": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            },
-            "thumbnail_url": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "thumbnail_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "thumbnail_height": {
-                "type_hint": "Optional[int]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultVenue": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultvenue",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VENUE"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "latitude": {
-                "type_hint": "float"
-            },
-            "longitude": {
-                "type_hint": "float"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "address": {
-                "type_hint": "str"
-            },
-            "foursquare_id": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "foursquare_type": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "google_place_id": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "google_place_type": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            },
-            "thumbnail_url": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "thumbnail_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "thumbnail_height": {
-                "type_hint": "Optional[int]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultContact": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcontact",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CONTACT"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "phone_number": {
-                "type_hint": "str"
-            },
-            "first_name": {
-                "type_hint": "str"
-            },
-            "last_name": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "vcard": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            },
-            "thumbnail_url": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "thumbnail_width": {
-                "type_hint": "Optional[int]",
-                "default": null
-            },
-            "thumbnail_height": {
-                "type_hint": "Optional[int]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultGame": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultgame",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_GAME"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "game_short_name": {
-                "type_hint": "str"
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultCachedPhoto": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedphoto",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_PHOTO"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "photo_file_id": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultCachedSticker": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedsticker",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_STICKER"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "sticker_file_id": {
-                "type_hint": "str"
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultCachedVideo": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvideo",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VIDEO"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "video_file_id": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "description": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
-    "InlineQueryResultCachedVoice": {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultcachedvoice",
-        "has_dese": false,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INLINE_QUERY_RESULT_CACHED_VOICE"
-        ],
-        "kwargs": {
-            "id": {
-                "type_hint": "str"
-            },
-            "voice_file_id": {
-                "type_hint": "str"
-            },
-            "title": {
-                "type_hint": "str"
-            },
-            "caption": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "parse_mode": {
-                "type_hint": "Optional[str]",
-                "default": null
-            },
-            "caption_entities": {
-                "type_hint": "Optional[list[MessageEntity]]",
-                "default": null
-            },
-            "reply_markup": {
-                "type_hint": "Optional[InlineKeyboardMarkup]",
-                "default": null
-            },
-            "input_message_content": {
-                "type_hint": "Optional[InputMessageContent]",
-                "default": null
-            }
-        }
-    },
     "SentWebAppMessage": {
         "link": "https://core.telegram.org/bots/api#sentwebappmessage",
         "has_dese": true,
@@ -4662,6 +4705,18 @@
                 "default": null
             },
             "edited_channel_post": {
+                "type_hint": "Optional[Message]",
+                "default": null
+            },
+            "business_connection": {
+                "type_hint": "Optional[BusinessConnection]",
+                "default": null
+            },
+            "business_message": {
+                "type_hint": "Optional[Message]",
+                "default": null
+            },
+            "edited_business_message": {
                 "type_hint": "Optional[Message]",
                 "default": null
             },
