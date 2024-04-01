@@ -6,10 +6,10 @@ __all__ = (
     'TelegramError',
 )
 
-__version__ = '0.2.7'
+__version__ = '0.2.8'
 VERSION = __version__
 
-from ._logging import get_logger
+from .logging import get_logger
 logger = get_logger('aiotgm ' + VERSION)
 del get_logger
 

@@ -17,7 +17,7 @@ LOGGER_LEVEL = DEBUG
 import re
 import json
 import aiotgm.types
-from aiotgm._logging import get_logger
+from aiotgm.logging import get_logger
 logger = get_logger('TypeChecker')
 logger.setLevel(LOGGER_LEVEL)
 
@@ -448,7 +448,7 @@ f = '''\
 if __name__ != '__main__':
     raise OSError("__name__ is not '__main__'")
 
-from aiotgm._logging import get_logger
+from aiotgm.logging import get_logger
 logger = get_logger(__name__)
 
 from typing import (
