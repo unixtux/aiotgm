@@ -2374,6 +2374,27 @@ class Client(TelegramApi):
         return [MessageId._dese(mid) for mid in result]
 
 
+    async def get_business_connection(
+        self,
+        business_connection_id: str
+    ) -> BusinessConnection:
+        '''
+        https://core.telegram.org/bots/api#getbusinessconnection
+
+        Use this method to get information about the connection of the bot with a business account.
+        Returns a :obj:`~aiotgm.types.BusinessConnection` object on success.
+
+        :param business_connection_id: Unique identifier of the business connection.
+        :type business_connection_id: :obj:`str`
+        :rtype: :obj:`~aiotgm.types.BusinessConnection`
+        '''
+        params = {
+            'business_connection_id': business_connection_id
+        }
+        result = await super().get_business_connection(params)
+        return BusinessConnection._dese(result)
+
+
     async def get_chat(
         self,
         chat_id: Union[int, str]

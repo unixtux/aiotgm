@@ -519,6 +519,10 @@ class TelegramApi:
         method = 'forwardMessages'
         return await self._request(method, params)
 
+    async def get_business_connection(self, params: dict):
+        method = 'getBusinessConnection'
+        return await self._request(method, params)
+
     async def get_chat(self, params: dict):
         method = 'getChat'
         return await self._request(method, params)
