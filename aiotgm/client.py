@@ -277,9 +277,9 @@ class Client(TelegramApi):
     def manage_business_connection(self, checker: Callable[[BusinessConnection], Any] = lambda business_connection: ..., /):
         '''
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
-        inside this decorator to manage an incoming *message_reaction* :obj:`~aiotgm.types.Update`.
-        The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.MessageReactionUpdated`.
-        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.MessageReactionUpdated` update.
+        inside this decorator to manage an incoming *business_connection* :obj:`~aiotgm.types.Update`.
+        The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.BusinessConnection`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.BusinessConnection` update.
 
         Usage:
 
@@ -297,8 +297,8 @@ class Client(TelegramApi):
 
             asyncio.run(bot.long_polling())
 
-        :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
-        :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
+        :param checker: A function that takes only one argument to check an incoming *business_connection* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
+        :type checker: :obj:`Callable[[BusinessConnection], Any]`
         '''
         def wrap(coroutine: Callable[[BusinessConnection], Awaitable]):
             self._business_connection_manager.add_rule(checker, coroutine)
