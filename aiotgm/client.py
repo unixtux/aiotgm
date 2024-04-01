@@ -839,6 +839,13 @@ class Client(TelegramApi):
                 if not _is_next_function(result):
                     return
 
+        elif update.business_connection:
+            obj: BusinessConnection = update.business_connection
+            for rule in self._business_connection_manager:
+                result = await _run_coroutine(rule, obj)
+                if not _is_next_function(result):
+                    return
+
         elif update.message_reaction:
             obj: MessageReactionUpdated = update.message_reaction
             for rule in self._message_reaction_manager:
