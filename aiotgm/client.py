@@ -332,7 +332,7 @@ class Client(TelegramApi):
         :param checker: A function that takes only one argument to check an incoming *business_message* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
         :type checker: :obj:`Callable[[Message], Any]`
         '''
-        def wrap(coroutine: Callable[[MessageReactionUpdated], Awaitable]):
+        def wrap(coroutine: Callable[[Message], Awaitable]):
             self._message_reaction_manager.add_rule(checker, coroutine)
         return wrap
 
