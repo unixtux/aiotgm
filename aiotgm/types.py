@@ -602,6 +602,39 @@ class BusinessConnection(TelegramType):
         self.is_enabled = is_enabled
 
 
+class BusinessMessagesDeleted(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#businessmessagesdeleted
+
+    This object is received when messages are deleted from a connected business account.
+
+    :param business_connection_id: Unique identifier of the business connection.
+    :type business_connection_id: :obj:`str`
+    :param chat: Information about a chat in the business account. The bot may not have access to the chat or the corresponding user.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param message_ids: A JSON-serialized list of identifiers of deleted messages in the chat of the business account.
+    :type message_ids: :obj:`list` of :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['business_connection_id'] = res.get('business_connection_id')
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['message_ids'] = res.get('message_ids')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        business_connection_id: str,
+        chat: Chat,
+        message_ids: list[int]
+    ):
+        self.business_connection_id = business_connection_id
+        self.message_ids = chat
+        self.message_ids = message_ids
+
+
 class CallbackGame(TelegramType):
     '''
     https://core.telegram.org/bots/api#callbackgame
