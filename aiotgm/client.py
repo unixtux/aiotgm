@@ -34,6 +34,7 @@ from .update_manager import (
     BUSINESS_CONNECTION_MANAGER,
     BUSINESS_MESSAGE_MANAGER,
     EDITED_BUSINESS_MESSAGE_MANAGER,
+    DELETED_BUSINESS_MESSAGES_MANAGER,
     MESSAGE_REACTION_MANAGER,
     MESSAGE_REACTION_COUNT_MANAGER,
     INLINE_QUERY_MANAGER,
@@ -93,6 +94,7 @@ class Client(TelegramApi):
         self._business_connection_manager = UpdateManager(BUSINESS_CONNECTION_MANAGER, BusinessConnection)
         self._business_message_manager = UpdateManager(BUSINESS_MESSAGE_MANAGER, Message)
         self._edited_business_message_manager = UpdateManager(EDITED_BUSINESS_MESSAGE_MANAGER, Message)
+        self._deleted_business_messages_manager = UpdateManager(DELETED_BUSINESS_MESSAGES_MANAGER, BusinessMessagesDeleted)
         self._message_reaction_manager = UpdateManager(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
         self._message_reaction_count_manager = UpdateManager(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
         self._inline_query_manager = UpdateManager(INLINE_QUERY_MANAGER, InlineQuery)
@@ -365,7 +367,37 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
-            self._business_message_manager.add_rule(checker, coroutine)
+            self._edited_business_message_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_deleted_business_messages(self, checker: Callable[[BusinessMessagesDeleted], Any] = lambda deleted_business_messages: ..., /):
+        '''
+        You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
+        inside this decorator to manage an incoming *deleted_business_messages* :obj:`~aiotgm.types.Update`.
+        The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.BusinessMessagesDeleted`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.BusinessMessagesDeleted` update.
+
+        Usage:
+
+        .. code-block:: python3
+
+            import aiotgm
+            import asyncio
+            from aiotgm.types import BusinessMessagesDeleted
+
+            bot = aiotgm.Client('<your_api_token>')
+
+            @bot.manage_deleted_business_messages(lambda deleted_business_messages: deleted_business_messages.chat.id == xyz)
+            async def foo(deleted_business_messages: BusinessMessagesDeleted):
+                ...
+
+            asyncio.run(bot.long_polling())
+
+        :param checker: A function that takes only one argument to check an incoming *deleted_business_messages* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
+        :type checker: :obj:`Callable[[BusinessMessagesDeleted], Any]`
+        '''
+        def wrap(coroutine: Callable[[BusinessMessagesDeleted], Awaitable]):
+            self._deleted_business_messages_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
@@ -920,6 +952,13 @@ class Client(TelegramApi):
         elif update.edited_business_message:
             obj: Message = update.edited_business_message
             for rule in self._edited_business_message_manager:
+                result = await _run_coroutine(rule, obj)
+                if not _is_next_function(result):
+                    return
+
+        elif update.deleted_business_messages:
+            obj: BusinessMessagesDeleted = update.deleted_business_messages
+            for rule in self._deleted_business_messages_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return

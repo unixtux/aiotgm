@@ -19,6 +19,7 @@ EDITED_CHANNEL_POST_MANAGER = 'edited_channel_post_manager'
 BUSINESS_CONNECTION_MANAGER = 'business_connection_manager'
 BUSINESS_MESSAGE_MANAGER = 'business_message_manager'
 EDITED_BUSINESS_MESSAGE_MANAGER = 'edited_business_message_manager'
+DELETED_BUSINESS_MESSAGES_MANAGER = 'deleted_business_messages_manager'
 MESSAGE_REACTION_MANAGER = 'message_reaction_manager'
 MESSAGE_REACTION_COUNT_MANAGER = 'message_reaction_count_manager'
 INLINE_QUERY_MANAGER = 'inline_query_manager'
@@ -42,6 +43,7 @@ EXAMPLES = {
     BUSINESS_CONNECTION_MANAGER: ("business_connection", "lambda business_connection: business_connection.user.id == xyz"),
     BUSINESS_MESSAGE_MANAGER: ("business_message", "lambda business_message: business_message.chat.id == xyz"),
     EDITED_BUSINESS_MESSAGE_MANAGER: ("edited_business_message", "lambda edited_business_message: edited_business_message.chat.id == xyz"),
+    DELETED_BUSINESS_MESSAGES_MANAGER: ("deleted_business_messages", "lambda deleted_business_messages: deleted_business_messages.chat.id == xyz"),
     MESSAGE_REACTION_MANAGER: ("message_reaction", "lambda message_reaction: message_reaction.chat.id == xyz"),
     MESSAGE_REACTION_COUNT_MANAGER: ("message_reaction_count", "lambda message_reaction_count: message_reaction_count.chat.id == xyz"),
     INLINE_QUERY_MANAGER : ("inline_query", "lambda inline_query: inline_query.from_user.id == xyz"),

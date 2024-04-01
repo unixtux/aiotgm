@@ -6861,6 +6861,7 @@ class Update(TelegramType):
         obj['business_connection'] = BusinessConnection._dese(res.get('business_connection'))
         obj['business_message'] = Message._dese(res.get('business_message'))
         obj['edited_business_message'] = Message._dese(res.get('edited_business_message'))
+        obj['deleted_business_messages'] = BusinessMessagesDeleted._dese(res.get('deleted_business_messages'))
         obj['message_reaction'] = MessageReactionUpdated._dese(res.get('message_reaction'))
         obj['message_reaction_count'] = MessageReactionCountUpdated._dese(res.get('message_reaction_count'))
         obj['inline_query'] = InlineQuery._dese(res.get('inline_query'))
@@ -6887,6 +6888,7 @@ class Update(TelegramType):
         business_connection: Optional[BusinessConnection] = None,
         business_message: Optional[Message] = None,
         edited_business_message: Optional[Message] = None,
+        deleted_business_messages: Optional[BusinessMessagesDeleted] = None,
         message_reaction: Optional[MessageReactionUpdated] = None,
         message_reaction_count: Optional[MessageReactionCountUpdated] = None,
         inline_query: Optional[InlineQuery] = None,
@@ -6910,6 +6912,7 @@ class Update(TelegramType):
         self.business_connection = business_connection
         self.business_message = business_message
         self.edited_business_message = edited_business_message
+        self.deleted_business_messages = deleted_business_messages
         self.message_reaction = message_reaction
         self.message_reaction_count = message_reaction_count
         self.inline_query = inline_query
