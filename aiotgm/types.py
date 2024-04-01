@@ -3503,9 +3503,36 @@ class InlineQueryResultDocument(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultdocument
 
-    Represents a link to a file. By default, this file will be sent by the user with an optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the file.\n
-    Currently, only .PDF and .ZIP files can be sent using this method.
+    Represents a link to a file. By default, this file will be sent by the user with an optional
+    caption. Alternatively, you can use *input_message_content* to send a message with the specified
+    content instead of the file. Currently, only **.PDF** and **.ZIP** files can be sent using this method.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param title: Title for the result.
+    :type title: :obj:`str`
+    :param document_url: A valid URL for the file.
+    :type document_url: :obj:`str`
+    :param mime_type: MIME type of the content of the file, either “application/pdf” or “application/zip”.
+    :type mime_type: :obj:`str`
+    :param caption: Caption of the document to be sent, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the document caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param description: Short description of the result.
+    :type description: :obj:`str`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the file.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    :param thumbnail_url: URL of the thumbnail (JPEG only) for the file.
+    :type thumbnail_url: :obj:`str`, optional
+    :param thumbnail_width: Thumbnail width.
+    :type thumbnail_width: :obj:`int`, optional
+    :param thumbnail_height: Thumbnail height.
+    :type thumbnail_height: :obj:`int`, optional
     '''
     def __init__(
         self,
