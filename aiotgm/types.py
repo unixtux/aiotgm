@@ -18,6 +18,7 @@ __all__ = (
     'BotDescription',
     'BotName',
     'BotShortDescription',
+    'BusinessConnection',
     'CallbackGame',
     'CallbackQuery',
     'Chat',
@@ -551,6 +552,54 @@ class BotShortDescription(TelegramType):
         short_description: str
     ):
         self.short_description = short_description
+
+
+class BusinessConnection(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#businessconnection
+
+    Describes the connection of the bot with a business account.
+
+    :param id: Unique identifier of the business connection.
+    :type id: :obj:`str`
+    :param user: Business account user that created the business connection.
+    :type user: :obj:`~aiotgm.types.User`
+    :param user_chat_id: Identifier of a private chat with the user who created the business connection. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
+    :type user_chat_id: :obj:`int`
+    :param date: Date the connection was established in Unix time.
+    :type date: :obj:`int`
+    :param can_reply: :obj:`True`, if the bot can act on behalf of the business account in chats that were active in the last 24 hours.
+    :type can_reply: :obj:`bool`
+    :param is_enabled: :obj:`True`, if the connection is active.
+    :type is_enabled: :obj:`bool`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['user'] = User._dese(res.get('user'))
+        obj['user_chat_id'] = res.get('user_chat_id')
+        obj['date'] = res.get('date')
+        obj['can_reply'] = res.get('can_reply')
+        obj['is_enabled'] = res.get('is_enabled')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: str,
+        user: User,
+        user_chat_id: int,
+        date: int,
+        can_reply: bool,
+        is_enabled: bool,
+    ):
+        self.id = id
+        self.user = user
+        self.user_chat_id = user_chat_id
+        self.date = date
+        self.can_reply = can_reply
+        self.is_enabled = is_enabled
 
 
 class CallbackGame(TelegramType):
