@@ -3448,8 +3448,30 @@ class InlineQueryResultContact(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultcontact
 
-    Represents a contact with a phone number. By default, this contact will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the contact.
+    Represents a contact with a phone number. By default, this contact will be sent by the user.
+    Alternatively, you can use *input_message_content* to send a message with the specified content
+    instead of the contact.
+
+    :param id: Unique identifier for this result, 1-64 Bytes.
+    :type id: :obj:`str`
+    :param phone_number: Contact's phone number.
+    :type phone_number: :obj:`str`
+    :param first_name: Contact's first name.
+    :type first_name: :obj:`str`
+    :param last_name: Contact's last name.
+    :type last_name: :obj:`str`, optional
+    :param vcard: Additional data about the contact in the form of a `vCard <https://en.wikipedia.org/wiki/VCard>`_, 0-2048 bytes.
+    :type vcard: :obj:`str`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the contact.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    :param thumbnail_url: Url of the thumbnail for the result.
+    :type thumbnail_url: :obj:`str`, optional
+    :param thumbnail_width: Thumbnail width.
+    :type thumbnail_width: :obj:`int`, optional
+    :param thumbnail_height: Thumbnail height.
+    :type thumbnail_height: :obj:`int`, optional
     '''
     def __init__(
         self,
