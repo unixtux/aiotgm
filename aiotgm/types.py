@@ -3444,6 +3444,367 @@ class InlineQueryResultCachedVoice(TelegramType):
         self.input_message_content = input_message_content
 
 
+class InlineQueryResultContact(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultcontact
+
+    Represents a contact with a phone number. By default, this contact will be sent by the user.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the contact.
+    '''
+    def __init__(
+        self,
+        id: str,
+        phone_number: str,
+        first_name: str,
+        last_name: Optional[str] = None,
+        vcard: Optional[str] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None,
+        thumbnail_url: Optional[str] = None,
+        thumbnail_width: Optional[int] = None,
+        thumbnail_height: Optional[int] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_CONTACT
+        self.id = id
+        self.phone_number = phone_number
+        self.first_name = first_name
+        self.last_name = last_name
+        self.vcard = vcard
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+        self.thumbnail_url = thumbnail_url
+        self.thumbnail_width = thumbnail_width
+        self.thumbnail_height = thumbnail_height
+
+
+class InlineQueryResultDocument(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultdocument
+
+    Represents a link to a file. By default, this file will be sent by the user with an optional caption.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the file.\n
+    Currently, only .PDF and .ZIP files can be sent using this method.
+    '''
+    def __init__(
+        self,
+        id: str,
+        title: str,
+        document_url: str,
+        mime_type: str,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        description: Optional[str] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None,
+        thumbnail_url: Optional[str] = None,
+        thumbnail_width: Optional[int] = None,
+        thumbnail_height: Optional[int] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_DOCUMENT
+        self.id = id
+        self.title = title
+        self.document_url = document_url
+        self.mime_type = mime_type
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.description = description
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+        self.thumbnail_url = thumbnail_url
+        self.thumbnail_width = thumbnail_width
+        self.thumbnail_height = thumbnail_height
+
+
+class InlineQueryResultGame(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultgame
+
+    Represents a Game.
+    '''
+    def __init__(
+        self,
+        id: str,
+        game_short_name: str,
+        reply_markup: Optional[InlineKeyboardMarkup] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_GAME
+        self.id = id
+        self.game_short_name = game_short_name
+        self.reply_markup = reply_markup
+
+
+class InlineQueryResultGif(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultgif
+
+    Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
+    '''
+    def __init__(
+        self,
+        id: str,
+        gif_url: str,
+        thumbnail_url: str,
+        gif_width: Optional[int] = None,
+        gif_height: Optional[int] = None,
+        gif_duration: Optional[int] = None,
+        thumbnail_mime_type: Optional[str] = None,
+        title: Optional[str] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_GIF
+        self.id = id
+        self.gif_url = gif_url
+        self.thumbnail_url = thumbnail_url
+        self.gif_width = gif_width
+        self.gif_height = gif_height
+        self.gif_duration = gif_duration
+        self.thumbnail_mime_type = thumbnail_mime_type
+        self.title = title
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
+class InlineQueryResultLocation(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultlocation
+
+    Represents a location on a map. By default, the location will be sent by the user.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the location.
+    '''
+    def __init__(
+        self,
+        id: str,
+        latitude: float,
+        longitude: float,
+        title: str,
+        horizontal_accuracy: Optional[float] = None,
+        live_period: Optional[int] = None,
+        heading: Optional[int] = None,
+        proximity_alert_radius: Optional[int] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None,
+        thumbnail_url: Optional[str] = None,
+        thumbnail_width: Optional[int] = None,
+        thumbnail_height: Optional[int] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_LOCATION
+        self.id = id
+        self.latitude = latitude
+        self.longitude = longitude
+        self.title = title
+        self.horizontal_accuracy = horizontal_accuracy
+        self.live_period = live_period
+        self.heading = heading
+        self.proximity_alert_radius = proximity_alert_radius
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+        self.thumbnail_url = thumbnail_url
+        self.thumbnail_width = thumbnail_width
+        self.thumbnail_height = thumbnail_height
+
+
+class InlineQueryResultMpeg4Gif(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
+
+    Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).\n
+    By default, this animated MPEG-4 file will be sent by the user with optional caption.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
+    '''
+    def __init__(
+        self,
+        id: str,
+        mpeg4_url: str,
+        thumbnail_url: str,
+        mpeg4_width: Optional[int] = None,
+        mpeg4_height: Optional[int] = None,
+        mpeg4_duration: Optional[int] = None,
+        thumbnail_mime_type: Optional[str] = None,
+        title: Optional[str] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF
+        self.id = id
+        self.mpeg4_url = mpeg4_url
+        self.thumbnail_url = thumbnail_url
+        self.mpeg4_width = mpeg4_width
+        self.mpeg4_height = mpeg4_height
+        self.mpeg4_duration = mpeg4_duration
+        self.thumbnail_mime_type = thumbnail_mime_type
+        self.title = title
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
+class InlineQueryResultPhoto(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultphoto
+
+    Represents a link to a photo. By default, this photo will be sent by the user with optional caption.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
+    '''
+    def __init__(
+        self,
+        id: str,
+        photo_url: str,
+        thumbnail_url: str,
+        photo_width: Optional[int] = None,
+        photo_height: Optional[int] = None,
+        title: Optional[str] = None,
+        description: Optional[str] = None,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_PHOTO
+        self.id = id
+        self.photo_url = photo_url
+        self.thumbnail_url = thumbnail_url
+        self.photo_width = photo_width
+        self.photo_height = photo_height
+        self.title = title
+        self.description = description
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
+class InlineQueryResultVenue(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultvenue
+
+    Represents a venue. By default, the venue will be sent by the user.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.
+    '''
+    def __init__(
+        self,
+        id: str,
+        latitude: float,
+        longitude: float,
+        title: str,
+        address: str,
+        foursquare_id: Optional[str] = None,
+        foursquare_type: Optional[str] = None,
+        google_place_id: Optional[str] = None,
+        google_place_type: Optional[str] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None,
+        thumbnail_url: Optional[str] = None,
+        thumbnail_width: Optional[int] = None,
+        thumbnail_height: Optional[int] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_VENUE
+        self.id = id
+        self.latitude = latitude
+        self.longitude = longitude
+        self.title = title
+        self.address = address
+        self.foursquare_id = foursquare_id
+        self.foursquare_type = foursquare_type
+        self.google_place_id = google_place_id
+        self.google_place_type = google_place_type
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+        self.thumbnail_url = thumbnail_url
+        self.thumbnail_width = thumbnail_width
+        self.thumbnail_height = thumbnail_height
+
+
+class InlineQueryResultVideo(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultvideo
+
+    Represents a link to a page containing an embedded video player or a video file.\n
+    By default, this video file will be sent by the user with an optional caption.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
+    '''
+    def __init__(
+        self,
+        id: str,
+        video_url: str,
+        mime_type: str,
+        thumbnail_url: str,
+        title: str,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        video_width: Optional[int] = None,
+        video_height: Optional[int] = None,
+        video_duration: Optional[int] = None,
+        description: Optional[str] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_VIDEO
+        self.id = id
+        self.video_url = video_url
+        self.mime_type = mime_type
+        self.thumbnail_url = thumbnail_url
+        self.title = title
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.video_width = video_width
+        self.video_height = video_height
+        self.video_duration = video_duration
+        self.description = description
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
+class InlineQueryResultVoice(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inlinequeryresultvoice
+
+    Represents a link to a voice recording in an .OGG container encoded with OPUS.\n
+    By default, this voice recording will be sent by the user.\n
+    Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
+    '''
+    def __init__(
+        self,
+        id: str,
+        voice_url: str,
+        title: str,
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        voice_duration: Optional[int] = None,
+        reply_markup: Optional[InlineKeyboardMarkup] = None,
+        input_message_content: Optional[InputMessageContent] = None
+    ):
+        self.type = DEFAULT_INLINE_QUERY_RESULT_VOICE
+        self.id = id
+        self.voice_url = voice_url
+        self.title = title
+        self.caption = caption
+        self.parse_mode = parse_mode
+        self.caption_entities = caption_entities
+        self.voice_duration = voice_duration
+        self.reply_markup = reply_markup
+        self.input_message_content = input_message_content
+
+
 
 
 
@@ -5589,369 +5950,6 @@ Telegram clients currently support the following 5 types:
 - InputContactMessageContent
 - InputInvoiceMessageContent
 '''
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class InlineQueryResultPhoto(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultphoto
-
-    Represents a link to a photo. By default, this photo will be sent by the user with optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
-    '''
-    def __init__(
-        self,
-        id: str,
-        photo_url: str,
-        thumbnail_url: str,
-        photo_width: Optional[int] = None,
-        photo_height: Optional[int] = None,
-        title: Optional[str] = None,
-        description: Optional[str] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_PHOTO
-        self.id = id
-        self.photo_url = photo_url
-        self.thumbnail_url = thumbnail_url
-        self.photo_width = photo_width
-        self.photo_height = photo_height
-        self.title = title
-        self.description = description
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-
-
-class InlineQueryResultGif(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultgif
-
-    Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
-    '''
-    def __init__(
-        self,
-        id: str,
-        gif_url: str,
-        thumbnail_url: str,
-        gif_width: Optional[int] = None,
-        gif_height: Optional[int] = None,
-        gif_duration: Optional[int] = None,
-        thumbnail_mime_type: Optional[str] = None,
-        title: Optional[str] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_GIF
-        self.id = id
-        self.gif_url = gif_url
-        self.thumbnail_url = thumbnail_url
-        self.gif_width = gif_width
-        self.gif_height = gif_height
-        self.gif_duration = gif_duration
-        self.thumbnail_mime_type = thumbnail_mime_type
-        self.title = title
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-
-
-class InlineQueryResultMpeg4Gif(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
-
-    Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).\n
-    By default, this animated MPEG-4 file will be sent by the user with optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
-    '''
-    def __init__(
-        self,
-        id: str,
-        mpeg4_url: str,
-        thumbnail_url: str,
-        mpeg4_width: Optional[int] = None,
-        mpeg4_height: Optional[int] = None,
-        mpeg4_duration: Optional[int] = None,
-        thumbnail_mime_type: Optional[str] = None,
-        title: Optional[str] = None,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_MPEG4_GIF
-        self.id = id
-        self.mpeg4_url = mpeg4_url
-        self.thumbnail_url = thumbnail_url
-        self.mpeg4_width = mpeg4_width
-        self.mpeg4_height = mpeg4_height
-        self.mpeg4_duration = mpeg4_duration
-        self.thumbnail_mime_type = thumbnail_mime_type
-        self.title = title
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-
-
-class InlineQueryResultVideo(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultvideo
-
-    Represents a link to a page containing an embedded video player or a video file.\n
-    By default, this video file will be sent by the user with an optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
-    '''
-    def __init__(
-        self,
-        id: str,
-        video_url: str,
-        mime_type: str,
-        thumbnail_url: str,
-        title: str,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        video_width: Optional[int] = None,
-        video_height: Optional[int] = None,
-        video_duration: Optional[int] = None,
-        description: Optional[str] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_VIDEO
-        self.id = id
-        self.video_url = video_url
-        self.mime_type = mime_type
-        self.thumbnail_url = thumbnail_url
-        self.title = title
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.video_width = video_width
-        self.video_height = video_height
-        self.video_duration = video_duration
-        self.description = description
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-
-
-class InlineQueryResultVoice(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultvoice
-
-    Represents a link to a voice recording in an .OGG container encoded with OPUS.\n
-    By default, this voice recording will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
-    '''
-    def __init__(
-        self,
-        id: str,
-        voice_url: str,
-        title: str,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        voice_duration: Optional[int] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_VOICE
-        self.id = id
-        self.voice_url = voice_url
-        self.title = title
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.voice_duration = voice_duration
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-
-
-class InlineQueryResultDocument(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultdocument
-
-    Represents a link to a file. By default, this file will be sent by the user with an optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the file.\n
-    Currently, only .PDF and .ZIP files can be sent using this method.
-    '''
-    def __init__(
-        self,
-        id: str,
-        title: str,
-        document_url: str,
-        mime_type: str,
-        caption: Optional[str] = None,
-        parse_mode: Optional[str] = None,
-        caption_entities: Optional[list[MessageEntity]] = None,
-        description: Optional[str] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None,
-        thumbnail_url: Optional[str] = None,
-        thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_DOCUMENT
-        self.id = id
-        self.title = title
-        self.document_url = document_url
-        self.mime_type = mime_type
-        self.caption = caption
-        self.parse_mode = parse_mode
-        self.caption_entities = caption_entities
-        self.description = description
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-        self.thumbnail_url = thumbnail_url
-        self.thumbnail_width = thumbnail_width
-        self.thumbnail_height = thumbnail_height
-
-
-class InlineQueryResultLocation(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultlocation
-
-    Represents a location on a map. By default, the location will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the location.
-    '''
-    def __init__(
-        self,
-        id: str,
-        latitude: float,
-        longitude: float,
-        title: str,
-        horizontal_accuracy: Optional[float] = None,
-        live_period: Optional[int] = None,
-        heading: Optional[int] = None,
-        proximity_alert_radius: Optional[int] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None,
-        thumbnail_url: Optional[str] = None,
-        thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_LOCATION
-        self.id = id
-        self.latitude = latitude
-        self.longitude = longitude
-        self.title = title
-        self.horizontal_accuracy = horizontal_accuracy
-        self.live_period = live_period
-        self.heading = heading
-        self.proximity_alert_radius = proximity_alert_radius
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-        self.thumbnail_url = thumbnail_url
-        self.thumbnail_width = thumbnail_width
-        self.thumbnail_height = thumbnail_height
-
-
-class InlineQueryResultVenue(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultvenue
-
-    Represents a venue. By default, the venue will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.
-    '''
-    def __init__(
-        self,
-        id: str,
-        latitude: float,
-        longitude: float,
-        title: str,
-        address: str,
-        foursquare_id: Optional[str] = None,
-        foursquare_type: Optional[str] = None,
-        google_place_id: Optional[str] = None,
-        google_place_type: Optional[str] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None,
-        thumbnail_url: Optional[str] = None,
-        thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_VENUE
-        self.id = id
-        self.latitude = latitude
-        self.longitude = longitude
-        self.title = title
-        self.address = address
-        self.foursquare_id = foursquare_id
-        self.foursquare_type = foursquare_type
-        self.google_place_id = google_place_id
-        self.google_place_type = google_place_type
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-        self.thumbnail_url = thumbnail_url
-        self.thumbnail_width = thumbnail_width
-        self.thumbnail_height = thumbnail_height
-
-
-class InlineQueryResultContact(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultcontact
-
-    Represents a contact with a phone number. By default, this contact will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the contact.
-    '''
-    def __init__(
-        self,
-        id: str,
-        phone_number: str,
-        first_name: str,
-        last_name: Optional[str] = None,
-        vcard: Optional[str] = None,
-        reply_markup: Optional[InlineKeyboardMarkup] = None,
-        input_message_content: Optional[InputMessageContent] = None,
-        thumbnail_url: Optional[str] = None,
-        thumbnail_width: Optional[int] = None,
-        thumbnail_height: Optional[int] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_CONTACT
-        self.id = id
-        self.phone_number = phone_number
-        self.first_name = first_name
-        self.last_name = last_name
-        self.vcard = vcard
-        self.reply_markup = reply_markup
-        self.input_message_content = input_message_content
-        self.thumbnail_url = thumbnail_url
-        self.thumbnail_width = thumbnail_width
-        self.thumbnail_height = thumbnail_height
-
-
-class InlineQueryResultGame(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inlinequeryresultgame
-
-    Represents a Game.
-    '''
-    def __init__(
-        self,
-        id: str,
-        game_short_name: str,
-        reply_markup: Optional[InlineKeyboardMarkup] = None
-    ):
-        self.type = DEFAULT_INLINE_QUERY_RESULT_GAME
-        self.id = id
-        self.game_short_name = game_short_name
-        self.reply_markup = reply_markup
 
 
 class SentWebAppMessage(TelegramType):
