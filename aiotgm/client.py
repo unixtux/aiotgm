@@ -333,7 +333,7 @@ class Client(TelegramApi):
         :type checker: :obj:`Callable[[Message], Any]`
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
-            self._message_reaction_manager.add_rule(checker, coroutine)
+            self._business_message_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
