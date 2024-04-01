@@ -3570,7 +3570,14 @@ class InlineQueryResultGame(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultgame
 
-    Represents a Game.
+    Represents a `Game <https://core.telegram.org/bots/api#games>`_.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param game_short_name: Short name of the game.
+    :type game_short_name: :obj:`str`
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     '''
     def __init__(
         self,
