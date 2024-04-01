@@ -19,6 +19,7 @@ __all__ = (
     'BotName',
     'BotShortDescription',
     'BusinessConnection',
+    'BusinessMessagesDeleted',
     'CallbackGame',
     'CallbackQuery',
     'Chat',
