@@ -31,6 +31,7 @@ from .update_manager import (
     EDITED_MESSAGE_MANAGER, 
     CHANNEL_POST_MANAGER, 
     EDITED_CHANNEL_POST_MANAGER,
+    BUSINESS_CONNECTION_MANAGER,
     MESSAGE_REACTION_MANAGER,
     MESSAGE_REACTION_COUNT_MANAGER,
     INLINE_QUERY_MANAGER,
@@ -87,6 +88,7 @@ class Client(TelegramApi):
         self._edited_message_manager = UpdateManager(EDITED_MESSAGE_MANAGER, Message)
         self._channel_post_manager = UpdateManager(CHANNEL_POST_MANAGER, Message)
         self._edited_channel_post_manager = UpdateManager(EDITED_CHANNEL_POST_MANAGER, Message)
+        self._business_connection_manager = UpdateManager(BUSINESS_CONNECTION_MANAGER, BusinessConnection)
         self._message_reaction_manager = UpdateManager(MESSAGE_REACTION_MANAGER, MessageReactionUpdated)
         self._message_reaction_count_manager = UpdateManager(MESSAGE_REACTION_COUNT_MANAGER, MessageReactionCountUpdated)
         self._inline_query_manager = UpdateManager(INLINE_QUERY_MANAGER, InlineQuery)
@@ -150,7 +152,7 @@ class Client(TelegramApi):
         self._protect_content = True if val else None
 
 
-    # 18 UpdateManagers
+    # UpdateManagers
 
     def manage_message(self, checker: Callable[[Message], Any] = lambda message: ..., /):
         '''
@@ -270,6 +272,36 @@ class Client(TelegramApi):
         '''
         def wrap(coroutine: Callable[[Message], Awaitable]):
             self._edited_channel_post_manager.add_rule(checker, coroutine)
+        return wrap
+
+    def manage_business_connection(self, checker: Callable[[BusinessConnection], Any] = lambda business_connection: ..., /):
+        '''
+        You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
+        inside this decorator to manage an incoming *message_reaction* :obj:`~aiotgm.types.Update`.
+        The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.MessageReactionUpdated`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.MessageReactionUpdated` update.
+
+        Usage:
+
+        .. code-block:: python3
+
+            import aiotgm
+            import asyncio
+            from aiotgm.types import BusinessConnection
+
+            bot = aiotgm.Client('<your_api_token>')
+
+            @bot.manage_business_connection(lambda business_connection: business_connection.user.id == xyz)
+            async def foo(business_connection: BusinessConnection):
+                ...
+
+            asyncio.run(bot.long_polling())
+
+        :param checker: A function that takes only one argument to check an incoming *message_reaction* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
+        :type checker: :obj:`Callable[[MessageReactionUpdated], Any]`
+        '''
+        def wrap(coroutine: Callable[[BusinessConnection], Awaitable]):
+            self._business_connection_manager.add_rule(checker, coroutine)
         return wrap
 
     def manage_message_reaction(self, checker: Callable[[MessageReactionUpdated], Any] = lambda message_reaction: ..., /):
