@@ -5,7 +5,6 @@ BotCommandScopeChat: 'type' is not in __init__() and 'type' default value is: DE
 BotCommandScopeChatAdministrators: 'type' is not in __init__() and 'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_ADMINISTRATORS
 BotCommandScopeChatMember: 'type' is not in __init__() and 'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_CHAT_MEMBER
 BotCommandScopeDefault: 'type' is not in __init__() and 'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_DEFAULT
-BusinessMessagesDeleted: 'message_ids' default value is: chat and Not found BusinessMessagesDeleted.chat
 ChatBoostSourceGiftCode: 'source' is not in __init__() and 'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_GIFT_CODE
 ChatBoostSourceGiveaway: 'source' is not in __init__() and 'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY
 ChatBoostSourcePremium: 'source' is not in __init__() and 'source' default value is: DEFAULT_CHAT_BOOST_SOURCE_PREMIUM

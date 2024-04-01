@@ -632,7 +632,7 @@ class BusinessMessagesDeleted(TelegramType):
         message_ids: list[int]
     ):
         self.business_connection_id = business_connection_id
-        self.message_ids = chat
+        self.chat = chat
         self.message_ids = message_ids
 
 

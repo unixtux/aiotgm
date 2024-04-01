@@ -244,10 +244,6 @@ TYPES = {
     BusinessMessagesDeleted: {
         "link": "https://core.telegram.org/bots/api#businessmessagesdeleted",
         "has_dese": True,
-        "warnings": [
-            "'message_ids' default value is: chat",
-            "Not found BusinessMessagesDeleted.chat"
-        ],
         "kwargs": {
             "business_connection_id": {
                 "type_hint": str
