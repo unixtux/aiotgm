@@ -3595,8 +3595,36 @@ class InlineQueryResultGif(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultgif
 
-    Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the animation.
+    Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the
+    user with optional caption. Alternatively, you can use *input_message_content* to send a message
+    with the specified content instead of the animation.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param gif_url: A valid URL for the GIF file. File size must not exceed 1MB.
+    :type gif_url: :obj:`str`
+    :param thumbnail_url: URL of the static (JPEG or GIF) or animated (MPEG4) thumbnail for the result.
+    :type thumbnail_url: :obj:`str`
+    :param gif_width: Width of the GIF.
+    :type gif_width: :obj:`int`, optional
+    :param gif_height: Height of the GIF.
+    :type gif_height: :obj:`int`, optional
+    :param gif_duration: Duration of the GIF in seconds.
+    :type gif_duration: :obj:`int`, optional
+    :param thumbnail_mime_type: MIME type of the thumbnail, must be one of “image/jpeg”, “image/gif”, or “video/mp4”. Defaults to “image/jpeg”.
+    :type thumbnail_mime_type: :obj:`str`, optional
+    :param title: Title for the result.
+    :type title: :obj:`str`, optional
+    :param caption: Caption of the GIF file to be sent, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the GIF animation.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
     '''
     def __init__(
         self,
