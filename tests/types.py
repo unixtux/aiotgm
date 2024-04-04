@@ -100,6 +100,22 @@ TYPES = {
             }
         }
     },
+    Birthdate: {
+        "link": "https://core.telegram.org/bots/api#birthdate",
+        "has_dese": True,
+        "kwargs": {
+            "day": {
+                "type_hint": int
+            },
+            "month": {
+                "type_hint": int
+            },
+            "year": {
+                "type_hint": Optional[int],
+                "default": None
+            }
+        }
+    },
     BotCommand: {
         "link": "https://core.telegram.org/bots/api#botcommand",
         "has_dese": True,
@@ -287,6 +303,30 @@ TYPES = {
             }
         }
     },
+    BusinessOpeningHours: {
+        "link": "https://core.telegram.org/bots/api#businessopeninghours",
+        "has_dese": True,
+        "kwargs": {
+            "time_zone_name": {
+                "type_hint": str
+            },
+            "opening_hours": {
+                "type_hint": list[BusinessOpeningHoursInterval]
+            }
+        }
+    },
+    BusinessOpeningHoursInterval: {
+        "link": "https://core.telegram.org/bots/api#businessopeninghoursinterval",
+        "has_dese": True,
+        "kwargs": {
+            "opening_minute": {
+                "type_hint": int
+            },
+            "closing_minute": {
+                "type_hint": int
+            }
+        }
+    },
     CallbackGame: {
         "link": "https://core.telegram.org/bots/api#callbackgame",
         "has_dese": True,
@@ -361,12 +401,24 @@ TYPES = {
                 "type_hint": Optional[list[str]],
                 "default": None
             },
+            "birthdate": {
+                "type_hint": Optional[Birthdate],
+                "default": None
+            },
             "business_intro": {
                 "type_hint": Optional[BusinessIntro],
                 "default": None
             },
             "business_location": {
                 "type_hint": Optional[BusinessLocation],
+                "default": None
+            },
+            "business_opening_hours": {
+                "type_hint": Optional[BusinessOpeningHours],
+                "default": None
+            },
+            "personal_chat": {
+                "type_hint": Optional[Chat],
                 "default": None
             },
             "available_reactions": {
@@ -1027,6 +1079,18 @@ TYPES = {
             },
             "chat_id": {
                 "type_hint": int
+            },
+            "title": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "username": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "photo": {
+                "type_hint": Optional[list[PhotoSize]],
+                "default": None
             }
         }
     },
@@ -2697,6 +2761,10 @@ TYPES = {
             "supports_inline_queries": {
                 "type_hint": Optional[bool],
                 "default": None
+            },
+            "can_connect_to_business": {
+                "type_hint": Optional[bool],
+                "default": None
             }
         }
     },
@@ -2861,6 +2929,10 @@ TYPES = {
                 "default": None
             },
             "has_protected_content": {
+                "type_hint": Optional[Literal[True]],
+                "default": None
+            },
+            "is_from_offline": {
                 "type_hint": Optional[Literal[True]],
                 "default": None
             },
@@ -3504,8 +3576,8 @@ TYPES = {
             "request_id": {
                 "type_hint": int
             },
-            "user_ids": {
-                "type_hint": list[int]
+            "users": {
+                "type_hint": list[SharedUser]
             }
         }
     },
@@ -3559,6 +3631,31 @@ TYPES = {
             }
         }
     },
+    SharedUser: {
+        "link": "https://core.telegram.org/bots/api#shareduser",
+        "has_dese": True,
+        "kwargs": {
+            "user_id": {
+                "type_hint": int
+            },
+            "first_name": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "last_name": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "username": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "photo": {
+                "type_hint": Optional[list[PhotoSize]],
+                "default": None
+            }
+        }
+    },
     UserProfilePhotos: {
         "link": "https://core.telegram.org/bots/api#userprofilephotos",
         "has_dese": True,
@@ -3598,6 +3695,18 @@ TYPES = {
             "max_quantity": {
                 "type_hint": Optional[int],
                 "default": None
+            },
+            "request_name": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_username": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_photo": {
+                "type_hint": Optional[bool],
+                "default": None
             }
         }
     },
@@ -3632,6 +3741,18 @@ TYPES = {
                 "default": None
             },
             "bot_is_member": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_title": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_username": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_photo": {
                 "type_hint": Optional[bool],
                 "default": None
             }
@@ -4062,12 +4183,6 @@ TYPES = {
             "sticker_type": {
                 "type_hint": str
             },
-            "is_animated": {
-                "type_hint": bool
-            },
-            "is_video": {
-                "type_hint": bool
-            },
             "stickers": {
                 "type_hint": list[Sticker]
             },
@@ -4083,6 +4198,9 @@ TYPES = {
         "kwargs": {
             "sticker": {
                 "type_hint": Union[InputFile, str]
+            },
+            "format": {
+                "type_hint": str
             },
             "emoji_list": {
                 "type_hint": list[str]
