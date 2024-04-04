@@ -627,6 +627,10 @@ class TelegramApi:
         method = 'reopenGeneralForumTopic'
         return await self._request(method, params)
 
+    async def replace_sticker_in_set(self, params: dict):
+        method = 'replaceStickerInSet'
+        return await self._request(method, params)
+
     async def restrict_chat_member(self, params: dict):
         method = 'restrictChatMember'
         return await self._request(method, params)

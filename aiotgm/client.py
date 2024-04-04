@@ -3043,6 +3043,39 @@ class Client(TelegramApi):
         return await super().reopen_general_forum_topic(params)
 
 
+    async def replace_sticker_in_set(
+        self,
+        user_id: int,
+        name: str,
+        old_sticker: str,
+        sticker: InputSticker,
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#replacestickerinset
+
+        Use this method to replace an existing sticker in a sticker set with a new one.
+        The method is equivalent to calling :meth:`~aiotgm.types.delete_sticker_from_set`,
+        then :meth:`~aiotgm.types.add_sticker_to_set`addStickerToSet,
+        then :meth:`~aiotgm.types.set_sticker_position_set`. Returns :obj:`True` on success.
+
+        :param user_id: User identifier of the sticker set owner.
+        :type user_id: :obj:`int`
+        :param name: Sticker set name.
+        :type name: :obj:`str`
+        :param old_sticker: File identifier of the replaced sticker.
+        :type old_sticker: :obj:`str`
+        :param sticker: A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged.
+        :type sticker: :obj:`~aiotgm.types.InputSticker`
+        '''
+        params = {
+            'user_id': user_id,
+            'name': name,
+            'old_sticker': old_sticker,
+            'sticker': sticker
+        }
+        return await super().replace_sticker_in_set(params)
+
+
     async def restrict_chat_member(
         self,
         chat_id: Union[int, str],
