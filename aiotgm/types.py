@@ -6028,8 +6028,6 @@ class StickerSet(TelegramType):
         obj['name'] = res.get('name')
         obj['title'] = res.get('title')
         obj['sticker_type'] = res.get('sticker_type')
-        obj['is_animated'] = res.get('is_animated')
-        obj['is_video'] = res.get('is_video')
         obj['stickers'] = [Sticker._dese(kwargs) for kwargs in res.get('stickers')]
         obj['thumbnail'] = PhotoSize._dese(res.get('thumbnail'))
         return cls(**obj)
@@ -6039,16 +6037,12 @@ class StickerSet(TelegramType):
         name: str,
         title: str,
         sticker_type: str,
-        is_animated: bool,
-        is_video: bool,
         stickers: list[Sticker],
         thumbnail: Optional[PhotoSize] = None
     ):
         self.name = name
         self.title = title
         self.sticker_type = sticker_type
-        self.is_animated = is_animated
-        self.is_video = is_video
         self.stickers = stickers
         self.thumbnail = thumbnail
 
