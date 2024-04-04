@@ -4425,6 +4425,7 @@ class Message(TelegramType):
         obj['via_bot'] = User._dese(res.get('via_bot'))
         obj['edit_date'] = res.get('edit_date')
         obj['has_protected_content'] = res.get('has_protected_content')
+        obj['is_from_offline'] = res.get('is_from_offline')
         obj['media_group_id'] = res.get('media_group_id')
         obj['author_signature'] = res.get('author_signature')
         obj['text'] = res.get('text')
@@ -4508,6 +4509,7 @@ class Message(TelegramType):
         via_bot: Optional[User] = None,
         edit_date: Optional[int] = None,
         has_protected_content: Optional[Literal[True]] = None,
+        is_from_offline: Optional[Literal[True]] = None,
         media_group_id: Optional[str] = None,
         author_signature: Optional[str] = None,
         text: str = None,
@@ -4588,6 +4590,7 @@ class Message(TelegramType):
         self.via_bot = via_bot
         self.edit_date = edit_date
         self.has_protected_content = has_protected_content
+        self.is_from_offline = is_from_offline
         self.media_group_id = media_group_id
         self.author_signature = author_signature
         self.text = text or str() # If not text, it's str() instead of None
