@@ -3054,9 +3054,9 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#replacestickerinset
 
         Use this method to replace an existing sticker in a sticker set with a new one.
-        The method is equivalent to calling :meth:`~aiotgm.types.delete_sticker_from_set`,
-        then :meth:`~aiotgm.types.add_sticker_to_set`addStickerToSet,
-        then :meth:`~aiotgm.types.set_sticker_position_set`. Returns :obj:`True` on success.
+        The method is equivalent to calling :meth:`~aiotgm.Client.delete_sticker_from_set`,
+        then :meth:`~aiotgm.Client.add_sticker_to_set`, then :meth:`~aiotgm.Client.set_sticker_position_in_set`.
+        Returns :obj:`True` on success.
 
         :param user_id: User identifier of the sticker set owner.
         :type user_id: :obj:`int`
@@ -3066,6 +3066,7 @@ class Client(TelegramApi):
         :type old_sticker: :obj:`str`
         :param sticker: A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged.
         :type sticker: :obj:`~aiotgm.types.InputSticker`
+        :rtype: :obj:`True`
         '''
         params = {
             'user_id': user_id,
