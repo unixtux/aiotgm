@@ -4268,9 +4268,29 @@ class InlineQueryResultVoice(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultvoice
 
-    Represents a link to a voice recording in an .OGG container encoded with OPUS.\n
-    By default, this voice recording will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the the voice message.
+    Represents a link to a voice recording in an .OGG container encoded with OPUS.
+    By default, this voice recording will be sent by the user.
+    Alternatively, you can use *input_message_content* to send a message with the
+    specified content instead of the the voice message.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param voice_url: A valid URL for the voice recording.
+    :type voice_url: :obj:`str`
+    :param title: Recording title.
+    :type title: :obj:`str`
+    :param caption: Caption, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the voice message caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param voice_duration: Recording duration in seconds.
+    :type voice_duration: :obj:`int`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the voice recording.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
     '''
     def __init__(
         self,
