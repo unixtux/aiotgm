@@ -22,6 +22,8 @@ __all__ = (
     'BusinessIntro',
     'BusinessLocation',
     'BusinessMessagesDeleted',
+    'BusinessOpeningHours',
+    'BusinessOpeningHoursInterval',
     'CallbackGame',
     'CallbackQuery',
     'Chat',
@@ -695,6 +697,58 @@ class BusinessMessagesDeleted(TelegramType):
         self.message_ids = message_ids
 
 
+class BusinessOpeningHours(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#businessopeninghours
+
+    :param time_zone_name: Unique name of the time zone for which the opening hours are defined.
+    :type time_zone_name: :obj:`str`
+    :param opening_hours: List of time intervals describing business opening hours.
+    :type opening_hours: :obj:`list` of :obj:`~aiotgm.types.BusinessOpeningHoursInterval`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['time_zone_name'] = res.get('time_zone_name')
+        obj['opening_hours'] = [BusinessOpeningHoursInterval._dese(kwargs) for kwargs in res.get('opening_hours')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        time_zone_name: str,
+        opening_hours: list[BusinessOpeningHoursInterval]
+    ):
+        self.time_zone_name = time_zone_name
+        self.opening_hours = opening_hours
+
+
+class BusinessOpeningHoursInterval(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#businessopeninghoursinterval
+
+    :param opening_minute: The minute's sequence number in a week, starting on Monday, marking the start of the time interval during which the business is open; 0 - 7 * 24 * 60.
+    :type opening_minute: :obj:`int`
+    :param closing_minute: The minute's sequence number in a week, starting on Monday, marking the end of the time interval during which the business is open; 0 - 8 * 24 * 60.
+    :type closing_minute: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['opening_minute'] = res.get('opening_minute')
+        obj['closing_minute'] = res.get('closing_minute')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        opening_minute: int,
+        closing_minute: int
+    ):
+        self.opening_minute = opening_minute
+        self.closing_minute = closing_minute
+
+
 class CallbackGame(TelegramType):
     '''
     https://core.telegram.org/bots/api#callbackgame
@@ -798,6 +852,8 @@ class Chat(TelegramType):
     :type business_intro: :obj:`~aiotgm.types.BusinessIntro`
     :param business_location: For private chats with business accounts, the location of the business. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type business_location: :obj:`~aiotgm.types.BusinessLocation`
+    :param business_opening_hours: For private chats with business accounts, the opening hours of the business. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type business_opening_hours: :obj:`~aiotgm.types.BusinessOpeningHours`, optional
     :param available_reactions: List of available reactions allowed in the chat. If omitted, then all :obj:`emoji reactions <aiotgm.types.ReactionTypeEmoji>` are allowed. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type available_reactions: :obj:`list` of :obj:`~aiotgm.types.ReactionType`, optional
     :param accent_color_id: Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See `accent colors <https://core.telegram.org/bots/api#accent-colors>`_ for more details. Returned only in :meth:`~aiotgm.Client.get_chat`.
@@ -870,6 +926,7 @@ class Chat(TelegramType):
         obj['active_usernames'] = res.get('active_usernames')
         obj['business_intro'] = BusinessIntro._dese(res.get('business_intro'))
         obj['business_location'] = BusinessLocation._dese(res.get('business_location'))
+        obj['business_opening_hours'] = BusinessOpeningHours._dese(res.get('business_opening_hours'))
         obj['available_reactions'] = [_dese_reaction_type(kwargs) for kwargs in res.get('available_reactions')] if 'available_reactions' in res else None
         obj['accent_color_id'] = res.get('accent_color_id')
         obj['background_custom_emoji_id'] = res.get('background_custom_emoji_id')
@@ -913,6 +970,7 @@ class Chat(TelegramType):
         active_usernames: Optional[list[str]] = None,
         business_intro: Optional[BusinessIntro] = None,
         business_location: Optional[BusinessLocation] = None,
+        business_opening_hours: Optional[BusinessOpeningHours] = None,
         available_reactions: Optional[list[ReactionType]] = None,
         accent_color_id: Optional[int] = None,
         background_custom_emoji_id: Optional[str] = None,
@@ -953,6 +1011,7 @@ class Chat(TelegramType):
         self.active_usernames = active_usernames
         self.business_intro = business_intro
         self.business_location = business_location
+        self.business_opening_hours = business_opening_hours
         self.available_reactions = available_reactions
         self.accent_color_id = accent_color_id
         self.background_custom_emoji_id = background_custom_emoji_id
