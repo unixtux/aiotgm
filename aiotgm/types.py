@@ -4346,6 +4346,35 @@ class InlineQueryResultsButton(TelegramType):
         self.start_parameter = start_parameter
 
 
+class InputContactMessageContent(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputcontactmessagecontent
+
+    Represents the :obj:`content <aiotgm.types.InputMessageContent>`
+    of a contact message to be sent as the result of an inline query.
+
+    :param phone_number: Contact's phone number.
+    :type phone_number: :obj:`str`
+    :param first_name: Contact's first name.
+    :type first_name: :obj:`str`
+    :param last_name: Contact's last name.
+    :type last_name: :obj:`str`, optional
+    :param vcard: Additional data about the contact in the form of a `vCard <https://en.wikipedia.org/wiki/VCard>`_, 0-2048 bytes.
+    :type vcard: :obj:`str`, optional
+    '''
+    def __init__(
+        self,
+        phone_number: str,
+        first_name: str,
+        last_name: Optional[str] = None,
+        vcard: Optional[str] = None
+    ):
+        self.phone_number = phone_number
+        self.first_name = first_name
+        self.last_name = last_name
+        self.vcard = vcard
+
+
 
 
 
@@ -6434,25 +6463,6 @@ class InputVenueMessageContent(TelegramType):
         self.foursquare_type = foursquare_type
         self.google_place_id = google_place_id
         self.google_place_type = google_place_type
-
-
-class InputContactMessageContent(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inputcontactmessagecontent
-
-    Represents the content of a contact message to be sent as the result of an inline query.
-    '''
-    def __init__(
-        self,
-        phone_number: str,
-        first_name: str,
-        last_name: Optional[str] = None,
-        vcard: Optional[str] = None
-    ):
-        self.phone_number = phone_number
-        self.first_name = first_name
-        self.last_name = last_name
-        self.vcard = vcard
 
 
 class InputInvoiceMessageContent(TelegramType):
