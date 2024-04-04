@@ -4375,6 +4375,39 @@ class InputContactMessageContent(TelegramType):
         self.vcard = vcard
 
 
+class InputFile(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputfile
+
+    This object represents the contents of a file to be uploaded. Must be posted
+    using multipart/form-data in the usual way that files are uploaded via the browser.
+
+        **Note**: If *file_name* or *hide_name* are not set. The filename will be taken from the *path*.
+
+    :param path: Directory of the specified file.
+    :type path: :obj:`str`
+    :param file_name: Choose a filename.
+    :type file_name: :obj:`str`, optional
+    :param hide_name: Hide the filename.
+    :type hide_name: :obj:`bool`, optional
+    '''
+    def __init__(
+        self,
+        path: str,
+        file_name: Optional[str] = None,
+        hide_name: Optional[bool] = None
+    ):
+        self.path = path
+
+        if not file_name and not hide_name:
+            self.file_name = os.path.basename(path)
+
+        elif file_name and not hide_name:
+            self.file_name = file_name
+        else:
+            self.file_name = None
+
+
 
 
 
@@ -4413,30 +4446,6 @@ class SwitchInlineQueryChosenChat(TelegramType):
         self.allow_bot_chats = allow_bot_chats
         self.allow_group_chats = allow_group_chats
         self.allow_channel_chats = allow_channel_chats
-
-
-class InputFile(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inputfile
-
-    This object represents the contents of a file to be uploaded. Must be posted
-    using multipart/form-data in the usual way that files are uploaded via the browser.
-    '''
-    def __init__(
-        self,
-        path: str,
-        file_name: Optional[str] = None,
-        hide_name: bool = False
-    ):
-        self.path = path
-
-        if not file_name and not hide_name:
-            self.file_name = os.path.basename(path)
-
-        elif file_name and not hide_name:
-            self.file_name = file_name
-        else:
-            self.file_name = None
 
 
 class LoginUrl(TelegramType):
