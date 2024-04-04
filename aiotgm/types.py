@@ -6,6 +6,7 @@ __all__ = (
     'REPLY_MARKUP_TYPES', # Union of all the reply markups
     'Animation',
     'Audio',
+    'Birthdate',
     'BotCommand',
     'BotCommandScope', # No deserialization.
     'BotCommandScopeAllChatAdministrators',
@@ -365,6 +366,37 @@ class Audio(TelegramType):
         self.mime_type = mime_type
         self.file_size = file_size
         self.thumbnail = thumbnail
+
+
+class Birthdate(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#birthdate
+
+    :param day: Day of the user's birth; 1-31.
+    :type day: :obj:`int`
+    :param month: Month of the user's birth; 1-12.
+    :type month: :obj:`int`
+    :param year: Year of the user's birth.
+    :type year: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['day'] = res.get('day')
+        obj['month'] = res.get('month')
+        obj['year'] = res.get('year')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        day: int,
+        month: int,
+        year: Optional[int] = None
+    ):
+        self.day = day
+        self.month = month
+        self.year = year
 
 
 class BotCommand(TelegramType):
@@ -849,6 +881,8 @@ class Chat(TelegramType):
     :type photo: :obj:`~aiotgm.types.ChatPhoto`, optional
     :param active_usernames: If non-empty, the list of all `active chat usernames <https://telegram.org/blog/topics-in-groups-collectible-usernames#collectible-usernames>`_; for private chats, supergroups and channels. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type active_usernames: :obj:`list` of :obj:`str`, optional
+    :param birthdate: For private chats, the date of birth of the user. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type birthdate: :obj:`~aiotgm.types.Birthdate`, optional
     :param business_intro: For private chats with business accounts, the intro of the business. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type business_intro: :obj:`~aiotgm.types.BusinessIntro`
     :param business_location: For private chats with business accounts, the location of the business. Returned only in :meth:`~aiotgm.Client.get_chat`.
@@ -927,6 +961,7 @@ class Chat(TelegramType):
         obj['is_forum'] = res.get('is_forum')
         obj['photo'] = ChatPhoto._dese(res.get('photo'))
         obj['active_usernames'] = res.get('active_usernames')
+        obj['birthdate'] = Birthdate._dese(res.get('birthdate'))
         obj['business_intro'] = BusinessIntro._dese(res.get('business_intro'))
         obj['business_location'] = BusinessLocation._dese(res.get('business_location'))
         obj['business_opening_hours'] = BusinessOpeningHours._dese(res.get('business_opening_hours'))
@@ -972,6 +1007,7 @@ class Chat(TelegramType):
         is_forum: Optional[Literal[True]] = None,
         photo: Optional[ChatPhoto] = None,
         active_usernames: Optional[list[str]] = None,
+        birthdate: Optional[Birthdate] = None,
         business_intro: Optional[BusinessIntro] = None,
         business_location: Optional[BusinessLocation] = None,
         business_opening_hours: Optional[BusinessOpeningHours] = None,
@@ -1014,6 +1050,7 @@ class Chat(TelegramType):
         self.is_forum = is_forum
         self.photo = photo
         self.active_usernames = active_usernames
+        self.birthdate = birthdate
         self.business_intro = business_intro
         self.business_location = business_location
         self.business_opening_hours = business_opening_hours
