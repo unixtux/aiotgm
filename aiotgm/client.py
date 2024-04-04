@@ -1695,7 +1695,6 @@ class Client(TelegramApi):
         name: str,
         title: str,
         stickers: list[InputSticker],
-        sticker_format: str,
         sticker_type: Optional[str] = None,
         needs_repainting: Optional[bool] = None
     ) -> Literal[True]:
@@ -1713,8 +1712,6 @@ class Client(TelegramApi):
         :type title: :obj:`str`
         :param stickers: A JSON-serialized list of 1-50 initial stickers to be added to the sticker set.
         :type stickers: :obj:`list` of :obj:`~aiotgm.types.InputSticker`
-        :param sticker_format: Format of stickers in the set, must be one of “static”, “animated”, “video”.
-        :type sticker_format: :obj:`str`
         :param sticker_type: Type of stickers in the set, pass “regular”, “mask”, or “custom_emoji”. By default, a regular sticker set is created.
         :type sticker_type: :obj:`str`, optional
         :param needs_repainting: Pass :obj:`True` if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context; for custom emoji sticker sets only.
@@ -1725,8 +1722,7 @@ class Client(TelegramApi):
             'user_id': user_id,
             'name': name,
             'title': title,
-            'stickers': stickers,
-            'sticker_format': sticker_format
+            'stickers': stickers
         }
         if sticker_type is not None: params['sticker_type'] = sticker_type
         if needs_repainting is not None: params['needs_repainting'] = needs_repainting
