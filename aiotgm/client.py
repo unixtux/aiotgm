@@ -3280,6 +3280,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         action: str,
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None
     ) -> Literal[True]:
         '''
@@ -3300,6 +3301,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param action: Type of action to broadcast. Choose one, depending on what the user is about to receive: *typing* for :obj:`text messages <aiotgm.Client.send_message>`, *upload_photo* for :obj:`photos <aiotgm.Client.send_photo>`, *record_video* or *upload_video* for :obj:`videos <aiotgm.Client.send_video>`, *record_voice* or *upload_voice* for :obj:`voice notes <aiotgm.Client.send_voice>`, *upload_document* for :obj:`general files <aiotgm.Client.send_document>`, *choose_sticker* for :obj:`stickers <aiotgm.Client.send_sticker>`, *find_location* for :obj:`location data <aiotgm.Client.send_location>`, *record_video_note* or *upload_video_note* for :obj:`video notes <aiotgm.Client.send_video_note>`.
         :type action: :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the action will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread; for supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :rtype: :obj:`True`
@@ -3308,6 +3311,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'action': action
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         return await super().send_chat_action(params)
 
