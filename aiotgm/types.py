@@ -4384,9 +4384,9 @@ class InputFile(TelegramType):
 
         **Note**: If *file_name* or *hide_name* are not set. The filename will be taken from the *path*.
 
-    :param path: Directory of the specified file.
+    :param path: Directory of the file.
     :type path: :obj:`str`
-    :param file_name: Choose a filename.
+    :param file_name: Select a different filename.
     :type file_name: :obj:`str`, optional
     :param hide_name: Hide the filename.
     :type hide_name: :obj:`bool`, optional
