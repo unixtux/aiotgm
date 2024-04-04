@@ -3,6 +3,9 @@
 if __name__ != '__main__':
     raise OSError("__name__ is not '__main__'")
 
+import sys
+sys.path.insert(0, '../aiotgm/')
+
 from aiotgm.logging import get_logger
 logger = get_logger(__name__)
 
@@ -241,6 +244,37 @@ TYPES = {
             }
         }
     },
+    BusinessIntro: {
+        "link": "https://core.telegram.org/bots/api#businessintro",
+        "has_dese": True,
+        "kwargs": {
+            "title": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "message": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "sticker": {
+                "type_hint": Optional[Sticker],
+                "default": None
+            }
+        }
+    },
+    BusinessLocation: {
+        "link": "https://core.telegram.org/bots/api#businesslocation",
+        "has_dese": True,
+        "kwargs": {
+            "address": {
+                "type_hint": str
+            },
+            "location": {
+                "type_hint": Optional[Location],
+                "default": None
+            }
+        }
+    },
     BusinessMessagesDeleted: {
         "link": "https://core.telegram.org/bots/api#businessmessagesdeleted",
         "has_dese": True,
@@ -328,6 +362,14 @@ TYPES = {
             },
             "active_usernames": {
                 "type_hint": Optional[list[str]],
+                "default": None
+            },
+            "business_intro": {
+                "type_hint": Optional[BusinessIntro],
+                "default": None
+            },
+            "business_location": {
+                "type_hint": Optional[BusinessLocation],
                 "default": None
             },
             "available_reactions": {
@@ -2777,6 +2819,14 @@ TYPES = {
                 "type_hint": Optional[int],
                 "default": None
             },
+            "sender_business_bot": {
+                "type_hint": Optional[User],
+                "default": None
+            },
+            "business_connection_id": {
+                "type_hint": Optional[str],
+                "default": None
+            },
             "forward_origin": {
                 "type_hint": Optional[MessageOrigin],
                 "default": None
@@ -4739,6 +4789,10 @@ TYPES = {
             },
             "edited_business_message": {
                 "type_hint": Optional[Message],
+                "default": None
+            },
+            "deleted_business_messages": {
+                "type_hint": Optional[BusinessMessagesDeleted],
                 "default": None
             },
             "message_reaction": {

@@ -216,6 +216,37 @@
             }
         }
     },
+    "BusinessIntro": {
+        "link": "https://core.telegram.org/bots/api#businessintro",
+        "has_dese": true,
+        "kwargs": {
+            "title": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "message": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
+            "sticker": {
+                "type_hint": "Optional[Sticker]",
+                "default": null
+            }
+        }
+    },
+    "BusinessLocation": {
+        "link": "https://core.telegram.org/bots/api#businesslocation",
+        "has_dese": true,
+        "kwargs": {
+            "address": {
+                "type_hint": "str"
+            },
+            "location": {
+                "type_hint": "Optional[Location]",
+                "default": null
+            }
+        }
+    },
     "BusinessMessagesDeleted": {
         "link": "https://core.telegram.org/bots/api#businessmessagesdeleted",
         "has_dese": true,
@@ -303,6 +334,14 @@
             },
             "active_usernames": {
                 "type_hint": "Optional[list[str]]",
+                "default": null
+            },
+            "business_intro": {
+                "type_hint": "Optional[BusinessIntro]",
+                "default": null
+            },
+            "business_location": {
+                "type_hint": "Optional[BusinessLocation]",
                 "default": null
             },
             "available_reactions": {
@@ -2752,6 +2791,14 @@
                 "type_hint": "Optional[int]",
                 "default": null
             },
+            "sender_business_bot": {
+                "type_hint": "Optional[User]",
+                "default": null
+            },
+            "business_connection_id": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
             "forward_origin": {
                 "type_hint": "Optional[MessageOrigin]",
                 "default": null
@@ -4714,6 +4761,10 @@
             },
             "edited_business_message": {
                 "type_hint": "Optional[Message]",
+                "default": null
+            },
+            "deleted_business_messages": {
+                "type_hint": "Optional[BusinessMessagesDeleted]",
                 "default": null
             },
             "message_reaction": {
