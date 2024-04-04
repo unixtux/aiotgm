@@ -3925,8 +3925,35 @@ class InlineQueryResultLocation(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultlocation
 
-    Represents a location on a map. By default, the location will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the location.
+    Represents a location on a map. By default, the location will be sent by the user.
+    Alternatively, you can use *input_message_content* to send a message with the specified content instead of the location.
+
+    :param id: Unique identifier for this result, 1-64 Bytes.
+    :type id: :obj:`str`
+    :param latitude: Location latitude in degrees.
+    :type latitude: :obj:`float`
+    :param longitude: Location longitude in degrees.
+    :type longitude: :obj:`float`
+    :param title: Location title.
+    :type title: :obj:`str`
+    :param horizontal_accuracy: The radius of uncertainty for the location, measured in meters; 0-1500.
+    :type horizontal_accuracy: :obj:`float`, optional
+    :param live_period: Period in seconds for which the location can be updated, should be between 60 and 86400.
+    :type live_period: :obj:`int`, optional
+    :param heading: For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
+    :type heading: :obj:`int`, optional
+    :param proximity_alert_radius: For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
+    :type proximity_alert_radius: :obj:`int`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the location.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    :param thumbnail_url: Url of the thumbnail for the result.
+    :type thumbnail_url: :obj:`str`, optional
+    :param thumbnail_width: Thumbnail width.
+    :type thumbnail_width: :obj:`int`, optional
+    :param thumbnail_height: Thumbnail height.
+    :type thumbnail_height: :obj:`int`, optional
     '''
     def __init__(
         self,
