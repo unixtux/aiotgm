@@ -6587,8 +6587,6 @@ class InputSticker(TelegramType):
         self.keywords = keywords
 
 
-# InputMessageContent: 5 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 class InputTextMessageContent(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputtextmessagecontent
@@ -6633,28 +6631,6 @@ class InputVenueMessageContent(TelegramType):
         self.foursquare_type = foursquare_type
         self.google_place_id = google_place_id
         self.google_place_type = google_place_type
-
-
-InputMessageContent = Union[
-    InputTextMessageContent,
-    InputLocationMessageContent,
-    InputVenueMessageContent,
-    InputContactMessageContent,
-    InputInvoiceMessageContent
-]
-'''
-https://core.telegram.org/bots/api#inputmessagecontent
-
-This object represents the content of a message to be sent as a result of an inline query.
-
-Telegram clients currently support the following 5 types:
-
-- InputTextMessageContent
-- InputLocationMessageContent
-- InputVenueMessageContent
-- InputContactMessageContent
-- InputInvoiceMessageContent
-'''
 
 
 class SentWebAppMessage(TelegramType):
@@ -7683,6 +7659,27 @@ This object represents the content of a media message to be sent. It should be o
 - :obj:`~aiotgm.types.InputMediaAudio`
 - :obj:`~aiotgm.types.InputMediaPhoto`
 - :obj:`~aiotgm.types.InputMediaVideo`
+'''
+
+
+InputMessageContent = Union[
+    InputTextMessageContent,
+    InputLocationMessageContent,
+    InputVenueMessageContent,
+    InputContactMessageContent,
+    InputInvoiceMessageContent
+]
+'''
+https://core.telegram.org/bots/api#inputmessagecontent
+
+This object represents the content of a message to be sent as a result of an inline query.
+Telegram clients currently support the following 5 types:
+
+- :obj:`~aiotgm.types.InputTextMessageContent`
+- :obj:`~aiotgm.types.InputLocationMessageContent`
+- :obj:`~aiotgm.types.InputVenueMessageContent`
+- :obj:`~aiotgm.types.InputContactMessageContent`
+- :obj:`~aiotgm.types.InputInvoiceMessageContent`
 '''
 
 
