@@ -4148,7 +4148,7 @@ class InlineQueryResultVenue(TelegramType):
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     :param input_message_content: Content of the message to be sent instead of the venue.
     :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
-    :param thumbnail_url: gggg
+    :param thumbnail_url: Url of the thumbnail for the result.
     :type thumbnail_url: :obj:`str`, optional
     :param thumbnail_width: Thumbnail width.
     :type thumbnail_width: :obj:`int`, optional
