@@ -4193,9 +4193,42 @@ class InlineQueryResultVideo(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultvideo
 
-    Represents a link to a page containing an embedded video player or a video file.\n
-    By default, this video file will be sent by the user with an optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the video.
+    Represents a link to a page containing an embedded video player or a video file.
+    By default, this video file will be sent by the user with an optional caption.
+    Alternatively, you can use *input_message_content* to send a message with the
+    specified content instead of the video.
+
+        If an :obj:`~aiotgm.types.InlineQueryResultVideo` message contains an embedded
+        video (e.g., YouTube), you **must** replace its content using *input_message_content*.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param video_url: A valid URL for the embedded video player or video file.
+    :type video_url: :obj:`str`
+    :param mime_type: MIME type of the content of the video URL, “text/html” or “video/mp4”.
+    :type mime_type: :obj:`str`
+    :param thumbnail_url: URL of the thumbnail (JPEG only) for the video.
+    :type thumbnail_url: :obj:`str`
+    :param title: Title for the result.
+    :type title: :obj:`str`
+    :param caption: Caption of the video to be sent, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the video caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param video_width: Video width.
+    :type video_width: :obj:`int`, optional
+    :param video_height: Video height.
+    :type video_height: :obj:`int`, optional
+    :param video_duration: Video duration in seconds.
+    :type video_duration: :obj:`int`, optional
+    :param description: Short description of the result.
+    :type description: :obj:`str`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the video. This field is **required** if :obj:`~aiotgm.types.InlineQueryResultVideo` is used to send an HTML-page as a result (e.g., a YouTube video).
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
     '''
     def __init__(
         self,
