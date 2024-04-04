@@ -617,6 +617,9 @@ class BusinessIntro(TelegramType):
     '''
     def _dese(cls, res: dict):
         obj = {}
+        obj['title'] = res.get('title')
+        obj['message'] = res.get('message')
+        obj['sticker'] = Sticker._dese(res.get('sticker'))
         return cls(**obj)
 
     def __init__(
