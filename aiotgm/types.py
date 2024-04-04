@@ -4122,8 +4122,38 @@ class InlineQueryResultVenue(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultvenue
 
-    Represents a venue. By default, the venue will be sent by the user.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the venue.
+    Represents a venue. By default, the venue will be sent by the user.
+    Alternatively, you can use *input_message_content* to send a message
+    with the specified content instead of the venue.
+
+    :param id: Unique identifier for this result, 1-64 Bytes.
+    :type id: :obj:`str`
+    :param latitude: Latitude of the venue location in degrees.
+    :type latitude: :obj:`float`
+    :param longitude: Longitude of the venue location in degrees.
+    :type longitude: :obj:`float`
+    :param title: Title of the venue.
+    :type title: :obj:`str`
+    :param address: Address of the venue.
+    :type address: :obj:`str`
+    :param foursquare_id: Foursquare identifier of the venue if known.
+    :type foursquare_id: :obj:`str`, optional
+    :param foursquare_type: Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+    :type foursquare_type: :obj:`str`, optional
+    :param google_place_id: Google Places identifier of the venue.
+    :type google_place_id: :obj:`str`, optional
+    :param google_place_type: Google Places type of the venue. (See `supported types <https://developers.google.com/places/web-service/supported_types>`_.)
+    :type google_place_type: :obj:`str`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: 
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
+    :param thumbnail_url: 
+    :type thumbnail_url: :obj:`str`, optional
+    :param thumbnail_width: 
+    :type thumbnail_width: :obj:`int`, optional
+    :param thumbnail_height: 
+    :type thumbnail_height: :obj:`int`, optional
     '''
     def __init__(
         self,
