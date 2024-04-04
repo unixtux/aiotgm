@@ -4275,6 +4275,8 @@ class Message(TelegramType):
         obj['from_user'] = User._dese(res.get('from_user'))
         obj['sender_chat'] = Chat._dese(res.get('sender_chat'))
         obj['sender_boost_count'] = res.get('sender_boost_count')
+        obj['sender_business_bot'] = User._dese(res.get('sender_business_bot'))
+        obj['business_connection_id'] = res.get('business_connection_id')
         obj['forward_origin'] = _dese_message_origin(res.get('forward_origin'))
         obj['is_topic_message'] = res.get('is_topic_message')
         obj['is_automatic_forward'] = res.get('is_automatic_forward')
@@ -4356,6 +4358,8 @@ class Message(TelegramType):
         from_user: Optional[User] = None,
         sender_chat: Optional[Chat] = None,
         sender_boost_count: Optional[int] = None,
+        sender_business_bot: Optional[User] = None,
+        business_connection_id: Optional[str] = None,
         forward_origin: Optional[MessageOrigin] = None,
         is_topic_message: Optional[Literal[True]] = None,
         is_automatic_forward: Optional[Literal[True]] = None,
@@ -4434,6 +4438,8 @@ class Message(TelegramType):
         self.from_user = from_user
         self.sender_chat = sender_chat
         self.sender_boost_count = sender_boost_count
+        self.sender_business_bot = sender_business_bot
+        self.business_connection_id = business_connection_id
         self.forward_origin = forward_origin
         self.is_topic_message = is_topic_message
         self.is_automatic_forward = is_automatic_forward
