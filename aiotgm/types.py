@@ -4146,13 +4146,13 @@ class InlineQueryResultVenue(TelegramType):
     :type google_place_type: :obj:`str`, optional
     :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
-    :param input_message_content: 
+    :param input_message_content: Content of the message to be sent instead of the venue.
     :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
-    :param thumbnail_url: 
+    :param thumbnail_url: gggg
     :type thumbnail_url: :obj:`str`, optional
-    :param thumbnail_width: 
+    :param thumbnail_width: Thumbnail width.
     :type thumbnail_width: :obj:`int`, optional
-    :param thumbnail_height: 
+    :param thumbnail_height: Thumbnail height.
     :type thumbnail_height: :obj:`int`, optional
     '''
     def __init__(
