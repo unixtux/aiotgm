@@ -20,6 +20,7 @@ __all__ = (
     'BotShortDescription',
     'BusinessConnection',
     'BusinessIntro',
+    'BusinessLocation',
     'BusinessMessagesDeleted',
     'CallbackGame',
     'CallbackQuery',
@@ -615,6 +616,8 @@ class BusinessIntro(TelegramType):
     :param sticker: Sticker of the business intro.
     :type sticker: :obj:`~aiotgm.types.Sticker`, optional
     '''
+    @classmethod
+    @_parse_result
     def _dese(cls, res: dict):
         obj = {}
         obj['title'] = res.get('title')
@@ -631,6 +634,32 @@ class BusinessIntro(TelegramType):
         self.title = title
         self.message = message
         self.sticker = sticker
+
+
+class BusinessLocation(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#businesslocation
+
+    :param address: Address of the business.
+    :type address: :obj:`str`
+    :param location: Location of the business.
+    :type location: :obj:`~aiotgm.types.Location`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['address'] = res.get('address')
+        obj['location'] = Location._dese(res.get('location'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        address: str,
+        location: Optional[Location] = None
+    ):
+        self.address = address
+        self.location = location
 
 
 class BusinessMessagesDeleted(TelegramType):
@@ -767,6 +796,8 @@ class Chat(TelegramType):
     :type active_usernames: :obj:`list` of :obj:`str`, optional
     :param business_intro: For private chats with business accounts, the intro of the business. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type business_intro: :obj:`~aiotgm.types.BusinessIntro`
+    :param business_location: For private chats with business accounts, the location of the business. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type business_location: :obj:`~aiotgm.types.BusinessLocation`
     :param available_reactions: List of available reactions allowed in the chat. If omitted, then all :obj:`emoji reactions <aiotgm.types.ReactionTypeEmoji>` are allowed. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type available_reactions: :obj:`list` of :obj:`~aiotgm.types.ReactionType`, optional
     :param accent_color_id: Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See `accent colors <https://core.telegram.org/bots/api#accent-colors>`_ for more details. Returned only in :meth:`~aiotgm.Client.get_chat`.
@@ -838,6 +869,7 @@ class Chat(TelegramType):
         obj['photo'] = ChatPhoto._dese(res.get('photo'))
         obj['active_usernames'] = res.get('active_usernames')
         obj['business_intro'] = BusinessIntro._dese(res.get('business_intro'))
+        obj['business_location'] = BusinessLocation._dese(res.get('business_location'))
         obj['available_reactions'] = [_dese_reaction_type(kwargs) for kwargs in res.get('available_reactions')] if 'available_reactions' in res else None
         obj['accent_color_id'] = res.get('accent_color_id')
         obj['background_custom_emoji_id'] = res.get('background_custom_emoji_id')
@@ -880,6 +912,7 @@ class Chat(TelegramType):
         photo: Optional[ChatPhoto] = None,
         active_usernames: Optional[list[str]] = None,
         business_intro: Optional[BusinessIntro] = None,
+        business_location: Optional[BusinessLocation] = None,
         available_reactions: Optional[list[ReactionType]] = None,
         accent_color_id: Optional[int] = None,
         background_custom_emoji_id: Optional[str] = None,
@@ -919,6 +952,7 @@ class Chat(TelegramType):
         self.photo = photo
         self.active_usernames = active_usernames
         self.business_intro = business_intro
+        self.business_location = business_location
         self.available_reactions = available_reactions
         self.accent_color_id = accent_color_id
         self.background_custom_emoji_id = background_custom_emoji_id
