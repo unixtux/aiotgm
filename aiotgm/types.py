@@ -4273,6 +4273,7 @@ class User(TelegramType):
         obj['can_join_groups'] = res.get('can_join_groups')
         obj['can_read_all_group_messages'] = res.get('can_read_all_group_messages')
         obj['supports_inline_queries'] = res.get('supports_inline_queries')
+        obj['can_connect_to_business'] = res.get('can_connect_to_business')
         return cls(**obj)
 
     def __init__(
@@ -4287,7 +4288,8 @@ class User(TelegramType):
         added_to_attachment_menu: Optional[Literal[True]] = None,
         can_join_groups: Optional[bool] = None,
         can_read_all_group_messages: Optional[bool] = None,
-        supports_inline_queries: Optional[bool] = None
+        supports_inline_queries: Optional[bool] = None,
+        can_connect_to_business: Optional[bool] = None
     ):
         self.id = id
         self.is_bot = is_bot
@@ -4300,6 +4302,7 @@ class User(TelegramType):
         self.can_join_groups = can_join_groups
         self.can_read_all_group_messages = can_read_all_group_messages
         self.supports_inline_queries = supports_inline_queries
+        self.can_connect_to_business = can_connect_to_business
 
 
 class MessageEntity(TelegramType):
