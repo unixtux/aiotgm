@@ -4382,7 +4382,7 @@ class InputFile(TelegramType):
     This object represents the contents of a file to be uploaded. Must be posted
     using multipart/form-data in the usual way that files are uploaded via the browser.
 
-        **Note**: If *file_name* or *hide_name* are not set. The filename will be taken from the *path*.
+        **Note**: If *file_name* or *hide_name* are not set, then the filename will be taken from the *path*.
 
     :param path: Directory of the file.
     :type path: :obj:`str`
