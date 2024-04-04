@@ -2611,6 +2611,369 @@ TYPES = {
             }
         }
     },
+    InlineQueryResultsButton: {
+        "link": "https://core.telegram.org/bots/api#inlinequeryresultsbutton",
+        "has_dese": False,
+        "kwargs": {
+            "text": {
+                "type_hint": str
+            },
+            "web_app": {
+                "type_hint": Optional[WebAppInfo],
+                "default": None
+            },
+            "start_parameter": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    InputContactMessageContent: {
+        "link": "https://core.telegram.org/bots/api#inputcontactmessagecontent",
+        "has_dese": False,
+        "kwargs": {
+            "phone_number": {
+                "type_hint": str
+            },
+            "first_name": {
+                "type_hint": str
+            },
+            "last_name": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "vcard": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    InputFile: {
+        "link": "https://core.telegram.org/bots/api#inputfile",
+        "has_dese": False,
+        "warnings": [
+            "Not found InputFile.file_name",
+            "Not found InputFile.hide_name"
+        ],
+        "kwargs": {
+            "path": {
+                "type_hint": str
+            },
+            "file_name": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "hide_name": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
+    InputInvoiceMessageContent: {
+        "link": "https://core.telegram.org/bots/api#inputinvoicemessagecontent",
+        "has_dese": False,
+        "kwargs": {
+            "title": {
+                "type_hint": str
+            },
+            "description": {
+                "type_hint": str
+            },
+            "payload": {
+                "type_hint": str
+            },
+            "provider_token": {
+                "type_hint": str
+            },
+            "currency": {
+                "type_hint": str
+            },
+            "prices": {
+                "type_hint": list[LabeledPrice]
+            },
+            "max_tip_amount": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "suggested_tip_amounts": {
+                "type_hint": Optional[list[int]],
+                "default": None
+            },
+            "provider_data": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "photo_url": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "photo_size": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "photo_width": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "photo_height": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "need_name": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "need_phone_number": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "need_email": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "need_shipping_address": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "send_phone_number_to_provider": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "send_email_to_provider": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "is_flexible": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
+    InputLocationMessageContent: {
+        "link": "https://core.telegram.org/bots/api#inputlocationmessagecontent",
+        "has_dese": False,
+        "kwargs": {
+            "latitude": {
+                "type_hint": float
+            },
+            "longitude": {
+                "type_hint": float
+            },
+            "horizontal_accuracy": {
+                "type_hint": Optional[float],
+                "default": None
+            },
+            "live_period": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "heading": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "proximity_alert_radius": {
+                "type_hint": Optional[int],
+                "default": None
+            }
+        }
+    },
+    InputMediaAnimation: {
+        "link": "https://core.telegram.org/bots/api#inputmediaanimation",
+        "has_dese": False,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_ANIMATION"
+        ],
+        "kwargs": {
+            "media": {
+                "type_hint": str
+            },
+            "thumbnail": {
+                "type_hint": Optional[Union[InputFile, str]],
+                "default": None
+            },
+            "caption": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "parse_mode": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption_entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "width": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "height": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "duration": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "has_spoiler": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
+    InputMediaAudio: {
+        "link": "https://core.telegram.org/bots/api#inputmediaaudio",
+        "has_dese": False,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_AUDIO"
+        ],
+        "kwargs": {
+            "media": {
+                "type_hint": str
+            },
+            "thumbnail": {
+                "type_hint": Optional[Union[InputFile, str]],
+                "default": None
+            },
+            "caption": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "parse_mode": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption_entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "duration": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "performer": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "title": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    InputMediaDocument: {
+        "link": "https://core.telegram.org/bots/api#inputmediadocument",
+        "has_dese": False,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT"
+        ],
+        "kwargs": {
+            "media": {
+                "type_hint": str
+            },
+            "thumbnail": {
+                "type_hint": Optional[Union[InputFile, str]],
+                "default": None
+            },
+            "caption": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "parse_mode": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption_entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "disable_content_type_detection": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
+    InputMediaPhoto: {
+        "link": "https://core.telegram.org/bots/api#inputmediaphoto",
+        "has_dese": False,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_PHOTO"
+        ],
+        "kwargs": {
+            "media": {
+                "type_hint": str
+            },
+            "caption": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "parse_mode": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption_entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "has_spoiler": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
+    InputMediaVideo: {
+        "link": "https://core.telegram.org/bots/api#inputmediavideo",
+        "has_dese": False,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_MEDIA_VIDEO"
+        ],
+        "kwargs": {
+            "media": {
+                "type_hint": str
+            },
+            "thumbnail": {
+                "type_hint": Optional[Union[InputFile, str]],
+                "default": None
+            },
+            "caption": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "parse_mode": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "caption_entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "width": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "height": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "duration": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "supports_streaming": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "has_spoiler": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
     SwitchInlineQueryChosenChat: {
         "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
         "has_dese": True,
@@ -2634,27 +2997,6 @@ TYPES = {
             "allow_channel_chats": {
                 "type_hint": Optional[bool],
                 "default": None
-            }
-        }
-    },
-    InputFile: {
-        "link": "https://core.telegram.org/bots/api#inputfile",
-        "has_dese": False,
-        "warnings": [
-            "Not found InputFile.file_name",
-            "Not found InputFile.hide_name"
-        ],
-        "kwargs": {
-            "path": {
-                "type_hint": str
-            },
-            "file_name": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "hide_name": {
-                "type_hint": bool,
-                "default": False
             }
         }
     },
@@ -3896,203 +4238,6 @@ TYPES = {
             }
         }
     },
-    InputMediaPhoto: {
-        "link": "https://core.telegram.org/bots/api#inputmediaphoto",
-        "has_dese": False,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_PHOTO"
-        ],
-        "kwargs": {
-            "media": {
-                "type_hint": str
-            },
-            "caption": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption_entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "has_spoiler": {
-                "type_hint": Optional[bool],
-                "default": None
-            }
-        }
-    },
-    InputMediaVideo: {
-        "link": "https://core.telegram.org/bots/api#inputmediavideo",
-        "has_dese": False,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_VIDEO"
-        ],
-        "kwargs": {
-            "media": {
-                "type_hint": str
-            },
-            "thumbnail": {
-                "type_hint": Optional[Union[InputFile, str]],
-                "default": None
-            },
-            "caption": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption_entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "width": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "height": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "duration": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "supports_streaming": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "has_spoiler": {
-                "type_hint": Optional[bool],
-                "default": None
-            }
-        }
-    },
-    InputMediaAnimation: {
-        "link": "https://core.telegram.org/bots/api#inputmediaanimation",
-        "has_dese": False,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_ANIMATION"
-        ],
-        "kwargs": {
-            "media": {
-                "type_hint": str
-            },
-            "thumbnail": {
-                "type_hint": Optional[Union[InputFile, str]],
-                "default": None
-            },
-            "caption": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption_entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "width": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "height": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "duration": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "has_spoiler": {
-                "type_hint": Optional[bool],
-                "default": None
-            }
-        }
-    },
-    InputMediaAudio: {
-        "link": "https://core.telegram.org/bots/api#inputmediaaudio",
-        "has_dese": False,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_AUDIO"
-        ],
-        "kwargs": {
-            "media": {
-                "type_hint": str
-            },
-            "thumbnail": {
-                "type_hint": Optional[Union[InputFile, str]],
-                "default": None
-            },
-            "caption": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption_entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "duration": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "performer": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "title": {
-                "type_hint": Optional[str],
-                "default": None
-            }
-        }
-    },
-    InputMediaDocument: {
-        "link": "https://core.telegram.org/bots/api#inputmediadocument",
-        "has_dese": False,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT"
-        ],
-        "kwargs": {
-            "media": {
-                "type_hint": str
-            },
-            "thumbnail": {
-                "type_hint": Optional[Union[InputFile, str]],
-                "default": None
-            },
-            "caption": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "caption_entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "disable_content_type_detection": {
-                "type_hint": Optional[bool],
-                "default": None
-            }
-        }
-    },
     MaskPosition: {
         "link": "https://core.telegram.org/bots/api#maskposition",
         "has_dese": True,
@@ -4215,23 +4360,6 @@ TYPES = {
             }
         }
     },
-    InlineQueryResultsButton: {
-        "link": "https://core.telegram.org/bots/api#inlinequeryresultsbutton",
-        "has_dese": False,
-        "kwargs": {
-            "text": {
-                "type_hint": str
-            },
-            "web_app": {
-                "type_hint": Optional[WebAppInfo],
-                "default": None
-            },
-            "start_parameter": {
-                "type_hint": Optional[str],
-                "default": None
-            }
-        }
-    },
     InputTextMessageContent: {
         "link": "https://core.telegram.org/bots/api#inputtextmessagecontent",
         "has_dese": False,
@@ -4249,34 +4377,6 @@ TYPES = {
             },
             "link_preview_options": {
                 "type_hint": Optional[LinkPreviewOptions],
-                "default": None
-            }
-        }
-    },
-    InputLocationMessageContent: {
-        "link": "https://core.telegram.org/bots/api#inputlocationmessagecontent",
-        "has_dese": False,
-        "kwargs": {
-            "latitude": {
-                "type_hint": float
-            },
-            "longitude": {
-                "type_hint": float
-            },
-            "horizontal_accuracy": {
-                "type_hint": Optional[float],
-                "default": None
-            },
-            "live_period": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "heading": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "proximity_alert_radius": {
-                "type_hint": Optional[int],
                 "default": None
             }
         }
@@ -4311,106 +4411,6 @@ TYPES = {
             },
             "google_place_type": {
                 "type_hint": Optional[str],
-                "default": None
-            }
-        }
-    },
-    InputContactMessageContent: {
-        "link": "https://core.telegram.org/bots/api#inputcontactmessagecontent",
-        "has_dese": False,
-        "kwargs": {
-            "phone_number": {
-                "type_hint": str
-            },
-            "first_name": {
-                "type_hint": str
-            },
-            "last_name": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "vcard": {
-                "type_hint": Optional[str],
-                "default": None
-            }
-        }
-    },
-    InputInvoiceMessageContent: {
-        "link": "https://core.telegram.org/bots/api#inputinvoicemessagecontent",
-        "has_dese": False,
-        "kwargs": {
-            "title": {
-                "type_hint": str
-            },
-            "description": {
-                "type_hint": str
-            },
-            "payload": {
-                "type_hint": str
-            },
-            "provider_token": {
-                "type_hint": str
-            },
-            "currency": {
-                "type_hint": str
-            },
-            "prices": {
-                "type_hint": list[LabeledPrice]
-            },
-            "max_tip_amount": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "suggested_tip_amounts": {
-                "type_hint": Optional[list[int]],
-                "default": None
-            },
-            "provider_data": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "photo_url": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "photo_size": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "photo_width": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "photo_height": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "need_name": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "need_phone_number": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "need_email": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "need_shipping_address": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "send_phone_number_to_provider": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "send_email_to_provider": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "is_flexible": {
-                "type_hint": Optional[bool],
                 "default": None
             }
         }

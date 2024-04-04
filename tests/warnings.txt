@@ -37,6 +37,11 @@ InlineQueryResultVenue: 'type' is not in __init__() and 'type' default value is:
 InlineQueryResultVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VIDEO
 InlineQueryResultVoice: 'type' is not in __init__() and 'type' default value is: DEFAULT_INLINE_QUERY_RESULT_VOICE
 InputFile: Not found InputFile.file_name and Not found InputFile.hide_name
+InputMediaAnimation: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_ANIMATION
+InputMediaAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_AUDIO
+InputMediaDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT
+InputMediaPhoto: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_PHOTO
+InputMediaVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_VIDEO
 Message: 'text' default value is: text or str() # If not text, it's str() instead of None
 ReactionTypeEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_EMOJI
 ReactionTypeCustomEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
@@ -45,11 +50,6 @@ ReplyKeyboardRemove: 'remove_keyboard: Literal[True]' is not in __init__() and '
 MenuButtonCommands: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_COMMANDS
 MenuButtonWebApp: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP
 MenuButtonDefault: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_DEFAULT
-InputMediaPhoto: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_PHOTO
-InputMediaVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_VIDEO
-InputMediaAnimation: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_ANIMATION
-InputMediaAudio: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_AUDIO
-InputMediaDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT
 PassportElementErrorDataField: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD
 PassportElementErrorFrontSide: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE
 PassportElementErrorReverseSide: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE
