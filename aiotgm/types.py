@@ -4059,8 +4059,34 @@ class InlineQueryResultPhoto(TelegramType):
     '''
     https://core.telegram.org/bots/api#inlinequeryresultphoto
 
-    Represents a link to a photo. By default, this photo will be sent by the user with optional caption.\n
-    Alternatively, you can use input_message_content to send a message with the specified content instead of the photo.
+    Represents a link to a photo. By default, this photo will be sent by the
+    user with optional caption. Alternatively, you can use *input_message_content*
+    to send a message with the specified content instead of the photo.
+
+    :param id: Unique identifier for this result, 1-64 bytes.
+    :type id: :obj:`str`
+    :param photo_url: A valid URL of the photo. Photo must be in **JPEG** format. Photo size must not exceed 5MB.
+    :type photo_url: :obj:`str`
+    :param thumbnail_url: URL of the thumbnail for the photo.
+    :type thumbnail_url: :obj:`str`
+    :param photo_width: Width of the photo.
+    :type photo_width: :obj:`int`, optional
+    :param photo_height: Height of the photo.
+    :type photo_height: :obj:`int`, optional
+    :param title: Title for the result.
+    :type title: :obj:`str`, optional
+    :param description: Short description of the result.
+    :type description: :obj:`str`, optional
+    :param caption: Caption of the photo to be sent, 0-1024 characters after entities parsing.
+    :type caption: :obj:`str`, optional
+    :param parse_mode: Mode for parsing entities in the photo caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+    :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
+    :param input_message_content: Content of the message to be sent instead of the photo.
+    :type input_message_content: :obj:`~aiotgm.types.InputMessageContent`, optional
     '''
     def __init__(
         self,
