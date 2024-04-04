@@ -6056,11 +6056,13 @@ class InputSticker(TelegramType):
     def __init__(
         self,
         sticker: Union[InputFile, str],
+        format: str,
         emoji_list: list[str],
         mask_position: Optional[MaskPosition] = None,
         keywords: Optional[list[str]] = None
     ):
         self.sticker = sticker
+        self.format = format
         self.emoji_list = emoji_list
         self.mask_position = mask_position
         self.keywords = keywords
