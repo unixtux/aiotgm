@@ -41,6 +41,6 @@ html_theme = 'furo' #'sphinx_rtd_theme' # 'alabaster'
 html_static_path = ['_static']
 html_theme_options = {
     'light_logo': 'robot_light.png',
-    'dark_logo': 'robot_dark.png',
+    'dark_logo': 'robot_darkk.png',
     'navigation_with_keys': True
 }
