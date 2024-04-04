@@ -2008,15 +2008,24 @@ class ChatShared(TelegramType):
         obj = {}
         obj['request_id'] = res.get('request_id')
         obj['chat_id'] = res.get('chat_id')
+        obj['title'] = res.get('title')
+        obj['username'] = res.get('username')
+        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')] if 'photo' in res else None
         return cls(**obj)
 
     def __init__(
         self,
         request_id: int,
-        chat_id: int
+        chat_id: int,
+        title: Optional[str] = None,
+        username: Optional[str] = None,
+        photo: Optional[list[PhotoSize]] = None,
     ):
         self.request_id = request_id
         self.chat_id = chat_id
+        self.title = title
+        self.username = username
+        self.photo = photo
 
 
 class ChosenInlineResult(TelegramType):
