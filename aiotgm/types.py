@@ -166,6 +166,7 @@ __all__ = (
     'ReplyParameters',
     'ResponseParameters',
     'SentWebAppMessage',
+    'SharedUser',
     'ShippingAddress',
     'ShippingOption',
     'ShippingQuery',
@@ -5285,16 +5286,16 @@ class UsersShared(TelegramType):
     def _dese(cls, res: dict):
         obj = {}
         obj['request_id'] = res.get('request_id')
-        obj['user_ids'] = res.get('user_ids')
+        obj['users'] = [SharedUser._dese(kwargs) for kwargs in res.get('users')]
         return cls(**obj)
 
     def __init__(
         self,
         request_id: int,
-        user_ids: list[int]
+        users: list[SharedUser]
     ):
         self.request_id = request_id
-        self.user_ids = user_ids
+        self.users = users
 
 
 class WriteAccessAllowed(TelegramType):
@@ -5400,6 +5401,39 @@ class VideoChatParticipantsInvited(TelegramType):
         users: list[User]
     ):
         self.users = users
+
+
+class SharedUser(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#shareduser
+
+    This object contains information about a user that was shared with
+    the bot using a :obj:`~aiotgm.types.KeyboardButtonRequestUser` button.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user_id'] = res.get('user_id')
+        obj['first_name'] = res.get('first_name')
+        obj['last_name'] = res.get('last_name')
+        obj['username'] = res.get('username')
+        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')] if 'photo' in res else None
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user_id: int,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
+        username: Optional[str] = None,
+        photo: Optional[list[PhotoSize]] = None
+    ):
+        self.user_id = user_id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.username = username
+        self.photo = photo
 
 
 class UserProfilePhotos(TelegramType):
