@@ -855,6 +855,8 @@ class Chat(TelegramType):
     :type business_location: :obj:`~aiotgm.types.BusinessLocation`
     :param business_opening_hours: For private chats with business accounts, the opening hours of the business. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type business_opening_hours: :obj:`~aiotgm.types.BusinessOpeningHours`, optional
+    :param personal_chat: For private chats, the personal channel of the user. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type personal_chat: :obj:`~aiotgm.types.Chat`, optional
     :param available_reactions: List of available reactions allowed in the chat. If omitted, then all :obj:`emoji reactions <aiotgm.types.ReactionTypeEmoji>` are allowed. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type available_reactions: :obj:`list` of :obj:`~aiotgm.types.ReactionType`, optional
     :param accent_color_id: Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See `accent colors <https://core.telegram.org/bots/api#accent-colors>`_ for more details. Returned only in :meth:`~aiotgm.Client.get_chat`.
@@ -928,6 +930,7 @@ class Chat(TelegramType):
         obj['business_intro'] = BusinessIntro._dese(res.get('business_intro'))
         obj['business_location'] = BusinessLocation._dese(res.get('business_location'))
         obj['business_opening_hours'] = BusinessOpeningHours._dese(res.get('business_opening_hours'))
+        obj['personal_chat'] = Chat._dese(res.get('personal_chat'))
         obj['available_reactions'] = [_dese_reaction_type(kwargs) for kwargs in res.get('available_reactions')] if 'available_reactions' in res else None
         obj['accent_color_id'] = res.get('accent_color_id')
         obj['background_custom_emoji_id'] = res.get('background_custom_emoji_id')
@@ -972,6 +975,7 @@ class Chat(TelegramType):
         business_intro: Optional[BusinessIntro] = None,
         business_location: Optional[BusinessLocation] = None,
         business_opening_hours: Optional[BusinessOpeningHours] = None,
+        personal_chat: Optional[Chat] = None,
         available_reactions: Optional[list[ReactionType]] = None,
         accent_color_id: Optional[int] = None,
         background_custom_emoji_id: Optional[str] = None,
@@ -1013,6 +1017,7 @@ class Chat(TelegramType):
         self.business_intro = business_intro
         self.business_location = business_location
         self.business_opening_hours = business_opening_hours
+        self.personal_chat = personal_chat
         self.available_reactions = available_reactions
         self.accent_color_id = accent_color_id
         self.background_custom_emoji_id = background_custom_emoji_id
