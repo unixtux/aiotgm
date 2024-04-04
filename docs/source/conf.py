@@ -40,7 +40,7 @@ toc_object_entries = True # if False, it doesn't index members
 html_theme = 'furo' #'sphinx_rtd_theme' # 'alabaster'
 html_static_path = ['_static']
 html_theme_options = {
-    'light_logo': 'tux.png',
-    'dark_logo': 'tux.png',
+    'light_logo': 'robot_light.png',
+    'dark_logo': 'robot_dark.png',
     'navigation_with_keys': True
 }
