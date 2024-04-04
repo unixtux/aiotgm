@@ -4408,6 +4408,98 @@ class InputFile(TelegramType):
             self.file_name = None
 
 
+class InputInvoiceMessageContent(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputinvoicemessagecontent
+
+    Represents the :obj:`content <aiotgm.types.InputMessageContent>` of an invoice message to be sent as the result of an inline query.
+
+    :param title: Product name, 1-32 characters.
+    :type title: :obj:`str`
+    :param description: Product description, 1-255 characters.
+    :type description: :obj:`str`
+    :param payload: Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
+    :type payload: :obj:`str`
+    :param provider_token: Payment provider token, obtained via `@BotFather <https://t.me/botfather>`_.
+    :type provider_token: :obj:`str`
+    :param currency: Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_.
+    :type currency: :obj:`str`
+    :param prices: Price breakdown, a JSON-serialized list of components. (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+    :type prices: :obj:`list` of :obj:`~aiotgm.types.LabeledPrice`
+    :param max_tip_amount: The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of ``US$ 1.45`` pass ``max_tip_amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to :obj:`0`.
+    :type max_tip_amount: :obj:`int`, optional
+    :param suggested_tip_amounts: A JSON-serialized array of suggested amounts of tip in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.
+    :type suggested_tip_amounts: :obj:`list` of :obj:`int`, optional
+    :param provider_data: A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.
+    :type provider_data: :obj:`str`, optional
+    :param photo_url: URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
+    :type photo_url: :obj:`str`, optional
+    :param photo_size: Photo size in bytes.
+    :type photo_size: :obj:`int`, optional
+    :param photo_width: Photo width.
+    :type photo_width: :obj:`int`, optional
+    :param photo_height: Photo height.
+    :type photo_height: :obj:`int`, optional
+    :param need_name: Pass :obj:`True` if you require the user's full name to complete the order.
+    :type need_name: :obj:`bool`, optional
+    :param need_phone_number: Pass :obj:`True` if you require the user's phone number to complete the order.
+    :type need_phone_number: :obj:`bool`, optional
+    :param need_email: Pass :obj:`True` if you require the user's email address to complete the order.
+    :type need_email: :obj:`bool`, optional
+    :param need_shipping_address: Pass :obj:`True` if you require the user's shipping address to complete the order.
+    :type need_shipping_address: :obj:`bool`, optional
+    :param send_phone_number_to_provider: Pass :obj:`True` if the user's phone number should be sent to provider.
+    :type send_phone_number_to_provider: :obj:`bool`, optional
+    :param send_email_to_provider: Pass :obj:`True` if the user's email address should be sent to provider.
+    :type send_email_to_provider: :obj:`bool`, optional
+    :param is_flexible: Pass :obj:`True` if the final price depends on the shipping method.
+    :type is_flexible: :obj:`bool`, optional
+    '''
+    def __init__(
+        self,
+        title: str,
+        description: str,
+        payload: str,
+        provider_token: str,
+        currency: str,
+        prices: list[LabeledPrice],
+        max_tip_amount: Optional[int] = None,
+        suggested_tip_amounts: Optional[list[int]] = None,
+        provider_data: Optional[str] = None,
+        photo_url: Optional[str] = None,
+        photo_size: Optional[int] = None,
+        photo_width: Optional[int] = None,
+        photo_height: Optional[int] = None,
+        need_name: Optional[bool] = None,
+        need_phone_number: Optional[bool] = None,
+        need_email: Optional[bool] = None,
+        need_shipping_address: Optional[bool] = None,
+        send_phone_number_to_provider: Optional[bool] = None,
+        send_email_to_provider: Optional[bool] = None,
+        is_flexible: Optional[bool] = None
+    ):
+        self.title = title
+        self.description = description
+        self.payload = payload
+        self.provider_token = provider_token
+        self.currency = currency
+        self.prices = prices
+        self.max_tip_amount = max_tip_amount
+        self.suggested_tip_amounts = suggested_tip_amounts
+        self.provider_data = provider_data
+        self.photo_url = photo_url
+        self.photo_size = photo_size
+        self.photo_width = photo_width
+        self.photo_height = photo_height
+        self.need_name = need_name
+        self.need_phone_number = need_phone_number
+        self.need_email = need_email
+        self.need_shipping_address = need_shipping_address
+        self.send_phone_number_to_provider = send_phone_number_to_provider
+        self.send_email_to_provider = send_email_to_provider
+        self.is_flexible = is_flexible
+
+
 
 
 
@@ -6472,57 +6564,6 @@ class InputVenueMessageContent(TelegramType):
         self.foursquare_type = foursquare_type
         self.google_place_id = google_place_id
         self.google_place_type = google_place_type
-
-
-class InputInvoiceMessageContent(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inputinvoicemessagecontent
-
-    Represents the content of an invoice message to be sent as the result of an inline query.
-    '''
-    def __init__(
-        self,
-        title: str,
-        description: str,
-        payload: str,
-        provider_token: str,
-        currency: str,
-        prices: list[LabeledPrice],
-        max_tip_amount: Optional[int] = None,
-        suggested_tip_amounts: Optional[list[int]] = None,
-        provider_data: Optional[str] = None,
-        photo_url: Optional[str] = None,
-        photo_size: Optional[int] = None,
-        photo_width: Optional[int] = None,
-        photo_height: Optional[int] = None,
-        need_name: Optional[bool] = None,
-        need_phone_number: Optional[bool] = None,
-        need_email: Optional[bool] = None,
-        need_shipping_address: Optional[bool] = None,
-        send_phone_number_to_provider: Optional[bool] = None,
-        send_email_to_provider: Optional[bool] = None,
-        is_flexible: Optional[bool] = None
-    ):
-        self.title = title
-        self.description = description
-        self.payload = payload
-        self.provider_token = provider_token
-        self.currency = currency
-        self.prices = prices
-        self.max_tip_amount = max_tip_amount
-        self.suggested_tip_amounts = suggested_tip_amounts
-        self.provider_data = provider_data
-        self.photo_url = photo_url
-        self.photo_size = photo_size
-        self.photo_width = photo_width
-        self.photo_height = photo_height
-        self.need_name = need_name
-        self.need_phone_number = need_phone_number
-        self.need_email = need_email
-        self.need_shipping_address = need_shipping_address
-        self.send_phone_number_to_provider = send_phone_number_to_provider
-        self.send_email_to_provider = send_email_to_provider
-        self.is_flexible = is_flexible
 
 
 InputMessageContent = Union[
