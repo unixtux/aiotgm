@@ -3115,6 +3115,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         animation: Union[InputFile, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         duration: Optional[int] = None,
         width: Optional[int] = None,
@@ -3140,6 +3141,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param animation: Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an animation from the Internet, or upload a new animation using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
         :type animation: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param duration: Duration of sent animation in seconds.
@@ -3172,6 +3175,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'animation': animation
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if duration is not None: params['duration'] = duration
         if width is not None: params['width'] = width
@@ -3195,6 +3199,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         audio: Union[InputFile, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
@@ -3220,6 +3225,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param audio: Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get an audio file from the Internet, or upload a new one using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
         :type audio: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param caption: Audio caption, 0-1024 characters after entities parsing.
@@ -3250,6 +3257,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'audio': audio
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
@@ -3309,6 +3317,7 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         phone_number: str,
         first_name: str,
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         last_name: Optional[str] = None,
         vcard: Optional[str] = None,
@@ -3329,6 +3338,8 @@ class Client(TelegramApi):
         :type phone_number: :obj:`str`
         :param first_name: Contact's first name.
         :type first_name: :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param last_name: Contact's last name.
@@ -3350,6 +3361,7 @@ class Client(TelegramApi):
             'phone_number': phone_number,
             'first_name': first_name
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if last_name is not None: params['last_name'] = last_name
         if vcard is not None: params['vcard'] = vcard
@@ -3365,6 +3377,7 @@ class Client(TelegramApi):
     async def send_dice(
         self,
         chat_id: Union[int, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         emoji: Optional[str] = None,
         disable_notification: Optional[bool] = None,
@@ -3380,6 +3393,8 @@ class Client(TelegramApi):
 
         :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param emoji: Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”. Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults to “🎲”.
@@ -3397,6 +3412,7 @@ class Client(TelegramApi):
         params = {
             'chat_id': chat_id
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if emoji is not None: params['emoji'] = emoji
         if disable_notification is not None: params['disable_notification'] = disable_notification
@@ -3412,6 +3428,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         document: Union[InputFile, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         thumbnail: Optional[Union[InputFile, str]] = None,
         caption: Optional[str] = None,
@@ -3434,6 +3451,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param document: File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
         :type document: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param thumbnail: Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
@@ -3460,6 +3479,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'document': document
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if thumbnail is not None: params['thumbnail'] = thumbnail
         if caption is not None: params['caption'] = caption
@@ -3480,6 +3500,7 @@ class Client(TelegramApi):
         self,
         chat_id: int,
         game_short_name: str,
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
@@ -3496,6 +3517,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int`
         :param game_short_name: Short name of the game, serves as the unique identifier for the game. Set up your games via `@BotFather <https://t.me/botfather>`_.
         :type game_short_name: :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
@@ -3512,6 +3535,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'game_short_name': game_short_name
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
@@ -3653,6 +3677,7 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         latitude: float,
         longitude: float,
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         horizontal_accuracy: Optional[float] = None,
         live_period: Optional[int] = None,
@@ -3675,6 +3700,8 @@ class Client(TelegramApi):
         :type latitude: :obj:`float`
         :param longitude: Longitude of the location.
         :type longitude: :obj:`float`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param horizontal_accuracy: The radius of uncertainty for the location, measured in meters; 0-1500.
@@ -3700,6 +3727,7 @@ class Client(TelegramApi):
             'latitude': latitude,
             'longitude': longitude
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if horizontal_accuracy is not None: params['horizontal_accuracy'] = horizontal_accuracy
         if live_period is not None: params['live_period'] = live_period
@@ -3718,6 +3746,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         media: list[Union[InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo]],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
@@ -3734,6 +3763,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param media: A JSON-serialized array describing messages to be sent, must include 2-10 items.
         :type media: :obj:`list` of :obj:`~aiotgm.types.InputMediaAudio`, :obj:`~aiotgm.types.InputMediaDocument`, :obj:`~aiotgm.types.InputMediaPhoto` and :obj:`~aiotgm.types.InputMediaVideo`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param disable_notification: Sends messages `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
@@ -3748,6 +3779,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'media': media
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
@@ -3761,6 +3793,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         text: str,
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         parse_mode: Optional[str] = None,
         entities: Optional[list[MessageEntity]] = None,
@@ -3780,6 +3813,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param text: Text of the message to be sent, 1-4096 characters after entities parsing.
         :type text: :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param parse_mode: Mode for parsing entities in the message text. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
@@ -3802,6 +3837,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'text': text
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
@@ -3820,6 +3856,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         photo: Union[InputFile, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
@@ -3840,6 +3877,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param photo: Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a photo from the Internet, or upload a new photo using multipart/form-data. The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total. Width and height ratio must be at most 20. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
         :type photo: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param caption: Photo caption (may also be used when resending photos by *file_id*), 0-1024 characters after entities parsing.
@@ -3864,6 +3903,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'photo': photo
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
@@ -3884,6 +3924,7 @@ class Client(TelegramApi):
         chat_id: Union[int, str],
         question: str,
         options: list[str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         is_anonymous: Optional[bool] = None,
         type: Optional[str] = None,
@@ -3912,6 +3953,8 @@ class Client(TelegramApi):
         :type question: :obj:`str`
         :param options: A JSON-serialized list of answer options, 2-10 strings 1-100 characters each.
         :type options: :obj:`list` of :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param is_anonymous: :obj:`True`, if the poll needs to be anonymous, defaults to :obj:`True`.
@@ -3949,6 +3992,7 @@ class Client(TelegramApi):
             'question': question,
             'options': options
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if is_anonymous is not None: params['is_anonymous'] = is_anonymous
         if type is not None: params['type'] = type
@@ -3973,6 +4017,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         sticker: Union[InputFile, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         emoji: Optional[str] = None,
         disable_notification: Optional[bool] = None,
@@ -3990,6 +4035,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param sticker: Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP or .TGS sticker using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_. Video stickers can only be sent by a file_id. Animated stickers can't be sent via an HTTP URL.
         :type sticker: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param emoji: Emoji associated with the sticker; only for just uploaded stickers.
@@ -4008,6 +4055,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'sticker': sticker
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if emoji is not None: params['emoji'] = emoji
         if disable_notification is not None: params['disable_notification'] = disable_notification
@@ -4026,6 +4074,7 @@ class Client(TelegramApi):
         longitude: float,
         title: str,
         address: str,
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         foursquare_id: Optional[str] = None,
         foursquare_type: Optional[str] = None,
@@ -4052,6 +4101,8 @@ class Client(TelegramApi):
         :type title: :obj:`str`
         :param address: Address of the venue.
         :type address: :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param foursquare_id: Foursquare identifier of the venue.
@@ -4079,6 +4130,7 @@ class Client(TelegramApi):
             'title': title,
             'address': address
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if foursquare_id is not None: params['foursquare_id'] = foursquare_id
         if foursquare_type is not None: params['foursquare_type'] = foursquare_type
@@ -4097,6 +4149,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         video: Union[InputFile, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         duration: Optional[int] = None,
         width: Optional[int] = None,
@@ -4124,6 +4177,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param video: Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a video from the Internet, or upload a new video using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
         :type video: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param duration: Duration of sent video in seconds.
@@ -4158,6 +4213,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'video': video
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if duration is not None: params['duration'] = duration
         if width is not None: params['width'] = width
@@ -4182,6 +4238,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         video_note: Union[InputFile, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         duration: Optional[int] = None,
         length: Optional[int] = None,
@@ -4202,6 +4259,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param video_note: Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_. Sending video notes by a URL is currently unsupported.
         :type video_note: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param duration: Duration of sent video in seconds.
@@ -4224,6 +4283,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'video_note': video_note
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if duration is not None: params['duration'] = duration
         if length is not None: params['length'] = length
@@ -4241,6 +4301,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         voice: Union[InputFile, str],
+        business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
@@ -4264,6 +4325,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param voice: Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
         :type voice: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
+        :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
         :param caption: Voice message caption, 0-1024 characters after entities parsing.
@@ -4288,6 +4351,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'voice': voice
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
