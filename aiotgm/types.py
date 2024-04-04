@@ -19,6 +19,7 @@ __all__ = (
     'BotName',
     'BotShortDescription',
     'BusinessConnection',
+    'BusinessIntro',
     'BusinessMessagesDeleted',
     'CallbackGame',
     'CallbackQuery',
@@ -603,6 +604,32 @@ class BusinessConnection(TelegramType):
         self.is_enabled = is_enabled
 
 
+class BusinessIntro(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#businessintro
+
+    :param title: Title text of the business intro.
+    :type title: :obj:`str`, optional
+    :param message: Message text of the business intro.
+    :type message: :obj:`str`, optional
+    :param sticker: Sticker of the business intro.
+    :type sticker: :obj:`~aiotgm.types.Sticker`, optional
+    '''
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(
+        self,
+        title: Optional[str] = None,
+        message: Optional[str] = None,
+        sticker: Optional[Sticker] = None
+    ):
+        self.title = title
+        self.message = message
+        self.sticker = sticker
+
+
 class BusinessMessagesDeleted(TelegramType):
     '''
     https://core.telegram.org/bots/api#businessmessagesdeleted
@@ -735,6 +762,8 @@ class Chat(TelegramType):
     :type photo: :obj:`~aiotgm.types.ChatPhoto`, optional
     :param active_usernames: If non-empty, the list of all `active chat usernames <https://telegram.org/blog/topics-in-groups-collectible-usernames#collectible-usernames>`_; for private chats, supergroups and channels. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type active_usernames: :obj:`list` of :obj:`str`, optional
+    :param business_intro: For private chats with business accounts, the intro of the business. Returned only in :meth:`~aiotgm.Client.get_chat`.
+    :type business_intro: :obj:`~aiotgm.types.BusinessIntro`
     :param available_reactions: List of available reactions allowed in the chat. If omitted, then all :obj:`emoji reactions <aiotgm.types.ReactionTypeEmoji>` are allowed. Returned only in :meth:`~aiotgm.Client.get_chat`.
     :type available_reactions: :obj:`list` of :obj:`~aiotgm.types.ReactionType`, optional
     :param accent_color_id: Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See `accent colors <https://core.telegram.org/bots/api#accent-colors>`_ for more details. Returned only in :meth:`~aiotgm.Client.get_chat`.
@@ -805,6 +834,7 @@ class Chat(TelegramType):
         obj['is_forum'] = res.get('is_forum')
         obj['photo'] = ChatPhoto._dese(res.get('photo'))
         obj['active_usernames'] = res.get('active_usernames')
+        obj['business_intro'] = BusinessIntro._dese(res.get('business_intro'))
         obj['available_reactions'] = [_dese_reaction_type(kwargs) for kwargs in res.get('available_reactions')] if 'available_reactions' in res else None
         obj['accent_color_id'] = res.get('accent_color_id')
         obj['background_custom_emoji_id'] = res.get('background_custom_emoji_id')
@@ -846,6 +876,7 @@ class Chat(TelegramType):
         is_forum: Optional[Literal[True]] = None,
         photo: Optional[ChatPhoto] = None,
         active_usernames: Optional[list[str]] = None,
+        business_intro: Optional[BusinessIntro] = None,
         available_reactions: Optional[list[ReactionType]] = None,
         accent_color_id: Optional[int] = None,
         background_custom_emoji_id: Optional[str] = None,
@@ -884,6 +915,7 @@ class Chat(TelegramType):
         self.is_forum = is_forum
         self.photo = photo
         self.active_usernames = active_usernames
+        self.business_intro = business_intro
         self.available_reactions = available_reactions
         self.accent_color_id = accent_color_id
         self.background_custom_emoji_id = background_custom_emoji_id
