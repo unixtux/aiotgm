@@ -4860,6 +4860,49 @@ class InputVenueMessageContent(TelegramType):
         self.google_place_type = google_place_type
 
 
+class Invoice(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#invoice
+
+    This object contains basic information about an invoice.
+
+    :param title: Product name.
+    :type title: :obj:`str`
+    :param description: Product description.
+    :type description: :obj:`str`
+    :param start_parameter: Unique bot deep-linking parameter that can be used to generate this invoice.
+    :type start_parameter: :obj:`str`
+    :param currency: Three-letter ISO 4217 `currency <https://core.telegram.org/bots/payments#supported-currencies>`_ code.
+    :type currency: :obj:`str`
+    :param total_amount: Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of ``US$ 1.45`` pass ``amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+    :type total_amount: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['title'] = res.get('title')
+        obj['description'] = res.get('description')
+        obj['start_parameter'] = res.get('start_parameter')
+        obj['currency'] = res.get('currency')
+        obj['total_amount'] = res.get('total_amount')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        title: str,
+        description: str,
+        start_parameter: str,
+        currency: str,
+        total_amount: int
+    ):
+        self.title = title
+        self.description = description
+        self.start_parameter = start_parameter
+        self.currency = currency
+        self.total_amount = total_amount
+
+
 
 
 
@@ -6705,38 +6748,6 @@ class SentWebAppMessage(TelegramType):
         inline_message_id: Optional[str] = None
     ):
         self.inline_message_id = inline_message_id
-
-
-class Invoice(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#invoice
-
-    This object contains basic information about an invoice.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['title'] = res.get('title')
-        obj['description'] = res.get('description')
-        obj['start_parameter'] = res.get('start_parameter')
-        obj['currency'] = res.get('currency')
-        obj['total_amount'] = res.get('total_amount')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        title: str,
-        description: str,
-        start_parameter: str,
-        currency: str,
-        total_amount: int
-    ):
-        self.title = title
-        self.description = description
-        self.start_parameter = start_parameter
-        self.currency = currency
-        self.total_amount = total_amount
 
 
 class ShippingAddress(TelegramType):
