@@ -5332,163 +5332,165 @@ class Message(TelegramType):
     This object represents a message.
 
     :param message_id: 
-    :type message_id: 
+    :type message_id: :obj:`int`
     :param date: 
-    :type date: 
+    :type date: :obj:`int`
     :param chat: 
-    :type chat: 
+    :type chat: :obj:`~aiotgm.types.Chat`
     :param message_thread_id: 
-    :type message_thread_id: 
+    :type message_thread_id: :obj:`int`, optional
     :param from_user: 
-    :type from_user: 
+    :type from_user: :obj:`~aiotgm.types.User`, optional
     :param sender_chat: 
-    :type sender_chat: 
+    :type sender_chat: :obj:`~aiotgm.types.Chat`, optional
     :param sender_boost_count: 
-    :type sender_boost_count: 
+    :type sender_boost_count: :obj:`int`, optional
     :param sender_business_bot: 
-    :type sender_business_bot: 
+    :type sender_business_bot: :obj:`~aiotgm.types.User`, optional
     :param business_connection_id: 
-    :type business_connection_id: 
+    :type business_connection_id: :obj:`str`, optional
     :param forward_origin: 
-    :type forward_origin: 
+    :type forward_origin: :obj:`~aiotgm.types.MessageOrigin`, optional
     :param is_topic_message: 
-    :type is_topic_message: 
+    :type is_topic_message: :obj:`True`, optional
     :param is_automatic_forward: 
-    :type is_automatic_forward: 
+    :type is_automatic_forward: :obj:`True`, optional
     :param reply_to_message: 
-    :type reply_to_message: 
+    :type reply_to_message: :obj:`~aiotgm.types.Message`, optional
     :param external_reply: 
-    :typeexternal_reply : 
+    :typeexternal_reply : :obj:`~aiotgm.types.ExternalReplyInfo`, optional
     :param quote: 
-    :type quote: 
+    :type quote: :obj:`~aiotgm.types.TextQuote`, optional
     :param reply_to_story: 
-    :type reply_to_story: 
+    :type reply_to_story: :obj:`~aiotgm.types.Story`, optional
     :param via_bot: 
-    :type via_bot: 
+    :type via_bot: :obj:`~aiotgm.types.User`, optional
     :param edit_date: 
-    :type edit_date: 
+    :type edit_date: :obj:`int`, optional
     :param has_protected_content: 
-    :type has_protected_content: 
+    :type has_protected_content: :obj:`True`, optional
     :param is_from_offline: 
-    :type is_from_offline: 
+    :type is_from_offline: :obj:`True`, optional
     :param media_group_id: 
-    :type media_group_id: 
+    :type media_group_id: :obj:`str`, optional
     :param author_signature: 
-    :type author_signature: 
+    :type author_signature: :obj:`str`, optional
     :param text: 
-    :type text: 
+    :type text: :obj:`str`, optional
     :param entities: 
-    :type entities: 
+    :type entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
     :param link_preview_options: 
-    :type link_preview_options: 
+    :type link_preview_options: :obj:`~aiotgm.types.LinkPreviewOptions`, optional
     :param animation: 
-    :type animation: 
+    :type animation: :obj:`~aiotgm.types.Animation`, optional
     :param audio: 
-    :type audio: 
+    :type audio: :obj:`~aiotgm.types.Audio`, optional
     :param document: 
-    :type document: 
+    :type document: :obj:`~aiotgm.types.Document`, optional
     :param photo: 
-    :type photo: 
+    :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
     :param sticker: 
-    :type sticker: 
+    :type sticker: :obj:`~aiotgm.types.Sticker`, optional
     :param story: 
-    :type story: 
+    :type story: :obj:`~aiotgm.types.Story`, optional
     :param video: 
-    :type video: 
+    :type video: :obj:`~aiotgm.types.Video`, optional
     :param video_note: 
-    :type video_note: 
+    :type video_note: :obj:`~aiotgm.types.VideoNote`, optional
     :param voice: 
-    :type voice: 
+    :type voice: :obj:`~aiotgm.types.Voice`, optional
     :param caption: 
-    :type caption: 
+    :type caption: :obj:`str`, optional
     :param caption_entities: 
-    :type caption_entities: 
+    :type caption_entities: :obj:`list` of :obj:`MessageEntity`, optional
     :param has_media_spoiler: 
-    :type has_media_spoiler: 
+    :type has_media_spoiler: :obj:`True`, optional
     :param contact: 
-    :type contact: 
+    :type contact: :obj:`~aiotgm.types.Contact`, optional
     :param dice: 
-    :type dice: 
+    :type dice: :obj:`~aiotgm.types.Dice`, optional
     :param game: 
-    :type game: 
+    :type game: :obj:`~aiotgm.types.Game`, optional
     :param poll: 
-    :type poll: 
+    :type poll: :obj:`~aiotgm.types.Poll`, optional
     :param venue: 
-    :type venue: 
+    :type venue: :obj:`~aiotgm.types.Venue`, optional
     :param location: 
-    :type location: 
+    :type location: :obj:`~aiotgm.types.Location`, optional
     :param new_chat_members: 
-    :type new_chat_members: 
+    :type new_chat_members: :obj:`list` of :obj:`~aiotgm.types.User`, optional
     :param left_chat_member: 
-    :type left_chat_member: 
+    :type left_chat_member: :obj:`~aiotgm.types.User`, optional
     :param new_chat_title: 
-    :type new_chat_title: 
+    :type new_chat_title: :obj:`str`, optional
     :param new_chat_photo: 
-    :type new_chat_photo: 
+    :type new_chat_photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
     :param delete_chat_photo: 
-    :type delete_chat_photo: 
+    :type delete_chat_photo: :obj:`True`, optional
     :param group_chat_created: 
-    :type group_chat_created: 
+    :type group_chat_created: :obj:`True`, optional
+    :param supergroup_chat_created:
+    :type supergroup_chat_created: :obj:`True`, optional
     :param channel_chat_created: 
-    :type channel_chat_created: 
+    :type channel_chat_created: :obj:`True`, optional
     :param message_auto_delete_timer_changed: 
-    :type message_auto_delete_timer_changed: 
+    :type message_auto_delete_timer_changed: :obj:`~aiotgm.types.MessageAutoDeleteTimerChanged`, optional
     :param migrate_to_chat_id: 
-    :type migrate_to_chat_id: 
+    :type migrate_to_chat_id: :obj:`int`, optional
     :param migrate_from_chat_id: 
-    :type migrate_from_chat_id: 
+    :type migrate_from_chat_id: :obj:`int`, optional
     :param pinned_message: 
-    :type pinned_message: 
+    :type pinned_message: :obj:`~aiotgm.types.MaybeInaccessibleMessage`, optional
     :param invoice: 
-    :type invoice: 
+    :type invoice: :obj:`~aiotgm.types.Invoice`, optional
     :param successful_payment: 
-    :type successful_payment: 
+    :type successful_payment: :obj:`~aiotgm.types.SuccesfulPayment`, optional
     :param users_shared: 
-    :type users_shared: 
+    :type users_shared: :obj:`~aiotgm.types.UsersShared`, optional
     :param chat_shared: 
-    :type chat_shared: 
+    :type chat_shared: :obj:`~aiotgm.types.ChatShared`, optional
     :param connected_website: 
-    :type connected_website: 
+    :type connected_website: :obj:`str`, optional
     :param write_access_allowed: 
-    :type write_access_allowed: 
+    :type write_access_allowed: :obj:`~aiotgm.types.WriteAccessAllowed`, optional
     :param passport_data: 
-    :type passport_data: 
+    :type passport_data: :obj:`~aiotgm.types.PassportData`, optional
     :param proximity_alert_triggered: 
-    :type proximity_alert_triggered: 
+    :type proximity_alert_triggered: :obj:`~aiotgm.types.ProximityAlertTriggered`, optional
     :param boost_added: 
-    :type boost_added: 
+    :type boost_added: :obj:`~aiotgm.types.ChatBoostAdded`, optional
     :param forum_topic_created: 
-    :type forum_topic_created: 
+    :type forum_topic_created: :obj:`~aiotgm.types.ForumTopicCreated`, optional
     :param forum_topic_edited: 
-    :type forum_topic_edited: 
+    :type forum_topic_edited: :obj:`~aiotgm.types.ForumTopicEdited`, optional
     :param forum_topic_closed: 
-    :type forum_topic_closed: 
+    :type forum_topic_closed: :obj:`~aiotgm.types.ForumTopicClosed`, optional
     :param forum_topic_reopened: 
-    :type forum_topic_reopened: 
+    :type forum_topic_reopened: :obj:`~aiotgm.types.ForumTopicReopened`, optional
     :param general_forum_topic_hidden: 
-    :type general_forum_topic_hidden: 
+    :type general_forum_topic_hidden: :obj:`~aiotgm.types.GeneralForumTopicHidden`, optional
     :param general_forum_topic_unhidden: 
-    :type general_forum_topic_unhidden: 
+    :type general_forum_topic_unhidden: :obj:`~aiotgm.types.GeneralForumTopicUnhidden`, optional
     :param giveaway_created: 
-    :type giveaway_created: 
+    :type giveaway_created: :obj:`~aiotgm.types.GiveawayCreated`, optional
     :param giveaway: 
-    :type giveaway: 
+    :type giveaway: :obj:`~aiotgm.types.Giveaway`, optional
     :param giveaway_winners: 
-    :type giveaway_winners: 
+    :type giveaway_winners: :obj:`~aiotgm.types.GiveawayWinners`, optional
     :param giveaway_completed: 
-    :type giveaway_completed: 
+    :type giveaway_completed: :obj:`~aiotgm.types.GiveawayCompleted`, optional
     :param video_chat_scheduled: 
-    :type video_chat_scheduled: 
+    :type video_chat_scheduled: :obj:`~aiotgm.types.VideoChatScheduled`, optional
     :param video_chat_started: 
-    :type video_chat_started: 
+    :type video_chat_started: :obj:`~aiotgm.types.VideoChatStarted`, optional
     :param video_chat_ended: 
-    :type video_chat_ended: 
+    :type video_chat_ended: :obj:`~aiotgm.types.VideoChatEnded`, optional
     :param video_chat_participants_invited: 
-    :type video_chat_participants_invited: 
+    :type video_chat_participants_invited: :obj:`~aiotgm.types.VideoChatParticipantsInvited`, optional
     :param web_app_data: 
-    :type web_app_data: 
+    :type web_app_data: :obj:`~aiotgm.types.WebAppData`, optional
     :param reply_markup: 
-    :type reply_markup: 
+    :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     '''
     @classmethod
     @_parse_result
