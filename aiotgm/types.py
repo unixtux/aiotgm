@@ -5280,6 +5280,51 @@ class MenuButtonCommands(TelegramType):
         self.type = DEFAULT_MENU_BUTTON_COMMANDS
 
 
+class MenuButtonDefault(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#menubuttondefault
+
+    Describes that no specific value for the menu button was set.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        self.type = DEFAULT_MENU_BUTTON_DEFAULT
+
+
+class MenuButtonWebApp(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#menubuttonwebapp
+
+    Represents a menu button, which launches a `Web App <https://core.telegram.org/bots/webapps>`_.
+
+    :param text: Text on the button.
+    :type text: :obj:`str`
+    :param web_app: Description of the Web App that will be launched when the user presses the button. The Web App will be able to send an arbitrary message on behalf of the user using the method :meth:`~aiotgm.Client.answer_web_app_query`.
+    :type web_app: :obj:`~aiotgm.types.WebAppInfo`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['text'] = res.get('text')
+        obj['web_app'] = WebAppInfo._dese(res.get('web_app'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        text: str,
+        web_app: WebAppInfo
+    ):
+        self.type = DEFAULT_MENU_BUTTON_WEB_APP
+        self.text = text
+        self.web_app = web_app
+
+
 
 
 
@@ -6618,46 +6663,6 @@ One of the following reply markups:
 - :obj:`~aiotgm.types.ReplyKeyboardRemove`
 - :obj:`~aiotgm.types.ForceReply`
 '''
-
-class MenuButtonWebApp(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#menubuttonwebapp
-
-    Represents a menu button, which launches a Web App.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['text'] = res.get('text')
-        obj['web_app'] = WebAppInfo._dese(res.get('web_app'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        text: str,
-        web_app: WebAppInfo
-    ):
-        self.type = DEFAULT_MENU_BUTTON_WEB_APP
-        self.text = text
-        self.web_app = web_app
-
-
-class MenuButtonDefault(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#menubuttondefault
-
-    Describes that no specific value for the menu button was set.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        self.type = DEFAULT_MENU_BUTTON_DEFAULT
-
 
 class ResponseParameters(TelegramType):
     '''
