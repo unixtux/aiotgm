@@ -5743,6 +5743,29 @@ class Message(TelegramType):
         self.reply_markup = reply_markup
 
 
+class MessageAutoDeleteTimerChanged(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messageautodeletetimerchanged
+
+    This object represents a service message about a change in auto-delete timer settings.
+
+    :param message_auto_delete_time: New auto-delete time for messages in the chat; in seconds.
+    :type message_auto_delete_time: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['message_auto_delete_time'] = res.get('message_auto_delete_time')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        message_auto_delete_time: int
+    ):
+        self.message_auto_delete_time = message_auto_delete_time
+
+
 
 
 
@@ -6492,26 +6515,6 @@ class ProximityAlertTriggered(TelegramType):
         self.traveler = traveler
         self.watcher = watcher
         self.distance = distance
-
-
-class MessageAutoDeleteTimerChanged(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messageautodeletetimerchanged
-
-    This object represents a service message about a change in auto-delete timer settings.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['message_auto_delete_time'] = res.get('message_auto_delete_time')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        message_auto_delete_time: int
-    ):
-        self.message_auto_delete_time = message_auto_delete_time
 
 
 class UsersShared(TelegramType):
