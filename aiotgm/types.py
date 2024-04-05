@@ -5358,7 +5358,7 @@ class Message(TelegramType):
     :param reply_to_message: 
     :type reply_to_message: :obj:`~aiotgm.types.Message`, optional
     :param external_reply: 
-    :typeexternal_reply : :obj:`~aiotgm.types.ExternalReplyInfo`, optional
+    :type external_reply: :obj:`~aiotgm.types.ExternalReplyInfo`, optional
     :param quote: 
     :type quote: :obj:`~aiotgm.types.TextQuote`, optional
     :param reply_to_story: 
