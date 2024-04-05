@@ -2043,6 +2043,12 @@ class ChatShared(TelegramType):
     :type request_id: :obj:`int`
     :param chat_id: Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means.
     :type chat_id: :obj:`int`
+    :param title: Title of the chat, if the title was requested by the bot.
+    :type title: :obj:`str`, optional
+    :param username: Username of the chat, if the username was requested by the bot and available.
+    :type username: :obj:`str`, optional
+    :param photo: Available sizes of the chat photo, if the photo was requested by the bot.
+    :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
     '''
     @classmethod
     @_parse_result
@@ -4962,6 +4968,64 @@ class KeyboardButtonPollType(TelegramType):
         self.type = type
 
 
+class KeyboardButtonRequestChat(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#keyboardbuttonrequestchat
+
+    This object defines the criteria used to request a suitable chat. Information about the
+    selected chat will be shared with the bot when the corresponding button is pressed. The bot
+    will be granted requested rights in the chat if appropriate `More about requesting chats » <https://core.telegram.org/bots/features#chat-and-user-selection>`_.
+
+    :param request_id: Signed 32-bit identifier of the request, which will be received back in the :obj:`~aiotgm.types.ChatShared` object. Must be unique within the message.
+    :type request_id: :obj:`int`
+    :param chat_is_channel: Pass :obj:`True` to request a channel chat, pass :obj:`False` to request a group or a supergroup chat.
+    :type chat_is_channel: :obj:`bool`
+    :param chat_is_forum: Pass :obj:`True` to request a forum supergroup, pass :obj:`False` to request a non-forum chat. If not specified, no additional restrictions are applied.
+    :type chat_is_forum: :obj:`bool`, optional
+    :param chat_has_username: Pass :obj:`True` to request a supergroup or a channel with a username, pass :obj:`False` to request a chat without a username. If not specified, no additional restrictions are applied.
+    :type chat_has_username: :obj:`bool`, optional
+    :param chat_is_created: Pass :obj:`True` to request a chat owned by the user. Otherwise, no additional restrictions are applied.
+    :type chat_is_created: :obj:`bool`, optional
+    :param user_administrator_rights: A JSON-serialized object listing the required administrator rights of the user in the chat. The rights must be a superset of *bot_administrator_rights*. If not specified, no additional restrictions are applied.
+    :type user_administrator_rights: :obj:`~aiotgm.types.ChatAdministratorRights`, optional
+    :param bot_administrator_rights: A JSON-serialized object listing the required administrator rights of the bot in the chat. The rights must be a subset of *user_administrator_rights*. If not specified, no additional restrictions are applied.
+    :type bot_administrator_rights: :obj:`~aiotgm.types.ChatAdministratorRights`, optional
+    :param bot_is_member: Pass :obj:`True` to request a chat with the bot as a member. Otherwise, no additional restrictions are applied.
+    :type bot_is_member: :obj:`bool`, optional
+    :param request_title: Pass :obj:`True` to request the chat's title.
+    :type request_title: :obj:`bool`, optional
+    :param request_username: Pass :obj:`True` to request the chat's username.
+    :type request_username: :obj:`bool`, optional
+    :param request_photo: Pass :obj:`True` to request the chat's photo.
+    :type request_photo: :obj:`bool`, optional
+    '''
+    def __init__(
+        self,
+        request_id: int,
+        chat_is_channel: bool,
+        chat_is_forum: Optional[bool] = None,
+        chat_has_username: Optional[bool] = None,
+        chat_is_created: Optional[bool] = None,
+        user_administrator_rights: Optional[ChatAdministratorRights] = None,
+        bot_administrator_rights: Optional[ChatAdministratorRights] = None,
+        bot_is_member: Optional[bool] = None,
+        request_title: Optional[bool] = None,
+        request_username: Optional[bool] = None,
+        request_photo: Optional[bool] = None
+    ):
+        self.request_id = request_id
+        self.chat_is_channel = chat_is_channel
+        self.chat_is_forum = chat_is_forum
+        self.chat_has_username = chat_has_username
+        self.chat_is_created = chat_is_created
+        self.user_administrator_rights = user_administrator_rights
+        self.bot_administrator_rights = bot_administrator_rights
+        self.bot_is_member = bot_is_member
+        self.request_title = request_title
+        self.request_username = request_username
+        self.request_photo = request_photo
+
+
 
 
 
@@ -6359,40 +6423,6 @@ class KeyboardButtonRequestUsers(TelegramType):
         self.user_is_premium = user_is_premium
         self.max_quantity = max_quantity
         self.request_name = request_name
-        self.request_username = request_username
-        self.request_photo = request_photo
-
-
-class KeyboardButtonRequestChat(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#keyboardbuttonrequestchat
-
-    This object defines the criteria used to request a suitable chat.
-    The identifier of the selected chat will be shared with the bot when the corresponding button is pressed.
-    '''
-    def __init__(
-        self,
-        request_id: int,
-        chat_is_channel: bool,
-        chat_is_forum: Optional[bool] = None,
-        chat_has_username: Optional[bool] = None,
-        chat_is_created: Optional[bool] = None,
-        user_administrator_rights: Optional[ChatAdministratorRights] = None,
-        bot_administrator_rights: Optional[ChatAdministratorRights] = None,
-        bot_is_member: Optional[bool] = None,
-        request_title: Optional[bool] = None,
-        request_username: Optional[bool] = None,
-        request_photo: Optional[bool] = None
-    ):
-        self.request_id = request_id
-        self.chat_is_channel = chat_is_channel
-        self.chat_is_forum = chat_is_forum
-        self.chat_has_username = chat_has_username
-        self.chat_is_created = chat_is_created
-        self.user_administrator_rights = user_administrator_rights
-        self.bot_administrator_rights = bot_administrator_rights
-        self.bot_is_member = bot_is_member
-        self.request_title = request_title
         self.request_username = request_username
         self.request_photo = request_photo
 
