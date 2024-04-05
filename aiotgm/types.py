@@ -5088,6 +5088,49 @@ class LabeledPrice(TelegramType):
         self.amount = amount
 
 
+class LinkPreviewOptions(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#linkpreviewoptions
+
+    Describes the options used for link preview generation.
+
+    :param is_disabled: :obj:`True`, if the link preview is disabled.
+    :type is_disabled: :obj:`bool`, optional
+    :param url: URL to use for the link preview. If empty, then the first URL found in the message text will be used.
+    :type url: :obj:`str`, optional
+    :param prefer_small_media: :obj:`True`, if the media in the link preview is supposed to be shrunk; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview.
+    :type prefer_small_media: :obj:`bool`, optional
+    :param prefer_large_media: :obj:`True`, if the media in the link preview is supposed to be enlarged; ignored if the URL isn't explicitly specified or media size change isn't supported for the preview.
+    :type prefer_large_media: :obj:`bool`, optional
+    :param show_above_text: :obj:`True`, if the link preview must be shown above the message text; otherwise, the link preview will be shown below the message text.
+    :type show_above_text: :obj:`bool`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['is_disabled'] = res.get('is_disabled')
+        obj['url'] = res.get('url')
+        obj['prefer_small_media'] = res.get('prefer_small_media')
+        obj['prefer_large_media'] = res.get('prefer_large_media')
+        obj['show_above_text'] = res.get('show_above_text')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        is_disabled: Optional[bool] = None,
+        url: Optional[str] = None,
+        prefer_small_media: Optional[bool] = None,
+        prefer_large_media: Optional[bool] = None,
+        show_above_text: Optional[bool] = None
+    ):
+        self.is_disabled = is_disabled
+        self.url = url
+        self.prefer_small_media = prefer_small_media
+        self.prefer_large_media = prefer_large_media
+        self.show_above_text = show_above_text
+
+
 
 
 
@@ -5172,38 +5215,6 @@ class LoginUrl(TelegramType):
         self.forward_text = forward_text
         self.bot_username = bot_username
         self.request_write_access = request_write_access
-
-
-class LinkPreviewOptions(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#linkpreviewoptions
-
-    Describes the options used for link preview generation.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['is_disabled'] = res.get('is_disabled')
-        obj['url'] = res.get('url')
-        obj['prefer_small_media'] = res.get('prefer_small_media')
-        obj['prefer_large_media'] = res.get('prefer_large_media')
-        obj['show_above_text'] = res.get('show_above_text')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        is_disabled: Optional[bool] = None,
-        url: Optional[str] = None,
-        prefer_small_media: Optional[bool] = None,
-        prefer_large_media: Optional[bool] = None,
-        show_above_text: Optional[bool] = None
-    ):
-        self.is_disabled = is_disabled
-        self.url = url
-        self.prefer_small_media = prefer_small_media
-        self.prefer_large_media = prefer_large_media
-        self.show_above_text = show_above_text
 
 
 class User(TelegramType):
