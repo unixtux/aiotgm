@@ -5026,6 +5026,48 @@ class KeyboardButtonRequestChat(TelegramType):
         self.request_photo = request_photo
 
 
+class KeyboardButtonRequestUsers(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#keyboardbuttonrequestusers
+
+    This object defines the criteria used to request suitable users. Information about the
+    selected users will be shared with the bot when the corresponding button is pressed.
+    `More about requesting users » <https://core.telegram.org/bots/features#chat-and-user-selection>`_.
+
+    :param request_id: Signed 32-bit identifier of the request that will be received back in the :obj:`~aiotgm.types.UsersShared` object. Must be unique within the message.
+    :type request_id: :obj:`int`
+    :param user_is_bot: Pass :obj:`True` to request bots, pass :obj:`False` to request regular users. If not specified, no additional restrictions are applied.
+    :type user_is_bot: :obj:`bool`, optional
+    :param user_is_premium: Pass :obj:`True` to request premium users, pass :obj:`False` to request non-premium users. If not specified, no additional restrictions are applied.
+    :type user_is_premium: :obj:`bool`, optional
+    :param max_quantity: The maximum number of users to be selected; 1-10. Defaults to :obj:`1`.
+    :type max_quantity: :obj:`int`, optional
+    :param request_name: Pass :obj:`True` to request the users' first and last name.
+    :type request_name: :obj:`bool`, optional
+    :param request_username: Pass :obj:`True` to request the users' username.
+    :type request_username: :obj:`bool`, optional
+    :param request_photo: Pass :obj:`True` to request the users' photo.
+    :type request_photo: :obj:`bool`, optional
+    '''
+    def __init__(
+        self,
+        request_id: int,
+        user_is_bot: Optional[bool] = None,
+        user_is_premium: Optional[bool] = None,
+        max_quantity: Optional[int] = None,
+        request_name: Optional[bool] = None,
+        request_username: Optional[bool] = None,
+        request_photo: Optional[bool] = None
+    ):
+        self.request_id = request_id
+        self.user_is_bot = user_is_bot
+        self.user_is_premium = user_is_premium
+        self.max_quantity = max_quantity
+        self.request_name = request_name
+        self.request_username = request_username
+        self.request_photo = request_photo
+
+
 
 
 
@@ -6399,32 +6441,6 @@ class WebAppInfo(TelegramType):
         url: str
     ):
         self.url = url
-
-
-class KeyboardButtonRequestUsers(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#keyboardbuttonrequestusers
-
-    This object defines the criteria used to request suitable users.\n
-    The identifiers of the selected users will be shared with the bot when the corresponding button is pressed.
-    '''
-    def __init__(
-        self,
-        request_id: int,
-        user_is_bot: Optional[bool] = None,
-        user_is_premium: Optional[bool] = None,
-        max_quantity: Optional[int] = None,
-        request_name: Optional[bool] = None,
-        request_username: Optional[bool] = None,
-        request_photo: Optional[bool] = None
-    ):
-        self.request_id = request_id
-        self.user_is_bot = user_is_bot
-        self.user_is_premium = user_is_premium
-        self.max_quantity = max_quantity
-        self.request_name = request_name
-        self.request_username = request_username
-        self.request_photo = request_photo
 
 
 class ReplyKeyboardMarkup(TelegramType):
