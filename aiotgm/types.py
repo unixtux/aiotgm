@@ -4786,6 +4786,35 @@ class InputSticker(TelegramType):
         self.keywords = keywords
 
 
+class InputTextMessageContent(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputtextmessagecontent
+
+    Represents the :obj:`content <aiotgm.types.InputMessageContent>`
+    of a text message to be sent as the result of an inline query.
+
+    :param message_text: Text of the message to be sent, 1-4096 characters.
+    :type message_text: :obj:`str`
+    :param parse_mode: Mode for parsing entities in the message text. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type parse_mode: :obj:`str`, optional
+    :param entities: List of special entities that appear in message text, which can be specified instead of *parse_mode*.
+    :type entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param link_preview_options: Link preview generation options for the message.
+    :type link_preview_options: :obj:`~aiotgm.types.LinkPreviewOptions`, optional
+    '''
+    def __init__(
+        self,
+        message_text: str,
+        parse_mode: Optional[str] = None,
+        entities: Optional[list[MessageEntity]] = None,
+        link_preview_options: Optional[LinkPreviewOptions] = None
+    ):
+        self.message_text = message_text
+        self.parse_mode = parse_mode
+        self.entities = entities
+        self.link_preview_options = link_preview_options
+
+
 
 
 
@@ -6611,25 +6640,6 @@ class StickerSet(TelegramType):
         self.sticker_type = sticker_type
         self.stickers = stickers
         self.thumbnail = thumbnail
-
-
-class InputTextMessageContent(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inputtextmessagecontent
-
-    Represents the content of a text message to be sent as the result of an inline query.
-    '''
-    def __init__(
-        self,
-        message_text: str,
-        parse_mode: Optional[str] = None,
-        entities: Optional[list[MessageEntity]] = None,
-        link_preview_options: Optional[LinkPreviewOptions] = None
-    ):
-        self.message_text = message_text
-        self.parse_mode = parse_mode
-        self.entities = entities
-        self.link_preview_options = link_preview_options
 
 
 class InputVenueMessageContent(TelegramType):
