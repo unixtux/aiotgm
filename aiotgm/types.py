@@ -4945,6 +4945,23 @@ class KeyboardButton(TelegramType):
         self.web_app = web_app
 
 
+class KeyboardButtonPollType(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#keyboardbuttonpolltype
+
+    This object represents type of a poll, which is allowed to
+    be created and sent when the corresponding button is pressed.
+
+    :param type: If *quiz* is passed, the user will be allowed to create only polls in the quiz mode. If *regular* is passed, only regular polls will be allowed. Otherwise, the user will be allowed to create a poll of any type.
+    :type type: :obj:`str`, optional
+    '''
+    def __init__(
+        self,
+        type: Optional[str] = None
+    ):
+        self.type = type
+
+
 
 
 
@@ -6378,20 +6395,6 @@ class KeyboardButtonRequestChat(TelegramType):
         self.request_title = request_title
         self.request_username = request_username
         self.request_photo = request_photo
-
-
-class KeyboardButtonPollType(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#keyboardbuttonpolltype
-
-    This object represents type of a poll, which is allowed to
-    be created and sent when the corresponding button is pressed.
-    '''
-    def __init__(
-        self,
-        type: Optional[str] = None
-    ):
-        self.type = type
 
 
 class ReplyKeyboardMarkup(TelegramType):
