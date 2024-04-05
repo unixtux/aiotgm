@@ -4903,6 +4903,48 @@ class Invoice(TelegramType):
         self.total_amount = total_amount
 
 
+class KeyboardButton(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#keyboardbutton
+
+    This object represents one button of the reply keyboard. For simple text buttons, :obj:`String` can be
+    used instead of this object to specify the button text. The optional fields *web_app*, *request_users*,
+    *request_chat*, *request_contact*, *request_location*, and *request_poll* are mutually exclusive.
+
+    :param text: Text of the button. If none of the optional fields are used, it will be sent as a message when the button is pressed.
+    :type text: :obj:`str`
+    :param request_users: If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users_shared” service message. Available in private chats only.
+    :type request_users: :obj:`~aiotgm.types.KeyboardButtonRequestUsers`, optional
+    :param request_chat: If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a “chat_shared” service message. Available in private chats only.
+    :type request_chat: :obj:`~aiotgm.types.KeyboardButtonRequestChat`, optional
+    :param request_contact: If :obj:`True`, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only.
+    :type request_contact: :obj:`bool`, optional
+    :param request_location: If :obj:`True`, the user's current location will be sent when the button is pressed. Available in private chats only.
+    :type request_location: :obj:`bool`, optional
+    :param request_poll: If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only.
+    :type request_poll: :obj:`~aiotgm.types.KeyboardButtonPollType`, optional
+    :param web_app: If specified, the described `Web App <https://core.telegram.org/bots/webapps>`_ will be launched when the button is pressed. The Web App will be able to send a “web_app_data” service message. Available in private chats only.
+    :type web_app: :obj:`~aiotgm.types.WebAppInfo`, optional
+    '''
+    def __init__(
+        self,
+        text: str,
+        request_users: Optional[KeyboardButtonRequestUsers] = None,
+        request_chat: Optional[KeyboardButtonRequestChat] = None,
+        request_contact: Optional[bool] = None,
+        request_location: Optional[bool] = None,
+        request_poll: Optional[KeyboardButtonPollType] = None,
+        web_app: Optional[WebAppInfo] = None
+    ):
+        self.text = text
+        self.request_users = request_users
+        self.request_chat = request_chat
+        self.request_contact = request_contact
+        self.request_location = request_location
+        self.request_poll = request_poll
+        self.web_app = web_app
+
+
 
 
 
@@ -6350,33 +6392,6 @@ class KeyboardButtonPollType(TelegramType):
         type: Optional[str] = None
     ):
         self.type = type
-
-
-class KeyboardButton(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#keyboardbutton
-
-    This object represents one button of the reply keyboard.\n
-    For simple text buttons, String can be used instead of this object to specify the button text.\n
-    The optional fields web_app, request_users, request_chat, request_contact, request_location, and request_poll are mutually exclusive.
-    '''
-    def __init__(
-        self,
-        text: str,
-        request_users: Optional[KeyboardButtonRequestUsers] = None,
-        request_chat: Optional[KeyboardButtonRequestChat] = None,
-        request_contact: Optional[bool] = None,
-        request_location: Optional[bool] = None,
-        request_poll: Optional[KeyboardButtonPollType] = None,
-        web_app: Optional[WebAppInfo] = None
-    ):
-        self.text = text
-        self.request_users = request_users
-        self.request_chat = request_chat
-        self.request_contact = request_contact
-        self.request_location = request_location
-        self.request_poll = request_poll
-        self.web_app = web_app
 
 
 class ReplyKeyboardMarkup(TelegramType):
