@@ -5331,165 +5331,165 @@ class Message(TelegramType):
 
     This object represents a message.
 
-    :param message_id: 
+    :param message_id: Unique message identifier inside this chat.
     :type message_id: :obj:`int`
-    :param date: 
+    :param date: Date the message was sent in Unix time. It is always a positive number, representing a valid date.
     :type date: :obj:`int`
-    :param chat: 
+    :param chat: Chat the message belongs to.
     :type chat: :obj:`~aiotgm.types.Chat`
-    :param message_thread_id: 
+    :param message_thread_id: Unique identifier of a message thread to which the message belongs; for supergroups only.
     :type message_thread_id: :obj:`int`, optional
-    :param from_user: 
+    :param from_user: Sender of the message; empty for messages sent to channels. For backward compatibility, the field contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
     :type from_user: :obj:`~aiotgm.types.User`, optional
-    :param sender_chat: 
+    :param sender_chat: Sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group. For backward compatibility, the field from contains a fake sender user in non-channel chats, if the message was sent on behalf of a chat.
     :type sender_chat: :obj:`~aiotgm.types.Chat`, optional
-    :param sender_boost_count: 
+    :param sender_boost_count: If the sender of the message boosted the chat, the number of boosts added by the user.
     :type sender_boost_count: :obj:`int`, optional
-    :param sender_business_bot: 
+    :param sender_business_bot: The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the connected business account.
     :type sender_business_bot: :obj:`~aiotgm.types.User`, optional
-    :param business_connection_id: 
+    :param business_connection_id: Unique identifier of the business connection from which the message was received. If non-empty, the message belongs to a chat of the corresponding business account that is independent from any potential bot chat which might share the same identifier.
     :type business_connection_id: :obj:`str`, optional
-    :param forward_origin: 
+    :param forward_origin: Information about the original message for forwarded messages.
     :type forward_origin: :obj:`~aiotgm.types.MessageOrigin`, optional
-    :param is_topic_message: 
+    :param is_topic_message: :obj:`True`, if the message is sent to a forum topic.
     :type is_topic_message: :obj:`True`, optional
-    :param is_automatic_forward: 
+    :param is_automatic_forward: :obj:`True`, if the message is a channel post that was automatically forwarded to the connected discussion group.
     :type is_automatic_forward: :obj:`True`, optional
-    :param reply_to_message: 
+    :param reply_to_message: For replies in the same chat and message thread, the original message. Note that the Message object in this field will not contain further *reply_to_message* fields even if it itself is a reply.
     :type reply_to_message: :obj:`~aiotgm.types.Message`, optional
-    :param external_reply: 
+    :param external_reply: Information about the message that is being replied to, which may come from another chat or forum topic.
     :type external_reply: :obj:`~aiotgm.types.ExternalReplyInfo`, optional
-    :param quote: 
+    :param quote: For replies that quote part of the original message, the quoted part of the message.
     :type quote: :obj:`~aiotgm.types.TextQuote`, optional
-    :param reply_to_story: 
+    :param reply_to_story: For replies to a story, the original story.
     :type reply_to_story: :obj:`~aiotgm.types.Story`, optional
-    :param via_bot: 
+    :param via_bot: Bot through which the message was sent.
     :type via_bot: :obj:`~aiotgm.types.User`, optional
-    :param edit_date: 
+    :param edit_date: Date the message was last edited in Unix time.
     :type edit_date: :obj:`int`, optional
-    :param has_protected_content: 
+    :param has_protected_content: :obj:`True`, if the message can't be forwarded.
     :type has_protected_content: :obj:`True`, optional
-    :param is_from_offline: 
+    :param is_from_offline: :obj:`True`, if the message was sent by an implicit action, for example, as an away or a greeting business message, or as a scheduled message.
     :type is_from_offline: :obj:`True`, optional
-    :param media_group_id: 
+    :param media_group_id: The unique identifier of a media message group this message belongs to.
     :type media_group_id: :obj:`str`, optional
-    :param author_signature: 
+    :param author_signature: Signature of the post author for messages in channels, or the custom title of an anonymous group administrator.
     :type author_signature: :obj:`str`, optional
-    :param text: 
+    :param text: For text messages, the actual UTF-8 text of the message.
     :type text: :obj:`str`, optional
-    :param entities: 
+    :param entities: For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text.
     :type entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
-    :param link_preview_options: 
+    :param link_preview_options: Options used for link preview generation for the message, if it is a text message and link preview options were changed.
     :type link_preview_options: :obj:`~aiotgm.types.LinkPreviewOptions`, optional
-    :param animation: 
+    :param animation: Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set.
     :type animation: :obj:`~aiotgm.types.Animation`, optional
-    :param audio: 
+    :param audio: Message is an audio file, information about the file.
     :type audio: :obj:`~aiotgm.types.Audio`, optional
-    :param document: 
+    :param document: Message is a general file, information about the file.
     :type document: :obj:`~aiotgm.types.Document`, optional
-    :param photo: 
+    :param photo: Message is a photo, available sizes of the photo.
     :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
-    :param sticker: 
+    :param sticker: Message is a sticker, information about the sticker.
     :type sticker: :obj:`~aiotgm.types.Sticker`, optional
-    :param story: 
+    :param story: Message is a forwarded story.
     :type story: :obj:`~aiotgm.types.Story`, optional
-    :param video: 
+    :param video: Message is a video, information about the video.
     :type video: :obj:`~aiotgm.types.Video`, optional
-    :param video_note: 
+    :param video_note: Message is a `video note <https://telegram.org/blog/video-messages-and-telescope>`_, information about the video message.
     :type video_note: :obj:`~aiotgm.types.VideoNote`, optional
-    :param voice: 
+    :param voice: Message is a voice message, information about the file.
     :type voice: :obj:`~aiotgm.types.Voice`, optional
-    :param caption: 
+    :param caption: Caption for the animation, audio, document, photo, video or voice.
     :type caption: :obj:`str`, optional
-    :param caption_entities: 
+    :param caption_entities: For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption.
     :type caption_entities: :obj:`list` of :obj:`MessageEntity`, optional
-    :param has_media_spoiler: 
+    :param has_media_spoiler: :obj:`True`, if the message media is covered by a spoiler animation.
     :type has_media_spoiler: :obj:`True`, optional
-    :param contact: 
+    :param contact: Message is a shared contact, information about the contact.
     :type contact: :obj:`~aiotgm.types.Contact`, optional
-    :param dice: 
+    :param dice: Message is a dice with random value.
     :type dice: :obj:`~aiotgm.types.Dice`, optional
-    :param game: 
+    :param game: Message is a game, information about the game. `More about games » <https://core.telegram.org/bots/api#games>`_.
     :type game: :obj:`~aiotgm.types.Game`, optional
-    :param poll: 
+    :param poll: Message is a native poll, information about the poll.
     :type poll: :obj:`~aiotgm.types.Poll`, optional
-    :param venue: 
+    :param venue: Message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set.
     :type venue: :obj:`~aiotgm.types.Venue`, optional
-    :param location: 
+    :param location: Message is a shared location, information about the location.
     :type location: :obj:`~aiotgm.types.Location`, optional
-    :param new_chat_members: 
+    :param new_chat_members: New members that were added to the group or supergroup and information about them (the bot itself may be one of these members).
     :type new_chat_members: :obj:`list` of :obj:`~aiotgm.types.User`, optional
-    :param left_chat_member: 
+    :param left_chat_member: A member was removed from the group, information about them (this member may be the bot itself).
     :type left_chat_member: :obj:`~aiotgm.types.User`, optional
-    :param new_chat_title: 
+    :param new_chat_title: A chat title was changed to this value.
     :type new_chat_title: :obj:`str`, optional
-    :param new_chat_photo: 
+    :param new_chat_photo: A chat photo was change to this value.
     :type new_chat_photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
-    :param delete_chat_photo: 
+    :param delete_chat_photo: Service message: the chat photo was deleted.
     :type delete_chat_photo: :obj:`True`, optional
-    :param group_chat_created: 
+    :param group_chat_created: Service message: the group has been created.
     :type group_chat_created: :obj:`True`, optional
-    :param supergroup_chat_created:
+    :param supergroup_chat_created: Service message: the supergroup has been created. This field can't be received in a message coming through updates, because bot can't be a member of a supergroup when it is created. It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup.
     :type supergroup_chat_created: :obj:`True`, optional
-    :param channel_chat_created: 
+    :param channel_chat_created: Service message: the channel has been created. This field can't be received in a message coming through updates, because bot can't be a member of a channel when it is created. It can only be found in reply_to_message if someone replies to a very first message in a channel.
     :type channel_chat_created: :obj:`True`, optional
-    :param message_auto_delete_timer_changed: 
+    :param message_auto_delete_timer_changed: Service message: auto-delete timer settings changed in the chat.
     :type message_auto_delete_timer_changed: :obj:`~aiotgm.types.MessageAutoDeleteTimerChanged`, optional
-    :param migrate_to_chat_id: 
+    :param migrate_to_chat_id: The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
     :type migrate_to_chat_id: :obj:`int`, optional
-    :param migrate_from_chat_id: 
+    :param migrate_from_chat_id: The supergroup has been migrated from a group with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
     :type migrate_from_chat_id: :obj:`int`, optional
-    :param pinned_message: 
+    :param pinned_message: Specified message was pinned. Note that the Message object in this field will not contain further *reply_to_message* fields even if it itself is a reply.
     :type pinned_message: :obj:`~aiotgm.types.MaybeInaccessibleMessage`, optional
-    :param invoice: 
+    :param invoice: Message is an invoice for a `payment <https://core.telegram.org/bots/api#payments>`_, information about the invoice. `More about payments » <https://core.telegram.org/bots/api#payments>`_.
     :type invoice: :obj:`~aiotgm.types.Invoice`, optional
-    :param successful_payment: 
+    :param successful_payment: Message is a service message about a successful payment, information about the payment. `More about payments » <https://core.telegram.org/bots/api#payments>`_.
     :type successful_payment: :obj:`~aiotgm.types.SuccessfulPayment`, optional
-    :param users_shared: 
+    :param users_shared: Service message: users were shared with the bot.
     :type users_shared: :obj:`~aiotgm.types.UsersShared`, optional
-    :param chat_shared: 
+    :param chat_shared: Service message: a chat was shared with the bot.
     :type chat_shared: :obj:`~aiotgm.types.ChatShared`, optional
-    :param connected_website: 
+    :param connected_website: The domain name of the website on which the user has logged in. `More about Telegram Login » <https://core.telegram.org/widgets/login>`_.
     :type connected_website: :obj:`str`, optional
-    :param write_access_allowed: 
+    :param write_access_allowed: Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method `requestWriteAccess <https://core.telegram.org/bots/webapps#initializing-mini-apps>`_.
     :type write_access_allowed: :obj:`~aiotgm.types.WriteAccessAllowed`, optional
-    :param passport_data: 
+    :param passport_data: Telegram Passport data.
     :type passport_data: :obj:`~aiotgm.types.PassportData`, optional
-    :param proximity_alert_triggered: 
+    :param proximity_alert_triggered: Service message. A user in the chat triggered another user's proximity alert while sharing Live Location.
     :type proximity_alert_triggered: :obj:`~aiotgm.types.ProximityAlertTriggered`, optional
-    :param boost_added: 
+    :param boost_added: Service message: user boosted the chat.
     :type boost_added: :obj:`~aiotgm.types.ChatBoostAdded`, optional
-    :param forum_topic_created: 
+    :param forum_topic_created: Service message: forum topic created.
     :type forum_topic_created: :obj:`~aiotgm.types.ForumTopicCreated`, optional
-    :param forum_topic_edited: 
+    :param forum_topic_edited: Service message: forum topic edited.
     :type forum_topic_edited: :obj:`~aiotgm.types.ForumTopicEdited`, optional
-    :param forum_topic_closed: 
+    :param forum_topic_closed: Service message: forum topic closed.
     :type forum_topic_closed: :obj:`~aiotgm.types.ForumTopicClosed`, optional
-    :param forum_topic_reopened: 
+    :param forum_topic_reopened: Service message: forum topic reopened.
     :type forum_topic_reopened: :obj:`~aiotgm.types.ForumTopicReopened`, optional
-    :param general_forum_topic_hidden: 
+    :param general_forum_topic_hidden: Service message: the 'General' forum topic hidden.
     :type general_forum_topic_hidden: :obj:`~aiotgm.types.GeneralForumTopicHidden`, optional
-    :param general_forum_topic_unhidden: 
+    :param general_forum_topic_unhidden: Service message: the 'General' forum topic unhidden.
     :type general_forum_topic_unhidden: :obj:`~aiotgm.types.GeneralForumTopicUnhidden`, optional
-    :param giveaway_created: 
+    :param giveaway_created: Service message: a scheduled giveaway was created.
     :type giveaway_created: :obj:`~aiotgm.types.GiveawayCreated`, optional
-    :param giveaway: 
+    :param giveaway: The message is a scheduled giveaway message.
     :type giveaway: :obj:`~aiotgm.types.Giveaway`, optional
-    :param giveaway_winners: 
+    :param giveaway_winners: A giveaway with public winners was completed.
     :type giveaway_winners: :obj:`~aiotgm.types.GiveawayWinners`, optional
-    :param giveaway_completed: 
+    :param giveaway_completed: Service message: a giveaway without public winners was completed.
     :type giveaway_completed: :obj:`~aiotgm.types.GiveawayCompleted`, optional
-    :param video_chat_scheduled: 
+    :param video_chat_scheduled: Service message: video chat scheduled.
     :type video_chat_scheduled: :obj:`~aiotgm.types.VideoChatScheduled`, optional
-    :param video_chat_started: 
+    :param video_chat_started: Service message: video chat started.
     :type video_chat_started: :obj:`~aiotgm.types.VideoChatStarted`, optional
-    :param video_chat_ended: 
+    :param video_chat_ended: Service message: video chat ended.
     :type video_chat_ended: :obj:`~aiotgm.types.VideoChatEnded`, optional
-    :param video_chat_participants_invited: 
+    :param video_chat_participants_invited: Service message: new participants invited to a video chat.
     :type video_chat_participants_invited: :obj:`~aiotgm.types.VideoChatParticipantsInvited`, optional
-    :param web_app_data: 
+    :param web_app_data: Service message: data sent by a Web App.
     :type web_app_data: :obj:`~aiotgm.types.WebAppData`, optional
-    :param reply_markup: 
+    :param reply_markup: Inline keyboard attached to the message. ``login_url`` buttons are represented as ordinary ``url`` buttons.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     '''
     @classmethod
