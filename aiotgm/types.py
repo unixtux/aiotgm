@@ -4815,6 +4815,51 @@ class InputTextMessageContent(TelegramType):
         self.link_preview_options = link_preview_options
 
 
+class InputVenueMessageContent(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputvenuemessagecontent
+
+    Represents the :obj:`content <aiotgm.types.InputMessageContent>`
+    of a venue message to be sent as the result of an inline query.
+
+    :param latitude: Latitude of the venue in degrees.
+    :type latitude: :obj:`float`
+    :param longitude: Longitude of the venue in degrees.
+    :type longitude: :obj:`float`
+    :param title: Name of the venue.
+    :type title: :obj:`str`
+    :param address: Address of the venue.
+    :type address: :obj:`str`
+    :param foursquare_id: Foursquare identifier of the venue, if known.
+    :type foursquare_id: :obj:`str`, optional
+    :param foursquare_type: Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+    :type foursquare_type: :obj:`str`, optional
+    :param google_place_id: Google Places identifier of the venue.
+    :type google_place_id: :obj:`str`, optional
+    :param google_place_type: Google Places type of the venue. (See `supported types <https://developers.google.com/places/web-service/supported_types>`_.)
+    :type google_place_type: :obj:`str`, optional
+    '''
+    def __init__(
+        self,
+        latitude: float,
+        longitude: float,
+        title: str,
+        address: str,
+        foursquare_id: Optional[str] = None,
+        foursquare_type: Optional[str] = None,
+        google_place_id: Optional[str] = None,
+        google_place_type: Optional[str] = None
+    ):
+        self.latitude = latitude
+        self.longitude = longitude
+        self.title = title
+        self.address = address
+        self.foursquare_id = foursquare_id
+        self.foursquare_type = foursquare_type
+        self.google_place_id = google_place_id
+        self.google_place_type = google_place_type
+
+
 
 
 
@@ -6640,33 +6685,6 @@ class StickerSet(TelegramType):
         self.sticker_type = sticker_type
         self.stickers = stickers
         self.thumbnail = thumbnail
-
-
-class InputVenueMessageContent(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inputvenuemessagecontent
-
-    Represents the content of a venue message to be sent as the result of an inline query.
-    '''
-    def __init__(
-        self,
-        latitude: float,
-        longitude: float,
-        title: str,
-        address: str,
-        foursquare_id: Optional[str] = None,
-        foursquare_type: Optional[str] = None,
-        google_place_id: Optional[str] = None,
-        google_place_type: Optional[str] = None
-    ):
-        self.latitude = latitude
-        self.longitude = longitude
-        self.title = title
-        self.address = address
-        self.foursquare_id = foursquare_id
-        self.foursquare_type = foursquare_type
-        self.google_place_id = google_place_id
-        self.google_place_type = google_place_type
 
 
 class SentWebAppMessage(TelegramType):
