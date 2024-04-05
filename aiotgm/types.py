@@ -4754,6 +4754,53 @@ class InputMediaVideo(TelegramType):
         self.has_spoiler = has_spoiler
 
 
+class InputSticker(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputsticker
+
+    This object describes a sticker to be added to a sticker set.
+
+    :param sticker: The added sticker. Pass a file_id as a String to send a file that already exists on the Telegram servers, pass an HTTP URL as a String for Telegram to get a file from the Internet, upload a new one using multipart/form-data, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. Animated and video stickers can't be uploaded via HTTP URL. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+    :type sticker: :obj:`~aiotgm.types.InputFile` or :obj:`str`
+    :param format: Format of the added sticker, must be one of “static” for a **.WEBP** or **.PNG** image, “animated” for a **.TGS** animation, “video” for a **WEBM** video.
+    :type format: :obj:`str`
+    :param emoji_list: List of 1-20 emoji associated with the sticker.
+    :type emoji_list: :obj:`list` of :obj:`str`
+    :param mask_position: Position where the mask should be placed on faces. For “mask” stickers only.
+    :type mask_position: :obj:`~aiotgm.types.MaskPosition`, optional
+    :param keywords: List of 0-20 search keywords for the sticker with total length of up to 64 characters. For “regular” and “custom_emoji” stickers only.
+    :type keywords: :obj:`list` of :obj:`str`, optional
+    '''
+    def __init__(
+        self,
+        sticker: Union[InputFile, str],
+        format: str,
+        emoji_list: list[str],
+        mask_position: Optional[MaskPosition] = None,
+        keywords: Optional[list[str]] = None
+    ):
+        self.sticker = sticker
+        self.format = format
+        self.emoji_list = emoji_list
+        self.mask_position = mask_position
+        self.keywords = keywords
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6564,27 +6611,6 @@ class StickerSet(TelegramType):
         self.sticker_type = sticker_type
         self.stickers = stickers
         self.thumbnail = thumbnail
-
-
-class InputSticker(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#inputsticker
-
-    This object describes a sticker to be added to a sticker set.
-    '''
-    def __init__(
-        self,
-        sticker: Union[InputFile, str],
-        format: str,
-        emoji_list: list[str],
-        mask_position: Optional[MaskPosition] = None,
-        keywords: Optional[list[str]] = None
-    ):
-        self.sticker = sticker
-        self.format = format
-        self.emoji_list = emoji_list
-        self.mask_position = mask_position
-        self.keywords = keywords
 
 
 class InputTextMessageContent(TelegramType):
