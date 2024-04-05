@@ -6372,7 +6372,7 @@ class SharedUser(TelegramType):
     https://core.telegram.org/bots/api#shareduser
 
     This object contains information about a user that was shared with
-    the bot using a :obj:`~aiotgm.types.KeyboardButtonRequestUser` button.
+    the bot using a :obj:`~aiotgm.types.KeyboardButtonRequestUsers` button.
     '''
     @classmethod
     @_parse_result
