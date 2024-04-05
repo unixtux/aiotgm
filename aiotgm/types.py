@@ -5264,6 +5264,22 @@ class MaskPosition(TelegramType):
         self.scale = scale
 
 
+class MenuButtonCommands(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#menubuttoncommands
+
+    Represents a menu button, which opens the bot's list of commands.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        self.type = DEFAULT_MENU_BUTTON_COMMANDS
+
+
 
 
 
@@ -5463,8 +5479,6 @@ class ReplyParameters(TelegramType):
         self.quote_entities = quote_entities
         self.quote_position = quote_position
 
-
-# MaybeInaccessibleMessage: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~
 
 class Message(TelegramType):
     '''
@@ -5721,33 +5735,6 @@ class Message(TelegramType):
         self.video_chat_participants_invited = video_chat_participants_invited
         self.web_app_data = web_app_data
         self.reply_markup = reply_markup
-
-
-MaybeInaccessibleMessage = Union[Message, InaccessibleMessage]
-'''
-https://core.telegram.org/bots/api#maybeinaccessiblemessage
-
-This object describes a message that can be inaccessible to the bot.
-
-It can be one of:
-
-- Message
-- InaccessibleMessage
-'''
-
-def _dese_maybe_inaccessible_message(res: Optional[dict], /) -> Optional[MaybeInaccessibleMessage]:
-    '''
-    Function to deserialize MaybeInaccessibleMessage.
-    '''
-    if res is None: return None
-    obj = _check_dict(res)
-
-    if obj['date'] == 0:
-        return InaccessibleMessage._dese(obj, check_dict=False)
-    else:
-        return Message._dese(obj, check_dict=False)
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 # ReactionType: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -6632,24 +6619,6 @@ One of the following reply markups:
 - :obj:`~aiotgm.types.ForceReply`
 '''
 
-# MenuButton: 3 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-class MenuButtonCommands(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#menubuttoncommands
-
-    Represents a menu button, which opens the bot's list of commands.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        self.type = DEFAULT_MENU_BUTTON_COMMANDS
-
-
 class MenuButtonWebApp(TelegramType):
     '''
     https://core.telegram.org/bots/api#menubuttonwebapp
@@ -6688,47 +6657,6 @@ class MenuButtonDefault(TelegramType):
 
     def __init__(self):
         self.type = DEFAULT_MENU_BUTTON_DEFAULT
-
-
-MenuButton = Union[MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault]
-'''
-https://core.telegram.org/bots/api#menubutton
-
-This object describes the bot's menu button in a private chat. It should be one of
-
-- MenuButtonCommands
-- MenuButtonWebApp
-- MenuButtonDefault
-
-If a menu button other than MenuButtonDefault is set for a private chat, then it is applied in the chat.
-
-Otherwise the default menu button is applied. By default, the menu button opens the list of bot commands.
-'''
-
-def _dese_menu_button(res: Optional[dict], /) -> Optional[MenuButton]: # used in aiotgm.__init__
-    '''
-    Function to deserialize MenuButton.
-    '''
-    if res is None: return None
-    obj = _check_dict(res)
-
-    type = obj.pop('type')
-
-    if type == DEFAULT_MENU_BUTTON_COMMANDS:
-        return MenuButtonCommands._dese(obj, check_dict=False)
-
-    elif type == DEFAULT_MENU_BUTTON_WEB_APP:
-        return MenuButtonWebApp._dese(obj, check_dict=False)
-
-    elif type == DEFAULT_MENU_BUTTON_DEFAULT:
-        return MenuButtonDefault._dese(obj, check_dict=False)
-    else:
-        raise ValueError(
-            'An error occurred during the deserialization'
-            f' of the type MenuButton. Invalid type: {type!r}.'
-        )
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class ResponseParameters(TelegramType):
@@ -7864,5 +7792,67 @@ Telegram clients currently support the following 5 types:
 - :obj:`~aiotgm.types.InputContactMessageContent`
 - :obj:`~aiotgm.types.InputInvoiceMessageContent`
 '''
+
+
+MaybeInaccessibleMessage = Union[Message, InaccessibleMessage]
+'''
+https://core.telegram.org/bots/api#maybeinaccessiblemessage
+
+This object describes a message that can be inaccessible to the bot. It can be one of:
+
+- :obj:`~aiotgm.types.Message`
+- :obj:`~aiotgm.types.InaccessibleMessage`
+'''
+
+def _dese_maybe_inaccessible_message(res: Optional[dict], /) -> Optional[MaybeInaccessibleMessage]:
+    '''
+    Function to deserialize MaybeInaccessibleMessage.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    if obj['date'] == 0:
+        return InaccessibleMessage._dese(obj, check_dict=False)
+    else:
+        return Message._dese(obj, check_dict=False)
+
+
+MenuButton = Union[MenuButtonCommands, MenuButtonWebApp, MenuButtonDefault]
+'''
+https://core.telegram.org/bots/api#menubutton
+
+This object describes the bot's menu button in a private chat. It should be one of
+
+- :obj:`~aiotgm.types.MenuButtonCommands`
+- :obj:`~aiotgm.types.MenuButtonWebApp`
+- :obj:`~aiotgm.types.MenuButtonDefault`
+
+If a menu button other than :obj:`~aiotgm.types.MenuButtonDefault` is set for a private
+chat, then it is applied in the chat. Otherwise the default menu button is applied. By
+default, the menu button opens the list of bot commands.
+'''
+
+def _dese_menu_button(res: Optional[dict], /) -> Optional[MenuButton]: # used in aiotgm.__init__
+    '''
+    Function to deserialize MenuButton.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_MENU_BUTTON_COMMANDS:
+        return MenuButtonCommands._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_MENU_BUTTON_WEB_APP:
+        return MenuButtonWebApp._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_MENU_BUTTON_DEFAULT:
+        return MenuButtonDefault._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type MenuButton. Invalid type: {type!r}.'
+        )
 
 
