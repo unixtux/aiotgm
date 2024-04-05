@@ -5226,6 +5226,44 @@ class LoginUrl(TelegramType):
         self.request_write_access = request_write_access
 
 
+class MaskPosition(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#maskposition
+
+    This object describes the position on faces where a mask should be placed by default.
+
+    :param point: The part of the face relative to which the mask should be placed. One of “forehead”, “eyes”, “mouth”, or “chin”.
+    :type point: :obj:`str`
+    :param x_shift: Shift by X-axis measured in widths of the mask scaled to the face size, from left to right. For example, choosing -1.0 will place mask just to the left of the default mask position.
+    :type x_shift: :obj:`float`
+    :param y_shift: Shift by Y-axis measured in heights of the mask scaled to the face size, from top to bottom. For example, 1.0 will place the mask just below the default mask position.
+    :type y_shift: :obj:`float`
+    :param scale: Mask scaling coefficient. For example, 2.0 means double size.
+    :type scale: :obj:`float`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['point'] = res.get('point')
+        obj['x_shift'] = res.get('x_shift')
+        obj['y_shift'] = res.get('y_shift')
+        obj['scale'] = res.get('scale')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        point: str,
+        x_shift: float,
+        y_shift: float,
+        scale: float
+    ):
+        self.point = point
+        self.x_shift = x_shift
+        self.y_shift = y_shift
+        self.scale = scale
+
+
 
 
 
@@ -6714,35 +6752,6 @@ class ResponseParameters(TelegramType):
     ):
         self.migrate_to_chat_id = migrate_to_chat_id
         self.retry_after = retry_after
-
-
-class MaskPosition(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#maskposition
-
-    This object describes the position on faces where a mask should be placed by default.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['point'] = res.get('point')
-        obj['x_shift'] = res.get('x_shift')
-        obj['y_shift'] = res.get('y_shift')
-        obj['scale'] = res.get('scale')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        point: str,
-        x_shift: float,
-        y_shift: float,
-        scale: float
-    ):
-        self.point = point
-        self.x_shift = x_shift
-        self.y_shift = y_shift
-        self.scale = scale
 
 
 class Sticker(TelegramType):
