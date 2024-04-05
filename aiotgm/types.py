@@ -5325,211 +5325,170 @@ class MenuButtonWebApp(TelegramType):
         self.web_app = web_app
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class SwitchInlineQueryChosenChat(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#switchinlinequerychosenchat
-
-    This object represents an inline button that switches the current user
-    to inline mode in a chosen chat, with an optional default inline query.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['query'] = res.get('query')
-        obj['allow_user_chats'] = res.get('allow_user_chats')
-        obj['allow_bot_chats'] = res.get('allow_bot_chats')
-        obj['allow_group_chats'] = res.get('allow_group_chats')
-        obj['allow_channel_chats'] = res.get('allow_channel_chats')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        query: Optional[str] = None,
-        allow_user_chats: Optional[bool] = None,
-        allow_bot_chats: Optional[bool] = None,
-        allow_group_chats: Optional[bool] = None,
-        allow_channel_chats: Optional[bool] = None
-    ):
-        self.query = query
-        self.allow_user_chats = allow_user_chats
-        self.allow_bot_chats = allow_bot_chats
-        self.allow_group_chats = allow_group_chats
-        self.allow_channel_chats = allow_channel_chats
-
-
-class User(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#user
-
-    This object represents a Telegram user or bot.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['id'] = res.get('id')
-        obj['is_bot'] = res.get('is_bot')
-        obj['first_name'] = res.get('first_name')
-        obj['last_name'] = res.get('last_name')
-        obj['username'] = res.get('username')
-        obj['language_code'] = res.get('language_code')
-        obj['is_premium'] = res.get('is_premium')
-        obj['added_to_attachment_menu'] = res.get('added_to_attachment_menu')
-        obj['can_join_groups'] = res.get('can_join_groups')
-        obj['can_read_all_group_messages'] = res.get('can_read_all_group_messages')
-        obj['supports_inline_queries'] = res.get('supports_inline_queries')
-        obj['can_connect_to_business'] = res.get('can_connect_to_business')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        id: int,
-        is_bot: bool,
-        first_name: str,
-        last_name: Optional[str] = None,
-        username: Optional[str] = None,
-        language_code: Optional[str] = None,
-        is_premium: Optional[Literal[True]] = None,
-        added_to_attachment_menu: Optional[Literal[True]] = None,
-        can_join_groups: Optional[bool] = None,
-        can_read_all_group_messages: Optional[bool] = None,
-        supports_inline_queries: Optional[bool] = None,
-        can_connect_to_business: Optional[bool] = None
-    ):
-        self.id = id
-        self.is_bot = is_bot
-        self.first_name = first_name
-        self.last_name = last_name
-        self.username = username
-        self.language_code = language_code
-        self.is_premium = is_premium
-        self.added_to_attachment_menu = added_to_attachment_menu
-        self.can_join_groups = can_join_groups
-        self.can_read_all_group_messages = can_read_all_group_messages
-        self.supports_inline_queries = supports_inline_queries
-        self.can_connect_to_business = can_connect_to_business
-
-
-class MessageEntity(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messageentity
-
-    This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['type'] = res.get('type')
-        obj['offset'] = res.get('offset')
-        obj['length'] = res.get('length')
-        obj['url'] = res.get('url')
-        obj['user'] = User._dese(res.get('user'))
-        obj['language'] = res.get('language')
-        obj['custom_emoji_id'] = res.get('custom_emoji_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        type: str,
-        offset: int,
-        length: int,
-        url: Optional[str] = None,
-        user: Optional[User] = None,
-        language: Optional[str] = None,
-        custom_emoji_id: Optional[str] = None
-    ):
-        self.type = type
-        self.offset = offset
-        self.length = length
-        self.url = url
-        self.user = user
-        self.language = language
-        self.custom_emoji_id = custom_emoji_id
-
-
-class TextQuote(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#textquote
-
-    This object contains information about the quoted part of a message that is replied to by the given message.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['text'] = res.get('text')
-        obj['position'] = res.get('position')
-        obj['entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('entities')] if 'entities' in res else None
-        obj['is_manual'] = res.get('is_manual')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        text: str,
-        position: int,
-        entities: Optional[list[MessageEntity]] = None,
-        is_manual: Optional[Literal[True]] = None
-    ):
-        self.text = text
-        self.position = position
-        self.entities = entities
-        self.is_manual = is_manual
-
-
-class ReplyParameters(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#replyparameters
-
-    Describes reply parameters for the message that is being sent.
-    '''
-    def __init__(
-        self,
-        message_id: int,
-        chat_id: Optional[Union[int, str]] = None,
-        allow_sending_without_reply: Optional[bool] = None,
-        quote: Optional[str] = None,
-        quote_parse_mode: Optional[str] = None,
-        quote_entities: Optional[list[MessageEntity]] = None,
-        quote_position: Optional[int] = None
-    ):
-        self.message_id = message_id
-        self.chat_id = chat_id
-        self.allow_sending_without_reply = allow_sending_without_reply
-        self.quote = quote
-        self.quote_parse_mode = quote_parse_mode
-        self.quote_entities = quote_entities
-        self.quote_position = quote_position
-
-
 class Message(TelegramType):
     '''
     https://core.telegram.org/bots/api#message
 
     This object represents a message.
+
+    :param message_id: 
+    :type message_id: 
+    :param date: 
+    :type date: 
+    :param chat: 
+    :type chat: 
+    :param message_thread_id: 
+    :type message_thread_id: 
+    :param from_user: 
+    :type from_user: 
+    :param sender_chat: 
+    :type sender_chat: 
+    :param sender_boost_count: 
+    :type sender_boost_count: 
+    :param sender_business_bot: 
+    :type sender_business_bot: 
+    :param business_connection_id: 
+    :type business_connection_id: 
+    :param forward_origin: 
+    :type forward_origin: 
+    :param is_topic_message: 
+    :type is_topic_message: 
+    :param is_automatic_forward: 
+    :type is_automatic_forward: 
+    :param reply_to_message: 
+    :type reply_to_message: 
+    :param external_reply: 
+    :typeexternal_reply : 
+    :param quote: 
+    :type quote: 
+    :param reply_to_story: 
+    :type reply_to_story: 
+    :param via_bot: 
+    :type via_bot: 
+    :param edit_date: 
+    :type edit_date: 
+    :param has_protected_content: 
+    :type has_protected_content: 
+    :param is_from_offline: 
+    :type is_from_offline: 
+    :param media_group_id: 
+    :type media_group_id: 
+    :param author_signature: 
+    :type author_signature: 
+    :param text: 
+    :type text: 
+    :param entities: 
+    :type entities: 
+    :param link_preview_options: 
+    :type link_preview_options: 
+    :param animation: 
+    :type animation: 
+    :param audio: 
+    :type audio: 
+    :param document: 
+    :type document: 
+    :param photo: 
+    :type photo: 
+    :param sticker: 
+    :type sticker: 
+    :param story: 
+    :type story: 
+    :param video: 
+    :type video: 
+    :param video_note: 
+    :type video_note: 
+    :param voice: 
+    :type voice: 
+    :param caption: 
+    :type caption: 
+    :param caption_entities: 
+    :type caption_entities: 
+    :param has_media_spoiler: 
+    :type has_media_spoiler: 
+    :param contact: 
+    :type contact: 
+    :param dice: 
+    :type dice: 
+    :param game: 
+    :type game: 
+    :param poll: 
+    :type poll: 
+    :param venue: 
+    :type venue: 
+    :param location: 
+    :type location: 
+    :param new_chat_members: 
+    :type new_chat_members: 
+    :param left_chat_member: 
+    :type left_chat_member: 
+    :param new_chat_title: 
+    :type new_chat_title: 
+    :param new_chat_photo: 
+    :type new_chat_photo: 
+    :param delete_chat_photo: 
+    :type delete_chat_photo: 
+    :param group_chat_created: 
+    :type group_chat_created: 
+    :param channel_chat_created: 
+    :type channel_chat_created: 
+    :param message_auto_delete_timer_changed: 
+    :type message_auto_delete_timer_changed: 
+    :param migrate_to_chat_id: 
+    :type migrate_to_chat_id: 
+    :param migrate_from_chat_id: 
+    :type migrate_from_chat_id: 
+    :param pinned_message: 
+    :type pinned_message: 
+    :param invoice: 
+    :type invoice: 
+    :param successful_payment: 
+    :type successful_payment: 
+    :param users_shared: 
+    :type users_shared: 
+    :param chat_shared: 
+    :type chat_shared: 
+    :param connected_website: 
+    :type connected_website: 
+    :param write_access_allowed: 
+    :type write_access_allowed: 
+    :param passport_data: 
+    :type passport_data: 
+    :param proximity_alert_triggered: 
+    :type proximity_alert_triggered: 
+    :param boost_added: 
+    :type boost_added: 
+    :param forum_topic_created: 
+    :type forum_topic_created: 
+    :param forum_topic_edited: 
+    :type forum_topic_edited: 
+    :param forum_topic_closed: 
+    :type forum_topic_closed: 
+    :param forum_topic_reopened: 
+    :type forum_topic_reopened: 
+    :param general_forum_topic_hidden: 
+    :type general_forum_topic_hidden: 
+    :param general_forum_topic_unhidden: 
+    :type general_forum_topic_unhidden: 
+    :param giveaway_created: 
+    :type giveaway_created: 
+    :param giveaway: 
+    :type giveaway: 
+    :param giveaway_winners: 
+    :type giveaway_winners: 
+    :param giveaway_completed: 
+    :type giveaway_completed: 
+    :param video_chat_scheduled: 
+    :type video_chat_scheduled: 
+    :param video_chat_started: 
+    :type video_chat_started: 
+    :param video_chat_ended: 
+    :type video_chat_ended: 
+    :param video_chat_participants_invited: 
+    :type video_chat_participants_invited: 
+    :param web_app_data: 
+    :type web_app_data: 
+    :param reply_markup: 
+    :type reply_markup: 
     '''
     @classmethod
     @_parse_result
@@ -5780,6 +5739,206 @@ class Message(TelegramType):
         self.video_chat_participants_invited = video_chat_participants_invited
         self.web_app_data = web_app_data
         self.reply_markup = reply_markup
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class SwitchInlineQueryChosenChat(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#switchinlinequerychosenchat
+
+    This object represents an inline button that switches the current user
+    to inline mode in a chosen chat, with an optional default inline query.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['query'] = res.get('query')
+        obj['allow_user_chats'] = res.get('allow_user_chats')
+        obj['allow_bot_chats'] = res.get('allow_bot_chats')
+        obj['allow_group_chats'] = res.get('allow_group_chats')
+        obj['allow_channel_chats'] = res.get('allow_channel_chats')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        query: Optional[str] = None,
+        allow_user_chats: Optional[bool] = None,
+        allow_bot_chats: Optional[bool] = None,
+        allow_group_chats: Optional[bool] = None,
+        allow_channel_chats: Optional[bool] = None
+    ):
+        self.query = query
+        self.allow_user_chats = allow_user_chats
+        self.allow_bot_chats = allow_bot_chats
+        self.allow_group_chats = allow_group_chats
+        self.allow_channel_chats = allow_channel_chats
+
+
+class User(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#user
+
+    This object represents a Telegram user or bot.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['is_bot'] = res.get('is_bot')
+        obj['first_name'] = res.get('first_name')
+        obj['last_name'] = res.get('last_name')
+        obj['username'] = res.get('username')
+        obj['language_code'] = res.get('language_code')
+        obj['is_premium'] = res.get('is_premium')
+        obj['added_to_attachment_menu'] = res.get('added_to_attachment_menu')
+        obj['can_join_groups'] = res.get('can_join_groups')
+        obj['can_read_all_group_messages'] = res.get('can_read_all_group_messages')
+        obj['supports_inline_queries'] = res.get('supports_inline_queries')
+        obj['can_connect_to_business'] = res.get('can_connect_to_business')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: int,
+        is_bot: bool,
+        first_name: str,
+        last_name: Optional[str] = None,
+        username: Optional[str] = None,
+        language_code: Optional[str] = None,
+        is_premium: Optional[Literal[True]] = None,
+        added_to_attachment_menu: Optional[Literal[True]] = None,
+        can_join_groups: Optional[bool] = None,
+        can_read_all_group_messages: Optional[bool] = None,
+        supports_inline_queries: Optional[bool] = None,
+        can_connect_to_business: Optional[bool] = None
+    ):
+        self.id = id
+        self.is_bot = is_bot
+        self.first_name = first_name
+        self.last_name = last_name
+        self.username = username
+        self.language_code = language_code
+        self.is_premium = is_premium
+        self.added_to_attachment_menu = added_to_attachment_menu
+        self.can_join_groups = can_join_groups
+        self.can_read_all_group_messages = can_read_all_group_messages
+        self.supports_inline_queries = supports_inline_queries
+        self.can_connect_to_business = can_connect_to_business
+
+
+class MessageEntity(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messageentity
+
+    This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['type'] = res.get('type')
+        obj['offset'] = res.get('offset')
+        obj['length'] = res.get('length')
+        obj['url'] = res.get('url')
+        obj['user'] = User._dese(res.get('user'))
+        obj['language'] = res.get('language')
+        obj['custom_emoji_id'] = res.get('custom_emoji_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        type: str,
+        offset: int,
+        length: int,
+        url: Optional[str] = None,
+        user: Optional[User] = None,
+        language: Optional[str] = None,
+        custom_emoji_id: Optional[str] = None
+    ):
+        self.type = type
+        self.offset = offset
+        self.length = length
+        self.url = url
+        self.user = user
+        self.language = language
+        self.custom_emoji_id = custom_emoji_id
+
+
+class TextQuote(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#textquote
+
+    This object contains information about the quoted part of a message that is replied to by the given message.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['text'] = res.get('text')
+        obj['position'] = res.get('position')
+        obj['entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('entities')] if 'entities' in res else None
+        obj['is_manual'] = res.get('is_manual')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        text: str,
+        position: int,
+        entities: Optional[list[MessageEntity]] = None,
+        is_manual: Optional[Literal[True]] = None
+    ):
+        self.text = text
+        self.position = position
+        self.entities = entities
+        self.is_manual = is_manual
+
+
+class ReplyParameters(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#replyparameters
+
+    Describes reply parameters for the message that is being sent.
+    '''
+    def __init__(
+        self,
+        message_id: int,
+        chat_id: Optional[Union[int, str]] = None,
+        allow_sending_without_reply: Optional[bool] = None,
+        quote: Optional[str] = None,
+        quote_parse_mode: Optional[str] = None,
+        quote_entities: Optional[list[MessageEntity]] = None,
+        quote_position: Optional[int] = None
+    ):
+        self.message_id = message_id
+        self.chat_id = chat_id
+        self.allow_sending_without_reply = allow_sending_without_reply
+        self.quote = quote
+        self.quote_parse_mode = quote_parse_mode
+        self.quote_entities = quote_entities
+        self.quote_position = quote_position
 
 
 # ReactionType: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~
