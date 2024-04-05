@@ -5444,7 +5444,7 @@ class Message(TelegramType):
     :param invoice: 
     :type invoice: :obj:`~aiotgm.types.Invoice`, optional
     :param successful_payment: 
-    :type successful_payment: :obj:`~aiotgm.types.SuccesfulPayment`, optional
+    :type successful_payment: :obj:`~aiotgm.types.SuccessfulPayment`, optional
     :param users_shared: 
     :type users_shared: :obj:`~aiotgm.types.UsersShared`, optional
     :param chat_shared: 
