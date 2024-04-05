@@ -5131,6 +5131,54 @@ class LinkPreviewOptions(TelegramType):
         self.show_above_text = show_above_text
 
 
+class Location(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#location
+
+    This object represents a point on the map.
+
+    :param latitude: Latitude as defined by sender.
+    :type latitude: :obj:`float`
+    :param longitude: Longitude as defined by sender.
+    :type longitude: :obj:`float`
+    :param horizontal_accuracy: The radius of uncertainty for the location, measured in meters; 0-1500.
+    :type horizontal_accuracy: :obj:`float`, optional
+    :param live_period: Time relative to the message sending date, during which the location can be updated; in seconds. For active live locations only.
+    :type live_period: :obj:`int`, optional
+    :param heading: The direction in which user is moving, in degrees; 1-360. For active live locations only.
+    :type heading: :obj:`int`, optional
+    :param proximity_alert_radius: The maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only.
+    :type proximity_alert_radius: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['latitude'] = res.get('latitude')
+        obj['longitude'] = res.get('longitude')
+        obj['horizontal_accuracy'] = res.get('horizontal_accuracy')
+        obj['live_period'] = res.get('live_period')
+        obj['heading'] = res.get('heading')
+        obj['proximity_alert_radius'] = res.get('proximity_alert_radius')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        latitude: float,
+        longitude: float,
+        horizontal_accuracy: Optional[float] = None,
+        live_period: Optional[int] = None,
+        heading: Optional[int] = None,
+        proximity_alert_radius: Optional[int] = None
+    ):
+        self.latitude = latitude
+        self.longitude = longitude
+        self.horizontal_accuracy = horizontal_accuracy
+        self.live_period = live_period
+        self.heading = heading
+        self.proximity_alert_radius = proximity_alert_radius
+
+
 
 
 
@@ -5646,41 +5694,6 @@ def _dese_maybe_inaccessible_message(res: Optional[dict], /) -> Optional[MaybeIn
         return Message._dese(obj, check_dict=False)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class Location(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#location
-
-    This object represents a point on the map.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['longitude'] = res.get('longitude')
-        obj['latitude'] = res.get('latitude')
-        obj['horizontal_accuracy'] = res.get('horizontal_accuracy')
-        obj['live_period'] = res.get('live_period')
-        obj['heading'] = res.get('heading')
-        obj['proximity_alert_radius'] = res.get('proximity_alert_radius')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        longitude: float,
-        latitude: float,
-        horizontal_accuracy: Optional[float] = None,
-        live_period: Optional[int] = None,
-        heading: Optional[int] = None,
-        proximity_alert_radius: Optional[int] = None
-    ):
-        self.longitude = longitude
-        self.latitude = latitude
-        self.horizontal_accuracy = horizontal_accuracy
-        self.live_period = live_period
-        self.heading = heading
-        self.proximity_alert_radius = proximity_alert_radius
 
 
 # ReactionType: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~
