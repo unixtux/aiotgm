@@ -7066,6 +7066,30 @@ class ShippingAddress(TelegramType):
         self.post_code = post_code
 
 
+class ShippingOption(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#shippingoption
+
+    This object represents one shipping option.
+
+    :param id: Shipping option identifier.
+    :type id: :obj:`str`
+    :param title: Option title.
+    :type title: :obj:`str`
+    :param prices: List of price portions.
+    :type prices: :obj:`list` of :obj:`~aiotgm.types.LabeledPrice`
+    '''
+    def __init__(
+        self,
+        id: str,
+        title: str,
+        prices: list[LabeledPrice]
+    ):
+        self.id = id
+        self.title = title
+        self.prices = prices
+
+
 
 
 
@@ -7662,23 +7686,6 @@ class StickerSet(TelegramType):
         self.sticker_type = sticker_type
         self.stickers = stickers
         self.thumbnail = thumbnail
-
-
-class ShippingOption(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#shippingoption
-
-    This object represents one shipping option.
-    '''
-    def __init__(
-        self,
-        id: str,
-        title: str,
-        prices: list[LabeledPrice]
-    ):
-        self.id = id
-        self.title = title
-        self.prices = prices
 
 
 class SuccessfulPayment(TelegramType):
