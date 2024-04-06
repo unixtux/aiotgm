@@ -5945,6 +5945,35 @@ class MessageOriginHiddenUser(TelegramType):
         self.sender_user_name = sender_user_name
 
 
+class MessageOriginUser(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messageoriginuser
+
+    The message was originally sent by a known user.
+
+    :param date: Date the message was sent originally in Unix time.
+    :type date: :obj:`int`
+    :param sender_user: User that sent the message originally.
+    :type sender_user: :obj:`~aiotgm.types.User`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['date'] = res.get('date')
+        obj['sender_user'] = User._dese(res.get('sender_user'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        date: int,
+        sender_user: User
+    ):
+        self.type = DEFAULT_MESSAGE_ORIGIN_USER
+        self.date = date
+        self.sender_user = sender_user
+
+
 
 
 
@@ -7578,30 +7607,6 @@ It should be one of:
 - PassportElementErrorTranslationFiles
 - PassportElementErrorUnspecified
 '''
-
-
-class MessageOriginUser(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messageoriginuser
-
-    The message was originally sent by a known user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['date'] = res.get('date')
-        obj['sender_user'] = User._dese(res.get('sender_user'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        date: int,
-        sender_user: User
-    ):
-        self.type = DEFAULT_MESSAGE_ORIGIN_USER
-        self.date = date
-        self.sender_user = sender_user
 
 
 class UserChatBoosts(TelegramType):
