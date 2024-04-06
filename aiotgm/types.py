@@ -6883,6 +6883,46 @@ class ReplyKeyboardRemove(TelegramType):
         self.selective = selective
 
 
+class ReplyParameters(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#replyparameters
+
+    Describes reply parameters for the message that is being sent.
+
+    :param message_id: Identifier of the message that will be replied to in the current chat, or in the chat chat_id if it is specified.
+    :type message_id: :obj:`int`
+    :param chat_id: If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format ``@channelusername``). Not supported for messages sent on behalf of a business account.
+    :type chat_id: :obj:`int` or :obj:`str`, optional
+    :param allow_sending_without_reply: Pass :obj:`True` if the message should be sent even if the specified message to be replied to is not found. Always :obj:`False` for replies in another chat or forum topic. Always :obj:`True` for messages sent on behalf of a business account.
+    :type allow_sending_without_reply: :obj:`bool`, optional
+    :param quote: Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including *bold*, *italic*, *underline*, *strikethrough*, *spoiler*, and *custom_emoji entities*. The message will fail to send if the quote isn't found in the original message.
+    :type quote: :obj:`str`, optional
+    :param quote_parse_mode: Mode for parsing entities in the quote. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+    :type quote_parse_mode: :obj:`str`, optional
+    :param quote_entities: A JSON-serialized list of special entities that appear in the quote. It can be specified instead of *quote_parse_mode*.
+    :type quote_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param quote_position: Position of the quote in the original message in UTF-16 code units.
+    :type quote_position: :obj:`int`, optional
+    '''
+    def __init__(
+        self,
+        message_id: int,
+        chat_id: Optional[Union[int, str]] = None,
+        allow_sending_without_reply: Optional[bool] = None,
+        quote: Optional[str] = None,
+        quote_parse_mode: Optional[str] = None,
+        quote_entities: Optional[list[MessageEntity]] = None,
+        quote_position: Optional[int] = None
+    ):
+        self.message_id = message_id
+        self.chat_id = chat_id
+        self.allow_sending_without_reply = allow_sending_without_reply
+        self.quote = quote
+        self.quote_parse_mode = quote_parse_mode
+        self.quote_entities = quote_entities
+        self.quote_position = quote_position
+
+
 
 
 
@@ -7018,31 +7058,6 @@ class TextQuote(TelegramType):
         self.position = position
         self.entities = entities
         self.is_manual = is_manual
-
-
-class ReplyParameters(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#replyparameters
-
-    Describes reply parameters for the message that is being sent.
-    '''
-    def __init__(
-        self,
-        message_id: int,
-        chat_id: Optional[Union[int, str]] = None,
-        allow_sending_without_reply: Optional[bool] = None,
-        quote: Optional[str] = None,
-        quote_parse_mode: Optional[str] = None,
-        quote_entities: Optional[list[MessageEntity]] = None,
-        quote_position: Optional[int] = None
-    ):
-        self.message_id = message_id
-        self.chat_id = chat_id
-        self.allow_sending_without_reply = allow_sending_without_reply
-        self.quote = quote
-        self.quote_parse_mode = quote_parse_mode
-        self.quote_entities = quote_entities
-        self.quote_position = quote_position
 
 
 class Story(TelegramType):
