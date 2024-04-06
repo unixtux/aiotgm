@@ -6369,6 +6369,45 @@ class PassportElementErrorUnspecified(TelegramType):
         self.message = message
 
 
+class PassportFile(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportfile
+
+    This object represents a file uploaded to Telegram Passport.
+    Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
+
+    :param file_id: Identifier for this file, which can be used to download or reuse the file.
+    :type file_id: :obj:`str`
+    :param file_unique_id: Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type file_unique_id: :obj:`str`
+    :param file_size: File size in bytes.
+    :type file_size: :obj:`int`
+    :param file_date: Unix time when the file was uploaded.
+    :type file_date: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['file_id'] = res.get('file_id')
+        obj['file_unique_id'] = res.get('file_unique_id')
+        obj['file_size'] = res.get('file_size')
+        obj['file_date'] = res.get('file_date')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        file_id: str,
+        file_unique_id: str,
+        file_size: int,
+        file_date: int
+    ):
+        self.file_id = file_id
+        self.file_unique_id = file_unique_id
+        self.file_size = file_size
+        self.file_date = file_date
+
+
 
 
 
@@ -7598,36 +7637,6 @@ class PreCheckoutQuery(TelegramType):
         self.invoice_payload = invoice_payload
         self.shipping_option_id = shipping_option_id
         self.order_info = order_info
-
-
-class PassportFile(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportfile
-
-    This object represents a file uploaded to Telegram Passport.\n
-    Currently all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['file_id'] = res.get('file_id')
-        obj['file_unique_id'] = res.get('file_unique_id')
-        obj['file_size'] = res.get('file_size')
-        obj['file_date'] = res.get('file_date')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        file_id: str,
-        file_unique_id: str,
-        file_size: int,
-        file_date: int
-    ):
-        self.file_id = file_id
-        self.file_unique_id = file_unique_id
-        self.file_size = file_size
-        self.file_date = file_date
 
 
 class UserChatBoosts(TelegramType):
