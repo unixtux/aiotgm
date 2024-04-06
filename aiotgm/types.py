@@ -7090,6 +7090,44 @@ class ShippingOption(TelegramType):
         self.prices = prices
 
 
+class ShippingQuery(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#shippingquery
+
+    This object contains information about an incoming shipping query.
+
+    :param id: Unique query identifier.
+    :type id: :obj:`str`
+    :param from_user: User who sent the query.
+    :type from_user: :obj:`~aiotgm.types.User`
+    :param invoice_payload: Bot specified invoice payload.
+    :type invoice_payload: :obj:`str`
+    :param shipping_address: User specified shipping address.
+    :type shipping_address: :obj:`~aiotgm.types.ShippingAddress`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['from_user'] = User._dese(res.get('from_user'))
+        obj['invoice_payload'] = res.get('invoice_payload')
+        obj['shipping_address'] = ShippingAddress._dese(res.get('shipping_address'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: str,
+        from_user: User,
+        invoice_payload: str,
+        shipping_address: ShippingAddress
+    ):
+        self.id = id
+        self.from_user = from_user
+        self.invoice_payload = invoice_payload
+        self.shipping_address = shipping_address
+
+
 
 
 
@@ -7724,35 +7762,6 @@ class SuccessfulPayment(TelegramType):
         self.provider_payment_charge_id = provider_payment_charge_id
         self.shipping_option_id = shipping_option_id
         self.order_info = order_info
-
-
-class ShippingQuery(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#shippingquery
-
-    This object contains information about an incoming shipping query.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['id'] = res.get('id')
-        obj['from_user'] = User._dese(res.get('from_user'))
-        obj['invoice_payload'] = res.get('invoice_payload')
-        obj['shipping_address'] = ShippingAddress._dese(res.get('shipping_address'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        id: str,
-        from_user: User,
-        invoice_payload: str,
-        shipping_address: ShippingAddress
-    ):
-        self.id = id
-        self.from_user = from_user
-        self.invoice_payload = invoice_payload
-        self.shipping_address = shipping_address
 
 
 class UserChatBoosts(TelegramType):
