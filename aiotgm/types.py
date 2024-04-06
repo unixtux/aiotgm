@@ -7018,6 +7018,54 @@ class SharedUser(TelegramType):
         self.photo = photo
 
 
+class ShippingAddress(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#shippingaddress
+
+    This object represents a shipping address.
+
+    :param country_code: Two-letter `ISO 3166-1 alpha-2 <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_ country code.
+    :type country_code: :obj:`str`
+    :param state: State, if applicable.
+    :type state: :obj:`str`
+    :param city: City.
+    :type city: :obj:`str`
+    :param street_line1: First line for the address.
+    :type street_line1: :obj:`str`
+    :param street_line2: Second line for the address.
+    :type street_line2: :obj:`str`
+    :param post_code: Address post code.
+    :type post_code: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['country_code'] = res.get('country_code')
+        obj['state'] = res.get('state')
+        obj['city'] = res.get('city')
+        obj['street_line1'] = res.get('street_line1')
+        obj['street_line2'] = res.get('street_line2')
+        obj['post_code'] = res.get('post_code')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        country_code: str,
+        state: str,
+        city: str,
+        street_line1: str,
+        street_line2: str,
+        post_code: str
+    ):
+        self.country_code = country_code
+        self.state = state
+        self.city = city
+        self.street_line1 = street_line1
+        self.street_line2 = street_line2
+        self.post_code = post_code
+
+
 
 
 
@@ -7614,41 +7662,6 @@ class StickerSet(TelegramType):
         self.sticker_type = sticker_type
         self.stickers = stickers
         self.thumbnail = thumbnail
-
-
-class ShippingAddress(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#shippingaddress
-
-    This object represents a shipping address.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['country_code'] = res.get('country_code')
-        obj['state'] = res.get('state')
-        obj['city'] = res.get('city')
-        obj['street_line1'] = res.get('street_line1')
-        obj['street_line2'] = res.get('street_line2')
-        obj['post_code'] = res.get('post_code')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        country_code: str,
-        state: str,
-        city: str,
-        street_line1: str,
-        street_line2: str,
-        post_code: str
-    ):
-        self.country_code = country_code
-        self.state = state
-        self.city = city
-        self.street_line1 = street_line1
-        self.street_line2 = street_line2
-        self.post_code = post_code
 
 
 class ShippingOption(TelegramType):
