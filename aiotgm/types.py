@@ -6269,8 +6269,15 @@ class PassportElementErrorSelfie(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorselfie
 
-    Represents an issue with the selfie with a document.\n
+    Represents an issue with the selfie with a document.
     The error is considered resolved when the file with the selfie changes.
+
+    :param type: The section of the user's Telegram Passport which has the issue, one of “passport”, “driver_license”, “identity_card”, “internal_passport”.
+    :type type: :obj:`str`
+    :param file_hash: Base64-encoded hash of the file with the selfie.
+    :type file_hash: :obj:`str`
+    :param message: Error message.
+    :type message: :obj:`str`
     '''
     def __init__(
         self,
@@ -6288,7 +6295,7 @@ class PassportElementErrorTranslationFile(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrortranslationfile
 
-    Represents an issue with one of the files that constitute the translation of a document.\n
+    Represents an issue with one of the files that constitute the translation of a document.
     The error is considered resolved when the file changes.
     '''
     def __init__(
@@ -6307,7 +6314,7 @@ class PassportElementErrorTranslationFiles(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrortranslationfiles
 
-    Represents an issue with the translated version of a document.\n
+    Represents an issue with the translated version of a document.
     The error is considered resolved when a file with the document translation change.
     '''
     def __init__(
@@ -6326,7 +6333,7 @@ class PassportElementErrorUnspecified(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorunspecified
 
-    Represents an issue in an unspecified place.\n
+    Represents an issue in an unspecified place.
     The error is considered resolved when new data is added.
     '''
     def __init__(
