@@ -6951,6 +6951,29 @@ class ResponseParameters(TelegramType):
         self.retry_after = retry_after
 
 
+class SentWebAppMessage(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#sentwebappmessage
+
+    Describes an inline message sent by a `Web App <https://core.telegram.org/bots/webapps>`_ on behalf of a user.
+
+    :param inline_message_id: Identifier of the sent inline message. Available only if there is an :obj:`inline keyboard <aiotgm.types.InlineKeyboardMarkup>` attached to the message.
+    :type inline_message_id: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['inline_message_id'] = res.get('inline_message_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        inline_message_id: Optional[str] = None
+    ):
+        self.inline_message_id = inline_message_id
+
+
 
 
 
@@ -7580,26 +7603,6 @@ class StickerSet(TelegramType):
         self.sticker_type = sticker_type
         self.stickers = stickers
         self.thumbnail = thumbnail
-
-
-class SentWebAppMessage(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#sentwebappmessage
-
-    Describes an inline message sent by a Web App on behalf of a user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['inline_message_id'] = res.get('inline_message_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        inline_message_id: Optional[str] = None
-    ):
-        self.inline_message_id = inline_message_id
 
 
 class ShippingAddress(TelegramType):
