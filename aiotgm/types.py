@@ -6103,6 +6103,34 @@ class OrderInfo(TelegramType):
         self.shipping_address = shipping_address
 
 
+class PassportData(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportdata
+
+    Describes Telegram Passport data shared with the bot by the user.
+
+    :param data: Array with information about documents and other Telegram Passport elements that was shared with the bot.
+    :type data: :obj:`list` of :obj:`~aiotgm.types.EncryptedPassportElement`
+    :param credentials: Encrypted credentials required to decrypt the data.
+    :type credentials: :obj:`~aiotgm.types.EncryptedCredentials`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['data'] = [EncryptedPassportElement._dese(kwargs) for kwargs in res.get('data')]
+        obj['credentials'] = EncryptedCredentials._dese(res.get('credentials'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        data: list[EncryptedPassportElement],
+        credentials: EncryptedCredentials
+    ):
+        self.data = data
+        self.credentials = credentials
+
+
 
 
 
@@ -7362,29 +7390,6 @@ class PassportFile(TelegramType):
         self.file_unique_id = file_unique_id
         self.file_size = file_size
         self.file_date = file_date
-
-
-class PassportData(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportdata
-
-    Describes Telegram Passport data shared with the bot by the user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['data'] = [EncryptedPassportElement._dese(kwargs) for kwargs in res.get('data')]
-        obj['credentials'] = EncryptedCredentials._dese(res.get('credentials'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        data: list[EncryptedPassportElement],
-        credentials: EncryptedCredentials
-    ):
-        self.data = data
-        self.credentials = credentials
 
 
 # PassportElementError: 9 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
