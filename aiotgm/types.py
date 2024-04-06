@@ -6452,6 +6452,89 @@ class PhotoSize(TelegramType):
         self.file_size = file_size
 
 
+class Poll(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#poll
+
+    This object contains information about a poll.
+
+    :param id: Unique poll identifier.
+    :type id: :obj:`str`
+    :param question: Poll question, 1-300 characters.
+    :type question: :obj:`str`
+    :param options: List of poll options.
+    :type options: :obj:`list` of :obj:`~aiotgm.types.PollOption`
+    :param total_voter_count: Total number of users that voted in the poll.
+    :type total_voter_count: :obj:`int`
+    :param is_closed: :obj:`True`, if the poll is closed.
+    :type is_closed: :obj:`bool`
+    :param is_anonymous: :obj:`True`, if the poll is anonymous.
+    :type is_anonymous: :obj:`bool`
+    :param type: Poll type, currently can be “regular” or “quiz”.
+    :type type: :obj:`str`
+    :param allows_multiple_answers: :obj:`True`, if the poll allows multiple answers.
+    :type allows_multiple_answers: :obj:`bool`
+    :param correct_option_id: 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.
+    :type correct_option_id: :obj:`int`, optional
+    :param explanation: Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters.
+    :type explanation: :obj:`str`, optional
+    :param explanation_entities: Special entities like usernames, URLs, bot commands, etc. that appear in the *explanation*.
+    :type explanation_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param open_period: Amount of time in seconds the poll will be active after creation.
+    :type open_period: :obj:`int`, optional
+    :param close_date: Point in time (Unix timestamp) when the poll will be automatically closed.
+    :type close_date: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['question'] = res.get('question')
+        obj['options'] = [PollOption._dese(kwargs) for kwargs in res.get('options')]
+        obj['total_voter_count'] = res.get('total_voter_count')
+        obj['is_closed'] = res.get('is_closed')
+        obj['is_anonymous'] = res.get('is_anonymous')
+        obj['type'] = res.get('type')
+        obj['allows_multiple_answers'] = res.get('allows_multiple_answers')
+        obj['correct_option_id'] = res.get('correct_option_id')
+        obj['explanation'] = res.get('explanation')
+        obj['explanation_entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('explanation_entities')] if 'explanation_entities' in res else None
+        obj['open_period'] = res.get('open_period')
+        obj['close_date'] = res.get('close_date')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: str,
+        question: str,
+        options: list[PollOption],
+        total_voter_count: int,
+        is_closed: bool,
+        is_anonymous: bool,
+        type: str,
+        allows_multiple_answers: bool,
+        correct_option_id: Optional[int] = None,
+        explanation: Optional[str] = None,
+        explanation_entities: Optional[list[MessageEntity]] = None,
+        open_period: Optional[int] = None,
+        close_date: Optional[int] = None
+    ):
+        self.id = id
+        self.question = question
+        self.options = options
+        self.total_voter_count = total_voter_count
+        self.is_closed = is_closed
+        self.is_anonymous = is_anonymous
+        self.type = type
+        self.allows_multiple_answers = allows_multiple_answers
+        self.correct_option_id = correct_option_id
+        self.explanation = explanation
+        self.explanation_entities = explanation_entities
+        self.open_period = open_period
+        self.close_date = close_date
+
+
 
 
 
@@ -6900,62 +6983,6 @@ class PollAnswer(TelegramType):
         self.option_ids = option_ids
         self.voter_chat = voter_chat
         self.user = user
-
-
-class Poll(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#poll
-
-    This object contains information about a poll.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['id'] = res.get('id')
-        obj['question'] = res.get('question')
-        obj['options'] = [PollOption._dese(kwargs) for kwargs in res.get('options')]
-        obj['total_voter_count'] = res.get('total_voter_count')
-        obj['is_closed'] = res.get('is_closed')
-        obj['is_anonymous'] = res.get('is_anonymous')
-        obj['type'] = res.get('type')
-        obj['allows_multiple_answers'] = res.get('allows_multiple_answers')
-        obj['correct_option_id'] = res.get('correct_option_id')
-        obj['explanation'] = res.get('explanation')
-        obj['explanation_entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('explanation_entities')] if 'explanation_entities' in res else None
-        obj['open_period'] = res.get('open_period')
-        obj['close_date'] = res.get('close_date')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        id: str,
-        question: str,
-        options: list[PollOption],
-        total_voter_count: int,
-        is_closed: bool,
-        is_anonymous: bool,
-        type: str,
-        allows_multiple_answers: bool,
-        correct_option_id: Optional[int] = None,
-        explanation: Optional[str] = None,
-        explanation_entities: Optional[list[MessageEntity]] = None,
-        open_period: Optional[int] = None,
-        close_date: Optional[int] = None
-    ):
-        self.id = id
-        self.question = question
-        self.options = options
-        self.total_voter_count = total_voter_count
-        self.is_closed = is_closed
-        self.is_anonymous = is_anonymous
-        self.type = type
-        self.allows_multiple_answers = allows_multiple_answers
-        self.correct_option_id = correct_option_id
-        self.explanation = explanation
-        self.explanation_entities = explanation_entities
-        self.open_period = open_period
-        self.close_date = close_date
 
 
 class Venue(TelegramType):
