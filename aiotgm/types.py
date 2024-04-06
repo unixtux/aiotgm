@@ -6716,6 +6716,54 @@ class ReactionCount(TelegramType):
         self.total_count = total_count
 
 
+class ReactionTypeCustomEmoji(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#reactiontypecustomemoji
+
+    The reaction is based on a custom emoji.
+
+    :param custom_emoji_id: Custom emoji identifier.
+    :type custom_emoji_id: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['custom_emoji_id'] = res.get('custom_emoji_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        custom_emoji_id: str
+    ):
+        self.type = DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
+        self.custom_emoji_id = custom_emoji_id
+
+
+class ReactionTypeEmoji(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#reactiontypeemoji
+
+    The reaction is based on an emoji.
+
+    :param emoji: Reaction emoji. Currently, it can be one of "👍", "👎", "❤", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊", "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋", "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃", "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡".
+    :type emoji: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['emoji'] = res.get('emoji')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        emoji: str
+    ):
+        self.type = DEFAULT_REACTION_TYPE_EMOJI
+        self.emoji = emoji
+
+
 
 
 
@@ -6876,48 +6924,6 @@ class ReplyParameters(TelegramType):
         self.quote_parse_mode = quote_parse_mode
         self.quote_entities = quote_entities
         self.quote_position = quote_position
-
-
-class ReactionTypeEmoji(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#reactiontypeemoji
-
-    The reaction is based on an emoji.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['emoji'] = res.get('emoji')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        emoji: str
-    ):
-        self.type = DEFAULT_REACTION_TYPE_EMOJI
-        self.emoji = emoji
-
-
-class ReactionTypeCustomEmoji(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#reactiontypecustomemoji
-
-    The reaction is based on a custom emoji.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['custom_emoji_id'] = res.get('custom_emoji_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        custom_emoji_id: str
-    ):
-        self.type = DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
-        self.custom_emoji_id = custom_emoji_id
 
 
 class Story(TelegramType):
