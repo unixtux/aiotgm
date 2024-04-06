@@ -7392,8 +7392,6 @@ class PassportFile(TelegramType):
         self.file_date = file_date
 
 
-# PassportElementError: 9 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 class PassportElementErrorDataField(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrordatafield
@@ -7614,37 +7612,6 @@ class PassportElementErrorUnspecified(TelegramType):
         self.type = type
         self.element_hash = element_hash
         self.message = message
-
-
-PassportElementError = Union[
-    PassportElementErrorDataField,
-    PassportElementErrorFrontSide,
-    PassportElementErrorReverseSide,
-    PassportElementErrorSelfie,
-    PassportElementErrorFile,
-    PassportElementErrorFiles,
-    PassportElementErrorTranslationFile,
-    PassportElementErrorTranslationFiles,
-    PassportElementErrorUnspecified
-]
-'''
-https://core.telegram.org/bots/api#passportelementerror
-
-This object represents an error in the Telegram Passport element which
-was submitted that should be resolved by the user.
-
-It should be one of:
-
-- PassportElementErrorDataField
-- PassportElementErrorFrontSide
-- PassportElementErrorReverseSide
-- PassportElementErrorSelfie
-- PassportElementErrorFile
-- PassportElementErrorFiles
-- PassportElementErrorTranslationFile
-- PassportElementErrorTranslationFiles
-- PassportElementErrorUnspecified
-'''
 
 
 class UserChatBoosts(TelegramType):
@@ -8098,5 +8065,34 @@ def _dese_message_origin(res: Optional[dict], /) -> Optional[MessageOrigin]:
             'An error occurred during the deserialization'
             f' of the type MessageOrigin. Invalid type: {type!r}.'
         )
+
+
+PassportElementError = Union[
+    PassportElementErrorDataField,
+    PassportElementErrorFrontSide,
+    PassportElementErrorReverseSide,
+    PassportElementErrorSelfie,
+    PassportElementErrorFile,
+    PassportElementErrorFiles,
+    PassportElementErrorTranslationFile,
+    PassportElementErrorTranslationFiles,
+    PassportElementErrorUnspecified
+]
+'''
+https://core.telegram.org/bots/api#passportelementerror
+
+This object represents an error in the Telegram Passport element which
+was submitted that should be resolved by the user. It should be one of:
+
+- :obj:`~aiotgm.types.PassportElementErrorDataField`
+- :obj:`~aiotgm.types.PassportElementErrorFrontSide`
+- :obj:`~aiotgm.types.PassportElementErrorReverseSide`
+- :obj:`~aiotgm.types.PassportElementErrorSelfie`
+- :obj:`~aiotgm.types.PassportElementErrorFile`
+- :obj:`~aiotgm.types.PassportElementErrorFiles`
+- :obj:`~aiotgm.types.PassportElementErrorTranslationFile`
+- :obj:`~aiotgm.types.PassportElementErrorTranslationFiles`
+- :obj:`~aiotgm.types.PassportElementErrorUnspecified`
+'''
 
 
