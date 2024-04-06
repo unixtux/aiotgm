@@ -5843,6 +5843,45 @@ class MessageId(TelegramType):
         self.message_id = message_id
 
 
+class MessageOriginChannel(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messageoriginchannel
+
+    The message was originally sent to a channel chat.
+
+    :param date: Date the message was sent originally in Unix time.
+    :type date: :obj:`int`
+    :param chat: Channel chat to which the message was originally sent.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param message_id: Unique message identifier inside the chat.
+    :type message_id: :obj:`int`
+    :param author_signature: Signature of the original post author.
+    :type author_signature: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['date'] = res.get('date')
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['message_id'] = res.get('message_id')
+        obj['author_signature'] = res.get('author_signature')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        date: int,
+        chat: Chat,
+        message_id: int,
+        author_signature: Optional[str] = None
+    ):
+        self.type = DEFAULT_MESSAGE_ORIGIN_CHANNEL
+        self.date = date
+        self.chat = chat
+        self.message_id = message_id
+        self.author_signature = author_signature
+
+
 
 
 
@@ -7550,36 +7589,6 @@ class MessageOriginChat(TelegramType):
         self.type = DEFAULT_MESSAGE_ORIGIN_CHAT
         self.date = date
         self.sender_chat = sender_chat
-        self.author_signature = author_signature
-
-
-class MessageOriginChannel(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messageoriginchannel
-
-    The message was originally sent to a channel chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['date'] = res.get('date')
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['message_id'] = res.get('message_id')
-        obj['author_signature'] = res.get('author_signature')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        date: int,
-        chat: Chat,
-        message_id: int,
-        author_signature: Optional[str] = None
-    ):
-        self.type = DEFAULT_MESSAGE_ORIGIN_CHANNEL
-        self.date = date
-        self.chat = chat
-        self.message_id = message_id
         self.author_signature = author_signature
 
 
