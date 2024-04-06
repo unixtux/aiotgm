@@ -6349,6 +6349,13 @@ class PassportElementErrorUnspecified(TelegramType):
 
     Represents an issue in an unspecified place.
     The error is considered resolved when new data is added.
+
+    :param type: Type of element of the user's Telegram Passport which has the issue.
+    :type type: :obj:`str`
+    :param element_hash: Base64-encoded element hash.
+    :type element_hash: :obj:`str`
+    :param message: Error message.
+    :type message: :obj:`str`
     '''
     def __init__(
         self,
