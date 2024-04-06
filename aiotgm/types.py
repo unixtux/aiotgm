@@ -7477,10 +7477,6 @@ It should be one of:
 - PassportElementErrorUnspecified
 '''
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-# MessageOrigin: 4 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 class MessageOriginUser(TelegramType):
     '''
@@ -7585,54 +7581,6 @@ class MessageOriginChannel(TelegramType):
         self.chat = chat
         self.message_id = message_id
         self.author_signature = author_signature
-
-
-MessageOrigin = Union[
-    MessageOriginUser,
-    MessageOriginHiddenUser,
-    MessageOriginChat,
-    MessageOriginChannel
-]
-'''
-https://core.telegram.org/bots/api#messageorigin
-
-This object describes the origin of a message.
-
-It can be one of:
-
-- MessageOriginUser
-- MessageOriginHiddenUser
-- MessageOriginChat
-- MessageOriginChannel
-'''
-
-def _dese_message_origin(res: Optional[dict], /) -> Optional[MessageOrigin]:
-    '''
-    Function to deserialize MessageOrigin.
-    '''
-    if res is None: return None
-    obj = _check_dict(res)
-
-    type = obj.pop('type')
-
-    if type == DEFAULT_MESSAGE_ORIGIN_USER:
-        return MessageOriginUser._dese(obj, check_dict=False)
-
-    elif type == DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER:
-        return MessageOriginHiddenUser._dese(obj, check_dict=False)
-
-    elif type == DEFAULT_MESSAGE_ORIGIN_CHAT:
-        return MessageOriginChat._dese(obj, check_dict=False)
-
-    elif type == DEFAULT_MESSAGE_ORIGIN_CHANNEL:
-        return MessageOriginChannel._dese(obj, check_dict=False)
-    else:
-        raise ValueError(
-            'An error occurred during the deserialization'
-            f' of the type MessageOrigin. Invalid type: {type!r}.'
-        )
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class UserChatBoosts(TelegramType):
@@ -8041,6 +7989,50 @@ def _dese_menu_button(res: Optional[dict], /) -> Optional[MenuButton]: # used in
         raise ValueError(
             'An error occurred during the deserialization'
             f' of the type MenuButton. Invalid type: {type!r}.'
+        )
+
+
+MessageOrigin = Union[
+    MessageOriginUser,
+    MessageOriginHiddenUser,
+    MessageOriginChat,
+    MessageOriginChannel
+]
+'''
+https://core.telegram.org/bots/api#messageorigin
+
+This object describes the origin of a message. It can be one of:
+
+- :obj:`~aiotgm.types.MessageOriginUser`
+- :obj:`~aiotgm.types.MessageOriginHiddenUser`
+- :obj:`~aiotgm.types.MessageOriginChat`
+- :obj:`~aiotgm.types.MessageOriginChannel`
+'''
+
+def _dese_message_origin(res: Optional[dict], /) -> Optional[MessageOrigin]:
+    '''
+    Function to deserialize MessageOrigin.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_MESSAGE_ORIGIN_USER:
+        return MessageOriginUser._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER:
+        return MessageOriginHiddenUser._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_MESSAGE_ORIGIN_CHAT:
+        return MessageOriginChat._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_MESSAGE_ORIGIN_CHANNEL:
+        return MessageOriginChannel._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type MessageOrigin. Invalid type: {type!r}.'
         )
 
 
