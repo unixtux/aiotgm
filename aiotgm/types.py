@@ -5916,6 +5916,35 @@ class MessageOriginChat(TelegramType):
         self.author_signature = author_signature
 
 
+class MessageOriginHiddenUser(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messageoriginhiddenuser
+
+    The message was originally sent by an unknown user.
+
+    :param date: Date the message was sent originally in Unix time.
+    :type date: :obj:`int`
+    :param sender_user_name: Name of the user that sent the message originally.
+    :type sender_user_name: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['date'] = res.get('date')
+        obj['sender_user_name'] = res.get('sender_user_name')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        date: int,
+        sender_user_name: str
+    ):
+        self.type = DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER
+        self.date = date
+        self.sender_user_name = sender_user_name
+
+
 
 
 
@@ -7573,30 +7602,6 @@ class MessageOriginUser(TelegramType):
         self.type = DEFAULT_MESSAGE_ORIGIN_USER
         self.date = date
         self.sender_user = sender_user
-
-
-class MessageOriginHiddenUser(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messageoriginhiddenuser
-
-    The message was originally sent by an unknown user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['date'] = res.get('date')
-        obj['sender_user_name'] = res.get('sender_user_name')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        date: int,
-        sender_user_name: str
-    ):
-        self.type = DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER
-        self.date = date
-        self.sender_user_name = sender_user_name
 
 
 class UserChatBoosts(TelegramType):
