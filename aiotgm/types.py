@@ -6408,6 +6408,50 @@ class PassportFile(TelegramType):
         self.file_date = file_date
 
 
+class PhotoSize(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#photosize
+
+    This object represents one size of a photo or a
+    :obj:`file <aiotgm.types.Document>` / :obj:`sticker <aiotgm.types.Sticker>` thumbnail.
+
+    :param file_id: Identifier for this file, which can be used to download or reuse the file.
+    :type file_id: :obj:`str`
+    :param file_unique_id: Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type file_unique_id: :obj:`str`
+    :param width: Photo width.
+    :type width: :obj:`int`
+    :param height: Photo height.
+    :type height: :obj:`int`
+    :param file_size: File size in bytes.
+    :type file_size: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['file_id'] = res.get('file_id')
+        obj['file_unique_id'] = res.get('file_unique_id')
+        obj['width'] = res.get('width')
+        obj['height'] = res.get('height')
+        obj['file_size'] = res.get('file_size')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        file_id: str,
+        file_unique_id: str,
+        width: int,
+        height: int,
+        file_size: Optional[int] = None
+    ):
+        self.file_id = file_id
+        self.file_unique_id = file_unique_id
+        self.width = width
+        self.height = height
+        self.file_size = file_size
+
+
 
 
 
@@ -6670,38 +6714,6 @@ class ReactionCount(TelegramType):
     ):
         self.type = type
         self.total_count = total_count
-
-
-class PhotoSize(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#photosize
-
-    This object represents one size of a photo or a file / sticker thumbnail.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['file_id'] = res.get('file_id')
-        obj['file_unique_id'] = res.get('file_unique_id')
-        obj['width'] = res.get('width')
-        obj['height'] = res.get('height')
-        obj['file_size'] = res.get('file_size')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        file_id: str,
-        file_unique_id: str,
-        width: int,
-        height: int,
-        file_size: Optional[int] = None
-    ):
-        self.file_id = file_id
-        self.file_unique_id = file_unique_id
-        self.width = width
-        self.height = height
-        self.file_size = file_size
 
 
 class Story(TelegramType):
