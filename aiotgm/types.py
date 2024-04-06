@@ -6601,6 +6601,59 @@ class PollOption(TelegramType):
         self.voter_count = voter_count
 
 
+class PreCheckoutQuery(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#precheckoutquery
+
+    This object contains information about an incoming pre-checkout query.
+
+    :param id: Unique query identifier.
+    :type id: :obj:`str`
+    :param from_user: User who sent the query.
+    :type from_user: :obj:`~aiotgm.types.User`
+    :param currency: Three-letter ISO 4217 `currency <https://core.telegram.org/bots/payments#supported-currencies>`_ code.
+    :type currency: :obj:`str`
+    :param total_amount: Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of ``US$ 1.45`` pass ``amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+    :type total_amount: :obj:`int`
+    :param invoice_payload: Bot specified invoice payload.
+    :type invoice_payload: :obj:`str`
+    :param shipping_option_id: Identifier of the shipping option chosen by the user.
+    :type shipping_option_id: :obj:`str`, optional
+    :param order_info: Order information provided by the user.
+    :type order_info: :obj:`~aiotgm.types.OrderInfo`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['from_user'] = User._dese(res.get('from_user'))
+        obj['currency'] = res.get('currency')
+        obj['total_amount'] = res.get('total_amount')
+        obj['invoice_payload'] = res.get('invoice_payload')
+        obj['shipping_option_id'] = res.get('shipping_option_id')
+        obj['order_info'] = OrderInfo._dese(res.get('order_info'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: str,
+        from_user: User,
+        currency: str,
+        total_amount: int,
+        invoice_payload: str,
+        shipping_option_id: Optional[str] = None,
+        order_info: Optional[OrderInfo] = None
+    ):
+        self.id = id
+        self.from_user = from_user
+        self.currency = currency
+        self.total_amount = total_amount
+        self.invoice_payload = invoice_payload
+        self.shipping_option_id = shipping_option_id
+        self.order_info = order_info
+
+
 
 
 
@@ -7652,44 +7705,6 @@ class ShippingQuery(TelegramType):
         self.from_user = from_user
         self.invoice_payload = invoice_payload
         self.shipping_address = shipping_address
-
-
-class PreCheckoutQuery(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#precheckoutquery
-
-    This object contains information about an incoming pre-checkout query.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['id'] = res.get('id')
-        obj['from_user'] = User._dese(res.get('from_user'))
-        obj['currency'] = res.get('currency')
-        obj['total_amount'] = res.get('total_amount')
-        obj['invoice_payload'] = res.get('invoice_payload')
-        obj['shipping_option_id'] = res.get('shipping_option_id')
-        obj['order_info'] = OrderInfo._dese(res.get('order_info'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        id: str,
-        from_user: User,
-        currency: str,
-        total_amount: int,
-        invoice_payload: str,
-        shipping_option_id: Optional[str] = None,
-        order_info: Optional[OrderInfo] = None
-    ):
-        self.id = id
-        self.from_user = from_user
-        self.currency = currency
-        self.total_amount = total_amount
-        self.invoice_payload = invoice_payload
-        self.shipping_option_id = shipping_option_id
-        self.order_info = order_info
 
 
 class UserChatBoosts(TelegramType):
