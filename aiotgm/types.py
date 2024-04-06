@@ -7128,6 +7128,142 @@ class ShippingQuery(TelegramType):
         self.shipping_address = shipping_address
 
 
+class Sticker(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#sticker
+
+    This object represents a sticker.
+
+    :param file_id: Identifier for this file, which can be used to download or reuse the file.
+    :type file_id: :obj:`str`
+    :param file_unique_id: Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type file_unique_id: :obj:`str`
+    :param type: Type of the sticker, currently one of “regular”, “mask”, “custom_emoji”. The type of the sticker is independent from its format, which is determined by the fields *is_animated* and *is_video*.
+    :type type: :obj:`str`
+    :param width: Sticker width.
+    :type width: :obj:`int`
+    :param height: Sticker height.
+    :type height: :obj:`int`
+    :param is_animated: :obj:`True`, if the sticker is `animated <https://telegram.org/blog/animated-stickers>`_.
+    :type is_animated: :obj:`bool`
+    :param is_video: :obj:`True`, if the sticker is a `video sticker <https://telegram.org/blog/video-stickers-better-reactions>`_.
+    :type is_video: :obj:`bool`
+    :param thumbnail: Sticker thumbnail in the .WEBP or .JPG format.
+    :type thumbnail: :obj:`~aiotgm.types.PhotoSize`, optional
+    :param emoji: Emoji associated with the sticker.
+    :type emoji: :obj:`str`, optional
+    :param set_name: Name of the sticker set to which the sticker belongs.
+    :type set_name: :obj:`str`, optional
+    :param premium_animation: For premium regular stickers, premium animation for the sticker.
+    :type premium_animation: :obj:`~aiotgm.types.File`, optional
+    :param mask_position: For mask stickers, the position where the mask should be placed.
+    :type mask_position: :obj:`~aiotgm.types.MaskPosition`, optional
+    :param custom_emoji_id: For custom emoji stickers, unique identifier of the custom emoji.
+    :type custom_emoji_id: :obj:`str`, optional
+    :param needs_repainting: :obj:`True`, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, white color on chat photos, or another appropriate color in other places.
+    :type needs_repainting: :obj:`True`, optional
+    :param file_size: File size in bytes.
+    :type file_size: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['file_id'] = res.get('file_id')
+        obj['file_unique_id'] = res.get('file_unique_id')
+        obj['type'] = res.get('type')
+        obj['width'] = res.get('width')
+        obj['height'] = res.get('height')
+        obj['is_animated'] = res.get('is_animated')
+        obj['is_video'] = res.get('is_video')
+        obj['thumbnail'] = PhotoSize._dese(res.get('thumbnail'))
+        obj['emoji'] = res.get('emoji')
+        obj['set_name'] = res.get('set_name')
+        obj['premium_animation'] = File._dese(res.get('premium_animation'))
+        obj['mask_position'] = MaskPosition._dese(res.get('mask_position'))
+        obj['custom_emoji_id'] = res.get('custom_emoji_id')
+        obj['needs_repainting'] = res.get('needs_repainting')
+        obj['file_size'] = res.get('file_size')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        file_id: str,
+        file_unique_id: str,
+        type: str,
+        width: int,
+        height: int,
+        is_animated: bool,
+        is_video: bool,
+        thumbnail: Optional[PhotoSize] = None,
+        emoji: Optional[str] = None,
+        set_name: Optional[str] = None,
+        premium_animation: Optional[File] = None,
+        mask_position: Optional[MaskPosition] = None,
+        custom_emoji_id: Optional[str] = None,
+        needs_repainting: Optional[Literal[True]] = None,
+        file_size: Optional[int] = None
+    ):
+        self.file_id = file_id
+        self.file_unique_id = file_unique_id
+        self.type = type
+        self.width = width
+        self.height = height
+        self.is_animated = is_animated
+        self.is_video = is_video
+        self.thumbnail = thumbnail
+        self.emoji = emoji
+        self.set_name = set_name
+        self.premium_animation = premium_animation
+        self.mask_position = mask_position
+        self.custom_emoji_id = custom_emoji_id
+        self.needs_repainting = needs_repainting
+        self.file_size = file_size
+
+
+class StickerSet(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#stickerset
+
+    This object represents a sticker set.
+
+    :param name: Sticker set name.
+    :type name: :obj:`str`
+    :param title: Sticker set title.
+    :type title: :obj:`str`
+    :param sticker_type: Type of stickers in the set, currently one of “regular”, “mask”, “custom_emoji”.
+    :type sticker_type: :obj:`str`
+    :param stickers: List of all set stickers.
+    :type stickers: :obj:`list` of :obj:`~aiotgm.types.Sticker`
+    :param thumbnail: Sticker set thumbnail in the .WEBP, .TGS, or .WEBM format.
+    :type thumbnail: :obj:`~aiotgm.types.PhotoSize`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['name'] = res.get('name')
+        obj['title'] = res.get('title')
+        obj['sticker_type'] = res.get('sticker_type')
+        obj['stickers'] = [Sticker._dese(kwargs) for kwargs in res.get('stickers')]
+        obj['thumbnail'] = PhotoSize._dese(res.get('thumbnail'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        name: str,
+        title: str,
+        sticker_type: str,
+        stickers: list[Sticker],
+        thumbnail: Optional[PhotoSize] = None
+    ):
+        self.name = name
+        self.title = title
+        self.sticker_type = sticker_type
+        self.stickers = stickers
+        self.thumbnail = thumbnail
+
+
 
 
 
@@ -7630,100 +7766,6 @@ class WebAppInfo(TelegramType):
         url: str
     ):
         self.url = url
-
-
-class Sticker(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#sticker
-
-    This object represents a sticker.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['file_id'] = res.get('file_id')
-        obj['file_unique_id'] = res.get('file_unique_id')
-        obj['type'] = res.get('type')
-        obj['width'] = res.get('width')
-        obj['height'] = res.get('height')
-        obj['is_animated'] = res.get('is_animated')
-        obj['is_video'] = res.get('is_video')
-        obj['thumbnail'] = PhotoSize._dese(res.get('thumbnail'))
-        obj['emoji'] = res.get('emoji')
-        obj['set_name'] = res.get('set_name')
-        obj['premium_animation'] = File._dese(res.get('premium_animation'))
-        obj['mask_position'] = MaskPosition._dese(res.get('mask_position'))
-        obj['custom_emoji_id'] = res.get('custom_emoji_id')
-        obj['needs_repainting'] = res.get('needs_repainting')
-        obj['file_size'] = res.get('file_size')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        file_id: str,
-        file_unique_id: str,
-        type: str,
-        width: int,
-        height: int,
-        is_animated: bool,
-        is_video: bool,
-        thumbnail: Optional[PhotoSize] = None,
-        emoji: Optional[str] = None,
-        set_name: Optional[str] = None,
-        premium_animation: Optional[File] = None,
-        mask_position: Optional[MaskPosition] = None,
-        custom_emoji_id: Optional[str] = None,
-        needs_repainting: Optional[Literal[True]] = None,
-        file_size: Optional[int] = None
-    ):
-        self.file_id = file_id
-        self.file_unique_id = file_unique_id
-        self.type = type
-        self.width = width
-        self.height = height
-        self.is_animated = is_animated
-        self.is_video = is_video
-        self.thumbnail = thumbnail
-        self.emoji = emoji
-        self.set_name = set_name
-        self.premium_animation = premium_animation
-        self.mask_position = mask_position
-        self.custom_emoji_id = custom_emoji_id
-        self.needs_repainting = needs_repainting
-        self.file_size = file_size
-
-
-class StickerSet(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#stickerset
-
-    This object represents a sticker set.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['name'] = res.get('name')
-        obj['title'] = res.get('title')
-        obj['sticker_type'] = res.get('sticker_type')
-        obj['stickers'] = [Sticker._dese(kwargs) for kwargs in res.get('stickers')]
-        obj['thumbnail'] = PhotoSize._dese(res.get('thumbnail'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        name: str,
-        title: str,
-        sticker_type: str,
-        stickers: list[Sticker],
-        thumbnail: Optional[PhotoSize] = None
-    ):
-        self.name = name
-        self.title = title
-        self.sticker_type = sticker_type
-        self.stickers = stickers
-        self.thumbnail = thumbnail
 
 
 class SuccessfulPayment(TelegramType):
