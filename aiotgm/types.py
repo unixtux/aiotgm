@@ -6012,6 +6012,59 @@ class MessageReactionCountUpdated(TelegramType):
         self.reactions = reactions
 
 
+class MessageReactionUpdated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messagereactionupdated
+
+    This object represents a change of a reaction on a message performed by a user.
+
+    :param chat: The chat containing the message the user reacted to.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param message_id: Unique identifier of the message inside the chat.
+    :type message_id: :obj:`int`
+    :param date: Date of the change in Unix time.
+    :type date: :obj:`int`
+    :param old_reaction: Previous list of reaction types that were set by the user.
+    :type old_reaction: :obj:`list` of :obj:`~aiotgm.types.ReactionType`
+    :param new_reaction: New list of reaction types that have been set by the user.
+    :type new_reaction: :obj:`list` of :obj:`~aiotgm.types.ReactionType`
+    :param user: The user that changed the reaction, if the user isn't anonymous.
+    :type user: :obj:`~aiotgm.types.User`, optional
+    :param actor_chat: The chat on behalf of which the reaction was changed, if the user is anonymous.
+    :type actor_chat: :obj:`~aiotgm.types.Chat`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['message_id'] = res.get('message_id')
+        obj['date'] = res.get('date')
+        obj['old_reaction'] = [_dese_reaction_type(kwargs) for kwargs in res.get('old_reaction')]
+        obj['new_reaction'] = [_dese_reaction_type(kwargs) for kwargs in res.get('new_reaction')]
+        obj['user'] = User._dese(res.get('user'))
+        obj['actor_chat'] = Chat._dese(res.get('actor_chat'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        message_id: int,
+        date: int,
+        old_reaction: list[ReactionType],
+        new_reaction: list[ReactionType],
+        user: Optional[User] = None,
+        actor_chat: Optional[Chat] = None
+    ):
+        self.chat = chat
+        self.message_id = message_id
+        self.date = date
+        self.old_reaction = old_reaction
+        self.new_reaction = new_reaction
+        self.user = user
+        self.actor_chat = actor_chat
+
+
 
 
 
@@ -6251,44 +6304,6 @@ def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
         )
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class MessageReactionUpdated(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messagereactionupdated
-
-    This object represents a change of a reaction on a message performed by a user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['message_id'] = res.get('message_id')
-        obj['date'] = res.get('date')
-        obj['old_reaction'] = [_dese_reaction_type(kwargs) for kwargs in res.get('old_reaction')]
-        obj['new_reaction'] = [_dese_reaction_type(kwargs) for kwargs in res.get('new_reaction')]
-        obj['user'] = User._dese(res.get('user'))
-        obj['actor_chat'] = Chat._dese(res.get('actor_chat'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        message_id: int,
-        date: int,
-        old_reaction: list[ReactionType],
-        new_reaction: list[ReactionType],
-        user: Optional[User] = None,
-        actor_chat: Optional[Chat] = None
-    ):
-        self.chat = chat
-        self.message_id = message_id
-        self.date = date
-        self.old_reaction = old_reaction
-        self.new_reaction = new_reaction
-        self.user = user
-        self.actor_chat = actor_chat
 
 
 class ReactionCount(TelegramType):
