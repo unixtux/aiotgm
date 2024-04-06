@@ -6573,6 +6573,34 @@ class PollAnswer(TelegramType):
         self.user = user
 
 
+class PollOption(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#polloption
+
+    This object contains information about one answer option in a poll.
+
+    :param text: Option text, 1-100 characters.
+    :type text: :obj:`str`
+    :param voter_count: Number of users that voted for this option.
+    :type voter_count: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['text'] = res.get('text')
+        obj['voter_count'] = res.get('voter_count')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        text: str,
+        voter_count: int
+    ):
+        self.text = text
+        self.voter_count = voter_count
+
+
 
 
 
@@ -6969,29 +6997,6 @@ class Voice(TelegramType):
         self.duration = duration
         self.mime_type = mime_type
         self.file_size = file_size
-
-
-class PollOption(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#polloption
-
-    This object contains information about one answer option in a poll.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['text'] = res.get('text')
-        obj['voter_count'] = res.get('voter_count')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        text: str,
-        voter_count: int
-    ):
-        self.text = text
-        self.voter_count = voter_count
 
 
 class Venue(TelegramType):
