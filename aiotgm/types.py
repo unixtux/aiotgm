@@ -6165,8 +6165,15 @@ class PassportElementErrorFile(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorfile
 
-    Represents an issue with a document scan.\n
+    Represents an issue with a document scan.
     The error is considered resolved when the file with the document scan changes.
+
+    :param type: The section of the user's Telegram Passport which has the issue, one of “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”.
+    :type type: :obj:`str`
+    :param file_hash: Base64-encoded file hash.
+    :type file_hash: :obj:`str`
+    :param message: Error message.
+    :type message: :obj:`str`
     '''
     def __init__(
         self,
@@ -6184,8 +6191,15 @@ class PassportElementErrorFiles(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorfiles
 
-    Represents an issue with a list of scans.\n
+    Represents an issue with a list of scans.
     The error is considered resolved when the list of files containing the scans changes.
+
+    :param type: The section of the user's Telegram Passport which has the issue, one of “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”.
+    :type type: :obj:`str`
+    :param file_hashes: List of base64-encoded file hashes.
+    :type file_hashes: :obj:`list` of :obj:`str`
+    :param message: Error message.
+    :type message: :obj:`str`
     '''
     def __init__(
         self,
