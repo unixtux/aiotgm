@@ -6217,8 +6217,15 @@ class PassportElementErrorFrontSide(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrorfrontside
 
-    Represents an issue with the front side of a document.\n
+    Represents an issue with the front side of a document.
     The error is considered resolved when the file with the front side of the document changes.
+
+    :param type: The section of the user's Telegram Passport which has the issue, one of “passport”, “driver_license”, “identity_card”, “internal_passport”.
+    :type type: :obj:`str`
+    :param file_hash: Base64-encoded hash of the file with the front side of the document.
+    :type file_hash: :obj:`str`
+    :param message: Error message.
+    :type message: :obj:`str`
     '''
     def __init__(
         self,
