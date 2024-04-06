@@ -6131,6 +6131,179 @@ class PassportData(TelegramType):
         self.credentials = credentials
 
 
+class PassportElementErrorDataField(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrordatafield
+
+    Represents an issue in one of the data fields that was provided by the user.\n
+    The error is considered resolved when the field's value changes.
+    '''
+    def __init__(
+        self,
+        type: str,
+        field_name: str,
+        data_hash: str,
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD
+        self.type = type
+        self.field_name = field_name
+        self.data_hash = data_hash
+        self.message = message
+
+
+class PassportElementErrorFile(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrorfile
+
+    Represents an issue with a document scan.\n
+    The error is considered resolved when the file with the document scan changes.
+    '''
+    def __init__(
+        self,
+        type: str,
+        file_hash: str,
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FILE
+        self.type = type
+        self.file_hash = file_hash
+        self.message = message
+
+
+class PassportElementErrorFiles(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrorfiles
+
+    Represents an issue with a list of scans.\n
+    The error is considered resolved when the list of files containing the scans changes.
+    '''
+    def __init__(
+        self,
+        type: str,
+        file_hashes: list[str],
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FILES
+        self.type = type
+        self.file_hashes = file_hashes
+        self.message = message
+
+
+class PassportElementErrorFrontSide(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrorfrontside
+
+    Represents an issue with the front side of a document.\n
+    The error is considered resolved when the file with the front side of the document changes.
+    '''
+    def __init__(
+        self,
+        type: str,
+        file_hash: str,
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE
+        self.type = type
+        self.file_hash = file_hash
+        self.message = message
+
+
+class PassportElementErrorReverseSide(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrorreverseside
+
+    Represents an issue with the reverse side of a document.\n
+    The error is considered resolved when the file with reverse side of the document changes.
+    '''
+    def __init__(
+        self,
+        type: str,
+        file_hash: str,
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE
+        self.type = type
+        self.file_hash = file_hash
+        self.message = message
+
+
+class PassportElementErrorSelfie(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrorselfie
+
+    Represents an issue with the selfie with a document.\n
+    The error is considered resolved when the file with the selfie changes.
+    '''
+    def __init__(
+        self,
+        type: str,
+        file_hash: str,
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE
+        self.type = type
+        self.file_hash = file_hash
+        self.message = message
+
+
+class PassportElementErrorTranslationFile(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrortranslationfile
+
+    Represents an issue with one of the files that constitute the translation of a document.\n
+    The error is considered resolved when the file changes.
+    '''
+    def __init__(
+        self,
+        type: str,
+        file_hash: str,
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE
+        self.type = type
+        self.file_hash = file_hash
+        self.message = message
+
+
+class PassportElementErrorTranslationFiles(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrortranslationfiles
+
+    Represents an issue with the translated version of a document.\n
+    The error is considered resolved when a file with the document translation change.
+    '''
+    def __init__(
+        self,
+        type: str,
+        file_hashes: list[str],
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES
+        self.type = type
+        self.file_hashes = file_hashes
+        self.message = message
+
+
+class PassportElementErrorUnspecified(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#passportelementerrorunspecified
+
+    Represents an issue in an unspecified place.\n
+    The error is considered resolved when new data is added.
+    '''
+    def __init__(
+        self,
+        type: str,
+        element_hash: str,
+        message: str
+    ):
+        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED
+        self.type = type
+        self.element_hash = element_hash
+        self.message = message
+
+
 
 
 
@@ -7390,228 +7563,6 @@ class PassportFile(TelegramType):
         self.file_unique_id = file_unique_id
         self.file_size = file_size
         self.file_date = file_date
-
-
-class PassportElementErrorDataField(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrordatafield
-
-    Represents an issue in one of the data fields that was provided by the user.\n
-    The error is considered resolved when the field's value changes.
-    '''
-    def __init__(
-        self,
-        type: Literal[
-            'personal_details',
-            'passport',
-            'driver_license',
-            'identity_card',
-            'internal_passport',
-            'address'
-        ],
-        field_name: str,
-        data_hash: str,
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD
-        self.type = type
-        self.field_name = field_name
-        self.data_hash = data_hash
-        self.message = message
-
-
-class PassportElementErrorFrontSide(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrorfrontside
-
-    Represents an issue with the front side of a document.\n
-    The error is considered resolved when the file with the front side of the document changes.
-    '''
-    def __init__(
-        self,
-        type: Literal[
-            'passport',
-            'driver_license',
-            'identity_card',
-            'internal_passport'
-        ],
-        file_hash: str,
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE
-        self.type = type
-        self.file_hash = file_hash
-        self.message = message
-
-
-class PassportElementErrorReverseSide(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrorreverseside
-
-    Represents an issue with the reverse side of a document.\n
-    The error is considered resolved when the file with reverse side of the document changes.
-    '''
-    def __init__(
-        self,
-        type: Literal['driver_license', 'identity_card'],
-        file_hash: str,
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE
-        self.type = type
-        self.file_hash = file_hash
-        self.message = message
-
-
-class PassportElementErrorSelfie(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrorselfie
-
-    Represents an issue with the selfie with a document.\n
-    The error is considered resolved when the file with the selfie changes.
-    '''
-    def __init__(
-        self,
-        type: Literal[
-            'passport',
-            'driver_license',
-            'identity_card',
-            'internal_passport'
-        ],
-        file_hash: str,
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE
-        self.type = type
-        self.file_hash = file_hash
-        self.message = message
-
-
-class PassportElementErrorFile(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrorfile
-
-    Represents an issue with a document scan.\n
-    The error is considered resolved when the file with the document scan changes.
-    '''
-    def __init__(
-        self,
-        type: Literal[
-            'utility_bill',
-            'bank_statement',
-            'rental_agreement',
-            'passport_registration',
-            'temporary_registration'
-        ],
-        file_hash: str,
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FILE
-        self.type = type
-        self.file_hash = file_hash
-        self.message = message
-
-
-class PassportElementErrorFiles(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrorfiles
-
-    Represents an issue with a list of scans.\n
-    The error is considered resolved when the list of files containing the scans changes.
-    '''
-    def __init__(
-        self,
-        type: Literal[
-            'utility_bill',
-            'bank_statement',
-            'rental_agreement',
-            'passport_registration',
-            'temporary_registration'
-        ],
-        file_hashes: list[str],
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_FILES
-        self.type = type
-        self.file_hashes = file_hashes
-        self.message = message
-
-
-class PassportElementErrorTranslationFile(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrortranslationfile
-
-    Represents an issue with one of the files that constitute the translation of a document.\n
-    The error is considered resolved when the file changes.
-    '''
-    def __init__(
-        self,
-        type: Literal[
-            'passport',
-            'driver_license',
-            'identity_card',
-            'internal_passport',
-            'utility_bill',
-            'bank_statement',
-            'rental_agreement',
-            'passport_registration',
-            'temporary_registration'
-        ],
-        file_hash: str,
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE
-        self.type = type
-        self.file_hash = file_hash
-        self.message = message
-
-
-class PassportElementErrorTranslationFiles(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrortranslationfiles
-
-    Represents an issue with the translated version of a document.\n
-    The error is considered resolved when a file with the document translation change.
-    '''
-    def __init__(
-        self,
-        type: Literal[
-            'passport',
-            'driver_license',
-            'identity_card',
-            'internal_passport',
-            'utility_bill',
-            'bank_statement',
-            'rental_agreement',
-            'passport_registration',
-            'temporary_registration'
-        ],
-        file_hashes: list[str],
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES
-        self.type = type
-        self.file_hashes = file_hashes
-        self.message = message
-
-
-class PassportElementErrorUnspecified(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#passportelementerrorunspecified
-
-    Represents an issue in an unspecified place.\n
-    The error is considered resolved when new data is added.
-    '''
-    def __init__(
-        self,
-        type: str,
-        element_hash: str,
-        message: str
-    ):
-        self.source = DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED
-        self.type = type
-        self.element_hash = element_hash
-        self.message = message
 
 
 class UserChatBoosts(TelegramType):
