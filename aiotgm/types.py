@@ -6974,6 +6974,50 @@ class SentWebAppMessage(TelegramType):
         self.inline_message_id = inline_message_id
 
 
+class SharedUser(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#shareduser
+
+    This object contains information about a user that was shared with
+    the bot using a :obj:`~aiotgm.types.KeyboardButtonRequestUsers` button.
+
+    :param user_id: Identifier of the shared user. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so 64-bit integers or double-precision float types are safe for storing these identifiers. The bot may not have access to the user and could be unable to use this identifier, unless the user is already known to the bot by some other means.
+    :type user_id: :obj:`int`
+    :param first_name: First name of the user, if the name was requested by the bot.
+    :type first_name: :obj:`str`, optional
+    :param last_name: Last name of the user, if the name was requested by the bot.
+    :type last_name: :obj:`str`, optional
+    :param username: Username of the user, if the username was requested by the bot.
+    :type username: :obj:`str`, optional
+    :param photo: Available sizes of the chat photo, if the photo was requested by the bot.
+    :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user_id'] = res.get('user_id')
+        obj['first_name'] = res.get('first_name')
+        obj['last_name'] = res.get('last_name')
+        obj['username'] = res.get('username')
+        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')] if 'photo' in res else None
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user_id: int,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
+        username: Optional[str] = None,
+        photo: Optional[list[PhotoSize]] = None
+    ):
+        self.user_id = user_id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.username = username
+        self.photo = photo
+
+
 
 
 
@@ -7433,39 +7477,6 @@ class VideoChatParticipantsInvited(TelegramType):
         users: list[User]
     ):
         self.users = users
-
-
-class SharedUser(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#shareduser
-
-    This object contains information about a user that was shared with
-    the bot using a :obj:`~aiotgm.types.KeyboardButtonRequestUsers` button.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['user_id'] = res.get('user_id')
-        obj['first_name'] = res.get('first_name')
-        obj['last_name'] = res.get('last_name')
-        obj['username'] = res.get('username')
-        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')] if 'photo' in res else None
-        return cls(**obj)
-
-    def __init__(
-        self,
-        user_id: int,
-        first_name: Optional[str] = None,
-        last_name: Optional[str] = None,
-        username: Optional[str] = None,
-        photo: Optional[list[PhotoSize]] = None
-    ):
-        self.user_id = user_id
-        self.first_name = first_name
-        self.last_name = last_name
-        self.username = username
-        self.photo = photo
 
 
 class UserProfilePhotos(TelegramType):
