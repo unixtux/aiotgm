@@ -5820,6 +5820,29 @@ class MessageEntity(TelegramType):
         self.custom_emoji_id = custom_emoji_id
 
 
+class MessageId(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messageid
+
+    This object represents a unique message identifier.
+
+    :param message_id: Unique message identifier.
+    :type message_id: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['message_id'] = res.get('message_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        message_id: int
+    ):
+        self.message_id = message_id
+
+
 
 
 
@@ -6149,26 +6172,6 @@ class MessageReactionCountUpdated(TelegramType):
         self.message_id = message_id
         self.date = date
         self.reactions = reactions
-
-
-class MessageId(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messageid
-
-    This object represents a unique message identifier.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['message_id'] = res.get('message_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        message_id: int
-    ):
-        self.message_id = message_id
 
 
 class PhotoSize(TelegramType):
