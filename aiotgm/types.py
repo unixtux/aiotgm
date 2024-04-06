@@ -6688,6 +6688,34 @@ class ProximityAlertTriggered(TelegramType):
         self.distance = distance
 
 
+class ReactionCount(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#reactioncount
+
+    Represents a reaction added to a message along with the number of times it was added.
+
+    :param type: Type of the reaction.
+    :type type: :obj:`~aiotgm.types.ReactionType`
+    :param total_count: Number of times the reaction was added.
+    :type total_count: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['type'] = _dese_reaction_type(res.get('type'))
+        obj['total_count'] = res.get('total_count')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        type: ReactionType,
+        total_count: int
+    ):
+        self.type = type
+        self.total_count = total_count
+
+
 
 
 
@@ -6927,29 +6955,6 @@ def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
         )
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-class ReactionCount(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#reactioncount
-
-    Represents a reaction added to a message along with the number of times it was added.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['type'] = _dese_reaction_type(res.get('type'))
-        obj['total_count'] = res.get('total_count')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        type: ReactionType,
-        total_count: int
-    ):
-        self.type = type
-        self.total_count = total_count
 
 
 class Story(TelegramType):
