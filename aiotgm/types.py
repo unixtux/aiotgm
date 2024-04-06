@@ -6065,6 +6065,44 @@ class MessageReactionUpdated(TelegramType):
         self.actor_chat = actor_chat
 
 
+class OrderInfo(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#orderinfo
+
+    This object represents information about an order.
+
+    :param name: User name.
+    :type name: :obj:`str`, optional
+    :param phone_number: User's phone number.
+    :type phone_number: :obj:`str`, optional
+    :param email: User email.
+    :type email: :obj:`str`, optional
+    :param shipping_address: User shipping address.
+    :type shipping_address: :obj:`~aiotgm.types.ShippingAddress`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['name'] = res.get('name')
+        obj['phone_number'] = res.get('phone_number')
+        obj['email'] = res.get('email')
+        obj['shipping_address'] = ShippingAddress._dese(res.get('shipping_address'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        phone_number: Optional[str] = None,
+        email: Optional[str] = None,
+        shipping_address: Optional[ShippingAddress] = None
+    ):
+        self.name = name
+        self.phone_number = phone_number
+        self.email = email
+        self.shipping_address = shipping_address
+
+
 
 
 
@@ -7172,35 +7210,6 @@ class ShippingAddress(TelegramType):
         self.street_line1 = street_line1
         self.street_line2 = street_line2
         self.post_code = post_code
-
-
-class OrderInfo(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#orderinfo
-
-    This object represents information about an order.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['name'] = res.get('name')
-        obj['phone_number'] = res.get('phone_number')
-        obj['email'] = res.get('email')
-        obj['shipping_address'] = ShippingAddress._dese(res.get('shipping_address'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        name: Optional[str] = None,
-        phone_number: Optional[str] = None,
-        email: Optional[str] = None,
-        shipping_address: Optional[ShippingAddress] = None
-    ):
-        self.name = name
-        self.phone_number = phone_number
-        self.email = email
-        self.shipping_address = shipping_address
 
 
 class ShippingOption(TelegramType):
