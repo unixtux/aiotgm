@@ -6135,8 +6135,17 @@ class PassportElementErrorDataField(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportelementerrordatafield
 
-    Represents an issue in one of the data fields that was provided by the user.\n
+    Represents an issue in one of the data fields that was provided by the user.
     The error is considered resolved when the field's value changes.
+
+    :param type: The section of the user's Telegram Passport which has the error, one of “personal_details”, “passport”, “driver_license”, “identity_card”, “internal_passport”, “address”.
+    :type type: :obj:`str`
+    :param field_name: Name of the data field which has the error.
+    :type field_name: :obj:`str`
+    :param data_hash: Base64-encoded data hash.
+    :type data_hash: :obj:`str`
+    :param message: Error message.
+    :type message: :obj:`str`
     '''
     def __init__(
         self,
