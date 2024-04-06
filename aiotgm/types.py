@@ -5882,6 +5882,40 @@ class MessageOriginChannel(TelegramType):
         self.author_signature = author_signature
 
 
+class MessageOriginChat(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messageoriginchat
+
+    The message was originally sent on behalf of a chat to a group chat.
+
+    :param date: Date the message was sent originally in Unix time.
+    :type date: :obj:`int`
+    :param sender_chat: Chat that sent the message originally.
+    :type sender_chat: :obj:`~aiotgm.types.Chat`
+    :param author_signature: For messages originally sent by an anonymous chat administrator, original message author signature.
+    :type author_signature: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['date'] = res.get('date')
+        obj['sender_chat'] = Chat._dese(res.get('sender_chat'))
+        obj['author_signature'] = res.get('author_signature')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        date: int,
+        sender_chat: Chat,
+        author_signature: Optional[str] = None
+    ):
+        self.type = DEFAULT_MESSAGE_ORIGIN_CHAT
+        self.date = date
+        self.sender_chat = sender_chat
+        self.author_signature = author_signature
+
+
 
 
 
@@ -7563,33 +7597,6 @@ class MessageOriginHiddenUser(TelegramType):
         self.type = DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER
         self.date = date
         self.sender_user_name = sender_user_name
-
-
-class MessageOriginChat(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messageoriginchat
-
-    The message was originally sent on behalf of a chat to a group chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['date'] = res.get('date')
-        obj['sender_chat'] = Chat._dese(res.get('sender_chat'))
-        obj['author_signature'] = res.get('author_signature')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        date: int,
-        sender_chat: Chat,
-        author_signature: Optional[str] = None
-    ):
-        self.type = DEFAULT_MESSAGE_ORIGIN_CHAT
-        self.date = date
-        self.sender_chat = sender_chat
-        self.author_signature = author_signature
 
 
 class UserChatBoosts(TelegramType):
