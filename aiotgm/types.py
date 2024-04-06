@@ -6654,6 +6654,40 @@ class PreCheckoutQuery(TelegramType):
         self.order_info = order_info
 
 
+class ProximityAlertTriggered(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#proximityalerttriggered
+
+    This object represents the content of a service message, sent whenever
+    a user in the chat triggers a proximity alert set by another user.
+
+    :param traveler: User that triggered the alert.
+    :type traveler: :obj:`~aiotgm.types.User`
+    :param watcher: User that set the alert.
+    :type watcher: :obj:`~aiotgm.types.User`
+    :param distance: The distance between the users.
+    :type distance: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['traveler'] = User._dese(res.get('traveler'))
+        obj['watcher'] = User._dese(res.get('watcher'))
+        obj['distance'] = res.get('distance')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        traveler: User,
+        watcher: User,
+        distance: int
+    ):
+        self.traveler = traveler
+        self.watcher = watcher
+        self.distance = distance
+
+
 
 
 
@@ -7111,33 +7145,6 @@ class WebAppData(TelegramType):
     ):
         self.data = data
         self.button_text = button_text
-
-
-class ProximityAlertTriggered(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#proximityalerttriggered
-
-    This object represents the content of a service message, sent whenever
-    a user in the chat triggers a proximity alert set by another user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['traveler'] = User._dese(res.get('traveler'))
-        obj['watcher'] = User._dese(res.get('watcher'))
-        obj['distance'] = res.get('distance')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        traveler: User,
-        watcher: User,
-        distance: int
-    ):
-        self.traveler = traveler
-        self.watcher = watcher
-        self.distance = distance
 
 
 class UsersShared(TelegramType):
