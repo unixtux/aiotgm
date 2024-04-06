@@ -5974,6 +5974,44 @@ class MessageOriginUser(TelegramType):
         self.sender_user = sender_user
 
 
+class MessageReactionCountUpdated(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#messagereactioncountupdated
+
+    This object represents reaction changes on a message with anonymous reactions.
+
+    :param chat: The chat containing the message.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param message_id: Unique message identifier inside the chat.
+    :type message_id: :obj:`int`
+    :param date: Date of the change in Unix time.
+    :type date: :obj:`int`
+    :param reactions: List of reactions that are present on the message.
+    :type reactions: :obj:`list` of :obj:`~aiotgm.types.ReactionCount`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['message_id'] = res.get('message_id')
+        obj['date'] = res.get('date')
+        obj['reactions'] = [ReactionCount._dese(kwargs) for kwargs in res.get('reactions')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        message_id: int,
+        date: int,
+        reactions: list[ReactionCount]
+    ):
+        self.chat = chat
+        self.message_id = message_id
+        self.date = date
+        self.reactions = reactions
+
+
 
 
 
@@ -6274,35 +6312,6 @@ class ReactionCount(TelegramType):
     ):
         self.type = type
         self.total_count = total_count
-
-
-class MessageReactionCountUpdated(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#messagereactioncountupdated
-
-    This object represents reaction changes on a message with anonymous reactions.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['message_id'] = res.get('message_id')
-        obj['date'] = res.get('date')
-        obj['reactions'] = [ReactionCount._dese(kwargs) for kwargs in res.get('reactions')]
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        message_id: int,
-        date: int,
-        reactions: list[ReactionCount]
-    ):
-        self.chat = chat
-        self.message_id = message_id
-        self.date = date
-        self.reactions = reactions
 
 
 class PhotoSize(TelegramType):
