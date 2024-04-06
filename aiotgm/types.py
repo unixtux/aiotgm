@@ -6535,6 +6535,44 @@ class Poll(TelegramType):
         self.close_date = close_date
 
 
+class PollAnswer(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#pollanswer
+
+    This object represents an answer of a user in a non-anonymous poll.
+
+    :param poll_id: Unique poll identifier.
+    :type poll_id: :obj:`str`
+    :param option_ids: 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
+    :type option_ids: :obj:`list` of :obj:`int`
+    :param voter_chat: The chat that changed the answer to the poll, if the voter is anonymous.
+    :type voter_chat: :obj:`~aiotgm.types.Chat`, optional
+    :param user: The user that changed the answer to the poll, if the voter isn't anonymous.
+    :type user: :obj:`~aiotgm.types.User`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['poll_id'] = res.get('poll_id')
+        obj['option_ids'] = res.get('option_ids')
+        obj['voter_chat'] = Chat._dese(res.get('voter_chat'))
+        obj['user'] = User._dese(res.get('user'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        poll_id: str,
+        option_ids: list[int],
+        voter_chat: Optional[Chat] = None,
+        user: Optional[User] = None
+    ):
+        self.poll_id = poll_id
+        self.option_ids = option_ids
+        self.voter_chat = voter_chat
+        self.user = user
+
+
 
 
 
@@ -6954,35 +6992,6 @@ class PollOption(TelegramType):
     ):
         self.text = text
         self.voter_count = voter_count
-
-
-class PollAnswer(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#pollanswer
-
-    This object represents an answer of a user in a non-anonymous poll.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['poll_id'] = res.get('poll_id')
-        obj['option_ids'] = res.get('option_ids')
-        obj['voter_chat'] = Chat._dese(res.get('voter_chat'))
-        obj['user'] = User._dese(res.get('user'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        poll_id: str,
-        option_ids: list[int],
-        voter_chat: Optional[Chat] = None,
-        user: Optional[User] = None
-    ):
-        self.poll_id = poll_id
-        self.option_ids = option_ids
-        self.voter_chat = voter_chat
-        self.user = user
 
 
 class Venue(TelegramType):
