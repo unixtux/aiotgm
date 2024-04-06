@@ -6878,8 +6878,6 @@ class ReplyParameters(TelegramType):
         self.quote_position = quote_position
 
 
-# ReactionType: 2 SUBCLASSES ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 class ReactionTypeEmoji(TelegramType):
     '''
     https://core.telegram.org/bots/api#reactiontypeemoji
@@ -6920,41 +6918,6 @@ class ReactionTypeCustomEmoji(TelegramType):
     ):
         self.type = DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
         self.custom_emoji_id = custom_emoji_id
-
-
-ReactionType = Union[ReactionTypeEmoji, ReactionTypeCustomEmoji]
-'''
-https://core.telegram.org/bots/api#reactiontype
-
-This object describes the type of a reaction.
-
-Currently, it can be one of:
-
-- ReactionTypeEmoji
-- ReactionTypeCustomEmoji
-'''
-
-def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
-    '''
-    Function to deserialize ReactionType.
-    '''
-    if res is None: return None
-    obj = _check_dict(res)
-
-    type = obj.pop('type')
-
-    if type == DEFAULT_REACTION_TYPE_EMOJI:
-        return ReactionTypeEmoji._dese(obj, check_dict=False)
-
-    elif type == DEFAULT_REACTION_TYPE_CUSTOM_EMOJI:
-        return ReactionTypeCustomEmoji._dese(obj, check_dict=False)
-    else:
-        raise ValueError(
-            'An error occurred during the deserialization'
-            f' of the type ReactionType. Invalid type: {type!r}.'
-        )
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class Story(TelegramType):
@@ -8200,4 +8163,34 @@ was submitted that should be resolved by the user. It should be one of:
 - :obj:`~aiotgm.types.PassportElementErrorUnspecified`
 '''
 
+
+ReactionType = Union[ReactionTypeEmoji, ReactionTypeCustomEmoji]
+'''
+https://core.telegram.org/bots/api#reactiontype
+
+This object describes the type of a reaction. Currently, it can be one of:
+
+- :obj:`~aiotgm.types.ReactionTypeEmoji`
+- :obj:`~aiotgm.types.ReactionTypeCustomEmoji`
+'''
+
+def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
+    '''
+    Function to deserialize ReactionType.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_REACTION_TYPE_EMOJI:
+        return ReactionTypeEmoji._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_REACTION_TYPE_CUSTOM_EMOJI:
+        return ReactionTypeCustomEmoji._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type ReactionType. Invalid type: {type!r}.'
+        )
 
