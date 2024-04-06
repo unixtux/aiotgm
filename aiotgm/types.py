@@ -6323,6 +6323,13 @@ class PassportElementErrorTranslationFiles(TelegramType):
 
     Represents an issue with the translated version of a document.
     The error is considered resolved when a file with the document translation change.
+
+    :param type: Type of element of the user's Telegram Passport which has the issue, one of “passport”, “driver_license”, “identity_card”, “internal_passport”, “utility_bill”, “bank_statement”, “rental_agreement”, “passport_registration”, “temporary_registration”.
+    :type type: :obj:`str`
+    :param file_hashes: List of base64-encoded file hashes.
+    :type file_hashes: :obj:`list` of :obj:`str`
+    :param message: Error message.
+    :type message: :obj:`str`
     '''
     def __init__(
         self,
