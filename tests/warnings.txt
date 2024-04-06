@@ -42,14 +42,18 @@ InputMediaAudio: 'type' is not in __init__() and 'type' default value is: DEFAUL
 InputMediaDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT
 InputMediaPhoto: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_PHOTO
 InputMediaVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_VIDEO
+MenuButtonCommands: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_COMMANDS
+MenuButtonDefault: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_DEFAULT
+MenuButtonWebApp: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP
 Message: 'text' default value is: text or str() # If not text, it's str() instead of None
+MessageOriginChannel: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL
+MessageOriginChat: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHAT
+MessageOriginHiddenUser: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER
+MessageOriginUser: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_USER
 ReactionTypeEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_EMOJI
 ReactionTypeCustomEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
 ReplyKeyboardMarkup: 'keyboard' default value is: keyboard or []
 ReplyKeyboardRemove: 'remove_keyboard: Literal[True]' is not in __init__() and 'remove_keyboard: Literal[True]' default value is: True
-MenuButtonCommands: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_COMMANDS
-MenuButtonWebApp: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP
-MenuButtonDefault: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_DEFAULT
 PassportElementErrorDataField: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD
 PassportElementErrorFrontSide: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE
 PassportElementErrorReverseSide: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE
@@ -59,7 +63,3 @@ PassportElementErrorFiles: 'source' is not in __init__() and 'source' default va
 PassportElementErrorTranslationFile: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE
 PassportElementErrorTranslationFiles: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES
 PassportElementErrorUnspecified: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED
-MessageOriginUser: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_USER
-MessageOriginHiddenUser: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER
-MessageOriginChat: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHAT
-MessageOriginChannel: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL

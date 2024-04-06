@@ -2974,48 +2974,224 @@ TYPES = {
             }
         }
     },
-    SwitchInlineQueryChosenChat: {
-        "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
-        "has_dese": True,
+    InputSticker: {
+        "link": "https://core.telegram.org/bots/api#inputsticker",
+        "has_dese": False,
         "kwargs": {
-            "query": {
+            "sticker": {
+                "type_hint": Union[InputFile, str]
+            },
+            "format": {
+                "type_hint": str
+            },
+            "emoji_list": {
+                "type_hint": list[str]
+            },
+            "mask_position": {
+                "type_hint": Optional[MaskPosition],
+                "default": None
+            },
+            "keywords": {
+                "type_hint": Optional[list[str]],
+                "default": None
+            }
+        }
+    },
+    InputTextMessageContent: {
+        "link": "https://core.telegram.org/bots/api#inputtextmessagecontent",
+        "has_dese": False,
+        "kwargs": {
+            "message_text": {
+                "type_hint": str
+            },
+            "parse_mode": {
                 "type_hint": Optional[str],
                 "default": None
             },
-            "allow_user_chats": {
+            "entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "link_preview_options": {
+                "type_hint": Optional[LinkPreviewOptions],
+                "default": None
+            }
+        }
+    },
+    InputVenueMessageContent: {
+        "link": "https://core.telegram.org/bots/api#inputvenuemessagecontent",
+        "has_dese": False,
+        "kwargs": {
+            "latitude": {
+                "type_hint": float
+            },
+            "longitude": {
+                "type_hint": float
+            },
+            "title": {
+                "type_hint": str
+            },
+            "address": {
+                "type_hint": str
+            },
+            "foursquare_id": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "foursquare_type": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "google_place_id": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "google_place_type": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    Invoice: {
+        "link": "https://core.telegram.org/bots/api#invoice",
+        "has_dese": True,
+        "kwargs": {
+            "title": {
+                "type_hint": str
+            },
+            "description": {
+                "type_hint": str
+            },
+            "start_parameter": {
+                "type_hint": str
+            },
+            "currency": {
+                "type_hint": str
+            },
+            "total_amount": {
+                "type_hint": int
+            }
+        }
+    },
+    KeyboardButton: {
+        "link": "https://core.telegram.org/bots/api#keyboardbutton",
+        "has_dese": False,
+        "kwargs": {
+            "text": {
+                "type_hint": str
+            },
+            "request_users": {
+                "type_hint": Optional[KeyboardButtonRequestUsers],
+                "default": None
+            },
+            "request_chat": {
+                "type_hint": Optional[KeyboardButtonRequestChat],
+                "default": None
+            },
+            "request_contact": {
                 "type_hint": Optional[bool],
                 "default": None
             },
-            "allow_bot_chats": {
+            "request_location": {
                 "type_hint": Optional[bool],
                 "default": None
             },
-            "allow_group_chats": {
+            "request_poll": {
+                "type_hint": Optional[KeyboardButtonPollType],
+                "default": None
+            },
+            "web_app": {
+                "type_hint": Optional[WebAppInfo],
+                "default": None
+            }
+        }
+    },
+    KeyboardButtonPollType: {
+        "link": "https://core.telegram.org/bots/api#keyboardbuttonpolltype",
+        "has_dese": False,
+        "kwargs": {
+            "type": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    KeyboardButtonRequestChat: {
+        "link": "https://core.telegram.org/bots/api#keyboardbuttonrequestchat",
+        "has_dese": False,
+        "kwargs": {
+            "request_id": {
+                "type_hint": int
+            },
+            "chat_is_channel": {
+                "type_hint": bool
+            },
+            "chat_is_forum": {
                 "type_hint": Optional[bool],
                 "default": None
             },
-            "allow_channel_chats": {
+            "chat_has_username": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "chat_is_created": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "user_administrator_rights": {
+                "type_hint": Optional[ChatAdministratorRights],
+                "default": None
+            },
+            "bot_administrator_rights": {
+                "type_hint": Optional[ChatAdministratorRights],
+                "default": None
+            },
+            "bot_is_member": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_title": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_username": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_photo": {
                 "type_hint": Optional[bool],
                 "default": None
             }
         }
     },
-    LoginUrl: {
-        "link": "https://core.telegram.org/bots/api#loginurl",
-        "has_dese": True,
+    KeyboardButtonRequestUsers: {
+        "link": "https://core.telegram.org/bots/api#keyboardbuttonrequestusers",
+        "has_dese": False,
         "kwargs": {
-            "url": {
-                "type_hint": str
+            "request_id": {
+                "type_hint": int
             },
-            "forward_text": {
-                "type_hint": Optional[str],
+            "user_is_bot": {
+                "type_hint": Optional[bool],
                 "default": None
             },
-            "bot_username": {
-                "type_hint": Optional[str],
+            "user_is_premium": {
+                "type_hint": Optional[bool],
                 "default": None
             },
-            "request_write_access": {
+            "max_quantity": {
+                "type_hint": Optional[int],
+                "default": None
+            },
+            "request_name": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_username": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "request_photo": {
                 "type_hint": Optional[bool],
                 "default": None
             }
@@ -3059,138 +3235,104 @@ TYPES = {
             }
         }
     },
-    User: {
-        "link": "https://core.telegram.org/bots/api#user",
+    Location: {
+        "link": "https://core.telegram.org/bots/api#location",
         "has_dese": True,
         "kwargs": {
-            "id": {
-                "type_hint": int
+            "latitude": {
+                "type_hint": float
             },
-            "is_bot": {
-                "type_hint": bool
+            "longitude": {
+                "type_hint": float
             },
-            "first_name": {
-                "type_hint": str
-            },
-            "last_name": {
-                "type_hint": Optional[str],
+            "horizontal_accuracy": {
+                "type_hint": Optional[float],
                 "default": None
             },
-            "username": {
-                "type_hint": Optional[str],
+            "live_period": {
+                "type_hint": Optional[int],
                 "default": None
             },
-            "language_code": {
-                "type_hint": Optional[str],
+            "heading": {
+                "type_hint": Optional[int],
                 "default": None
             },
-            "is_premium": {
-                "type_hint": Optional[Literal[True]],
-                "default": None
-            },
-            "added_to_attachment_menu": {
-                "type_hint": Optional[Literal[True]],
-                "default": None
-            },
-            "can_join_groups": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "can_read_all_group_messages": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "supports_inline_queries": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "can_connect_to_business": {
-                "type_hint": Optional[bool],
+            "proximity_alert_radius": {
+                "type_hint": Optional[int],
                 "default": None
             }
         }
     },
-    MessageEntity: {
-        "link": "https://core.telegram.org/bots/api#messageentity",
+    LoginUrl: {
+        "link": "https://core.telegram.org/bots/api#loginurl",
         "has_dese": True,
         "kwargs": {
-            "type": {
-                "type_hint": str
-            },
-            "offset": {
-                "type_hint": int
-            },
-            "length": {
-                "type_hint": int
-            },
             "url": {
+                "type_hint": str
+            },
+            "forward_text": {
                 "type_hint": Optional[str],
                 "default": None
             },
-            "user": {
-                "type_hint": Optional[User],
-                "default": None
-            },
-            "language": {
+            "bot_username": {
                 "type_hint": Optional[str],
                 "default": None
             },
-            "custom_emoji_id": {
-                "type_hint": Optional[str],
+            "request_write_access": {
+                "type_hint": Optional[bool],
                 "default": None
             }
         }
     },
-    TextQuote: {
-        "link": "https://core.telegram.org/bots/api#textquote",
+    MaskPosition: {
+        "link": "https://core.telegram.org/bots/api#maskposition",
         "has_dese": True,
+        "kwargs": {
+            "point": {
+                "type_hint": str
+            },
+            "x_shift": {
+                "type_hint": float
+            },
+            "y_shift": {
+                "type_hint": float
+            },
+            "scale": {
+                "type_hint": float
+            }
+        }
+    },
+    MenuButtonCommands: {
+        "link": "https://core.telegram.org/bots/api#menubuttoncommands",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MENU_BUTTON_COMMANDS"
+        ],
+        "kwargs": {}
+    },
+    MenuButtonDefault: {
+        "link": "https://core.telegram.org/bots/api#menubuttondefault",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MENU_BUTTON_DEFAULT"
+        ],
+        "kwargs": {}
+    },
+    MenuButtonWebApp: {
+        "link": "https://core.telegram.org/bots/api#menubuttonwebapp",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP"
+        ],
         "kwargs": {
             "text": {
                 "type_hint": str
             },
-            "position": {
-                "type_hint": int
-            },
-            "entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "is_manual": {
-                "type_hint": Optional[Literal[True]],
-                "default": None
-            }
-        }
-    },
-    ReplyParameters: {
-        "link": "https://core.telegram.org/bots/api#replyparameters",
-        "has_dese": False,
-        "kwargs": {
-            "message_id": {
-                "type_hint": int
-            },
-            "chat_id": {
-                "type_hint": Optional[Union[int, str]],
-                "default": None
-            },
-            "allow_sending_without_reply": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "quote": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "quote_parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "quote_entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "quote_position": {
-                "type_hint": Optional[int],
-                "default": None
+            "web_app": {
+                "type_hint": WebAppInfo
             }
         }
     },
@@ -3520,57 +3662,145 @@ TYPES = {
             }
         }
     },
-    Location: {
-        "link": "https://core.telegram.org/bots/api#location",
+    MessageAutoDeleteTimerChanged: {
+        "link": "https://core.telegram.org/bots/api#messageautodeletetimerchanged",
         "has_dese": True,
         "kwargs": {
-            "longitude": {
-                "type_hint": float
-            },
-            "latitude": {
-                "type_hint": float
-            },
-            "horizontal_accuracy": {
-                "type_hint": Optional[float],
-                "default": None
-            },
-            "live_period": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "heading": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "proximity_alert_radius": {
-                "type_hint": Optional[int],
-                "default": None
+            "message_auto_delete_time": {
+                "type_hint": int
             }
         }
     },
-    ReactionTypeEmoji: {
-        "link": "https://core.telegram.org/bots/api#reactiontypeemoji",
+    MessageEntity: {
+        "link": "https://core.telegram.org/bots/api#messageentity",
         "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_REACTION_TYPE_EMOJI"
-        ],
         "kwargs": {
-            "emoji": {
+            "type": {
                 "type_hint": str
-            }
-        }
-    },
-    ReactionTypeCustomEmoji: {
-        "link": "https://core.telegram.org/bots/api#reactiontypecustomemoji",
-        "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
-        ],
-        "kwargs": {
+            },
+            "offset": {
+                "type_hint": int
+            },
+            "length": {
+                "type_hint": int
+            },
+            "url": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "user": {
+                "type_hint": Optional[User],
+                "default": None
+            },
+            "language": {
+                "type_hint": Optional[str],
+                "default": None
+            },
             "custom_emoji_id": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    MessageId: {
+        "link": "https://core.telegram.org/bots/api#messageid",
+        "has_dese": True,
+        "kwargs": {
+            "message_id": {
+                "type_hint": int
+            }
+        }
+    },
+    MessageOriginChannel: {
+        "link": "https://core.telegram.org/bots/api#messageoriginchannel",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL"
+        ],
+        "kwargs": {
+            "date": {
+                "type_hint": int
+            },
+            "chat": {
+                "type_hint": Chat
+            },
+            "message_id": {
+                "type_hint": int
+            },
+            "author_signature": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    MessageOriginChat: {
+        "link": "https://core.telegram.org/bots/api#messageoriginchat",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHAT"
+        ],
+        "kwargs": {
+            "date": {
+                "type_hint": int
+            },
+            "sender_chat": {
+                "type_hint": Chat
+            },
+            "author_signature": {
+                "type_hint": Optional[str],
+                "default": None
+            }
+        }
+    },
+    MessageOriginHiddenUser: {
+        "link": "https://core.telegram.org/bots/api#messageoriginhiddenuser",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
+        ],
+        "kwargs": {
+            "date": {
+                "type_hint": int
+            },
+            "sender_user_name": {
                 "type_hint": str
+            }
+        }
+    },
+    MessageOriginUser: {
+        "link": "https://core.telegram.org/bots/api#messageoriginuser",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_USER"
+        ],
+        "kwargs": {
+            "date": {
+                "type_hint": int
+            },
+            "sender_user": {
+                "type_hint": User
+            }
+        }
+    },
+    MessageReactionCountUpdated: {
+        "link": "https://core.telegram.org/bots/api#messagereactioncountupdated",
+        "has_dese": True,
+        "kwargs": {
+            "chat": {
+                "type_hint": Chat
+            },
+            "message_id": {
+                "type_hint": int
+            },
+            "date": {
+                "type_hint": int
+            },
+            "reactions": {
+                "type_hint": list[ReactionCount]
             }
         }
     },
@@ -3603,6 +3833,196 @@ TYPES = {
             }
         }
     },
+    OrderInfo: {
+        "link": "https://core.telegram.org/bots/api#orderinfo",
+        "has_dese": True,
+        "kwargs": {
+            "name": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "phone_number": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "email": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "shipping_address": {
+                "type_hint": Optional[ShippingAddress],
+                "default": None
+            }
+        }
+    },
+    PassportData: {
+        "link": "https://core.telegram.org/bots/api#passportdata",
+        "has_dese": True,
+        "kwargs": {
+            "data": {
+                "type_hint": list[EncryptedPassportElement]
+            },
+            "credentials": {
+                "type_hint": EncryptedCredentials
+            }
+        }
+    },
+    SwitchInlineQueryChosenChat: {
+        "link": "https://core.telegram.org/bots/api#switchinlinequerychosenchat",
+        "has_dese": True,
+        "kwargs": {
+            "query": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "allow_user_chats": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "allow_bot_chats": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "allow_group_chats": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "allow_channel_chats": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
+    User: {
+        "link": "https://core.telegram.org/bots/api#user",
+        "has_dese": True,
+        "kwargs": {
+            "id": {
+                "type_hint": int
+            },
+            "is_bot": {
+                "type_hint": bool
+            },
+            "first_name": {
+                "type_hint": str
+            },
+            "last_name": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "username": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "language_code": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "is_premium": {
+                "type_hint": Optional[Literal[True]],
+                "default": None
+            },
+            "added_to_attachment_menu": {
+                "type_hint": Optional[Literal[True]],
+                "default": None
+            },
+            "can_join_groups": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "can_read_all_group_messages": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "supports_inline_queries": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "can_connect_to_business": {
+                "type_hint": Optional[bool],
+                "default": None
+            }
+        }
+    },
+    TextQuote: {
+        "link": "https://core.telegram.org/bots/api#textquote",
+        "has_dese": True,
+        "kwargs": {
+            "text": {
+                "type_hint": str
+            },
+            "position": {
+                "type_hint": int
+            },
+            "entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "is_manual": {
+                "type_hint": Optional[Literal[True]],
+                "default": None
+            }
+        }
+    },
+    ReplyParameters: {
+        "link": "https://core.telegram.org/bots/api#replyparameters",
+        "has_dese": False,
+        "kwargs": {
+            "message_id": {
+                "type_hint": int
+            },
+            "chat_id": {
+                "type_hint": Optional[Union[int, str]],
+                "default": None
+            },
+            "allow_sending_without_reply": {
+                "type_hint": Optional[bool],
+                "default": None
+            },
+            "quote": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "quote_parse_mode": {
+                "type_hint": Optional[str],
+                "default": None
+            },
+            "quote_entities": {
+                "type_hint": Optional[list[MessageEntity]],
+                "default": None
+            },
+            "quote_position": {
+                "type_hint": Optional[int],
+                "default": None
+            }
+        }
+    },
+    ReactionTypeEmoji: {
+        "link": "https://core.telegram.org/bots/api#reactiontypeemoji",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_REACTION_TYPE_EMOJI"
+        ],
+        "kwargs": {
+            "emoji": {
+                "type_hint": str
+            }
+        }
+    },
+    ReactionTypeCustomEmoji: {
+        "link": "https://core.telegram.org/bots/api#reactiontypecustomemoji",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI"
+        ],
+        "kwargs": {
+            "custom_emoji_id": {
+                "type_hint": str
+            }
+        }
+    },
     ReactionCount: {
         "link": "https://core.telegram.org/bots/api#reactioncount",
         "has_dese": True,
@@ -3611,33 +4031,6 @@ TYPES = {
                 "type_hint": ReactionType
             },
             "total_count": {
-                "type_hint": int
-            }
-        }
-    },
-    MessageReactionCountUpdated: {
-        "link": "https://core.telegram.org/bots/api#messagereactioncountupdated",
-        "has_dese": True,
-        "kwargs": {
-            "chat": {
-                "type_hint": Chat
-            },
-            "message_id": {
-                "type_hint": int
-            },
-            "date": {
-                "type_hint": int
-            },
-            "reactions": {
-                "type_hint": list[ReactionCount]
-            }
-        }
-    },
-    MessageId: {
-        "link": "https://core.telegram.org/bots/api#messageid",
-        "has_dese": True,
-        "kwargs": {
-            "message_id": {
                 "type_hint": int
             }
         }
@@ -3902,15 +4295,6 @@ TYPES = {
             }
         }
     },
-    MessageAutoDeleteTimerChanged: {
-        "link": "https://core.telegram.org/bots/api#messageautodeletetimerchanged",
-        "has_dese": True,
-        "kwargs": {
-            "message_auto_delete_time": {
-                "type_hint": int
-            }
-        }
-    },
     UsersShared: {
         "link": "https://core.telegram.org/bots/api#usersshared",
         "has_dese": True,
@@ -4019,130 +4403,6 @@ TYPES = {
             }
         }
     },
-    KeyboardButtonRequestUsers: {
-        "link": "https://core.telegram.org/bots/api#keyboardbuttonrequestusers",
-        "has_dese": False,
-        "kwargs": {
-            "request_id": {
-                "type_hint": int
-            },
-            "user_is_bot": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "user_is_premium": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "max_quantity": {
-                "type_hint": Optional[int],
-                "default": None
-            },
-            "request_name": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "request_username": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "request_photo": {
-                "type_hint": Optional[bool],
-                "default": None
-            }
-        }
-    },
-    KeyboardButtonRequestChat: {
-        "link": "https://core.telegram.org/bots/api#keyboardbuttonrequestchat",
-        "has_dese": False,
-        "kwargs": {
-            "request_id": {
-                "type_hint": int
-            },
-            "chat_is_channel": {
-                "type_hint": bool
-            },
-            "chat_is_forum": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "chat_has_username": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "chat_is_created": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "user_administrator_rights": {
-                "type_hint": Optional[ChatAdministratorRights],
-                "default": None
-            },
-            "bot_administrator_rights": {
-                "type_hint": Optional[ChatAdministratorRights],
-                "default": None
-            },
-            "bot_is_member": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "request_title": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "request_username": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "request_photo": {
-                "type_hint": Optional[bool],
-                "default": None
-            }
-        }
-    },
-    KeyboardButtonPollType: {
-        "link": "https://core.telegram.org/bots/api#keyboardbuttonpolltype",
-        "has_dese": False,
-        "kwargs": {
-            "type": {
-                "type_hint": Optional[str],
-                "default": None
-            }
-        }
-    },
-    KeyboardButton: {
-        "link": "https://core.telegram.org/bots/api#keyboardbutton",
-        "has_dese": False,
-        "kwargs": {
-            "text": {
-                "type_hint": str
-            },
-            "request_users": {
-                "type_hint": Optional[KeyboardButtonRequestUsers],
-                "default": None
-            },
-            "request_chat": {
-                "type_hint": Optional[KeyboardButtonRequestChat],
-                "default": None
-            },
-            "request_contact": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "request_location": {
-                "type_hint": Optional[bool],
-                "default": None
-            },
-            "request_poll": {
-                "type_hint": Optional[KeyboardButtonPollType],
-                "default": None
-            },
-            "web_app": {
-                "type_hint": Optional[WebAppInfo],
-                "default": None
-            }
-        }
-    },
     ReplyKeyboardMarkup: {
         "link": "https://core.telegram.org/bots/api#replykeyboardmarkup",
         "has_dese": False,
@@ -4190,40 +4450,6 @@ TYPES = {
             }
         }
     },
-    MenuButtonCommands: {
-        "link": "https://core.telegram.org/bots/api#menubuttoncommands",
-        "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MENU_BUTTON_COMMANDS"
-        ],
-        "kwargs": {}
-    },
-    MenuButtonWebApp: {
-        "link": "https://core.telegram.org/bots/api#menubuttonwebapp",
-        "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP"
-        ],
-        "kwargs": {
-            "text": {
-                "type_hint": str
-            },
-            "web_app": {
-                "type_hint": WebAppInfo
-            }
-        }
-    },
-    MenuButtonDefault: {
-        "link": "https://core.telegram.org/bots/api#menubuttondefault",
-        "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MENU_BUTTON_DEFAULT"
-        ],
-        "kwargs": {}
-    },
     ResponseParameters: {
         "link": "https://core.telegram.org/bots/api#responseparameters",
         "has_dese": True,
@@ -4235,24 +4461,6 @@ TYPES = {
             "retry_after": {
                 "type_hint": Optional[int],
                 "default": None
-            }
-        }
-    },
-    MaskPosition: {
-        "link": "https://core.telegram.org/bots/api#maskposition",
-        "has_dese": True,
-        "kwargs": {
-            "point": {
-                "type_hint": str
-            },
-            "x_shift": {
-                "type_hint": float
-            },
-            "y_shift": {
-                "type_hint": float
-            },
-            "scale": {
-                "type_hint": float
             }
         }
     },
@@ -4337,84 +4545,6 @@ TYPES = {
             }
         }
     },
-    InputSticker: {
-        "link": "https://core.telegram.org/bots/api#inputsticker",
-        "has_dese": False,
-        "kwargs": {
-            "sticker": {
-                "type_hint": Union[InputFile, str]
-            },
-            "format": {
-                "type_hint": str
-            },
-            "emoji_list": {
-                "type_hint": list[str]
-            },
-            "mask_position": {
-                "type_hint": Optional[MaskPosition],
-                "default": None
-            },
-            "keywords": {
-                "type_hint": Optional[list[str]],
-                "default": None
-            }
-        }
-    },
-    InputTextMessageContent: {
-        "link": "https://core.telegram.org/bots/api#inputtextmessagecontent",
-        "has_dese": False,
-        "kwargs": {
-            "message_text": {
-                "type_hint": str
-            },
-            "parse_mode": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "entities": {
-                "type_hint": Optional[list[MessageEntity]],
-                "default": None
-            },
-            "link_preview_options": {
-                "type_hint": Optional[LinkPreviewOptions],
-                "default": None
-            }
-        }
-    },
-    InputVenueMessageContent: {
-        "link": "https://core.telegram.org/bots/api#inputvenuemessagecontent",
-        "has_dese": False,
-        "kwargs": {
-            "latitude": {
-                "type_hint": float
-            },
-            "longitude": {
-                "type_hint": float
-            },
-            "title": {
-                "type_hint": str
-            },
-            "address": {
-                "type_hint": str
-            },
-            "foursquare_id": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "foursquare_type": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "google_place_id": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "google_place_type": {
-                "type_hint": Optional[str],
-                "default": None
-            }
-        }
-    },
     SentWebAppMessage: {
         "link": "https://core.telegram.org/bots/api#sentwebappmessage",
         "has_dese": True,
@@ -4422,27 +4552,6 @@ TYPES = {
             "inline_message_id": {
                 "type_hint": Optional[str],
                 "default": None
-            }
-        }
-    },
-    Invoice: {
-        "link": "https://core.telegram.org/bots/api#invoice",
-        "has_dese": True,
-        "kwargs": {
-            "title": {
-                "type_hint": str
-            },
-            "description": {
-                "type_hint": str
-            },
-            "start_parameter": {
-                "type_hint": str
-            },
-            "currency": {
-                "type_hint": str
-            },
-            "total_amount": {
-                "type_hint": int
             }
         }
     },
@@ -4467,28 +4576,6 @@ TYPES = {
             },
             "post_code": {
                 "type_hint": str
-            }
-        }
-    },
-    OrderInfo: {
-        "link": "https://core.telegram.org/bots/api#orderinfo",
-        "has_dese": True,
-        "kwargs": {
-            "name": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "phone_number": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "email": {
-                "type_hint": Optional[str],
-                "default": None
-            },
-            "shipping_address": {
-                "type_hint": Optional[ShippingAddress],
-                "default": None
             }
         }
     },
@@ -4598,18 +4685,6 @@ TYPES = {
             },
             "file_date": {
                 "type_hint": int
-            }
-        }
-    },
-    PassportData: {
-        "link": "https://core.telegram.org/bots/api#passportdata",
-        "has_dese": True,
-        "kwargs": {
-            "data": {
-                "type_hint": list[EncryptedPassportElement]
-            },
-            "credentials": {
-                "type_hint": EncryptedCredentials
             }
         }
     },
@@ -4784,81 +4859,6 @@ TYPES = {
             },
             "message": {
                 "type_hint": str
-            }
-        }
-    },
-    MessageOriginUser: {
-        "link": "https://core.telegram.org/bots/api#messageoriginuser",
-        "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_USER"
-        ],
-        "kwargs": {
-            "date": {
-                "type_hint": int
-            },
-            "sender_user": {
-                "type_hint": User
-            }
-        }
-    },
-    MessageOriginHiddenUser: {
-        "link": "https://core.telegram.org/bots/api#messageoriginhiddenuser",
-        "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER"
-        ],
-        "kwargs": {
-            "date": {
-                "type_hint": int
-            },
-            "sender_user_name": {
-                "type_hint": str
-            }
-        }
-    },
-    MessageOriginChat: {
-        "link": "https://core.telegram.org/bots/api#messageoriginchat",
-        "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHAT"
-        ],
-        "kwargs": {
-            "date": {
-                "type_hint": int
-            },
-            "sender_chat": {
-                "type_hint": Chat
-            },
-            "author_signature": {
-                "type_hint": Optional[str],
-                "default": None
-            }
-        }
-    },
-    MessageOriginChannel: {
-        "link": "https://core.telegram.org/bots/api#messageoriginchannel",
-        "has_dese": True,
-        "warnings": [
-            "'type' is not in __init__()",
-            "'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHANNEL"
-        ],
-        "kwargs": {
-            "date": {
-                "type_hint": int
-            },
-            "chat": {
-                "type_hint": Chat
-            },
-            "message_id": {
-                "type_hint": int
-            },
-            "author_signature": {
-                "type_hint": Optional[str],
-                "default": None
             }
         }
     },
