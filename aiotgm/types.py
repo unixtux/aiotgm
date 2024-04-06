@@ -6923,6 +6923,34 @@ class ReplyParameters(TelegramType):
         self.quote_position = quote_position
 
 
+class ResponseParameters(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#responseparameters
+
+    Describes why a request was unsuccessful.
+
+    :param migrate_to_chat_id: The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.
+    :type migrate_to_chat_id: :obj:`int`, optional
+    :param retry_after: In case of exceeding flood control, the number of seconds left to wait before the request can be repeated.
+    :type retry_after: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['migrate_to_chat_id'] = res.get('migrate_to_chat_id')
+        obj['retry_after'] = res.get('retry_after')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        migrate_to_chat_id: Optional[int] = None,
+        retry_after: Optional[int] = None
+    ):
+        self.migrate_to_chat_id = migrate_to_chat_id
+        self.retry_after = retry_after
+
+
 
 
 
@@ -7460,39 +7488,6 @@ class WebAppInfo(TelegramType):
         self.url = url
 
 
-REPLY_MARKUP_TYPES = Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]
-'''
-One of the following reply markups:
-
-- :obj:`~aiotgm.types.InlineKeyboardMarkup`
-- :obj:`~aiotgm.types.ReplyKeyboardMarkup`
-- :obj:`~aiotgm.types.ReplyKeyboardRemove`
-- :obj:`~aiotgm.types.ForceReply`
-'''
-
-class ResponseParameters(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#responseparameters
-
-    Describes why a request was unsuccessful.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['migrate_to_chat_id'] = res.get('migrate_to_chat_id')
-        obj['retry_after'] = res.get('retry_after')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        migrate_to_chat_id: Optional[int] = None,
-        retry_after: Optional[int] = None
-    ):
-        self.migrate_to_chat_id = migrate_to_chat_id
-        self.retry_after = retry_after
-
-
 class Sticker(TelegramType):
     '''
     https://core.telegram.org/bots/api#sticker
@@ -7831,6 +7826,17 @@ class Update(TelegramType):
         self.chat_join_request = chat_join_request
         self.chat_boost = chat_boost
         self.removed_chat_boost = removed_chat_boost
+
+
+REPLY_MARKUP_TYPES = Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]
+'''
+One of the following reply markups:
+
+- :obj:`~aiotgm.types.InlineKeyboardMarkup`
+- :obj:`~aiotgm.types.ReplyKeyboardMarkup`
+- :obj:`~aiotgm.types.ReplyKeyboardRemove`
+- :obj:`~aiotgm.types.ForceReply`
+'''
 
 
 BotCommandScope = Union[
