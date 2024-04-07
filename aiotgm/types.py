@@ -7836,6 +7836,52 @@ class Video(TelegramType):
         self.file_size = file_size
 
 
+class VideoChatEnded(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#videochatended
+
+    This object represents a service message about a video chat ended in the chat.
+
+    :param duration: Video chat duration in seconds.
+    :type duration: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['duration'] = res.get('duration')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        duration: int
+    ):
+        self.duration = duration
+
+
+class VideoChatParticipantsInvited(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#videochatparticipantsinvited
+
+    This object represents a service message about new members invited to a video chat.
+
+    :param users: New members that were invited to the video chat.
+    :type users: :obj:`list` of :obj:`~aiotgm.types.User`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['users'] = [User._dese(kwargs) for kwargs in res.get('users')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        users: list[User]
+    ):
+        self.users = users
+
+
 
 
 
@@ -8011,46 +8057,6 @@ class VideoChatStarted(TelegramType):
 
     def __init__(self):
         ...
-
-
-class VideoChatEnded(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#videochatended
-
-    This object represents a service message about a video chat ended in the chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['duration'] = res.get('duration')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        duration: int
-    ):
-        self.duration = duration
-
-
-class VideoChatParticipantsInvited(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#videochatparticipantsinvited
-
-    This object represents a service message about new members invited to a video chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['users'] = [User._dese(kwargs) for kwargs in res.get('users')]
-        return cls(**obj)
-
-    def __init__(
-        self,
-        users: list[User]
-    ):
-        self.users = users
 
 
 class WebAppInfo(TelegramType):
