@@ -7720,6 +7720,59 @@ class UsersShared(TelegramType):
         self.users = users
 
 
+class Venue(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#venue
+
+    This object represents a venue.
+
+    :param location: Venue location. Can't be a live location.
+    :type location: :obj:`~aiotgm.types.Location`
+    :param title: Name of the venue.
+    :type title: :obj:`str`
+    :param address: Address of the venue.
+    :type address: :obj:`str`
+    :param foursquare_id: Foursquare identifier of the venue.
+    :type foursquare_id: :obj:`str`, optional
+    :param foursquare_type: Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+    :type foursquare_type: :obj:`str`, optional
+    :param google_place_id: Google Places identifier of the venue.
+    :type google_place_id: :obj:`str`, optional
+    :param google_place_type: Google Places type of the venue. (See `supported types <https://developers.google.com/places/web-service/supported_types>`_.)
+    :type google_place_type: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['location'] = Location._dese(res.get('location'))
+        obj['title'] = res.get('title')
+        obj['address'] = res.get('address')
+        obj['foursquare_id'] = res.get('foursquare_id')
+        obj['foursquare_type'] = res.get('foursquare_type')
+        obj['google_place_id'] = res.get('google_place_id')
+        obj['google_place_type'] = res.get('google_place_type')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        location: Location,
+        title: str,
+        address: str,
+        foursquare_id: Optional[str] = None,
+        foursquare_type: Optional[str] = None,
+        google_place_id: Optional[str] = None,
+        google_place_type: Optional[str] = None
+    ):
+        self.location = location
+        self.title = title
+        self.address = address
+        self.foursquare_id = foursquare_id
+        self.foursquare_type = foursquare_type
+        self.google_place_id = google_place_id
+        self.google_place_type = google_place_type
+
+
 
 
 
@@ -7851,44 +7904,6 @@ class Voice(TelegramType):
         self.duration = duration
         self.mime_type = mime_type
         self.file_size = file_size
-
-
-class Venue(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#venue
-
-    This object represents a venue.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['location'] = Location._dese(res.get('location'))
-        obj['title'] = res.get('title')
-        obj['address'] = res.get('address')
-        obj['foursquare_id'] = res.get('foursquare_id')
-        obj['foursquare_type'] = res.get('foursquare_type')
-        obj['google_place_id'] = res.get('google_place_id')
-        obj['google_place_type'] = res.get('google_place_type')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        location: Location,
-        title: str,
-        address: str,
-        foursquare_id: Optional[str] = None,
-        foursquare_type: Optional[str] = None,
-        google_place_id: Optional[str] = None,
-        google_place_type: Optional[str] = None
-    ):
-        self.location = location
-        self.title = title
-        self.address = address
-        self.foursquare_id = foursquare_id
-        self.foursquare_type = foursquare_type
-        self.google_place_id = google_place_id
-        self.google_place_type = google_place_type
 
 
 class WebAppData(TelegramType):
