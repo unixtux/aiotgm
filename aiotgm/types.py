@@ -8042,26 +8042,27 @@ class WebAppData(TelegramType):
         self.button_text = button_text
 
 
+class WebAppInfo(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#webappinfo
 
+    Describes a `Web App <https://core.telegram.org/bots/webapps>`_.
 
+    :param url: An HTTPS URL of a Web App to be opened with additional data as specified in `Initializing Web Apps <https://core.telegram.org/bots/webapps#initializing-mini-apps>`_.
+    :type url: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['url'] = res.get('url')
+        return cls(**obj)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def __init__(
+        self,
+        url: str
+    ):
+        self.url = url
 
 
 class WriteAccessAllowed(TelegramType):
@@ -8070,7 +8071,14 @@ class WriteAccessAllowed(TelegramType):
 
     This object represents a service message about a user allowing a bot to write
     messages after adding it to the attachment menu, launching a Web App from a link,
-    or accepting an explicit request from a Web App sent by the method requestWriteAccess.
+    or accepting an explicit request from a Web App sent by the method `requestWriteAccess <https://core.telegram.org/bots/webapps#initializing-mini-apps>`_.
+
+    :param from_request: :obj:`True`, if the access was granted after the user accepted an explicit request from a Web App sent by the method `requestWriteAccess <https://core.telegram.org/bots/webapps#initializing-mini-apps>`_.
+    :type from_request: :obj:`bool`, optional
+    :param web_app_name: Name of the Web App, if the access was granted when the Web App was launched from a link.
+    :type web_app_name: :obj:`str`, optional
+    :param from_attachment_menu: :obj:`True`, if the access was granted when the bot was added to the attachment or side menu.
+    :type from_attachment_menu: :obj:`bool`, optional
     '''
     @classmethod
     @_parse_result
@@ -8092,26 +8100,7 @@ class WriteAccessAllowed(TelegramType):
         self.from_attachment_menu = from_attachment_menu
 
 
-class WebAppInfo(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#webappinfo
-
-    Describes a Web App.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['url'] = res.get('url')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        url: str
-    ):
-        self.url = url
-
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 REPLY_MARKUP_TYPES = Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]
 '''
 One of the following reply markups:
