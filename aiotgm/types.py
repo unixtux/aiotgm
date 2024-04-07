@@ -7640,6 +7640,29 @@ class User(TelegramType):
         self.can_connect_to_business = can_connect_to_business
 
 
+class UserChatBoosts(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#userchatboosts
+
+    This object represents a list of boosts added to a chat by a user.
+
+    :param boosts: The list of boosts added to the chat by the user.
+    :type boosts: :obj:`list` of :obj:`~aiotgm.types.ChatBoost`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['boosts'] = [ChatBoost._dese(kwargs) for kwargs in res.get('boosts')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        boosts: list[ChatBoost]
+    ):
+        self.boosts = boosts
+
+
 
 
 
@@ -8004,26 +8027,6 @@ class WebAppInfo(TelegramType):
         url: str
     ):
         self.url = url
-
-
-class UserChatBoosts(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#userchatboosts
-
-    This object represents a list of boosts added to a chat by a user.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['boosts'] = [ChatBoost._dese(kwargs) for kwargs in res.get('boosts')]
-        return cls(**obj)
-
-    def __init__(
-        self,
-        boosts: list[ChatBoost]
-    ):
-        self.boosts = boosts
 
 
 REPLY_MARKUP_TYPES = Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]
