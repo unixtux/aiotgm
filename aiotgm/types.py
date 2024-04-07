@@ -7264,6 +7264,34 @@ class StickerSet(TelegramType):
         self.thumbnail = thumbnail
 
 
+class Story(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#story
+
+    This object represents a story.
+
+    :param chat: Chat that posted the story.
+    :type chat: :obj:`~aiotgm.types.Chat`
+    :param id: Unique identifier for the story in the chat.
+    :type id: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['chat'] = Chat._dese(res.get('chat'))
+        obj['id'] = res.get('id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        chat: Chat,
+        id: int
+    ):
+        self.chat = chat
+        self.id = id
+
+
 
 
 
@@ -7399,29 +7427,6 @@ class TextQuote(TelegramType):
         self.position = position
         self.entities = entities
         self.is_manual = is_manual
-
-
-class Story(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#story
-
-    This object represents a message about a forwarded story in the chat. Currently holds no information.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['chat'] = Chat._dese(res.get('chat'))
-        obj['id'] = res.get('id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        chat: Chat,
-        id: int
-    ):
-        self.chat = chat
-        self.id = id
 
 
 class Video(TelegramType):
@@ -8328,4 +8333,3 @@ def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
             'An error occurred during the deserialization'
             f' of the type ReactionType. Invalid type: {type!r}.'
         )
-
