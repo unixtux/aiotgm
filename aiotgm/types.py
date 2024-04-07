@@ -7882,6 +7882,46 @@ class VideoChatParticipantsInvited(TelegramType):
         self.users = users
 
 
+class VideoChatScheduled(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#videochatscheduled
+
+    This object represents a service message about a video chat scheduled in the chat.
+
+    :param start_date: Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator.
+    :type start_date: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['start_date'] = res.get('start_date')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        start_date: int
+    ):
+        self.start_date = start_date
+
+
+class VideoChatStarted(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#videochatstarted
+
+    This object represents a service message about a video
+    chat started in the chat. Currently holds no information.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        ...
+
+
 
 
 
@@ -8020,43 +8060,6 @@ class WriteAccessAllowed(TelegramType):
         self.from_request = from_request
         self.web_app_name = web_app_name
         self.from_attachment_menu = from_attachment_menu
-
-
-class VideoChatScheduled(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#videochatscheduled
-
-    This object represents a service message about a video chat scheduled in the chat.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['start_date'] = res.get('start_date')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        start_date: int
-    ):
-        self.start_date = start_date
-
-
-class VideoChatStarted(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#videochatstarted
-
-    This object represents a service message about a video
-    chat started in the chat. Currently holds no information.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        return cls(**obj)
-
-    def __init__(self):
-        ...
 
 
 class WebAppInfo(TelegramType):
