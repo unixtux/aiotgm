@@ -7922,33 +7922,25 @@ class VideoChatStarted(TelegramType):
         ...
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class VideoNote(TelegramType):
     '''
     https://core.telegram.org/bots/api#videonote
 
-    This object represents a video message (available in Telegram apps as of v.4.0).
+    This object represents a `video message <https://telegram.org/blog/video-messages-and-telescope>`_
+    (available in Telegram apps as of `v.4.0 <https://telegram.org/blog/video-messages-and-telescope>`_).
+
+    :param file_id: Identifier for this file, which can be used to download or reuse the file.
+    :type file_id: :obj:`str`
+    :param file_unique_id: Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type file_unique_id: :obj:`str`
+    :param length: Video width and height (diameter of the video message) as defined by sender.
+    :type length: :obj:`int`
+    :param duration: Duration of the video in seconds as defined by sender.
+    :type duration: :obj:`int`
+    :param thumbnail: Video thumbnail.
+    :type thumbnail: :obj:`~aiotgm.types.PhotoSize`, optional
+    :param file_size: File size in bytes.
+    :type file_size: :obj:`int`, optional
     '''
     @classmethod
     @_parse_result
@@ -7984,6 +7976,17 @@ class Voice(TelegramType):
     https://core.telegram.org/bots/api#voice
 
     This object represents a voice note.
+
+    :param file_id: Identifier for this file, which can be used to download or reuse the file.
+    :type file_id: :obj:`str`
+    :param file_unique_id: Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type file_unique_id: :obj:`str`
+    :param duration: Duration of the audio in seconds as defined by sender.
+    :type duration: :obj:`int`
+    :param mime_type: MIME type of the file as defined by sender.
+    :type mime_type: :obj:`str`, optional
+    :param file_size: File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
+    :type file_size: :obj:`int`, optional
     '''
     @classmethod
     @_parse_result
@@ -8015,7 +8018,12 @@ class WebAppData(TelegramType):
     '''
     https://core.telegram.org/bots/api#webappdata
 
-    Describes data sent from a Web App to the bot.
+    Describes data sent from a `Web App <https://core.telegram.org/bots/webapps>`_ to the bot.
+
+    :param data: The data. Be aware that a bad client can send arbitrary data in this field.
+    :type data: :obj:`str`
+    :param button_text: Text of the *web_app* keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field.
+    :type button_text: :obj:`str`
     '''
     @classmethod
     @_parse_result
@@ -8032,6 +8040,28 @@ class WebAppData(TelegramType):
     ):
         self.data = data
         self.button_text = button_text
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class WriteAccessAllowed(TelegramType):
