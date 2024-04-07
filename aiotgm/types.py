@@ -7292,6 +7292,59 @@ class Story(TelegramType):
         self.id = id
 
 
+class SuccessfulPayment(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#successfulpayment
+
+    This object contains basic information about a successful payment.
+
+    :param currency: Three-letter ISO 4217 `currency <https://core.telegram.org/bots/payments#supported-currencies>`_ code.
+    :type currency: :obj:`str`
+    :param total_amount: Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of ``US$ 1.45`` pass ``amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+    :type total_amount: :obj:`int`
+    :param invoice_payload: Bot specified invoice payload.
+    :type invoice_payload: :obj:`str`
+    :param telegram_payment_charge_id: Telegram payment identifier.
+    :type telegram_payment_charge_id: :obj:`str`
+    :param provider_payment_charge_id: Provider payment identifier.
+    :type provider_payment_charge_id: :obj:`str`
+    :param shipping_option_id: Identifier of the shipping option chosen by the user.
+    :type shipping_option_id: :obj:`str`, optional
+    :param order_info: Order information provided by the user.
+    :type order_info: :obj:`~aiotgm.types.OrderInfo`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['currency'] = res.get('currency')
+        obj['total_amount'] = res.get('total_amount')
+        obj['invoice_payload'] = res.get('invoice_payload')
+        obj['shipping_option_id'] = res.get('shipping_option_id')
+        obj['order_info'] = OrderInfo._dese(res.get('order_info'))
+        obj['telegram_payment_charge_id'] = res.get('telegram_payment_charge_id')
+        obj['provider_payment_charge_id'] = res.get('provider_payment_charge_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        currency: str,
+        total_amount: int,
+        invoice_payload: str,
+        telegram_payment_charge_id: str,
+        provider_payment_charge_id: str,
+        shipping_option_id: Optional[str] = None,
+        order_info: Optional[OrderInfo] = None
+    ):
+        self.currency = currency
+        self.total_amount = total_amount
+        self.invoice_payload = invoice_payload
+        self.telegram_payment_charge_id = telegram_payment_charge_id
+        self.provider_payment_charge_id = provider_payment_charge_id
+        self.shipping_option_id = shipping_option_id
+        self.order_info = order_info
+
+
 
 
 
@@ -7771,44 +7824,6 @@ class WebAppInfo(TelegramType):
         url: str
     ):
         self.url = url
-
-
-class SuccessfulPayment(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#successfulpayment
-
-    This object contains basic information about a successful payment.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['currency'] = res.get('currency')
-        obj['total_amount'] = res.get('total_amount')
-        obj['invoice_payload'] = res.get('invoice_payload')
-        obj['shipping_option_id'] = res.get('shipping_option_id')
-        obj['order_info'] = OrderInfo._dese(res.get('order_info'))
-        obj['telegram_payment_charge_id'] = res.get('telegram_payment_charge_id')
-        obj['provider_payment_charge_id'] = res.get('provider_payment_charge_id')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        currency: str,
-        total_amount: int,
-        invoice_payload: str,
-        telegram_payment_charge_id: str,
-        provider_payment_charge_id: str,
-        shipping_option_id: Optional[str] = None,
-        order_info: Optional[OrderInfo] = None
-    ):
-        self.currency = currency
-        self.total_amount = total_amount
-        self.invoice_payload = invoice_payload
-        self.telegram_payment_charge_id = telegram_payment_charge_id
-        self.provider_payment_charge_id = provider_payment_charge_id
-        self.shipping_option_id = shipping_option_id
-        self.order_info = order_info
 
 
 class UserChatBoosts(TelegramType):
