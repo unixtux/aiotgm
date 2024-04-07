@@ -7428,6 +7428,140 @@ class TextQuote(TelegramType):
         self.is_manual = is_manual
 
 
+class Update(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#update
+
+    This `object <https://core.telegram.org/bots/api#available-types>`_ represents an
+    incoming update. At most one of the optional parameters can be present in any given update.
+
+    :param update_id: The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This identifier becomes especially handy if you're using `webhooks <https://core.telegram.org/bots/api#setwebhook>`_, since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially.
+    :type update_id: :obj:`int`
+    :param message: New incoming message of any kind - text, photo, sticker, etc.
+    :type message: :obj:`~aiotgm.types.Message`, optional
+    :param edited_message: New version of a message that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
+    :type edited_message: :obj:`~aiotgm.types.Message`, optional
+    :param channel_post: New incoming channel post of any kind - text, photo, sticker, etc.
+    :type channel_post: :obj:`~aiotgm.types.Message`, optional
+    :param edited_channel_post: New version of a channel post that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.
+    :type edited_channel_post: :obj:`~aiotgm.types.Message`, optional
+    :param business_connection: The bot was connected to or disconnected from a business account, or a user edited an existing connection with the bot.
+    :type business_connection: :obj:`~aiotgm.types.BusinessConnection`, optional
+    :param business_message: New non-service message from a connected business account.
+    :type business_message: :obj:`~aiotgm.types.Message`, optional
+    :param edited_business_message: New version of a message from a connected business account.
+    :type edited_business_message: :obj:`~aiotgm.types.Message`, optional
+    :param deleted_business_messages: Messages were deleted from a connected business account.
+    :type deleted_business_messages: :obj:`~aiotgm.types.BusinessMessagesDeleted`, optional
+    :param message_reaction: A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify ``"message_reaction"`` in the list of *allowed_updates* to receive these updates. The update isn't received for reactions set by bots.
+    :type message_reaction: :obj:`~aiotgm.types.MessageReactionUpdated`, optional
+    :param message_reaction_count: Reactions to a message with anonymous reactions were changed. The bot must be an administrator in the chat and must explicitly specify ``"message_reaction_count"`` in the list of *allowed_updates* to receive these updates. The updates are grouped and can be sent with delay up to a few minutes.
+    :type message_reaction_count: :obj:`~aiotgm.types.MessageReactionCountUpdated`, optional
+    :param inline_query: New incoming `inline <https://core.telegram.org/bots/api#inline-mode>`_ query.
+    :type inline_query: :obj:`~aiotgm.types.InlineQuery`, optional
+    :param chosen_inline_result: The result of an `inline <https://core.telegram.org/bots/api#inline-mode>`_ query that was chosen by a user and sent to their chat partner. Please see our documentation on the `feedback collecting <https://core.telegram.org/bots/inline#collecting-feedback>`_ for details on how to enable these updates for your bot.
+    :type chosen_inline_result: :obj:`~aiotgm.types.ChosenInlineResult`, optional
+    :param callback_query: New incoming callback query.
+    :type callback_query: :obj:`~aiotgm.types.CallbackQuery`, optional
+    :param shipping_query: New incoming shipping query. Only for invoices with flexible price.
+    :type shipping_query: :obj:`~aiotgm.types.ShippingQuery`, optional
+    :param pre_checkout_query: New incoming pre-checkout query. Contains full information about checkout.
+    :type pre_checkout_query: :obj:`~aiotgm.types.PreCheckoutQuery`, optional
+    :param poll: New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot.
+    :type poll: :obj:`~aiotgm.types.Poll`, optional
+    :param poll_answer: A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself.
+    :type poll_answer: :obj:`~aiotgm.types.PollAnswer`, optional
+    :param my_chat_member: The bot's chat member status was updated in a chat. For private chats, this update is received only when the bot is blocked or unblocked by the user.
+    :type my_chat_member: :obj:`~aiotgm.types.ChatMemberUpdated`, optional
+    :param chat_member: A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify ``"chat_member"`` in the list of *allowed_updates* to receive these updates.
+    :type chat_member: :obj:`~aiotgm.types.ChatMemberUpdated`, optional
+    :param chat_join_request: A request to join the chat has been sent. The bot must have the *can_invite_users* administrator right in the chat to receive these updates.
+    :type chat_join_request: :obj:`~aiotgm.types.ChatJoinRequest`, optional
+    :param chat_boost: A chat boost was added or changed. The bot must be an administrator in the chat to receive these updates.
+    :type chat_boost: :obj:`~aiotgm.types.ChatBoostUpdated`, optional
+    :param removed_chat_boost: A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates.
+    :type removed_chat_boost: :obj:`~aiotgm.types.ChatBoostRemoved`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['update_id'] = res.get('update_id')
+        obj['message'] = Message._dese(res.get('message'))
+        obj['edited_message'] = Message._dese(res.get('edited_message'))
+        obj['channel_post'] = Message._dese(res.get('channel_post'))
+        obj['edited_channel_post'] = Message._dese(res.get('edited_channel_post'))
+        obj['business_connection'] = BusinessConnection._dese(res.get('business_connection'))
+        obj['business_message'] = Message._dese(res.get('business_message'))
+        obj['edited_business_message'] = Message._dese(res.get('edited_business_message'))
+        obj['deleted_business_messages'] = BusinessMessagesDeleted._dese(res.get('deleted_business_messages'))
+        obj['message_reaction'] = MessageReactionUpdated._dese(res.get('message_reaction'))
+        obj['message_reaction_count'] = MessageReactionCountUpdated._dese(res.get('message_reaction_count'))
+        obj['inline_query'] = InlineQuery._dese(res.get('inline_query'))
+        obj['chosen_inline_result'] = ChosenInlineResult._dese(res.get('chosen_inline_result'))
+        obj['callback_query'] = CallbackQuery._dese(res.get('callback_query'))
+        obj['shipping_query'] = ShippingQuery._dese(res.get('shipping_query'))
+        obj['pre_checkout_query'] = PreCheckoutQuery._dese(res.get('pre_checkout_query'))
+        obj['poll'] = Poll._dese(res.get('poll'))
+        obj['poll_answer'] = PollAnswer._dese(res.get('poll_answer'))
+        obj['my_chat_member'] = ChatMemberUpdated._dese(res.get('my_chat_member'))
+        obj['chat_member'] = ChatMemberUpdated._dese(res.get('chat_member'))
+        obj['chat_join_request'] = ChatJoinRequest._dese(res.get('chat_join_request'))
+        obj['chat_boost'] = ChatBoostUpdated._dese(res.get('chat_boost'))
+        obj['removed_chat_boost'] = ChatBoostRemoved._dese(res.get('removed_chat_boost'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        update_id: int,
+        message: Optional[Message] = None,
+        edited_message: Optional[Message] = None,
+        channel_post: Optional[Message] = None,
+        edited_channel_post: Optional[Message] = None,
+        business_connection: Optional[BusinessConnection] = None,
+        business_message: Optional[Message] = None,
+        edited_business_message: Optional[Message] = None,
+        deleted_business_messages: Optional[BusinessMessagesDeleted] = None,
+        message_reaction: Optional[MessageReactionUpdated] = None,
+        message_reaction_count: Optional[MessageReactionCountUpdated] = None,
+        inline_query: Optional[InlineQuery] = None,
+        chosen_inline_result: Optional[ChosenInlineResult] = None,
+        callback_query: Optional[CallbackQuery] = None,
+        shipping_query: Optional[ShippingQuery] = None,
+        pre_checkout_query: Optional[PreCheckoutQuery] = None,
+        poll: Optional[Poll] = None,
+        poll_answer: Optional[PollAnswer] = None,
+        my_chat_member: Optional[ChatMemberUpdated] = None,
+        chat_member: Optional[ChatMemberUpdated] = None,
+        chat_join_request: Optional[ChatJoinRequest] = None,
+        chat_boost: Optional[ChatBoostUpdated] = None,
+        removed_chat_boost: Optional[ChatBoostRemoved] = None
+    ):
+        self.update_id = update_id
+        self.message = message
+        self.edited_message = edited_message
+        self.channel_post = channel_post
+        self.edited_channel_post = edited_channel_post
+        self.business_connection = business_connection
+        self.business_message = business_message
+        self.edited_business_message = edited_business_message
+        self.deleted_business_messages = deleted_business_messages
+        self.message_reaction = message_reaction
+        self.message_reaction_count = message_reaction_count
+        self.inline_query = inline_query
+        self.chosen_inline_result = chosen_inline_result
+        self.callback_query = callback_query
+        self.shipping_query = shipping_query
+        self.pre_checkout_query = pre_checkout_query
+        self.poll = poll
+        self.poll_answer = poll_answer
+        self.my_chat_member = my_chat_member
+        self.chat_member = chat_member
+        self.chat_join_request = chat_join_request
+        self.chat_boost = chat_boost
+        self.removed_chat_boost = removed_chat_boost
+
+
 
 
 
@@ -7865,93 +7999,6 @@ class UserChatBoosts(TelegramType):
         boosts: list[ChatBoost]
     ):
         self.boosts = boosts
-
-
-class Update(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#update
-
-    This object represents an incoming update.\n
-    At most one of the optional parameters can be present in any given update.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['update_id'] = res.get('update_id')
-        obj['message'] = Message._dese(res.get('message'))
-        obj['edited_message'] = Message._dese(res.get('edited_message'))
-        obj['channel_post'] = Message._dese(res.get('channel_post'))
-        obj['edited_channel_post'] = Message._dese(res.get('edited_channel_post'))
-        obj['business_connection'] = BusinessConnection._dese(res.get('business_connection'))
-        obj['business_message'] = Message._dese(res.get('business_message'))
-        obj['edited_business_message'] = Message._dese(res.get('edited_business_message'))
-        obj['deleted_business_messages'] = BusinessMessagesDeleted._dese(res.get('deleted_business_messages'))
-        obj['message_reaction'] = MessageReactionUpdated._dese(res.get('message_reaction'))
-        obj['message_reaction_count'] = MessageReactionCountUpdated._dese(res.get('message_reaction_count'))
-        obj['inline_query'] = InlineQuery._dese(res.get('inline_query'))
-        obj['chosen_inline_result'] = ChosenInlineResult._dese(res.get('chosen_inline_result'))
-        obj['callback_query'] = CallbackQuery._dese(res.get('callback_query'))
-        obj['shipping_query'] = ShippingQuery._dese(res.get('shipping_query'))
-        obj['pre_checkout_query'] = PreCheckoutQuery._dese(res.get('pre_checkout_query'))
-        obj['poll'] = Poll._dese(res.get('poll'))
-        obj['poll_answer'] = PollAnswer._dese(res.get('poll_answer'))
-        obj['my_chat_member'] = ChatMemberUpdated._dese(res.get('my_chat_member'))
-        obj['chat_member'] = ChatMemberUpdated._dese(res.get('chat_member'))
-        obj['chat_join_request'] = ChatJoinRequest._dese(res.get('chat_join_request'))
-        obj['chat_boost'] = ChatBoostUpdated._dese(res.get('chat_boost'))
-        obj['removed_chat_boost'] = ChatBoostRemoved._dese(res.get('removed_chat_boost'))
-        return cls(**obj)
-
-    def __init__(
-        self,
-        update_id: int,
-        message: Optional[Message] = None,
-        edited_message: Optional[Message] = None,
-        channel_post: Optional[Message] = None,
-        edited_channel_post: Optional[Message] = None,
-        business_connection: Optional[BusinessConnection] = None,
-        business_message: Optional[Message] = None,
-        edited_business_message: Optional[Message] = None,
-        deleted_business_messages: Optional[BusinessMessagesDeleted] = None,
-        message_reaction: Optional[MessageReactionUpdated] = None,
-        message_reaction_count: Optional[MessageReactionCountUpdated] = None,
-        inline_query: Optional[InlineQuery] = None,
-        chosen_inline_result: Optional[ChosenInlineResult] = None,
-        callback_query: Optional[CallbackQuery] = None,
-        shipping_query: Optional[ShippingQuery] = None,
-        pre_checkout_query: Optional[PreCheckoutQuery] = None,
-        poll: Optional[Poll] = None,
-        poll_answer: Optional[PollAnswer] = None,
-        my_chat_member: Optional[ChatMemberUpdated] = None,
-        chat_member: Optional[ChatMemberUpdated] = None,
-        chat_join_request: Optional[ChatJoinRequest] = None,
-        chat_boost: Optional[ChatBoostUpdated] = None,
-        removed_chat_boost: Optional[ChatBoostRemoved] = None
-    ):
-        self.update_id = update_id
-        self.message = message
-        self.edited_message = edited_message
-        self.channel_post = channel_post
-        self.edited_channel_post = edited_channel_post
-        self.business_connection = business_connection
-        self.business_message = business_message
-        self.edited_business_message = edited_business_message
-        self.deleted_business_messages = deleted_business_messages
-        self.message_reaction = message_reaction
-        self.message_reaction_count = message_reaction_count
-        self.inline_query = inline_query
-        self.chosen_inline_result = chosen_inline_result
-        self.callback_query = callback_query
-        self.shipping_query = shipping_query
-        self.pre_checkout_query = pre_checkout_query
-        self.poll = poll
-        self.poll_answer = poll_answer
-        self.my_chat_member = my_chat_member
-        self.chat_member = chat_member
-        self.chat_join_request = chat_join_request
-        self.chat_boost = chat_boost
-        self.removed_chat_boost = removed_chat_boost
 
 
 REPLY_MARKUP_TYPES = Union[InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, ForceReply]
