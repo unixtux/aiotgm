@@ -7389,6 +7389,45 @@ class SwitchInlineQueryChosenChat(TelegramType):
         self.allow_channel_chats = allow_channel_chats
 
 
+class TextQuote(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#textquote
+
+    This object contains information about the quoted part
+    of a message that is replied to by the given message.
+
+    :param text: Text of the quoted part of a message that is replied to by the given message.
+    :type text: :obj:`str`
+    :param position: Approximate quote position in the original message in UTF-16 code units as specified by the sender.
+    :type position: :obj:`int`
+    :param entities: Special entities that appear in the quote. Currently, only *bold*, *italic*, *underline*, *strikethrough*, *spoiler*, and *custom_emoji entities* are kept in quotes.
+    :type entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param is_manual: :obj:`True`, if the quote was chosen manually by the message sender. Otherwise, the quote was added automatically by the server.
+    :type is_manual: :obj:`True`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['text'] = res.get('text')
+        obj['position'] = res.get('position')
+        obj['entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('entities')] if 'entities' in res else None
+        obj['is_manual'] = res.get('is_manual')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        text: str,
+        position: int,
+        entities: Optional[list[MessageEntity]] = None,
+        is_manual: Optional[Literal[True]] = None
+    ):
+        self.text = text
+        self.position = position
+        self.entities = entities
+        self.is_manual = is_manual
+
+
 
 
 
@@ -7462,35 +7501,6 @@ class User(TelegramType):
         self.can_read_all_group_messages = can_read_all_group_messages
         self.supports_inline_queries = supports_inline_queries
         self.can_connect_to_business = can_connect_to_business
-
-
-class TextQuote(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#textquote
-
-    This object contains information about the quoted part of a message that is replied to by the given message.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['text'] = res.get('text')
-        obj['position'] = res.get('position')
-        obj['entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('entities')] if 'entities' in res else None
-        obj['is_manual'] = res.get('is_manual')
-        return cls(**obj)
-
-    def __init__(
-        self,
-        text: str,
-        position: int,
-        entities: Optional[list[MessageEntity]] = None,
-        is_manual: Optional[Literal[True]] = None
-    ):
-        self.text = text
-        self.position = position
-        self.entities = entities
-        self.is_manual = is_manual
 
 
 class Video(TelegramType):
