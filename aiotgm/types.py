@@ -7562,33 +7562,36 @@ class Update(TelegramType):
         self.removed_chat_boost = removed_chat_boost
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class User(TelegramType):
     '''
     https://core.telegram.org/bots/api#user
 
     This object represents a Telegram user or bot.
+
+    :param id: Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.
+    :type id: :obj:`int`
+    :param is_bot: :obj:`True`, if this user is a bot.
+    :type is_bot: :obj:`bool`
+    :param first_name: User's or bot's first name.
+    :type first_name: :obj:`str`
+    :param last_name: User's or bot's last name.
+    :type last_name: :obj:`str`, optional
+    :param username: User's or bot's username.
+    :type username: :obj:`str`, optional
+    :param language_code: `IETF language tag <https://en.wikipedia.org/wiki/IETF_language_tag>`_ of the user's language.
+    :type language_code: :obj:`str`, optional
+    :param is_premium: :obj:`True`, if this user is a Telegram Premium user.
+    :type is_premium: :obj:`True`, optional
+    :param added_to_attachment_menu: :obj:`True`, if this user added the bot to the attachment menu.
+    :type added_to_attachment_menu: :obj:`True`, optional
+    :param can_join_groups: :obj:`True`, if the bot can be invited to groups. Returned only in :meth:`~aiotgm.Client.get_me`.
+    :type can_join_groups: :obj:`bool`, optional
+    :param can_read_all_group_messages: :obj:`True`, if privacy mode is disabled for the bot. Returned only in :meth:`~aiotgm.Client.get_me`.
+    :type can_read_all_group_messages: :obj:`bool`, optional
+    :param supports_inline_queries: :obj:`True`, if the bot supports inline queries. Returned only in :meth:`~aiotgm.Client.get_me`.
+    :type supports_inline_queries: :obj:`bool`, optional
+    :param can_connect_to_business: :obj:`True`, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in :meth:`~aiotgm.Client.get_me`.
+    :type can_connect_to_business: :obj:`bool`, optional
     '''
     @classmethod
     @_parse_result
@@ -7635,6 +7638,28 @@ class User(TelegramType):
         self.can_read_all_group_messages = can_read_all_group_messages
         self.supports_inline_queries = supports_inline_queries
         self.can_connect_to_business = can_connect_to_business
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Video(TelegramType):
