@@ -7691,6 +7691,35 @@ class UserProfilePhotos(TelegramType):
         self.photos = photos
 
 
+class UsersShared(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#usersshared
+
+    This object contains information about the users whose identifiers
+    were shared with the bot using a :obj:`~aiotgm.types.KeyboardButtonRequestUsers` button.
+
+    :param request_id: Identifier of the request.
+    :type request_id: :obj:`int`
+    :param users: Information about users shared with the bot.
+    :type users: :obj:`list` of :obj:`~aiotgm.types.SharedUser`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['request_id'] = res.get('request_id')
+        obj['users'] = [SharedUser._dese(kwargs) for kwargs in res.get('users')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        request_id: int,
+        users: list[SharedUser]
+    ):
+        self.request_id = request_id
+        self.users = users
+
+
 
 
 
@@ -7883,30 +7912,6 @@ class WebAppData(TelegramType):
     ):
         self.data = data
         self.button_text = button_text
-
-
-class UsersShared(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#usersshared
-
-    This object contains information about the users whose identifiers
-    were shared with the bot using a KeyboardButtonRequestUsers button.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['request_id'] = res.get('request_id')
-        obj['users'] = [SharedUser._dese(kwargs) for kwargs in res.get('users')]
-        return cls(**obj)
-
-    def __init__(
-        self,
-        request_id: int,
-        users: list[SharedUser]
-    ):
-        self.request_id = request_id
-        self.users = users
 
 
 class WriteAccessAllowed(TelegramType):
