@@ -7663,6 +7663,34 @@ class UserChatBoosts(TelegramType):
         self.boosts = boosts
 
 
+class UserProfilePhotos(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#userprofilephotos
+
+    This object represent a user's profile pictures.
+
+    :param total_count: Total number of profile pictures the target user has.
+    :type total_count: :obj:`int`
+    :param photos: Requested profile pictures (in up to 4 sizes each).
+    :type photos: :obj:`list` of :obj:`list` of :obj:`~aiotgm.types.PhotoSize`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['total_count'] = res.get('total_count')
+        obj['photos'] = [[PhotoSize._dese(kwargs) for kwargs in lst] for lst in res.get('photos')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        total_count: int,
+        photos: list[list[PhotoSize]]
+    ):
+        self.total_count = total_count
+        self.photos = photos
+
+
 
 
 
@@ -7984,29 +8012,6 @@ class VideoChatParticipantsInvited(TelegramType):
         users: list[User]
     ):
         self.users = users
-
-
-class UserProfilePhotos(TelegramType):
-    '''
-    https://core.telegram.org/bots/api#userprofilephotos
-
-    This object represent a user's profile pictures.
-    '''
-    @classmethod
-    @_parse_result
-    def _dese(cls, res: dict):
-        obj = {}
-        obj['total_count'] = res.get('total_count')
-        obj['photos'] = [[PhotoSize._dese(kwargs) for kwargs in lst] for lst in res.get('photos')]
-        return cls(**obj)
-
-    def __init__(
-        self,
-        total_count: int,
-        photos: list[list[PhotoSize]]
-    ):
-        self.total_count = total_count
-        self.photos = photos
 
 
 class WebAppInfo(TelegramType):
