@@ -7773,33 +7773,30 @@ class Venue(TelegramType):
         self.google_place_type = google_place_type
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Video(TelegramType):
     '''
     https://core.telegram.org/bots/api#video
 
     This object represents a video file.
+
+    :param file_id: Identifier for this file, which can be used to download or reuse the file.
+    :type file_id: :obj:`str`
+    :param file_unique_id: Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+    :type file_unique_id: :obj:`str`
+    :param width: Video width as defined by sender.
+    :type width: :obj:`int`
+    :param height: Video height as defined by sender.
+    :type height: :obj:`int`
+    :param duration: Duration of the video in seconds as defined by sender.
+    :type duration: :obj:`int`
+    :param thumbnail: Video thumbnail.
+    :type thumbnail: :obj:`~aiotgm.types.PhotoSize`, optional
+    :param file_name: Original filename as defined by sender.
+    :type file_name: :obj:`str`, optional
+    :param mime_type: MIME type of the file as defined by sender.
+    :type mime_type: :obj:`str`, optional
+    :param file_size: File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.
+    :type file_size: :obj:`int`, optional
     '''
     @classmethod
     @_parse_result
@@ -7837,6 +7834,28 @@ class Video(TelegramType):
         self.file_name = file_name
         self.mime_type = mime_type
         self.file_size = file_size
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class VideoNote(TelegramType):
