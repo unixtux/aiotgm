@@ -7345,34 +7345,23 @@ class SuccessfulPayment(TelegramType):
         self.order_info = order_info
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class SwitchInlineQueryChosenChat(TelegramType):
     '''
     https://core.telegram.org/bots/api#switchinlinequerychosenchat
 
     This object represents an inline button that switches the current user
     to inline mode in a chosen chat, with an optional default inline query.
+
+    :param query: The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted.
+    :type query: :obj:`str`, optional
+    :param allow_user_chats: :obj:`True`, if private chats with users can be chosen.
+    :type allow_user_chats: :obj:`bool`, optional
+    :param allow_bot_chats: :obj:`True`, if private chats with bots can be chosen.
+    :type allow_bot_chats: :obj:`bool`, optional
+    :param allow_group_chats: :obj:`True`, if group and supergroup chats can be chosen.
+    :type allow_group_chats: :obj:`bool`, optional
+    :param allow_channel_chats: :obj:`True`, if channel chats can be chosen.
+    :type allow_channel_chats: :obj:`bool`, optional
     '''
     @classmethod
     @_parse_result
@@ -7398,6 +7387,28 @@ class SwitchInlineQueryChosenChat(TelegramType):
         self.allow_bot_chats = allow_bot_chats
         self.allow_group_chats = allow_group_chats
         self.allow_channel_chats = allow_channel_chats
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class User(TelegramType):
