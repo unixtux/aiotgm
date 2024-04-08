@@ -33,7 +33,7 @@ Update the module regurarly with the following command.
 Usage
 -----
 
-Use the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server.
+Call the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aiotgm.types.Update>` from the Telegram Bot API Server.
 
 .. code-block:: python3
 
@@ -57,12 +57,16 @@ Use the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aiot
         except KeyboardInterrupt:
             ...
 
-There are 18 decorator methods to manage differrent :obj:`updates <aiotgm.types.Update>`:
+There are 22 decorator methods to manage differrent :obj:`updates <aiotgm.types.Update>`:
 
 * :meth:`~aiotgm.Client.manage_message`
 * :meth:`~aiotgm.Client.manage_edited_message`
 * :meth:`~aiotgm.Client.manage_channel_post`
 * :meth:`~aiotgm.Client.manage_edited_channel_post`
+* :meth:`~aiotgm.Client.manage_business_connection`
+* :meth:`~aiotgm.Client.manage_business_message`
+* :meth:`~aiotgm.Client.manage_edited_business_message`
+* :meth:`~aiotgm.Client.manage_deleted_business_messages`
 * :meth:`~aiotgm.Client.manage_message_reaction`
 * :meth:`~aiotgm.Client.manage_message_reaction_count`
 * :meth:`~aiotgm.Client.manage_inline_query`
