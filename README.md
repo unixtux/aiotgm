@@ -33,4 +33,4 @@ $ pip install -U aiotgm
 #
 
 * #### Documentation
-Here it is the [official documentation](https://aiotgm.com/).
+Here it is the [official documentation](https://aiotgm.readthedocs.io/).
