@@ -58,9 +58,9 @@ class Client(TelegramApi):
 
     :param token: Api token obtained from `@BotFather <https://t.me/botfather>`_.
     :type token: :obj:`str`
-    :param parse_mode: Select a default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overwritten in the methods).
+    :param parse_mode: Select a default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option.
     :type parse_mode: :obj:`str`, optional
-    :param protect_content: Pass :obj:`True` to use the protect content option by default (it can be overwritten in the methods).
+    :param protect_content: Pass :obj:`True` to use the protect content option by default.
     :type protect_content: :obj:`bool`, optional
     :param proxy: Pass a proxy string to be used in the http requests.
     :type proxy: :obj:`str`, optional
@@ -117,7 +117,7 @@ class Client(TelegramApi):
     @property
     def parse_mode(self) -> Optional[str]:
         '''
-        Default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option (it can be overwritten in the methods).
+        Default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option.
 
         Usage:
 
@@ -141,7 +141,7 @@ class Client(TelegramApi):
     @property
     def protect_content(self) -> Optional[bool]:
         '''
-        Default protect content option (it can be overwritten in the methods).
+        Default protect content option.
 
         Usage:
 
@@ -2090,6 +2090,7 @@ class Client(TelegramApi):
         chat_id: Optional[Union[int, str]] = None,
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None,
+        live_period: Optional[int] = None,
         horizontal_accuracy: Optional[float] = None,
         heading: Optional[int] = None,
         proximity_alert_radius: Optional[int] = None,
@@ -2112,6 +2113,8 @@ class Client(TelegramApi):
         :type message_id: :obj:`int`, optional
         :param inline_message_id: Required if *chat_id* and *message_id* are not specified. Identifier of the inline message.
         :type inline_message_id: :obj:`str`, optional
+        :param live_period: New period in seconds during which the location can be updated, starting from the message send date. If 0x7FFFFFFF is specified, then the location can be updated forever. Otherwise, the new value must not exceed the current *live_period* by more than a day, and the live location expiration date must remain within the next 90 days. If not specified, then *live_period* remains unchanged.
+        :type live_period: :obj:`int`, optional
         :param horizontal_accuracy: The radius of uncertainty for the location, measured in meters; 0-1500.
         :type horizontal_accuracy: :obj:`float`, optional
         :param heading: Direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
@@ -2129,6 +2132,7 @@ class Client(TelegramApi):
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
+        if live_period is not None: params['live_period'] = live_period
         if horizontal_accuracy is not None: params['horizontal_accuracy'] = horizontal_accuracy
         if heading is not None: params['heading'] = heading
         if proximity_alert_radius is not None: params['proximity_alert_radius'] = proximity_alert_radius
