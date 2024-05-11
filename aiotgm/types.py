@@ -1871,6 +1871,8 @@ class ChatMemberUpdated(TelegramType):
     :type new_chat_member: :obj:`~aiotgm.types.ChatMember`
     :param invite_link: Chat invite link, which was used by the user to join the chat; for joining by invite link events only.
     :type invite_link: :obj:`~aiotgm.types.ChatInviteLink`, optional
+    :param via_join_request: :obj:`True`, if the user joined the chat after sending a direct join request without using an invite link and being approved by an administrator.
+    :type via_join_request: :obj:`bool`, optional
     :param via_chat_folder_invite_link: :obj:`True`, if the user joined the chat via a chat folder invite link.
     :type via_chat_folder_invite_link: :obj:`bool`, optional
     '''
@@ -1884,6 +1886,7 @@ class ChatMemberUpdated(TelegramType):
         obj['old_chat_member'] = _dese_chat_member(res.get('old_chat_member'))
         obj['new_chat_member'] = _dese_chat_member(res.get('new_chat_member'))
         obj['invite_link'] = ChatInviteLink._dese(res.get('invite_link'))
+        obj['via_join_request'] = res.get('via_join_request')
         obj['via_chat_folder_invite_link'] = res.get('via_chat_folder_invite_link')
         return cls(**obj)
 
@@ -1895,6 +1898,7 @@ class ChatMemberUpdated(TelegramType):
         old_chat_member: ChatMember,
         new_chat_member: ChatMember,
         invite_link: Optional[ChatInviteLink] = None,
+        via_join_request: Optional[bool] = None,
         via_chat_folder_invite_link: Optional[bool] = None
     ):
         self.chat = chat
