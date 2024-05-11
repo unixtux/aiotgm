@@ -2402,7 +2402,7 @@ class Client(TelegramApi):
         https://core.telegram.org/bots/api#getchat
 
         Use this method to get up-to-date information about the chat.
-        Returns a `~aiotgm.types.ChatFullInfo` object on success.
+        Returns a :obj:`~aiotgm.types.ChatFullInfo` object on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
