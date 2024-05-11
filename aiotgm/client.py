@@ -4362,7 +4362,7 @@ class Client(TelegramApi):
 
         Use this method to send audio files, if you want Telegram clients to display the file as
         a playable voice message. For this to work, your audio must be in an .OGG file encoded with
-        OPUS (other formats may be sent as :obj:`~aiotgm.types.Audio` or :obj:`~aiotgm.types.Document`).
+        OPUS, or in .MP3 format, or in .M4A (other formats may be sent as :obj:`~aiotgm.types.Audio` or :obj:`~aiotgm.types.Document`).
         On success, the sent :obj:`~aiotgm.types.Message` is returned. Bots can currently send voice
         messages of up to 50 MB in size, this limit may be changed in the future.
 

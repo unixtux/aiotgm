@@ -7,6 +7,15 @@ __all__ = (
     'Animation',
     'Audio',
     'Birthdate',
+    'BackgroundFill', # Deserialized in _dese_background_fill()
+    'BackgroundFillFreeformGradient',
+    'BackgroundFillGradient',
+    'BackgroundFillSolid',
+    'BackgroundType', # Deserialized in _dese_background_type()
+    'BackgroundTypeChatTheme',
+    'BackgroundTypeFill',
+    'BackgroundTypePattern',
+    'BackgroundTypeWallpaper',
     'BotCommand',
     'BotCommandScope', # No deserialization.
     'BotCommandScopeAllChatAdministrators',
@@ -29,6 +38,7 @@ __all__ = (
     'CallbackQuery',
     'Chat',
     'ChatAdministratorRights',
+    'ChatBackground',
     'ChatBoost',
     'ChatBoostAdded',
     'ChatBoostRemoved',
@@ -367,6 +377,216 @@ class Audio(TelegramType):
         self.mime_type = mime_type
         self.file_size = file_size
         self.thumbnail = thumbnail
+
+
+class BackgroundFillFreeformGradient(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#backgroundfillfreeformgradient
+
+    The background is a freeform gradient that rotates after every message in the chat.
+
+    :param colors: A list of the 3 or 4 base colors that are used to generate the freeform gradient in the RGB24 format.
+    :type colors: :obj:`list` of :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['colors'] = res.get('colors')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        colors: list[int]
+    ):
+        self.type = DEFAULT_BACKGROUND_FILL_FREEFORM_GRADIENT
+        self.colors = colors
+
+
+class BackgroundFillGradient(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#backgroundfillgradient
+
+    The background is a gradient fill.
+
+    :param top_color: Top color of the gradient in the RGB24 format.
+    :type top_color: :obj:`int`
+    :param bottom_color: Bottom color of the gradient in the RGB24 format.
+    :type bottom_color: :obj:`int`
+    :param rotation_angle: Clockwise rotation angle of the background fill in degrees; 0-359.
+    :type rotation_angle: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['top_color'] = res.get('top_color')
+        obj['bottom_color'] = res.get('bottom_color')
+        obj['rotation_angle'] = res.get('rotation_angle')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        top_color: int,
+        bottom_color: int,
+        rotation_angle: int
+    ):
+        self.type = DEFAULT_BACKGROUND_FILL_GRADIENT
+        self.top_color = top_color
+        self.bottom_color = bottom_color
+        self.rotation_angle = rotation_angle
+
+
+class BackgroundFillSolid(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#backgroundfillsolid
+
+    The background is filled using the selected color.
+
+    :param color: The color of the background fill in the RGB24 format.
+    :type color: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['color'] = res.get('color')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        color: int
+    ):
+        self.type = DEFAULT_BACKGROUND_FILL_SOLID
+        self.color = color
+
+
+class BackgroundTypeChatTheme(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#backgroundtypechattheme
+
+    The background is taken directly from a built-in chat theme.
+
+    :param theme_name: Name of the chat theme, which is usually an emoji.
+    :type theme_name: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['theme_name'] = res.get('theme_name')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        theme_name: str
+    ):
+        self.type = DEFAULT_BACKGROUND_TYPE_CHAT_THEME
+        self.theme_name = theme_name
+
+
+class BackgroundTypeFill(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#backgroundtypefill
+
+    The background is automatically filled based on the selected colors.
+
+    :param fill: The background fill.
+    :type fill: :obj:`~aiotgm.types.BackGroundFill`
+    :param dark_theme_dimming: Dimming of the background in dark themes, as a percentage; 0-100.
+    :type dark_theme_dimming: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['fill'] = _dese_background_fill(res.get('fill'))
+        obj['dark_theme_dimming'] = res.get('dark_theme_dimming')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        fill: BackgroundFill,
+        dark_theme_dimming: int
+    ):
+        self.type = DEFAULT_BACKGROUND_TYPE_FILL
+        self.fill = fill
+        self.dark_theme_dimming = dark_theme_dimming
+
+
+class BackgroundTypePattern(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#backgroundtypepattern
+
+    The background is a PNG or TGV (gzipped subset of SVG with MIME type
+    “application/x-tgwallpattern”) pattern to be combined with the background fill chosen by the user.
+
+    :param document: Document with the pattern.
+    :type document: :obj:`~aiotgm.types.Document`
+    :param fill: The background fill that is combined with the pattern.
+    :type fill: :obj:`~aiotgm.types.BackgroundFill`
+    :param intensity: Intensity of the pattern when it is shown above the filled background; 0-100.
+    :type intensity: :obj:`int`
+    :param is_inverted: :obj:`True`, if the background fill must be applied only to the pattern itself. All other pixels are black in this case. For dark themes only.
+    :type is_inverted: :obj:`True`, optional
+    :param is_moving: :obj:`True`, if the background moves slightly when the device is tilted.
+    :type is_moving: :obj:`True`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(
+        self,
+        document: Document,
+        fill: BackgroundFill,
+        intensity: int,
+        is_inverted: Optional[Literal[True]] = None,
+        is_moving: Optional[Literal[True]] = None
+    ):
+        self.type = DEFAULT_BACKGROUND_TYPE_PATTERN
+        self.document = document
+        self.fill = fill
+        self.intensity = intensity
+        self.is_inverted = is_inverted
+        self.is_moving = is_moving
+
+
+class BackgroundTypeWallpaper(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#backgroundtypewallpaper
+
+    The background is a wallpaper in the JPEG format.
+
+    :param document: Document with the wallpaper.
+    :type document: :obj:`~aiotgm.types.Document`
+    :param dark_theme_dimming: Dimming of the background in dark themes, as a percentage; 0-100.
+    :type dark_theme_dimming: :obj:`int`
+    :param is_blurred: :obj:`True`, if the wallpaper is downscaled to fit in a 450x450 square and then box-blurred with radius 12.
+    :type is_blurred: :obj:`True`, optional
+    :param is_moving: :obj:`True`, if the background moves slightly when the device is tilted.
+    :type is_moving: :obj:`True`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(
+        self,
+        document: Document,
+        dark_theme_dimming: int,
+        is_blurred: Optional[Literal[True]] = None,
+        is_moving: Optional[Literal[True]] = None
+    ):
+        self.type = DEFAULT_BACKGROUND_TYPE_WALLPAPER
+        self.document = document
+        self.dark_theme_dimming = dark_theme_dimming
+        self.is_blurred = is_blurred
+        self.is_moving = is_moving
 
 
 class Birthdate(TelegramType):
@@ -1177,6 +1397,27 @@ class ChatAdministratorRights(TelegramType):
         self.can_edit_messages = can_edit_messages
         self.can_pin_messages = can_pin_messages
         self.can_manage_topics = can_manage_topics
+
+
+class ChatBackground(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#chatbackground
+
+    This object represents a chat background.
+
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['type'] = _dese_background_type(res.get('type'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        type: BackgroundType
+    ):
+        self.type = type
 
 
 class ChatBoost(TelegramType):
@@ -5488,6 +5729,8 @@ class Message(TelegramType):
     :type proximity_alert_triggered: :obj:`~aiotgm.types.ProximityAlertTriggered`, optional
     :param boost_added: Service message: user boosted the chat.
     :type boost_added: :obj:`~aiotgm.types.ChatBoostAdded`, optional
+    :param chat_background_set: Service message: chat background set.
+    :type chat_background_set: :obj:`~aiotgm.types.ChatBackground`, optional
     :param forum_topic_created: Service message: forum topic created.
     :type forum_topic_created: :obj:`~aiotgm.types.ForumTopicCreated`, optional
     :param forum_topic_edited: Service message: forum topic edited.
@@ -5589,6 +5832,7 @@ class Message(TelegramType):
         obj['passport_data'] = PassportData._dese(res.get('passport_data'))
         obj['proximity_alert_triggered'] = ProximityAlertTriggered._dese(res.get('proximity_alert_triggered'))
         obj['boost_added'] = ChatBoostAdded._dese(res.get('boost_added'))
+        obj['chat_background_set'] = ChatBackground._dese(res.get('chat_background_set'))
         obj['forum_topic_created'] = ForumTopicCreated._dese(res.get('forum_topic_created'))
         obj['forum_topic_edited'] = ForumTopicEdited._dese(res.get('forum_topic_edited'))
         obj['forum_topic_closed'] = ForumTopicClosed._dese(res.get('forum_topic_closed'))
@@ -5673,6 +5917,7 @@ class Message(TelegramType):
         passport_data: Optional[PassportData] = None,
         proximity_alert_triggered: Optional[ProximityAlertTriggered] = None,
         boost_added: Optional[ChatBoostAdded] = None,
+        chat_background_set: Optional[ChatBackground] = None,
         forum_topic_created: Optional[ForumTopicCreated] = None,
         forum_topic_edited: Optional[ForumTopicEdited] = None,
         forum_topic_closed: Optional[ForumTopicClosed] = None,
@@ -5754,6 +5999,7 @@ class Message(TelegramType):
         self.passport_data = passport_data
         self.proximity_alert_triggered = proximity_alert_triggered
         self.boost_added = boost_added
+        self.chat_background_set = chat_background_set
         self.forum_topic_created = forum_topic_created
         self.forum_topic_edited = forum_topic_edited
         self.forum_topic_closed = forum_topic_closed
@@ -8149,6 +8395,86 @@ One of the following reply markups:
 - :obj:`~aiotgm.types.ReplyKeyboardRemove`
 - :obj:`~aiotgm.types.ForceReply`
 '''
+
+BackgroundFill = Union[
+    BackgroundFillSolid,
+    BackgroundFillGradient,
+    BackgroundFillFreeformGradient
+]
+'''
+https://core.telegram.org/bots/api#backgroundfill
+
+This object describes the way a background is filled based on the selected colors. Currently, it can be one of:
+
+- :obj:`~aiotgm.types.BackgroundFillSolid`
+- :obj:`~aiotgm.types.BackgroundFillGradient`
+- :obj:`~aiotgm.types.BackgroundFillFreeformGradient`
+'''
+def _dese_background_fill(res: Optional[dict], /) -> Optional[BackgroundFill]:
+    '''
+    Function to deserialize BackgroundFill.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_BACKGROUND_FILL_SOLID:
+        return BackgroundFillSolid._dese(obj, check_dict=False)
+    elif type == DEFAULT_BACKGROUND_FILL_GRADIENT:
+        return BackgroundFillGradient._dese(obj, check_dict=False)
+    elif type == DEFAULT_BACKGROUND_FILL_FREEFORM_GRADIENT:
+        return BackgroundFillFreeformGradient._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization of the'
+            f' type BackgroundFill. Invalid type: {type!r}.'
+        )
+ 
+
+BackgroundType = Union[
+    BackgroundTypeFill,
+    BackgroundTypeWallpaper,
+    BackgroundTypePattern,
+    BackgroundTypeChatTheme
+]
+'''
+https://core.telegram.org/bots/api#backgroundtype
+
+This object describes the type of a background. Currently, it can be one of:
+
+- :obj:`~aiotgm.types.BackgroundTypeFill`
+- :obj:`~aiotgm.types.BackgroundTypeWallpaper`
+- :obj:`~aiotgm.types.BackgroundTypePattern`
+- :obj:`~aiotgm.types.BackgroundTypeChatTheme`
+'''
+
+def _dese_background_type(res: Optional[dict], /) -> Optional[BackgroundType]:
+    '''
+    Function to deserialize BackgroundType.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_BACKGROUND_TYPE_FILL:
+        return BackgroundTypeFill._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_BACKGROUND_TYPE_WALLPAPER:
+        return BackgroundTypeWallpaper._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_BACKGROUND_TYPE_PATTERN:
+        return BackgroundTypePattern._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_BACKGROUND_TYPE_CHAT_THEME:
+        return BackgroundTypeChatTheme._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization of the'
+            f' type BackgroundType. Invalid type: {type!r}.'
+        )
+
 
 
 BotCommandScope = Union[
