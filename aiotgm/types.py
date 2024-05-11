@@ -6478,6 +6478,8 @@ class Poll(TelegramType):
     :type type: :obj:`str`
     :param allows_multiple_answers: :obj:`True`, if the poll allows multiple answers.
     :type allows_multiple_answers: :obj:`bool`
+    :param question_entities: Special entities that appear in the question. Currently, only custom emoji entities are allowed in poll questions.
+    :type question_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
     :param correct_option_id: 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.
     :type correct_option_id: :obj:`int`, optional
     :param explanation: Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters.
@@ -6501,6 +6503,7 @@ class Poll(TelegramType):
         obj['is_anonymous'] = res.get('is_anonymous')
         obj['type'] = res.get('type')
         obj['allows_multiple_answers'] = res.get('allows_multiple_answers')
+        obj['question_entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('question_entities')] if 'question_entities' in res else None
         obj['correct_option_id'] = res.get('correct_option_id')
         obj['explanation'] = res.get('explanation')
         obj['explanation_entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('explanation_entities')] if 'explanation_entities' in res else None
@@ -6518,6 +6521,7 @@ class Poll(TelegramType):
         is_anonymous: bool,
         type: str,
         allows_multiple_answers: bool,
+        question_entities: Optional[list[MessageEntity]] = None,
         correct_option_id: Optional[int] = None,
         explanation: Optional[str] = None,
         explanation_entities: Optional[list[MessageEntity]] = None,
@@ -6532,6 +6536,7 @@ class Poll(TelegramType):
         self.is_anonymous = is_anonymous
         self.type = type
         self.allows_multiple_answers = allows_multiple_answers
+        self.question_entities = question_entities
         self.correct_option_id = correct_option_id
         self.explanation = explanation
         self.explanation_entities = explanation_entities
