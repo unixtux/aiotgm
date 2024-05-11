@@ -3963,6 +3963,8 @@ class Client(TelegramApi):
         options: list[str],
         business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
+        question_parse_mode: Optional[str] = None,
+        question_entities: Optional[list[MessageEntity]] = None,
         is_anonymous: Optional[bool] = None,
         type: Optional[str] = None,
         allows_multiple_answers: Optional[bool] = None,
@@ -3994,6 +3996,10 @@ class Client(TelegramApi):
         :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
+        :param question_parse_mode: Mode for parsing entities in the question. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details. Currently, only custom emoji entities are allowed.
+        :type question_parse_mode: :obj:`str`, optional
+        :param question_entities: A JSON-serialized list of special entities that appear in the poll question. It can be specified instead of *question_parse_mode*.
+        :type question_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
         :param is_anonymous: :obj:`True`, if the poll needs to be anonymous, defaults to :obj:`True`.
         :type is_anonymous: :obj:`bool`, optional
         :param type: Poll type, “quiz” or “regular”, defaults to “regular”.
@@ -4031,6 +4037,8 @@ class Client(TelegramApi):
         }
         if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
+        if question_parse_mode is not None: params['question_parse_mode'] = question_parse_mode
+        if question_entities is not None: params['question_entities'] = question_entities
         if is_anonymous is not None: params['is_anonymous'] = is_anonymous
         if type is not None: params['type'] = type
         if allows_multiple_answers is not None: params['allows_multiple_answers'] = allows_multiple_answers
