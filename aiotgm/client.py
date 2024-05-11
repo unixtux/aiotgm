@@ -3960,7 +3960,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         question: str,
-        options: list[str],
+        options: list[InputPollOption],
         business_connection_id: Optional[str] = None,
         message_thread_id: Optional[int] = None,
         question_parse_mode: Optional[str] = None,
@@ -3990,8 +3990,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param question: Poll question, 1-300 characters.
         :type question: :obj:`str`
-        :param options: A JSON-serialized list of answer options, 2-10 strings 1-100 characters each.
-        :type options: :obj:`list` of :obj:`str`
+        :param options: A JSON-serialized list of 2-10 answer options.
+        :type options: :obj:`list` of :obj:`~aiotgm.types.InputPollOption`
         :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
         :type business_connection_id: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.

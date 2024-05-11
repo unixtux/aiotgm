@@ -110,6 +110,7 @@ __all__ = (
     'InputMediaPhoto',
     'InputMediaVideo',
     'InputMessageContent', # No deserialization.
+    'InputPollOption',
     'InputSticker',
     'InputTextMessageContent',
     'InputVenueMessageContent',
@@ -4762,6 +4763,30 @@ class InputMediaVideo(TelegramType):
         self.duration = duration
         self.supports_streaming = supports_streaming
         self.has_spoiler = has_spoiler
+
+
+class InputPollOption(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputpolloption
+
+    This object contains information about one answer option in a poll to send.
+
+    :param text: Option text, 1-100 characters.
+    :type text: :obj:`str`
+    :param text_parse_mode: Mode for parsing entities in the text. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details. Currently, only custom emoji entities are allowed.
+    :type text_parse_mode: :obj:`str`, optional
+    :param text_entities: A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of *text_parse_mode*.
+    :type text_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    '''
+    def __init__(
+        self,
+        text: str,
+        text_parse_mode: Optional[str] = None,
+        text_entities: Optional[list[MessageEntity]] = None
+    ):
+        self.text = text
+        self.text_parse_mode = text_parse_mode
+        self.text_entities = text_entities
 
 
 class InputSticker(TelegramType):
