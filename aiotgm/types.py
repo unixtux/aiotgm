@@ -6618,7 +6618,7 @@ class PollOption(TelegramType):
     :param voter_count: Number of users that voted for this option.
     :type voter_count: :obj:`int`
     :param text_entities: Special entities that appear in the option *text*. Currently, only custom emoji entities are allowed in poll option texts.
-    :type text_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`
+    :type text_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
     '''
     @classmethod
     @_parse_result
