@@ -6592,6 +6592,8 @@ class PollOption(TelegramType):
     :type text: :obj:`str`
     :param voter_count: Number of users that voted for this option.
     :type voter_count: :obj:`int`
+    :param text_entities: Special entities that appear in the option *text*. Currently, only custom emoji entities are allowed in poll option texts.
+    :type text_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`
     '''
     @classmethod
     @_parse_result
@@ -6599,15 +6601,18 @@ class PollOption(TelegramType):
         obj = {}
         obj['text'] = res.get('text')
         obj['voter_count'] = res.get('voter_count')
+        obj['text_entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('text_entities')] if 'text_entities' in res else None
         return cls(**obj)
 
     def __init__(
         self,
         text: str,
-        voter_count: int
+        voter_count: int,
+        text_entities: Optional[list[MessageEntity]] = None
     ):
         self.text = text
         self.voter_count = voter_count
+        self.text_entities = text_entities
 
 
 class PreCheckoutQuery(TelegramType):
