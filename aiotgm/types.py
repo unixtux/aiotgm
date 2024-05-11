@@ -536,6 +536,11 @@ class BackgroundTypePattern(TelegramType):
     @_parse_result
     def _dese(cls, res: dict):
         obj = {}
+        obj['document'] = Document._dese(res.get('document'))
+        obj['fill'] = _dese_background_fill(res.get('fill'))
+        obj['intensity'] = res.get('intensity')
+        obj['is_inverted'] = res.get('is_inverted')
+        obj['is_moving'] = res.get('is_moving')
         return cls(**obj)
 
     def __init__(
@@ -573,6 +578,10 @@ class BackgroundTypeWallpaper(TelegramType):
     @_parse_result
     def _dese(cls, res: dict):
         obj = {}
+        obj['document'] = Document._dese(res.get('document'))
+        obj['dark_theme_dimming'] = res.get('dark_theme_dimming')
+        obj['is_blurred'] = res.get('is_blurred')
+        obj['is_moving'] = res.get('is_moving')
         return cls(**obj)
 
     def __init__(
@@ -1405,6 +1414,8 @@ class ChatBackground(TelegramType):
 
     This object represents a chat background.
 
+    :param type: Type of the background.
+    :type type: :obj:`~aiotgm.types.BackgroundType`
     '''
     @classmethod
     @_parse_result
@@ -8421,8 +8432,10 @@ def _dese_background_fill(res: Optional[dict], /) -> Optional[BackgroundFill]:
 
     if type == DEFAULT_BACKGROUND_FILL_SOLID:
         return BackgroundFillSolid._dese(obj, check_dict=False)
+
     elif type == DEFAULT_BACKGROUND_FILL_GRADIENT:
         return BackgroundFillGradient._dese(obj, check_dict=False)
+
     elif type == DEFAULT_BACKGROUND_FILL_FREEFORM_GRADIENT:
         return BackgroundFillFreeformGradient._dese(obj, check_dict=False)
     else:
