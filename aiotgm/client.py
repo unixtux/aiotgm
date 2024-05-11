@@ -2397,22 +2397,22 @@ class Client(TelegramApi):
     async def get_chat(
         self,
         chat_id: Union[int, str]
-    ) -> Chat:
+    ) -> ChatFullInfo:
         '''
         https://core.telegram.org/bots/api#getchat
 
-        Use this method to get up to date information about the chat.
-        Returns a :obj:`~aiotgm.types.Chat` object on success.
+        Use this method to get up-to-date information about the chat.
+        Returns a `~aiotgm.types.ChatFullInfo` object on success.
 
         :param chat_id: Unique identifier for the target chat or username of the target supergroup or channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`
-        :rtype: :obj:`~aiotgm.types.Chat`
+        :rtype: :obj:`~aiotgm.types.ChatFullInfo`
         '''
         params = {
             'chat_id': chat_id
         }
         result = await super().get_chat(params)
-        return Chat._dese(result)
+        return ChatFullInfo._dese(result)
 
 
     async def get_chat_administrators(
