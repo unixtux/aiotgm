@@ -1,3 +1,10 @@
+BackgroundFillFreeformGradient: 'type' is not in __init__() and 'type' default value is: DEFAULT_BACKGROUND_FILL_FREEFORM_GRADIENT
+BackgroundFillGradient: 'type' is not in __init__() and 'type' default value is: DEFAULT_BACKGROUND_FILL_GRADIENT
+BackgroundFillSolid: 'type' is not in __init__() and 'type' default value is: DEFAULT_BACKGROUND_FILL_SOLID
+BackgroundTypeChatTheme: 'type' is not in __init__() and 'type' default value is: DEFAULT_BACKGROUND_TYPE_CHAT_THEME
+BackgroundTypeFill: 'type' is not in __init__() and 'type' default value is: DEFAULT_BACKGROUND_TYPE_FILL
+BackgroundTypePattern: 'type' is not in __init__() and 'type' default value is: DEFAULT_BACKGROUND_TYPE_PATTERN
+BackgroundTypeWallpaper: 'type' is not in __init__() and 'type' default value is: DEFAULT_BACKGROUND_TYPE_WALLPAPER
 BotCommandScopeAllChatAdministrators: 'type' is not in __init__() and 'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_CHAT_ADMINISTRATORS
 BotCommandScopeAllGroupChats: 'type' is not in __init__() and 'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_GROUP_CHATS
 BotCommandScopeAllPrivateChats: 'type' is not in __init__() and 'type' default value is: DEFAULT_BOT_COMMAND_SCOPE_ALL_PRIVATE_CHATS
@@ -50,16 +57,16 @@ MessageOriginChannel: 'type' is not in __init__() and 'type' default value is: D
 MessageOriginChat: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_CHAT
 MessageOriginHiddenUser: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_HIDDEN_USER
 MessageOriginUser: 'type' is not in __init__() and 'type' default value is: DEFAULT_MESSAGE_ORIGIN_USER
-ReactionTypeEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_EMOJI
-ReactionTypeCustomEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
-ReplyKeyboardMarkup: 'keyboard' default value is: keyboard or []
-ReplyKeyboardRemove: 'remove_keyboard: Literal[True]' is not in __init__() and 'remove_keyboard: Literal[True]' default value is: True
 PassportElementErrorDataField: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_DATA_FIELD
+PassportElementErrorFile: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILE
+PassportElementErrorFiles: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILES
 PassportElementErrorFrontSide: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FRONT_SIDE
 PassportElementErrorReverseSide: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_REVERSE_SIDE
 PassportElementErrorSelfie: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_SELFIE
-PassportElementErrorFile: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILE
-PassportElementErrorFiles: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_FILES
 PassportElementErrorTranslationFile: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILE
 PassportElementErrorTranslationFiles: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_TRANSLATION_FILES
 PassportElementErrorUnspecified: 'source' is not in __init__() and 'source' default value is: DEFAULT_PASSPORT_ELEMENT_ERROR_UNSPECIFIED
+ReactionTypeCustomEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_CUSTOM_EMOJI
+ReactionTypeEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_EMOJI
+ReplyKeyboardMarkup: 'keyboard' default value is: keyboard or []
+ReplyKeyboardRemove: 'remove_keyboard: Literal[True]' is not in __init__() and 'remove_keyboard: Literal[True]' default value is: True

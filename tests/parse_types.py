@@ -448,6 +448,9 @@ f = '''\
 if __name__ != '__main__':
     raise OSError("__name__ is not '__main__'")
 
+import sys
+sys.path.append('../')
+
 from aiotgm.logging import get_logger
 logger = get_logger(__name__)
 

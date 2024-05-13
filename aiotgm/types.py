@@ -2394,6 +2394,7 @@ class ChatMemberUpdated(TelegramType):
         self.old_chat_member = old_chat_member
         self.new_chat_member = new_chat_member
         self.invite_link = invite_link
+        self.via_join_request = via_join_request
         self.via_chat_folder_invite_link = via_chat_folder_invite_link
 
 
