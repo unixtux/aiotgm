@@ -3948,6 +3948,8 @@ class InlineQueryResultCachedGif(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     :param input_message_content: Content of the message to be sent instead of the GIF animation.
@@ -3961,6 +3963,7 @@ class InlineQueryResultCachedGif(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
         input_message_content: Optional[InputMessageContent] = None
     ):
@@ -3971,6 +3974,7 @@ class InlineQueryResultCachedGif(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
@@ -3996,6 +4000,8 @@ class InlineQueryResultCachedMpeg4Gif(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     :param input_message_content: Content of the message to be sent instead of the video animation.
@@ -4009,6 +4015,7 @@ class InlineQueryResultCachedMpeg4Gif(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
         input_message_content: Optional[InputMessageContent] = None
     ):
@@ -4019,6 +4026,7 @@ class InlineQueryResultCachedMpeg4Gif(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
@@ -4046,6 +4054,8 @@ class InlineQueryResultCachedPhoto(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     :param input_message_content: Content of the message to be sent instead of the photo.
@@ -4060,6 +4070,7 @@ class InlineQueryResultCachedPhoto(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
         input_message_content: Optional[InputMessageContent] = None
     ):
@@ -4071,6 +4082,7 @@ class InlineQueryResultCachedPhoto(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
@@ -4129,6 +4141,8 @@ class InlineQueryResultCachedVideo(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     :param input_message_content: Content of the message to be sent instead of the video.
@@ -4143,6 +4157,7 @@ class InlineQueryResultCachedVideo(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
         input_message_content: Optional[InputMessageContent] = None
     ):
@@ -4154,6 +4169,7 @@ class InlineQueryResultCachedVideo(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
@@ -4382,6 +4398,8 @@ class InlineQueryResultGif(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     :param input_message_content: Content of the message to be sent instead of the GIF animation.
@@ -4400,6 +4418,7 @@ class InlineQueryResultGif(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
         input_message_content: Optional[InputMessageContent] = None
     ):
@@ -4415,6 +4434,7 @@ class InlineQueryResultGif(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
@@ -4516,6 +4536,8 @@ class InlineQueryResultMpeg4Gif(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     :param input_message_content: Content of the message to be sent instead of the video animation.
@@ -4534,6 +4556,7 @@ class InlineQueryResultMpeg4Gif(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
         input_message_content: Optional[InputMessageContent] = None
     ):
@@ -4549,6 +4572,7 @@ class InlineQueryResultMpeg4Gif(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
@@ -4581,6 +4605,8 @@ class InlineQueryResultPhoto(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param reply_markup: `Inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_ attached to the message.
     :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
     :param input_message_content: Content of the message to be sent instead of the photo.
@@ -4598,6 +4624,7 @@ class InlineQueryResultPhoto(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None,
         input_message_content: Optional[InputMessageContent] = None
     ):
@@ -4612,6 +4639,7 @@ class InlineQueryResultPhoto(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.reply_markup = reply_markup
         self.input_message_content = input_message_content
 
@@ -4715,6 +4743,8 @@ class InlineQueryResultVideo(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param video_width: Video width.
     :type video_width: :obj:`int`, optional
     :param video_height: Video height.
@@ -4738,6 +4768,7 @@ class InlineQueryResultVideo(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         video_width: Optional[int] = None,
         video_height: Optional[int] = None,
         video_duration: Optional[int] = None,
@@ -4754,6 +4785,7 @@ class InlineQueryResultVideo(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.video_width = video_width
         self.video_height = video_height
         self.video_duration = video_duration
@@ -5051,6 +5083,8 @@ class InputMediaAnimation(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param width: Animation width.
     :type width: :obj:`int`, optional
     :param height: Animation height.
@@ -5067,6 +5101,7 @@ class InputMediaAnimation(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         width: Optional[int] = None,
         height: Optional[int] = None,
         duration: Optional[int] = None,
@@ -5078,6 +5113,7 @@ class InputMediaAnimation(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.width = width
         self.height = height
         self.duration = duration
@@ -5180,6 +5216,8 @@ class InputMediaPhoto(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param has_spoiler: Pass :obj:`True` if the photo needs to be covered with a spoiler animation.
     :type has_spoiler: :obj:`bool`, optional
     '''
@@ -5189,6 +5227,7 @@ class InputMediaPhoto(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         has_spoiler: Optional[bool] = None
     ):
         self.type = DEFAULT_INPUT_MEDIA_PHOTO
@@ -5196,6 +5235,7 @@ class InputMediaPhoto(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.has_spoiler = has_spoiler
 
 
@@ -5215,6 +5255,8 @@ class InputMediaVideo(TelegramType):
     :type parse_mode: :obj:`str`, optional
     :param caption_entities: List of special entities that appear in the caption, which can be specified instead of *parse_mode*.
     :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+    :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`bool`, optional
     :param width: Video width.
     :type width: :obj:`int`, optional
     :param height: Video height.
@@ -5233,6 +5275,7 @@ class InputMediaVideo(TelegramType):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         width: Optional[int] = None,
         height: Optional[int] = None,
         duration: Optional[int] = None,
@@ -5245,6 +5288,7 @@ class InputMediaVideo(TelegramType):
         self.caption = caption
         self.parse_mode = parse_mode
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.width = width
         self.height = height
         self.duration = duration
@@ -5921,6 +5965,8 @@ class Message(TelegramType):
     :type caption: :obj:`str`, optional
     :param caption_entities: For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption.
     :type caption_entities: :obj:`list` of :obj:`MessageEntity`, optional
+    :param show_caption_above_media: :obj:`True`, if the caption must be shown above the message media.
+    :type show_caption_above_media: :obj:`True`, optional
     :param has_media_spoiler: :obj:`True`, if the message media is covered by a spoiler animation.
     :type has_media_spoiler: :obj:`True`, optional
     :param contact: Message is a shared contact, information about the contact.
@@ -6053,6 +6099,7 @@ class Message(TelegramType):
         obj['voice'] = Voice._dese(res.get('voice'))
         obj['caption'] = res.get('caption')
         obj['caption_entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('caption_entities')] if 'caption_entities' in res else None
+        obj['show_caption_above_media'] = res.get('show_caption_above_media')
         obj['has_media_spoiler'] = res.get('has_media_spoiler')
         obj['contact'] = Contact._dese(res.get('contact'))
         obj['dice'] = Dice._dese(res.get('dice'))
@@ -6139,6 +6186,7 @@ class Message(TelegramType):
         voice: Optional[Voice] = None,
         caption: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[Literal[True]] = None,
         has_media_spoiler: Optional[Literal[True]] = None,
         contact: Optional[Contact] = None,
         dice: Optional[Dice] = None,
@@ -6222,6 +6270,7 @@ class Message(TelegramType):
         self.voice = voice
         self.caption = caption
         self.caption_entities = caption_entities
+        self.show_caption_above_media = show_caption_above_media
         self.has_media_spoiler = has_media_spoiler
         self.contact = contact
         self.dice = dice
