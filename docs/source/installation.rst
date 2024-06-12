@@ -18,7 +18,7 @@ Dependencies
 Installation
 ------------
 
-Install the module using `pip <https://pypi.org/project/aiotgm/>`_ on your shell.
+Install the module using `pip <https://pypi.org/project/aiotgm/>`_ with your shell.
 
 .. code-block:: bash
 
