@@ -1627,13 +1627,13 @@ class Client(TelegramApi):
         :type description: :obj:`str`
         :param payload: Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
         :type payload: :obj:`str`
-        :param currency: Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_. Pass “XTR” for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param currency: Three-letter ISO 4217 currency code, see `more on currencies <https://core.telegram.org/bots/payments#supported-currencies>`_. Pass “XTR” for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type currency: :obj:`str`
-        :param prices: Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param prices: Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in `Telegram Stars <https://t.me/BotNews/90>`_
         :type prices: :obj:`list` of :obj:`~aiotgm.types.LabeledPrice`
-        :param provider_token: Payment provider token, obtained via `BotFather <https://t.me/botfather>`_. Pass an empty string for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param provider_token: Payment provider token, obtained via `BotFather <https://t.me/botfather>`_. Pass an empty string for payments in `Telegram Stars <https://t.me/BotNews/90>`_
         :type provider_token: :obj:`str`, optional
-        :param max_tip_amount: The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of ``US$ 1.45`` pass ``max_tip_amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to :obj:`0`. Not supported for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param max_tip_amount: The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of ``US$ 1.45`` pass ``max_tip_amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to :obj:`0`. Not supported for payments in `Telegram Stars <https://t.me/BotNews/90>`_
         :type max_tip_amount: :obj:`int`, optional
         :param suggested_tip_amounts: A JSON-serialized array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.
         :type suggested_tip_amounts: :obj:`list` of :obj:`int`, optional
@@ -1647,19 +1647,19 @@ class Client(TelegramApi):
         :type photo_width: :obj:`int`, optional
         :param photo_height: Photo height.
         :type photo_height: :obj:`int`, optional
-        :param need_name: Pass :obj:`True` if you require the user's full name to complete the order. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param need_name: Pass :obj:`True` if you require the user's full name to complete the order. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type need_name: :obj:`bool`, optional
-        :param need_phone_number: Pass :obj:`True` if you require the user's phone number to complete the order. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param need_phone_number: Pass :obj:`True` if you require the user's phone number to complete the order. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type need_phone_number: :obj:`bool`, optional
-        :param need_email: Pass :obj:`True` if you require the user's email address to complete the order. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param need_email: Pass :obj:`True` if you require the user's email address to complete the order. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type need_email: :obj:`bool`, optional
-        :param need_shipping_address: Pass :obj:`True` if you require the user's shipping address to complete the order. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param need_shipping_address: Pass :obj:`True` if you require the user's shipping address to complete the order. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type need_shipping_address: :obj:`bool`, optional
-        :param send_phone_number_to_provider: Pass :obj:`True` if the user's phone number should be sent to the provider. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param send_phone_number_to_provider: Pass :obj:`True` if the user's phone number should be sent to the provider. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type send_phone_number_to_provider: :obj:`bool`, optional
-        :param send_email_to_provider: Pass :obj:`True` if the user's email address should be sent to the provider. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param send_email_to_provider: Pass :obj:`True` if the user's email address should be sent to the provider. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type send_email_to_provider: :obj:`bool`, optional
-        :param is_flexible: Pass :obj:`True` if the final price depends on the shipping method. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`.
+        :param is_flexible: Pass :obj:`True` if the final price depends on the shipping method. Ignored for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type is_flexible: :obj:`bool`, optional
         :rtype: :obj:`str`
         '''
