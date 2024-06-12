@@ -3001,6 +3001,29 @@ class Client(TelegramApi):
         return await super().promote_chat_member(params)
 
 
+    async def refund_star_payment(
+        self,
+        user_id: int,
+        telegram_payment_charge_id: str
+    ) -> Literal[True]:
+        '''
+        https://core.telegram.org/bots/api#refundstarpayment
+
+        Refunds a successful payment in `Telegram Stars <https://t.me/BotNews/90>`_. Returns :obj:`True` on success.
+
+        :param user_id: Identifier of the user whose payment will be refunded.
+        :type user_id: :obj:`int`
+        :param telegram_payment_charge_id: Telegram payment identifier.
+        :type telegram_payment_charge_id: :obj:`str`
+        :rtype: :obj:`True`
+        '''
+        params = {
+            'user_id': user_id,
+            'telegram_payment_charge_id': telegram_payment_charge_id
+        }
+        return await super().refund_star_payment(params)
+
+
     async def reopen_forum_topic(
         self,
         chat_id: Union[int, str],
