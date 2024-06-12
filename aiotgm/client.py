@@ -3591,8 +3591,8 @@ class Client(TelegramApi):
         payload: str,
         currency: str,
         prices: list[LabeledPrice],
-        provider_token: Optional[str] = None,
         message_thread_id: Optional[int] = None,
+        provider_token: Optional[str] = None,
         max_tip_amount: Optional[int] = None,
         suggested_tip_amounts: Optional[list[int]] = None,
         start_parameter: Optional[str] = None,
@@ -3631,10 +3631,10 @@ class Client(TelegramApi):
         :type currency: :obj:`str`
         :param prices: Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type prices: :obj:`list` of :obj:`~aiotgm.types.LabeledPrice`
-        :param provider_token: Payment provider token, obtained via `@BotFather <https://t.me/botfather>`_. Pass an empty string for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
-        :type provider_token: :obj:`str`, optional
         :param message_thread_id: Unique identifier for the target message thread (topic) of the forum; for forum supergroups only.
         :type message_thread_id: :obj:`int`, optional
+        :param provider_token: Payment provider token, obtained via `@BotFather <https://t.me/botfather>`_. Pass an empty string for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
+        :type provider_token: :obj:`str`, optional
         :param max_tip_amount: The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of ``US$ 1.45`` pass ``max_tip_amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to :obj:`0`. Not supported for payments in `Telegram Stars <https://t.me/BotNews/90>`_.
         :type max_tip_amount: :obj:`int`, optional
         :param suggested_tip_amounts: A JSON-serialized array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.
