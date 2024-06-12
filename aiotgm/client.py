@@ -1418,6 +1418,7 @@ class Client(TelegramApi):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
         reply_parameters: Optional[ReplyParameters] = None,
@@ -1444,6 +1445,8 @@ class Client(TelegramApi):
         :type parse_mode: :obj:`str`, optional
         :param caption_entities: A JSON-serialized list of special entities that appear in the new caption, which can be specified instead of *parse_mode*.
         :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media. Ignored if a new caption isn't specified.
+        :type show_caption_above_media: :obj:`bool`, optional
         :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
         :type disable_notification: :obj:`bool`, optional
         :param protect_content: Protects the contents of the sent message from forwarding and saving.
@@ -1464,6 +1467,7 @@ class Client(TelegramApi):
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
+        if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
@@ -2046,6 +2050,7 @@ class Client(TelegramApi):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
         '''
@@ -2066,6 +2071,8 @@ class Client(TelegramApi):
         :type parse_mode: :obj:`str`, optional
         :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
         :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media. Supported only for animation, photo and video messages.
+        :type show_caption_above_media: :obj:`bool`, optional
         :param reply_markup: A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
         :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
         :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
@@ -2078,6 +2085,7 @@ class Client(TelegramApi):
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
+        if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_caption(params)
         return Message._dese(result) if result is not True else True
@@ -3180,6 +3188,7 @@ class Client(TelegramApi):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         has_spoiler: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
@@ -3216,6 +3225,8 @@ class Client(TelegramApi):
         :type parse_mode: :obj:`str`, optional
         :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
         :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+        :type show_caption_above_media: :obj:`bool`, optional
         :param has_spoiler: Pass :obj:`True` if the animation needs to be covered with a spoiler animation.
         :type has_spoiler: :obj:`bool`, optional
         :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
@@ -3244,6 +3255,7 @@ class Client(TelegramApi):
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
+        if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if has_spoiler is not None: params['has_spoiler'] = has_spoiler
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
@@ -3961,6 +3973,7 @@ class Client(TelegramApi):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         has_spoiler: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
@@ -3988,6 +4001,8 @@ class Client(TelegramApi):
         :type parse_mode: :obj:`str`, optional
         :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
         :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+        :type show_caption_above_media: :obj:`bool`, optional
         :param has_spoiler: Pass :obj:`True` if the photo needs to be covered with a spoiler animation.
         :type has_spoiler: :obj:`bool`, optional
         :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
@@ -4012,6 +4027,7 @@ class Client(TelegramApi):
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
+        if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if has_spoiler is not None: params['has_spoiler'] = has_spoiler
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
@@ -4282,6 +4298,7 @@ class Client(TelegramApi):
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
         has_spoiler: Optional[bool] = None,
         supports_streaming: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
@@ -4320,6 +4337,8 @@ class Client(TelegramApi):
         :type parse_mode: :obj:`str`, optional
         :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
         :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+        :type show_caption_above_media: :obj:`bool`, optional
         :param has_spoiler: Pass :obj:`True` if the video needs to be covered with a spoiler animation.
         :type has_spoiler: :obj:`bool`, optional
         :param supports_streaming: Pass :obj:`True` if the uploaded video is suitable for streaming.
@@ -4350,6 +4369,7 @@ class Client(TelegramApi):
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
+        if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if has_spoiler is not None: params['has_spoiler'] = has_spoiler
         if supports_streaming is not None: params['supports_streaming'] = supports_streaming
         if disable_notification is not None: params['disable_notification'] = disable_notification
