@@ -18,7 +18,7 @@ You require a good python knowledge with the [asyncio module](https://docs.pytho
 
 * #### Installation
 
-Install the module using [pip](https://pypi.org/project/aiotgm/) from your shell.
+Install the module using [pip](https://pypi.org/project/aiotgm/) on your shell.
 
 ```powershell
 $ pip install aiotgm

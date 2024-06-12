@@ -18,7 +18,7 @@ Dependencies
 Installation
 ------------
 
-Install the module using `pip <https://pypi.org/project/aiotgm/>`_ from your shell.
+Install the module using `pip <https://pypi.org/project/aiotgm/>`_ on your shell.
 
 .. code-block:: bash
 
@@ -55,7 +55,7 @@ Call the method :meth:`~aiotgm.Client.long_polling` to manage :obj:`updates <aio
         try:
             asyncio.run(bot.long_polling())
         except KeyboardInterrupt:
-            ...
+            pass
 
 There are 22 decorator methods to manage differrent :obj:`updates <aiotgm.types.Update>`:
 
