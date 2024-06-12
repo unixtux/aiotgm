@@ -5897,6 +5897,8 @@ class Message(TelegramType):
     :type entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
     :param link_preview_options: Options used for link preview generation for the message, if it is a text message and link preview options were changed.
     :type link_preview_options: :obj:`~aiotgm.types.LinkPreviewOptions`, optional
+    :param effect_id: Unique identifier of the message effect added to the message.
+    :type effect_id: :obj:`str`, optional
     :param animation: Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set.
     :type animation: :obj:`~aiotgm.types.Animation`, optional
     :param audio: Message is an audio file, information about the file.
@@ -6039,6 +6041,7 @@ class Message(TelegramType):
         obj['text'] = res.get('text')
         obj['entities'] = [MessageEntity._dese(kwargs) for kwargs in res.get('entities')] if 'entities' in res else None
         obj['link_preview_options'] = LinkPreviewOptions._dese(res.get('link_preview_options'))
+        obj['effect_id'] = res.get('effect_id')
         obj['animation'] = Animation._dese(res.get('animation'))
         obj['audio'] = Audio._dese(res.get('audio'))
         obj['document'] = Document._dese(res.get('document'))
@@ -6124,6 +6127,7 @@ class Message(TelegramType):
         text: str = None,
         entities: Optional[list[MessageEntity]] = None,
         link_preview_options: Optional[LinkPreviewOptions] = None,
+        effect_id: Optional[str] = None,
         animation: Optional[Animation] = None,
         audio: Optional[Audio] = None,
         document: Optional[Document] = None,
@@ -6206,6 +6210,7 @@ class Message(TelegramType):
         self.text = text or str() # If not text, it's str() instead of None
         self.entities = entities
         self.link_preview_options = link_preview_options
+        self.effect_id = effect_id
         self.animation = animation
         self.audio = audio
         self.document = document
