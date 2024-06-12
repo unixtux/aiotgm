@@ -3270,6 +3270,7 @@ class Client(TelegramApi):
         thumbnail: Optional[Union[InputFile, str]] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
+        message_effect_id: Optional[str] = None,
         reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
@@ -3307,6 +3308,8 @@ class Client(TelegramApi):
         :type disable_notification: :obj:`bool`, optional
         :param protect_content: Protects the contents of the sent message from forwarding and saving.
         :type protect_content: :obj:`bool`, optional
+        :param message_effect_id: Unique identifier of the message effect to be added to the message; for private chats only.
+        :type message_effect_id: :obj:`str`, optional
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
@@ -3330,6 +3333,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_audio(params)
@@ -3501,6 +3505,7 @@ class Client(TelegramApi):
         disable_content_type_detection: Optional[bool] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
+        message_effect_id: Optional[str] = None,
         reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
@@ -3533,6 +3538,8 @@ class Client(TelegramApi):
         :type disable_notification: :obj:`bool`, optional
         :param protect_content: Protects the contents of the sent message from forwarding and saving.
         :type protect_content: :obj:`bool`, optional
+        :param message_effect_id: Unique identifier of the message effect to be added to the message; for private chats only.
+        :type message_effect_id: :obj:`str`, optional
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
@@ -3554,6 +3561,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_document(params)
@@ -4102,6 +4110,7 @@ class Client(TelegramApi):
         emoji: Optional[str] = None,
         disable_notification: Optional[bool] = None,
         protect_content: Optional[bool] = None,
+        message_effect_id: Optional[str] = None,
         reply_parameters: Optional[ReplyParameters] = None,
         reply_markup: Optional[REPLY_MARKUP_TYPES] = None
     ) -> Message:
@@ -4125,6 +4134,8 @@ class Client(TelegramApi):
         :type disable_notification: :obj:`bool`, optional
         :param protect_content: Protects the contents of the sent message from forwarding and saving.
         :type protect_content: :obj:`bool`, optional
+        :param message_effect_id: Unique identifier of the message effect to be added to the message; for private chats only.
+        :type message_effect_id: :obj:`str`, optional
         :param reply_parameters: Description of the message to reply to.
         :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
         :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove reply keyboard or to force a reply from the user.
@@ -4141,6 +4152,7 @@ class Client(TelegramApi):
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
         elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().send_sticker(params)
