@@ -5200,6 +5200,7 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         message_id: int,
+        business_connection_id: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Poll:
         '''
@@ -5212,6 +5213,8 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param message_id: Identifier of the original message with the poll.
         :type message_id: :obj:`int`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
+        :type business_connection_id: :obj:`str`, optional
         :param reply_markup: A JSON-serialized object for a new `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
         :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
         :rtype: :obj:`~aiotgm.types.Poll`
@@ -5220,6 +5223,7 @@ class Client(TelegramApi):
             'chat_id': chat_id,
             'message_id': message_id
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().stop_poll(params)
         return Poll._dese(result)
