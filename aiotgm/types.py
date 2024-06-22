@@ -178,17 +178,27 @@ __all__ = (
     'ReplyKeyboardRemove',
     'ReplyParameters',
     'ResponseParameters',
+    'RevenueWithdrawalState', # Deserialized in _dese_revenue_withdrawal_state()
+    'RevenueWithdrawalStateFailed',
+    'RevenueWithdrawalStatePending',
+    'RevenueWithdrawalStateSucceeded',
     'SentWebAppMessage',
     'SharedUser',
     'ShippingAddress',
     'ShippingOption',
     'ShippingQuery',
+    'StarTransaction',
+    'StarTransactions',
     'Sticker',
     'StickerSet',
     'Story',
     'SuccessfulPayment',
     'SwitchInlineQueryChosenChat',
     'TextQuote',
+    'TransactionPartner', # Deserialized in _dese_transaction_partner()
+    'TransactionPartnerFragment',
+    'TransactionPartnerOther',
+    'TransactionPartnerUser',
     'Update',
     'User',
     'UserChatBoosts',
@@ -7536,6 +7546,70 @@ class ResponseParameters(TelegramType):
         self.retry_after = retry_after
 
 
+class RevenueWithdrawalStateFailed(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#revenuewithdrawalstatefailed
+
+    The withdrawal failed and the transaction was refunded.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(
+        self
+    ):
+        self.type = DEFAULT_REVENUE_WITHDRAWAL_STATE_FAILED
+
+class RevenueWithdrawalStatePending(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#revenuewithdrawalstatepending
+
+    The withdrawal is in progress.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(
+        self
+    ):
+        self.type = DEFAULT_REVENUE_WITHDRAWAL_STATE_PENDING
+
+
+class RevenueWithdrawalStateSucceeded(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#revenuewithdrawalstatesucceeded
+
+    The withdrawal succeeded.
+
+    :param date: Date the withdrawal was completed in Unix time.
+    :type date: :obj:`int`
+    :param url: An HTTPS URL that can be used to see transaction details.
+    :type url: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['date'] = res.get('date')
+        obj['url'] = res.get('url')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        date: int,
+        url: str
+    ):
+        self.type = DEFAULT_REVENUE_WITHDRAWAL_STATE_SUCCEEDED
+        self.date = date
+        self.url = url
+
+
 class SentWebAppMessage(TelegramType):
     '''
     https://core.telegram.org/bots/api#sentwebappmessage
@@ -7711,6 +7785,72 @@ class ShippingQuery(TelegramType):
         self.from_user = from_user
         self.invoice_payload = invoice_payload
         self.shipping_address = shipping_address
+
+
+class StarTransaction(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#startransaction
+
+    Describes a Telegram Star transaction.
+
+    :param id: Unique identifier of the transaction. Coincides with the identifer of the original transaction for refund transactions. Coincides with :obj:`~aiotgm.types.SuccessfulPayment`.telegram_payment_charge_id for successful incoming payments from users.
+    :type id: :obj:`str`
+    :param amount: Number of Telegram Stars transferred by the transaction.
+    :type amount: :obj:`int`
+    :param date: Date the transaction was created in Unix time.
+    :type date: :obj:`int`
+    :param source: Source of an incoming transaction (e.g., a user purchasing goods or services, Fragment refunding a failed withdrawal). Only for incoming transactions.
+    :type source: :obj:`~aiotgm.types.TransactionPartner`, optional
+    :param receiver: Receiver of an outgoing transaction (e.g., a user for a purchase refund, Fragment for a withdrawal). Only for outgoing transactions.
+    :type receiver: :obj:`~aiotgm.types.TransactionPartner`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['id'] = res.get('id')
+        obj['amount'] = res.get('amount')
+        obj['date'] = res.get('date')
+        obj['source'] = _dese_transaction_partner(res.get('source'))
+        obj['receiver'] = _dese_transaction_partner(res.get('receiver'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        id: str,
+        amount: int,
+        date: int,
+        source: Optional[TransactionPartner] = None,
+        receiver: Optional[TransactionPartner] = None
+    ):
+        self.id = id
+        self.amount = amount
+        self.date = date
+        self.source = source
+        self.receiver = receiver
+
+
+class StarTransactions(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#startransactions
+
+    Contains a list of Telegram Star transactions.
+
+    :param transactions: The list of transactions.
+    :type transactions: :obj:`list` of :obj:`~aiotgm.types.StarTransaction`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['transactions'] = [StarTransaction._dese(kwargs) for kwargs in res.get('transactions')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        transactions: list[StarTransaction]
+    ):
+        self.transactions = transactions
 
 
 class Sticker(TelegramType):
@@ -8011,6 +8151,72 @@ class TextQuote(TelegramType):
         self.position = position
         self.entities = entities
         self.is_manual = is_manual
+
+
+class TransactionPartnerFragment(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#transactionpartnerfragment
+
+    Describes a withdrawal transaction with Fragment.
+
+    :param withdrawal_state: State of the transaction if the transaction is outgoing.
+    :type withdrawal_state: :obj:`~aiotgm.types.RevenueWithdrawalState`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['withdrawal_state'] = _dese_revenue_withdrawal_state(res.get('withdrawal_state'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        withdrawal_state: Optional[RevenueWithdrawalState] = None
+    ):
+        self.type = DEFAULT_TRANSACTION_PARTNER_FRAGMENT
+        self.withdrawal_state = withdrawal_state
+
+
+class TransactionPartnerOther(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#transactionpartnerother
+
+    Describes a transaction with an unknown source or recipient.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(
+        self
+    ):
+        self.type = DEFAULT_TRANSACTION_PARTNER_OTHER
+
+
+class TransactionPartnerUser(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#transactionpartneruser
+
+    Describes a transaction with a user.
+
+    :param user: Information about the user.
+    :type user: :obj:`~aiotgm.types.User`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['user'] = User._dese(res.get('user'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        user: User
+    ):
+        self.type = DEFAULT_TRANSACTION_PARTNER_USER
+        self.user = user
 
 
 class Update(TelegramType):
@@ -9181,4 +9387,84 @@ def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
         raise ValueError(
             'An error occurred during the deserialization'
             f' of the type ReactionType. Invalid type: {type!r}.'
+        )
+
+
+RevenueWithdrawalState = Union[
+    RevenueWithdrawalStatePending,
+    RevenueWithdrawalStateSucceeded,
+    RevenueWithdrawalStateFailed
+]
+'''
+https://core.telegram.org/bots/api#revenuewithdrawalstate
+
+This object describes the state of a revenue withdrawal operation.
+Currently, it can be one of:
+
+- :obj:`~aiotgm.types.RevenueWithdrawalStatePending`
+- :obj:`~aiotgm.types.RevenueWithdrawalStateSucceeded`
+- :obj:`~aiotgm.types.RevenueWithdrawalStateFailed`
+'''
+
+def _dese_revenue_withdrawal_state(res: Optional[dict], /) -> Optional[RevenueWithdrawalState]:
+    '''
+    Function to deserialize RevenueWithdrawalState.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_REVENUE_WITHDRAWAL_STATE_PENDING:
+        return RevenueWithdrawalStatePending._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_REVENUE_WITHDRAWAL_STATE_SUCCEEDED:
+        return RevenueWithdrawalStateSucceeded._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_REVENUE_WITHDRAWAL_STATE_FAILED:
+        return RevenueWithdrawalStateFailed._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type RevenueWithdrawalState. Invalid type: {type!r}.'
+        )
+
+
+TransactionPartner = Union[
+    TransactionPartnerFragment,
+    TransactionPartnerUser,
+    TransactionPartnerOther
+]
+'''
+https://core.telegram.org/bots/api#transactionpartner
+
+This object describes the source of a transaction, or its recipient for outgoing transactions.
+Currently, it can be one of:
+
+- :obj:`~aiotgm.types.TransactionPartnerFragment`
+- :obj:`~aiotgm.types.TransactionPartnerUser`
+- :obj:`~aiotgm.types.TransactionPartnerOther`
+'''
+
+def _dese_transaction_partner(res: Optional[dict], /) -> Optional[TransactionPartner]:
+    '''
+    Function to deserialize TransactionPartner.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_TRANSACTION_PARTNER_FRAGMENT:
+        return TransactionPartnerFragment._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_TRANSACTION_PARTNER_USER:
+        return TransactionPartnerUser._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_TRANSACTION_PARTNER_OTHER:
+        return TransactionPartnerOther._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type TransactionPartner. Invalid type: {type!r}.'
         )
