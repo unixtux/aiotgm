@@ -2726,6 +2726,30 @@ class Client(TelegramApi):
         return BotShortDescription._dese(result)
 
 
+    async def get_star_transactions(
+        self,
+        offset: Optional[int] = None,
+        limit: Optional[int] = None
+    ) -> StarTransactions:
+        '''
+        https://core.telegram.org/bots/api#getstartransactions
+
+        Returns the bot's Telegram Star transactions in chronological order.
+        On success, returns a :obj:`~aiotgm.types.StarTransactions` object.
+
+        :param offset: Number of transactions to skip in the response.
+        :type offset: :obj:`int`, optional
+        :param limit: The maximum number of transactions to be retrieved. Values between 1-100 are accepted. Defaults to :obj:`100`.
+        :type limit: :obj:`int`, optional
+        :rtype: :obj:`~aiotgm.types.StarTransactions`
+        '''
+        params = {}
+        if offset is not None: params['offset'] = offset
+        if limit is not None: params['limit'] = limit
+        result = await super().get_star_transactions(params)
+        return StarTransactions._dese(result)
+
+
     async def get_sticker_set(
         self,
         name: str

@@ -583,6 +583,10 @@ class TelegramApi:
         method = 'getMyShortDescription'
         return await self._request(method, params)
 
+    async def get_star_transactions(self, params: dict):
+        method = 'getStarTransactions'
+        return await self._request(method, params)
+
     async def get_sticker_set(self, params: dict):
         method = 'getStickerSet'
         return await self._request(method, params)
