@@ -7563,6 +7563,7 @@ class RevenueWithdrawalStateFailed(TelegramType):
     ):
         self.type = DEFAULT_REVENUE_WITHDRAWAL_STATE_FAILED
 
+
 class RevenueWithdrawalStatePending(TelegramType):
     '''
     https://core.telegram.org/bots/api#revenuewithdrawalstatepending
