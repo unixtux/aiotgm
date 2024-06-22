@@ -2044,6 +2044,7 @@ class Client(TelegramApi):
 
     async def edit_message_caption(
         self,
+        business_connection_id: Optional[str] = None,
         chat_id: Optional[Union[int, str]] = None,
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None,
@@ -2058,7 +2059,10 @@ class Client(TelegramApi):
 
         Use this method to edit captions of messages. On success, if the edited message is
         not an inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
-
+        Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+        
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
+        :type business_connection_id: :obj:`str`, optional
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
         :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
@@ -2078,6 +2082,7 @@ class Client(TelegramApi):
         :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
         '''
         params = {}
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
@@ -2095,6 +2100,7 @@ class Client(TelegramApi):
         self,
         latitude: float,
         longitude: float,
+        business_connection_id: Optional[str] = None,
         chat_id: Optional[Union[int, str]] = None,
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None,
@@ -2115,6 +2121,8 @@ class Client(TelegramApi):
         :type latitude: :obj:`float`
         :param longitude: Longitude of new location.
         :type longitude: :obj:`float`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
+        :type business_connection_id: :obj:`str`, optional
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
         :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
@@ -2137,6 +2145,7 @@ class Client(TelegramApi):
             'latitude': latitude,
             'longitude': longitude
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
@@ -2152,6 +2161,7 @@ class Client(TelegramApi):
     async def edit_message_media(
         self,
         media: InputMedia,
+        business_connection_id: Optional[str] = None,
         chat_id: Optional[Union[int, str]] = None,
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None,
@@ -2165,9 +2175,12 @@ class Client(TelegramApi):
         document albums and to a photo or a video otherwise. When an inline message is edited, a new file
         can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited
         message is not an inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
-
+        Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+        
         :param media: A JSON-serialized object for a new media content of the message.
         :type media: :obj:`~aiotgm.types.InputMedia`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
+        :type business_connection_id: :obj:`str`, optional
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
         :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
@@ -2181,6 +2194,7 @@ class Client(TelegramApi):
         params = {
             'media': media
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
@@ -2191,6 +2205,7 @@ class Client(TelegramApi):
 
     async def edit_message_reply_markup(
         self,
+        business_connection_id: Optional[str] = None,
         chat_id: Optional[Union[int, str]] = None,
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None,
@@ -2201,7 +2216,10 @@ class Client(TelegramApi):
 
         Use this method to edit only the reply markup of messages. On success, if the edited message is not an
         inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
+        Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
 
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
+        :type business_connection_id: :obj:`str`, optional
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
         :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
@@ -2213,6 +2231,7 @@ class Client(TelegramApi):
         :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
         '''
         params = {}
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
@@ -2224,6 +2243,7 @@ class Client(TelegramApi):
     async def edit_message_text(
         self,
         text: str,
+        business_connection_id: Optional[str] = None,
         chat_id: Optional[Union[int, str]] = None,
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None,
@@ -2237,9 +2257,12 @@ class Client(TelegramApi):
 
         Use this method to edit text and `game <https://core.telegram.org/bots/api#games>`_ messages.
         On success, if the edited message is not an inline message, the edited :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
+        Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
 
         :param text: New text of the message, 1-4096 characters after entities parsing.
         :type text: :obj:`str`
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
+        :type business_connection_id: :obj:`str`, optional
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
         :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
@@ -2259,6 +2282,7 @@ class Client(TelegramApi):
         params = {
             'text': text
         }
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
@@ -5137,6 +5161,7 @@ class Client(TelegramApi):
 
     async def stop_message_live_location(
         self,
+        business_connection_id: Optional[str] = None,
         chat_id: Optional[Union[int, str]] = None,
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None,
@@ -5149,6 +5174,8 @@ class Client(TelegramApi):
         expires. On success, if the message is not an inline message, the edited
         :obj:`~aiotgm.types.Message` is returned, otherwise :obj:`True` is returned.
 
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
+        :type business_connection_id: :obj:`str`, optional
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
         :param message_id: Required if *inline_message_id* is not specified. Identifier of the message with live location to stop.
@@ -5160,6 +5187,7 @@ class Client(TelegramApi):
         :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
         '''
         params = {}
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
