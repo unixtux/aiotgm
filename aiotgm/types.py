@@ -152,6 +152,11 @@ __all__ = (
     'MessageReactionCountUpdated',
     'MessageReactionUpdated',
     'OrderInfo',
+    'PaidMedia', # Deserialized in _dese_paid_media()
+    'PaidMediaInfo',
+    'PaidMediaPhoto',
+    'PaidMediaPreview',
+    'PaidMediaVideo',
     'PassportData',
     'PassportElementError', # No deserialization.
     'PassportElementErrorDataField',
@@ -6688,6 +6693,113 @@ class OrderInfo(TelegramType):
         self.shipping_address = shipping_address
 
 
+class PaidMediaInfo(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#paidmediainfo
+
+    Describes the paid media added to a message.
+
+    :param star_count: The number of Telegram Stars that must be paid to buy access to the media.
+    :type star_count: :obj:`int`
+    :param paid_media: Information about the paid media.
+    :type paid_media: :obj:`list` of :obj:`~aiotgm.types.PaidMedia`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['star_count'] = res.get('star_count')
+        obj['paid_media'] = [_dese_paid_media(kwargs) for kwargs in res.get('paid_media')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        star_count: int,
+        paid_media: list[PaidMedia]
+    ):
+        self.star_count = star_count
+        self.paid_media = paid_media
+
+
+class PaidMediaPhoto(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#paidmediaphoto
+
+    The paid media is a photo.
+
+    :param photo: The photo.
+    :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')]
+        return cls(**obj)
+
+    def __init__(
+        self,
+        photo: list[PhotoSize]
+    ):
+        self.photo = photo
+
+
+class PaidMediaPreview(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#paidmediapreview
+
+    The paid media isn't available before the payment.
+
+    :param width: Media width as defined by the sender.
+    :type width: :obj:`int`, optional
+    :param height: Media height as defined by the sender.
+    :type height: :obj:`int`, optional
+    :param duration: Duration of the media in seconds as defined by the sender.
+    :type duration: :obj:`int`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['width'] = res.get('width')
+        obj['height'] = res.get('height')
+        obj['duration'] = res.get('duration')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        width: Optional[int],
+        height: Optional[int],
+        duration: Optional[int]
+    ):
+        self.width = width
+        self.height = height
+        self.duration = duration
+
+
+class PaidMediaVideo(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#paidmediavideo
+
+    The paid media is a video.
+
+    :param video: The video.
+    :type video: :obj:`~aiotgm.types.Video`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['video'] = Video._dese(res.get('video'))
+        return cls(**obj)
+
+    def __init__(
+        self,
+        video: Video
+    ):
+        self.video = video
+
+
 class PassportData(TelegramType):
     '''
     https://core.telegram.org/bots/api#passportdata
@@ -9328,6 +9440,41 @@ def _dese_message_origin(res: Optional[dict], /) -> Optional[MessageOrigin]:
         raise ValueError(
             'An error occurred during the deserialization'
             f' of the type MessageOrigin. Invalid type: {type!r}.'
+        )
+
+
+PaidMedia = Union[PaidMediaPreview, PaidMediaPhoto, PaidMediaVideo]
+'''
+https://core.telegram.org/bots/api#paidmedia
+
+This object describes paid media. Currently, it can be one of:
+
+- :obj:`~aiotgm.types.PaidMediaPreview`
+- :obj:`~aiotgm.types.PaidMediaPhoto`
+- :obj:`~aiotgm.types.PaidMediaVideo`
+'''
+
+def _dese_paid_media(res: Optional[dict], /) -> Optional[PaidMedia]:
+    '''
+    Function to deserialize PaidMedia.
+    '''
+    if res is None: return None
+    obj = _check_dict(res)
+
+    type = obj.pop('type')
+
+    if type == DEFAULT_PAID_MEDIA_PREVIEW:
+        return PaidMediaPreview._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_PAID_MEDIA_PHOTO:
+        return PaidMediaPhoto._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_PAID_MEDIA_VIDEO:
+        return PaidMediaVideo._dese(obj, check_dict=False)
+    else:
+        raise ValueError(
+            'An error occurred during the deserialization'
+            f' of the type PaidMedia. Invalid type: {type!r}.'
         )
 
 
