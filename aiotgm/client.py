@@ -4012,6 +4012,69 @@ class Client(TelegramApi):
         return Message._dese(result)
 
 
+    async def send_paid_media(
+        self,
+        chat_id: Union[int, str],
+        star_count: int,
+        media: list[InputPaidMedia],
+        caption: Optional[str] = None,
+        parse_mode: Optional[str] = None,
+        caption_entities: Optional[list[MessageEntity]] = None,
+        show_caption_above_media: Optional[bool] = None,
+        disable_notification: Optional[bool] = None,
+        protect_content: Optional[bool] = None,
+        reply_parameters: Optional[ReplyParameters] = None,
+        reply_markup: Optional[REPLY_MARKUP_TYPES] = None
+    ) -> Message:
+        '''
+        https://core.telegram.org/bots/api#sendpaidmedia
+
+        Use this method to send paid media to channel chats.
+        On success, the sent :obj:`~aiotgm.types.Message` is returned.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param star_count: The number of Telegram Stars that must be paid to buy access to the media.
+        :type star_count: :obj:`int`
+        :param media: A JSON-serialized array describing the media to be sent; up to 10 items.
+        :type media: :obj:`list` of :obj:`~aiotgm.types.InputPaidMedia`
+        :param caption: Media caption, 0-1024 characters after entities parsing
+        :type caption: :obj:`str`, optional
+        :param parse_mode: Mode for parsing entities in the media caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
+        :type parse_mode: :obj:`str`, optional
+        :param caption_entities: A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*.
+        :type caption_entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
+        :param show_caption_above_media: Pass :obj:`True`, if the caption must be shown above the message media.
+        :type show_caption_above_media: :obj:`bool`, optional
+        :param disable_notification: Sends the message `silently <https://telegram.org/blog/channels-2-0#silent-messages>`_. Users will receive a notification with no sound.
+        :type disable_notification: :obj:`bool`, optional
+        :param protect_content: Protects the contents of the sent message from forwarding and saving.
+        :type protect_content: :obj:`bool`, optional
+        :param reply_parameters: Description of the message to reply to.
+        :type reply_parameters: :obj:`~aiotgm.types.ReplyParameters`, optional
+        :param reply_markup: Additional interface options. A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_, `custom reply keyboard <https://core.telegram.org/bots/features#keyboards>`_, instructions to remove a reply keyboard or to force a reply from the user.
+        :type reply_markup: :obj:`~aiotgm.types.REPLY_MARKUP_TYPES`, optional
+        :rtype: :obj:`~aiotgm.types.Message`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'star_count': star_count,
+            'media': media
+        }
+        if caption is not None: params['caption'] = caption
+        if parse_mode is not None: params['parse_mode'] = parse_mode
+        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
+        if caption_entities is not None: params['caption_entities'] = caption_entities
+        if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
+        if disable_notification is not None: params['disable_notification'] = disable_notification
+        if protect_content is not None: params['protect_content'] = protect_content
+        elif self.protect_content is not None: params['protect_content'] = self.protect_content
+        if reply_parameters is not None: params['reply_parameters'] = reply_parameters
+        if reply_markup is not None: params['reply_markup'] = reply_markup
+        result = await super().send_paid_media(params)
+        return Message._dese(result)
+
+
     async def send_photo(
         self,
         chat_id: Union[int, str],

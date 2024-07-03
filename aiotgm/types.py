@@ -121,6 +121,9 @@ __all__ = (
     'InputMediaPhoto',
     'InputMediaVideo',
     'InputMessageContent', # No deserialization.
+    'InputPaidMedia',
+    'InputPaidMediaPhoto',
+    'InputPaidMediaVideo',
     'InputPollOption',
     'InputSticker',
     'InputTextMessageContent',
@@ -5311,6 +5314,60 @@ class InputMediaVideo(TelegramType):
         self.has_spoiler = has_spoiler
 
 
+class InputPaidMediaPhoto(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputpaidmediaphoto
+
+    The paid media to send is a photo.
+
+    :param media: File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+    :type media: :obj:`str`
+    '''
+    def __init__(
+        self,
+        media: str
+    ):
+        self.type = DEFAULT_INPUT_PAID_MEDIA_PHOTO
+        self.media = media
+
+
+class InputPaidMediaVideo(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#inputpaidmediavideo
+
+    The paid media to send is a video.
+
+    :param media: File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass “attach://<file_attach_name>” to upload a new one using multipart/form-data under <file_attach_name> name. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+    :type media: :obj:`str`
+    :param thumbnail: Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass “attach://<file_attach_name>” if the thumbnail was uploaded using multipart/form-data under <file_attach_name>. `More information on Sending Files » <https://core.telegram.org/bots/api#sending-files>`_.
+    :type thumbnail: :obj:`~aiotgm.types.InputFile` or :obj:`str`, optional
+    :param width: Video width.
+    :type width: :obj:`int`, optional
+    :param height: Video height.
+    :type height: :obj:`int`, optional
+    :param duration: Video duration in seconds.
+    :type duration: :obj:`int`, optional
+    :param supports_streaming: Pass :obj:`True` if the uploaded video is suitable for streaming.
+    :type supports_streaming: :obj:`bool`, optional
+    '''
+    def __init__(
+        self,
+        media: str,
+        thumbnail: Optional[Union[InputFile, str]] = None,
+        width: Optional[int] = None,
+        height: Optional[int] = None,
+        duration: Optional[int] = None,
+        supports_streaming: Optional[bool] = None
+    ):
+        self.type = DEFAULT_INPUT_PAID_MEDIA_VIDEO
+        self.media = media
+        self.thumbnail = thumbnail
+        self.width = width
+        self.height = height
+        self.duration = duration
+        self.supports_streaming = supports_streaming
+
+
 class InputPollOption(TelegramType):
     '''
     https://core.telegram.org/bots/api#inputpolloption
@@ -9334,6 +9391,17 @@ Telegram clients currently support the following 5 types:
 - :obj:`~aiotgm.types.InputVenueMessageContent`
 - :obj:`~aiotgm.types.InputContactMessageContent`
 - :obj:`~aiotgm.types.InputInvoiceMessageContent`
+'''
+
+
+InputPaidMedia = Union[InputPaidMediaPhoto, InputPaidMediaVideo]
+'''
+https://core.telegram.org/bots/api#inputpaidmedia
+
+This object describes the paid media to be sent. Currently, it can be one of:
+
+- :obj:`~aiotgm.types.InputPaidMediaPhoto`
+- :obj:`~aiotgm.types.InputPaidMediaVideo`
 '''
 
 

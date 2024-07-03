@@ -27,6 +27,7 @@ from .types import (
     TelegramType, # to serialize Telegram types in _serialize()
     InputFile,
     InputMedia,
+    InputPaidMedia,
     InputMediaAudio,
     InputMediaDocument,
     InputMediaPhoto,
@@ -698,6 +699,15 @@ class TelegramApi:
     async def send_message(self, params: dict):
         method = 'sendMessage'
         return await self._request(method, params)
+
+    async def send_paid_media(self, params: dict):
+        method = 'sendPaidMedia'
+        files = _get_input_media_files(
+            params,
+            'media',
+            types_check=InputPaidMedia
+        )
+        return await self._request(method, params, files)
 
     async def send_photo(self, params: dict):
         method = 'sendPhoto'
