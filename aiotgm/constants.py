@@ -110,3 +110,6 @@ DEFAULT_PAID_MEDIA_VIDEO = 'video'
 # InputPaidMedia (2)
 DEFAULT_INPUT_PAID_MEDIA_PHOTO = 'photo'
 DEFAULT_INPUT_PAID_MEDIA_VIDEO = 'video'
+
+# TransactionPartnerTelegramAds (?)
+DEFAULT_TRANSACTION_PARTNER_TELEGRAM_ADS = 'telegram_ads'

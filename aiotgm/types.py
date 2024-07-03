@@ -206,6 +206,7 @@ __all__ = (
     'TransactionPartner', # Deserialized in _dese_transaction_partner()
     'TransactionPartnerFragment',
     'TransactionPartnerOther',
+    'TransactionPartnerTelegramAds',
     'TransactionPartnerUser',
     'Update',
     'User',
@@ -8372,6 +8373,23 @@ class TransactionPartnerOther(TelegramType):
 
     def __init__(self):
         self.type = DEFAULT_TRANSACTION_PARTNER_OTHER
+
+
+class TransactionPartnerTelegramAds(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#transactionpartnertelegramads
+
+    Describes a withdrawal transaction to the Telegram Ads platform.
+
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        self.type = DEFAULT_TRANSACTION_PARTNER_TELEGRAM_ADS
 
 
 class TransactionPartnerUser(TelegramType):
