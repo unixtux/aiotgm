@@ -49,6 +49,8 @@ InputMediaAudio: 'type' is not in __init__() and 'type' default value is: DEFAUL
 InputMediaDocument: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_DOCUMENT
 InputMediaPhoto: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_PHOTO
 InputMediaVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_MEDIA_VIDEO
+InputPaidMediaPhoto: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_PAID_MEDIA_PHOTO
+InputPaidMediaVideo: 'type' is not in __init__() and 'type' default value is: DEFAULT_INPUT_PAID_MEDIA_VIDEO
 MenuButtonCommands: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_COMMANDS
 MenuButtonDefault: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_DEFAULT
 MenuButtonWebApp: 'type' is not in __init__() and 'type' default value is: DEFAULT_MENU_BUTTON_WEB_APP
@@ -70,3 +72,9 @@ ReactionTypeCustomEmoji: 'type' is not in __init__() and 'type' default value is
 ReactionTypeEmoji: 'type' is not in __init__() and 'type' default value is: DEFAULT_REACTION_TYPE_EMOJI
 ReplyKeyboardMarkup: 'keyboard' default value is: keyboard or []
 ReplyKeyboardRemove: 'remove_keyboard: Literal[True]' is not in __init__() and 'remove_keyboard: Literal[True]' default value is: True
+RevenueWithdrawalStateFailed: 'type' is not in __init__() and 'type' default value is: DEFAULT_REVENUE_WITHDRAWAL_STATE_FAILED
+RevenueWithdrawalStatePending: 'type' is not in __init__() and 'type' default value is: DEFAULT_REVENUE_WITHDRAWAL_STATE_PENDING
+RevenueWithdrawalStateSucceeded: 'type' is not in __init__() and 'type' default value is: DEFAULT_REVENUE_WITHDRAWAL_STATE_SUCCEEDED
+TransactionPartnerFragment: 'type' is not in __init__() and 'type' default value is: DEFAULT_TRANSACTION_PARTNER_FRAGMENT
+TransactionPartnerOther: 'type' is not in __init__() and 'type' default value is: DEFAULT_TRANSACTION_PARTNER_OTHER
+TransactionPartnerUser: 'type' is not in __init__() and 'type' default value is: DEFAULT_TRANSACTION_PARTNER_USER
