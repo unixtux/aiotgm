@@ -2884,6 +2884,8 @@ class ExternalReplyInfo(TelegramType):
     :type audio: :obj:`~aiotgm.types.Audio`, optional
     :param document: Message is a general file, information about the file.
     :type document: :obj:`~aiotgm.types.Document`, optional
+    :param paid_media: Message contains paid media; information about the paid media.
+    :type paid_media: :obj:`~aiotgm.types.PaidMediaInfo`, optional
     :param photo: Message is a photo, available sizes of the photo.
     :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
     :param sticker: Message is a sticker, information about the sticker.
@@ -2928,6 +2930,7 @@ class ExternalReplyInfo(TelegramType):
         obj['animation'] = Animation._dese(res.get('animation'))
         obj['audio'] = Audio._dese(res.get('audio'))
         obj['document'] = Document._dese(res.get('document'))
+        obj['paid_media'] = PaidMediaInfo._dese(res.get('paid_media'))
         obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')] if 'photo' in res else None
         obj['sticker'] = Sticker._dese(res.get('sticker'))
         obj['story'] = Story._dese(res.get('story'))
@@ -2955,6 +2958,7 @@ class ExternalReplyInfo(TelegramType):
         animation: Optional[Animation] = None,
         audio: Optional[Audio] = None,
         document: Optional[Document] = None,
+        paid_media: Optional[PaidMediaInfo] = None,
         photo: Optional[list[PhotoSize]] = None,
         sticker: Optional[Sticker] = None,
         story: Optional[Story] = None,
@@ -2979,6 +2983,7 @@ class ExternalReplyInfo(TelegramType):
         self.animation = animation
         self.audio = audio
         self.document = document
+        self.paid_media = paid_media
         self.photo = photo
         self.sticker = sticker
         self.story = story
@@ -6026,6 +6031,8 @@ class Message(TelegramType):
     :type audio: :obj:`~aiotgm.types.Audio`, optional
     :param document: Message is a general file, information about the file.
     :type document: :obj:`~aiotgm.types.Document`, optional
+    :param paid_media: Message contains paid media; information about the paid media.
+    :type paid_media: :obj:`~aiotgm.types.PaidMediaInfo`, optional
     :param photo: Message is a photo, available sizes of the photo.
     :type photo: :obj:`list` of :obj:`~aiotgm.types.PhotoSize`, optional
     :param sticker: Message is a sticker, information about the sticker.
@@ -6168,6 +6175,7 @@ class Message(TelegramType):
         obj['animation'] = Animation._dese(res.get('animation'))
         obj['audio'] = Audio._dese(res.get('audio'))
         obj['document'] = Document._dese(res.get('document'))
+        obj['paid_media'] = PaidMediaInfo._dese(res.get('paid_media'))
         obj['photo'] = [PhotoSize._dese(kwargs) for kwargs in res.get('photo')] if 'photo' in res else None
         obj['sticker'] = Sticker._dese(res.get('sticker'))
         obj['story'] = Story._dese(res.get('story'))
@@ -6255,6 +6263,7 @@ class Message(TelegramType):
         animation: Optional[Animation] = None,
         audio: Optional[Audio] = None,
         document: Optional[Document] = None,
+        paid_media: Optional[PaidMediaInfo] = None,
         photo: Optional[list[PhotoSize]] = None,
         sticker: Optional[Sticker] = None,
         story: Optional[Story] = None,
@@ -6339,6 +6348,7 @@ class Message(TelegramType):
         self.animation = animation
         self.audio = audio
         self.document = document
+        self.paid_media = paid_media
         self.photo = photo
         self.sticker = sticker
         self.story = story
