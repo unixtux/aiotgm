@@ -8400,20 +8400,25 @@ class TransactionPartnerUser(TelegramType):
 
     :param user: Information about the user.
     :type user: :obj:`~aiotgm.types.User`
+    :param invoice_payload: Bot-specified invoice payload.
+    :type invoice_payload: :obj:`str`, optional
     '''
     @classmethod
     @_parse_result
     def _dese(cls, res: dict):
         obj = {}
         obj['user'] = User._dese(res.get('user'))
+        obj['invoice_payload'] = res.get('invoice_payload')
         return cls(**obj)
 
     def __init__(
         self,
-        user: User
+        user: User,
+        invoice_payload: Optional[str] = None
     ):
         self.type = DEFAULT_TRANSACTION_PARTNER_USER
         self.user = user
+        self.invoice_payload = invoice_payload
 
 
 class Update(TelegramType):
