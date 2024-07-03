@@ -1728,6 +1728,8 @@ class ChatFullInfo(TelegramType):
     :type invite_link: :obj:`str`, optional
     :param pinned_message: The most recent pinned message (by sending date).
     :type pinned_message: :obj:`~aiotgm.types.Message`, optional
+    :param can_send_paid_media: :obj:`True`, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
+    :type can_send_paid_media: :obj:`True`, optional
     :param permissions: Default chat member permissions, for groups and supergroups.
     :type permissions: :obj:`~aiotgm.types.ChatPermissions`, optional
     :param slow_mode_delay: For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds.
@@ -1790,6 +1792,7 @@ class ChatFullInfo(TelegramType):
         obj['invite_link'] = res.get('invite_link')
         obj['pinned_message'] = Message._dese(res.get('pinned_message'))
         obj['permissions'] = ChatPermissions._dese(res.get('permissions'))
+        obj['can_send_paid_media'] = res.get('can_send_paid_media')
         obj['slow_mode_delay'] = res.get('slow_mode_delay')
         obj['unrestrict_boost_count'] = res.get('unrestrict_boost_count')
         obj['message_auto_delete_time'] = res.get('message_auto_delete_time')
@@ -1837,6 +1840,7 @@ class ChatFullInfo(TelegramType):
         invite_link: Optional[str] = None,
         pinned_message: Optional[Message] = None,
         permissions: Optional[ChatPermissions] = None,
+        can_send_paid_media: Optional[Literal[True]] = None,
         slow_mode_delay: Optional[int] = None,
         unrestrict_boost_count: Optional[int] = None,
         message_auto_delete_time: Optional[int] = None,
@@ -1881,6 +1885,7 @@ class ChatFullInfo(TelegramType):
         self.invite_link = invite_link
         self.pinned_message = pinned_message
         self.permissions = permissions
+        self.can_send_paid_media = can_send_paid_media
         self.slow_mode_delay = slow_mode_delay
         self.unrestrict_boost_count = unrestrict_boost_count
         self.message_auto_delete_time = message_auto_delete_time
