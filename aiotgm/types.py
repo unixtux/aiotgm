@@ -9066,6 +9066,7 @@ One of the following reply markups:
 - :obj:`~aiotgm.types.ForceReply`
 '''
 
+
 BackgroundFill = Union[
     BackgroundFillSolid,
     BackgroundFillGradient,
@@ -9080,6 +9081,7 @@ This object describes the way a background is filled based on the selected color
 - :obj:`~aiotgm.types.BackgroundFillGradient`
 - :obj:`~aiotgm.types.BackgroundFillFreeformGradient`
 '''
+
 def _dese_background_fill(res: Optional[dict], /) -> Optional[BackgroundFill]:
     '''
     Function to deserialize BackgroundFill.
@@ -9212,7 +9214,6 @@ This object describes the source of a chat boost. It can be one of:
 - :obj:`~aiotgm.types.ChatBoostSourceGiftCode`
 - :obj:`~aiotgm.types.ChatBoostSourceGiveaway`
 '''
-
 
 def _dese_chat_boost_source(res: Optional[dict], /) -> Optional[ChatBoostSource]:
     '''

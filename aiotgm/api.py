@@ -167,8 +167,7 @@ def _convert_input_media(
             except FileNotFoundError:
                 raise FileNotFoundError(
                     f'No such file {path!r},'
-                    ' check your InputMedia object,'
-                    ' InputMedia.media must be in the'
+                    ' media attribute must be in the'
                     ' format "attach://<file_name>" to'
                     ' post a file using multipart/form-data.'
                 )
