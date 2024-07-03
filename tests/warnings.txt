@@ -77,4 +77,5 @@ RevenueWithdrawalStatePending: 'type' is not in __init__() and 'type' default va
 RevenueWithdrawalStateSucceeded: 'type' is not in __init__() and 'type' default value is: DEFAULT_REVENUE_WITHDRAWAL_STATE_SUCCEEDED
 TransactionPartnerFragment: 'type' is not in __init__() and 'type' default value is: DEFAULT_TRANSACTION_PARTNER_FRAGMENT
 TransactionPartnerOther: 'type' is not in __init__() and 'type' default value is: DEFAULT_TRANSACTION_PARTNER_OTHER
+TransactionPartnerTelegramAds: 'type' is not in __init__() and 'type' default value is: DEFAULT_TRANSACTION_PARTNER_TELEGRAM_ADS
 TransactionPartnerUser: 'type' is not in __init__() and 'type' default value is: DEFAULT_TRANSACTION_PARTNER_USER

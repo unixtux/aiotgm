@@ -955,6 +955,10 @@ TYPES = {
                 "type_hint": Optional[ChatPermissions],
                 "default": None
             },
+            "can_send_paid_media": {
+                "type_hint": Optional[Literal[True]],
+                "default": None
+            },
             "slow_mode_delay": {
                 "type_hint": Optional[int],
                 "default": None
@@ -1584,6 +1588,10 @@ TYPES = {
             },
             "document": {
                 "type_hint": Optional[Document],
+                "default": None
+            },
+            "paid_media": {
+                "type_hint": Optional[PaidMediaInfo],
                 "default": None
             },
             "photo": {
@@ -3879,6 +3887,10 @@ TYPES = {
                 "type_hint": Optional[Document],
                 "default": None
             },
+            "paid_media": {
+                "type_hint": Optional[PaidMediaInfo],
+                "default": None
+            },
             "photo": {
                 "type_hint": Optional[list[PhotoSize]],
                 "default": None
@@ -5176,6 +5188,15 @@ TYPES = {
         ],
         "kwargs": {}
     },
+    TransactionPartnerTelegramAds: {
+        "link": "https://core.telegram.org/bots/api#transactionpartnertelegramads",
+        "has_dese": True,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_TRANSACTION_PARTNER_TELEGRAM_ADS"
+        ],
+        "kwargs": {}
+    },
     TransactionPartnerUser: {
         "link": "https://core.telegram.org/bots/api#transactionpartneruser",
         "has_dese": True,
@@ -5186,6 +5207,10 @@ TYPES = {
         "kwargs": {
             "user": {
                 "type_hint": User
+            },
+            "invoice_payload": {
+                "type_hint": Optional[str],
+                "default": None
             }
         }
     },
