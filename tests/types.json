@@ -2177,6 +2177,10 @@
                 "type_hint": "Optional[list[MessageEntity]]",
                 "default": null
             },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
             "reply_markup": {
                 "type_hint": "Optional[InlineKeyboardMarkup]",
                 "default": null
@@ -2215,6 +2219,10 @@
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
                 "default": null
             },
             "reply_markup": {
@@ -2259,6 +2267,10 @@
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
                 "default": null
             },
             "reply_markup": {
@@ -2326,6 +2338,10 @@
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
                 "default": null
             },
             "reply_markup": {
@@ -2551,6 +2567,10 @@
                 "type_hint": "Optional[list[MessageEntity]]",
                 "default": null
             },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
             "reply_markup": {
                 "type_hint": "Optional[InlineKeyboardMarkup]",
                 "default": null
@@ -2668,6 +2688,10 @@
                 "type_hint": "Optional[list[MessageEntity]]",
                 "default": null
             },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
             "reply_markup": {
                 "type_hint": "Optional[InlineKeyboardMarkup]",
                 "default": null
@@ -2721,6 +2745,10 @@
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
                 "default": null
             },
             "reply_markup": {
@@ -2827,6 +2855,10 @@
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
                 "default": null
             },
             "video_width": {
@@ -2969,14 +3001,15 @@
             "payload": {
                 "type_hint": "str"
             },
-            "provider_token": {
-                "type_hint": "str"
-            },
             "currency": {
                 "type_hint": "str"
             },
             "prices": {
                 "type_hint": "list[LabeledPrice]"
+            },
+            "provider_token": {
+                "type_hint": "Optional[str]",
+                "default": null
             },
             "max_tip_amount": {
                 "type_hint": "Optional[int]",
@@ -3089,6 +3122,10 @@
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
                 "default": null
             },
             "width": {
@@ -3206,6 +3243,10 @@
                 "type_hint": "Optional[list[MessageEntity]]",
                 "default": null
             },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
             "has_spoiler": {
                 "type_hint": "Optional[bool]",
                 "default": null
@@ -3239,6 +3280,10 @@
                 "type_hint": "Optional[list[MessageEntity]]",
                 "default": null
             },
+            "show_caption_above_media": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
             "width": {
                 "type_hint": "Optional[int]",
                 "default": null
@@ -3256,6 +3301,52 @@
                 "default": null
             },
             "has_spoiler": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            }
+        }
+    },
+    "InputPaidMediaPhoto": {
+        "link": "https://core.telegram.org/bots/api#inputpaidmediaphoto",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_PAID_MEDIA_PHOTO"
+        ],
+        "kwargs": {
+            "media": {
+                "type_hint": "str"
+            }
+        }
+    },
+    "InputPaidMediaVideo": {
+        "link": "https://core.telegram.org/bots/api#inputpaidmediavideo",
+        "has_dese": false,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_INPUT_PAID_MEDIA_VIDEO"
+        ],
+        "kwargs": {
+            "media": {
+                "type_hint": "str"
+            },
+            "thumbnail": {
+                "type_hint": "Optional[Union[InputFile, str]]",
+                "default": null
+            },
+            "width": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "height": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "duration": {
+                "type_hint": "Optional[int]",
+                "default": null
+            },
+            "supports_streaming": {
                 "type_hint": "Optional[bool]",
                 "default": null
             }
@@ -3744,6 +3835,10 @@
                 "type_hint": "Optional[LinkPreviewOptions]",
                 "default": null
             },
+            "effect_id": {
+                "type_hint": "Optional[str]",
+                "default": null
+            },
             "animation": {
                 "type_hint": "Optional[Animation]",
                 "default": null
@@ -3786,6 +3881,10 @@
             },
             "caption_entities": {
                 "type_hint": "Optional[list[MessageEntity]]",
+                "default": null
+            },
+            "show_caption_above_media": {
+                "type_hint": "Optional[Literal[True]]",
                 "default": null
             },
             "has_media_spoiler": {
@@ -4160,6 +4259,51 @@
             "shipping_address": {
                 "type_hint": "Optional[ShippingAddress]",
                 "default": null
+            }
+        }
+    },
+    "PaidMediaInfo": {
+        "link": "https://core.telegram.org/bots/api#paidmediainfo",
+        "has_dese": true,
+        "kwargs": {
+            "star_count": {
+                "type_hint": "int"
+            },
+            "paid_media": {
+                "type_hint": "list[PaidMedia]"
+            }
+        }
+    },
+    "PaidMediaPhoto": {
+        "link": "https://core.telegram.org/bots/api#paidmediaphoto",
+        "has_dese": true,
+        "kwargs": {
+            "photo": {
+                "type_hint": "list[PhotoSize]"
+            }
+        }
+    },
+    "PaidMediaPreview": {
+        "link": "https://core.telegram.org/bots/api#paidmediapreview",
+        "has_dese": true,
+        "kwargs": {
+            "width": {
+                "type_hint": "Optional[int]"
+            },
+            "height": {
+                "type_hint": "Optional[int]"
+            },
+            "duration": {
+                "type_hint": "Optional[int]"
+            }
+        }
+    },
+    "PaidMediaVideo": {
+        "link": "https://core.telegram.org/bots/api#paidmediavideo",
+        "has_dese": true,
+        "kwargs": {
+            "video": {
+                "type_hint": "Video"
             }
         }
     },
@@ -4655,6 +4799,40 @@
             }
         }
     },
+    "RevenueWithdrawalStateFailed": {
+        "link": "https://core.telegram.org/bots/api#revenuewithdrawalstatefailed",
+        "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_REVENUE_WITHDRAWAL_STATE_FAILED"
+        ],
+        "kwargs": {}
+    },
+    "RevenueWithdrawalStatePending": {
+        "link": "https://core.telegram.org/bots/api#revenuewithdrawalstatepending",
+        "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_REVENUE_WITHDRAWAL_STATE_PENDING"
+        ],
+        "kwargs": {}
+    },
+    "RevenueWithdrawalStateSucceeded": {
+        "link": "https://core.telegram.org/bots/api#revenuewithdrawalstatesucceeded",
+        "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_REVENUE_WITHDRAWAL_STATE_SUCCEEDED"
+        ],
+        "kwargs": {
+            "date": {
+                "type_hint": "int"
+            },
+            "url": {
+                "type_hint": "str"
+            }
+        }
+    },
     "SentWebAppMessage": {
         "link": "https://core.telegram.org/bots/api#sentwebappmessage",
         "has_dese": true,
@@ -4744,6 +4922,38 @@
             },
             "shipping_address": {
                 "type_hint": "ShippingAddress"
+            }
+        }
+    },
+    "StarTransaction": {
+        "link": "https://core.telegram.org/bots/api#startransaction",
+        "has_dese": true,
+        "kwargs": {
+            "id": {
+                "type_hint": "str"
+            },
+            "amount": {
+                "type_hint": "int"
+            },
+            "date": {
+                "type_hint": "int"
+            },
+            "source": {
+                "type_hint": "Optional[TransactionPartner]",
+                "default": null
+            },
+            "receiver": {
+                "type_hint": "Optional[TransactionPartner]",
+                "default": null
+            }
+        }
+    },
+    "StarTransactions": {
+        "link": "https://core.telegram.org/bots/api#startransactions",
+        "has_dese": true,
+        "kwargs": {
+            "transactions": {
+                "type_hint": "list[StarTransaction]"
             }
         }
     },
@@ -4912,6 +5122,42 @@
             "is_manual": {
                 "type_hint": "Optional[Literal[True]]",
                 "default": null
+            }
+        }
+    },
+    "TransactionPartnerFragment": {
+        "link": "https://core.telegram.org/bots/api#transactionpartnerfragment",
+        "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_TRANSACTION_PARTNER_FRAGMENT"
+        ],
+        "kwargs": {
+            "withdrawal_state": {
+                "type_hint": "Optional[RevenueWithdrawalState]",
+                "default": null
+            }
+        }
+    },
+    "TransactionPartnerOther": {
+        "link": "https://core.telegram.org/bots/api#transactionpartnerother",
+        "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_TRANSACTION_PARTNER_OTHER"
+        ],
+        "kwargs": {}
+    },
+    "TransactionPartnerUser": {
+        "link": "https://core.telegram.org/bots/api#transactionpartneruser",
+        "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_TRANSACTION_PARTNER_USER"
+        ],
+        "kwargs": {
+            "user": {
+                "type_hint": "User"
             }
         }
     },

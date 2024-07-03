@@ -7727,9 +7727,7 @@ class RevenueWithdrawalStateFailed(TelegramType):
         obj = {}
         return cls(**obj)
 
-    def __init__(
-        self
-    ):
+    def __init__(self):
         self.type = DEFAULT_REVENUE_WITHDRAWAL_STATE_FAILED
 
 
@@ -7745,9 +7743,7 @@ class RevenueWithdrawalStatePending(TelegramType):
         obj = {}
         return cls(**obj)
 
-    def __init__(
-        self
-    ):
+    def __init__(self):
         self.type = DEFAULT_REVENUE_WITHDRAWAL_STATE_PENDING
 
 
@@ -8359,9 +8355,7 @@ class TransactionPartnerOther(TelegramType):
         obj = {}
         return cls(**obj)
 
-    def __init__(
-        self
-    ):
+    def __init__(self):
         self.type = DEFAULT_TRANSACTION_PARTNER_OTHER
 
 
