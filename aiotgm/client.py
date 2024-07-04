@@ -2243,13 +2243,13 @@ class Client(TelegramApi):
     async def edit_message_text(
         self,
         text: str,
-        business_connection_id: Optional[str] = None,
         chat_id: Optional[Union[int, str]] = None,
         message_id: Optional[int] = None,
         inline_message_id: Optional[str] = None,
         parse_mode: Optional[str] = None,
         entities: Optional[list[MessageEntity]] = None,
         link_preview_options: Optional[LinkPreviewOptions] = None,
+        business_connection_id: Optional[str] = None,
         reply_markup: Optional[InlineKeyboardMarkup] = None
     ) -> Union[Message, Literal[True]]:
         '''
@@ -2261,8 +2261,6 @@ class Client(TelegramApi):
 
         :param text: New text of the message, 1-4096 characters after entities parsing.
         :type text: :obj:`str`
-        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
-        :type business_connection_id: :obj:`str`, optional
         :param chat_id: Required if *inline_message_id* is not specified. Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
         :type chat_id: :obj:`int` or :obj:`str`, optional
         :param message_id: Required if *inline_message_id* is not specified. Identifier of the message to edit.
@@ -2275,6 +2273,8 @@ class Client(TelegramApi):
         :type entities: :obj:`list` of :obj:`~aiotgm.types.MessageEntity`, optional
         :param link_preview_options: Link preview generation options for the message.
         :type link_preview_options: :obj:`~aiotgm.types.LinkPreviewOptions`, optional
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message to be edited was sent.
+        :type business_connection_id: :obj:`str`, optional
         :param reply_markup: A JSON-serialized object for an `inline keyboard <https://core.telegram.org/bots/features#inline-keyboards>`_.
         :type reply_markup: :obj:`~aiotgm.types.InlineKeyboardMarkup`, optional
         :rtype: :obj:`~aiotgm.types.Message` or :obj:`True`
@@ -2282,7 +2282,6 @@ class Client(TelegramApi):
         params = {
             'text': text
         }
-        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if chat_id is not None: params['chat_id'] = chat_id
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
@@ -2290,6 +2289,7 @@ class Client(TelegramApi):
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if entities is not None: params['entities'] = entities
         if link_preview_options is not None: params['link_preview_options'] = link_preview_options
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if reply_markup is not None: params['reply_markup'] = reply_markup
         result = await super().edit_message_text(params)
         return Message._dese(result) if result is not True else True
