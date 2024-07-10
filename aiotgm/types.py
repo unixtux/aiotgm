@@ -6095,6 +6095,8 @@ class Message(TelegramType):
     :type invoice: :obj:`~aiotgm.types.Invoice`, optional
     :param successful_payment: Message is a service message about a successful payment, information about the payment. `More about payments » <https://core.telegram.org/bots/api#payments>`_.
     :type successful_payment: :obj:`~aiotgm.types.SuccessfulPayment`, optional
+    :param refunded_payment: Message is a service message about a refunded payment, information about the payment. `More about payments » <https://core.telegram.org/bots/api#payments>`_.
+    :type refunded_payment: :obj:`~aiotgm.types.RefundedPayment`, optional
     :param users_shared: Service message: users were shared with the bot.
     :type users_shared: :obj:`~aiotgm.types.UsersShared`, optional
     :param chat_shared: Service message: a chat was shared with the bot.
@@ -6208,6 +6210,7 @@ class Message(TelegramType):
         obj['pinned_message'] = _dese_maybe_inaccessible_message(res.get('pinned_message'))
         obj['invoice'] = Invoice._dese(res.get('invoice'))
         obj['successful_payment'] = SuccessfulPayment._dese(res.get('successful_payment'))
+        obj['refunded_payment'] = RefundedPayment._dese(res.get('refunded_payment'))
         obj['users_shared'] = UsersShared._dese(res.get('users_shared'))
         obj['chat_shared'] = ChatShared._dese(res.get('chat_shared'))
         obj['connected_website'] = res.get('connected_website')
@@ -6296,6 +6299,7 @@ class Message(TelegramType):
         pinned_message: Optional[MaybeInaccessibleMessage] = None,
         invoice: Optional[Invoice] = None,
         successful_payment: Optional[SuccessfulPayment] = None,
+        refunded_payment: Optional[RefundedPayment] = None,
         users_shared: Optional[UsersShared] = None,
         chat_shared: Optional[ChatShared] = None,
         connected_website: Optional[str] = None,
@@ -6381,6 +6385,7 @@ class Message(TelegramType):
         self.pinned_message = pinned_message
         self.invoice = invoice
         self.successful_payment = successful_payment
+        self.refunded_payment = refunded_payment
         self.users_shared = users_shared
         self.chat_shared = chat_shared
         self.connected_website = connected_website
