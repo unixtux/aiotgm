@@ -182,6 +182,7 @@ __all__ = (
     'ReactionType', # Deserialized in _dese_reaction_type()
     'ReactionTypeCustomEmoji',
     'ReactionTypeEmoji',
+    'RefundedPayment',
     'ReplyKeyboardMarkup',
     'ReplyKeyboardRemove',
     'ReplyParameters',
@@ -7542,6 +7543,49 @@ class ReactionTypeEmoji(TelegramType):
     ):
         self.type = DEFAULT_REACTION_TYPE_EMOJI
         self.emoji = emoji
+
+
+class RefundedPayment(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#refundedpayment
+
+    This object contains basic information about a refunded payment.
+
+    :param currency: Three-letter ISO 4217 `currency <https://core.telegram.org/bots/payments#supported-currencies>`_ code, or “XTR” for payments in `Telegram Stars <https://t.me/BotNews/90>`_. Currently, always “XTR”.
+    :type currency: :obj:`str`
+    :param total_amount: Total refunded price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of ``US$ 1.45``, ``total_amount = 145``. See the *exp* parameter in `currencies.json <https://core.telegram.org/bots/payments/currencies.json>`_, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+    :type total_amount: :obj:`int`
+    :param invoice_payload: Bot-specified invoice payload.
+    :type invoice_payload: :obj:`str`
+    :param telegram_payment_charge_id: Telegram payment identifier.
+    :type telegram_payment_charge_id: :obj:`str`
+    :param provider_payment_charge_id: Provider payment identifier.
+    :type provider_payment_charge_id: :obj:`str`, optional
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['currency'] = res.get('currency')
+        obj['total_amount'] = res.get('total_amount')
+        obj['invoice_payload'] = res.get('invoice_payload')
+        obj['telegram_payment_charge_id'] = res.get('telegram_payment_charge_id')
+        obj['provider_payment_charge_id'] = res.get('provider_payment_charge_id')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        currency: str,
+        total_amount: int,
+        invoice_payload: str,
+        telegram_payment_charge_id: str,
+        provider_payment_charge_id: Optional[str] = None
+    ):
+        self.currency = currency
+        self.total_amount = total_amount
+        self.invoice_payload = invoice_payload
+        self.telegram_payment_charge_id = telegram_payment_charge_id
+        self.provider_payment_charge_id = provider_payment_charge_id
 
 
 class ReplyKeyboardMarkup(TelegramType):
