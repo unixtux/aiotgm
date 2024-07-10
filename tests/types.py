@@ -4011,6 +4011,10 @@ TYPES = {
                 "type_hint": Optional[SuccessfulPayment],
                 "default": None
             },
+            "refunded_payment": {
+                "type_hint": Optional[RefundedPayment],
+                "default": None
+            },
             "users_shared": {
                 "type_hint": Optional[UsersShared],
                 "default": None
@@ -4742,6 +4746,28 @@ TYPES = {
         "kwargs": {
             "emoji": {
                 "type_hint": str
+            }
+        }
+    },
+    RefundedPayment: {
+        "link": "https://core.telegram.org/bots/api#refundedpayment",
+        "has_dese": True,
+        "kwargs": {
+            "currency": {
+                "type_hint": str
+            },
+            "total_amount": {
+                "type_hint": int
+            },
+            "invoice_payload": {
+                "type_hint": str
+            },
+            "telegram_payment_charge_id": {
+                "type_hint": str
+            },
+            "provider_payment_charge_id": {
+                "type_hint": Optional[str],
+                "default": None
             }
         }
     },
