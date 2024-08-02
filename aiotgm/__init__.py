@@ -6,7 +6,7 @@ __all__ = (
     'TelegramError',
 )
 
-__version__ = '0.4.7'
+__version__ = '0.4.8'
 VERSION = __version__
 
 from .logging import get_logger
