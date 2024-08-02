@@ -8634,6 +8634,8 @@ class User(TelegramType):
     :type supports_inline_queries: :obj:`bool`, optional
     :param can_connect_to_business: :obj:`True`, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in :meth:`~aiotgm.Client.get_me`.
     :type can_connect_to_business: :obj:`bool`, optional
+    :param has_main_web_app: :obj:`True`, if the bot has a main Web App. Returned only in :meth:`~aiotgm.Client.get_me`.
+    :type has_main_web_app: :obj:`bool`, optional
     '''
     @classmethod
     @_parse_result
@@ -8651,6 +8653,7 @@ class User(TelegramType):
         obj['can_read_all_group_messages'] = res.get('can_read_all_group_messages')
         obj['supports_inline_queries'] = res.get('supports_inline_queries')
         obj['can_connect_to_business'] = res.get('can_connect_to_business')
+        obj['has_main_web_app'] = res.get('has_main_web_app')
         return cls(**obj)
 
     def __init__(
@@ -8666,7 +8669,8 @@ class User(TelegramType):
         can_join_groups: Optional[bool] = None,
         can_read_all_group_messages: Optional[bool] = None,
         supports_inline_queries: Optional[bool] = None,
-        can_connect_to_business: Optional[bool] = None
+        can_connect_to_business: Optional[bool] = None,
+        has_main_web_app: Optional[bool] = None
     ):
         self.id = id
         self.is_bot = is_bot
@@ -8680,6 +8684,7 @@ class User(TelegramType):
         self.can_read_all_group_messages = can_read_all_group_messages
         self.supports_inline_queries = supports_inline_queries
         self.can_connect_to_business = can_connect_to_business
+        self.has_main_web_app = has_main_web_app
 
 
 class UserChatBoosts(TelegramType):
