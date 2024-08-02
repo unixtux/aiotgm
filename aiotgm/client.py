@@ -2947,7 +2947,8 @@ class Client(TelegramApi):
         self,
         chat_id: Union[int, str],
         message_id: int,
-        disable_notification: Optional[bool] = None
+        disable_notification: Optional[bool] = None,
+        business_connection_id: Optional[str] = None
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#pinchatmessage
@@ -2962,6 +2963,8 @@ class Client(TelegramApi):
         :type message_id: :obj:`int`
         :param disable_notification: Pass :obj:`True` if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats.
         :type disable_notification: :obj:`bool`, optional
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be pinned.
+        :type business_connection_id: :obj:`str`, optional
         :rtype: :obj:`True`
         '''
         params = {
@@ -2969,6 +2972,7 @@ class Client(TelegramApi):
             'message_id': message_id
         }
         if disable_notification is not None: params['disable_notification'] = disable_notification
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         return await super().pin_chat_message(params)
 
 
@@ -5441,7 +5445,8 @@ class Client(TelegramApi):
     async def unpin_chat_message(
         self,
         chat_id: Union[int, str],
-        message_id: Optional[int] = None
+        message_id: Optional[int] = None,
+        business_connection_id: Optional[str] = None
     ) -> Literal[True]:
         '''
         https://core.telegram.org/bots/api#unpinchatmessage
@@ -5455,12 +5460,15 @@ class Client(TelegramApi):
         :type chat_id: :obj:`int` or :obj:`str`
         :param message_id: Identifier of a message to unpin. If not specified, the most recent pinned message (by sending date) will be unpinned.
         :type message_id: :obj:`int`, optional
+        :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be unpinned.
+        :type business_connection_id: :obj:`str`, optional
         :rtype: :obj:`True`
         '''
         params = {
             'chat_id': chat_id
         }
         if message_id is not None: params['message_id'] = message_id
+        if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         return await super().unpin_chat_message(params)
 
 
