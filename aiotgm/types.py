@@ -8451,6 +8451,8 @@ class TransactionPartnerUser(TelegramType):
     :type user: :obj:`~aiotgm.types.User`
     :param invoice_payload: Bot-specified invoice payload.
     :type invoice_payload: :obj:`str`, optional
+    :param paid_media: Information about the paid media bought by the user.
+    :type paid_media: :obj:`list` of :obj:`~aiotgm.types.PaidMedia`, optional
     '''
     @classmethod
     @_parse_result
@@ -8458,16 +8460,19 @@ class TransactionPartnerUser(TelegramType):
         obj = {}
         obj['user'] = User._dese(res.get('user'))
         obj['invoice_payload'] = res.get('invoice_payload')
+        obj['paid_media'] = [_dese_paid_media(kwargs) for kwargs in res.get('paid_media')] if 'paid_media' in res else None
         return cls(**obj)
 
     def __init__(
         self,
         user: User,
-        invoice_payload: Optional[str] = None
+        invoice_payload: Optional[str] = None,
+        paid_media: Optional[list[PaidMedia]] = None
     ):
         self.type = DEFAULT_TRANSACTION_PARTNER_USER
         self.user = user
         self.invoice_payload = invoice_payload
+        self.paid_media = paid_media
 
 
 class Update(TelegramType):
