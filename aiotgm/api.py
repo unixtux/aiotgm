@@ -426,6 +426,10 @@ class TelegramApi:
         method = 'createChatInviteLink'
         return await self._request(method, params)
 
+    async def create_chat_subscription_invite_link(self, params: dict):
+        method = 'createChatSubscriptionInviteLink'
+        return await self._request(method, params)
+
     async def create_forum_topic(self, params: dict):
         method = 'createForumTopic'
         return await self._request(method, params)

@@ -1563,6 +1563,40 @@ class Client(TelegramApi):
         return ChatInviteLink._dese(result)
 
 
+    async def create_chat_subscription_invite_link(
+        self,
+        chat_id: Union[int, str],
+        subscription_period: int,
+        subscription_price: int,
+        name: Optional[str] = None
+    ) -> ChatInviteLink:
+        '''
+        https://core.telegram.org/bots/api#createchatsubscriptioninvitelink
+
+        Use this method to create a `subscription invite link <https://telegram.org/blog/superchannels-star-reactions-subscriptions#star-subscriptions>`_ for a channel chat.
+        The bot must have the *can_invite_users* administrator rights. The link can be edited using the method :meth:`~aiotgm.Client.edit_chat_subscription_invite_link`
+        or revoked using the method :meth:`~aiotgm.Client.revoke_chat_invite_link`. Returns the new invite link as a :obj:`~aiotgm.types.ChatInviteLink` object.
+
+        :param chat_id: Unique identifier for the target channel chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param subscription_period: The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
+        :type subscription_period: :obj:`int`
+        :param subscription_price: The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-2500.
+        :type subscription_price: :obj:`int`
+        :param name: Invite link name; 0-32 characters.
+        :type name: :obj:`str`, optional
+        :rtype: :obj:`~aiotgm.types.ChatInviteLink`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'subscription_period': subscription_period,
+            'subscription_price': subscription_price
+        }
+        if name is not None: params['name'] = name
+        result = await super().create_chat_subscription_invite_link(params)
+        return ChatInviteLink._dese(result)
+
+
     async def create_forum_topic(
         self,
         chat_id: Union[int, str],
