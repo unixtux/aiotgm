@@ -482,6 +482,10 @@ class TelegramApi:
         method = 'editChatInviteLink'
         return await self._request(method, params)
 
+    async def edit_chat_subscription_invite_link(self, params: dict):
+        method = 'editChatSubscriptionInviteLink'
+        return await self._request(method, params)
+
     async def edit_forum_topic(self, params: dict):
         method = 'editForumTopic'
         return await self._request(method, params)

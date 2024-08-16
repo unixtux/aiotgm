@@ -2018,6 +2018,36 @@ class Client(TelegramApi):
         return ChatInviteLink._dese(result)
 
 
+    async def edit_chat_subscription_invite_link(
+        self,
+        chat_id: Union[int, str],
+        invite_link: str,
+        name: Optional[str] = None
+    ) -> ChatInviteLink:
+        '''
+        https://core.telegram.org/bots/api#editchatsubscriptioninvitelink
+
+        Use this method to edit a subscription invite link created by the bot.
+        The bot must have the *can_invite_users* administrator rights.
+        Returns the edited invite link as a :obj:`~aiotgm.types.ChatInviteLink` object.
+
+        :param chat_id: Unique identifier for the target chat or username of the target channel (in the format ``@channelusername``).
+        :type chat_id: :obj:`int` or :obj:`str`
+        :param invite_link: The invite link to edit.
+        :type invite_link: :obj:`str`
+        :param name: Invite link name; 0-32 characters.
+        :type name: :obj:`str`, optional
+        :rtype: :obj:`~aiotgm.types.ChatInviteLink`
+        '''
+        params = {
+            'chat_id': chat_id,
+            'invite_link': invite_link
+        }
+        if name is not None: params['name'] = name
+        result = await super().edit_chat_subscription_invite_link(params)
+        return ChatInviteLink._dese(result)
+
+
     async def edit_forum_topic(
         self,
         chat_id: Union[int, str],
