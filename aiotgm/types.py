@@ -182,6 +182,7 @@ __all__ = (
     'ReactionType', # Deserialized in _dese_reaction_type()
     'ReactionTypeCustomEmoji',
     'ReactionTypeEmoji',
+    'ReactionTypePaid',
     'RefundedPayment',
     'ReplyKeyboardMarkup',
     'ReplyKeyboardRemove',
@@ -7555,6 +7556,22 @@ class ReactionTypeEmoji(TelegramType):
         self.emoji = emoji
 
 
+class ReactionTypePaid(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#reactiontypepaid
+
+    The reaction is paid.
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        return cls(**obj)
+
+    def __init__(self):
+        self.type = DEFAULT_REACTION_TYPE_PAID
+
+
 class RefundedPayment(TelegramType):
     '''
     https://core.telegram.org/bots/api#refundedpayment
@@ -9672,7 +9689,11 @@ was submitted that should be resolved by the user. It should be one of:
 '''
 
 
-ReactionType = Union[ReactionTypeEmoji, ReactionTypeCustomEmoji]
+ReactionType = Union[
+    ReactionTypeEmoji,
+    ReactionTypeCustomEmoji,
+    ReactionTypePaid
+]
 '''
 https://core.telegram.org/bots/api#reactiontype
 
@@ -9680,6 +9701,7 @@ This object describes the type of a reaction. Currently, it can be one of:
 
 - :obj:`~aiotgm.types.ReactionTypeEmoji`
 - :obj:`~aiotgm.types.ReactionTypeCustomEmoji`
+- :obj:`~aiotgm.types.ReactionTypePaid`
 '''
 
 def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
@@ -9696,6 +9718,9 @@ def _dese_reaction_type(res: Optional[dict], /) -> Optional[ReactionType]:
 
     elif type == DEFAULT_REACTION_TYPE_CUSTOM_EMOJI:
         return ReactionTypeCustomEmoji._dese(obj, check_dict=False)
+
+    elif type == DEFAULT_REACTION_TYPE_PAID:
+        return ReactionTypePaid._dese(obj, check_dict=False)
     else:
         raise ValueError(
             'An error occurred during the deserialization'
