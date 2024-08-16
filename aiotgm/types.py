@@ -2211,20 +2211,25 @@ class ChatMemberMember(TelegramType):
 
     :param user: Information about the user.
     :type user: :obj:`~aiotgm.types.User`
+    :param until_date: Date when the user's subscription will expire; Unix time.
+    :type until_date: :obj:`int`, optional
     '''
     @classmethod
     @_parse_result
     def _dese(cls, res: dict):
         obj = {}
         obj['user'] = User._dese(res.get('user'))
+        obj['until_date'] = res.get('until_date')
         return cls(**obj)
 
     def __init__(
         self,
-        user: User
+        user: User,
+        until_date: Optional[int] = None
     ):
         self.status = DEFAULT_CHAT_MEMBER_MEMBER
         self.user = user
+        self.until_date = until_date
 
 
 class ChatMemberOwner(TelegramType):
