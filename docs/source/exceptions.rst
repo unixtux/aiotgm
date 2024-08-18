@@ -6,18 +6,18 @@ Example:
 
 .. code-block:: python3
 
-    import aiotgm
     import asyncio
     from aiotgm.types import Message
+    from aiotgm import Client, TelegramError
 
-    bot = aiotgm.Client('<your_api_token>')
+    bot = Client('<your_api_token>')
 
     @bot.manage_message()
     async def foo(msg: Message):
         try:
-            await bot.send_message(msg.chat.id, "I'm here.")
+            await bot.send_message(msg.chat.id, "Hello my friend.")
         except (TelegramError, TimeoutError) as e:
-            print(e)        
+            print(e)
 
 .. autoexception:: aiotgm.TelegramError
     :members:
