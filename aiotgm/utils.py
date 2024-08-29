@@ -23,7 +23,8 @@ MARKDOWN_ESCAPES = {
     '{': '\{',
     '}': '\}',
     '.': '\.',
-    '!': '\!'
+    '!': '\!',
+    '\\': '\\\\'
 }
 
 def escape_markdown(text) -> str:
