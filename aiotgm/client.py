@@ -4124,6 +4124,7 @@ class Client(TelegramApi):
         star_count: int,
         media: list[InputPaidMedia],
         business_connection_id: Optional[str] = None,
+        payload: Optional[str] = None,
         caption: Optional[str] = None,
         parse_mode: Optional[str] = None,
         caption_entities: Optional[list[MessageEntity]] = None,
@@ -4147,6 +4148,8 @@ class Client(TelegramApi):
         :type media: :obj:`list` of :obj:`~aiotgm.types.InputPaidMedia`
         :param business_connection_id: Unique identifier of the business connection on behalf of which the message will be sent.
         :type business_connection_id: :obj:`str`, optional
+        :param payload: Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.
+        :type payload: :obj:`str`, optional
         :param caption: Media caption, 0-1024 characters after entities parsing
         :type caption: :obj:`str`, optional
         :param parse_mode: Mode for parsing entities in the media caption. See `formatting options <https://core.telegram.org/bots/api#formatting-options>`_ for more details.
@@ -4171,6 +4174,7 @@ class Client(TelegramApi):
             'media': media
         }
         if business_connection_id is not None: params['business_connection_id'] = business_connection_id
+        if payload is not None: params['payload'] = payload
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
         elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
