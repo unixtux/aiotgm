@@ -3421,6 +3421,8 @@ class GiveawayCompleted(TelegramType):
     :type unclaimed_prize_count: :obj:`int`, optional
     :param giveaway_message: Message with the giveaway that was completed, if it wasn't deleted.
     :type giveaway_message: :obj:`~aiotgm.types.Message`, optional
+    :param is_star_giveaway: :obj:`True`, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway.
+    :type is_star_giveaway: :obj:`True`, optional
     '''
     @classmethod
     @_parse_result
@@ -3429,17 +3431,20 @@ class GiveawayCompleted(TelegramType):
         obj['winner_count'] = res.get('winner_count')
         obj['unclaimed_prize_count'] = res.get('unclaimed_prize_count')
         obj['giveaway_message'] = Message._dese(res.get('giveaway_message'))
+        obj['is_star_giveaway'] = res.get('is_star_giveaway')
         return cls(**obj)
 
     def __init__(
         self,
         winner_count: int,
         unclaimed_prize_count: Optional[int] = None,
-        giveaway_message: Optional[Message] = None
+        giveaway_message: Optional[Message] = None,
+        is_star_giveaway: Optional[Literal[True]] = None
     ):
         self.winner_count = winner_count
         self.unclaimed_prize_count = unclaimed_prize_count
         self.giveaway_message = giveaway_message
+        self.is_star_giveaway = is_star_giveaway
 
 
 class GiveawayCreated(TelegramType):
