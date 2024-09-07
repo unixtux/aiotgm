@@ -11,7 +11,6 @@ from .api import (
 from . import logger
 from .types import *
 from .types import (
-    REPLY_MARKUP_TYPES,
     _dese_chat_member,
     _dese_menu_button,
 )
@@ -42,6 +41,7 @@ from .update_manager import (
     CALLBACK_QUERY_MANAGER,
     SHIPPING_QUERY_MANAGER,
     PRE_CHECKOUT_QUERY_MANAGER,
+    PURCHASED_PAID_MEDIA_MANAGER,
     POLL_MANAGER,
     POLL_ANSWER_MANAGER,
     MY_CHAT_MEMBER_MANAGER,
@@ -102,6 +102,7 @@ class Client(TelegramApi):
         self._callback_query_manager = UpdateManager(CALLBACK_QUERY_MANAGER, CallbackQuery)
         self._shipping_query_manager = UpdateManager(SHIPPING_QUERY_MANAGER, ShippingQuery)
         self._pre_checkout_query_manager = UpdateManager(PRE_CHECKOUT_QUERY_MANAGER, PreCheckoutQuery)
+        self._purchased_paid_media_manager = UpdateManager(PURCHASED_PAID_MEDIA_MANAGER, PaidMediaPurchased)
         self._poll_manager = UpdateManager(POLL_MANAGER, Poll)
         self._poll_answer_manager = UpdateManager(POLL_ANSWER_MANAGER, PollAnswer)
         self._my_chat_member_manager = UpdateManager(MY_CHAT_MEMBER_MANAGER, ChatMemberUpdated)
@@ -610,6 +611,36 @@ class Client(TelegramApi):
             self._pre_checkout_query_manager.add_rule(checker, coroutine)
         return wrap
 
+    def manage_purchased_paid_media(self, checker: Callable[[PaidMediaPurchased], Any], /):
+        '''
+        You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
+        inside this decorator to manage an incoming *purchased_paid_media* :obj:`~aiotgm.types.Update`.
+        The coroutine must takes only one argument, it will be processed as :obj:`~aiotgm.types.PaidMediaPurchased`.
+        Then you need to call the method :meth:`~aiotgm.Client.long_polling` using the function `asyncio.run() <https://docs.python.org/3/library/asyncio-runner.html#asyncio.run>`_ to process the :obj:`~aiotgm.types.PaidMediaPurchased` update.
+
+        Usage:
+
+        .. code-block:: python3
+
+            import aiotgm
+            import asyncio
+            from aiotgm.types import PaidMediaPurchased
+
+            bot = aiotgm.Client('<your_api_token>')
+
+            @bot.manage_purchased_paid_media(lambda purchased_paid_media: purchased_paid_media.from_user.id == xyz)
+            async def foo(purchased_paid_media: PaidMediaPurchased):
+                ...
+
+            asyncio.run(bot.long_polling())
+
+        :param checker: A function that takes only one argument to check an incoming *purchased_paid_media* :obj:`~aiotgm.types.Update`. E.g. a lambda function.
+        :type checker: :obj:`Callable[[PaidMediaPurchased], Any]`
+        '''
+        def wrap(coroutine: Callable[[PaidMediaPurchased], Awaitable]):
+            self._purchased_paid_media_manager.add_rule(checker, coroutine)
+        return wrap
+
     def manage_poll(self, checker: Callable[[Poll], Any] = lambda poll: ..., /):
         '''
         You must wrap a `coroutine <https://docs.python.org/3/library/asyncio-task.html#coroutines>`_
@@ -1008,6 +1039,13 @@ class Client(TelegramApi):
         elif update.pre_checkout_query:
             obj: PreCheckoutQuery = update.pre_checkout_query
             for rule in self._pre_checkout_query_manager:
+                result = await _run_coroutine(rule, obj)
+                if not _is_next_function(result):
+                    return
+
+        elif update.purchased_paid_media:
+            obj: PaidMediaPurchased = update.purchased_paid_media
+            for rule in self._purchased_paid_media_manager:
                 result = await _run_coroutine(rule, obj)
                 if not _is_next_function(result):
                     return

@@ -159,6 +159,7 @@ __all__ = (
     'PaidMediaInfo',
     'PaidMediaPhoto',
     'PaidMediaPreview',
+    'PaidMediaPurchased',
     'PaidMediaVideo',
     'PassportData',
     'PassportElementError', # No deserialization.
@@ -6862,6 +6863,34 @@ class PaidMediaPreview(TelegramType):
         self.duration = duration
 
 
+class PaidMediaPurchased(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#paidmediapurchased
+
+    This object contains information about a paid media purchase.
+
+    :param from_user: User who purchased the media.
+    :type from_user: :obj:`~aiotgm.types.User`
+    :param paid_media_payload: Bot-specified paid media payload.
+    :type paid_media_payload: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['from_user'] = User._dese(res.get('from_user'))
+        obj['paid_media_payload'] = res.get('paid_media_payload')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        from_user: User,
+        paid_media_payload: str
+    ):
+        self.from_user = from_user
+        self.paid_media_payload = paid_media_payload
+
+
 class PaidMediaVideo(TelegramType):
     '''
     https://core.telegram.org/bots/api#paidmediavideo
@@ -8536,6 +8565,8 @@ class Update(TelegramType):
     :type shipping_query: :obj:`~aiotgm.types.ShippingQuery`, optional
     :param pre_checkout_query: New incoming pre-checkout query. Contains full information about checkout.
     :type pre_checkout_query: :obj:`~aiotgm.types.PreCheckoutQuery`, optional
+    :param purchased_paid_media: A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat.
+    :type purchased_paid_media: :obj:`~aiotgm.types.PaidMediaPurchased`, optional
     :param poll: New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot.
     :type poll: :obj:`~aiotgm.types.Poll`, optional
     :param poll_answer: A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself.
@@ -8571,6 +8602,7 @@ class Update(TelegramType):
         obj['callback_query'] = CallbackQuery._dese(res.get('callback_query'))
         obj['shipping_query'] = ShippingQuery._dese(res.get('shipping_query'))
         obj['pre_checkout_query'] = PreCheckoutQuery._dese(res.get('pre_checkout_query'))
+        obj['purchased_paid_media'] = PaidMediaPurchased._dese(res.get('purchased_paid_media'))
         obj['poll'] = Poll._dese(res.get('poll'))
         obj['poll_answer'] = PollAnswer._dese(res.get('poll_answer'))
         obj['my_chat_member'] = ChatMemberUpdated._dese(res.get('my_chat_member'))
@@ -8598,6 +8630,7 @@ class Update(TelegramType):
         callback_query: Optional[CallbackQuery] = None,
         shipping_query: Optional[ShippingQuery] = None,
         pre_checkout_query: Optional[PreCheckoutQuery] = None,
+        purchased_paid_media: Optional[PaidMediaPurchased] = None,
         poll: Optional[Poll] = None,
         poll_answer: Optional[PollAnswer] = None,
         my_chat_member: Optional[ChatMemberUpdated] = None,
@@ -8622,6 +8655,7 @@ class Update(TelegramType):
         self.callback_query = callback_query
         self.shipping_query = shipping_query
         self.pre_checkout_query = pre_checkout_query
+        self.purchased_paid_media = purchased_paid_media
         self.poll = poll
         self.poll_answer = poll_answer
         self.my_chat_member = my_chat_member

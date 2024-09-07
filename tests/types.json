@@ -1164,6 +1164,10 @@
         "kwargs": {
             "user": {
                 "type_hint": "User"
+            },
+            "until_date": {
+                "type_hint": "Optional[int]",
+                "default": null
             }
         }
     },
@@ -4314,6 +4318,18 @@
             }
         }
     },
+    "PaidMediaPurchased": {
+        "link": "https://core.telegram.org/bots/api#paidmediapurchased",
+        "has_dese": true,
+        "kwargs": {
+            "from_user": {
+                "type_hint": "User"
+            },
+            "paid_media_payload": {
+                "type_hint": "str"
+            }
+        }
+    },
     "PaidMediaVideo": {
         "link": "https://core.telegram.org/bots/api#paidmediavideo",
         "has_dese": true,
@@ -4720,6 +4736,15 @@
                 "type_hint": "str"
             }
         }
+    },
+    "ReactionTypePaid": {
+        "link": "https://core.telegram.org/bots/api#reactiontypepaid",
+        "has_dese": true,
+        "warnings": [
+            "'type' is not in __init__()",
+            "'type' default value is: DEFAULT_REACTION_TYPE_PAID"
+        ],
+        "kwargs": {}
     },
     "RefundedPayment": {
         "link": "https://core.telegram.org/bots/api#refundedpayment",
@@ -5209,6 +5234,10 @@
             "invoice_payload": {
                 "type_hint": "Optional[str]",
                 "default": null
+            },
+            "paid_media": {
+                "type_hint": "Optional[list[PaidMedia]]",
+                "default": null
             }
         }
     },
@@ -5277,6 +5306,10 @@
             },
             "pre_checkout_query": {
                 "type_hint": "Optional[PreCheckoutQuery]",
+                "default": null
+            },
+            "purchased_paid_media": {
+                "type_hint": "Optional[PaidMediaPurchased]",
                 "default": null
             },
             "poll": {
@@ -5355,6 +5388,10 @@
                 "default": null
             },
             "can_connect_to_business": {
+                "type_hint": "Optional[bool]",
+                "default": null
+            },
+            "has_main_web_app": {
                 "type_hint": "Optional[bool]",
                 "default": null
             }

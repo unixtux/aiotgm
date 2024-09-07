@@ -27,6 +27,7 @@ CHOSEN_INLINE_RESULT_MANAGER = 'chosen_inline_result_manager'
 CALLBACK_QUERY_MANAGER = 'callback_query_manager'
 SHIPPING_QUERY_MANAGER = 'shipping_query_manager'
 PRE_CHECKOUT_QUERY_MANAGER = 'pre_checkout_query_manager'
+PURCHASED_PAID_MEDIA_MANAGER = 'purchased_paid_media_manager'
 POLL_MANAGER = 'poll_manager'
 POLL_ANSWER_MANAGER = 'poll_answer_manager'
 MY_CHAT_MEMBER_MANAGER = 'my_chat_member_manager'
@@ -51,6 +52,7 @@ EXAMPLES = {
     CALLBACK_QUERY_MANAGER : ("callback_query", "lambda callback_query: callback_query.from_user.id == xyz"),
     SHIPPING_QUERY_MANAGER : ("shipping_query", "lambda shipping_query: shipping_query.from_user.id == xyz"),
     PRE_CHECKOUT_QUERY_MANAGER : ("pre_checkout_query", "lambda pre_checkout_query: pre_checkout_query.from_user.id == xyz"),
+    PURCHASED_PAID_MEDIA_MANAGER: ("purchased_paid_media", "lambda purchased_paid_media: purchased_paid_media.from_user.id == xyz"),
     POLL_MANAGER : ("poll", "lambda poll: poll.id == xyz"),
     POLL_ANSWER_MANAGER : ("poll_answer", "lambda poll_answer: poll_answer.poll_id == xyz"),
     MY_CHAT_MEMBER_MANAGER : ("my_chat_member", "lambda my_chat_member: my_chat_member.chat.id == xyz"),
