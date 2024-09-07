@@ -1582,13 +1582,16 @@ class ChatBoostSourceGiveaway(TelegramType):
     '''
     https://core.telegram.org/bots/api#chatboostsourcegiveaway
 
-    The boost was obtained by the creation of a Telegram Premium giveaway. This boosts
-    the chat 4 times for the duration of the corresponding Telegram Premium subscription.
+    The boost was obtained by the creation of a Telegram Premium or a Telegram Star giveaway.
+    This boosts the chat 4 times for the duration of the corresponding Telegram Premium subscription
+    for Telegram Premium giveaways and *prize_star_count* / 500 times for one year for Telegram Star giveaways.
 
     :param giveaway_message_id: Identifier of a message in the chat with the giveaway; the message could have been deleted already. May be 0 if the message isn't sent yet.
     :type giveaway_message_id: :obj:`int`
     :param user: User that won the prize in the giveaway if any.
     :type user: :obj:`~aiotgm.types.User`, optional
+    :param prize_star_count: The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only.
+    :type prize_star_count: :obj:`int`, optional
     :param is_unclaimed: :obj:`True`, if the giveaway was completed, but there was no user to win the prize.
     :type is_unclaimed: :obj:`True`, optional
     '''
@@ -1598,6 +1601,7 @@ class ChatBoostSourceGiveaway(TelegramType):
         obj = {}
         obj['giveaway_message_id'] = res.get('giveaway_message_id')
         obj['user'] = User._dese(res.get('user'))
+        obj['prize_star_count'] = res.get('prize_star_count')
         obj['is_unclaimed'] = res.get('is_unclaimed')
         return cls(**obj)
 
@@ -1605,11 +1609,13 @@ class ChatBoostSourceGiveaway(TelegramType):
         self,
         giveaway_message_id: int,
         user: Optional[User] = None,
+        prize_star_count: Optional[int] = None,
         is_unclaimed: Optional[Literal[True]] = None
     ):
         self.source = DEFAULT_CHAT_BOOST_SOURCE_GIVEAWAY
         self.giveaway_message_id = giveaway_message_id
         self.user = user
+        self.prize_star_count = prize_star_count
         self.is_unclaimed = is_unclaimed
 
 
@@ -3360,6 +3366,8 @@ class Giveaway(TelegramType):
     :type prize_description: :obj:`str`, optional
     :param country_codes: A list of two-letter `ISO 3166-1 alpha-2 <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2>`_ country codes indicating the countries from which eligible users for the giveaway must come. If empty, then all users can participate in the giveaway. Users with a phone number that was bought on Fragment can always participate in giveaways.
     :type country_codes: :obj:`list` of :obj:`str`, optional
+    :param prize_star_count: The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only.
+    :type prize_star_count: :obj:`int`, optional
     :param premium_subscription_month_count: The number of months the Telegram Premium subscription won from the giveaway will be active for.
     :type premium_subscription_month_count: :obj:`int`, optional
     '''
@@ -3374,6 +3382,7 @@ class Giveaway(TelegramType):
         obj['has_public_winners'] = res.get('has_public_winners')
         obj['prize_description'] = res.get('prize_description')
         obj['country_codes'] = res.get('country_codes')
+        obj['prize_star_count'] = res.get('prize_star_count')
         obj['premium_subscription_month_count'] = res.get('premium_subscription_month_count')
         return cls(**obj)
 
@@ -3386,6 +3395,7 @@ class Giveaway(TelegramType):
         has_public_winners: Optional[Literal[True]] = None,
         prize_description: Optional[str] = None,
         country_codes: Optional[list[str]] = None,
+        prize_star_count: Optional[int] = None,
         premium_subscription_month_count: Optional[int] = None
     ):
         self.chats = chats
@@ -3395,6 +3405,7 @@ class Giveaway(TelegramType):
         self.has_public_winners = has_public_winners
         self.prize_description = prize_description
         self.country_codes = country_codes
+        self.prize_star_count = prize_star_count
         self.premium_subscription_month_count = premium_subscription_month_count
 
 
@@ -3435,17 +3446,23 @@ class GiveawayCreated(TelegramType):
     '''
     https://core.telegram.org/bots/api#giveawaycreated
 
-    This object represents a service message about the creation
-    of a scheduled giveaway. Currently holds no information.
+    This object represents a service message about the creation of a scheduled giveaway.
+
+    :param prize_star_count: The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only.
+    :type prize_star_count: :obj:`int`, optional
     '''
     @classmethod
     @_parse_result
     def _dese(cls, res: dict):
         obj = {}
+        obj['prize_star_count'] = res.get('prize_star_count')
         return cls(**obj)
 
-    def __init__(self):
-        ...
+    def __init__(
+        self,
+        prize_star_count: Optional[int] = None
+    ):
+        self.prize_star_count = prize_star_count
 
 
 class GiveawayWinners(TelegramType):
@@ -3466,6 +3483,8 @@ class GiveawayWinners(TelegramType):
     :type winners: :obj:`list` of :obj:`~aiotgm.types.User`
     :param additional_chat_count: The number of other chats the user had to join in order to be eligible for the giveaway.
     :type additional_chat_count: :obj:`int`, optional
+    :param prize_star_count: The number of Telegram Stars that were split between giveaway winners; for Telegram Star giveaways only.
+    :type prize_star_count: :obj:`int`, optional
     :param premium_subscription_month_count: The number of months the Telegram Premium subscription won from the giveaway will be active for.
     :type premium_subscription_month_count: :obj:`int`, optional
     :param unclaimed_prize_count: Number of undistributed prizes.
@@ -3487,6 +3506,7 @@ class GiveawayWinners(TelegramType):
         obj['winner_count'] = res.get('winner_count')
         obj['winners'] = [User._dese(kwargs) for kwargs in res.get('winners')]
         obj['additional_chat_count'] = res.get('additional_chat_count')
+        obj['prize_star_count'] = res.get('prize_star_count')
         obj['premium_subscription_month_count'] = res.get('premium_subscription_month_count')
         obj['unclaimed_prize_count'] = res.get('unclaimed_prize_count')
         obj['only_new_members'] = res.get('only_new_members')
@@ -3502,6 +3522,7 @@ class GiveawayWinners(TelegramType):
         winner_count: int,
         winners: list[User],
         additional_chat_count: Optional[int] = None,
+        prize_star_count: Optional[int] = None,
         premium_subscription_month_count: Optional[int] = None,
         unclaimed_prize_count: Optional[int] = None,
         only_new_members: Optional[Literal[True]] = None,
@@ -3514,6 +3535,7 @@ class GiveawayWinners(TelegramType):
         self.winner_count = winner_count
         self.winners = winners
         self.additional_chat_count = additional_chat_count
+        self.prize_star_count = prize_star_count
         self.premium_subscription_month_count = premium_subscription_month_count
         self.unclaimed_prize_count = unclaimed_prize_count
         self.only_new_members = only_new_members
