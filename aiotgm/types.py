@@ -211,6 +211,7 @@ __all__ = (
     'TransactionPartnerFragment',
     'TransactionPartnerOther',
     'TransactionPartnerTelegramAds',
+    'TransactionPartnerTelegramApi',
     'TransactionPartnerUser',
     'Update',
     'User',
@@ -8546,6 +8547,30 @@ class TransactionPartnerTelegramAds(TelegramType):
 
     def __init__(self):
         self.type = DEFAULT_TRANSACTION_PARTNER_TELEGRAM_ADS
+
+
+class TransactionPartnerTelegramApi(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#transactionpartnertelegramapi
+
+    Describes a transaction with payment for `paid broadcasting <https://core.telegram.org/bots/api#paid-broadcasts>`_.
+
+    :param request_count: The number of successful requests that exceeded regular limits and were therefore billed.
+    :type request_count: :obj:`int`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['request_count'] = res.get('request_count')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        request_count: int
+    ):
+        self.type = DEFAULT_TRANSACTION_PARTNER_TELEGRAM_API
+        self.request_count = request_count
 
 
 class TransactionPartnerUser(TelegramType):

@@ -114,3 +114,6 @@ DEFAULT_INPUT_PAID_MEDIA_VIDEO = 'video'
 
 # TransactionPartnerTelegramAds (?)
 DEFAULT_TRANSACTION_PARTNER_TELEGRAM_ADS = 'telegram_ads'
+
+# TransactionPartnerTelegramApi (?)
+DEFAULT_TRANSACTION_PARTNER_TELEGRAM_API = 'telegram_api'
