@@ -64,6 +64,7 @@ __all__ = (
     'ChatShared',
     'ChosenInlineResult',
     'Contact',
+    'CopyTextButton',
     'Dice',
     'Document',
     'EncryptedCredentials',
@@ -2697,6 +2698,29 @@ class Contact(TelegramType):
         self.vcard = vcard
 
 
+class CopyTextButton(TelegramType):
+    '''
+    https://core.telegram.org/bots/api#copytextbutton
+
+    This object represents an inline keyboard button that copies specified text to the clipboard.
+
+    :param text: The text to be copied to the clipboard; 1-256 characters.
+    :type text: :obj:`str`
+    '''
+    @classmethod
+    @_parse_result
+    def _dese(cls, res: dict):
+        obj = {}
+        obj['text'] = res.get('text')
+        return cls(**obj)
+
+    def __init__(
+        self,
+        text: str
+    ):
+        self.text = text
+
+
 class Dice(TelegramType):
     '''
     https://core.telegram.org/bots/api#dice
@@ -3607,6 +3631,8 @@ class InlineKeyboardButton(TelegramType):
     :type switch_inline_query_current_chat: :obj:`str`, optional
     :param switch_inline_query_chosen_chat: If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field.
     :type switch_inline_query_chosen_chat: :obj:`~aiotgm.types.SwitchInlineQueryChosenChat`, optional
+    :param copy_text: Description of the button that copies the specified text to the clipboard.
+    :type copy_text: :obj:`~aiotgm.types.CopyTextButton`, optional
     :param callback_game:
         Description of the game that will be launched when the user presses the button.
 
@@ -3630,6 +3656,7 @@ class InlineKeyboardButton(TelegramType):
         obj['switch_inline_query'] = res.get('switch_inline_query')
         obj['switch_inline_query_current_chat'] = res.get('switch_inline_query_current_chat')
         obj['switch_inline_query_chosen_chat'] = SwitchInlineQueryChosenChat._dese(res.get('switch_inline_query_chosen_chat'))
+        obj['copy_text'] = CopyTextButton._dese(res.get('copy_text'))
         obj['callback_game'] = CallbackGame._dese(res.get('callback_game'))
         obj['pay'] = res.get('pay')
         return cls(**obj)
@@ -3644,6 +3671,7 @@ class InlineKeyboardButton(TelegramType):
         switch_inline_query: Optional[str] = None,
         switch_inline_query_current_chat: Optional[str] = None,
         switch_inline_query_chosen_chat: Optional[SwitchInlineQueryChosenChat] = None,
+        copy_text: Optional[CopyTextButton] = None,
         callback_game: Optional[CallbackGame] = None,
         pay: Optional[bool] = None
     ):
@@ -3655,6 +3683,7 @@ class InlineKeyboardButton(TelegramType):
         self.switch_inline_query = switch_inline_query
         self.switch_inline_query_current_chat = switch_inline_query_current_chat
         self.switch_inline_query_chosen_chat = switch_inline_query_chosen_chat
+        self.copy_text = copy_text
         self.callback_game = callback_game
         self.pay = pay
 
