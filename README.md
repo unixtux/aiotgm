@@ -1,6 +1,6 @@
 [![pypi](https://img.shields.io/badge/pypi-aiotgm-blue)](https://pypi.org/project/aiotgm/) [![tele](https://img.shields.io/badge/telegram-@geko1-blue)](https://t.me/geko1) [![Documentation Status](https://readthedocs.org/projects/aiotgm/badge/?version=latest)](https://aiotgm.readthedocs.io/?badge=latest)
 
-<h3 align="center">Asynchronous python implementation of the Telegram Bot API <a href="https://core.telegram.org/bots/api#september-6-2024">7.10</a></h3>
+<h3 align="center">Asynchronous python implementation of the Telegram Bot API <a href="https://core.telegram.org/bots/api#october-31-2024">7.11</a></h3>
 
 #
 
