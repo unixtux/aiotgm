@@ -58,10 +58,6 @@ class Client(TelegramApi):
 
     :param token: Api token obtained from `@BotFather <https://t.me/botfather>`_.
     :type token: :obj:`str`
-    :param parse_mode: Select a default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option.
-    :type parse_mode: :obj:`str`, optional
-    :param protect_content: Pass :obj:`True` to use the protect content option by default.
-    :type protect_content: :obj:`bool`, optional
     :param proxy: Pass a proxy string to be used in the http requests.
     :type proxy: :obj:`str`, optional
     :param debug: Pass :obj:`True` for some debug information.
@@ -73,8 +69,6 @@ class Client(TelegramApi):
         self,
         token: str,
         *,
-        parse_mode: Optional[str] = None,
-        protect_content: Optional[bool] = None,
         proxy: Optional[str] = None,
         debug: Optional[bool] = None,
         deep_debug: Optional[bool] = None
@@ -84,8 +78,6 @@ class Client(TelegramApi):
         self._offset = None
 
         self._user = None
-        self.parse_mode = parse_mode
-        self.protect_content = protect_content
 
         self._message_manager = UpdateManager(MESSAGE_MANAGER, Message)
         self._edited_message_manager = UpdateManager(EDITED_MESSAGE_MANAGER, Message)
@@ -114,50 +106,6 @@ class Client(TelegramApi):
     @property
     def user(self) -> Optional[User]:
         return self._user
-
-    @property
-    def parse_mode(self) -> Optional[str]:
-        '''
-        Default `parse mode <https://core.telegram.org/bots/api#formatting-options>`_ option.
-
-        Usage:
-
-        .. code-block:: python3
-
-            import aiotgm
-
-            bot = aiotgm.Client('<your_api_token>', parse_mode='MarkdownV2')
-        '''
-        return self._parse_mode
-
-    @parse_mode.setter
-    def parse_mode(self, val: Optional[str]):
-        if not isinstance(val, (str, type(None))):
-            raise TypeError(
-                "'parse_mode' must be str or"
-                f" None, got {val.__class__.__name__}."
-            )
-        self._parse_mode = val
-
-    @property
-    def protect_content(self) -> Optional[bool]:
-        '''
-        Default protect content option.
-
-        Usage:
-
-        .. code-block:: python3
-
-            import aiotgm
-
-            bot = aiotgm.Client('<your_api_token>', protect_content=True)
-        '''
-        return self._protect_content
-
-    @protect_content.setter
-    def protect_content(self, val: Optional[bool]):
-        self._protect_content = True if val else None
-
 
     # UpdateManagers
 
@@ -1506,12 +1454,10 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
@@ -1561,7 +1507,6 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if remove_caption is not None: params['remove_caption'] = remove_caption
         result = await super().copy_messages(params)
         return [MessageId._dese(mid) for mid in result]
@@ -2194,7 +2139,6 @@ class Client(TelegramApi):
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if reply_markup is not None: params['reply_markup'] = reply_markup
@@ -2392,7 +2336,6 @@ class Client(TelegramApi):
         if message_id is not None: params['message_id'] = message_id
         if inline_message_id is not None: params['inline_message_id'] = inline_message_id
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if entities is not None: params['entities'] = entities
         if link_preview_options is not None: params['link_preview_options'] = link_preview_options
         if business_connection_id is not None: params['business_connection_id'] = business_connection_id
@@ -2463,7 +2406,6 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         result = await super().forward_message(params)
         return Message._dese(result)
 
@@ -2506,7 +2448,6 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         result = await super().forward_messages(params)
         return [MessageId._dese(mid) for mid in result]
 
@@ -3414,13 +3355,11 @@ class Client(TelegramApi):
         if thumbnail is not None: params['thumbnail'] = thumbnail
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if has_spoiler is not None: params['has_spoiler'] = has_spoiler
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -3501,7 +3440,6 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if duration is not None: params['duration'] = duration
         if performer is not None: params['performer'] = performer
@@ -3509,7 +3447,6 @@ class Client(TelegramApi):
         if thumbnail is not None: params['thumbnail'] = thumbnail
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -3619,7 +3556,6 @@ class Client(TelegramApi):
         if vcard is not None: params['vcard'] = vcard
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -3677,7 +3613,6 @@ class Client(TelegramApi):
         if emoji is not None: params['emoji'] = emoji
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -3752,12 +3687,10 @@ class Client(TelegramApi):
         if thumbnail is not None: params['thumbnail'] = thumbnail
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if disable_content_type_detection is not None: params['disable_content_type_detection'] = disable_content_type_detection
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -3815,7 +3748,6 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -3949,7 +3881,6 @@ class Client(TelegramApi):
         if is_flexible is not None: params['is_flexible'] = is_flexible
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4027,7 +3958,6 @@ class Client(TelegramApi):
         if proximity_alert_radius is not None: params['proximity_alert_radius'] = proximity_alert_radius
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4083,7 +4013,6 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4148,12 +4077,10 @@ class Client(TelegramApi):
         if business_connection_id is not None: params['business_connection_id'] = business_connection_id
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if entities is not None: params['entities'] = entities
         if link_preview_options is not None: params['link_preview_options'] = link_preview_options
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4224,12 +4151,10 @@ class Client(TelegramApi):
         if payload is not None: params['payload'] = payload
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
         if reply_markup is not None: params['reply_markup'] = reply_markup
@@ -4301,13 +4226,11 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if has_spoiler is not None: params['has_spoiler'] = has_spoiler
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4417,7 +4340,6 @@ class Client(TelegramApi):
         if is_closed is not None: params['is_closed'] = is_closed
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4479,7 +4401,6 @@ class Client(TelegramApi):
         if emoji is not None: params['emoji'] = emoji
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4565,7 +4486,6 @@ class Client(TelegramApi):
         if google_place_type is not None: params['google_place_type'] = google_place_type
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4659,14 +4579,12 @@ class Client(TelegramApi):
         if thumbnail is not None: params['thumbnail'] = thumbnail
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if show_caption_above_media is not None: params['show_caption_above_media'] = show_caption_above_media
         if has_spoiler is not None: params['has_spoiler'] = has_spoiler
         if supports_streaming is not None: params['supports_streaming'] = supports_streaming
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4737,7 +4655,6 @@ class Client(TelegramApi):
         if thumbnail is not None: params['thumbnail'] = thumbnail
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
@@ -4810,12 +4727,10 @@ class Client(TelegramApi):
         if message_thread_id is not None: params['message_thread_id'] = message_thread_id
         if caption is not None: params['caption'] = caption
         if parse_mode is not None: params['parse_mode'] = parse_mode
-        elif self.parse_mode is not None: params['parse_mode'] = self.parse_mode
         if caption_entities is not None: params['caption_entities'] = caption_entities
         if duration is not None: params['duration'] = duration
         if disable_notification is not None: params['disable_notification'] = disable_notification
         if protect_content is not None: params['protect_content'] = protect_content
-        elif self.protect_content is not None: params['protect_content'] = self.protect_content
         if allow_paid_broadcast is not None: params['allow_paid_broadcast'] = allow_paid_broadcast
         if message_effect_id is not None: params['message_effect_id'] = message_effect_id
         if reply_parameters is not None: params['reply_parameters'] = reply_parameters
